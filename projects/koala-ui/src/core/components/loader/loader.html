@@ -1,0 +1,5 @@
+@let sizeClass = `loading-${size()}`;
+
+@if (sizeClass) {
+  <span class="loading loading-spinner" [class]="sizeClass"></span>
+}

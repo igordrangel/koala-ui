@@ -1,0 +1,9 @@
+idr-snackbar-content {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+progress::-webkit-progress-value {
+  transition: width 1s ease;
+}

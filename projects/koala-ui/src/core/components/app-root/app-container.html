@@ -1,0 +1,14 @@
+<ngx-loading-bar
+  [color]="routerLoaderColor()"
+  height="4px"
+  [includeSpinner]="false"
+/>
+
+<main>
+  <kl-loader-page-content />
+  <kl-snackbar-container />
+  <kl-dialog-container />
+  <kl-side-window-container />
+
+  <ng-content />
+</main>

@@ -7,8 +7,14 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "paths": {
-      "koala-ui": [
-        "./dist/koala-ui"
+      "@/*": [
+        "./projects/doc/src/*"
+      ],
+      "@koalarx/ui": [
+        "./projects/koala-ui/src/public-api.ts",
+      ],
+      "@koalarx/ui/*": [
+        "./projects/koala-ui/src/*"
       ]
     },
     "noImplicitReturns": true,
@@ -34,6 +40,12 @@
     },
     {
       "path": "./projects/koala-ui/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/doc/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/doc/tsconfig.spec.json"
     }
   ]
 }

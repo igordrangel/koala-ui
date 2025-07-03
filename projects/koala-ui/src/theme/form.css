@@ -1,0 +1,5 @@
+.validator-hint.show {
+  visibility: visible !important;
+  color: var(--color-error);
+  display: block;
+}

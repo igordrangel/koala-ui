@@ -1,0 +1,9 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@import "./animations.css";
+@import "./grid.css";
+@import "./form.css";
+@import "./content.css";
+@import "./snackbar.css";
+@import "./table.css";

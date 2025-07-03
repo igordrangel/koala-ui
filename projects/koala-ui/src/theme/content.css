@@ -1,0 +1,14 @@
+@theme {
+  --content-page-with-header: 7.6rem;
+  --content-page-with-header-and-breadcrumb: 9.9rem;
+  --content-page-without-header: 4.6rem;
+}
+
+@utility content-page-* {
+  position: relative;
+  display: flex;
+  height: calc(100vh - --value(--content-page- *));
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 1;
+}

@@ -7,7 +7,7 @@
       "projectType": "library",
       "root": "projects/koala-ui",
       "sourceRoot": "projects/koala-ui/src",
-      "prefix": "lib",
+      "prefix": "kl",
       "architect": {
         "build": {
           "builder": "@angular/build:ng-packagr",
@@ -25,6 +25,88 @@
           "builder": "@angular/build:karma",
           "options": {
             "tsConfig": "projects/koala-ui/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "doc": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/doc",
+      "sourceRoot": "projects/doc/src",
+      "prefix": "kl",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "projects/doc/src/main.ts",
+            "tsConfig": "projects/doc/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/doc/public"
+              }
+            ],
+            "styles": [
+              "@koalarx/ui/assets/icons/font-awesome/css/all.min.css",
+              "@koalarx/ui/theme/koala.css",
+              "projects/doc/src/styles.css"
+            ],
+            "allowedCommonJsDependencies": ["@koalarx/utils"],
+            "optimization": true,
+            "aot": true,
+            "statsJson": true
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "doc:build:production"
+            },
+            "development": {
+              "buildTarget": "doc:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/doc/tsconfig.spec.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/doc/public"
+              }
+            ],
+            "styles": ["projects/doc/src/styles.css"]
           }
         }
       }

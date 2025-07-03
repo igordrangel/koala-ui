@@ -1,0 +1,9 @@
+table thead th:first-child,
+table tbody td:first-child {
+  padding-left: 2rem;
+}
+
+table thead th:last-child,
+table tbody td:last-child {
+  padding-right: 1rem;
+}
