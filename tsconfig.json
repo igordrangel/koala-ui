@@ -1,95 +1,39 @@
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "rootDir": ".",
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "downlevelIteration": true,
-    "experimentalDecorators": true,
-    "module": "es2020",
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "target": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
     "paths": {
-      "@koalarx/ui/alert": [
-        "dist/alert",
-        "projects/alert/src"
-      ],
-      "@koalarx/ui/button": [
-        "dist/button",
-        "projects/button/src"
-      ],
-      "@koalarx/ui/common": [
-        "dist/common",
-        "projects/common/src"
-      ],
-      "@koalarx/ui/core": [
-        "dist/core",
-        "projects/core/src"
-      ],
-      "@koalarx/ui/dialog": [
-        "dist/dialog",
-        "projects/dialog/src"
-      ],
-      "@koalarx/ui/dynamic-component": [
-        "dist/dynamic-component",
-        "projects/dynamic-component/src"
-      ],
-      "@koalarx/ui/file-button": [
-        "dist/file-button",
-        "projects/file-button/src"
-      ],
-      "@koalarx/ui/folder-page": [
-        "dist/folder-page",
-        "projects/folder-page/src"
-      ],
-      "@koalarx/ui/form": [
-        "dist/form",
-        "projects/form/src"
-      ],
-      "@koalarx/ui/icon": [
-        "dist/icon",
-        "projects/icon/src"
-      ],
-      "@koalarx/ui/icons-animated": [
-        "dist/icons-animated",
-        "projects/icons-animated/src"
-      ],
-      "@koalarx/ui/list": [
-        "dist/list",
-        "projects/list/src"
-      ],
-      "@koalarx/ui/menu": [
-        "dist/menu",
-        "projects/menu/src"
-      ],
-      "@koalarx/ui/question": [
-        "dist/question",
-        "projects/question/src"
-      ],
-      "@koalarx/ui/snackbar": [
-        "dist/snackbar",
-        "projects/snackbar/src"
-      ],
-      "common": [
-        "dist/common/common",
-        "dist/common"
+      "koala-ui": [
+        "./dist/koala-ui"
       ]
-    }
+    },
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "preserve"
   },
   "angularCompilerOptions": {
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "typeCheckHostBindings": true,
+    "strictTemplates": true
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "scripts"
+  "files": [],
+  "references": [
+    {
+      "path": "./projects/koala-ui/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/koala-ui/tsconfig.spec.json"
+    }
   ]
 }
