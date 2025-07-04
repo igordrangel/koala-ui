@@ -12,7 +12,7 @@ export class NavMenu {
   items = [
     {
       module: 'Get Started',
-      items: new KlArray([
+      items: [
         {
           label: 'Introduction',
           link: '/docs/introduction',
@@ -21,7 +21,7 @@ export class NavMenu {
           label: 'Installation',
           link: '/docs/installation',
         },
-      ]).orderBy('label'),
+      ],
     },
     {
       module: 'Components',
