@@ -69,7 +69,7 @@ export class OnThisPage implements OnInit, OnDestroy {
       const el = document.getElementById(link.elementId);
       if (el) {
         const rect = el.getBoundingClientRect();
-        if (rect.top <= 200) {
+        if (rect.top <= 250) {
           current = link.elementId;
         }
       }
