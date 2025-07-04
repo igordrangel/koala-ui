@@ -9,7 +9,8 @@
     "types": [],
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "src/assets/js/all.min.js"
   ],
   "exclude": [
     "**/*.spec.ts"

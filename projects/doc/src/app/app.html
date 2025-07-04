@@ -1,3 +1,15 @@
-<kl-app-container>
-  <router-outlet />
-</kl-app-container>
+<kl-root>
+  <app-container>
+    <ng-container header>
+      <app-header />
+    </ng-container>
+
+    <ng-container menu>
+      <app-nav-menu />
+    </ng-container>
+
+    <ng-container content>
+      <router-outlet />
+    </ng-container>
+  </app-container>
+</kl-root>

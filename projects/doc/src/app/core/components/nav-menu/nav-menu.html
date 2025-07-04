@@ -1,0 +1,10 @@
+@for (item of items; track $index) {
+  <kl-vertical-menu-container>
+    <ng-container title>{{item.module}}</ng-container>
+    <ng-container items>
+      @for (item of item.items; track $index) {
+        <kl-vertical-menu-item [link]="item.link">{{ item.label }}</kl-vertical-menu-item>
+      }
+    </ng-container>
+  </kl-vertical-menu-container>
+}

@@ -1,0 +1,78 @@
+<div class="flex gap-15 w-full">
+  <div class="flex flex-col gap-6 py-10 w-full">
+    <section id="installation">
+      <h1 class="text-5xl font-bold">Installation</h1>
+      <small class="text-lg font-light opacity-60">How to install dependencies and structure your app.</small>
+    </section>
+
+    <section id="create-project">
+      <h2 class="text-2xl font-bold">Create project</h2>
+      <small class="text-base">Create a new project using the Angular CLI.</small>
+      <kl-code-viewer
+        name="ng"
+        language="bash"
+        src="markdown/installation/create-project.md"
+      />
+    </section>
+
+    <section id="install-koala-ui">
+      <h2 class="text-2xl font-bold">Install Koala UI</h2>
+      <small class="text-base">Install the Koala UI library in your project.</small>
+      <kl-code-viewer
+        name="npm"
+        language="bash"
+        src="markdown/installation/install-koala-ui.md"
+      />
+    </section>
+
+    <section id="configure-koala-provider">
+      <h2 class="text-2xl font-bold">Configure Koala Provider</h2>
+      <small class="text-base">Configure the Koala UI provider in your application.</small>
+      <kl-code-viewer
+        name="app.config.ts"
+        language="typescript"
+        src="markdown/installation/app.config.md"
+        lineNumbers
+        lineHighlight="7,15"
+      />
+    </section>
+
+    <section id="configure-angular-json">
+      <h2 class="text-2xl font-bold">Configure Angular JSON</h2>
+      <small class="text-base">Configure the Angular JSON file for your application.</small>
+      <kl-code-viewer
+        name="angular.json"
+        language="json"
+        src="markdown/installation/angular.json.md"
+        lineNumbers
+        lineHighlight="13,16"
+      />
+    </section>
+
+    <section id="include-app-root">
+      <h2 class="text-2xl font-bold">Include App Root</h2>
+      <small class="text-base">Include the App Root component in your application.</small>
+      <kl-code-viewer
+        name="app.ts"
+        language="typescript"
+        src="markdown/installation/app.ts.md"
+        lineNumbers
+        lineHighlight="3,8"
+      />
+      <kl-code-viewer
+        name="app.html"
+        language="html"
+        src="markdown/installation/app.html.md"
+      />
+    </section>
+  </div>
+
+  <kl-on-this-page class="min-w-3xs" [links]="[
+    { label: 'Installation', elementId: 'installation' },
+    { label: 'Create project', elementId: 'create-project' },
+    { label: 'Install Koala UI', elementId: 'install-koala-ui' },
+    { label: 'Configure Koala Provider', elementId: 'configure-koala-provider' },
+    { label: 'Configure Angular JSON', elementId: 'configure-angular-json' },
+    { label: 'Include App Root', elementId: 'include-app-root' }
+  ]"/>
+</div>

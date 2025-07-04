@@ -48,7 +48,6 @@
               }
             ],
             "styles": [
-              "@koalarx/ui/assets/icons/font-awesome/css/all.min.css",
               "@koalarx/ui/theme/koala.css",
               "projects/doc/src/styles.css"
             ],

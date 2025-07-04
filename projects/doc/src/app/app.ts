@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { AppContainer } from '@koalarx/ui/core/components/app-root/app-container';
+import { KlRoot } from '@koalarx/ui/core/components/kl-root/kl-root';
+import { AppContainer } from './core/components/app-container/app-container';
+import { AppHeader } from './core/components/app-header/app-header';
+import { NavMenu } from './core/components/nav-menu/nav-menu';
 
 @Component({
-  selector: 'kl-root',
+  selector: 'app-root',
   templateUrl: './app.html',
-  imports: [AppContainer, RouterOutlet],
+  imports: [KlRoot, RouterOutlet, AppHeader, AppContainer, NavMenu],
 })
-export class App {
-  protected title = 'doc';
-}
+export class App {}

@@ -1,0 +1,15 @@
+<div class="fixed">
+  <small class="opacity-70">
+    <ng-content select="[title]">
+      On This Page
+    </ng-content>
+  </small>
+
+  <div class="flex flex-col gap-2 mt-2">
+    @for (item of linkSections(); track $index) {
+      <a class="hover:cursor-pointer hover:opacity-90 transition duration-100 opacity-60" [class]="{'opacity-100': item.isActive}" (click)="scrollTo(item.elementId)">
+        {{ item.label }}
+      </a>
+    }
+  </div>
+</div>
