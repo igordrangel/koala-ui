@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HorizontalMenuContainer } from '@koalarx/ui/core/components/horizontal-menu/horizontal-menu-container';
-import { HorizontalMenuItem } from '@koalarx/ui/core/components/horizontal-menu/horizontal-menu-item';
+import { HorizontalMenuContainer } from '@koalarx/ui/shared/components/horizontal-menu/horizontal-menu-container';
+import { HorizontalMenuItem } from '@koalarx/ui/shared/components/horizontal-menu/horizontal-menu-item';
 import { Logotype } from '../logotype/logotype';
 
 @Component({

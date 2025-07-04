@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { VerticalMenuContainer } from '@koalarx/ui/core/components/vertical-menu/vertical-menu-container';
-import { VerticalMenuItem } from '@koalarx/ui/core/components/vertical-menu/vertical-menu-item';
+import { VerticalMenuContainer } from '@koalarx/ui/shared/components/vertical-menu/vertical-menu-container';
+import { VerticalMenuItem } from '@koalarx/ui/shared/components/vertical-menu/vertical-menu-item';
 import { KlArray } from '@koalarx/utils/KlArray';
 
 @Component({
@@ -27,16 +27,16 @@ export class NavMenu {
       module: 'Components',
       items: new KlArray([
         {
-          label: 'Dialog',
-          link: '/docs/components/dialog',
+          label: 'Code Viewer',
+          link: '/docs/components/code-viewer',
         },
         {
-          label: 'Snackbar',
-          link: '/docs/components/snackbar',
+          label: 'Toolbar',
+          link: '/docs/components/toolbar',
         },
         {
-          label: 'SideWindow',
-          link: '/docs/components/side-window',
+          label: 'On This Page',
+          link: '/docs/components/on-this-page',
         },
         {
           label: 'Loader Page',
