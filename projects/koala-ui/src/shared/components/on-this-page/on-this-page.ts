@@ -53,7 +53,7 @@ export class OnThisPage implements OnInit, OnDestroy {
       history.pushState({}, '', link);
 
       const scrollPosition =
-        element.getBoundingClientRect().top + window.scrollY - 80;
+        element.getBoundingClientRect().top + window.scrollY - 100;
 
       window.scrollTo({
         top: scrollPosition,
