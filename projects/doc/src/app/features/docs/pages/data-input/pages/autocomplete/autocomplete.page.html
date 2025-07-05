@@ -1,0 +1,38 @@
+<div class="flex gap-15 w-full">
+  <div class="flex flex-col gap-6 py-10 w-full">
+    <section id="autocomplete">
+      <h1 class="text-5xl font-bold">Autocomplete</h1>
+      <small class="text-lg font-light opacity-60">Autocomplete input and command palette with a list of suggestions.</small>
+    </section>
+
+    <section id="preview">
+      <h2 class="text-2xl font-bold">Preview</h2>
+      <app-autocomplete-sample />
+    </section>
+
+    <section id="code">
+      <h2 class="text-2xl font-bold">Code</h2>
+      <kl-code-viewer
+        name="autocomplete-sample.ts"
+        language="typescript"
+        src="markdown/data-input/autocomplete/autocomplete-sample.ts.md"
+      />
+      <kl-code-viewer
+        name="autocomplete-sample.html"
+        language="html"
+        src="markdown/data-input/autocomplete/autocomplete-sample.html.md"
+      />
+    </section>
+
+    <section id="attributes">
+      <h2 class="text-2xl font-bold">Attributes</h2>
+    </section>
+  </div>
+
+  <kl-on-this-page class="min-w-3xs" [links]="[
+    { label: 'Autocomplete', elementId: 'autocomplete' },
+    { label: 'Preview', elementId: 'preview' },
+    { label: 'Code', elementId: 'code' },
+    { label: 'Attributes', elementId: 'attributes' }
+  ]"/>
+</div>

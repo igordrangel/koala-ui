@@ -24,31 +24,11 @@ export class NavMenu {
       ],
     },
     {
-      module: 'Components',
+      module: 'Data Input',
       items: new KlArray([
         {
-          label: 'Code Viewer',
-          link: '/docs/components/code-viewer',
-        },
-        {
-          label: 'Toolbar',
-          link: '/docs/components/toolbar',
-        },
-        {
-          label: 'On This Page',
-          link: '/docs/components/on-this-page',
-        },
-        {
-          label: 'Loader Page',
-          link: '/docs/components/loader-page',
-        },
-        {
-          label: 'Loader',
-          link: '/docs/components/loader',
-        },
-        {
-          label: 'Menu',
-          link: '/docs/components/menu',
+          label: 'Autocomplete',
+          link: '/docs/data-input/autocomplete',
         },
       ]).orderBy('label'),
     },
