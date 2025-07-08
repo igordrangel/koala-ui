@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { InputDate } from '@koalarx/ui/shared/components/input-field/input-date/input-date';
+import { InputDate } from '@koalarx/ui/shared/components/input-field/input-date';
 import { KlDate } from '@koalarx/utils/light/KlDate';
 import { SampleContainer } from '../sample-container/sample-container';
 

@@ -1,8 +1,10 @@
 import { Component, inject, resource } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { AutocompleteBuilder } from '@koalarx/ui/shared/components/input-field/autocomplete/autocomplete-builder';
-import { AutocompleteField } from '@koalarx/ui/shared/components/input-field/autocomplete/autocomplete-field';
-import { AutocompleteOption } from '@koalarx/ui/shared/components/input-field/autocomplete/autocomplete-value';
+import {
+  AutocompleteBuilder,
+  AutocompleteField,
+  AutocompleteOption,
+} from '@koalarx/ui/shared/components/input-field/autocomplete';
 import { SampleContainer } from '../sample-container/sample-container';
 
 @Component({
