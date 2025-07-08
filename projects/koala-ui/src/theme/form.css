@@ -3,3 +3,61 @@
   color: var(--color-error);
   display: block;
 }
+
+kl-autocomplete-field .autocomplete-label {
+  top: 0;
+  left: 0.75rem;
+  transition: top 0.2s, font-size 0.2s;
+}
+
+kl-autocomplete-field .has-value .autocomplete-label {
+  position: absolute;
+  display: block;
+  font-size: 0.75rem;
+  top: -0.65rem;
+  left: 0.75rem;
+  padding: 0 0.3rem;
+}
+
+kl-autocomplete-field .has-value .autocomplete-label span {
+  position: relative;
+  z-index: 2;
+}
+
+kl-autocomplete-field .has-value .autocomplete-label:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background-color: var(--color-neutral-800);
+  bottom: 0.45rem;
+  left: 0;
+}
+
+.kl-autocomplete-options-container input {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.kl-autocomplete-options-container label.active {
+  background-color: rgba(63, 63, 63, 0.7);
+  transition: background-color 0.1s;
+}
+
+.kl-autocomplete-options-container label:has(input:checked):after {
+  content: "\f00c";
+  color: var(--color-neutral-500);
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  position: absolute;
+  right: 0.5rem;
+  top: 0.25rem;
+  font-size: 1rem;
+}
+
+.input:focus,
+.select:focus,
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-neutral-600) !important;
+}

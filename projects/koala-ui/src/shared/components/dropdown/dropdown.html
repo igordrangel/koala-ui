@@ -1,0 +1,10 @@
+<div class="dropdown dropdown-end">
+  <div tabindex="0" role="button">
+    <ng-content select="[trigger]" />
+  </div>
+  <ul
+    tabindex="0"
+    class="dropdown-content bg-base-100 rounded-box z-1 mt-3 min-w-52 w-auto shadow border border-neutral-200 dark:border-neutral-800 rounded-sm">
+    <ng-content select="[options]" />
+  </ul>
+</div>

@@ -1,0 +1,29 @@
+<button class="relative select hover:cursor-default bg-neutral-800 border border-neutral-700 dark:border-neutral-500 rounded-sm w-full flex items-center justify-between flex-nowrap gap-4"
+  [class.has-value]="autocompleteValue.hasValue()"
+  type="button"
+  tabindex="0"
+  trigger
+  [id]="fieldId"
+  [disabled]="isDisabled() || isLoading()"
+  (click)="open()">
+
+  <span class="autocomplete-label flex items-center gap-2 whitespace-nowrap text-neutral-500">
+    <span>{{label()}} {{ isRequired() ? '*' : '' }}</span>
+  </span>
+
+  @if (autocompleteValue.hasValue()) {
+    <div class="flex items-center w-full h-full selected-options">
+      @for (item of autocompleteValue.selectedOptions(); track $index) {
+        {{item.label}}
+      }
+
+      {{autocompleteValue.selectedOption()?.label}}
+    </div>
+  }
+
+  @if (isLoading()) {
+    <kl-loader size="sm" />
+  } @else if (autocompleteValue.hasValue()) {
+    <i class="fa-solid fa-xmark text-neutral-500 hover:cursor-pointer pt-1 pr-2" (click)="autocompleteValue.clear($event)"></i>
+  }
+</button>

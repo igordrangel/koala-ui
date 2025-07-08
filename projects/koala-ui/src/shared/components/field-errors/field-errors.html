@@ -1,0 +1,17 @@
+@if (field().errors && field().touched) {
+  <p class="validator-hint show mb-1.5">
+    <ng-content select="[errors]" />
+
+    @if (field().errors?.['required']) {
+      O campo é obrigatório.<br/>
+    }
+
+    @if (field().errors?.['email']) {
+      E-mail inválido.<br/>
+    }
+
+    @if (field().errors?.['minlength']) {
+      O campo deve ter no mínimo {{field().errors?.['minlength'].requiredLength}} caracteres.<br/>
+    }
+  </p>
+}

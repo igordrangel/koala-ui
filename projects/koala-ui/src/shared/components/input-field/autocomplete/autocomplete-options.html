@@ -1,0 +1,37 @@
+<div class="bg-base-300 overflow-hidden shadow border border-neutral-200 dark:border-neutral-700 rounded-md flex flex-col"
+  [attr.aria-labelledby]="fieldId()">
+
+  <div class="border-b border-neutral-200 dark:border-neutral-700">
+    <label class="flex items-center text-sm">
+      <i class="fa-solid fa-magnifying-glass opacity-60 absolute left-3"></i>
+      <input class="p-2 pr-3 pl-9 outline-none placeholder:opacity-60"
+        #searchInput
+        type="search"
+        [formControl]="autocompleteValue().filterControl"
+        placeholder="Type to Search..."
+      />
+    </label>
+  </div>
+
+  <div class="kl-autocomplete-options-container flex flex-col overflow-auto p-1">
+    @for (item of options()(); track $index) {
+      @let optionLabelId = fieldId() + '-' + item.value;
+
+      <label class="relative py-1 px-2 pr-8 rounded-md"
+        [attr.for]="optionLabelId"
+        [class.active]="$index === optionFocused()"
+        (mouseover)="optionFocused.set($index)">
+
+        <input
+          [type]="multiple() ? 'checkbox' : 'radio'"
+          [id]="optionLabelId"
+          [name]="fieldId()"
+          [attr.value]="item.value"
+          [checked]="item.value === control().value"
+          (change)="setValue($event)"
+        />
+        {{item.label}}
+      </label>
+    }
+  </div>
+</div>
