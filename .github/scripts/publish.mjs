@@ -34,7 +34,7 @@ fs.writeFileSync(
         url: "https://github.com/igordrangel/koala-ui/issues",
       },
       homepage: "https://github.com/igordrangel/koala-ui#readme",
-      types: "./koala-ui.d.ts",
+      types: "./index.d.ts",
       dependencies: config.dependencies,
     },
     null,
