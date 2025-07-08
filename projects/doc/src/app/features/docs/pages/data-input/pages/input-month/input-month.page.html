@@ -1,0 +1,33 @@
+<div class="flex gap-15 w-full">
+  <div class="flex flex-col gap-6 py-10 w-[70%]">
+    <section id="input-month">
+      <h1 class="text-5xl font-bold">Input Month</h1>
+      <small class="text-lg font-light opacity-60">A simple input month field.</small>
+    </section>
+
+    <section id="input-month-preview">
+      <h2 class="text-xl font-bold">Preview</h2>
+      <app-input-month-sample />
+    </section>
+
+    <section id="input-month-code">
+      <h2 class="text-xl font-bold">Code</h2>
+      <kl-code-viewer
+        name="input-month-sample.ts"
+        language="typescript"
+        src="markdown/data-input/input-month/input-month-sample.ts.md"
+      />
+      <kl-code-viewer
+        name="input-month-sample.html"
+        language="html"
+        src="markdown/data-input/input-month/input-month-sample.html.md"
+      />
+    </section>
+  </div>
+
+  <kl-on-this-page class="min-w-3xs" [links]="[
+    { label: 'Introduction', elementId: 'input-month' },
+    { label: 'Preview', elementId: 'input-month-preview' },
+    { label: 'Code', elementId: 'input-month-code' }
+  ]"/>
+</div>

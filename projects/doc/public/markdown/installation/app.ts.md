@@ -1,7 +1,7 @@
 ```typescript
 import { Component } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
-import { KlRoot } from "@koalarx/ui/core/components/kl-root/kl-root";
+import { KlRoot } from "@koalarx/ui/core/components/kl-root";
 
 @Component({
   selector: "app-root",

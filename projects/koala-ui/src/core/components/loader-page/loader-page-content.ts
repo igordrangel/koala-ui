@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { Loader } from '../loader/loader';
-import { LoaderPage } from './loader-page';
+import { Loader } from '../loader';
+import { LoaderPage } from '.';
 
 @Component({
   selector: 'kl-loader-page-content',

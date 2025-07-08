@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { InputField } from '../input-field';
+import { InputField } from '..';
 import { InputFieldBase } from '../input-field.base';
 
 @Component({

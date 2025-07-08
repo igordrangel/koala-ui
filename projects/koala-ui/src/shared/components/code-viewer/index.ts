@@ -16,8 +16,8 @@ import {
 } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
 import { Tooltip } from '../../directives/tooltip';
-import { TabContainer } from '../toolbar/tab-container';
-import { TabItem } from '../toolbar/tab-item';
+import { TabContainer } from '../tab/tab-container';
+import { TabItem } from '../tab/tab-item';
 
 export type CodeViewerLanguage =
   | 'bash'

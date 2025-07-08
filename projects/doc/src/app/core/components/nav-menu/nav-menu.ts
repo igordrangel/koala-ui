@@ -34,6 +34,22 @@ export class NavMenu {
           label: 'Input Text',
           link: '/docs/data-input/input-text',
         },
+        {
+          label: 'Input Date',
+          link: '/docs/data-input/input-date',
+        },
+        {
+          label: 'Input Datetime',
+          link: '/docs/data-input/input-datetime',
+        },
+        {
+          label: 'Input Month',
+          link: '/docs/data-input/input-month',
+        },
+        {
+          label: 'Input Time',
+          link: '/docs/data-input/input-time',
+        },
       ]).orderBy('label'),
     },
   ];

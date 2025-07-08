@@ -10,10 +10,10 @@ import {
   runInInjectionContext,
   signal,
 } from '@angular/core';
-import { Loader } from '@koalarx/ui/core/components/loader/loader';
+import { Loader } from '@koalarx/ui/core/components/loader';
 import { HookChange } from '@koalarx/ui/shared/directives/hook-change';
 import { isEmpty } from '@koalarx/ui/shared/utils/is-empty';
-import { FieldErrors } from '../../field-errors/field-errors';
+import { FieldErrors } from '../../field-errors';
 import { InputFieldBase } from '../input-field.base';
 import { Autocomplete } from './autocomplete';
 import {

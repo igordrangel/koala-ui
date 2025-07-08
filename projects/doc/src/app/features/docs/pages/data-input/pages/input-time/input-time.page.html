@@ -1,0 +1,33 @@
+<div class="flex gap-15 w-full">
+  <div class="flex flex-col gap-6 py-10 w-[70%]">
+    <section id="input-time">
+      <h1 class="text-5xl font-bold">Input Time</h1>
+      <small class="text-lg font-light opacity-60">A simple input time field.</small>
+    </section>
+
+    <section id="input-time-preview">
+      <h2 class="text-xl font-bold">Preview</h2>
+      <app-input-time-sample />
+    </section>
+
+    <section id="input-time-code">
+      <h2 class="text-xl font-bold">Code</h2>
+      <kl-code-viewer
+        name="input-time-sample.ts"
+        language="typescript"
+        src="markdown/data-input/input-time/input-time-sample.ts.md"
+      />
+      <kl-code-viewer
+        name="input-time-sample.html"
+        language="html"
+        src="markdown/data-input/input-time/input-time-sample.html.md"
+      />
+    </section>
+  </div>
+
+  <kl-on-this-page class="min-w-3xs" [links]="[
+    { label: 'Introduction', elementId: 'input-time' },
+    { label: 'Preview', elementId: 'input-time-preview' },
+    { label: 'Code', elementId: 'input-time-code' }
+  ]"/>
+</div>
