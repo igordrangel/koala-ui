@@ -24,6 +24,8 @@
   @if (isLoading()) {
     <kl-loader size="sm" />
   } @else if (autocompleteValue.hasValue()) {
-    <i class="fa-solid fa-xmark text-neutral-500 hover:cursor-pointer pt-1 pr-2" (click)="autocompleteValue.clear($event)"></i>
+    <i class="fa-solid fa-xmark text-neutral-500 hover:cursor-pointer pt-1 pr-2"
+      (click)="autocompleteValue.clear($event)">
+    </i>
   }
 </button>
