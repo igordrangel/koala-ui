@@ -8,4 +8,9 @@ export const routes: Routes = [
         (c) => c.AutocompletePage
       ),
   },
+  {
+    path: 'input-text',
+    loadComponent: () =>
+      import('./pages/input-text/input-text.page').then((c) => c.InputTextPage),
+  },
 ];

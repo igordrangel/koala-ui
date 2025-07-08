@@ -27,7 +27,9 @@
           [id]="optionLabelId"
           [name]="fieldId()"
           [attr.value]="item.value"
-          [checked]="item.value === control().value"
+          [checked]="multiple()
+            ? control().value?.includes(item.value)
+            : item.value === control().value"
           (change)="setValue($event)"
         />
         {{item.label}}

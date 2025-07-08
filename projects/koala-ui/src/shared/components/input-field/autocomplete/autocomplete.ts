@@ -53,6 +53,46 @@ export class Autocomplete {
     return elementId;
   }
 
+  private positionOnScreen(container: HTMLDivElement) {
+    const autocompleteField = this.viewContainerRef.element
+      .nativeElement as HTMLElement;
+    const currentTop = window.scrollY;
+    const position = autocompleteField.getBoundingClientRect();
+
+    if (position) {
+      const screenHeight = document.body.clientHeight;
+      let top = position.bottom;
+      let height = Math.abs(screenHeight - top);
+
+      if ((height * 100) / screenHeight <= 10) {
+        height = Math.abs(screenHeight - position.top);
+        top = position.top + height;
+      }
+
+      top += currentTop;
+
+      container.style.position = 'absolute';
+      container.style.display = 'flex';
+      container.style.top = `${top}px`;
+      container.style.left = `${position.left}px`;
+      container.style.width = `${position.width}px`;
+      container.style.height = `auto`;
+      container.style.maxHeight = `${height}px`;
+      container.style.zIndex = '99';
+      container.style.overflow = 'hidden';
+
+      const selectedOptions =
+        autocompleteField.querySelector<HTMLDivElement>('.selected-options');
+
+      if (selectedOptions) {
+        selectedOptions.onchange = () =>
+          setTimeout(() => {
+            this.positionOnScreen(container);
+          }, 50);
+      }
+    }
+  }
+
   open(data: AutocompleteOpenData) {
     const main = document.querySelector<HTMLElement>(
       GENERIC_COMPONENT_CONTAINER_NAME
@@ -64,34 +104,7 @@ export class Autocomplete {
 
       container.id = elementId;
 
-      const autocompleteField = this.viewContainerRef.element
-        .nativeElement as HTMLElement;
-
-      const currentTop = window.scrollY;
-      const position = autocompleteField.getBoundingClientRect();
-
-      if (position) {
-        const screenHeight = document.body.clientHeight;
-        let top = position.bottom;
-        let height = Math.abs(screenHeight - top);
-
-        if ((height * 100) / screenHeight <= 10) {
-          height = Math.abs(screenHeight - position.top);
-          top = position.top + height;
-        }
-
-        top += currentTop;
-
-        container.style.position = 'absolute';
-        container.style.display = 'flex';
-        container.style.top = `${top}px`;
-        container.style.left = `${position.left}px`;
-        container.style.width = `${position.width}px`;
-        container.style.height = `auto`;
-        container.style.maxHeight = `${height}px`;
-        container.style.zIndex = '99';
-        container.style.overflow = 'hidden';
-      }
+      this.positionOnScreen(container);
 
       const componentRef = createComponent(AutocompleteOptions, {
         environmentInjector: this.injector,

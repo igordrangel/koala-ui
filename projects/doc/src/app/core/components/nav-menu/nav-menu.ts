@@ -30,6 +30,10 @@ export class NavMenu {
           label: 'Autocomplete',
           link: '/docs/data-input/autocomplete',
         },
+        {
+          label: 'Input Text',
+          link: '/docs/data-input/input-text',
+        },
       ]).orderBy('label'),
     },
   ];

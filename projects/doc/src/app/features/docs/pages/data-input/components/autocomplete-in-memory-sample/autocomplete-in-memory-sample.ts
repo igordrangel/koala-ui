@@ -3,15 +3,16 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AutocompleteBuilder } from '@koalarx/ui/shared/components/input-field/autocomplete/autocomplete-builder';
 import { AutocompleteField } from '@koalarx/ui/shared/components/input-field/autocomplete/autocomplete-field';
 import { AutocompleteOption } from '@koalarx/ui/shared/components/input-field/autocomplete/autocomplete-value';
+import { SampleContainer } from '../sample-container/sample-container';
 
 @Component({
   selector: 'app-autocomplete-in-memory-sample',
   templateUrl: './autocomplete-in-memory-sample.html',
-  imports: [AutocompleteField],
+  imports: [SampleContainer, AutocompleteField],
 })
 export class AutocompleteInMemorySample {
   form = inject(FormBuilder).group({
-    personId: new FormControl<number | null>(1, Validators.required),
+    personId: new FormControl<number[]>([1], Validators.required),
   });
 
   options = inject(AutocompleteBuilder).inMemory([

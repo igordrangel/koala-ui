@@ -1,0 +1,58 @@
+<div class="flex gap-15 w-full">
+  <div class="flex flex-col gap-6 py-10 w-[70%]">
+    <section id="input-text">
+      <h1 class="text-5xl font-bold">Input Text</h1>
+      <small class="text-lg font-light opacity-60">A simple input text field.</small>
+    </section>
+
+    <section id="input-text-preview">
+      <h2 class="text-xl font-bold">Preview</h2>
+      <app-input-text-sample />
+    </section>
+
+    <section id="input-text-code">
+      <h2 class="text-xl font-bold">Code</h2>
+      <kl-code-viewer
+        name="input-text-sample.ts"
+        language="typescript"
+        src="markdown/data-input/input-text/input-text-sample.ts.md"
+      />
+      <kl-code-viewer
+        name="input-text-sample.html"
+        language="html"
+        src="markdown/data-input/input-text/input-text-sample.html.md"
+      />
+    </section>
+
+    <section id="input-text-with-mask">
+      <h2 class="text-2xl font-bold">Input Text With Mask</h2>
+      <small class="text-base font-light opacity-70">
+        In this mode, the input text field is enhanced with a mask, guiding users on the expected format (e.g., phone numbers, dates). Koala uses the <a href="https://ngx-mask.github.io/ngx-mask/" target="_blank" rel="noopener">ngx-mask</a> library to apply masks. To understand the mask patterns, please refer to the library's documentation.
+      </small>
+    </section>
+
+    <section id="input-text-with-mask-preview">
+      <h2 class="text-xl font-bold">Preview</h2>
+      <app-input-text-with-mask-sample />
+    </section>
+
+    <section id="input-text-with-mask-code">
+      <h2 class="text-xl font-bold">Code</h2>
+      <kl-code-viewer
+        name="input-text-with-mask-sample.ts"
+        language="typescript"
+        src="markdown/data-input/input-text/input-text-with-mask-sample.ts.md"
+      />
+      <kl-code-viewer
+        name="input-text-with-mask-sample.html"
+        language="html"
+        src="markdown/data-input/input-text/input-text-with-mask-sample.html.md"
+      />
+    </section>
+  </div>
+
+  <kl-on-this-page class="min-w-3xs" [links]="[
+    { label: 'Introduction', elementId: 'input-text' },
+    { label: 'With Mask', elementId: 'input-text-with-mask' },
+  ]"/>
+</div>

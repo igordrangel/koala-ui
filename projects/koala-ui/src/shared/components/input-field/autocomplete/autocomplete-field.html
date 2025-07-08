@@ -1,25 +1,32 @@
-<button class="relative select hover:cursor-default bg-neutral-300 dark:bg-neutral-900 border border-neutral-700 dark:border-neutral-500 rounded-sm w-full flex items-center justify-between flex-nowrap gap-4"
+<button class="relative select hover:cursor-default bg-base-100 border border-neutral-700 dark:border-neutral-500 rounded-sm w-full min-h-10 h-full flex items-center justify-between flex-nowrap"
   [class.has-value]="autocompleteValue.hasValue()"
   type="button"
   tabindex="0"
-  trigger
   [id]="fieldId"
   [disabled]="isDisabled() || isLoading()"
+  (focus)="control().markAsTouched()"
   (click)="open()">
 
   <span class="autocomplete-label flex items-center gap-2 whitespace-nowrap text-neutral-900 dark:text-neutral-300">
     <span>{{label()}} {{ isRequired() ? '*' : '' }}</span>
   </span>
 
-  @if (autocompleteValue.hasValue()) {
-    <div class="flex items-center w-full h-full selected-options">
+  <div class="flex flex-wrap gap-1 pt-3 pb-2 items-center w-full h-full selected-options"
+    [hookChange]="autocompleteValue.currentValue()"
+    [class.hidden]="!autocompleteValue.hasValue()">
+    @if (multiple()) {
       @for (item of autocompleteValue.selectedOptions(); track $index) {
-        {{item.label}}
+        <span class="flex items-center badge badge-primary badge-sm rounded-sm">
+          <span>{{item.label}}</span>
+          <i class="fa-solid fa-xmark text-neutral-400 hover:cursor-pointer"
+            (click)="autocompleteValue.remove($event, item.value)">
+          </i>
+        </span>
       }
-
+    } @else {
       {{autocompleteValue.selectedOption()?.label}}
-    </div>
-  }
+    }
+  </div>
 
   @if (isLoading()) {
     <kl-loader size="sm" />
@@ -29,3 +36,9 @@
     </i>
   }
 </button>
+
+<kl-field-errors [field]="control()">
+  <ng-container errors>
+    <ng-content select="[errors]" />
+  </ng-container>
+</kl-field-errors>

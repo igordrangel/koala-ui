@@ -1,0 +1,5 @@
+```html
+<app-sample-container>
+  <kl-input-text label="Input Text" [control]="form.controls.text" />
+</app-sample-container>
+```

@@ -3,11 +3,12 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AutocompleteBuilder } from '@koalarx/ui/shared/components/input-field/autocomplete/autocomplete-builder';
 import { AutocompleteField } from '@koalarx/ui/shared/components/input-field/autocomplete/autocomplete-field';
 import { AutocompleteOption } from '@koalarx/ui/shared/components/input-field/autocomplete/autocomplete-value';
+import { SampleContainer } from '../sample-container/sample-container';
 
 @Component({
   selector: 'app-autocomplete-on-demand-sample',
   templateUrl: './autocomplete-on-demand-sample.html',
-  imports: [AutocompleteField],
+  imports: [SampleContainer, AutocompleteField],
 })
 export class AutocompleteOnDemandSample {
   form = inject(FormBuilder).group({

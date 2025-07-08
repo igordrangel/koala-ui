@@ -11,7 +11,9 @@ import {
   signal,
 } from '@angular/core';
 import { Loader } from '@koalarx/ui/core/components/loader/loader';
+import { HookChange } from '@koalarx/ui/shared/directives/hook-change';
 import { isEmpty } from '@koalarx/ui/shared/utils/is-empty';
+import { FieldErrors } from '../../field-errors/field-errors';
 import { InputFieldBase } from '../input-field.base';
 import { Autocomplete } from './autocomplete';
 import {
@@ -31,7 +33,7 @@ interface OptionsResource {
   selector: 'kl-autocomplete-field',
   templateUrl: './autocomplete-field.html',
   providers: [Autocomplete, AutocompleteValue],
-  imports: [Loader],
+  imports: [Loader, FieldErrors, HookChange],
 })
 export class AutocompleteField extends InputFieldBase implements OnInit {
   private readonly injector = inject(Injector);

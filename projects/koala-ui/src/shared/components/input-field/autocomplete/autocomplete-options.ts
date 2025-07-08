@@ -59,12 +59,32 @@ export class AutocompleteOptions implements OnInit, OnDestroy {
     });
   }
 
-  private onKeyup = (event: KeyboardEvent) => {
+  private updateScrollPosition(direction: 'down' | 'up' = 'down') {
+    setTimeout(() => {
+      const containerElement =
+        this.viewContainerRef.element.nativeElement.querySelector(
+          '.kl-autocomplete-options-container'
+        ) as HTMLDivElement;
+      const focusedOptionElement = containerElement.querySelector(
+        'label.active'
+      ) as HTMLDivElement;
+
+      if (focusedOptionElement) {
+        containerElement.scrollTo({
+          top:
+            direction === 'down'
+              ? containerElement.scrollTop +
+                focusedOptionElement.getBoundingClientRect().height
+              : containerElement.scrollTop -
+                focusedOptionElement.getBoundingClientRect().height,
+        });
+      }
+    });
+  }
+
+  private onKeyDown = (event: KeyboardEvent) => {
     event.stopPropagation();
     event.preventDefault();
-
-    const containerElement: HTMLDivElement =
-      this.viewContainerRef.element.nativeElement;
 
     switch (event.key) {
       case 'ArrowDown': {
@@ -74,6 +94,7 @@ export class AutocompleteOptions implements OnInit, OnDestroy {
           }
           return value;
         });
+        this.updateScrollPosition('down');
         break;
       }
       case 'ArrowUp': {
@@ -83,8 +104,20 @@ export class AutocompleteOptions implements OnInit, OnDestroy {
           }
           return value;
         });
+        this.updateScrollPosition('up');
         break;
       }
+    }
+  };
+
+  private onKeyup = (event: KeyboardEvent) => {
+    event.stopPropagation();
+    event.preventDefault();
+
+    const containerElement: HTMLDivElement =
+      this.viewContainerRef.element.nativeElement;
+
+    switch (event.key) {
       case 'Enter': {
         const focusedOption = this.options()()[this.optionFocused()];
 
@@ -122,6 +155,7 @@ export class AutocompleteOptions implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     document.removeEventListener('keyup', this.onKeyup);
+    document.removeEventListener('keydown', this.onKeyDown);
     document.removeEventListener('click', this.onClick);
   }
 
@@ -130,6 +164,7 @@ export class AutocompleteOptions implements OnInit, OnDestroy {
 
     setTimeout(() => {
       document.addEventListener('keyup', this.onKeyup);
+      document.addEventListener('keydown', this.onKeyDown);
       document.addEventListener('click', this.onClick);
     }, 150);
   }
@@ -143,6 +178,22 @@ export class AutocompleteOptions implements OnInit, OnDestroy {
       value = Number(value);
     }
 
-    this.control().setValue(value);
+    if (this.multiple()) {
+      const check = target.checked;
+
+      let currentValue = this.control().value;
+
+      if (!Array.isArray(currentValue)) {
+        currentValue = [currentValue];
+      }
+
+      if (check) {
+        this.control().setValue([...currentValue, value]);
+      } else {
+        this.control().setValue(currentValue.filter((v: any) => v !== value));
+      }
+    } else {
+      this.control().setValue(value);
+    }
   }
 }

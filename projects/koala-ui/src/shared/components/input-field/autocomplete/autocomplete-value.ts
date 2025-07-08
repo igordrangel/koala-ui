@@ -13,7 +13,7 @@ import { isEmpty } from '@koalarx/ui/shared/utils/is-empty';
 import { delay } from '@koalarx/utils/KlDelay';
 import { debounceTime } from 'rxjs/internal/operators/debounceTime';
 
-export type AutocompleteOptionValue = string | number | boolean | null;
+export type AutocompleteOptionValue = string | number | null;
 
 export interface AutocompleteOption<TData = any> {
   label: string;
@@ -123,19 +123,21 @@ export class AutocompleteValue {
       return;
     }
 
-    const option = this._options().find((opt) => opt.value === value);
+    const options = this._multiple
+      ? this._options().filter((opt) => value?.includes(opt.value))
+      : this._options().find((opt) => opt.value === value);
 
-    if (option) {
-      this._currentValue.update((current) => {
+    if (options) {
+      this._currentValue.update(() => {
         if (this._multiple) {
-          if (Array.isArray(current)) {
-            return [...current, option];
+          if (Array.isArray(options)) {
+            return options;
           }
 
-          return [option];
+          return [options];
         }
 
-        return option;
+        return options;
       });
     }
   }
@@ -181,9 +183,25 @@ export class AutocompleteValue {
   }
 
   clear(event: MouseEvent) {
-    event.stopPropagation();
     event.preventDefault();
     this._control?.setValue(null);
     this._currentValue.set(null);
+  }
+
+  remove(event: MouseEvent, value: AutocompleteOptionValue) {
+    event.preventDefault();
+    if (!this._multiple) {
+      return;
+    }
+
+    if (!this._control) {
+      return;
+    }
+
+    const currentValue = this._control.value;
+
+    this._control?.setValue(
+      currentValue.filter((v: AutocompleteOptionValue) => v !== value)
+    );
   }
 }

@@ -1,0 +1,9 @@
+```html
+<app-sample-container>
+  <kl-input-text
+    label="Phone"
+    [control]="form.controls.phone"
+    mask="(00) 00000000?0"
+  />
+</app-sample-container>
+```
