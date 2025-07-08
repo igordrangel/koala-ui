@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { InputText } from '@koalarx/ui/shared/components/input-field/input-text';
+import { InputText } from '@koalarx/ui/shared/components/input-field/input-text/input-text';
 import { SampleContainer } from '../sample-container/sample-container';
 
 @Component({

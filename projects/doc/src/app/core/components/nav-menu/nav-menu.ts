@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { VerticalMenuContainer } from '@koalarx/ui/shared/components/vertical-menu/vertical-menu-container';
-import { VerticalMenuItem } from '@koalarx/ui/shared/components/vertical-menu/vertical-menu-item';
+import {
+  VerticalMenuContainer,
+  VerticalMenuItem,
+} from '@koalarx/ui/shared/components/vertical-menu';
 import { KlArray } from '@koalarx/utils/KlArray';
 
 @Component({

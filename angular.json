@@ -6,7 +6,7 @@
     "koala-ui": {
       "projectType": "library",
       "root": "projects/koala-ui",
-      "sourceRoot": "projects/koala-ui/src",
+      "sourceRoot": "projects/koala-ui",
       "prefix": "kl",
       "architect": {
         "build": {
@@ -39,6 +39,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "outputPath": "dist",
             "browser": "projects/doc/src/main.ts",
             "tsConfig": "projects/doc/tsconfig.app.json",
             "assets": [

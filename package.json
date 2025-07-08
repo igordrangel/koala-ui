@@ -4,7 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve doc",
-    "build": "ng build",
+    "build:app": "ng build doc",
+    "build:lib": "ng build koala-ui",
+    "build:publish": "node .github/scripts/publish.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

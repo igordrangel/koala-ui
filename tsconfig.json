@@ -11,11 +11,11 @@
         "./projects/doc/src/*"
       ],
       "@koalarx/ui": [
-        "./projects/koala-ui/src/public-api.ts",
+        "./projects/koala-ui",
       ],
       "@koalarx/ui/*": [
-        "./projects/koala-ui/src/*"
-      ]
+        "./projects/koala-ui/*"
+      ],
     },
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
@@ -32,20 +32,5 @@
     "strictInputAccessModifiers": true,
     "typeCheckHostBindings": true,
     "strictTemplates": true
-  },
-  "files": [],
-  "references": [
-    {
-      "path": "./projects/koala-ui/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/koala-ui/tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/doc/tsconfig.app.json"
-    },
-    {
-      "path": "./projects/doc/tsconfig.spec.json"
-    }
-  ]
+  }
 }

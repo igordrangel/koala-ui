@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CodeViewer } from '@koalarx/ui/shared/components/code-viewer';
-import { OnThisPage } from '@koalarx/ui/shared/components/on-this-page';
+import { CodeViewer } from '@koalarx/ui/shared/components/code-viewer/code-viewer';
+import { OnThisPage } from '@koalarx/ui/shared/components/on-this-page/on-this-page';
 import { InputDateSample } from '../../components/input-date-sample/input-date-sample';
 
 @Component({

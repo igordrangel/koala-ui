@@ -8,10 +8,6 @@
     "declarationMap": true,
     "types": [],
   },
-  "include": [
-    "src/**/*.ts",
-    "src/assets/js/all.min.js"
-  ],
   "exclude": [
     "**/*.spec.ts"
   ]

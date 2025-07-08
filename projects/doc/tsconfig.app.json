@@ -5,17 +5,6 @@
   "compilerOptions": {
     "outDir": "../../out-tsc/app",
     "types": [],
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@koalarx/ui": [
-        "../../projects/koala-ui/src/public-api.ts",
-      ],
-      "@koalarx/ui/*": [
-        "../../projects/koala-ui/src/*"
-      ]
-    },
   },
   "include": [
     "src/**/*.ts"
