@@ -9,6 +9,8 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl } from '@angular/forms';
+import { isEmpty } from '@koalarx/ui/shared/utils/is-empty';
+import { delay } from '@koalarx/utils/KlDelay';
 import { debounceTime } from 'rxjs/internal/operators/debounceTime';
 
 export type AutocompleteOptionValue = string | number | boolean | null;
@@ -20,9 +22,13 @@ export interface AutocompleteOption<TData = any> {
 }
 
 export type AutocompleteList = AutocompleteOption[];
+export interface AutocompleteDataOptionsFnParams {
+  filter?: string | null;
+  autofill?: any | null;
+}
 
 export type AutocompleteDataOptionsFn = (
-  filter: Signal<string | null>
+  data: Signal<AutocompleteDataOptionsFnParams>
 ) => ResourceRef<AutocompleteList>;
 
 export type AutocompleteDataOptions =
@@ -40,6 +46,12 @@ export class AutocompleteValue {
   >(null);
   private _multiple = false;
   private _options?: Signal<AutocompleteList>;
+  private _autofill = signal<any | null>(null);
+  private readonly _requestOptionsParams =
+    linkedSignal<AutocompleteDataOptionsFnParams>(() => ({
+      filter: this._filter(),
+      autofill: this._autofill(),
+    }));
 
   private readonly _selectedOption = linkedSignal(() => {
     const currentValue = this._currentValue();
@@ -98,6 +110,14 @@ export class AutocompleteValue {
     return this._selectedOptions.asReadonly();
   }
 
+  get autofill() {
+    return this._autofill.asReadonly();
+  }
+
+  get requestOptionsParams() {
+    return this._requestOptionsParams.asReadonly();
+  }
+
   private selectOption(value: any) {
     if (!this._options) {
       return;
@@ -120,6 +140,25 @@ export class AutocompleteValue {
     }
   }
 
+  async makeAutofill(loadingState: Signal<boolean>) {
+    while (loadingState()) {
+      await delay(100);
+    }
+
+    this.selectOption(this._control?.value);
+
+    const currentValue = this._currentValue();
+
+    if (
+      (this._multiple &&
+        ((Array.isArray(currentValue) && currentValue.length === 0) ||
+          !Array.isArray(currentValue))) ||
+      (!this._multiple && isEmpty(currentValue))
+    ) {
+      this._autofill.set(this._control?.value);
+    }
+  }
+
   init(
     control: FormControl<any>,
     options: Signal<AutocompleteList>,
@@ -131,7 +170,10 @@ export class AutocompleteValue {
 
     this.filterControl.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef), debounceTime(500))
-      .subscribe((value) => this._filter.set(value));
+      .subscribe((value) => {
+        this._autofill.set(null);
+        this._filter.set(value);
+      });
 
     this._control.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef))

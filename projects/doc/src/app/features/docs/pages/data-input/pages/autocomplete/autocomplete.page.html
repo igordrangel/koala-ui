@@ -5,34 +5,89 @@
       <small class="text-lg font-light opacity-60">Autocomplete input and command palette with a list of suggestions.</small>
     </section>
 
-    <section id="preview">
-      <h2 class="text-2xl font-bold">Preview</h2>
-      <app-autocomplete-sample />
+    <section id="autocomplete-on-demand">
+      <h2 class="text-2xl font-bold">Autocomplete On Demand</h2>
+      <small class="text-base font-light opacity-70">
+        This loading mode fetches suggestions dynamically based on the current filter or field value, enabling efficient and responsive autocomplete.
+      </small>
     </section>
 
-    <section id="code">
-      <h2 class="text-2xl font-bold">Code</h2>
+    <section id="autocomplete-on-demand-preview">
+      <h2 class="text-xl font-bold">Preview</h2>
+      <app-autocomplete-on-demand-sample />
+    </section>
+
+    <section id="autocomplete-on-demand-code">
+      <h2 class="text-xl font-bold">Code</h2>
       <kl-code-viewer
-        name="autocomplete-sample.ts"
+        name="autocomplete-on-demand-sample.ts"
         language="typescript"
-        src="markdown/data-input/autocomplete/autocomplete-sample.ts.md"
+        src="markdown/data-input/autocomplete/autocomplete-on-demand-sample.ts.md"
       />
       <kl-code-viewer
-        name="autocomplete-sample.html"
+        name="autocomplete-on-demand-sample.html"
         language="html"
         src="markdown/data-input/autocomplete/autocomplete-sample.html.md"
       />
     </section>
 
-    <section id="attributes">
-      <h2 class="text-2xl font-bold">Attributes</h2>
+    <section id="autocomplete-on-server">
+      <h2 class="text-2xl font-bold">Autocomplete On Server</h2>
+      <small class="text-base font-light opacity-70">
+        In this mode, suggestions are fetched from the server, but the filtering of results is performed in-memory on the client side, providing fast responses without overloading the backend.
+      </small>
+    </section>
+
+    <section id="autocomplete-on-server-preview">
+      <h2 class="text-xl font-bold">Preview</h2>
+      <app-autocomplete-on-server-sample />
+    </section>
+
+    <section id="autocomplete-on-server-code">
+      <h2 class="text-xl font-bold">Code</h2>
+      <kl-code-viewer
+        name="autocomplete-on-server-sample.ts"
+        language="typescript"
+        src="markdown/data-input/autocomplete/autocomplete-on-server-sample.ts.md"
+      />
+      <kl-code-viewer
+        name="autocomplete-on-server-sample.html"
+        language="html"
+        src="markdown/data-input/autocomplete/autocomplete-sample.html.md"
+      />
+    </section>
+
+    <section id="autocomplete-in-memory">
+      <h2 class="text-2xl font-bold">Autocomplete In Memory</h2>
+      <small class="text-base font-light opacity-70">
+        This mode is ideal for cases where the options are already available locally, such as enum lists or fixed values, and do not need to be fetched from the server. The options are loaded directly into an array and filtering is performed in memory, providing fast and efficient responses.
+      </small>
+    </section>
+
+    <section id="autocomplete-in-memory-preview">
+      <h2 class="text-xl font-bold">Preview</h2>
+      <app-autocomplete-in-memory-sample />
+    </section>
+
+    <section id="autocomplete-in-memory-code">
+      <h2 class="text-xl font-bold">Code</h2>
+      <kl-code-viewer
+        name="autocomplete-in-memory-sample.ts"
+        language="typescript"
+        src="markdown/data-input/autocomplete/autocomplete-in-memory-sample.ts.md"
+      />
+      <kl-code-viewer
+        name="autocomplete-in-memory-sample.html"
+        language="html"
+        src="markdown/data-input/autocomplete/autocomplete-sample.html.md"
+      />
     </section>
   </div>
 
   <kl-on-this-page class="min-w-3xs" [links]="[
-    { label: 'Autocomplete', elementId: 'autocomplete' },
-    { label: 'Preview', elementId: 'preview' },
-    { label: 'Code', elementId: 'code' },
-    { label: 'Attributes', elementId: 'attributes' }
+    { label: 'Introduction', elementId: 'autocomplete' },
+    { label: 'On Demand', elementId: 'autocomplete-on-demand' },
+    { label: 'On Server', elementId: 'autocomplete-on-server' },
+    { label: 'In Memory', elementId: 'autocomplete-in-memory' },
   ]"/>
 </div>

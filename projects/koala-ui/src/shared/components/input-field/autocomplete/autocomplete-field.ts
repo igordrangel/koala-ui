@@ -3,20 +3,29 @@ import {
   Component,
   effect,
   inject,
+  Injector,
   input,
-  linkedSignal,
   OnInit,
   ResourceRef,
+  runInInjectionContext,
   signal,
 } from '@angular/core';
 import { Loader } from '@koalarx/ui/core/components/loader/loader';
+import { isEmpty } from '@koalarx/ui/shared/utils/is-empty';
 import { InputFieldBase } from '../input-field.base';
 import { Autocomplete } from './autocomplete';
 import {
   AutocompleteDataOptions,
+  AutocompleteDataOptionsFn,
   AutocompleteList,
   AutocompleteValue,
 } from './autocomplete-value';
+
+interface OptionsResource {
+  onDemand?: ResourceRef<AutocompleteList>;
+  onServer?: ResourceRef<AutocompleteList>;
+  inMemory?: AutocompleteList;
+}
 
 @Component({
   selector: 'kl-autocomplete-field',
@@ -25,6 +34,8 @@ import {
   imports: [Loader],
 })
 export class AutocompleteField extends InputFieldBase implements OnInit {
+  private readonly injector = inject(Injector);
+
   readonly autocompleteValue = inject(AutocompleteValue);
   readonly autocomplete = inject(Autocomplete);
 
@@ -32,40 +43,42 @@ export class AutocompleteField extends InputFieldBase implements OnInit {
   multiple = input(false, { transform: booleanAttribute });
   placeholderSearchField = input<string>();
 
-  isLoading = linkedSignal(() => {
-    let options = this.options();
-
-    if (Object.hasOwn(options, 'value')) {
-      options = options as ResourceRef<AutocompleteList>;
-      return options.isLoading();
-    } else if (typeof options === 'function') {
-      return options(this.autocompleteValue.filter).isLoading();
-    }
-
-    return false;
-  });
-
+  isLoading = signal<boolean>(false);
   optionList = signal<AutocompleteList>([]);
+
+  optionsResource = signal<OptionsResource | null>(null);
 
   constructor() {
     super();
 
     effect(() => {
-      let options = this.options();
+      const optionList = this.optionList();
+      const autofill = this.autocompleteValue.autofill();
 
-      if (Object.hasOwn(options, 'value')) {
-        options = this.options() as ResourceRef<AutocompleteList>;
+      if (optionList.length > 0 && !isEmpty(autofill)) {
+        this.autocompleteValue.makeAutofill(this.isLoading);
+      }
+    });
 
-        this.optionList.set(this.applyFilter(options.value()));
+    effect(() => {
+      const options = this.optionsResource();
 
-        return;
-      } else if (typeof options === 'function') {
-        this.optionList.set(options(this.autocompleteValue.filter).value());
-
+      if (!options) {
         return;
       }
 
-      this.optionList.set(this.applyFilter(options as AutocompleteList));
+      const { onDemand, onServer, inMemory } = options;
+
+      if (onDemand) {
+        this.optionList.set(onDemand.value());
+        this.isLoading.set(onDemand.isLoading());
+      } else if (onServer) {
+        this.optionList.set(this.applyFilter(onServer.value()));
+        this.isLoading.set(onServer.isLoading());
+      } else if (inMemory) {
+        this.optionList.set(this.applyFilter(inMemory));
+        this.isLoading.set(false);
+      }
     });
   }
 
@@ -74,6 +87,23 @@ export class AutocompleteField extends InputFieldBase implements OnInit {
     return options.filter((option) =>
       option.label.toLowerCase().includes(filter.toLowerCase())
     );
+  }
+
+  private generateOptionsResource(): OptionsResource {
+    const options = this.options();
+
+    if (Object.hasOwn(options, 'value')) {
+      return { onServer: options as ResourceRef<AutocompleteList> };
+    } else if (typeof options === 'function') {
+      const resourceFnOptions = options as AutocompleteDataOptionsFn;
+      return {
+        onDemand: runInInjectionContext(this.injector, () =>
+          resourceFnOptions(this.autocompleteValue.requestOptionsParams)
+        ),
+      };
+    }
+
+    return { inMemory: options as AutocompleteList };
   }
 
   open() {
@@ -93,5 +123,7 @@ export class AutocompleteField extends InputFieldBase implements OnInit {
       this.optionList,
       this.multiple()
     );
+    this.optionsResource.set(this.generateOptionsResource());
+    this.autocompleteValue.makeAutofill(this.isLoading);
   }
 }
