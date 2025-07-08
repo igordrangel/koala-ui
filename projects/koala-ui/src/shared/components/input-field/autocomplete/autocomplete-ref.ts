@@ -20,7 +20,9 @@ export class AutocompleteRef {
   );
 
   close() {
-    this.componentRef().destroy();
-    this.appRef.detachView(this.componentRef().hostView);
+    setTimeout(() => {
+      this.componentRef().destroy();
+      this.appRef.detachView(this.componentRef().hostView);
+    });
   }
 }

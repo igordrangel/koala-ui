@@ -1,10 +1,10 @@
-<div class="bg-base-300 overflow-hidden shadow border border-neutral-200 dark:border-neutral-700 rounded-md flex flex-col"
+<div class="bg-base-300 overflow-hidden shadow border border-neutral-200 dark:border-neutral-700 rounded-lg flex flex-col"
   [attr.aria-labelledby]="fieldId()">
 
   <div class="border-b border-neutral-200 dark:border-neutral-700">
     <label class="flex items-center text-sm">
-      <i class="fa-solid fa-magnifying-glass opacity-60 absolute left-3"></i>
-      <input class="p-2 pr-3 pl-9 outline-none placeholder:opacity-60"
+      <i class="fa-solid fa-magnifying-glass opacity-60 absolute top-3 left-4"></i>
+      <input class="p-2 pr-3 pl-10 outline-none placeholder:opacity-60"
         #searchInput
         type="search"
         [formControl]="autocompleteValue().filterControl"

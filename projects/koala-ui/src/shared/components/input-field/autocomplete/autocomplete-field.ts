@@ -4,7 +4,6 @@ import {
   effect,
   inject,
   input,
-  isSignal,
   linkedSignal,
   OnInit,
   ResourceRef,
@@ -15,7 +14,6 @@ import { InputFieldBase } from '../input-field.base';
 import { Autocomplete } from './autocomplete';
 import {
   AutocompleteDataOptions,
-  AutocompleteDataOptionsFn,
   AutocompleteList,
   AutocompleteValue,
 } from './autocomplete-value';
@@ -35,9 +33,13 @@ export class AutocompleteField extends InputFieldBase implements OnInit {
   placeholderSearchField = input<string>();
 
   isLoading = linkedSignal(() => {
-    if (isSignal(this.options)) {
-      const options = this.options() as ResourceRef<AutocompleteList>;
+    let options = this.options();
+
+    if (Object.hasOwn(options, 'value')) {
+      options = options as ResourceRef<AutocompleteList>;
       return options.isLoading();
+    } else if (typeof options === 'function') {
+      return options(this.autocompleteValue.filter).isLoading();
     }
 
     return false;
@@ -49,21 +51,21 @@ export class AutocompleteField extends InputFieldBase implements OnInit {
     super();
 
     effect(() => {
-      if (Object.hasOwn(this.options(), 'value')) {
-        const options: ResourceRef<AutocompleteList> = this.options() as any;
+      let options = this.options();
+
+      if (Object.hasOwn(options, 'value')) {
+        options = this.options() as ResourceRef<AutocompleteList>;
 
         this.optionList.set(this.applyFilter(options.value()));
 
         return;
-      } else if (typeof this.options() === 'function') {
-        const options: AutocompleteDataOptionsFn = this.options() as any;
-
+      } else if (typeof options === 'function') {
         this.optionList.set(options(this.autocompleteValue.filter).value());
 
         return;
       }
 
-      this.optionList.set(this.applyFilter(this.options() as AutocompleteList));
+      this.optionList.set(this.applyFilter(options as AutocompleteList));
     });
   }
 

@@ -1,4 +1,4 @@
-<button class="relative select hover:cursor-default bg-neutral-800 border border-neutral-700 dark:border-neutral-500 rounded-sm w-full flex items-center justify-between flex-nowrap gap-4"
+<button class="relative select hover:cursor-default bg-neutral-300 dark:bg-neutral-900 border border-neutral-700 dark:border-neutral-500 rounded-sm w-full flex items-center justify-between flex-nowrap gap-4"
   [class.has-value]="autocompleteValue.hasValue()"
   type="button"
   tabindex="0"
@@ -7,7 +7,7 @@
   [disabled]="isDisabled() || isLoading()"
   (click)="open()">
 
-  <span class="autocomplete-label flex items-center gap-2 whitespace-nowrap text-neutral-500">
+  <span class="autocomplete-label flex items-center gap-2 whitespace-nowrap text-neutral-900 dark:text-neutral-300">
     <span>{{label()}} {{ isRequired() ? '*' : '' }}</span>
   </span>
 
