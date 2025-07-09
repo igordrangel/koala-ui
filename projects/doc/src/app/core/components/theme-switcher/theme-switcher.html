@@ -1,0 +1,6 @@
+<label class="btn btn-ghost btn-sm swap swap-rotate">
+  <input type="checkbox" class="theme-controller" [(ngModel)]="activeDarkMode" />
+
+  <i class="fa-regular fa-sun text-base fill-current" [class.swap-off]="activeDarkMode()"></i>
+  <i class="fa-regular fa-moon text-base fill-current" [class.swap-on]="!activeDarkMode()"></i>
+</label>

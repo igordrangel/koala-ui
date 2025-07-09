@@ -1,9 +1,15 @@
 <div class="flex items-center p-2 pl-8 gap-4">
   <app-logotype />
 
-  <kl-horizontal-menu-container>
+  <kl-horizontal-menu-container class="w-full">
     <kl-horizontal-menu-item link="/">Docs</kl-horizontal-menu-item>
     <kl-horizontal-menu-item link="/components">Components</kl-horizontal-menu-item>
     <kl-horizontal-menu-item link="/themes">Themes</kl-horizontal-menu-item>
   </kl-horizontal-menu-container>
+
+  <div class="flex items-center justify-end w-full gap-2 pr-4">
+    <app-github-stars />
+    <span class="relative text-neutral-300 dark:text-neutral-700 text-xl h-full top-[-0.15rem]">|</span>
+    <app-theme-switcher />
+  </div>
 </div>

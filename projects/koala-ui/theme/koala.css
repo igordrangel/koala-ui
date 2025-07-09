@@ -1,6 +1,9 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
 @plugin "daisyui" {
-  themes: light --default, black --prefersdark;
+  themes: all;
 }
 
 @import "./icons/font-awesome/css/all.min.css";
