@@ -83,11 +83,11 @@ export class AutocompleteOptions implements OnInit, OnDestroy {
   }
 
   private onKeyDown = (event: KeyboardEvent) => {
-    event.stopPropagation();
-    event.preventDefault();
-
     switch (event.key) {
       case 'ArrowDown': {
+        event.stopPropagation();
+        event.preventDefault();
+
         this.optionFocused.update((value) => {
           if (value < this.options()().length - 1) {
             return value + 1;
@@ -98,6 +98,9 @@ export class AutocompleteOptions implements OnInit, OnDestroy {
         break;
       }
       case 'ArrowUp': {
+        event.stopPropagation();
+        event.preventDefault();
+
         this.optionFocused.update((value) => {
           if (value > 0) {
             return value - 1;
@@ -111,14 +114,14 @@ export class AutocompleteOptions implements OnInit, OnDestroy {
   };
 
   private onKeyup = (event: KeyboardEvent) => {
-    event.stopPropagation();
-    event.preventDefault();
-
     const containerElement: HTMLDivElement =
       this.viewContainerRef.element.nativeElement;
 
     switch (event.key) {
       case 'Enter': {
+        event.stopPropagation();
+        event.preventDefault();
+
         const focusedOption = this.options()()[this.optionFocused()];
 
         if (focusedOption) {
@@ -130,6 +133,9 @@ export class AutocompleteOptions implements OnInit, OnDestroy {
         break;
       }
       case 'Escape': {
+        event.stopPropagation();
+        event.preventDefault();
+
         this.close();
         break;
       }
@@ -177,7 +183,7 @@ export class AutocompleteOptions implements OnInit, OnDestroy {
 
     let value: string | number = target.value;
 
-    if (!Number.isNaN(parseInt(value as any))) {
+    if (!Number.isNaN(parseInt(value as any)) && !/^0+[1-9]\d*$/.test(value)) {
       value = Number(value);
     }
 

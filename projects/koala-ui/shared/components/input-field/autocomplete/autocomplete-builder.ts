@@ -1,4 +1,4 @@
-import { Injectable, ResourceRef } from '@angular/core';
+import { Injectable, ResourceRef, Signal } from '@angular/core';
 import {
   AutocompleteDataOptionsFn,
   AutocompleteList,
@@ -15,6 +15,10 @@ export class AutocompleteBuilder {
   }
 
   inMemory(config: AutocompleteList) {
+    return config;
+  }
+
+  inMemoryWithLoading(config: Signal<AutocompleteList>) {
     return config;
   }
 }

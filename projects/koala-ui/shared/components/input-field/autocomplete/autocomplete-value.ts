@@ -34,6 +34,7 @@ export type AutocompleteDataOptionsFn = (
 export type AutocompleteDataOptions =
   | AutocompleteDataOptionsFn
   | ResourceRef<AutocompleteList>
+  | Signal<AutocompleteList>
   | AutocompleteList;
 
 @Injectable()
@@ -47,6 +48,7 @@ export class AutocompleteValue {
   private _multiple = false;
   private _options?: Signal<AutocompleteList>;
   private _autofill = signal<any | null>(null);
+  private _isLoading?: Signal<boolean>;
   private readonly _requestOptionsParams =
     linkedSignal<AutocompleteDataOptionsFnParams>(() => ({
       filter: this._filter(),
@@ -118,14 +120,18 @@ export class AutocompleteValue {
     return this._requestOptionsParams.asReadonly();
   }
 
-  private selectOption(value: any) {
+  private async selectOption(value: any) {
+    while (this._isLoading!()) {
+      await delay(100);
+    }
+
     if (!this._options) {
       return;
     }
 
     const options = this._multiple
-      ? this._options().filter((opt) => value?.includes(opt.value))
-      : this._options().find((opt) => opt.value === value);
+      ? this._options()?.filter((opt) => `${value}`?.includes(`${opt.value}`))
+      : this._options()?.find((opt) => `${opt.value}` === `${value}`);
 
     if (options) {
       this._currentValue.update(() => {
@@ -142,8 +148,8 @@ export class AutocompleteValue {
     }
   }
 
-  async makeAutofill(loadingState: Signal<boolean>) {
-    while (loadingState()) {
+  async makeAutofill() {
+    while (this._isLoading!()) {
       await delay(100);
     }
 
@@ -164,11 +170,13 @@ export class AutocompleteValue {
   init(
     control: FormControl<any>,
     options: Signal<AutocompleteList>,
+    isLoading: Signal<boolean>,
     multiple = false
   ) {
     this._control = control;
     this._options = options;
     this._multiple = multiple;
+    this._isLoading = isLoading;
 
     this.filterControl.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef), debounceTime(500))

@@ -5,9 +5,11 @@ import {
   inject,
   Injector,
   input,
+  isSignal,
   OnInit,
   ResourceRef,
   runInInjectionContext,
+  Signal,
   signal,
 } from '@angular/core';
 import { Loader } from '@koalarx/ui/core/components/loader';
@@ -27,6 +29,7 @@ interface OptionsResource {
   onDemand?: ResourceRef<AutocompleteList>;
   onServer?: ResourceRef<AutocompleteList>;
   inMemory?: AutocompleteList;
+  inMemoryWithLoading?: Signal<AutocompleteList>;
 }
 
 @Component({
@@ -58,7 +61,7 @@ export class AutocompleteField extends InputFieldBase implements OnInit {
       const autofill = this.autocompleteValue.autofill();
 
       if (optionList.length > 0 && !isEmpty(autofill)) {
-        this.autocompleteValue.makeAutofill(this.isLoading);
+        this.autocompleteValue.makeAutofill();
       }
     });
 
@@ -69,7 +72,7 @@ export class AutocompleteField extends InputFieldBase implements OnInit {
         return;
       }
 
-      const { onDemand, onServer, inMemory } = options;
+      const { onDemand, onServer, inMemory, inMemoryWithLoading } = options;
 
       if (onDemand) {
         this.optionList.set(onDemand.value());
@@ -80,6 +83,10 @@ export class AutocompleteField extends InputFieldBase implements OnInit {
       } else if (inMemory) {
         this.optionList.set(this.applyFilter(inMemory));
         this.isLoading.set(false);
+      } else if (inMemoryWithLoading) {
+        const optionsWithLoading = inMemoryWithLoading();
+        this.optionList.set(this.applyFilter(optionsWithLoading ?? []));
+        this.isLoading.set(!optionsWithLoading);
       }
     });
   }
@@ -96,6 +103,10 @@ export class AutocompleteField extends InputFieldBase implements OnInit {
 
     if (Object.hasOwn(options, 'value')) {
       return { onServer: options as ResourceRef<AutocompleteList> };
+    } else if (isSignal(options)) {
+      return {
+        inMemoryWithLoading: options as Signal<AutocompleteList>,
+      };
     } else if (typeof options === 'function') {
       const resourceFnOptions = options as AutocompleteDataOptionsFn;
       return {
@@ -123,9 +134,10 @@ export class AutocompleteField extends InputFieldBase implements OnInit {
     this.autocompleteValue.init(
       this.control(),
       this.optionList,
+      this.isLoading,
       this.multiple()
     );
     this.optionsResource.set(this.generateOptionsResource());
-    this.autocompleteValue.makeAutofill(this.isLoading);
+    this.autocompleteValue.makeAutofill();
   }
 }

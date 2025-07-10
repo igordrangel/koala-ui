@@ -61,12 +61,24 @@ export class Autocomplete {
 
     if (position) {
       const screenHeight = document.body.clientHeight;
+      const maxHeight = (screenHeight * 40) / 100;
       let top = position.bottom;
       let height = Math.abs(screenHeight - top);
 
-      if ((height * 100) / screenHeight <= 10) {
-        height = Math.abs(screenHeight - position.top);
-        top = position.top + height;
+      if (height > maxHeight) {
+        height = maxHeight;
+      }
+
+      const percentFillOnScreen = (height * 100) / screenHeight;
+
+      if (percentFillOnScreen <= 20) {
+        height = Math.abs(screenHeight - (screenHeight - position.top));
+
+        if (height > maxHeight) {
+          height = maxHeight;
+        }
+
+        top = position.top - height;
       }
 
       top += currentTop;
