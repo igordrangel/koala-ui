@@ -15,7 +15,6 @@ import {
   linkedSignal,
   signal,
 } from '@angular/core';
-import { TabContainer, TabItem } from '@koalarx/ui/shared/components/tab';
 import { Tooltip } from '@koalarx/ui/shared/directives';
 import { MarkdownModule } from 'ngx-markdown';
 
@@ -39,7 +38,7 @@ export interface CodeViewerConfig {
 @Component({
   selector: 'kl-code-viewer',
   templateUrl: './code-viewer.html',
-  imports: [MarkdownModule, TabContainer, TabItem, Tooltip],
+  imports: [MarkdownModule, Tooltip],
 })
 export class CodeViewer {
   copied = signal(false);

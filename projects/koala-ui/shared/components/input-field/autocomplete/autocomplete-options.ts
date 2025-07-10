@@ -149,7 +149,10 @@ export class AutocompleteOptions implements OnInit, OnDestroy {
   };
 
   private close() {
-    this.autocompleteValue().filterControl.reset();
+    if (this.autocompleteValue().filterControl.value) {
+      this.autocompleteValue().filterControl.reset();
+    }
+
     this.autocompleteRef.close();
   }
 

@@ -11,7 +11,7 @@ import { SampleContainer } from '../sample-container/sample-container';
 })
 export class InputMonthSample {
   min = new KlDate().format('yyyy-MM');
-  max = new KlDate().add(1, 'months').format('yyyy-MM');
+  max = new KlDate().add(1, 'years').format('yyyy-MM');
 
   form = inject(FormBuilder).group({
     month: [''],
