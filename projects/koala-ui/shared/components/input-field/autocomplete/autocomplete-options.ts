@@ -158,8 +158,11 @@ export class AutocompleteOptions implements OnInit, OnDestroy {
     const container = this.viewContainerRef.element.nativeElement.querySelector(
       '.kl-autocomplete-options-container'
     );
-    if (!container) return;
-    if (event.target !== container) {
+    const target = event.target as HTMLElement;
+
+    if (!container || !target.tagName) return;
+
+    if (target !== container) {
       this.close();
     }
   };
