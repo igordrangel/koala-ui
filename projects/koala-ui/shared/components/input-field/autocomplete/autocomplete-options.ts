@@ -12,8 +12,8 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { AutocompleteList, AutocompleteValue } from './autocomplete-value';
 import { AutocompleteRef } from './autocomplete-ref';
+import { AutocompleteList, AutocompleteValue } from './autocomplete-value';
 
 @Component({
   selector: 'kl-autocomplete-options',
@@ -154,6 +154,16 @@ export class AutocompleteOptions implements OnInit, OnDestroy {
     }
   };
 
+  private onScroll = (event: Event) => {
+    const container = this.viewContainerRef.element.nativeElement.querySelector(
+      '.kl-autocomplete-options-container'
+    );
+    if (!container) return;
+    if (event.target !== container) {
+      this.close();
+    }
+  };
+
   private close() {
     if (this.autocompleteValue().filterControl.value) {
       this.autocompleteValue().filterControl.reset();
@@ -166,6 +176,7 @@ export class AutocompleteOptions implements OnInit, OnDestroy {
     document.removeEventListener('keyup', this.onKeyup);
     document.removeEventListener('keydown', this.onKeyDown);
     document.removeEventListener('click', this.onClick);
+    window.removeEventListener('scroll', this.onScroll, true);
   }
 
   ngOnInit() {
@@ -175,6 +186,7 @@ export class AutocompleteOptions implements OnInit, OnDestroy {
       document.addEventListener('keyup', this.onKeyup);
       document.addEventListener('keydown', this.onKeyDown);
       document.addEventListener('click', this.onClick);
+      window.addEventListener('scroll', this.onScroll, true);
     }, 150);
   }
 
