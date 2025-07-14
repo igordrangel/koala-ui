@@ -23,6 +23,10 @@ export class NavMenu {
           label: 'Installation',
           link: '/docs/installation',
         },
+        {
+          label: 'Theming',
+          link: '/docs/theming',
+        },
       ],
     },
     {

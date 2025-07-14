@@ -12,6 +12,11 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'theming',
+    loadComponent: () =>
+      import('./theming/theming.page').then((c) => c.ThemingPage),
+  },
+  {
     path: 'data-input',
     loadChildren: () => import('./data-input/routes').then((c) => c.routes),
   },

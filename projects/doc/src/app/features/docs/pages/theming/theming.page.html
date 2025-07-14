@@ -1,0 +1,55 @@
+<div class="flex gap-15 w-full">
+  <div class="flex flex-col gap-6 py-10 w-full">
+    <section id="theming">
+      <h1 class="text-5xl font-bold">Theming</h1>
+      <small class="text-lg font-light opacity-60">How to customize the appearance of your application using themes.</small>
+
+      <p class="mt-6">
+        Koala UI uses the <a href="https://daisyui.com" target="_blank" class="link font-semibold">daisyUI</a> library to provide a wide range of ready-to-use themes. You can easily apply these themes to your Angular application, ensuring a consistent look and feel throughout the user interface.
+      </p>
+
+      <p class="mt-6">To apply a theme, choose one from the <a href="https://daisyui.com/docs/themes/#list-of-themes" target="_blank" class="link font-semibold">official list</a> and apply it as shown below:</p>
+
+      <kl-code-viewer
+        name="index.html"
+        language="html"
+        src="markdown/theming/define-theme.md"
+        lineNumbers
+        lineHighlight="2"
+      />
+
+      <p class="mt-6">If you want to switch the theme by clicking or programmatically, simply change the value of the <span class="kbd">data-theme</span> attribute.</p>
+
+      <p class="mt-6">To make the theme work, make sure to import the CSS file from <span class="kbd">&#64;koalarx/ui/theme/koala.css</span> in your <span class="kbd">styles.css</span> or in the <span class="kbd">angular.json</span> file.</p>
+
+      <kl-code-viewer
+        name="angular.json"
+        language="json"
+        src="markdown/installation/angular.json.md"
+        lineNumbers
+        lineHighlight="13"
+      />
+
+      <p class="mt-6">
+        It is worth mentioning that the <span class="kbd">koala.css</span> file already imports
+        <a href="https://tailwindcss.com/" target="_blank" class="link font-semibold">Tailwind CSS</a>
+        and
+        <a href="https://daisyui.com/" target="_blank" class="link font-semibold">daisyUI</a>.
+        Therefore, if you want to use these features in your <span class="kbd">styles.css</span>,
+        it is recommended to include it directly in the <span class="kbd">styles.css</span> file instead of the <span class="kbd">angular.json</span> file.
+      </p>
+
+      <kl-code-viewer
+        name="style.css"
+        language="css"
+        src="markdown/theming/style.css.md"
+        lineNumbers
+        lineHighlight="1"
+      />
+    </section>
+  </div>
+
+  <kl-on-this-page class="min-w-3xs" [links]="[
+    { label: 'Theming', elementId: 'theming' },
+  ]"/>
+</div>
