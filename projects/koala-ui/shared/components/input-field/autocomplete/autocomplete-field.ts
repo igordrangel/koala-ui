@@ -47,6 +47,7 @@ export class AutocompleteField extends InputFieldBase implements OnInit {
   options = input.required<AutocompleteDataOptions>();
   multiple = input(false, { transform: booleanAttribute });
   placeholderSearchField = input<string>();
+  disableAutoTypeConversion = input(false, { transform: booleanAttribute });
 
   isLoading = signal<boolean>(false);
   optionList = signal<AutocompleteList>([]);
@@ -127,6 +128,7 @@ export class AutocompleteField extends InputFieldBase implements OnInit {
       multiple: this.multiple(),
       autocompleteValue: this.autocompleteValue,
       placeholderSearchField: this.placeholderSearchField(),
+      disableAutoTypeConversion: this.disableAutoTypeConversion(),
     });
   }
 

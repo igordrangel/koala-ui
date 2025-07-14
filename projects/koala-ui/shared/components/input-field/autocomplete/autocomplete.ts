@@ -30,6 +30,7 @@ export interface AutocompleteOpenData {
   multiple: boolean;
   autocompleteValue: AutocompleteValue;
   placeholderSearchField?: string;
+  disableAutoTypeConversion?: boolean;
 }
 
 @Injectable()

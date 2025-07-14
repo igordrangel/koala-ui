@@ -1,9 +1,11 @@
 import {
+  booleanAttribute,
   Component,
   effect,
   ElementRef,
   inject,
   input,
+  linkedSignal,
   OnDestroy,
   OnInit,
   Signal,
@@ -14,6 +16,7 @@ import {
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AutocompleteRef } from './autocomplete-ref';
 import { AutocompleteList, AutocompleteValue } from './autocomplete-value';
+import { KlArray } from '@koalarx/utils';
 
 @Component({
   selector: 'kl-autocomplete-options',
@@ -32,6 +35,11 @@ export class AutocompleteOptions implements OnInit, OnDestroy {
   multiple = input.required<boolean>();
   autocompleteValue = input.required<AutocompleteValue>();
   placeholderSearchField = input<string | undefined>();
+  disableAutoTypeConversion = input(false, { transform: booleanAttribute });
+  list = linkedSignal(() => {
+    const options = this.options()();
+    return new KlArray(options).split(100)[0];
+  });
 
   optionFocused = signal(0);
 
@@ -198,7 +206,11 @@ export class AutocompleteOptions implements OnInit, OnDestroy {
 
     let value: string | number = target.value;
 
-    if (!Number.isNaN(parseInt(value as any)) && !/^0+[1-9]\d*$/.test(value)) {
+    if (
+      !Number.isNaN(parseInt(value as any)) &&
+      !/^0+[1-9]\d*$/.test(value) &&
+      !this.disableAutoTypeConversion()
+    ) {
       value = Number(value);
     }
 

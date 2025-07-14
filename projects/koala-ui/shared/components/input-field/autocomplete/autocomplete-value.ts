@@ -50,10 +50,10 @@ export class AutocompleteValue {
   private _autofill = signal<any | null>(null);
   private _isLoading?: Signal<boolean>;
   private readonly _requestOptionsParams =
-    linkedSignal<AutocompleteDataOptionsFnParams>(() => ({
-      filter: this._filter(),
-      autofill: this._autofill(),
-    }));
+    signal<AutocompleteDataOptionsFnParams>({
+      filter: null,
+      autofill: null,
+    });
 
   private readonly _selectedOption = linkedSignal(() => {
     const currentValue = this._currentValue();
@@ -149,21 +149,27 @@ export class AutocompleteValue {
   }
 
   async makeAutofill() {
-    while (this._isLoading!()) {
-      await delay(100);
-    }
+    if (!isEmpty(this._control?.value)) {
+      while (this._isLoading!()) {
+        await delay(100);
+      }
 
-    this.selectOption(this._control?.value);
+      this.selectOption(this._control?.value);
 
-    const currentValue = this._currentValue();
+      const currentValue = this._currentValue();
 
-    if (
-      (this._multiple &&
-        ((Array.isArray(currentValue) && currentValue.length === 0) ||
-          !Array.isArray(currentValue))) ||
-      (!this._multiple && isEmpty(currentValue))
-    ) {
-      this._autofill.set(this._control?.value);
+      if (
+        (this._multiple &&
+          ((Array.isArray(currentValue) && currentValue.length === 0) ||
+            !Array.isArray(currentValue))) ||
+        (!this._multiple && isEmpty(currentValue))
+      ) {
+        this._autofill.set(this._control?.value);
+        this._requestOptionsParams.update((params) => ({
+          ...params,
+          autofill: this._autofill(),
+        }));
+      }
     }
   }
 
@@ -183,6 +189,10 @@ export class AutocompleteValue {
       .subscribe((value) => {
         this._autofill.set(null);
         this._filter.set(value);
+        this._requestOptionsParams.update(() => ({
+          filter: value,
+          autofill: null,
+        }));
       });
 
     this._control.valueChanges
@@ -194,6 +204,10 @@ export class AutocompleteValue {
     event.preventDefault();
     this._control?.setValue(null);
     this._currentValue.set(null);
+    this._requestOptionsParams.update(() => ({
+      filter: null,
+      autofill: null,
+    }));
   }
 
   remove(event: MouseEvent, value: AutocompleteOptionValue) {

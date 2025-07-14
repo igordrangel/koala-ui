@@ -14,7 +14,7 @@
   </div>
 
   <div class="kl-autocomplete-options-container flex flex-col overflow-auto p-1">
-    @for (item of options()(); track $index) {
+    @for (item of list(); track $index) {
       @let optionLabelId = fieldId() + '-' + item.value;
 
       <label class="relative py-1 px-2 pr-8 rounded-md"
