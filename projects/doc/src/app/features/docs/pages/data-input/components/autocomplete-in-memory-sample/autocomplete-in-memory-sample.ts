@@ -1,3 +1,4 @@
+import { SampleContainer } from '@/app/shared/components/sample-container/sample-container';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import {
@@ -5,7 +6,6 @@ import {
   AutocompleteField,
   AutocompleteOption,
 } from '@koalarx/ui/shared/components/input-field/autocomplete';
-import { SampleContainer } from '../sample-container/sample-container';
 
 @Component({
   selector: 'app-autocomplete-in-memory-sample',

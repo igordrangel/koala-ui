@@ -25,6 +25,13 @@ export type ButtonColor =
   | 'error'
   | 'ghost';
 
+export type ButtonSize =
+  | 'extraSmall'
+  | 'small'
+  | 'medium'
+  | 'large'
+  | 'extraLarge';
+
 @Directive({ selector: 'button[klButton], a[klButton]' })
 export class Button implements OnInit {
   private readonly elementRef = inject<ElementRef<HTMLButtonElement>>(
@@ -34,13 +41,14 @@ export class Button implements OnInit {
   private readonly injector = inject(EnvironmentInjector);
   private loaderComponent: ComponentRef<Loader> | null = null;
 
-  color = input.required<ButtonColor>();
+  color = input<ButtonColor>('neutral');
   type = input<'button' | 'submit'>('button');
   circle = input(false, { transform: booleanAttribute });
   outline = input(false, { transform: booleanAttribute });
+  soft = input(false, { transform: booleanAttribute });
   showLoader = input(false, { transform: booleanAttribute });
   disabled = input(false, { transform: booleanAttribute });
-  compact = input(false, { transform: booleanAttribute });
+  size = input<ButtonSize>('medium');
 
   constructor() {
     effect(() => this.toggleLoader(this.showLoader()));
@@ -55,10 +63,16 @@ export class Button implements OnInit {
       document.createElement('span'),
       this.elementRef.nativeElement.firstChild
     );
+    spanContainer.classList.add(
+      'flex',
+      'items-center',
+      'justify-center',
+      'h-full'
+    );
     this.loaderComponent = createComponent(Loader, {
       environmentInjector: this.injector,
       hostElement: spanContainer,
-      bindings: [inputBinding('size', () => 'xs')],
+      bindings: [inputBinding('size', () => this.size())],
     });
 
     return this.loaderComponent;
@@ -108,16 +122,30 @@ export class Button implements OnInit {
     }
   }
 
+  private getSizeClass(size: ButtonSize): string {
+    switch (size) {
+      case 'extraSmall':
+        return 'btn-xs';
+      case 'small':
+        return 'btn-sm';
+      case 'medium':
+        return 'btn-md';
+      case 'large':
+        return 'btn-lg';
+      case 'extraLarge':
+        return 'btn-xl';
+      default:
+        throw new Error(`Unknown button size: ${size}`);
+    }
+  }
+
   ngOnInit(): void {
     this.elementRef.nativeElement.type = this.type();
     this.elementRef.nativeElement.classList.add('btn');
     this.elementRef.nativeElement.classList.add(
       this.getColorClass(this.color())
     );
-
-    if (this.compact()) {
-      this.elementRef.nativeElement.classList.add('btn-sm');
-    }
+    this.elementRef.nativeElement.classList.add(this.getSizeClass(this.size()));
 
     if (this.outline()) {
       this.elementRef.nativeElement.classList.add('btn-outline');
@@ -125,6 +153,10 @@ export class Button implements OnInit {
 
     if (this.circle()) {
       this.elementRef.nativeElement.classList.add('btn-circle');
+    }
+
+    if (this.soft()) {
+      this.elementRef.nativeElement.classList.add('btn-soft');
     }
   }
 }

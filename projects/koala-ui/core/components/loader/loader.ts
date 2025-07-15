@@ -1,11 +1,11 @@
 import { Component, input } from '@angular/core';
 
-type LoaderSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+type LoaderSize = 'extraSmall' | 'small' | 'medium' | 'large' | 'extraLarge';
 
 @Component({
   selector: 'kl-loader',
   templateUrl: './loader.html',
 })
 export class Loader {
-  size = input<LoaderSize>('sm');
+  size = input<LoaderSize>('small');
 }

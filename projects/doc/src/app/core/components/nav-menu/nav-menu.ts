@@ -30,6 +30,15 @@ export class NavMenu {
       ],
     },
     {
+      module: 'Actions',
+      items: [
+        {
+          label: 'Button',
+          link: '/docs/actions/button',
+        },
+      ],
+    },
+    {
       module: 'Data Input',
       items: new KlArray([
         {

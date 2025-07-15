@@ -20,4 +20,8 @@ export const routes: Routes = [
     path: 'data-input',
     loadChildren: () => import('./data-input/routes').then((c) => c.routes),
   },
+  {
+    path: 'actions',
+    loadChildren: () => import('./actions/routes').then((c) => c.routes),
+  },
 ];

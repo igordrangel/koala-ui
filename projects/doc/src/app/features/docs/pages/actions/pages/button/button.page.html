@@ -1,0 +1,112 @@
+<div class="flex gap-15 w-full">
+  <div class="flex flex-col gap-6 py-10 w-[70%]">
+    <section id="button">
+      <h1 class="text-5xl font-bold">Button</h1>
+      <small class="text-lg font-light opacity-60">A simple button component.</small>
+    </section>
+
+    <section id="button-color-sample">
+      <h2 class="text-xl font-bold">Different Colors</h2>
+      <app-button-color-sample />
+    </section>
+
+    <section>
+      <h2 class="text-xl font-bold">Code</h2>
+      <kl-code-viewer
+        name="button-color-sample.ts"
+        language="typescript"
+        src="markdown/actions/button/button-color-sample.ts.md"
+      />
+      <kl-code-viewer
+        name="button-color-sample.html"
+        language="html"
+        src="markdown/actions/button/button-color-sample.html.md"
+      />
+    </section>
+
+    <section id="button-soft-sample">
+      <h2 class="text-xl font-bold">Different Soft Colors</h2>
+      <app-button-soft-sample />
+    </section>
+
+    <section>
+      <h2 class="text-xl font-bold">Code</h2>
+      <kl-code-viewer
+        name="button-soft-sample.ts"
+        language="typescript"
+        src="markdown/actions/button/button-soft-sample.ts.md"
+      />
+      <kl-code-viewer
+        name="button-soft-sample.html"
+        language="html"
+        src="markdown/actions/button/button-soft-sample.html.md"
+      />
+    </section>
+
+    <section id="button-size-sample">
+      <h2 class="text-xl font-bold">Different Sizes</h2>
+      <app-button-size-sample />
+    </section>
+
+    <section>
+      <h2 class="text-xl font-bold">Code</h2>
+      <kl-code-viewer
+        name="button-size-sample.ts"
+        language="typescript"
+        src="markdown/actions/button/button-size-sample.ts.md"
+      />
+      <kl-code-viewer
+        name="button-size-sample.html"
+        language="html"
+        src="markdown/actions/button/button-size-sample.html.md"
+      />
+    </section>
+
+    <section id="button-format-sample">
+      <h2 class="text-xl font-bold">Different Formats</h2>
+      <app-button-format-sample />
+    </section>
+
+    <section>
+      <h2 class="text-xl font-bold">Code</h2>
+      <kl-code-viewer
+        name="button-format-sample.ts"
+        language="typescript"
+        src="markdown/actions/button/button-format-sample.ts.md"
+      />
+      <kl-code-viewer
+        name="button-format-sample.html"
+        language="html"
+        src="markdown/actions/button/button-format-sample.html.md"
+      />
+    </section>
+
+    <section id="button-loader-sample">
+      <h2 class="text-xl font-bold">With Loader</h2>
+      <app-button-loader-sample />
+    </section>
+
+    <section>
+      <h2 class="text-xl font-bold">Code</h2>
+      <kl-code-viewer
+        name="button-loader-sample.ts"
+        language="typescript"
+        src="markdown/actions/button/button-loader-sample.ts.md"
+      />
+      <kl-code-viewer
+        name="button-loader-sample.html"
+        language="html"
+        src="markdown/actions/button/button-loader-sample.html.md"
+      />
+    </section>
+  </div>
+
+  <kl-on-this-page class="min-w-3xs" [links]="[
+    { label: 'Introduction', elementId: 'button' },
+    { label: 'Different Colors', elementId: 'button-color-sample' },
+    { label: 'Different Soft Colors', elementId: 'button-soft-sample' },
+    { label: 'Different Sizes', elementId: 'button-size-sample' },
+    { label: 'Different Formats', elementId: 'button-format-sample' },
+    { label: 'With Loader', elementId: 'button-loader-sample' }
+  ]"/>
+</div>

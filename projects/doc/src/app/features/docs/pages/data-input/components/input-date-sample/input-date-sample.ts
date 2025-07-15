@@ -1,8 +1,8 @@
+import { SampleContainer } from '@/app/shared/components/sample-container/sample-container';
 import { Component, inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { InputDate } from '@koalarx/ui/shared/components/input-field/input-date';
 import { KlDate } from '@koalarx/utils/light/KlDate';
-import { SampleContainer } from '../sample-container/sample-container';
 
 @Component({
   selector: 'app-input-date-sample',
