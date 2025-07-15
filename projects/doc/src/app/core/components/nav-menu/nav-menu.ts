@@ -48,6 +48,10 @@ export class NavMenu {
           label: 'Side Window',
           link: '/docs/actions/side-window',
         },
+        {
+          label: 'Confirm',
+          link: '/docs/actions/confirm',
+        },
       ]).orderBy('label'),
     },
     {

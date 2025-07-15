@@ -1,0 +1,15 @@
+<kl-dialog-content>
+  <div content>
+    <p class="text-center" [innerHTML]="message"></p>
+    <p class="text-center">Tem certeza de que deseja continuar?</p>
+  </div>
+
+  <div class="flex items-center justify-center gap-1 w-full" actions>
+    <button klButton color="error" (click)="close('no')">
+      {{translations.btnLabelNo}}
+    </button>
+    <button klButton color="primary" (click)="close('yes')">
+      {{translations.btnLabelYes}}
+    </button>
+  </div>
+</kl-dialog-content>

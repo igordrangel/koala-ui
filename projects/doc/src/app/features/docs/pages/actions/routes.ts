@@ -23,4 +23,9 @@ export const routes: Routes = [
         (c) => c.SideWindowPage
       ),
   },
+  {
+    path: 'confirm',
+    loadComponent: () =>
+      import('./pages/confirm/confirm.page').then((c) => c.ConfirmPage),
+  },
 ];

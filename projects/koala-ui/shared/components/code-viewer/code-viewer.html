@@ -9,7 +9,10 @@
 
     <button class="hover:cursor-pointer px-2 text-md text-neutral-500 hover:text-neutral-300 hover:bg-neutral-800 rounded-sm"
       type="button"
-      [tooltip]="copied() ? 'Copied' : 'Copy to clipboard'"
+      [tooltip]="copied()
+        ? translations.copiedToClipboard
+        : translations.copyToClipboard"
+      tooltipPosition="left"
       (click)="copyCode()">
 
       @if (copied()) {

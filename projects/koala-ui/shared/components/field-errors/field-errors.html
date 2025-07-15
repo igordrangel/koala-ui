@@ -3,15 +3,15 @@
     <ng-content select="[errors]" />
 
     @if (field().errors?.['required']) {
-      O campo é obrigatório.<br/>
+      {{translations.required}}<br/>
     }
 
     @if (field().errors?.['email']) {
-      E-mail inválido.<br/>
+      {{translations.invalidEmail}}<br/>
     }
 
     @if (field().errors?.['minlength']) {
-      O campo deve ter no mínimo {{field().errors?.['minlength'].requiredLength}} caracteres.<br/>
+      {{translations.invalidMinLength(field().errors?.['minlength'].requiredLength)}}<br/>
     }
   </p>
 }

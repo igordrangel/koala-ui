@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
+import { CurrentTranslation } from '@koalarx/ui/core/translations/current-language';
 
 export interface OnThisPageLink {
   label: string;
@@ -21,6 +22,8 @@ export interface OnThisPageLink {
 })
 export class OnThisPage implements OnInit, OnDestroy {
   private readonly activatedRoute = inject(ActivatedRoute);
+
+  readonly translations = CurrentTranslation.get().onThisPage;
 
   links = input.required<OnThisPageLink[]>();
   activeSection = signal<string | null>(null);

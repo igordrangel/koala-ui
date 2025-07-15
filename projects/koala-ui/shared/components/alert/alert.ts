@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { Dialog } from '../dialog';
+import { Dialog } from '@koalarx/ui/shared/components/dialog';
 import { AlertContent } from './alert-content';
 
 export interface AlertData {

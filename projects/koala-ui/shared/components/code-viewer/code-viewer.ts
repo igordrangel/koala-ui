@@ -17,6 +17,7 @@ import {
 } from '@angular/core';
 import { Tooltip } from '@koalarx/ui/shared/directives';
 import { MarkdownModule } from 'ngx-markdown';
+import { CurrentTranslation } from '@koalarx/ui/core/translations/current-language';
 
 export type CodeViewerLanguage =
   | 'bash'
@@ -41,6 +42,8 @@ export interface CodeViewerConfig {
   imports: [MarkdownModule, Tooltip],
 })
 export class CodeViewer {
+  readonly translations = CurrentTranslation.get().codeViewer;
+
   copied = signal(false);
   content = signal<string>('');
 
