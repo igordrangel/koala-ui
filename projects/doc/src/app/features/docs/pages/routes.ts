@@ -21,6 +21,10 @@ export const routes: Routes = [
     loadChildren: () => import('./actions/routes').then((c) => c.routes),
   },
   {
+    path: 'navigation',
+    loadChildren: () => import('./navigation/routes').then((c) => c.routes),
+  },
+  {
     path: 'feedback',
     loadChildren: () => import('./feedback/routes').then((c) => c.routes),
   },

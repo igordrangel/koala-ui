@@ -55,6 +55,15 @@ export class NavMenu {
       ]).orderBy('label'),
     },
     {
+      module: 'Navigation',
+      items: new KlArray([
+        {
+          label: 'Stepper',
+          link: '/docs/navigation/stepper',
+        },
+      ]).orderBy('label'),
+    },
+    {
       module: 'Feedback',
       items: new KlArray([
         {
