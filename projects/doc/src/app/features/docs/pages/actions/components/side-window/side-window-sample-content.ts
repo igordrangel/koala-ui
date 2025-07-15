@@ -1,7 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { SIDE_WINDOW_DATA } from '@koalarx/ui/shared/components/side-window/side-window';
-import { SideWindowContent } from '@koalarx/ui/shared/components/side-window/side-window-content';
-import { SideWindowRef } from '@koalarx/ui/shared/components/side-window/side-window-ref';
+import {
+  SIDE_WINDOW_DATA,
+  SideWindowContent,
+  SideWindowRef,
+} from '@koalarx/ui/shared/components/side-window';
 import { Button } from '@koalarx/ui/shared/directives';
 
 @Component({

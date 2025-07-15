@@ -54,7 +54,7 @@ interface ThemeOption {
 })
 export class ThemeSwitcher implements OnInit {
   lightTheme: ThemeName = 'light';
-  blackTheme: ThemeName = 'black';
+  darkTheme: ThemeName = 'dark';
   themes = signal<ThemeOption[]>([
     { isDark: false, name: 'light', active: false },
     { isDark: true, name: 'dark', active: false },
@@ -137,7 +137,7 @@ export class ThemeSwitcher implements OnInit {
     let themeName = this.lightTheme;
 
     if (this.activeDarkTheme()) {
-      themeName = this.blackTheme;
+      themeName = this.darkTheme;
     }
 
     const theme = this.themes().find((t) => t.name === themeName);
@@ -153,7 +153,7 @@ export class ThemeSwitcher implements OnInit {
     if (currentTheme) {
       this.setTheme(currentTheme);
     } else {
-      const darkTheme = this.themes().find((t) => t.name === this.blackTheme);
+      const darkTheme = this.themes().find((t) => t.name === this.darkTheme);
 
       if (darkTheme) {
         this.setTheme(darkTheme);

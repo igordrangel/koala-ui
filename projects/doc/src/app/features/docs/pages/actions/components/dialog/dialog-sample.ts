@@ -1,6 +1,6 @@
 import { SampleContainer } from '@/app/shared/components/sample-container/sample-container';
 import { Component, inject } from '@angular/core';
-import { Dialog } from '@koalarx/ui/shared/components/dialog/dialog';
+import { Dialog } from '@koalarx/ui/shared/components/dialog';
 import { Button } from '@koalarx/ui/shared/directives';
 import { DialogSampleContent } from './dialog-sample-content';
 

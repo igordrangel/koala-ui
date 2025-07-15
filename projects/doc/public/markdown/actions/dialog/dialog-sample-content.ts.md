@@ -1,8 +1,10 @@
 ```typescript
 import { Component, inject } from "@angular/core";
-import { DIALOG_DATA } from "@koalarx/ui/shared/components/dialog/dialog";
-import { DialogContent } from "@koalarx/ui/shared/components/dialog/dialog-content";
-import { DialogRef } from "@koalarx/ui/shared/components/dialog/dialog-ref";
+import {
+  DIALOG_DATA,
+  DialogContent,
+  DialogRef,
+} from "@koalarx/ui/shared/components/dialog";
 import { Button } from "@koalarx/ui/shared/directives";
 
 @Component({

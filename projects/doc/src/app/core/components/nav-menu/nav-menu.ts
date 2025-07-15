@@ -51,6 +51,27 @@ export class NavMenu {
       ]).orderBy('label'),
     },
     {
+      module: 'Feedback',
+      items: new KlArray([
+        {
+          label: 'Alert',
+          link: '/docs/feedback/alert',
+        },
+        {
+          label: 'Loader',
+          link: '/docs/feedback/loader',
+        },
+        {
+          label: 'Snackbar',
+          link: '/docs/feedback/snackbar',
+        },
+        {
+          label: 'Tooltip',
+          link: '/docs/feedback/tooltip',
+        },
+      ]).orderBy('label'),
+    },
+    {
       module: 'Data Input',
       items: new KlArray([
         {

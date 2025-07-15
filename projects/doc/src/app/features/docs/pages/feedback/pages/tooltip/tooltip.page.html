@@ -1,0 +1,33 @@
+<div class="flex gap-15 w-full">
+  <div class="flex flex-col gap-6 py-10 w-[70%]">
+    <section id="tooltip">
+      <h1 class="text-5xl font-bold">Tooltip</h1>
+      <small class="text-lg font-light opacity-60">A simple tooltip component.</small>
+    </section>
+
+    <section id="tooltip-sample">
+      <h2 class="text-xl font-bold">Preview</h2>
+      <app-tooltip-sample />
+    </section>
+
+    <section>
+      <h2 class="text-xl font-bold">Code</h2>
+      <kl-code-viewer
+        name="tooltip-sample.ts"
+        language="typescript"
+        src="markdown/feedback/tooltip/tooltip-sample.ts.md"
+      />
+      <kl-code-viewer
+        name="tooltip-sample.html"
+        language="html"
+        src="markdown/feedback/tooltip/tooltip-sample.html.md"
+      />
+    </section>
+  </div>
+
+  <kl-on-this-page class="min-w-3xs" [links]="[
+    { label: 'Introduction', elementId: 'tooltip' },
+    { label: 'Preview', elementId: 'tooltip-preview' },
+    { label: 'Code', elementId: 'tooltip-code' },
+  ]"/>
+</div>

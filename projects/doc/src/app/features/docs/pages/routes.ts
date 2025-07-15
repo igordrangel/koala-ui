@@ -17,11 +17,15 @@ export const routes: Routes = [
       import('./theming/theming.page').then((c) => c.ThemingPage),
   },
   {
-    path: 'data-input',
-    loadChildren: () => import('./data-input/routes').then((c) => c.routes),
-  },
-  {
     path: 'actions',
     loadChildren: () => import('./actions/routes').then((c) => c.routes),
+  },
+  {
+    path: 'feedback',
+    loadChildren: () => import('./feedback/routes').then((c) => c.routes),
+  },
+  {
+    path: 'data-input',
+    loadChildren: () => import('./data-input/routes').then((c) => c.routes),
   },
 ];

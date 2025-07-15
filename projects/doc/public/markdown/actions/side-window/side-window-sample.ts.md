@@ -1,7 +1,7 @@
 ```typescript
 import { SampleContainer } from "@/app/shared/components/sample-container/sample-container";
 import { Component, inject } from "@angular/core";
-import { SideWindow } from "@koalarx/ui/shared/components/side-window/side-window";
+import { SideWindow } from "@koalarx/ui/shared/components/side-window";
 import { Button } from "@koalarx/ui/shared/directives";
 import { SideWindowSampleContent } from "./side-window-sample-content";
 

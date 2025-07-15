@@ -1,0 +1,13 @@
+<div role="alert" #alertContent class="relative alert alert-outline bg-base-100! max-w-1/4 rounded-sm">
+  <i #alertIcon class="h-6 w-6 shrink-0 stroke-current text-2xl fa-solid"></i>
+  <span [innerHTML]="message()"></span>
+  <div>
+    <button class="btn btn-sm btn-outline" (click)="dismiss()">OK</button>
+  </div>
+  @if (timePast() > 0) {
+    <progress class="absolute left-0 bottom-0 progress w-full opacity-20"
+      [value]="timePast()"
+      [max]="timeout()">
+    </progress>
+  }
+</div>
