@@ -6,4 +6,9 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/button/button.page').then((c) => c.ButtonPage),
   },
+  {
+    path: 'dropdown',
+    loadComponent: () =>
+      import('./pages/dropdown/dropdown.page').then((c) => c.DropdownPage),
+  },
 ];

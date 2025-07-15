@@ -1,0 +1,33 @@
+<div class="flex gap-15 w-full">
+  <div class="flex flex-col gap-6 py-10 w-[70%]">
+    <section id="dropdown">
+      <h1 class="text-5xl font-bold">Dropdown</h1>
+      <small class="text-lg font-light opacity-60">A simple dropdown component.</small>
+    </section>
+
+    <section id="dropdown-sample">
+      <h2 class="text-xl font-bold">Preview</h2>
+      <app-dropdown-sample />
+    </section>
+
+    <section>
+      <h2 class="text-xl font-bold">Code</h2>
+      <kl-code-viewer
+        name="dropdown-sample.ts"
+        language="typescript"
+        src="markdown/actions/dropdown/dropdown-sample.ts.md"
+      />
+      <kl-code-viewer
+        name="dropdown-sample.html"
+        language="html"
+        src="markdown/actions/dropdown/dropdown-sample.html.md"
+      />
+    </section>
+  </div>
+
+  <kl-on-this-page class="min-w-3xs" [links]="[
+    { label: 'Introduction', elementId: 'dropdown' },
+    { label: 'Preview', elementId: 'dropdown-preview' },
+    { label: 'Code', elementId: 'dropdown-code' },
+  ]"/>
+</div>

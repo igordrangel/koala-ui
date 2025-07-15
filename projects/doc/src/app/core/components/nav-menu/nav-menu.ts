@@ -31,12 +31,16 @@ export class NavMenu {
     },
     {
       module: 'Actions',
-      items: [
+      items: new KlArray([
         {
           label: 'Button',
           link: '/docs/actions/button',
         },
-      ],
+        {
+          label: 'Dropdown',
+          link: '/docs/actions/dropdown',
+        },
+      ]).orderBy('label'),
     },
     {
       module: 'Data Input',
