@@ -15,9 +15,9 @@ import {
   linkedSignal,
   signal,
 } from '@angular/core';
+import { CurrentTranslation } from '@koalarx/ui/core/translations';
 import { Tooltip } from '@koalarx/ui/shared/directives';
 import { MarkdownModule } from 'ngx-markdown';
-import { CurrentTranslation } from '@koalarx/ui/core/translations/current-language';
 
 export type CodeViewerLanguage =
   | 'bash'

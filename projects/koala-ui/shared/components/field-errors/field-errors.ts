@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { CurrentTranslation } from '@koalarx/ui/core/translations/current-language';
+import { CurrentTranslation } from '@koalarx/ui/core/translations';
 
 @Component({
   selector: 'kl-field-errors',

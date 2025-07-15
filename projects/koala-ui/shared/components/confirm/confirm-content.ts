@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CurrentTranslation } from '@koalarx/ui/core/translations/current-language';
+import { CurrentTranslation } from '@koalarx/ui/core/translations';
 import {
   DIALOG_DATA,
   DialogContent,

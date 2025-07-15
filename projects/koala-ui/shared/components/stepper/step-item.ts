@@ -7,7 +7,7 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import { generateQuerySelector } from '@koalarx/ui/shared/utils/generate-query-selector';
+import { generateQuerySelector } from '@koalarx/ui/shared/utils';
 
 @Directive({ selector: 'li[klStepItem]' })
 export class StepItem implements OnInit {
