@@ -1,0 +1,10 @@
+<dialog #dialog class="modal">
+  <div class="modal-box">
+    <ng-content select="[header]" />
+    <ng-content select="[content]" />
+
+    <div class="modal-action">
+      <ng-content select="[actions]" />
+    </div>
+  </div>
+</dialog>

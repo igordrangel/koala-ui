@@ -1,0 +1,16 @@
+```html
+<kl-side-window-content>
+  <div class="flex flex-col p-8 h-full">
+    <h2>Title</h2>
+
+    <div class="h-full">{{sideWindowMessage}}</div>
+
+    <div
+      class="flex items-center justify-between gap-1 border-t border-neutral-700 pt-4"
+    >
+      <button klButton color="error" soft (click)="close()">Cancel</button>
+      <button klButton color="primary" (click)="close(true)">Confirm</button>
+    </div>
+  </div>
+</kl-side-window-content>
+```

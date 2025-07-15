@@ -1,0 +1,43 @@
+<div class="flex gap-15 w-full">
+  <div class="flex flex-col gap-6 py-10 w-[70%]">
+    <section id="side-window">
+      <h1 class="text-5xl font-bold">Side Window</h1>
+      <small class="text-lg font-light opacity-60">A simple side window component.</small>
+    </section>
+
+    <section id="side-window-preview">
+      <h2 class="text-xl font-bold">Preview</h2>
+      <app-side-window-sample />
+    </section>
+
+    <section id="side-window-code">
+      <h2 class="text-xl font-bold">Code</h2>
+      <kl-code-viewer
+        name="side-window-sample.ts"
+        language="typescript"
+        src="markdown/actions/side-window/side-window-sample.ts.md"
+      />
+      <kl-code-viewer
+        name="side-window-sample.html"
+        language="html"
+        src="markdown/actions/side-window/side-window-sample.html.md"
+      />
+      <kl-code-viewer
+        name="side-window-sample-content.ts"
+        language="typescript"
+        src="markdown/actions/side-window/side-window-sample-content.ts.md"
+      />
+      <kl-code-viewer
+        name="side-window-sample-content.html"
+        language="html"
+        src="markdown/actions/side-window/side-window-sample-content.html.md"
+      />
+    </section>
+  </div>
+
+  <kl-on-this-page class="min-w-3xs" [links]="[
+    { label: 'Introduction', elementId: 'side-window' },
+    { label: 'Preview', elementId: 'side-window-preview' },
+    { label: 'Code', elementId: 'side-window-code' },
+  ]"/>
+</div>

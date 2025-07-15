@@ -1,0 +1,12 @@
+```html
+<kl-dialog-content>
+  <h2 header>Title</h2>
+
+  <div content class="h-full">{{dialogMessage}}</div>
+
+  <div actions class="flex items-center justify-between gap-1">
+    <button klButton color="error" soft (click)="close()">Cancel</button>
+    <button klButton color="primary" (click)="close(true)">Confirm</button>
+  </div>
+</kl-dialog-content>
+```

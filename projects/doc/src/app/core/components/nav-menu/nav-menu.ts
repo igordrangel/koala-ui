@@ -40,6 +40,14 @@ export class NavMenu {
           label: 'Dropdown',
           link: '/docs/actions/dropdown',
         },
+        {
+          label: 'Dialog',
+          link: '/docs/actions/dialog',
+        },
+        {
+          label: 'Side Window',
+          link: '/docs/actions/side-window',
+        },
       ]).orderBy('label'),
     },
     {

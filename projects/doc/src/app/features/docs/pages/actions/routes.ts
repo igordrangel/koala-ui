@@ -11,4 +11,16 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/dropdown/dropdown.page').then((c) => c.DropdownPage),
   },
+  {
+    path: 'dialog',
+    loadComponent: () =>
+      import('./pages/dialog/dialog.page').then((c) => c.DialogPage),
+  },
+  {
+    path: 'side-window',
+    loadComponent: () =>
+      import('./pages/side-window/side-window.page').then(
+        (c) => c.SideWindowPage
+      ),
+  },
 ];
