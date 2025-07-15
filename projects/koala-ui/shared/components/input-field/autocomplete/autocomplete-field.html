@@ -29,7 +29,7 @@
   </div>
 
   @if (isLoading()) {
-    <kl-loader size="sm" />
+    <kl-loader size="small" />
   } @else if (autocompleteValue.hasValue()) {
     <i class="fa-solid fa-xmark text-neutral-500 hover:cursor-pointer pt-1 pr-2"
       (click)="autocompleteValue.clear($event)">
