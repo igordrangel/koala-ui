@@ -2,18 +2,22 @@ import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { Provider } from '@angular/core';
 import { MARKED_OPTIONS, provideMarkdown } from 'ngx-markdown';
 import { NgxMaskConfig, provideEnvironmentNgxMask } from 'ngx-mask';
-import {
-  CurrentTranslation,
-  KoalaLanguage,
-} from './translations/current-language';
+import { AppConfig } from './config';
+import { getTranslationByLanguage, KoalaLanguage } from './translations';
 
 const maskOptions: Partial<NgxMaskConfig> = {
   validation: false,
   thousandSeparator: '.',
 };
 
-export function provideKoala(lang: KoalaLanguage = 'en'): Provider {
-  CurrentTranslation.defineLanguage(lang);
+interface KoalaSettings {
+  hostApi?: string;
+  language?: KoalaLanguage;
+}
+
+export function provideKoala(config?: KoalaSettings): Provider {
+  AppConfig.translation = getTranslationByLanguage(config?.language ?? 'en');
+  AppConfig.hostApi = config?.hostApi;
 
   return [
     provideEnvironmentNgxMask(maskOptions),

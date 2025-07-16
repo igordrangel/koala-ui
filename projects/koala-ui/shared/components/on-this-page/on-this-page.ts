@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
-import { CurrentTranslation } from '@koalarx/ui/core/translations';
+import { AppConfig } from '@koalarx/ui/core/config';
 
 export interface OnThisPageLink {
   label: string;
@@ -23,7 +23,7 @@ export interface OnThisPageLink {
 export class OnThisPage implements OnInit, OnDestroy {
   private readonly activatedRoute = inject(ActivatedRoute);
 
-  readonly translations = CurrentTranslation.get().onThisPage;
+  readonly translations = AppConfig.translation.onThisPage;
 
   links = input.required<OnThisPageLink[]>();
   activeSection = signal<string | null>(null);

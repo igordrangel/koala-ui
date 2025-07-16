@@ -1,0 +1,183 @@
+<div class="flex gap-15 w-full">
+  <div class="flex flex-col gap-6 py-10 w-full">
+    <section id="configurations">
+      <h1 class="text-5xl font-bold">Configurations</h1>
+      <small class="text-lg font-light opacity-60">
+        Customize the language of the components and easily configure your HTTP client with Koala UI.
+      </small>
+
+      <p class="mt-6 text-justify">
+        Koala provides abstract classes that simplify the creation of page components, dynamic lists, and services integrated with HTTP requests, making development faster and more standardized.
+      </p>
+
+      <p class="mt-6 text-justify">
+        These abstractions work seamlessly with several components in the library, providing easy integration and a smoother development experience. The main integrated components include:
+      </p>
+
+      <ul class="list-disc list-inside mt-2">
+        <li>
+          <a routerLink="/docs/components/datatable" class="link font-semibold">Datatable</a>
+        </li>
+        <li>
+          <a routerLink="/docs/data-input/autocomplete" class="link font-semibold">Autocomplete</a>
+        </li>
+        <li>
+          <a routerLink="/docs/data-input/select" class="link font-semibold">Select</a>
+        </li>
+        <li>
+          General Forms
+        </li>
+      </ul>
+    </section>
+
+    <section id="abstractions">
+      <h2 class="text-2xl font-bold">Abstractions</h2>
+      <h3 id="http-base" class="mt-4 text-xl font-semibold">HttpBase</h3>
+      <p class="mt-2 text-justify">
+        The <span class="kbd">HttpBase</span> abstraction is designed to simplify the creation of HTTP services, allowing you to focus on business logic without worrying about repetitive implementation details. It provides ready-to-use methods for common operations, making development faster and more standardized.
+      </p>
+      <kl-code-viewer
+        name="user.service.ts"
+        language="typescript"
+        src="markdown/configurations/http-base-implementation.ts.md"
+        lineNumbers
+        lineHighlight="1,8-11,14"
+      />
+      <p class="mt-2 text-justify">
+        In lines 1 and 8, the <span class="kbd">HttpBase</span> class is imported and extended. Lines 9, 10, and 11 define the types used: the entity type returned by the <span class="kbd">getById</span> and <span class="kbd">getMany</span> methods, the payload type for saving data, and the filter type for queries. Finally, line 14 defines the base API endpoint, which will be concatenated with the hostApi that can be configured in the <span class="kbd">app.config.ts</span> file or manually defined within the constructor by setting the protected hostApi attribute.
+      </p>
+      <h4 class="mt-2 text-base font-semibold">Available methods:</h4>
+      <ul class="list-inside mt-2">
+        <li>
+          <span class="kbd">post</span>: This method allows you to send custom data to the server for specific operations.
+        </li>
+        <li>
+          <span class="kbd">put</span>: This method is used to update an existing resource in an API, replacing it with the data sent in the request.
+        </li>
+        <li>
+            <span class="kbd">patch</span>: Updates specific fields of an existing resource.
+        </li>
+        <li>
+          <span class="kbd">delete</span>: Deletes a resource from the API.
+        </li>
+        <li>
+          <span class="kbd">getMany</span>: Retrieves multiple entities based on filters.
+        </li>
+        <li>
+          <span class="kbd">getById</span>: Retrieves an entity by its ID.
+        </li>
+        <li>
+          <span class="kbd">getManyWithResource</span>: Retrieves multiple entities based on filters and returns a <span class="kbd">ResourceRef</span> ideal for <span class="kbd">Datatable</span>.
+        </li>
+        <li>
+            <span class="kbd">getByIdWithResource</span>: Retrieves an entity by its ID and returns a <span class="kbd">ResourceRef</span> ideal for responsive data presentation.
+        </li>
+        <li>
+          <span class="kbd">getByOneWithResource</span>: Retrieves a single entity based on filters and returns a <span class="kbd">ResourceRef</span> ideal for responsive data presentation.
+        </li>
+        <li>
+          <span class="kbd">getManyForSelector</span>: Retrieves multiple entities based on filters and returns a <span class="kbd">ResourceRef</span> ideal for <span class="kbd">Autocomplete</span> and <span class="kbd">Select</span>.
+        </li>
+      </ul>
+
+      <h3 id="list-base" class="mt-4 text-xl font-semibold">ListBase</h3>
+      <p class="mt-2 text-justify">
+        The <span class="kbd">ListBase</span> abstraction is designed to simplify the creation of list-based components, such as data tables. It provides a set of reusable methods and properties that streamline the development process, allowing you to focus on building your application's features.
+      </p>
+      <kl-code-viewer
+        name="user-list.ts"
+        language="typescript"
+        src="markdown/configurations/list-base-implementation.ts.md"
+        lineNumbers
+        lineHighlight="1,13,15"
+      />
+      <p class="mt-2 text-justify">
+        In lines 1 and 13, the <span class="kbd">ListBase</span> class is imported and extended. Line 15 demonstrates how to pass the Service classes (which extend <span class="kbd">HttpBase</span>) and a Filter Component to the list component. The Filter Component will be opened by the Datatable component, allowing users to filter the displayed data dynamically.
+
+        By leveraging <span class="kbd">ListBase</span>, you can quickly build list pages that are fully integrated with Koala UI's data components, ensuring consistency and reducing boilerplate code. This abstraction handles common list operations, such as filtering, pagination, and integration with HTTP services, so you can focus on your application's unique requirements.
+      </p>
+      <h4 class="mt-2 text-base font-semibold">Available methods:</h4>
+      <ul class="list-inside mt-2">
+        <li>
+          <span class="kbd">queryParams</span>: Computed signal that combines pagination (page, limit) with the current filters.
+        </li>
+        <li>
+          <span class="kbd">reload</span>: Input signal that allows reloading the list externally.
+        </li>
+        <li>
+          <span class="kbd">limitPage</span>: Protected signal that controls the number of items per page (default: 30).
+        </li>
+        <li>
+          <span class="kbd">page</span>: Protected signal that controls the current page (default: 1).
+        </li>
+        <li>
+          <span class="kbd">filter</span>: Protected signal that stores the filters applied to the list.
+        </li>
+        <li>
+          <span class="kbd">totalItems</span>: Protected signal that contains the total number of available items.
+        </li>
+        <li>
+          <span class="kbd">list</span>: Protected signal that contains the items of the current list.
+        </li>
+        <li>
+          <span class="kbd">reloadList</span>: Protected method that forces the list data to reload.
+        </li>
+        <li>
+          <span class="kbd">resourceRef</span>: Protected HttpResourceRef that manages the HTTP request state.
+        </li>
+        <li>
+          <span class="kbd">resource</span>: Protected instance of the HttpBase service injected in the constructor.
+        </li>
+        <li>
+          <span class="kbd">componentFilter</span>: Optional protected filter component passed in the constructor.
+        </li>
+      </ul>
+
+      <h3 id="page-base" class="mt-4 text-xl font-semibold">PageBase</h3>
+      <p class="mt-2 text-justify">
+        The <span class="kbd">PageBase</span> abstraction is designed to simplify the creation of page-based components. It provides a set of reusable methods and properties that streamline the development process, allowing you to focus on building your application's features.
+      </p>
+      <kl-code-viewer
+        name="manage-users.page.ts"
+        language="typescript"
+        src="markdown/configurations/page-base-implementation.ts.md"
+        lineNumbers
+        lineHighlight="1,13"
+      />
+      <p class="mt-2 text-justify">
+        In lines 1 and 13, the <span class="kbd">PageBase</span> class is imported and extended.
+      </p>
+      <h4 class="mt-2 text-base font-semibold">Available methods:</h4>
+      <ul class="list-inside mt-2">
+        <li>
+          <span class="kbd">reload</span>: Protected signal that controls the reload state of the page.
+        </li>
+        <li>
+          <span class="kbd">reloadList</span>: Protected method that triggers a reload of child list components by setting the reload signal.
+        </li>
+      </ul>
+    </section>
+
+    <section id="language">
+      <h2 class="text-2xl font-bold">Language</h2>
+      <p class="mt-4">
+        The default language is English, but Koala UI also supports other languages, such as Brazilian Portuguese. You can easily change the language by following the example below:
+      </p>
+      <kl-code-viewer
+        name="app.config.ts"
+        language="typescript"
+        src="markdown/configurations/app.config.md"
+        lineNumbers
+        lineHighlight="7,15-17"
+      />
+    </section>
+  </div>
+
+  <kl-on-this-page class="min-w-3xs" [links]="[
+    { label: 'Configurations', elementId: 'configurations' },
+    { label: 'HttpBase', elementId: 'http-base' },
+    { label: 'ListBase', elementId: 'list-base' },
+    { label: 'PageBase', elementId: 'page-base' },
+    { label: 'Language', elementId: 'language' },
+  ]"/>
+</div>

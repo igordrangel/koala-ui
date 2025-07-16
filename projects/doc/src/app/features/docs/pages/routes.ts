@@ -17,6 +17,13 @@ export const routes: Routes = [
       import('./theming/theming.page').then((c) => c.ThemingPage),
   },
   {
+    path: 'configurations',
+    loadComponent: () =>
+      import('./configurations/configurations.page').then(
+        (c) => c.ConfigurationsPage
+      ),
+  },
+  {
     path: 'actions',
     loadChildren: () => import('./actions/routes').then((c) => c.routes),
   },

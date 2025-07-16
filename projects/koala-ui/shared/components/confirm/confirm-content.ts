@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CurrentTranslation } from '@koalarx/ui/core/translations';
+import { AppConfig } from '@koalarx/ui/core/config';
 import {
   DIALOG_DATA,
   DialogContent,
@@ -13,7 +13,7 @@ import { Button } from '@koalarx/ui/shared/directives';
   imports: [DialogContent, Button],
 })
 export class ConfirmContent {
-  readonly translations = CurrentTranslation.get().confirm;
+  readonly translations = AppConfig.translation.confirm;
   private readonly dialogRef = inject(DialogRef);
 
   message = inject<string>(DIALOG_DATA);

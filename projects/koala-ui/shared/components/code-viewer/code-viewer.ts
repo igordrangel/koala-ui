@@ -15,7 +15,7 @@ import {
   linkedSignal,
   signal,
 } from '@angular/core';
-import { CurrentTranslation } from '@koalarx/ui/core/translations';
+import { AppConfig } from '@koalarx/ui/core/config';
 import { Tooltip } from '@koalarx/ui/shared/directives';
 import { MarkdownModule } from 'ngx-markdown';
 
@@ -42,7 +42,7 @@ export interface CodeViewerConfig {
   imports: [MarkdownModule, Tooltip],
 })
 export class CodeViewer {
-  readonly translations = CurrentTranslation.get().codeViewer;
+  readonly translations = AppConfig.translation.codeViewer;
 
   copied = signal(false);
   content = signal<string>('');

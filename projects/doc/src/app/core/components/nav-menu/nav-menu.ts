@@ -27,6 +27,10 @@ export class NavMenu {
           label: 'Theming',
           link: '/docs/theming',
         },
+        {
+          label: 'Configurations',
+          link: '/docs/configurations',
+        },
       ],
     },
     {
