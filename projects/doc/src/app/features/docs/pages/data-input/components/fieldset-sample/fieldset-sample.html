@@ -1,1 +1,22 @@
-<app-sample-container></app-sample-container>
+<app-sample-container>
+  <kl-fieldset>
+    <ng-container legend>Dados Pessoais</ng-container>
+
+    <ng-container fields>
+      <kl-input-text class="col-6"
+        label="First Name"
+        [control]="form.controls.firstName"
+      />
+
+      <kl-input-text class="col-6"
+        label="Last Name"
+        [control]="form.controls.lastName"
+      />
+
+      <kl-input-text class="col-12"
+        label="Nickname"
+        [control]="form.controls.nickname"
+      />
+    </ng-container>
+  </kl-fieldset>
+</app-sample-container>

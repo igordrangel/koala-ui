@@ -2,5 +2,9 @@
   type="text"
   [control]="control()"
   [label]="label()"
-  [mask]="mask()"
-/>
+  [mask]="mask()">
+
+  <ng-container errors>
+    <ng-content select="[errors]" />
+  </ng-container>
+</kl-input-field>

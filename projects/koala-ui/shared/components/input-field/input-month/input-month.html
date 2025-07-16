@@ -3,5 +3,9 @@
   [control]="control()"
   [label]="label()"
   [min]="min()"
-  [max]="max()"
-/>
+  [max]="max()">
+
+  <ng-container errors>
+    <ng-content select="[errors]" />
+  </ng-container>
+</kl-input-field>

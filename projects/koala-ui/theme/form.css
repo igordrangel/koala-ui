@@ -65,3 +65,8 @@ button:focus {
   outline: none;
   box-shadow: 0 0 0 3px var(--color-neutral-600) !important;
 }
+
+.input:has(.ng-invalid),
+.select:has(.ng-invalid) {
+  --input-color: var(--color-error);
+}

@@ -1,0 +1,11 @@
+<kl-input-text
+  [control]="control()"
+  [label]="label()"
+  mask="000.000.000-00">
+
+  <ng-container errors>
+    @if (control().errors?.['cpfInvalid']) {
+      <div class="error-message">CPF inválido</div>
+    }
+  </ng-container>
+</kl-input-text>
