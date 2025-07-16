@@ -1,0 +1,11 @@
+<kl-input-field
+  [control]="control()"
+  [label]="label()"
+  type="url">
+
+  <ng-container errors>
+    @if (control().errors?.['pattern']) {
+      <div class="error-message">{{ translations.invalidURL }}</div>
+    }
+  </ng-container>
+</kl-input-field>

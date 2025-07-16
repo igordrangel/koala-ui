@@ -5,7 +5,7 @@
 
   <ng-container errors>
     @if (control().errors?.['cpfInvalid']) {
-      <div class="error-message">CPF inválido</div>
+      <div class="error-message">{{ translations.invalidCPF }}</div>
     }
   </ng-container>
 </kl-input-text>

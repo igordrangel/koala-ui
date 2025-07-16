@@ -14,6 +14,9 @@ export const en: Translation = {
     invalidEmail: 'Invalid email address',
     invalidMinLength: (minLength: number) =>
       `The field must have at least ${minLength} characters.`,
+    invalidCPF: 'Invalid CPF',
+    invalidCNPJ: 'Invalid CNPJ',
+    invalidURL: 'Invalid URL',
   },
   onThisPage: {
     title: 'On this page',

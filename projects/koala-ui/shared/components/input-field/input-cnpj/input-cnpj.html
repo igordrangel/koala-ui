@@ -1,11 +1,11 @@
 <kl-input-text
   [control]="control()"
   [label]="label()"
-  mask="00.000.000/0000-00">
+  mask="AA.AAA.AAA/AAAA-AA">
 
   <ng-container errors>
     @if (control().errors?.['cnpjInvalid']) {
-      <div class="error-message">CNPJ inválido</div>
+      <div class="error-message">{{ translations.invalidCNPJ }}</div>
     }
   </ng-container>
 </kl-input-text>

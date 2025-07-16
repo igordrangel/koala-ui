@@ -14,6 +14,9 @@ export const ptBr: Translation = {
     invalidEmail: 'E-mail inválido',
     invalidMinLength: (minLength: number) =>
       `O campo deve ter no mínimo ${minLength} caracteres.`,
+    invalidCPF: 'CPF inválido',
+    invalidCNPJ: 'CNPJ inválido',
+    invalidURL: 'URL inválida',
   },
   onThisPage: {
     title: 'Nesta página',

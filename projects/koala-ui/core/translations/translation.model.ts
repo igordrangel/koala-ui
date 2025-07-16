@@ -11,6 +11,9 @@ export interface Translation {
     required: string;
     invalidEmail: string;
     invalidMinLength: (requiredLength: number) => string;
+    invalidCPF: string;
+    invalidCNPJ: string;
+    invalidURL: string;
   };
   onThisPage: {
     title: string;

@@ -2,6 +2,7 @@ import { Component, effect } from '@angular/core';
 import { InputFieldBase } from '@koalarx/ui/shared/components/input-field';
 import { InputText } from '@koalarx/ui/shared/components/input-field/input-text';
 import { CPFValidator } from './cpf.validator';
+import { AppConfig } from '@koalarx/ui/core/config';
 
 @Component({
   selector: 'kl-input-cpf',
@@ -9,6 +10,8 @@ import { CPFValidator } from './cpf.validator';
   imports: [InputText],
 })
 export class InputCpf extends InputFieldBase {
+  readonly translations = AppConfig.translation.form;
+
   constructor() {
     super();
 
