@@ -104,7 +104,7 @@ export class SideWindow {
 
       componentRef.changeDetectorRef.detectChanges();
 
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflowY = 'hidden';
     }
   }
 }

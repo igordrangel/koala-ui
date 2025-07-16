@@ -1,0 +1,33 @@
+<div class="flex gap-15 w-full">
+  <div class="flex flex-col gap-6 py-10 w-[70%]">
+    <section id="input-cnpj">
+      <h1 class="text-5xl font-bold">Input CNPJ</h1>
+      <small class="text-lg font-light opacity-60">A simple input CNPJ field.</small>
+    </section>
+
+    <section id="input-cnpj-preview">
+      <h2 class="text-xl font-bold">Preview</h2>
+      <app-input-cnpj-sample />
+    </section>
+
+    <section id="input-cnpj-code">
+      <h2 class="text-xl font-bold">Code</h2>
+      <kl-code-viewer
+        name="input-cnpj-sample.ts"
+        language="typescript"
+        src="markdown/data-input/input-cnpj/input-cnpj-sample.ts.md"
+      />
+      <kl-code-viewer
+        name="input-cnpj-sample.html"
+        language="html"
+        src="markdown/data-input/input-cnpj/input-cnpj-sample.html.md"
+      />
+    </section>
+  </div>
+
+  <kl-on-this-page class="min-w-3xs" [links]="[
+    { label: 'Introduction', elementId: 'input-cnpj' },
+    { label: 'Preview', elementId: 'input-cnpj-preview' },
+    { label: 'Code', elementId: 'input-cnpj-code' },
+  ]"/>
+</div>

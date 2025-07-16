@@ -1,0 +1,33 @@
+<div class="flex gap-15 w-full">
+  <div class="flex flex-col gap-6 py-10 w-[70%]">
+    <section id="input-currency">
+      <h1 class="text-5xl font-bold">Input Currency</h1>
+      <small class="text-lg font-light opacity-60">A simple input currency field.</small>
+    </section>
+
+    <section id="input-currency-preview">
+      <h2 class="text-xl font-bold">Preview</h2>
+      <app-input-currency-sample />
+    </section>
+
+    <section id="input-currency-code">
+      <h2 class="text-xl font-bold">Code</h2>
+      <kl-code-viewer
+        name="input-currency-sample.ts"
+        language="typescript"
+        src="markdown/data-input/input-currency/input-currency-sample.ts.md"
+      />
+      <kl-code-viewer
+        name="input-currency-sample.html"
+        language="html"
+        src="markdown/data-input/input-currency/input-currency-sample.html.md"
+      />
+    </section>
+  </div>
+
+  <kl-on-this-page class="min-w-3xs" [links]="[
+    { label: 'Introduction', elementId: 'input-currency' },
+    { label: 'Preview', elementId: 'input-currency-preview' },
+    { label: 'Code', elementId: 'input-currency-code' },
+  ]"/>
+</div>

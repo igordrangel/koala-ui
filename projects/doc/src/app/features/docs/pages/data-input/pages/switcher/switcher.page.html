@@ -1,0 +1,33 @@
+<div class="flex gap-15 w-full">
+  <div class="flex flex-col gap-6 py-10 w-[70%]">
+    <section id="switcher">
+      <h1 class="text-5xl font-bold">Switcher</h1>
+      <small class="text-lg font-light opacity-60">A simple switcher component.</small>
+    </section>
+
+    <section id="switcher-preview">
+      <h2 class="text-xl font-bold">Preview</h2>
+      <app-switcher-sample />
+    </section>
+
+    <section id="switcher-code">
+      <h2 class="text-xl font-bold">Code</h2>
+      <kl-code-viewer
+        name="switcher-sample.ts"
+        language="typescript"
+        src="markdown/data-input/switcher/switcher-sample.ts.md"
+      />
+      <kl-code-viewer
+        name="switcher-sample.html"
+        language="html"
+        src="markdown/data-input/switcher/switcher-sample.html.md"
+      />
+    </section>
+  </div>
+
+  <kl-on-this-page class="min-w-3xs" [links]="[
+    { label: 'Introduction', elementId: 'switcher' },
+    { label: 'Preview', elementId: 'switcher-preview' },
+    { label: 'Code', elementId: 'switcher-code' },
+  ]"/>
+</div>

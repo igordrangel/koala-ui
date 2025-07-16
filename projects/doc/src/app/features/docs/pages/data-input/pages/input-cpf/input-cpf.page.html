@@ -1,0 +1,33 @@
+<div class="flex gap-15 w-full">
+  <div class="flex flex-col gap-6 py-10 w-[70%]">
+    <section id="input-cpf">
+      <h1 class="text-5xl font-bold">Input CPF</h1>
+      <small class="text-lg font-light opacity-60">A simple input CPF field.</small>
+    </section>
+
+    <section id="input-cpf-preview">
+      <h2 class="text-xl font-bold">Preview</h2>
+      <app-input-cpf-sample />
+    </section>
+
+    <section id="input-cpf-code">
+      <h2 class="text-xl font-bold">Code</h2>
+      <kl-code-viewer
+        name="input-cpf-sample.ts"
+        language="typescript"
+        src="markdown/data-input/input-cpf/input-cpf-sample.ts.md"
+      />
+      <kl-code-viewer
+        name="input-cpf-sample.html"
+        language="html"
+        src="markdown/data-input/input-cpf/input-cpf-sample.html.md"
+      />
+    </section>
+  </div>
+
+  <kl-on-this-page class="min-w-3xs" [links]="[
+    { label: 'Introduction', elementId: 'input-cpf' },
+    { label: 'Preview', elementId: 'input-cpf-preview' },
+    { label: 'Code', elementId: 'input-cpf-code' },
+  ]"/>
+</div>
