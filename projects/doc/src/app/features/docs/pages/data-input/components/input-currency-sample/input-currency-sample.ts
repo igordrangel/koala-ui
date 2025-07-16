@@ -1,9 +1,13 @@
 import { SampleContainer } from '@/app/shared/components/sample-container/sample-container';
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { InputCurrency } from '@koalarx/ui/shared/components/input-field/input-currency';
 
 @Component({
   selector: 'app-input-currency-sample',
   templateUrl: './input-currency-sample.html',
-  imports: [SampleContainer],
+  imports: [SampleContainer, InputCurrency],
 })
-export class InputCurrencySample {}
+export class InputCurrencySample {
+  currencyControl = new FormControl<number>(0);
+}

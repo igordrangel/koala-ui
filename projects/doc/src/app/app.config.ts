@@ -12,8 +12,6 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes, withHashLocation()),
-    provideKoala({
-      language: 'ptBr',
-    }),
+    provideKoala(),
   ],
 };

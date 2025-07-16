@@ -16,6 +16,7 @@ interface KoalaSettings {
 }
 
 export function provideKoala(config?: KoalaSettings): Provider {
+  AppConfig.language = config?.language ?? 'en';
   AppConfig.translation = getTranslationByLanguage(config?.language ?? 'en');
   AppConfig.hostApi = config?.hostApi;
 

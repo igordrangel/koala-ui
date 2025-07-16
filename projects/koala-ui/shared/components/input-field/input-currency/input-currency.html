@@ -1,0 +1,27 @@
+<label [attr.for]="fieldId" class="floating-label input validator w-full rounded-sm">
+  @if (label(); as label) {
+    <span>
+      <ng-content select="[icon]" />
+      {{ label }} {{ isRequired() ? '*' : '' }}
+    </span>
+  }
+
+  <input
+    [id]="fieldId"
+    [formControl]="control()"
+    [placeholder]="label() + (isRequired() ? ' *' : '')"
+    [required]="isRequired()"
+    type="tel"
+    currencyMask
+    [decimalCount]="decimalCount()"
+    (currencyValue)="control().setValue($event)"
+  />
+
+  <ng-content select="[suffix]" />
+</label>
+
+<kl-field-errors [field]="control()">
+  <ng-container errors>
+    <ng-content select="[errors]" />
+  </ng-container>
+</kl-field-errors>
