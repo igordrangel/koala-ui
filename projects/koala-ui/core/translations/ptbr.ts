@@ -17,6 +17,12 @@ export const ptBr: Translation = {
     invalidCPF: 'CPF inválido',
     invalidCNPJ: 'CNPJ inválido',
     invalidURL: 'URL inválida',
+    invalidPasswordHasSpecialCharacters:
+      'A senha deve conter caracteres especiais.',
+    invalidPasswordHasLowercase: 'A senha deve conter letras minúsculas.',
+    invalidPasswordHasUppercase: 'A senha deve conter letras maiúsculas.',
+    invalidPasswordHasNumber: 'A senha deve conter números.',
+    invalidConfirmPassword: 'A confirmação da senha não confere.',
   },
   onThisPage: {
     title: 'Nesta página',

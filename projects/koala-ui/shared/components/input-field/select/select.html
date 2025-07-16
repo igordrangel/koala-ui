@@ -1,0 +1,34 @@
+@if (options(); as items) {
+  <label [attr.for]="fieldId" class="floating-label select w-full">
+
+    @if (label(); as label) {
+      <span>{{ label }} {{ isRequired() ? '*' : '' }}</span>
+    }
+
+    <select
+      [id]="fieldId"
+      [value]="control().value"
+      (change)="onSelectChange($event)"
+      [disabled]="items.isLoading()">
+
+      @if (items.isLoading()) {
+        <option [value]="null">Carregando...</option>
+      } @else {
+        <option [value]="null">Selecione uma opção...</option>
+      }
+      @for (item of items.value(); track $index) {
+        <option
+          [value]="`${item.value}`"
+          [selected]="item.value === control().value">
+          {{ item.label }}
+        </option>
+      }
+    </select>
+  </label>
+
+  <kl-field-errors [field]="control()">
+    <ng-container errors>
+      <ng-content select="[errors]" />
+    </ng-container>
+  </kl-field-errors>
+}

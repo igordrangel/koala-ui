@@ -6,13 +6,14 @@ import { first } from 'rxjs/internal/operators/first';
 import { map } from 'rxjs/internal/operators/map';
 import { AppConfig } from '../config';
 import { GetManyResult } from '../models/get-many-result';
+import { SelectOption } from '@koalarx/ui/shared/components/input-field/select';
 
 export interface HttpResourceRequestOptions<EntityType> {
   debounceTime?: number;
   endpoint?: string;
   mapOption?: (
     item: EntityType
-  ) => Omit<AutocompleteOption<EntityType>, 'data'>;
+  ) => Omit<AutocompleteOption<EntityType> | SelectOption<EntityType>, 'data'>;
 }
 
 export abstract class HttpBase<
@@ -122,7 +123,9 @@ export abstract class HttpBase<
 
   getManyForSelector<TResponse = EntityType>(
     query: QueryType | Signal<QueryType>,
-    mapOption: (item: TResponse) => Omit<AutocompleteOption<TResponse>, 'data'>
+    mapOption: (
+      item: TResponse
+    ) => Omit<AutocompleteOption<TResponse> | SelectOption<TResponse>, 'data'>
   ) {
     return rxResource({
       defaultValue: [],

@@ -14,6 +14,11 @@ export interface Translation {
     invalidCPF: string;
     invalidCNPJ: string;
     invalidURL: string;
+    invalidPasswordHasSpecialCharacters: string;
+    invalidPasswordHasLowercase: string;
+    invalidPasswordHasUppercase: string;
+    invalidPasswordHasNumber: string;
+    invalidConfirmPassword: string;
   };
   onThisPage: {
     title: string;

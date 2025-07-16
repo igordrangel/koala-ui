@@ -1,3 +1,4 @@
+```typescript
 import { SampleContainer } from '@/app/shared/components/sample-container/sample-container';
 import { Component, inject, resource } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -33,3 +34,4 @@ export class SelectSample {
         ),
   });
 }
+```
