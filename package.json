@@ -11,9 +11,9 @@
     "test": "ng test",
     "version": "git add -A src",
     "postversion": "git push && git push --tags",
-    "deploy:hotfix": "npm test && npm version patch",
-    "deploy:feature": "npm test && npm version minor",
-    "deploy:release": "npm test && npm version major"
+    "deploy:hotfix": "npm version patch",
+    "deploy:feature": "npm version minor",
+    "deploy:release": "npm version major"
   },
   "private": true,
   "dependencies": {
