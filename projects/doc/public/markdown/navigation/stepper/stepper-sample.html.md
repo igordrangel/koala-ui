@@ -15,15 +15,13 @@
           <p class="w-full">Content step 1</p>
           <span class="divider"></span>
           <div class="flex items-center justify-end gap-2 w-full">
-            <button klButton color="primary" soft (click)="stepper.previous()">
-              Previous
-            </button>
-
             <button klButton color="primary" (click)="stepper.next()">
               Next
             </button>
           </div>
-        } @case (2) {
+        } 
+
+        @case (2) {
           <p class="w-full">Content step 2</p>
           <span class="divider"></span>
           <div class="flex items-center justify-end gap-2 w-full">
@@ -35,7 +33,9 @@
               Next
             </button>
           </div>
-        } @case (3) {
+        } 
+
+        @case (3) {
           <p class="w-full">Content step 3</p>
           <span class="divider"></span>
           <div class="flex items-center justify-end gap-2 w-full">
