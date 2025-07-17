@@ -1,6 +1,6 @@
 {
   "name": "koala-ui",
-  "version": "20.0.0",
+  "version": "20.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve doc",
@@ -9,7 +9,7 @@
     "build:publish": "node .github/scripts/publish.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "version": "git add -A src",
+    "version": "git add -A projects",
     "postversion": "git push && git push --tags",
     "deploy:hotfix": "npm version patch",
     "deploy:feature": "npm version minor",
