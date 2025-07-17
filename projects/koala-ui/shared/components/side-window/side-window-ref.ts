@@ -31,7 +31,7 @@ export class SideWindowRef {
       .querySelector('div div')
       .classList.add('animate-slide-out-right');
 
-    document.body.style.overflowX = 'auto';
+    document.body.style.overflowY = 'auto';
 
     setTimeout(() => {
       componentRef.destroy();
