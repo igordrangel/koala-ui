@@ -1,4 +1,4 @@
-import { KoalaLanguage, Translation } from '../translations';
+import { KoalaLanguage, Translation } from '@koalarx/ui/core/translations';
 
 export const GENERIC_COMPONENT_CONTAINER_NAME =
   '.kl-generic-component-container';

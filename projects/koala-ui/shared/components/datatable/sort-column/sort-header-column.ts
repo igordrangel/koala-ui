@@ -10,7 +10,7 @@ import {
 import {
   QueryPaginationDirection,
   SortFilterType,
-} from '@koalarx/ui/core/models/query-pagination';
+} from '@koalarx/ui/core/models';
 import { OrderedColumnState } from './ordered-column.state';
 
 @Component({
