@@ -140,13 +140,10 @@ export abstract class HttpBase<
       stream: (data) =>
         this.getMany<TResponse>(data.params).pipe(
           map((response) =>
-            response.items.map(
-              (item) =>
-                ({
-                  ...mapOption(item),
-                  data: item,
-                } as AutocompleteOption<TResponse>)
-            )
+            response.items.map((item) => ({
+              ...mapOption(item),
+              data: item,
+            }))
           )
         ),
     });

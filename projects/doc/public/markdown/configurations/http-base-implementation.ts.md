@@ -1,5 +1,5 @@
 ```typescript
-import { HttpBase } from '@/core/base/http-base';
+import { HttpBase } from '@koalarx/ui/core/base';
 import { computed, Injectable, Signal } from '@angular/core';
 import { QueryUsersRequest } from '../models/query-users.request';
 import { User } from '../models/user';

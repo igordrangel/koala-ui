@@ -1,5 +1,5 @@
 ```typescript
-import { PageBase } from '@/core/base/page-base';
+import { PageBase } from '@koalarx/ui/core/base/page-base';
 import { SideWindow } from '@koalarx/ui/shared/components/side-window';
 import { Button } from '@koalarx/ui/shared/directives';
 import { Component, inject } from '@angular/core';

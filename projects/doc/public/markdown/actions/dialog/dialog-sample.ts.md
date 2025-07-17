@@ -1,5 +1,4 @@
 ```typescript
-import { SampleContainer } from "@/app/shared/components/sample-container/sample-container";
 import { Component, inject } from "@angular/core";
 import { Dialog } from "@koalarx/ui/shared/components/dialog";
 import { Button } from "@koalarx/ui/shared/directives";
@@ -8,7 +7,7 @@ import { DialogSampleContent } from "./dialog-sample-content";
 @Component({
   selector: "app-dialog-sample",
   templateUrl: "./dialog-sample.html",
-  imports: [SampleContainer, Button],
+  imports: [Button],
 })
 export class DialogSample {
   private readonly dialog = inject(Dialog);

@@ -1,5 +1,5 @@
 ```typescript
-import { ListBase } from '@/core/base/list-base';
+import { ListBase } from '@koalarx/ui/core/base';
 import { QueryUsersRequest } from '@/features/users/models/query-users.request';
 import { User } from '@/features/users/models/user';
 import { UserService } from '@/features/users/services/user.service';

@@ -1,5 +1,4 @@
 ```typescript
-import { SampleContainer } from '@/app/shared/components/sample-container/sample-container';
 import { Component, inject, resource } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import {
@@ -10,7 +9,7 @@ import {
 @Component({
   selector: 'app-select-sample',
   templateUrl: './select-sample.html',
-  imports: [SampleContainer, Select],
+  imports: [Select],
 })
 export class SelectSample {
   form = inject(FormBuilder).group({

@@ -1,5 +1,4 @@
 ```typescript
-import { SampleContainer } from "@/app/shared/components/sample-container/sample-container";
 import { Component, inject } from "@angular/core";
 import { Confirm } from "@koalarx/ui/shared/components/confirm";
 import { Button } from "@koalarx/ui/shared/directives";
@@ -7,7 +6,7 @@ import { Button } from "@koalarx/ui/shared/directives";
 @Component({
   selector: "app-confirm-sample",
   templateUrl: "./confirm-sample.html",
-  imports: [SampleContainer, Button],
+  imports: [Button],
 })
 export class ConfirmSample {
   private readonly confirm = inject(Confirm);
