@@ -1,0 +1,7 @@
+<input #inputCheckbox
+  type="checkbox"
+  class="checkbox"
+  [checked]="control().value"
+  [disabled]="disabled()"
+  (change)="toggle($event)"
+/>

@@ -2,5 +2,110 @@
 <div
   class="flex items-center justify-center w-full h-[26rem] border border-neutral-700 rounded-2xl mt-4"
 >
+  <div class="flex flex-col items-center gap-4">
+    <div class="flex items-center gap-4">
+      <kl-input-radio
+        [control]="radioColorControl"
+        name="radioColorSample"
+        color="neutral"
+        [value]="1"
+      />
+
+      <kl-input-radio
+        [control]="radioColorControl"
+        name="radioColorSample"
+        color="primary"
+        [value]="2"
+      />
+
+      <kl-input-radio
+        [control]="radioColorControl"
+        name="radioColorSample"
+        color="secondary"
+        [value]="3"
+      />
+
+      <kl-input-radio
+        [control]="radioColorControl"
+        name="radioColorSample"
+        color="accent"
+        [value]="4"
+      />
+
+      <kl-input-radio
+        [control]="radioColorControl"
+        name="radioColorSample"
+        color="info"
+        [value]="5"
+      />
+
+      <kl-input-radio
+        [control]="radioColorControl"
+        name="radioColorSample"
+        color="success"
+        [value]="6"
+      />
+
+      <kl-input-radio
+        [control]="radioColorControl"
+        name="radioColorSample"
+        color="warning"
+        [value]="7"
+      />
+
+      <kl-input-radio
+        [control]="radioColorControl"
+        name="radioColorSample"
+        color="error"
+        [value]="8"
+      />
+    </div>
+
+    <div class="flex items-center gap-4">
+      <kl-input-radio
+        [control]="radioSizeControl"
+        name="radioSizeSample"
+        size="extraSmall"
+        [value]="1"
+      />
+
+      <kl-input-radio
+        [control]="radioSizeControl"
+        name="radioSizeSample"
+        size="small"
+        [value]="2"
+      />
+
+      <kl-input-radio
+        [control]="radioSizeControl"
+        name="radioSizeSample"
+        size="medium"
+        [value]="3"
+      />
+
+      <kl-input-radio
+        [control]="radioSizeControl"
+        name="radioSizeSample"
+        size="large"
+        [value]="4"
+      />
+
+      <kl-input-radio
+        [control]="radioSizeControl"
+        name="radioSizeSample"
+        size="extraLarge"
+        [value]="5"
+      />
+    </div>
+
+    <div class="flex items-center gap-4">
+      <kl-input-radio
+        [control]="disabledRadioControl"
+        name="radioDisabledSample"
+        disabled
+        [value]="1"
+      />
+    </div>
+  </div>
 </div>
 ```

@@ -1,0 +1,33 @@
+<div class="flex gap-15 w-full">
+  <div class="flex flex-col gap-6 py-10 w-[70%]">
+    <section id="accordion">
+      <h1 class="text-5xl font-bold">Accordion</h1>
+      <small class="text-lg font-light opacity-60">A simple accordion component.</small>
+    </section>
+
+    <section id="accordion-preview">
+      <h2 class="text-xl font-bold">Preview</h2>
+      <app-accordion-sample />
+    </section>
+
+    <section id="accordion-code">
+      <h2 class="text-xl font-bold">Code</h2>
+      <kl-code-viewer
+        name="accordion-sample.ts"
+        language="typescript"
+        src="markdown/data-display/accordion/accordion-sample.ts.md"
+      />
+      <kl-code-viewer
+        name="accordion-sample.html"
+        language="html"
+        src="markdown/data-display/accordion/accordion-sample.html.md"
+      />
+    </section>
+  </div>
+
+  <kl-on-this-page class="min-w-3xs" [links]="[
+    { label: 'Introduction', elementId: 'accordion' },
+    { label: 'Preview', elementId: 'accordion-preview' },
+    { label: 'Code', elementId: 'accordion-code' },
+  ]"/>
+</div>

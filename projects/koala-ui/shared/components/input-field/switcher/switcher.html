@@ -1,0 +1,7 @@
+<input #inputSwitcher
+  type="checkbox"
+  class="toggle"
+  [checked]="control().value"
+  [disabled]="disabled()"
+  (change)="toggle($event)"
+/>

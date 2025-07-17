@@ -1,0 +1,33 @@
+<div class="flex gap-15 w-full">
+  <div class="flex flex-col gap-6 py-10 w-[70%]">
+    <section id="datatable">
+      <h1 class="text-5xl font-bold">Datatable</h1>
+      <small class="text-lg font-light opacity-60">A simple datatable component.</small>
+    </section>
+
+    <section id="datatable-preview">
+      <h2 class="text-xl font-bold">Preview</h2>
+      <app-datatable-sample />
+    </section>
+
+    <section id="datatable-code">
+      <h2 class="text-xl font-bold">Code</h2>
+      <kl-code-viewer
+        name="datatable-sample.ts"
+        language="typescript"
+        src="markdown/data-display/datatable/datatable-sample.ts.md"
+      />
+      <kl-code-viewer
+        name="datatable-sample.html"
+        language="html"
+        src="markdown/data-display/datatable/datatable-sample.html.md"
+      />
+    </section>
+  </div>
+
+  <kl-on-this-page class="min-w-3xs" [links]="[
+    { label: 'Introduction', elementId: 'datatable' },
+    { label: 'Preview', elementId: 'datatable-preview' },
+    { label: 'Code', elementId: 'datatable-code' },
+  ]"/>
+</div>

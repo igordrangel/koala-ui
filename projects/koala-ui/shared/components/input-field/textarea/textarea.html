@@ -1,0 +1,21 @@
+<label [attr.for]="fieldId" class="floating-label textarea validator w-full rounded-sm">
+  @if (label(); as label) {
+    <span>
+      <ng-content select="[icon]" />
+      {{ label }} {{ isRequired() ? '*' : '' }}
+    </span>
+  }
+
+  <textarea class="w-full h-full" #textareaElement
+    [id]="fieldId"
+    [formControl]="control()"
+    [required]="isRequired()"
+    [rows]="rows()">
+  </textarea>
+</label>
+
+<kl-field-errors [field]="control()">
+  <ng-container errors>
+    <ng-content select="[errors]" />
+  </ng-container>
+</kl-field-errors>

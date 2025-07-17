@@ -59,6 +59,23 @@ export class NavMenu {
       ]).orderBy('label'),
     },
     {
+      module: 'Data Display',
+      items: new KlArray([
+        {
+          label: 'Accordion',
+          link: '/docs/data-display/accordion',
+        },
+        {
+          label: 'Collapse',
+          link: '/docs/data-display/collapse',
+        },
+        {
+          label: 'Datatable',
+          link: '/docs/data-display/datatable',
+        },
+      ]).orderBy('label'),
+    },
+    {
       module: 'Navigation',
       items: new KlArray([
         {

@@ -1,0 +1,9 @@
+<input #inputRadio
+  type="radio"
+  class="radio"
+  [name]="name()"
+  [value]="value()"
+  [checked]="value() === control().value"
+  [disabled]="disabled()"
+  (change)="toggle($event)"
+/>

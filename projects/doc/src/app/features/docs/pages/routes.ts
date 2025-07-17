@@ -28,6 +28,10 @@ export const routes: Routes = [
     loadChildren: () => import('./actions/routes').then((c) => c.routes),
   },
   {
+    path: 'data-display',
+    loadChildren: () => import('./data-display/routes').then((c) => c.routes),
+  },
+  {
     path: 'navigation',
     loadChildren: () => import('./navigation/routes').then((c) => c.routes),
   },
