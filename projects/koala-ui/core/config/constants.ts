@@ -1,5 +1,5 @@
+import { HttpClientErrorsMiddleware } from '@koalarx/ui/core/middlewares';
 import { KoalaLanguage, Translation } from '@koalarx/ui/core/translations';
-import { HttpClientErrorsMiddleware } from '../middlewares/http-client-errors.middleware';
 
 export const GENERIC_COMPONENT_CONTAINER_NAME =
   '.kl-generic-component-container';
