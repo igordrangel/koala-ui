@@ -24,6 +24,7 @@ export abstract class ListBase<
   protected readonly page = signal(1);
   protected readonly filter = signal<QueryType>({} as any);
   protected readonly resource: HttpBase<TEntity, any, QueryType>;
+  protected readonly totalItemsOnPage = signal(0);
   protected readonly totalItems = signal(0);
   protected readonly list = signal<TEntity[]>([]);
 
@@ -54,6 +55,7 @@ export abstract class ListBase<
       }
 
       this.list.set(result.items);
+      this.totalItemsOnPage.set(result.items.length);
       this.totalItems.set(result.count);
     });
 

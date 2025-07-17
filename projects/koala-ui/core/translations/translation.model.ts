@@ -23,4 +23,11 @@ export interface Translation {
   onThisPage: {
     title: string;
   };
+  datatable: {
+    btnFilterLabel: string;
+    clearFilterTooltip: string;
+    addFilterTooltip: string;
+    reloadListTooltip: string;
+    labelItemsPerPage: string;
+  };
 }

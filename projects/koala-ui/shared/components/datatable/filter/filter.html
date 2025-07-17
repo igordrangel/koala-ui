@@ -1,0 +1,29 @@
+@if (datatableFilter.filters().length > 0) {
+  <div class="p-2 pr-8 pl-8 border-b border-gray-200 dark:border-gray-700 w-full flex items-center gap-3 text-gray-500 dark:text-gray-300">
+
+    <button class="hover:cursor-pointer"
+      [tooltip]="translations.clearFilterTooltip"
+      tooltipPosition="right"
+      (click)="datatableFilter.clearFilters()">
+      <i class="fa-solid fa-filter-circle-xmark"></i>
+    </button>
+
+    <div class="flex items-center gap-1">
+      @for (item of datatableFilter.filters(); track $index) {
+        <div class="badge badge-ghost text-xs">
+          <span>{{item.templateValue}}</span>
+          <button class="hover:cursor-pointer" (click)="datatableFilter.removeFilter(item.propName)">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      }
+    </div>
+
+    <button class="hover:cursor-pointer"
+      [tooltip]="translations.addFilterTooltip"
+      tooltipPosition="right"
+      (click)="add()">
+      <i class="fa-solid fa-circle-plus"></i>
+    </button>
+  </div>
+}

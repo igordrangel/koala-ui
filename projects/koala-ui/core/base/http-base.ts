@@ -12,8 +12,13 @@ export interface HttpResourceRequestOptions<EntityType> {
   debounceTime?: number;
   endpoint?: string;
   mapOption?: (
-    item: EntityType
-  ) => Omit<AutocompleteOption<EntityType> | SelectOption<EntityType>, 'data'>;
+    item: any
+  ) => Omit<
+    | AutocompleteOption<EntityType>
+    | SelectOption<EntityType>
+    | GetManyResult<EntityType>,
+    'data'
+  >;
 }
 
 export abstract class HttpBase<
@@ -23,10 +28,12 @@ export abstract class HttpBase<
 > {
   protected readonly injector = inject(Injector);
   protected readonly http = inject(HttpClient);
-  protected readonly hostApi = AppConfig.hostApi;
   protected readonly url: string;
 
-  constructor(protected readonly resource: string) {
+  constructor(
+    protected readonly resource: string,
+    protected readonly hostApi = AppConfig.hostApi
+  ) {
     this.url = `${this.hostApi}/${this.resource}`;
   }
 

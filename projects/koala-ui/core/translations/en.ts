@@ -27,4 +27,11 @@ export const en: Translation = {
   onThisPage: {
     title: 'On this page',
   },
+  datatable: {
+    btnFilterLabel: 'Filter',
+    clearFilterTooltip: 'Clear filters',
+    addFilterTooltip: 'Add filter',
+    reloadListTooltip: 'Reload data',
+    labelItemsPerPage: 'Items per page limit',
+  },
 };

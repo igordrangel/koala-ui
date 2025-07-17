@@ -1,1 +1,41 @@
-<app-sample-container></app-sample-container>
+<app-sample-container>
+  <kl-datatable class="w-full h-full"
+    [currentPage]="page()"
+    [totalItems]="totalItems()"
+    [totalItemsOnPage]="totalItemsOnPage()"
+    [currentPageSize]="limitPage()"
+    [isLoading]="resourceRef.isLoading()"
+    [colspan]="7"
+    [componentFilter]="componentFilter"
+    (pageChange)="page.set($event)"
+    (pageSizeChange)="limitPage.set($event)"
+    (filterChange)="filter.set($event)"
+    (reloadList)="reloadList()">
+
+    <ng-container head>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>Country</th>
+    </ng-container>
+
+    <ng-container body>
+      @for (user of list(); track $index) {
+        <tr>
+          <td>{{ user.firstName }}</td>
+          <td>{{ user.lastName }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.phone }}</td>
+          <td>{{ user.address.address }}</td>
+          <td>{{ user.address.city }}</td>
+          <td>{{ user.address.country }}</td>
+        </tr>
+      } @empty {
+        <tr><td colspan="7" class="text-center">Nenhum usuário encontrado</td></tr>
+      }
+    </ng-container>
+  </kl-datatable>
+</app-sample-container>

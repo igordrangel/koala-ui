@@ -1,0 +1,65 @@
+<div class="flex flex-col h-full">
+  <div class="pr-8 pl-5 pt-0 pb-0 border-b border-gray-200 dark:border-gray-700 w-full flex items-center justify-between">
+    <div class="flex items-center gap-2 p-2 opacity-80">
+      <button class="btn btn-circle btn-ghost btn-xs text-sm"
+        [tooltip]="translations.reloadListTooltip"
+        tooltipPosition="right"
+        (click)="reloadList.emit()">
+        <i class="fa-solid fa-rotate-right"></i>
+      </button>
+
+      <ng-content select="[menu]" />
+
+      @if (componentFilter()) {
+        <button class="btn btn-ghost btn-xs text-sm"
+          (click)="openFilter()">
+          <i class="fa-solid fa-filter"></i>
+          {{translations.btnFilterLabel}}
+        </button>
+      }
+    </div>
+
+    <div class="flex items-center justify-end gap-3 text-sm">
+      <span class="flex items-center justify-end gap-1 opacity-60">
+        <span>{{translations.labelItemsPerPage}}:</span>
+
+        <select class="select select-md p-0 pl-2 pr-8 h-[1.5rem] w-auto" [(ngModel)]="pageSize">
+          @for (item of pageSizes; track $index) {
+            <option [value]="item">{{ item }}</option>
+          }
+        </select>
+      </span>
+      <span class="opacity-60">|</span>
+      <span class="opacity-60">{{totalItemsOnPage()}} de {{totalItems()}}</span>
+    </div>
+  </div>
+
+  <kl-filter
+    [filter]="filter()"
+    (addFilter)="openFilter($event)"
+    (payload)="filterChange.emit($event)"
+  />
+
+  <div class="overflow-x-auto h-full">
+    <table class="table table-sm table-pin-rows">
+      <thead>
+        <tr class="text-xs">
+          <ng-content select="[head]" />
+        </tr>
+      </thead>
+      <tbody>
+        @if (isLoading()) {
+          @for (row of skeletonRows(); track $index) {
+            <tr>
+              @for (col of skeletonCols(); track $index) {
+                <td><span class="block skeleton w-full h-4"></span></td>
+              }
+            </tr>
+          }
+        } @else {
+          <ng-content select="[body]" />
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

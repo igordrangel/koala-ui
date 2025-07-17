@@ -27,4 +27,11 @@ export const ptBr: Translation = {
   onThisPage: {
     title: 'Nesta página',
   },
+  datatable: {
+    btnFilterLabel: 'Filtro',
+    clearFilterTooltip: 'Limpar filtros',
+    addFilterTooltip: 'Adicionar filtro',
+    reloadListTooltip: 'Recarregar dados',
+    labelItemsPerPage: 'Limite de itens por carregamento',
+  },
 };
