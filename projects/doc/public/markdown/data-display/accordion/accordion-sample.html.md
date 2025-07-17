@@ -2,5 +2,25 @@
 <div
   class="flex items-center justify-center w-full h-[26rem] border border-neutral-700 rounded-2xl mt-4"
 >
+  <div class="flex flex-col gap-2">
+    <kl-accordion name="my-accordion-1">
+      <ng-container title>How do I create an account?</ng-container>
+      <ng-container content>
+        Click the "Sign Up" button in the top right corner and follow the registration process.
+      </ng-container>
+    </kl-accordion>
+
+    <kl-accordion name="my-accordion-1">
+      <ng-container title>I forgot my password. What should I do?</ng-container>
+      <ng-container content>
+        Click on "Forgot Password" on the login page and follow the instructions sent to your email.
+      </ng-container>
+    </kl-accordion>
+
+    <kl-accordion name="my-accordion-1">
+      <ng-container title>How do I update my profile information?</ng-container>
+      <ng-container content>Go to "My Account" settings and select "Edit Profile" to make changes.</ng-container>
+    </kl-accordion>
+  </div>
 </div>
 ```
