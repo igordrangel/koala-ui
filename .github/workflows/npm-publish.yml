@@ -1,0 +1,26 @@
+name: NPM PUBLISH
+on:
+  push:
+    branches: [main]
+jobs:
+  build:
+    name: "npm publish library"
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v2.3.2
+
+      - name: 🔨 Install Dependencies
+        run: npm ci
+
+      - name: 🔨 Build Project
+        run: npm run build:publish
+
+      - name: Publish npm package
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: 14
+          registry-url: https://registry.npmjs.org/
+      - run: cd ./dist && npm publish --access public --ignore-scripts
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
