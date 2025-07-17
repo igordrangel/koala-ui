@@ -1,4 +1,9 @@
-import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClient,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { Provider } from '@angular/core';
 import { HttpClientErrorsMiddleware } from '@koalarx/ui/core/middlewares';
 import { MARKED_OPTIONS, provideMarkdown } from 'ngx-markdown';
@@ -22,9 +27,11 @@ export function provideKoala(config?: KoalaSettings): Provider {
   AppConfig.language = config?.language ?? 'en';
   AppConfig.translation = getTranslationByLanguage(config?.language ?? 'en');
   AppConfig.hostApi = config?.hostApi;
+  AppConfig.httpClientErrorsMiddleware = config?.httpClientErrorsMiddleware;
 
   return [
     provideEnvironmentNgxMask(maskOptions),
+    provideHttpClient(withInterceptorsFromDi()),
     provideMarkdown({
       loader: HttpClient,
       markedOptions: {
