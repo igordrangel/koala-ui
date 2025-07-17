@@ -1,5 +1,5 @@
 <div class="flex flex-col h-full">
-  <div class="pr-8 pl-5 pt-0 pb-0 border-b border-gray-200 dark:border-gray-700 w-full flex items-center justify-between">
+  <div class="pr-8 pl-1 pt-0 pb-0 border-b border-gray-200 dark:border-gray-700 w-full flex items-center justify-between z-10">
     <div class="flex items-center gap-2 p-2 opacity-80">
       <button class="btn btn-circle btn-ghost btn-xs text-sm"
         [tooltip]="translations.reloadListTooltip"
@@ -10,6 +10,8 @@
 
       <ng-content select="[menu]" />
 
+      <span class="relative top-[-0.10rem] pl-1 opacity-60">|</span>
+
       @if (componentFilter()) {
         <button class="btn btn-ghost btn-xs text-sm"
           (click)="openFilter()">
@@ -19,19 +21,21 @@
       }
     </div>
 
-    <div class="flex items-center justify-end gap-3 text-sm">
-      <span class="flex items-center justify-end gap-1 opacity-60">
-        <span>{{translations.labelItemsPerPage}}:</span>
+    @if (!withPaginator()) {
+      <div class="flex items-center justify-end gap-3 text-sm">
+        <span class="flex items-center justify-end gap-1 opacity-60">
+          <span>{{translations.labelItemsPerPage}}:</span>
 
-        <select class="select select-md p-0 pl-2 pr-8 h-[1.5rem] w-auto" [(ngModel)]="pageSize">
-          @for (item of pageSizes; track $index) {
-            <option [value]="item">{{ item }}</option>
-          }
-        </select>
-      </span>
-      <span class="opacity-60">|</span>
-      <span class="opacity-60">{{totalItemsOnPage()}} de {{totalItems()}}</span>
-    </div>
+          <select class="select select-md p-0 pl-2 pr-8 h-[1.5rem] w-auto" [(ngModel)]="pageSize">
+            @for (item of pageSizes; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </span>
+        <span class="opacity-60">|</span>
+        <span class="opacity-60">{{totalItemsOnPage()}} de {{totalItems()}}</span>
+      </div>
+    }
   </div>
 
   <kl-filter
@@ -62,4 +66,44 @@
       </tbody>
     </table>
   </div>
+
+  @if (withPaginator()) {
+    <div class="px-4 py-2 border-t border-gray-200 dark:border-gray-700 w-full flex items-center justify-between">
+      <div class="flex items-center justify-end gap-3 text-xs">
+        <span class="flex items-center justify-end gap-1 opacity-60">
+          <span>{{translations.labelItemsPerPage}}:</span>
+
+          <select class="select select-sm p-0 pl-2 pr-0 w-15 h-[1.5rem]" [(ngModel)]="pageSize">
+            @for (item of pageSizes; track $index) {
+              <option [value]="item">{{ item }}</option>
+            }
+          </select>
+        </span>
+        <span class="opacity-60">|</span>
+        <span class="opacity-60">{{totalItemsOnPage()}} de {{totalItems()}}</span>
+      </div>
+
+      <div class="join flex items-center">
+        <button class="join-item btn btn-sm"
+          [disabled]="paginator()[0] === currentPage()"
+          (click)="pageChange.emit(currentPage() - 1)">
+          «
+        </button>
+
+        @for (page of paginator(); track $index) {
+          <button class="join-item btn btn-sm"
+            [class.btn-disabled]="page === currentPage()"
+            (click)="pageChange.emit(page)">
+            {{page}}
+          </button>
+        }
+
+        <button class="join-item btn btn-sm"
+          [disabled]="paginator()[paginator().length - 1] === currentPage()"
+          (click)="pageChange.emit(currentPage() + 1)">
+          »
+        </button>
+      </div>
+    </div>
+  }
 </div>

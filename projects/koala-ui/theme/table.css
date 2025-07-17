@@ -1,9 +1,26 @@
 table thead th:first-child,
-table tbody td:first-child {
-  padding-left: 2rem;
+table tbody td:first-child,
+kl-sort-header-column:first-child div {
+  padding-left: 1rem;
 }
 
 table thead th:last-child,
-table tbody td:last-child {
+table tbody td:last-child,
+kl-sort-header-column:last-child div {
   padding-right: 1rem;
+}
+
+kl-sort-header-column {
+  display: table-cell;
+  height: 100%;
+}
+
+kl-sort-header-column div:not(.not-ordered) {
+  font-weight: bolder;
+  color: var(--color-green-600);
+}
+
+kl-sort-header-column.ordered-column,
+kl-datatable td.sorted {
+  background-color: var(--color-base-200);
 }

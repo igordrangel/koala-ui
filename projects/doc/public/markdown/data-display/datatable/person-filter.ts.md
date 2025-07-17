@@ -1,3 +1,4 @@
+```typescript
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -71,3 +72,4 @@ export class PersonFilter implements OnInit {
     this.sideWindowRef.dismiss();
   }
 }
+```

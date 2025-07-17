@@ -1,8 +1,11 @@
 export type QueryPaginationDirection = 'asc' | 'desc';
 
-export interface QueryPagination {
-  page?: number;
-  limit?: number;
+export interface SortFilterType {
   orderBy?: string;
   direction?: QueryPaginationDirection;
+}
+
+export interface QueryPagination extends SortFilterType {
+  page?: number;
+  limit?: number;
 }

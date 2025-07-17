@@ -2,5 +2,86 @@
 <div
   class="flex items-center justify-center w-full h-[26rem] border border-neutral-700 rounded-2xl mt-4"
 >
+  <kl-datatable class="w-full h-full"
+    [currentPage]="page()"
+    [totalItems]="totalItems()"
+    [totalItemsOnPage]="totalItemsOnPage()"
+    [currentPageSize]="limitPage()"
+    [isLoading]="resourceRef.isLoading()"
+    [colspan]="7"
+    [componentFilter]="componentFilter"
+    withPaginator="center"
+    (pageChange)="page.set($event)"
+    (pageSizeChange)="limitPage.set($event)"
+    (filterChange)="filter.set($event)"
+    (reloadList)="reloadList()">
+
+    <ng-container menu>
+      <button klButton
+        class="text-sm"
+        size="extraSmall"
+        color="ghost"
+        circle
+        tooltip="Export List"
+        tooltipPosition="right">
+        <i class="fa-solid fa-download"></i>
+      </button>
+    </ng-container>
+
+    <ng-container head>
+      <kl-sort-header-column
+        orderBy="firstName"
+        defaultDirection="asc"
+        (sortable)="sort($event)">
+        First Name
+      </kl-sort-header-column>
+
+      <kl-sort-header-column
+        orderBy="lastName"
+        (sortable)="sort($event)">
+        Last Name
+      </kl-sort-header-column>
+
+      <kl-sort-header-column
+        orderBy="email"
+        (sortable)="sort($event)">
+        Email
+      </kl-sort-header-column>
+
+      <kl-sort-header-column
+        orderBy="phone"
+        (sortable)="sort($event)">
+        Phone
+      </kl-sort-header-column>
+
+      <th>Address</th>
+      <th>City</th>
+      <th>Country</th>
+    </ng-container>
+
+    <ng-container body>
+      @for (user of list(); track $index) {
+        <tr>
+          <td [klSortedItem]="sortFilter()" sortedPropName="firstName">
+            {{ user.firstName }}
+          </td>
+          <td [klSortedItem]="sortFilter()" sortedPropName="lastName">
+            {{ user.lastName }}
+          </td>
+          <td [klSortedItem]="sortFilter()" sortedPropName="email">
+            {{ user.email }}
+          </td>
+          <td [klSortedItem]="sortFilter()" sortedPropName="phone">
+            {{ user.phone }}
+          </td>
+          <td>{{ user.address.address }}</td>
+          <td>{{ user.address.city }}</td>
+          <td>{{ user.address.country }}</td>
+        </tr>
+      } @empty {
+        <tr><td colspan="7" class="text-center">Nenhum usuário encontrado</td></tr>
+      }
+    </ng-container>
+  </kl-datatable>
 </div>
 ```

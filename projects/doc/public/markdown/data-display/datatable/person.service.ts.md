@@ -1,3 +1,4 @@
+```typescript
 import { Injectable, linkedSignal, Signal } from '@angular/core';
 import { HttpBase, HttpResourceRequestOptions } from '@koalarx/ui/core/base';
 import { GetManyResult } from '@koalarx/ui/core/models';
@@ -65,3 +66,4 @@ export class PersonService extends HttpBase<Person, any, PersonFilterData> {
     );
   }
 }
+```

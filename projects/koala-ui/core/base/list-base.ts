@@ -8,8 +8,11 @@ import {
   signal,
   Type,
 } from '@angular/core';
-import { GetManyResult } from '../models/get-many-result';
-import { QueryPagination } from '../models/query-pagination';
+import {
+  GetManyResult,
+  QueryPagination,
+  SortFilterType,
+} from '@koalarx/ui/core/models';
 import { HttpBase } from './http-base';
 
 @Directive()
@@ -27,12 +30,14 @@ export abstract class ListBase<
   protected readonly totalItemsOnPage = signal(0);
   protected readonly totalItems = signal(0);
   protected readonly list = signal<TEntity[]>([]);
+  protected readonly sortFilter = signal<SortFilterType | null>(null);
 
   queryParams = computed<QueryType>(
     () =>
       ({
         page: this.page(),
         limit: this.limitPage(),
+        ...(this.sortFilter() ?? {}),
         ...this.filter(),
       } as QueryType)
   );
@@ -64,6 +69,10 @@ export abstract class ListBase<
         this.reloadList();
       }
     });
+  }
+
+  protected sort(sortFilter: SortFilterType) {
+    this.sortFilter.set(sortFilter);
   }
 
   protected reloadList() {

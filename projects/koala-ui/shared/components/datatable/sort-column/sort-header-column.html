@@ -1,0 +1,20 @@
+<div #orderedColumn [style]="style()" class="flex items-center justify-start gap-1 py-2 px-3 cursor-pointer"
+  [class.not-ordered]="direction() === null"
+  [class.asc]="direction() === 'asc'"
+  [class.desc]="direction() === 'desc'"
+  (click)="sort()">
+
+  @switch (direction()) {
+    @case ('asc') {
+      <i class="fa-solid fa-arrow-down-short-wide"></i>
+    }
+    @case ('desc') {
+      <i class="fa-solid fa-arrow-down-wide-short"></i>
+    }
+    @default {
+      <i class="fa-solid fa-sort"></i>
+    }
+  }
+
+  <ng-content />
+</div>

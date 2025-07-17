@@ -1,3 +1,4 @@
+```typescript
 import {
   QueryPagination,
   QueryPaginationDirection,
@@ -36,3 +37,4 @@ export interface QueryPerson {
   sortBy?: string;
   order?: QueryPaginationDirection;
 }
+```
