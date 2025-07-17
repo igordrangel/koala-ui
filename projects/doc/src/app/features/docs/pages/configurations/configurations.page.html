@@ -158,6 +158,26 @@
       </ul>
     </section>
 
+    <section id="middlewares">
+      <h2 class="text-2xl font-bold">Middlewares</h2>
+      <h3 id="http-client-errors" class="mt-4 text-xl font-semibold">HttpClientErrorsMiddleware</h3>
+      <p class="mt-2 text-justify">
+        The <span class="kbd">HttpClientErrorsMiddleware</span> is responsible for handling HTTP errors in a centralized manner. It intercepts HTTP requests and responses, allowing you to implement custom error handling logic.
+      </p>
+      <kl-code-viewer
+        name="http-errors.middleware.ts"
+        language="typescript"
+        src="markdown/configurations/middlewares/http-client-errors/http-errors.middleware.ts.md"
+      />
+      <kl-code-viewer
+        name="app.config.ts"
+        language="typescript"
+        src="markdown/configurations/middlewares/http-client-errors/app.config.md"
+        lineNumbers
+        lineHighlight="9,16"
+      />
+    </section>
+
     <section id="language">
       <h2 class="text-2xl font-bold">Language</h2>
       <p class="mt-4">
@@ -178,6 +198,7 @@
     { label: 'HttpBase', elementId: 'http-base' },
     { label: 'ListBase', elementId: 'list-base' },
     { label: 'PageBase', elementId: 'page-base' },
+    { label: 'HttpClient Errors', elementId: 'http-client-errors' },
     { label: 'Language', elementId: 'language' },
   ]"/>
 </div>

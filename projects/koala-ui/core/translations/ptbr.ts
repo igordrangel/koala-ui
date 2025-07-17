@@ -34,4 +34,15 @@ export const ptBr: Translation = {
     reloadListTooltip: 'Recarregar dados',
     labelItemsPerPage: 'Limite de itens por carregamento',
   },
+  feedbackRequestInterceptor: {
+    '400': 'Ocorreu um erro relacionado aos dados enviados',
+    '401': 'Acesso não autorizado, por favor, faça login novamente.',
+    '403': 'Acesso negado.',
+    '404': 'Nenhum registro encontrado a partir dos dados informados.',
+    '409': 'Este registro já existe',
+    '422': 'Erro de validação nos dados enviados.',
+    '500': 'Entre em contato com nosso suporte pelo canal do whatsapp.',
+    '0': 'Identificamos uma instabilidade na comunicação com nosso servidor, isto pode ocorrer devido a rápidas quedas de internet, conexão lenta ou sobrecarga no servidor, por favor, tente novamente.',
+    unknowError: 'Ocorreu um erro desconhecido, por favor, tente novamente.',
+  },
 };

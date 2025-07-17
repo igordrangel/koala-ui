@@ -34,4 +34,15 @@ export const en: Translation = {
     reloadListTooltip: 'Reload data',
     labelItemsPerPage: 'Items per page limit',
   },
+  feedbackRequestInterceptor: {
+    '400': 'An error occurred related to the submitted data',
+    '401': 'Unauthorized access, please log in again.',
+    '403': 'Access denied.',
+    '404': 'No record found from the provided data.',
+    '409': 'This record already exists',
+    '422': 'Validation error in the submitted data.',
+    '500': 'Please contact our support via WhatsApp.',
+    '0': 'We identified an instability in communication with our server, this may occur due to rapid internet drops, slow connection, or server overload, please try again.',
+    unknowError: 'An unknown error occurred, please try again.',
+  },
 };

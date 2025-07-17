@@ -1,8 +1,15 @@
-import { HttpClient, provideHttpClient } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClient,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { Provider } from '@angular/core';
+import { HttpClientErrorsMiddleware } from '@koalarx/ui/core/middlewares';
 import { MARKED_OPTIONS, provideMarkdown } from 'ngx-markdown';
 import { NgxMaskConfig, provideEnvironmentNgxMask } from 'ngx-mask';
 import { AppConfig } from './config';
+import { FeedbackRequestInterceptor } from './interceptors/feedback-request-interceptor';
 import { getTranslationByLanguage, KoalaLanguage } from './translations';
 
 const maskOptions: Partial<NgxMaskConfig> = {
@@ -13,6 +20,7 @@ const maskOptions: Partial<NgxMaskConfig> = {
 interface KoalaSettings {
   hostApi?: string;
   language?: KoalaLanguage;
+  httpClientErrorsMiddleware?: HttpClientErrorsMiddleware;
 }
 
 export function provideKoala(config?: KoalaSettings): Provider {
@@ -22,7 +30,7 @@ export function provideKoala(config?: KoalaSettings): Provider {
 
   return [
     provideEnvironmentNgxMask(maskOptions),
-    provideHttpClient(),
+    provideHttpClient(withInterceptorsFromDi()),
     provideMarkdown({
       loader: HttpClient,
       markedOptions: {
@@ -34,5 +42,10 @@ export function provideKoala(config?: KoalaSettings): Provider {
         },
       },
     }),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: FeedbackRequestInterceptor,
+      multi: true,
+    },
   ];
 }
