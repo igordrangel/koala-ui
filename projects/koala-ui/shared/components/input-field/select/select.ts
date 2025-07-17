@@ -7,7 +7,7 @@ type SelectValue = string | number | boolean | null;
 export interface SelectOption<TData = any> {
   label: string;
   value: SelectValue;
-  data: TData;
+  data?: TData;
 }
 export type SelectList<TData = any> = SelectOption<TData>[];
 
