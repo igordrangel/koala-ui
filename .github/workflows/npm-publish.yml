@@ -1,7 +1,7 @@
 name: NPM PUBLISH
 on:
   push:
-    branches: [main]
+    branches: [master]
 jobs:
   build:
     name: "npm publish library"
