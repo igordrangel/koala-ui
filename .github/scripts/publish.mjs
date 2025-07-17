@@ -11,9 +11,7 @@ if (fs.existsSync("dist")) {
 execSync(`npm run build:lib`, { stdio: "inherit" });
 
 const packageJson = JSON.parse(
-  fs
-    .readFileSync("projects/koala-ui/package.json", { encoding: "utf8" })
-    .toString()
+  fs.readFileSync("dist/package.json", { encoding: "utf8" }).toString()
 );
 
 fs.writeFileSync(
@@ -34,7 +32,6 @@ fs.writeFileSync(
         url: "https://github.com/igordrangel/koala-ui/issues",
       },
       homepage: "https://github.com/igordrangel/koala-ui#readme",
-      types: "./index.d.ts",
       dependencies: config.dependencies,
     },
     null,
