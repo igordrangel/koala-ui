@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClientErrorsMiddleware } from '@koalarx/ui/core/middlewares';
 import { KoalaLanguage, Translation, en } from '@koalarx/ui/core/translations';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AppConfig {
   private _hostApi: string | undefined;
   private _language: KoalaLanguage | undefined;

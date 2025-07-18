@@ -5,10 +5,10 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { Provider } from '@angular/core';
+import { AppConfig } from '@koalarx/ui/core/config';
 import { HttpClientErrorsMiddleware } from '@koalarx/ui/core/middlewares';
 import { MARKED_OPTIONS, provideMarkdown } from 'ngx-markdown';
 import { NgxMaskConfig, provideEnvironmentNgxMask } from 'ngx-mask';
-import { AppConfig } from './config';
 import { FeedbackRequestInterceptor } from './interceptors/feedback-request-interceptor';
 import { getTranslationByLanguage, KoalaLanguage } from './translations';
 
