@@ -5,7 +5,7 @@ import { Loader } from "@koalarx/ui/core/components/loader";
 @Component({
   selector: "app-loader-sample",
   templateUrl: "./loader-sample.html",
-  imports: [SampleContainer, Loader],
+  imports: [Loader],
 })
 export class LoaderSample {}
 ```
