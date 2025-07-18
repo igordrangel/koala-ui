@@ -24,7 +24,7 @@
   </div>
 
   <div class="flex items-center justify-center w-full" actions>
-    <button klButton soft color="primary" (click)="close()">
+    <button klButton outline [color]="data.type" (click)="close()">
       {{ data.okButtonText ?? 'OK' }}
     </button>
   </div>

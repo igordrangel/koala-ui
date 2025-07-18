@@ -8,7 +8,7 @@ import {
   signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { AppConfig } from '@koalarx/ui/core/config';
 
 export interface OnThisPageLink {
@@ -21,7 +21,7 @@ export interface OnThisPageLink {
   templateUrl: './on-this-page.html',
 })
 export class OnThisPage implements OnInit, OnDestroy {
-  private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly router = inject(Router);
 
   readonly translations = inject(AppConfig).translation.onThisPage;
 
@@ -57,8 +57,10 @@ export class OnThisPage implements OnInit, OnDestroy {
   };
 
   constructor() {
-    this.activatedRoute.url.pipe(takeUntilDestroyed()).subscribe(() => {
-      document.body.scrollTo({ top: 0 });
+    this.router.events.pipe(takeUntilDestroyed()).subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        window.scrollTo({ top: 0 });
+      }
     });
   }
 

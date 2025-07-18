@@ -5,6 +5,7 @@ import { Tooltip } from '@koalarx/ui/shared/directives';
 import { THEME_STORAGE_NAME } from '../../config/constants';
 
 type ThemeName =
+  | 'koala'
   | 'light'
   | 'dark'
   | 'cupcake'
@@ -54,8 +55,9 @@ interface ThemeOption {
 })
 export class ThemeSwitcher implements OnInit {
   lightTheme: ThemeName = 'light';
-  darkTheme: ThemeName = 'dark';
+  darkTheme: ThemeName = 'koala';
   themes = signal<ThemeOption[]>([
+    { isDark: true, name: 'koala', active: false },
     { isDark: false, name: 'light', active: false },
     { isDark: true, name: 'dark', active: false },
     { isDark: false, name: 'cupcake', active: false },
