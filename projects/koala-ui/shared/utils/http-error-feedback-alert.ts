@@ -6,10 +6,12 @@ import { Snackbar } from '@koalarx/ui/shared/components/snackbar';
 @Injectable({ providedIn: 'root' })
 export class HttpErrorFeedbackAlert {
   private readonly snackbar = inject(Snackbar);
+  private readonly appConfig = inject(AppConfig);
 
   tapError(error: HttpErrorResponse) {
-    const httpClientErrorsMiddleware = AppConfig.httpClientErrorsMiddleware;
-    const translations = AppConfig.translation.feedbackRequestInterceptor;
+    const httpClientErrorsMiddleware =
+      this.appConfig.httpClientErrorsMiddleware;
+    const translations = this.appConfig.translation.feedbackRequestInterceptor;
     const statusCode = error.status.toString();
 
     if (statusCode.charAt(0) === '4') {

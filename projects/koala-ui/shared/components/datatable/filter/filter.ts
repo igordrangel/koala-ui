@@ -10,7 +10,7 @@ import { AppConfig } from '@koalarx/ui/core/config';
   imports: [Tooltip],
 })
 export class Filter {
-  readonly translations = AppConfig.translation.datatable;
+  readonly translations = inject(AppConfig).translation.datatable;
 
   datatableFilter = inject(DatatableFilter);
   filter = input<FilterData[]>([]);

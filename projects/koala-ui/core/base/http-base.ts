@@ -26,13 +26,14 @@ export abstract class HttpBase<
   PayloadType = any,
   QueryType = any
 > {
+  private readonly appConfig = inject(AppConfig);
   protected readonly injector = inject(Injector);
   protected readonly http = inject(HttpClient);
   protected readonly url: string;
 
   constructor(
     protected readonly resource: string,
-    protected readonly hostApi = AppConfig.hostApi
+    protected readonly hostApi = this.appConfig.hostApi
   ) {
     this.url = `${this.hostApi}/${this.resource}`;
   }

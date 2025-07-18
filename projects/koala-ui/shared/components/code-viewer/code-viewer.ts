@@ -11,6 +11,7 @@ import 'prismjs/plugins/line-numbers/prism-line-numbers';
 import {
   booleanAttribute,
   Component,
+  inject,
   input,
   linkedSignal,
   signal,
@@ -42,7 +43,7 @@ export interface CodeViewerConfig {
   imports: [MarkdownModule, Tooltip],
 })
 export class CodeViewer {
-  readonly translations = AppConfig.translation.codeViewer;
+  readonly translations = inject(AppConfig).translation.codeViewer;
 
   copied = signal(false);
   content = signal<string>('');

@@ -13,7 +13,7 @@ import { Button } from '@koalarx/ui/shared/directives';
   imports: [DialogContent, Button],
 })
 export class ConfirmContent {
-  readonly translations = AppConfig.translation.confirm;
+  readonly translations = inject(AppConfig).translation.confirm;
   private readonly dialogRef = inject(DialogRef);
 
   message = inject<string>(DIALOG_DATA);

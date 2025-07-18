@@ -23,7 +23,7 @@ export interface OnThisPageLink {
 export class OnThisPage implements OnInit, OnDestroy {
   private readonly activatedRoute = inject(ActivatedRoute);
 
-  readonly translations = AppConfig.translation.onThisPage;
+  readonly translations = inject(AppConfig).translation.onThisPage;
 
   links = input.required<OnThisPageLink[]>();
   activeSection = signal<string | null>(null);

@@ -24,10 +24,12 @@ interface KoalaSettings {
 }
 
 export function provideKoala(config?: KoalaSettings): Provider {
-  AppConfig.language = config?.language ?? 'en';
-  AppConfig.translation = getTranslationByLanguage(config?.language ?? 'en');
-  AppConfig.hostApi = config?.hostApi;
-  AppConfig.httpClientErrorsMiddleware = config?.httpClientErrorsMiddleware;
+  const appConfig = new AppConfig();
+
+  appConfig.language = config?.language ?? 'en';
+  appConfig.translation = getTranslationByLanguage(config?.language ?? 'en');
+  appConfig.hostApi = config?.hostApi;
+  appConfig.httpClientErrorsMiddleware = config?.httpClientErrorsMiddleware;
 
   return [
     provideEnvironmentNgxMask(maskOptions),
@@ -47,6 +49,10 @@ export function provideKoala(config?: KoalaSettings): Provider {
       provide: HTTP_INTERCEPTORS,
       useClass: FeedbackRequestInterceptor,
       multi: true,
+    },
+    {
+      provide: AppConfig,
+      useValue: appConfig,
     },
   ];
 }

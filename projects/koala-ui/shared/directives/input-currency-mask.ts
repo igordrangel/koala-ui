@@ -19,6 +19,7 @@ export class InputCurrencyMask implements OnInit {
   private readonly elementRef = inject<ElementRef<HTMLInputElement>>(
     ElementRef<HTMLInputElement>
   );
+  private readonly appConfig = inject(AppConfig);
   private writedValue = 0.0;
 
   decimalCount = input<number>(2);
@@ -29,7 +30,7 @@ export class InputCurrencyMask implements OnInit {
     const thousandSeparator = ',';
     const decimalSeparator = '.';
 
-    switch (AppConfig.language) {
+    switch (this.appConfig.language) {
       case 'en':
         prefix = '$';
         break;

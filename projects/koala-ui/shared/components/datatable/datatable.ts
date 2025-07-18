@@ -25,7 +25,7 @@ import { Filter } from './filter/filter';
 export class Datatable {
   private readonly sideWindow = inject(SideWindow);
 
-  readonly translations = AppConfig.translation.datatable;
+  readonly translations = inject(AppConfig).translation.datatable;
 
   currentPage = input.required<number>();
   totalItems = input.required<number>();

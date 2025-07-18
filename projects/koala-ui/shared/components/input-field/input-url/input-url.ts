@@ -1,4 +1,4 @@
-import { Component, effect } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { AppConfig } from '@koalarx/ui/core/config';
 import {
@@ -12,7 +12,7 @@ import {
   imports: [InputField],
 })
 export class InputUrl extends InputFieldBase {
-  readonly translations = AppConfig.translation.form;
+  readonly translations = inject(AppConfig).translation.form;
 
   constructor() {
     super();

@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { AppConfig } from '@koalarx/ui/core/config';
 
@@ -7,6 +7,6 @@ import { AppConfig } from '@koalarx/ui/core/config';
   templateUrl: './field-errors.html',
 })
 export class FieldErrors {
-  readonly translations = AppConfig.translation.form;
+  readonly translations = inject(AppConfig).translation.form;
   field = input.required<FormControl>();
 }
