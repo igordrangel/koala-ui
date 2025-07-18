@@ -6,36 +6,34 @@ import { Snackbar } from '@koalarx/ui/shared/components/snackbar';
 @Injectable({ providedIn: 'root' })
 export class HttpErrorFeedbackAlert {
   private readonly snackbar = inject(Snackbar);
-  private readonly httpClientErrorsMiddleware =
-    AppConfig.httpClientErrorsMiddleware;
-  private readonly translations =
-    AppConfig.translation.feedbackRequestInterceptor;
 
   tapError(error: HttpErrorResponse) {
+    const httpClientErrorsMiddleware = AppConfig.httpClientErrorsMiddleware;
+    const translations = AppConfig.translation.feedbackRequestInterceptor;
     const statusCode = error.status.toString();
 
     if (statusCode.charAt(0) === '4') {
       console.warn(error);
 
       this.snackbar.warning(
-        this.httpClientErrorsMiddleware?.handleError(error) ??
-          (this.translations as any)[statusCode]
+        httpClientErrorsMiddleware?.handleError(error) ??
+          (translations as any)[statusCode]
       );
       return;
     } else if (statusCode.charAt(0) === '5') {
       console.error(error);
 
       this.snackbar.error(
-        this.httpClientErrorsMiddleware?.handleError(error) ??
-          (this.translations as any)[statusCode]
+        httpClientErrorsMiddleware?.handleError(error) ??
+          (translations as any)[statusCode]
       );
       return;
     } else {
       console.info(error);
 
       this.snackbar.info(
-        this.httpClientErrorsMiddleware?.handleError(error) ??
-          this.translations.unknowError
+        httpClientErrorsMiddleware?.handleError(error) ??
+          translations.unknowError
       );
       return;
     }
