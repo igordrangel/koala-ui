@@ -30,11 +30,10 @@ export abstract class HttpBase<
   protected readonly injector = inject(Injector);
   protected readonly http = inject(HttpClient);
   protected readonly url: string;
+  protected readonly hostApi: string;
 
-  constructor(
-    protected readonly resource: string,
-    protected readonly hostApi = this.appConfig.hostApi
-  ) {
+  constructor(protected readonly resource: string, hostApi?: string) {
+    this.hostApi = hostApi || this.appConfig.hostApi || '';
     this.url = `${this.hostApi}/${this.resource}`;
   }
 
