@@ -1,10 +1,15 @@
-<div #dropdown class="dropdown">
-  <div tabindex="0" role="button">
-    <ng-content select="[trigger]" />
-  </div>
-  <ul
-    tabindex="0"
-    class="dropdown-content bg-base-100 rounded-box z-1 mt-3 min-w-52 w-auto shadow-sm border border-neutral-200 dark:border-neutral-700 rounded-md overflow-y-auto overflow-x-hidden max-h-[50vh]">
-    <ng-content select="[options]" />
-  </ul>
+<button #dropdownTrigger
+  tabindex="0"
+  role="button"
+  [attr.popovertarget]="id"
+  (click)="ajustPosition()">
+  <ng-content select="[trigger]" />
+</button>
+
+<div #dropdownContent
+  tabindex="0"
+  popover
+  [id]="id"
+  class="dropdown bg-base-100 rounded-box mt-3 min-w-52 w-auto max-w-[30vw] max-h-[40vh] shadow-sm border border-neutral-200 dark:border-neutral-700 rounded-md overflow-y-auto">
+  <ng-content select="[options]" />
 </div>

@@ -25,6 +25,35 @@
       />
     </section>
 
+    <section id="import-koala-css">
+      <h2 class="text-2xl font-bold">Import Koala CSS</h2>
+      <small class="text-base">
+        Import the Koala CSS file in your <span class="kbd">styles.css</span> to import the Koala Styles, <a class="link font-semibold" href="https://tailwindcss.com" target="_blank">Tailwind CSS</a> and <a class="link font-semibold" href="https://daisyui.com" target="_blank">Daisy UI</a>.
+      </small>
+      <kl-code-viewer
+        name="styles.css"
+        language="css"
+        src="markdown/installation/styles.css.md"
+        lineNumbers
+        lineHighlight="1,2"
+      />
+      <p class="mt-1">
+        <span class="font-semibold">Note:</span> Line 2 is required to ensure that both
+        <a class="link font-semibold" href="https://tailwindcss.com" target="_blank">Tailwind CSS</a> and
+        <a class="link font-semibold" href="https://daisyui.com" target="_blank">Daisy UI</a> styles are also applied to Koala UI components.
+      </p>
+    </section>
+
+    <section id="add-tailwind-css">
+      <h2 class="text-2xl font-bold">Add Tailwind CSS</h2>
+      <small class="text-base">Add <a class="link font-semibold" href="https://tailwindcss.com" target="_blank">Tailwind CSS</a> plugin for PostCSS to a new <span class="kbd">.postcssrc.json</span> file at root</small>
+      <kl-code-viewer
+        name=".postcssrc.json"
+        language="json"
+        src="markdown/installation/postcssrc.json.md"
+      />
+    </section>
+
     <section id="configure-koala-provider">
       <h2 class="text-2xl font-bold">Configure Koala Provider</h2>
       <small class="text-base">Configure the Koala UI provider in your application.</small>
@@ -34,18 +63,6 @@
         src="markdown/installation/app.config.md"
         lineNumbers
         lineHighlight="7,15"
-      />
-    </section>
-
-    <section id="configure-angular-json">
-      <h2 class="text-2xl font-bold">Configure Angular JSON</h2>
-      <small class="text-base">Configure the Angular JSON file for your application.</small>
-      <kl-code-viewer
-        name="angular.json"
-        language="json"
-        src="markdown/installation/angular.json.md"
-        lineNumbers
-        lineHighlight="13,16"
       />
     </section>
 
@@ -71,8 +88,9 @@
     { label: 'Installation', elementId: 'installation' },
     { label: 'Create project', elementId: 'create-project' },
     { label: 'Install Koala UI', elementId: 'install-koala-ui' },
+    { label: 'Import Koala CSS', elementId: 'import-koala-css' },
+    { label: 'Add Tailwind CSS', elementId: 'add-tailwind-css' },
     { label: 'Configure Koala Provider', elementId: 'configure-koala-provider' },
-    { label: 'Configure Angular JSON', elementId: 'configure-angular-json' },
     { label: 'Include App Root', elementId: 'include-app-root' }
   ]"/>
 </div>

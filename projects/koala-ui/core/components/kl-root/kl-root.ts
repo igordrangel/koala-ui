@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, OnInit } from '@angular/core';
 import { DialogContainer } from '@koalarx/ui/core/components/dialog';
 import { LoaderPageContent } from '@koalarx/ui/core/components/loader-page';
 import { SideWindowContainer } from '@koalarx/ui/core/components/side-window';
@@ -16,6 +16,12 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
     LoaderPageContent,
   ],
 })
-export class KlRoot {
+export class KlRoot implements OnInit {
   routerLoaderColor = input<string>('#6A1B9A');
+
+  ngOnInit(): void {
+    if (document.querySelector('html')?.getAttribute('data-theme') === null) {
+      document.querySelector('html')?.setAttribute('data-theme', 'light');
+    }
+  }
 }

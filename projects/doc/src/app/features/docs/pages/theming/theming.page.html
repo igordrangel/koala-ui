@@ -20,24 +20,7 @@
 
       <p class="mt-6">If you want to switch the theme by clicking or programmatically, simply change the value of the <span class="kbd">data-theme</span> attribute.</p>
 
-      <p class="mt-6">To make the theme work, make sure to import the CSS file from <span class="kbd">&#64;koalarx/ui/theme/koala.css</span> in your <span class="kbd">styles.css</span> or in the <span class="kbd">angular.json</span> file.</p>
-
-      <kl-code-viewer
-        name="angular.json"
-        language="json"
-        src="markdown/installation/angular.json.md"
-        lineNumbers
-        lineHighlight="13"
-      />
-
-      <p class="mt-6">
-        It is worth mentioning that the <span class="kbd">koala.css</span> file already imports
-        <a href="https://tailwindcss.com/" target="_blank" class="link font-semibold">Tailwind CSS</a>
-        and
-        <a href="https://daisyui.com/" target="_blank" class="link font-semibold">daisyUI</a>.
-        Therefore, if you want to use these features in your <span class="kbd">styles.css</span>,
-        it is recommended to include it directly in the <span class="kbd">styles.css</span> file instead of the <span class="kbd">angular.json</span> file.
-      </p>
+      <p class="mt-6">To make the theme work, make sure to import the CSS file from <span class="kbd">../node_modules/&#64;koalarx/ui/theme/koala.css</span> in your <span class="kbd">styles.css</span>.</p>
 
       <kl-code-viewer
         name="style.css"
@@ -46,6 +29,18 @@
         lineNumbers
         lineHighlight="1"
       />
+
+      <p class="mt-2">
+        <span class="font-semibold">Note:</span> It is worth mentioning that the <span class="kbd">koala.css</span> file already imports
+        <a href="https://tailwindcss.com/" target="_blank" class="link font-semibold">Tailwind CSS</a>
+        and
+        <a href="https://daisyui.com/" target="_blank" class="link font-semibold">daisyUI</a>.
+      </p>
+      <p class="mt-1">
+        <span class="font-semibold">Note:</span> Line 2 is required to ensure that both
+        <a class="link font-semibold" href="https://tailwindcss.com" target="_blank">Tailwind CSS</a> and
+        <a class="link font-semibold" href="https://daisyui.com" target="_blank">Daisy UI</a> styles are also applied to Koala UI components.
+      </p>
     </section>
   </div>
 

@@ -1,62 +1,51 @@
-import {
-  Component,
-  computed,
-  effect,
-  ElementRef,
-  input,
-  viewChild,
-} from '@angular/core';
-
-type DropdownVerticalPosition = 'top' | 'bottom' | 'left' | 'right';
-type DropdownHorizontalPosition = 'start' | 'center' | 'end';
+import { Component, effect, ElementRef, viewChild } from '@angular/core';
+import { KlString, randomString } from '@koalarx/utils';
 
 @Component({
   selector: 'kl-dropdown',
   templateUrl: './dropdown.html',
 })
 export class Dropdown {
-  private readonly dropdownElement =
-    viewChild<ElementRef<HTMLDivElement>>('dropdown');
+  private readonly dropdownTriggerElement =
+    viewChild<ElementRef<HTMLButtonElement>>('dropdownTrigger');
+  private readonly dropdownContentElement =
+    viewChild<ElementRef<HTMLDivElement>>('dropdownContent');
 
-  verticalPosition = input<DropdownVerticalPosition>('bottom');
-  horizontalPosition = input<DropdownHorizontalPosition>('start');
+  id = randomString(10, { numbers: true, uppercase: false, lowercase: false });
 
-  verticalPositionClass = computed(() => {
-    switch (this.verticalPosition()) {
-      case 'top':
-        return 'dropdown-top';
-      case 'left':
-        return 'dropdown-left';
-      case 'right':
-        return 'dropdown-right';
-      case 'bottom':
-      default:
-        return 'dropdown-bottom';
-    }
-  });
-
-  horizontalPositionClass = computed(() => {
-    switch (this.horizontalPosition()) {
-      case 'start':
-        return 'dropdown-start';
-      case 'center':
-        return 'dropdown-center';
-      case 'end':
-      default:
-        return 'dropdown-end';
-    }
-  });
+  private readonly anchorName = new KlString('--anchor-').concat(this.id);
 
   constructor() {
     effect(() => {
-      const dropdownElement = this.dropdownElement()?.nativeElement;
+      const triggerElement = this.dropdownTriggerElement()?.nativeElement;
+      const contentElement = this.dropdownContentElement()?.nativeElement;
 
-      if (dropdownElement) {
-        dropdownElement.classList.add(
-          this.verticalPositionClass(),
-          this.horizontalPositionClass()
-        );
+      if (triggerElement && contentElement) {
+        triggerElement.style = `anchor-name: ${this.anchorName};`;
+        contentElement.style = `position-anchor: ${this.anchorName};`;
       }
     });
+  }
+
+  ajustPosition() {
+    const triggerElement = this.dropdownTriggerElement()?.nativeElement;
+    const contentElement = this.dropdownContentElement()?.nativeElement;
+
+    if (triggerElement && contentElement) {
+      setTimeout(() => {
+        const position = contentElement.getBoundingClientRect();
+        const screenWidth = document.body.clientWidth;
+        const screenHeight = document.body.clientHeight;
+
+        if (position.right > screenWidth) {
+          contentElement.classList.add('dropdown-left');
+          contentElement.classList.add('dropdown-start');
+        }
+
+        if (position.bottom > screenHeight) {
+          contentElement.classList.add('dropdown-top');
+        }
+      });
+    }
   }
 }

@@ -149,12 +149,10 @@ export class ThemeSwitcher implements OnInit {
   ngOnInit(): void {
     const storedTheme = localStorage.getItem(THEME_STORAGE_NAME);
     const currentTheme = this.themes().find((t) => t.name === storedTheme);
-
     if (currentTheme) {
       this.setTheme(currentTheme);
     } else {
       const darkTheme = this.themes().find((t) => t.name === this.darkTheme);
-
       if (darkTheme) {
         this.setTheme(darkTheme);
       }
