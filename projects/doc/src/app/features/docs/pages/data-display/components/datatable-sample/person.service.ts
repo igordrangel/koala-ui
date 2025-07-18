@@ -7,7 +7,7 @@ import {
   PersonListResult,
   QueryPerson,
 } from './person.types';
-import { KlArray } from '@koalarx/utils';
+import { KlArray } from '@koalarx/utils/KlArray';
 
 @Injectable()
 export class PersonService extends HttpBase<Person, any, PersonFilterData> {

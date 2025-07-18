@@ -16,7 +16,7 @@ import {
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AutocompleteRef } from './autocomplete-ref';
 import { AutocompleteList, AutocompleteValue } from './autocomplete-value';
-import { KlArray } from '@koalarx/utils';
+import { KlArray } from '@koalarx/utils/KlArray';
 
 @Component({
   selector: 'kl-autocomplete-options',
