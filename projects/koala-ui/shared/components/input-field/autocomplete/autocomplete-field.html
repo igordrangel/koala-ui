@@ -7,9 +7,11 @@
   (focus)="control().markAsTouched()"
   (click)="open()">
 
-  <span class="autocomplete-label flex items-center gap-2 whitespace-nowrap text-neutral-900 dark:text-neutral-300">
-    <span>{{label()}} {{ isRequired() ? '*' : '' }}</span>
-  </span>
+  @if (label(); as label) {
+    <span class="autocomplete-label flex items-center gap-2 whitespace-nowrap text-neutral-900 dark:text-neutral-300">
+      <span>{{label}} {{ isRequired() ? '*' : '' }}</span>
+    </span>
+  }
 
   <div class="flex flex-wrap gap-1 pt-3 pb-2 items-center w-full h-full selected-options"
     [hookChange]="autocompleteValue.currentValue()"

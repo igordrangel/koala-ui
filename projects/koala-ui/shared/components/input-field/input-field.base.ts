@@ -21,6 +21,7 @@ export abstract class InputFieldBase {
 
   control = input.required<FormControl>();
   label = input<string>('');
+  placeholder = input<string>('');
   disabled = input(false, { transform: booleanAttribute });
 
   constructor() {
