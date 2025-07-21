@@ -8,5 +8,12 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "keywords": [
+    "koalarx",
+    "ui",
+    "angular",
+    "components",
+    "library"
+  ]
 }
