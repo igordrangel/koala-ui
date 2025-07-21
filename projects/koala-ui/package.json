@@ -23,6 +23,8 @@
     "ui",
     "angular",
     "components",
-    "library"
+    "library",
+    "tailwindcss",
+    "daisyui"
   ]
 }
