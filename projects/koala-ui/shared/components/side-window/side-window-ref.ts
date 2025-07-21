@@ -40,6 +40,6 @@ export class SideWindowRef {
       if (afterCloseTrigger) {
         this.afterCloseTrigger(afterCloseTrigger);
       }
-    }, 100);
+    }, 50);
   }
 }
