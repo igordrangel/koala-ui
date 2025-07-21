@@ -9,6 +9,15 @@
     "tslib": "^2.3.0"
   },
   "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/igordrangel/koala-ui.git"
+  },
+  "author": "Igor D. Rangel",
+  "bugs": {
+    "url": "https://github.com/igordrangel/koala-ui/issues"
+  },
+  "homepage": "https://github.com/igordrangel/koala-ui#readme",
   "keywords": [
     "koalarx",
     "ui",

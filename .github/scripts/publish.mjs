@@ -20,18 +20,7 @@ fs.writeFileSync(
     {
       ...packageJson,
       version: currentVersion,
-      description: config.description,
-      repository: {
-        type: "git",
-        url: "git+https://github.com/igordrangel/koala-ui.git",
-      },
-      keywords: config.keywords,
-      author: "Igor D. Rangel",
       license: config.license,
-      bugs: {
-        url: "https://github.com/igordrangel/koala-ui/issues",
-      },
-      homepage: "https://github.com/igordrangel/koala-ui#readme",
       dependencies: config.dependencies,
     },
     null,
