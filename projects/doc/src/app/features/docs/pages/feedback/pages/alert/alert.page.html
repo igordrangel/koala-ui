@@ -1,5 +1,5 @@
 <div class="flex gap-15 w-full">
-  <div class="flex flex-col gap-6 py-10 w-[70%]">
+  <div class="flex flex-col gap-6 py-10 px-5 md:px-0 w-full">
     <section id="alert">
       <h1 class="text-5xl font-bold">Alert</h1>
       <small class="text-lg font-light opacity-60">A simple alert component.</small>
@@ -25,7 +25,7 @@
     </section>
   </div>
 
-  <kl-on-this-page class="min-w-3xs" [links]="[
+  <kl-on-this-page class="hidden md:block min-w-3xs" [links]="[
     { label: 'Introduction', elementId: 'alert' },
     { label: 'Preview', elementId: 'alert-sample' },
     { label: 'Code', elementId: 'alert-code' },

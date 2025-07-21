@@ -4,11 +4,12 @@
   </div>
 
   <div class="flex justify-between w-full h-full">
-    <div class="fixed top-[4rem] w-[20%] h-[calc(100%-4rem)] pt-6 pl-2 overflow-auto no-scrollbar">
+    <div class="fixed bg-base-100/99 top-[4rem] w-0 md:w-[20%] h-[calc(100%-4rem)] pt-6 pl-2 overflow-auto no-scrollbar z-100 shadow-lg transition-width duration-300"
+      [class.w-full]="menuState()">
       <ng-content select="[menu]" />
     </div>
 
-    <div class="absolute top-[4rem] left-[20%] w-[80%] max-w-[80%] h-[calc(100%-4rem)]">
+    <div class="absolute px-2 md:px-0 top-[4rem] md:left-[20%] w-full md:w-[80%] md:max-w-[80%] h-[calc(100%-4rem)]">
       <ng-content select="[content]" />
     </div>
   </div>

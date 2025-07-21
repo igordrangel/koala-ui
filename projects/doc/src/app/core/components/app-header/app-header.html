@@ -1,4 +1,11 @@
 <div class="flex items-center p-2 pl-8 gap-4">
+  <label
+    class="btn btn-ghost btn-lg justify-start p-0 w-8 active:bg-transparent active:border-0 active:shadow-none focus:border-0 focus:shadow-none h-auto! md:hidden swap swap-rotate">
+    <input type="checkbox" [checked]="menuState.isOpen()" (change)="menuState.toggle()" />
+    <i class="swap-off fill-current fa-solid fa-bars"></i>
+    <i class="swap-on fill-current fa-solid fa-xmark"></i>
+  </label>
+
   <app-logotype />
 
   <kl-horizontal-menu-container class="w-full">
@@ -6,8 +13,8 @@
   </kl-horizontal-menu-container>
 
   <div class="flex items-center justify-end w-full gap-2 pr-4">
-    <app-github-stars />
+    <app-github-stars class="w-auto" />
     <span class="relative text-neutral-300 dark:text-neutral-700 text-xl h-full top-[-0.15rem]">|</span>
-    <app-theme-switcher />
+    <app-theme-switcher class="flex w-auto" />
   </div>
 </div>

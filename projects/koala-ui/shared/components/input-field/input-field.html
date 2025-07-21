@@ -9,7 +9,9 @@
   <input
     [id]="fieldId"
     [formControl]="control()"
-    [placeholder]="placeholder()"
+    [placeholder]="label()
+      ? label() + (isRequired() ? '*' : '')
+      : placeholder()"
     [required]="isRequired()"
     [mask]="mask()"
     [type]="type()"

@@ -17,7 +17,7 @@ export function generateQuerySelector(elem: HTMLElement): string {
         .replace(/(^\s)/gm, '')
         .replace(/(\s{2,})/gm, ' ')
         .split(/\s/)
-        .filter((c) => !/[[,\]]/.test(c))
+        .filter((c) => !/[[,\],:]/.test(c))
         .join('.');
   }
 
