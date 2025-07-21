@@ -23,18 +23,12 @@ import { ThemeSwitcher } from '../theme-switcher/theme-switcher';
 })
 export class AppHeader {
   private readonly router = inject(Router);
-  private firstLoad = true;
 
   menuState = inject(MenuState);
 
   constructor() {
     this.router.events.pipe(takeUntilDestroyed()).subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        if (this.firstLoad) {
-          this.firstLoad = false;
-          return;
-        }
-
+      if (event instanceof NavigationEnd && this.menuState.isOpen()) {
         this.menuState.toggle();
       }
     });
