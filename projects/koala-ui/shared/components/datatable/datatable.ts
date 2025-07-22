@@ -13,14 +13,13 @@ import {
 import { FormsModule } from '@angular/forms';
 import { AppConfig } from '@koalarx/ui/core/config';
 import { SideWindow } from '@koalarx/ui/shared/components/side-window';
-import { Tooltip } from '@koalarx/ui/shared/directives';
 import { FilterData } from './filter/datatable-filter';
 import { Filter } from './filter/filter';
 
 @Component({
   selector: 'kl-datatable',
   templateUrl: './datatable.html',
-  imports: [FormsModule, Filter, Tooltip],
+  imports: [FormsModule, Filter],
 })
 export class Datatable {
   private readonly sideWindow = inject(SideWindow);

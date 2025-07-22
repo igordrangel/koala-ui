@@ -59,6 +59,12 @@ kl-autocomplete-field .has-value:focus .autocomplete-label:after {
   font-size: 1rem;
 }
 
+kl-datatable .input,
+kl-datatable .select,
+kl-datatable .textarea {
+  --bg-input: var(--color-base-100);
+}
+
 .input,
 .select,
 .textarea,

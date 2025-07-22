@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   booleanAttribute,
   Directive,
   effect,
@@ -12,7 +13,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { randomString } from '@koalarx/utils/KlString';
 
 @Directive()
-export abstract class InputFieldBase {
+export abstract class InputFieldBase implements AfterViewInit {
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly required = signal(false);
   protected readonly isDisabled = linkedSignal(() => this.disabled());
@@ -29,24 +30,37 @@ export abstract class InputFieldBase {
 
   constructor() {
     effect(() => this.checkIsRequired(this.control()));
+  }
 
-    setTimeout(() => {
-      const container = this.elementRef.nativeElement.parentElement;
+  private getBgColorParent(element: HTMLElement): string {
+    const containerBgColor = window.getComputedStyle(element).backgroundColor;
 
-      if (container) {
-        let containerBgColor =
-          window.getComputedStyle(container).backgroundColor;
-
-        if (!containerBgColor || containerBgColor === 'rgba(0, 0, 0, 0)') {
-          containerBgColor = 'var(--color-base-100)';
-        }
-
-        this.elementRef.nativeElement.style = `--bg-input: ${containerBgColor}`;
+    if (!containerBgColor || containerBgColor === 'rgba(0, 0, 0, 0)') {
+      if (!element.parentElement) {
+        return 'var(--color-base-100)';
       }
-    });
+
+      return this.getBgColorParent(element.parentElement!);
+    }
+
+    return containerBgColor;
   }
 
   private checkIsRequired(control: FormControl) {
     this.required.set(control.hasValidator(Validators.required));
+  }
+
+  ngAfterViewInit(): void {
+    if (
+      this.elementRef.nativeElement?.tagName.toLowerCase() !== 'kl-input-field'
+    ) {
+      const container = this.elementRef.nativeElement.parentElement;
+
+      if (container) {
+        const containerBgColor = this.getBgColorParent(container);
+
+        this.elementRef.nativeElement.style = `--bg-input: ${containerBgColor}`;
+      }
+    }
   }
 }

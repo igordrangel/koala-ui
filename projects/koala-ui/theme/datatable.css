@@ -1,0 +1,5 @@
+kl-datatable
+  .datatable-menu:has(.addicional-options-menu:empty)
+  .datatable-separator-menu {
+  display: none;
+}
