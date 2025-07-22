@@ -51,16 +51,19 @@ export abstract class InputFieldBase implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (
-      this.elementRef.nativeElement?.tagName.toLowerCase() !== 'kl-input-field'
-    ) {
-      const container = this.elementRef.nativeElement.parentElement;
+    setTimeout(() => {
+      if (
+        this.elementRef.nativeElement?.tagName.toLowerCase() !==
+        'kl-input-field'
+      ) {
+        const container = this.elementRef.nativeElement.parentElement;
 
-      if (container) {
-        const containerBgColor = this.getBgColorParent(container);
+        if (container) {
+          const containerBgColor = this.getBgColorParent(container);
 
-        this.elementRef.nativeElement.style = `--bg-input: ${containerBgColor}`;
+          this.elementRef.nativeElement.style = `--bg-input: ${containerBgColor}`;
+        }
       }
-    }
+    }, 50);
   }
 }
