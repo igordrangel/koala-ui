@@ -29,7 +29,7 @@ kl-autocomplete-field .has-value .autocomplete-label:after {
   position: absolute;
   width: 100%;
   height: 1px;
-  background-color: var(--color-base-100);
+  background-color: var(--bg-input);
   bottom: 0.5rem;
   left: 0;
 }
@@ -61,13 +61,15 @@ kl-autocomplete-field .has-value:focus .autocomplete-label:after {
 
 .input,
 .select,
-.textarea {
-  background-color: transparent;
+.textarea,
+.input span,
+.select span,
+.textarea span {
+  background-color: var(--bg-input);
 }
 
 .input:focus,
 .select:focus,
-textarea:focus,
 button:focus {
   outline: none;
   box-shadow: 0 0 0 3px var(--color-neutral-600) !important;

@@ -2,6 +2,8 @@ import {
   booleanAttribute,
   Directive,
   effect,
+  ElementRef,
+  inject,
   input,
   linkedSignal,
   signal,
@@ -11,6 +13,7 @@ import { randomString } from '@koalarx/utils/KlString';
 
 @Directive()
 export abstract class InputFieldBase {
+  private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly required = signal(false);
   protected readonly isDisabled = linkedSignal(() => this.disabled());
   protected readonly isRequired = this.required.asReadonly();
@@ -26,6 +29,21 @@ export abstract class InputFieldBase {
 
   constructor() {
     effect(() => this.checkIsRequired(this.control()));
+
+    setTimeout(() => {
+      const container = this.elementRef.nativeElement.parentElement;
+
+      if (container) {
+        let containerBgColor =
+          window.getComputedStyle(container).backgroundColor;
+
+        if (!containerBgColor || containerBgColor === 'rgba(0, 0, 0, 0)') {
+          containerBgColor = 'var(--color-base-100)';
+        }
+
+        this.elementRef.nativeElement.style = `--bg-input: ${containerBgColor}`;
+      }
+    });
   }
 
   private checkIsRequired(control: FormControl) {
