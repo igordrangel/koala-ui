@@ -1,6 +1,6 @@
 {
   "name": "koala-ui",
-  "version": "20.0.37",
+  "version": "20.0.38",
   "scripts": {
     "ng": "ng",
     "start": "ng serve doc",
