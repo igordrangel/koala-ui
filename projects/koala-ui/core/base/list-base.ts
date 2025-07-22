@@ -56,6 +56,9 @@ export abstract class ListBase<
       const result = this.resourceRef.value();
 
       if (!result) {
+        this.list.set([]);
+        this.totalItemsOnPage.set(0);
+        this.totalItems.set(0);
         return;
       }
 

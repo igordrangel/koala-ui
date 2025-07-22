@@ -59,14 +59,22 @@ kl-autocomplete-field .has-value:focus .autocomplete-label:after {
   font-size: 1rem;
 }
 
+.input,
+.select,
+.textarea {
+  background-color: transparent;
+}
+
 .input:focus,
 .select:focus,
+textarea:focus,
 button:focus {
   outline: none;
   box-shadow: 0 0 0 3px var(--color-neutral-600) !important;
 }
 
 .input:has(.ng-touched.ng-invalid),
-.select:has(.ng-touched.ng-invalid) {
+.select:has(.ng-touched.ng-invalid),
+.textarea:has(.ng-touched.ng-invalid) {
   --input-color: var(--color-error);
 }
