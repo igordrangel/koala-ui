@@ -15,9 +15,9 @@
     (loadMore)="loadMore()">
 
     <ng-container menu>
-      <select class="select select-xs" [(ngModel)]="withPagination">
-        <option [value]="true">Pagination Mode: Paginator</option>
-        <option [value]="false">Pagination Mode: Load More</option>
+      <select class="select select-xs" [(ngModel)]="paginationType">
+        <option value="paginator">Pagination Mode: Paginator</option>
+        <option value="loadMore">Pagination Mode: Load More</option>
       </select>
     </ng-container>
 

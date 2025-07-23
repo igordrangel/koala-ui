@@ -45,14 +45,14 @@
     (payload)="filterChange.emit($event)"
   />
 
-  <div class="overflow-x-auto h-full">
+  <div class="datatable-table overflow-x-auto h-full bg-base-200">
     <table class="table table-sm table-pin-rows">
       <thead>
         <tr class="text-xs overflow-hidden bg-base-200">
           <ng-content select="[head]" />
         </tr>
       </thead>
-      <tbody class="bg-base-200">
+      <tbody>
         <ng-content select="[body]" />
 
         @if (!withPaginator() && !isLoading() && totalItemsOnPage() < totalItems()) {

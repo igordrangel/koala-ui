@@ -5,6 +5,7 @@ import {
   effect,
   inject,
   input,
+  model,
   signal,
   Type,
 } from '@angular/core';
@@ -15,12 +16,15 @@ import {
 } from '@koalarx/ui/core/models';
 import { HttpBase } from './http-base';
 
+type PaginationType = 'paginator' | 'loadMore';
+
 @Directive()
 export abstract class ListBase<
   QueryType extends QueryPagination,
   TEntity = any
 > {
   private reloading = false;
+  private currentPaginationType: PaginationType = 'paginator';
   protected readonly resourceRef: HttpResourceRef<
     GetManyResult<TEntity> | undefined
   >;
@@ -32,7 +36,11 @@ export abstract class ListBase<
   protected readonly totalItems = signal(0);
   protected readonly list = signal<TEntity[]>([]);
   protected readonly sortFilter = signal<SortFilterType | null>(null);
-  protected readonly withPagination = signal<boolean>(true);
+  protected readonly paginationType = model<PaginationType>('paginator');
+  protected readonly withPagination = computed<boolean>(() => {
+    this.currentPaginationType = this.paginationType();
+    return this.currentPaginationType === 'paginator';
+  });
 
   queryParams = computed<QueryType>(
     () =>
@@ -55,7 +63,21 @@ export abstract class ListBase<
     this.resourceRef = this.resource.getManyWithResource(this.queryParams);
 
     effect(() => {
-      const withPagination = this.withPagination();
+      this.filter();
+      this.page.set(1);
+    });
+
+    effect(() => {
+      const queryParams = this.queryParams();
+
+      if (queryParams.page === 1 && !this.reloading) {
+        this.reloading = true;
+        return;
+      }
+    });
+
+    effect(() => {
+      const withPagination = this.currentPaginationType === 'paginator';
       const result = this.resourceRef.value();
 
       if (!withPagination && !this.reloading) {

@@ -42,24 +42,24 @@ export class PersonService extends HttpBase<Person, any, PersonFilterData> {
           const params = query();
           const pageIndex = params.page ? params.page - 1 : 0;
           const limit = params.limit || 30;
+          const filteredItems = new KlArray(
+            response.users.filter(
+              (user) =>
+                user.firstName
+                  .toLowerCase()
+                  .includes(params?.firstName?.toLowerCase() || '') &&
+                user.lastName
+                  .toLowerCase()
+                  .includes(params?.lastName?.toLowerCase() || '') &&
+                user.email
+                  .toLowerCase()
+                  .includes(params?.email?.toLowerCase() || '')
+            )
+          );
 
           return {
-            count: response.total,
-            items:
-              new KlArray(
-                response.users.filter(
-                  (user) =>
-                    user.firstName
-                      .toLowerCase()
-                      .includes(params?.firstName?.toLowerCase() || '') &&
-                    user.lastName
-                      .toLowerCase()
-                      .includes(params?.lastName?.toLowerCase() || '') &&
-                    user.email
-                      .toLowerCase()
-                      .includes(params?.email?.toLowerCase() || '')
-                )
-              ).split(limit)[pageIndex] || [],
+            count: filteredItems.length,
+            items: filteredItems.split(limit)[pageIndex] || [],
           } as GetManyResult<Person>;
         },
       } as Omit<HttpResourceRequestOptions<TResponse>, 'debounceTime'>
