@@ -1,5 +1,5 @@
 <div class="flex flex-col h-full">
-  <div class="datatable-menu-container pl-2 pr-4 w-full flex items-center justify-between z-10">
+  <div class="datatable-menu-container pl-2 pr-4 w-full flex items-center justify-between gap-2 z-10">
     <div class="datatable-menu flex items-center py-2 opacity-80 gap-2">
       <div class="addicional-options-menu flex items-center opacity-80">
         <ng-content select="[menu]" />
@@ -8,11 +8,22 @@
       <span class="datatable-separator-menu relative top-[-0.10rem] opacity-20">|</span>
 
       @if (componentFilter()) {
-        <button class="btn btn-neutral btn-xs text-sm font-light"
-          (click)="openFilter()">
-          <i class="fa-solid fa-filter text-xs"></i>
-          {{translations.btnFilterLabel}}
-        </button>
+        @if (hasFilter()) {
+          <kl-filter
+            [filter]="filter()"
+            (addFilter)="openFilter($event)"
+            (payload)="filterChange.emit($event)"
+            (clearFilter)="filter.set([])"
+          />
+
+          <span class="relative top-[-0.10rem] opacity-20">|</span>
+        } @else {
+          <button class="btn btn-neutral btn-xs text-sm font-light"
+            (click)="openFilter()">
+            <i class="fa-solid fa-filter text-xs"></i>
+            {{translations.btnFilterLabel}}
+          </button>
+        }
       }
 
       <button class="btn btn-outline border-neutral-300 hover:border-neutral-500 dark:border-neutral-700 btn-xs text-sm font-light"
@@ -25,7 +36,7 @@
     @if (!withPaginator()) {
       <div class="flex items-center justify-end gap-3 text-sm">
         <span class="flex items-center justify-end gap-1 opacity-60">
-          <span>{{translations.labelItemsPerPage}}:</span>
+          <span class="whitespace-nowrap">{{translations.labelItemsPerPage}}:</span>
 
           <select class="select select-md p-0 pl-2 pr-8 h-[1.5rem] w-auto" [(ngModel)]="pageSize">
             @for (item of pageSizes; track $index) {
@@ -34,16 +45,10 @@
           </select>
         </span>
         <span class="opacity-60">|</span>
-        <span class="opacity-60">{{totalItemsOnPage()}} de {{totalItems()}}</span>
+        <span class="opacity-60 whitespace-nowrap">{{totalItemsOnPage()}} de {{totalItems()}}</span>
       </div>
     }
   </div>
-
-  <kl-filter
-    [filter]="filter()"
-    (addFilter)="openFilter($event)"
-    (payload)="filterChange.emit($event)"
-  />
 
   <div class="datatable-table overflow-x-auto h-full bg-base-200">
     <table class="table table-sm table-pin-rows">

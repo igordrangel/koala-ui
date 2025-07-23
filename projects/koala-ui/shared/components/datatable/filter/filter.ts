@@ -16,10 +16,16 @@ export class Filter {
   filter = input<FilterData[]>([]);
   payload = output<Record<string, any>>();
   addFilter = output<FilterData[]>();
+  clearFilter = output<void>();
 
   constructor() {
     effect(() => this.datatableFilter.setFilters(this.filter()));
     effect(() => this.payload.emit(this.datatableFilter.payload()));
+    effect(() => {
+      if (this.datatableFilter.clearFilter()) {
+        this.clearFilter.emit();
+      }
+    });
   }
 
   add() {

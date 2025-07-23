@@ -10,6 +10,7 @@ export interface FilterData {
 export class DatatableFilter {
   private readonly _payload = signal<Record<string, any>>({});
   private readonly _filters = signal<FilterData[]>([]);
+  private readonly _clearFilter = signal<boolean>(false);
 
   constructor() {
     effect(() => {
@@ -34,6 +35,10 @@ export class DatatableFilter {
     return this._filters.asReadonly();
   }
 
+  get clearFilter() {
+    return this._clearFilter.asReadonly();
+  }
+
   setFilters(filters: FilterData[]) {
     this._filters.set(filters);
   }
@@ -47,5 +52,8 @@ export class DatatableFilter {
   clearFilters() {
     this._filters.set([]);
     this._payload.set({});
+
+    this._clearFilter.set(true);
+    setTimeout(() => this._clearFilter.set(false));
   }
 }

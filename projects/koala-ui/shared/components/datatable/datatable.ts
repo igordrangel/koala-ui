@@ -37,6 +37,9 @@ export class Datatable {
   componentFilter = input<Type<any>>();
   withPaginator = input(false, { transform: booleanAttribute });
   filter = signal<FilterData[]>([]);
+  hasFilter = computed(() => {
+    return this.filter().length > 0;
+  });
   pageSize = model<number>(0);
   pageSizes = [10, 20, 30, 50, 100];
 
