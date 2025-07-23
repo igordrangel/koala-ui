@@ -29,6 +29,7 @@ export interface Translation {
     addFilterTooltip: string;
     reloadListTooltip: string;
     labelItemsPerPage: string;
+    paginatorPagesFeedback: (currentPage: number, lastPage: number) => string;
   };
   feedbackRequestInterceptor: {
     '400': string;

@@ -43,43 +43,21 @@ export class Datatable {
     return Array.from({ length: this.colspan() }, (_, i) => i);
   });
 
-  paginator = computed(() => {
+  lastPage = computed(() => {
     const isLoading = this.isLoading();
-    const paginator: number[] = [];
 
     if (!isLoading) {
-      const firstPage = 1;
-      const previousPage = this.currentPage() - 1;
-      const currentPage = this.currentPage();
-      const nextPage = this.currentPage() + 1;
-      const lastPage = Math.ceil(this.totalItems() / this.currentPageSize());
-
-      if (firstPage < currentPage) {
-        paginator.push(firstPage);
-      }
-
-      if (previousPage > firstPage) {
-        paginator.push(previousPage);
-      }
-
-      paginator.push(currentPage);
-
-      if (nextPage < lastPage) {
-        paginator.push(nextPage);
-      }
-
-      if (lastPage > currentPage) {
-        paginator.push(lastPage);
-      }
+      return Math.ceil(this.totalItems() / this.currentPageSize());
     }
 
-    return paginator;
+    return 1;
   });
 
   pageChange = output<number>();
   pageSizeChange = output<number>();
   filterChange = output<Record<string, any>>();
   reloadList = output<void>();
+  loadMore = output<void>();
 
   constructor() {
     effect(() => this.pageSize.set(this.currentPageSize()));

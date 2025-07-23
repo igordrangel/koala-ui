@@ -1,12 +1,12 @@
 ```typescript
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ListBase } from '@koalarx/ui/core/base';
 import {
   Datatable,
   SortedItem,
   SortHeaderColumn,
 } from '@koalarx/ui/shared/components/datatable';
-import { Button, Tooltip } from '@koalarx/ui/shared/directives';
 import { PersonFilter } from './person-filter';
 import { PersonService } from './person.service';
 import { Person, PersonFilterData } from './person.types';
@@ -19,8 +19,7 @@ import { Person, PersonFilterData } from './person.types';
     Datatable,
     SortHeaderColumn,
     SortedItem,
-    Button,
-    Tooltip,
+    FormsModule,
   ],
 })
 export class DatatableSample extends ListBase<PersonFilterData, Person> {

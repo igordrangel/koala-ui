@@ -1,21 +1,21 @@
 <div class="flex flex-col h-full">
   <div class="pr-8 pl-1 pt-0 pb-0 border-b border-neutral-200 dark:border-neutral-700 w-full flex items-center justify-between z-10">
-    <div class="datatable-menu flex items-center p-2 opacity-80">
+    <div class="datatable-menu flex items-center p-2 opacity-80 gap-2">
       <div class="addicional-options-menu flex items-center opacity-80">
         <ng-content select="[menu]" />
       </div>
 
-      <span class="datatable-separator-menu relative top-[-0.10rem] pl-3 pr-2 opacity-60">|</span>
+      <span class="datatable-separator-menu relative top-[-0.10rem] opacity-20">|</span>
 
       @if (componentFilter()) {
-        <button class="btn btn-ghost btn-xs text-sm font-light"
+        <button class="btn btn-neutral btn-xs text-sm font-light"
           (click)="openFilter()">
           <i class="fa-solid fa-filter text-xs"></i>
           {{translations.btnFilterLabel}}
         </button>
       }
 
-      <button class="btn btn-ghost btn-xs text-sm font-light"
+      <button class="btn btn-outline border-neutral-300 hover:border-neutral-500 dark:border-neutral-700 btn-xs text-sm font-light"
         (click)="reloadList.emit()">
         <i class="fa-solid fa-rotate-right text-xs"></i>
         {{translations.reloadListTooltip}}
@@ -45,14 +45,26 @@
     (payload)="filterChange.emit($event)"
   />
 
-  <div class="overflow-x-auto h-full">
+  <div class="overflow-x-auto h-full bg-base-200">
     <table class="table table-sm table-pin-rows">
       <thead>
-        <tr class="text-xs">
+        <tr class="text-xs bg-base-200">
           <ng-content select="[head]" />
         </tr>
       </thead>
       <tbody>
+        <ng-content select="[body]" />
+
+        @if (!withPaginator() && !isLoading() && totalItemsOnPage() < totalItems()) {
+          <tr>
+            <td colspan="7">
+              <button class="btn btn-outline btn-accent w-full" (click)="loadMore.emit()">
+                Load More
+              </button>
+            </td>
+          </tr>
+        }
+
         @if (isLoading()) {
           @for (row of skeletonRows(); track $index) {
             <tr>
@@ -61,15 +73,13 @@
               }
             </tr>
           }
-        } @else {
-          <ng-content select="[body]" />
         }
       </tbody>
     </table>
   </div>
 
   @if (withPaginator()) {
-    <div class="px-4 py-2 border-t border-neutral-200 dark:border-neutral-700 w-full flex items-center justify-between">
+    <div class="px-4 py-2 bg-base-200 border-t border-neutral-200 dark:border-neutral-700 w-full flex items-center justify-between">
       <div class="flex items-center justify-end gap-3 text-xs">
         <span class="flex items-center justify-end gap-1 opacity-60">
           <span>{{translations.labelItemsPerPage}}:</span>
@@ -84,26 +94,34 @@
         <span class="opacity-60">{{totalItemsOnPage()}} de {{totalItems()}}</span>
       </div>
 
-      <div class="join flex items-center">
-        <button class="join-item btn btn-sm"
-          [disabled]="paginator()[0] === currentPage()"
-          (click)="pageChange.emit(currentPage() - 1)">
-          «
-        </button>
+      <div class="flex items-center gap-8">
+        <span class="text-xs opacity-60">{{translations.paginatorPagesFeedback(currentPage(), lastPage())}}</span>
 
-        @for (page of paginator(); track $index) {
+        <div class="join flex items-center">
           <button class="join-item btn btn-sm"
-            [class.btn-disabled]="page === currentPage()"
-            (click)="pageChange.emit(page)">
-            {{page}}
+            [disabled]="currentPage() === 1"
+            (click)="pageChange.emit(1)">
+            <i class="fa-solid fa-angles-left text-[0.6rem]"></i>
           </button>
-        }
 
-        <button class="join-item btn btn-sm"
-          [disabled]="paginator()[paginator().length - 1] === currentPage()"
-          (click)="pageChange.emit(currentPage() + 1)">
-          »
-        </button>
+          <button class="join-item btn btn-sm"
+            [disabled]="currentPage() === 1"
+            (click)="pageChange.emit(currentPage() - 1)">
+            <i class="fa-solid fa-chevron-left text-[0.6rem]"></i>
+          </button>
+
+          <button class="join-item btn btn-sm"
+            [disabled]="currentPage() === lastPage()"
+            (click)="pageChange.emit(currentPage() + 1)">
+            <i class="fa-solid fa-angle-right text-[0.6rem]"></i>
+          </button>
+
+          <button class="join-item btn btn-sm"
+            [disabled]="currentPage() === lastPage()"
+            (click)="pageChange.emit(lastPage())">
+            <i class="fa-solid fa-angles-right text-[0.6rem]"></i>
+          </button>
+        </div>
       </div>
     </div>
   }

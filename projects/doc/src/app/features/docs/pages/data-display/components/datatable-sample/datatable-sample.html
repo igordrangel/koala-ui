@@ -7,22 +7,18 @@
     [isLoading]="resourceRef.isLoading()"
     [colspan]="7"
     [componentFilter]="componentFilter"
-    withPaginator="center"
+    [withPaginator]="withPagination()"
     (pageChange)="page.set($event)"
     (pageSizeChange)="limitPage.set($event)"
     (filterChange)="filter.set($event)"
-    (reloadList)="reloadList()">
+    (reloadList)="reloadList()"
+    (loadMore)="loadMore()">
 
     <ng-container menu>
-      <button klButton
-        class="text-sm"
-        size="extraSmall"
-        color="ghost"
-        circle
-        tooltip="Export List"
-        tooltipPosition="right">
-        <i class="fa-solid fa-download"></i>
-      </button>
+      <select class="select select-xs" [(ngModel)]="withPagination">
+        <option [value]="true">Pagination Mode: Paginator</option>
+        <option [value]="false">Pagination Mode: Load More</option>
+      </select>
     </ng-container>
 
     <ng-container head>
@@ -76,7 +72,9 @@
           <td>{{ user.address.country }}</td>
         </tr>
       } @empty {
-        <tr><td colspan="7" class="text-center">No data found</td></tr>
+        @if (!resourceRef.isLoading()) {
+          <tr><td colspan="7" class="text-center">No data found</td></tr>
+        }
       }
     </ng-container>
   </kl-datatable>

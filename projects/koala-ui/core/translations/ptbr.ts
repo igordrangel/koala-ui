@@ -33,6 +33,8 @@ export const ptBr: Translation = {
     addFilterTooltip: 'Adicionar filtro',
     reloadListTooltip: 'Recarregar dados',
     labelItemsPerPage: 'Limite de itens por carregamento',
+    paginatorPagesFeedback: (currentPage: number, lastPage: number) =>
+      `Página ${currentPage} de ${lastPage}`,
   },
   feedbackRequestInterceptor: {
     '400': 'Ocorreu um erro relacionado aos dados enviados',

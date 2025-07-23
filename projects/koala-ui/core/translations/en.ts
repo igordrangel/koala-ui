@@ -33,6 +33,8 @@ export const en: Translation = {
     addFilterTooltip: 'Add filter',
     reloadListTooltip: 'Reload data',
     labelItemsPerPage: 'Items per page limit',
+    paginatorPagesFeedback: (currentPage: number, lastPage: number) =>
+      `Page ${currentPage} of ${lastPage}`,
   },
   feedbackRequestInterceptor: {
     '400': 'An error occurred related to the submitted data',

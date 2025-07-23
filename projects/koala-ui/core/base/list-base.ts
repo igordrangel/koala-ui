@@ -20,6 +20,7 @@ export abstract class ListBase<
   QueryType extends QueryPagination,
   TEntity = any
 > {
+  private reloading = false;
   protected readonly resourceRef: HttpResourceRef<
     GetManyResult<TEntity> | undefined
   >;
@@ -31,6 +32,7 @@ export abstract class ListBase<
   protected readonly totalItems = signal(0);
   protected readonly list = signal<TEntity[]>([]);
   protected readonly sortFilter = signal<SortFilterType | null>(null);
+  protected readonly withPagination = signal<boolean>(true);
 
   queryParams = computed<QueryType>(
     () =>
@@ -53,18 +55,33 @@ export abstract class ListBase<
     this.resourceRef = this.resource.getManyWithResource(this.queryParams);
 
     effect(() => {
+      const withPagination = this.withPagination();
       const result = this.resourceRef.value();
+
+      if (!withPagination && !this.reloading) {
+        if (result) {
+          this.list.update((current) => [...current, ...result.items]);
+          this.totalItemsOnPage.update(
+            (current) => current + result.items.length
+          );
+          this.totalItems.set(result.count);
+        }
+        this.reloading = false;
+        return;
+      }
 
       if (!result) {
         this.list.set([]);
         this.totalItemsOnPage.set(0);
         this.totalItems.set(0);
+        this.reloading = false;
         return;
       }
 
       this.list.set(result.items);
       this.totalItemsOnPage.set(result.items.length);
       this.totalItems.set(result.count);
+      this.reloading = false;
     });
 
     effect(() => {
@@ -79,6 +96,15 @@ export abstract class ListBase<
   }
 
   protected reloadList() {
+    this.reloading = true;
+    this.list.set([]);
+    this.totalItemsOnPage.set(0);
+    this.totalItems.set(0);
+    this.page.set(1);
     this.resourceRef.reload();
+  }
+
+  protected loadMore() {
+    this.page.update((current) => current + 1);
   }
 }
