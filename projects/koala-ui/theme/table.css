@@ -27,6 +27,7 @@ kl-datatable td.sorted {
 
 kl-datatable
   .datatable-menu:has(.addicional-options-menu:empty)
-  .datatable-separator-menu {
+  .datatable-separator-menu,
+kl-datatable .datatable-menu .addicional-options-menu:empty {
   display: none;
 }

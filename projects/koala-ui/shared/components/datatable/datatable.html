@@ -1,6 +1,6 @@
 <div class="flex flex-col h-full">
-  <div class="pr-8 pl-1 pt-0 pb-0 border-b border-neutral-200 dark:border-neutral-700 w-full flex items-center justify-between z-10">
-    <div class="datatable-menu flex items-center p-2 opacity-80 gap-2">
+  <div class="datatable-menu-container pl-2 pr-4 w-full flex items-center justify-between z-10">
+    <div class="datatable-menu flex items-center py-2 opacity-80 gap-2">
       <div class="addicional-options-menu flex items-center opacity-80">
         <ng-content select="[menu]" />
       </div>
@@ -45,14 +45,14 @@
     (payload)="filterChange.emit($event)"
   />
 
-  <div class="overflow-x-auto h-full bg-base-200">
+  <div class="overflow-x-auto h-full">
     <table class="table table-sm table-pin-rows">
       <thead>
-        <tr class="text-xs bg-base-200">
+        <tr class="text-xs overflow-hidden bg-base-200">
           <ng-content select="[head]" />
         </tr>
       </thead>
-      <tbody>
+      <tbody class="bg-base-200">
         <ng-content select="[body]" />
 
         @if (!withPaginator() && !isLoading() && totalItemsOnPage() < totalItems()) {
