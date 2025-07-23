@@ -33,6 +33,7 @@ export const ptBr: Translation = {
     addFilterTooltip: 'Adicionar filtro',
     reloadListTooltip: 'Recarregar dados',
     labelItemsPerPage: 'Limite de itens por carregamento',
+    loadMoreBtnLabel: 'Carregar mais',
     paginatorPagesFeedback: (currentPage: number, lastPage: number) =>
       `Página ${currentPage} de ${lastPage}`,
   },

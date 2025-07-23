@@ -13,13 +13,14 @@ import {
 import { FormsModule } from '@angular/forms';
 import { AppConfig } from '@koalarx/ui/core/config';
 import { SideWindow } from '@koalarx/ui/shared/components/side-window';
+import { Button, ButtonColor } from '@koalarx/ui/shared/directives';
 import { FilterData } from './filter/datatable-filter';
 import { Filter } from './filter/filter';
 
 @Component({
   selector: 'kl-datatable',
   templateUrl: './datatable.html',
-  imports: [FormsModule, Filter],
+  imports: [FormsModule, Filter, Button],
 })
 export class Datatable {
   private readonly sideWindow = inject(SideWindow);
@@ -32,6 +33,7 @@ export class Datatable {
   currentPageSize = input.required<number>();
   isLoading = input.required();
   colspan = input.required<number>();
+  loadMoreBtnColor = input<ButtonColor>('accent');
   componentFilter = input<Type<any>>();
   withPaginator = input(false, { transform: booleanAttribute });
   filter = signal<FilterData[]>([]);

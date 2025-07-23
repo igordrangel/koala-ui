@@ -58,8 +58,13 @@
         @if (!withPaginator() && !isLoading() && totalItemsOnPage() < totalItems()) {
           <tr>
             <td colspan="7">
-              <button class="btn btn-outline btn-accent w-full" (click)="loadMore.emit()">
-                Load More
+              <button
+                klButton
+                outline
+                [color]="loadMoreBtnColor()"
+                class="w-full"
+                (click)="loadMore.emit()">
+                {{translations.loadMoreBtnLabel}}
               </button>
             </td>
           </tr>

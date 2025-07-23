@@ -33,6 +33,7 @@ export const en: Translation = {
     addFilterTooltip: 'Add filter',
     reloadListTooltip: 'Reload data',
     labelItemsPerPage: 'Items per page limit',
+    loadMoreBtnLabel: 'Load more',
     paginatorPagesFeedback: (currentPage: number, lastPage: number) =>
       `Page ${currentPage} of ${lastPage}`,
   },
