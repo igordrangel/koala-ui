@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://koalaui.igordrangel.com.br/sitemap.xml
+Sitemap: https://koalaui.igordrangel.com.br/google/sitemap.xml
