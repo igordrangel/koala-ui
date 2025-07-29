@@ -4,6 +4,7 @@ export const en: Translation = {
   confirm: {
     btnLabelYes: 'Yes',
     btnLabelNo: 'No',
+    askAreYouSureMessage: 'Are you sure you want to continue?',
   },
   codeViewer: {
     copyToClipboard: 'Copy to clipboard',
@@ -47,5 +48,8 @@ export const en: Translation = {
     '500': 'Please contact our support via WhatsApp.',
     '0': 'We identified an instability in communication with our server, this may occur due to rapid internet drops, slow connection, or server overload, please try again.',
     unknowError: 'An unknown error occurred, please try again.',
+  },
+  jwtAuthorizationService: {
+    questionLogoutMessage: 'You are about to <b>log out of the system</b>.',
   },
 };

@@ -1,16 +1,22 @@
 import {
   HTTP_INTERCEPTORS,
   HttpClient,
+  HttpInterceptor,
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { Provider } from '@angular/core';
 import { AppConfig } from '@koalarx/ui/core/config';
 import { HttpClientErrorsMiddleware } from '@koalarx/ui/core/middlewares';
+import { AuthConfig } from '@koalarx/ui/core/models/auth-config';
+import {
+  getTranslationByLanguage,
+  KoalaLanguage,
+} from '@koalarx/ui/core/translations';
 import { MARKED_OPTIONS, provideMarkdown } from 'ngx-markdown';
 import { NgxMaskConfig, provideEnvironmentNgxMask } from 'ngx-mask';
+import { AuthorizationInterceptor } from './interceptors/authorization-interceptor';
 import { FeedbackRequestInterceptor } from './interceptors/feedback-request-interceptor';
-import { getTranslationByLanguage, KoalaLanguage } from './translations';
 
 const maskOptions: Partial<NgxMaskConfig> = {
   validation: false,
@@ -21,6 +27,8 @@ interface KoalaSettings {
   hostApi?: string;
   language?: KoalaLanguage;
   httpClientErrorsMiddleware?: HttpClientErrorsMiddleware;
+  authConfig: AuthConfig;
+  authorizationInterceptor?: HttpInterceptor;
 }
 
 export function provideKoala(config?: KoalaSettings): Provider {
@@ -30,8 +38,9 @@ export function provideKoala(config?: KoalaSettings): Provider {
   appConfig.translation = getTranslationByLanguage(config?.language ?? 'en');
   appConfig.hostApi = config?.hostApi;
   appConfig.httpClientErrorsMiddleware = config?.httpClientErrorsMiddleware;
+  appConfig.authConfig = config?.authConfig;
 
-  return [
+  const providers: Provider = [
     provideEnvironmentNgxMask(maskOptions),
     provideHttpClient(withInterceptorsFromDi()),
     provideMarkdown({
@@ -55,4 +64,14 @@ export function provideKoala(config?: KoalaSettings): Provider {
       useValue: appConfig,
     },
   ];
+
+  if (config?.authConfig) {
+    providers.push({
+      provide: HTTP_INTERCEPTORS,
+      useClass: config?.authorizationInterceptor ?? AuthorizationInterceptor,
+      multi: true,
+    });
+  }
+
+  return providers;
 }

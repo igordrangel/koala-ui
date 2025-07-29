@@ -1,0 +1,45 @@
+<div class="flex gap-15 w-full">
+  <div class="flex flex-col gap-6 py-10 px-5 lg:px-0 w-3/4">
+    <section id="configuration">
+      <h1 class="text-5xl font-bold">Auth Configuration</h1>
+      <small class="text-lg font-light opacity-60">A complete auth flow using JWT authentication.</small>
+
+      <p class="mt-6 text-justify">
+        Koala provides a flexible JWT-based authentication configuration, allowing you to implement a complete flow for login, token renewal, and logout.
+        The configuration is done in the <span class="kbd">app.config.ts</span> file, where you define the storage keys for access and refresh tokens, as well as the login and home routes.
+        This makes it easy to adapt authentication to your application's needs.
+      </p>
+
+      <p class="mt-6 text-justify">
+        The <span class="kbd">app.config.ts</span> file contains the necessary configuration for the authentication flow, including the endpoints for login, token refresh, and user information retrieval.
+      </p>
+
+      <kl-code-viewer
+        name="app.config.ts"
+        language="typescript"
+        src="markdown/auth/configuration/app.config.ts.md"
+        lineNumbers
+        lineHighlight="16-35"
+      />
+
+      <p id="authentication-interceptor" class="mt-6 text-justify">
+        Koala uses a dedicated interceptor to manage the authentication flow, ensuring that all requests are sent with the correct tokens and that automatic token renewal occurs whenever necessary.
+        The access token is added to the request headers as a Bearer Token under the <span class="kbd">Authorization</span> key.
+        If you need to adapt this behavior, you can create a custom interceptor and configure it in the Koala provider, allowing full flexibility in implementing authentication.
+      </p>
+
+      <kl-code-viewer
+        name="app.config.ts"
+        language="typescript"
+        src="markdown/auth/configuration/custom-interceptor-app.config.ts.md"
+        lineNumbers
+        lineHighlight="9,37"
+      />
+    </section>
+  </div>
+
+  <kl-on-this-page class="hidden lg:block min-w-3xs" [links]="[
+    { label: 'Configuration', elementId: 'configuration' },
+    { label: 'Custom Interceptor', elementId: 'authentication-interceptor' },
+  ]"/>
+</div>

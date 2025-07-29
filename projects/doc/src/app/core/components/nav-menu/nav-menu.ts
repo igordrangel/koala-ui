@@ -186,5 +186,22 @@ export class NavMenu {
         },
       ]).orderBy('label'),
     },
+    {
+      module: 'Auth',
+      items: [
+        {
+          label: 'Configuration',
+          link: '/docs/auth/configuration',
+        },
+        {
+          label: 'Authentication',
+          link: '/docs/auth/authentication',
+        },
+        {
+          label: 'Authorization',
+          link: '/docs/auth/authorization',
+        },
+      ],
+    },
   ];
 }

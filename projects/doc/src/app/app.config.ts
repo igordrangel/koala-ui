@@ -1,8 +1,4 @@
 import {
-  provideHttpClient,
-  withInterceptorsFromDi,
-} from '@angular/common/http';
-import {
   ApplicationConfig,
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
@@ -16,7 +12,25 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideRouter(routes, withHashLocation()),
-    provideHttpClient(withInterceptorsFromDi()),
-    provideKoala(),
+    provideKoala({
+      authConfig: {
+        storageTokenKey: '@koalarx_ui:access_token',
+        storageRefreshTokenKey: '@koalarx_ui:refresh_token',
+        refreshToken: {
+          url: 'https://dummyjson.com/auth/refresh',
+          data: {
+            tokenKeyName: 'accessToken',
+            refreshTokenKeyName: 'refreshToken',
+          },
+          response: {
+            accessTokenKeyName: 'accessToken',
+            refreshTokenKeyName: 'refreshToken',
+          },
+        },
+        userInfo: {
+          url: 'https://dummyjson.com/auth/me',
+        },
+      },
+    }),
   ],
 };

@@ -13,7 +13,7 @@ export class ConfirmSample {
 
   startQuestion() {
     this.confirm.open({
-      message: 'Are you sure you want to proceed?',
+      message: 'This is a confirmation dialog.',
       yesCallback: () => alert('Confirmed!'),
       noCallback: () => alert('Cancelled!'),
     });

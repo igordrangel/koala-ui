@@ -4,6 +4,7 @@ export const ptBr: Translation = {
   confirm: {
     btnLabelYes: 'Sim',
     btnLabelNo: 'Não',
+    askAreYouSureMessage: 'Tem certeza de que deseja continuar?',
   },
   codeViewer: {
     copyToClipboard: 'Copiar',
@@ -47,5 +48,8 @@ export const ptBr: Translation = {
     '500': 'Entre em contato com nosso suporte pelo canal do whatsapp.',
     '0': 'Identificamos uma instabilidade na comunicação com nosso servidor, isto pode ocorrer devido a rápidas quedas de internet, conexão lenta ou sobrecarga no servidor, por favor, tente novamente.',
     unknowError: 'Ocorreu um erro desconhecido, por favor, tente novamente.',
+  },
+  jwtAuthorizationService: {
+    questionLogoutMessage: 'Você está prestes a <b>deslogar do sistema</b>.',
   },
 };

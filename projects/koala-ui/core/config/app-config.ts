@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
 import { HttpClientErrorsMiddleware } from '@koalarx/ui/core/middlewares';
+import { AuthConfig } from '@koalarx/ui/core/models/auth-config';
 import { KoalaLanguage, Translation, en } from '@koalarx/ui/core/translations';
 
-@Injectable({ providedIn: 'root' })
 export class AppConfig {
   private _hostApi: string | undefined;
   private _language: KoalaLanguage | undefined;
   private _translation: Translation | undefined;
   private _httpClientErrorsMiddleware: HttpClientErrorsMiddleware | undefined;
+  private _authConfig: AuthConfig | undefined;
 
   set hostApi(hostApi: string | undefined) {
     this._hostApi = hostApi;
@@ -41,5 +41,13 @@ export class AppConfig {
 
   get httpClientErrorsMiddleware(): HttpClientErrorsMiddleware | undefined {
     return this._httpClientErrorsMiddleware;
+  }
+
+  set authConfig(authConfig: AuthConfig | undefined) {
+    this._authConfig = authConfig;
+  }
+
+  get authConfig(): AuthConfig | undefined {
+    return this._authConfig;
   }
 }

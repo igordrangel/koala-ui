@@ -2,6 +2,7 @@ export interface Translation {
   confirm: {
     btnLabelYes: string;
     btnLabelNo: string;
+    askAreYouSureMessage: string;
   };
   codeViewer: {
     copyToClipboard: string;
@@ -42,5 +43,8 @@ export interface Translation {
     '500': string;
     '0': string;
     unknowError: string;
+  };
+  jwtAuthorizationService: {
+    questionLogoutMessage: string;
   };
 }
