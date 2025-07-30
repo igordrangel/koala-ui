@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppConfig } from '@koalarx/ui/core/config';
-import { AuthConfig } from '@koalarx/ui/core/models/auth-config';
+import { AuthConfig } from '@koalarx/ui/core/models';
 import { Confirm } from '@koalarx/ui/shared/components/confirm';
 import { jwtDecode } from 'jwt-decode';
 import { first } from 'rxjs/internal/operators/first';

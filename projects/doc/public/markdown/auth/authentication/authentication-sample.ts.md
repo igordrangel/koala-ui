@@ -10,7 +10,7 @@ import {
 import { InputPassword } from '@koalarx/ui/shared/components/input-field/input-password';
 import { InputText } from '@koalarx/ui/shared/components/input-field/input-text';
 import { Button } from '@koalarx/ui/shared/directives';
-import { Authorization } from '@koalarx/ui/shared/services/authorization';
+import { Authorization } from '@koalarx/ui/shared/services';
 import { first } from 'rxjs/internal/operators/first';
 
 interface AuthenticationResponse {

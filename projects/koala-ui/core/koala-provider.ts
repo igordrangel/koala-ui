@@ -8,7 +8,7 @@ import {
 import { Provider } from '@angular/core';
 import { AppConfig } from '@koalarx/ui/core/config';
 import { HttpClientErrorsMiddleware } from '@koalarx/ui/core/middlewares';
-import { AuthConfig } from '@koalarx/ui/core/models/auth-config';
+import { AuthConfig } from '@koalarx/ui/core/models';
 import {
   getTranslationByLanguage,
   KoalaLanguage,

@@ -1,5 +1,5 @@
 import { HttpClientErrorsMiddleware } from '@koalarx/ui/core/middlewares';
-import { AuthConfig } from '@koalarx/ui/core/models/auth-config';
+import { AuthConfig } from '@koalarx/ui/core/models';
 import { KoalaLanguage, Translation, en } from '@koalarx/ui/core/translations';
 
 export class AppConfig {

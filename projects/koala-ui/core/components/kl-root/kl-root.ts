@@ -3,7 +3,7 @@ import { DialogContainer } from '@koalarx/ui/core/components/dialog';
 import { LoaderPageContent } from '@koalarx/ui/core/components/loader-page';
 import { SideWindowContainer } from '@koalarx/ui/core/components/side-window';
 import { SnackbarContainer } from '@koalarx/ui/core/components/snackbar';
-import { Authorization } from '@koalarx/ui/shared/services/authorization';
+import { Authorization } from '@koalarx/ui/shared/services';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 
 @Component({

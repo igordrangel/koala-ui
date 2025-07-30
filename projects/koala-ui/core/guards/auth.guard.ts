@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { CanActivate, GuardResult, MaybeAsync } from '@angular/router';
-import { Authorization } from '@koalarx/ui/shared/services/authorization';
+import { Authorization } from '@koalarx/ui/shared/services';
 
 @Injectable()
 export class AuthGuard implements CanActivate {

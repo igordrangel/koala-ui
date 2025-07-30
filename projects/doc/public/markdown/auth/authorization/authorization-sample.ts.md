@@ -1,7 +1,7 @@
 ```typescript
 import { Component, inject } from '@angular/core';
 import { Button } from '@koalarx/ui/shared/directives';
-import { Authorization } from '@koalarx/ui/shared/services/authorization';
+import { Authorization } from '@koalarx/ui/shared/services';
 
 interface User {
   id: number;

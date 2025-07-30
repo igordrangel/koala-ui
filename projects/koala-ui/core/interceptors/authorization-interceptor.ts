@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { AppConfig } from '@koalarx/ui/core/config';
-import { Authorization } from '@koalarx/ui/shared/services/authorization';
+import { Authorization } from '@koalarx/ui/shared/services';
 import { Observable } from 'rxjs/internal/Observable';
 import { switchMap } from 'rxjs/internal/operators/switchMap';
 
