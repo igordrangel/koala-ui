@@ -22,7 +22,8 @@
         lineHighlight="16-35"
       />
 
-      <p id="authentication-interceptor" class="mt-6 text-justify">
+      <h3 id="custom-interceptor" class="mt-6 text-xl font-semibold">Custom Interceptor</h3>
+      <p class="mt-2 text-justify">
         Koala uses a dedicated interceptor to manage the authentication flow, ensuring that all requests are sent with the correct tokens and that automatic token renewal occurs whenever necessary.
         The access token is added to the request headers as a Bearer Token under the <span class="kbd">Authorization</span> key.
         If you need to adapt this behavior, you can create a custom interceptor and configure it in the Koala provider, allowing full flexibility in implementing authentication.
@@ -36,17 +37,26 @@
         lineHighlight="9,37"
       />
 
-      <p id="auth-guard" class="mt-6 text-justify">
+      <h3 id="auth-guard" class="mt-6 text-xl font-semibold">Auth Guard</h3>
+      <p class="mt-2 text-justify">
         To protect routes, Koala provides an authentication guard that ensures access only for authenticated users.
         This allows you to restrict sensitive areas of your application in a simple and efficient way.
         To use it, just add the <span class="kbd">AuthGuard</span> to the desired routes, importing it from <span class="kbd">&#64;koalarx/ui/core/guards</span>.
       </p>
+
+      <kl-code-viewer
+        name="routes.ts"
+        language="typescript"
+        src="markdown/auth/configuration/routes.ts.md"
+        lineNumbers
+        lineHighlight="2,11"
+      />
     </section>
   </div>
 
   <kl-on-this-page class="hidden lg:block min-w-3xs" [links]="[
     { label: 'Configuration', elementId: 'configuration' },
-    { label: 'Custom Interceptor', elementId: 'authentication-interceptor' },
+    { label: 'Custom Interceptor', elementId: 'custom-interceptor' },
     { label: 'Auth Guard', elementId: 'auth-guard' },
   ]"/>
 </div>
