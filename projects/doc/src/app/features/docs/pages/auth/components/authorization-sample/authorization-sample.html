@@ -1,0 +1,36 @@
+<app-sample-container>
+  @if (userInfo(); as user) {
+    <div class="flex flex-col items-center justify-center gap-4">
+      <div class="flex gap-4 items-center">
+        <div class="avatar">
+          <div class="ring-primary ring-offset-base-100 w-12 rounded-full ring-2 ring-offset-2">
+            <img [src]="user.image" />
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <h4>{{user.firstName}} {{user.lastName}}</h4>
+          <small>{{user.email}}</small>
+        </div>
+      </div>
+
+      <button klButton color="error"
+        class="w-full"
+        size="small"
+        (click)="logout()">
+        Logout
+      </button>
+    </div>
+  } @else {
+    <div class="flex flex-col items-center justify-center gap-4">
+      <p>You are not logged in.</p>
+      <p>Please log in to access your account.</p>
+      <button klButton color="primary"
+        class="w-full"
+        size="small"
+        routerLink="/docs/auth/authentication">
+        Go to Login
+      </button>
+    </div>
+  }
+</app-sample-container>

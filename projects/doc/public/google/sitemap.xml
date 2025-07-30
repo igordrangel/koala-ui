@@ -37,5 +37,8 @@
   <url><loc>https://koalaui.igordrangel.com.br/#/docs/data-input/select</loc></url>
   <url><loc>https://koalaui.igordrangel.com.br/#/docs/data-input/switcher</loc></url>
   <url><loc>https://koalaui.igordrangel.com.br/#/docs/data-input/textarea</loc></url>
+  <url><loc>https://koalaui.igordrangel.com.br/#/docs/auth/configuration</loc></url>
+  <url><loc>https://koalaui.igordrangel.com.br/#/docs/auth/authentication</loc></url>
+  <url><loc>https://koalaui.igordrangel.com.br/#/docs/auth/authorization</loc></url>
 
 </urlset>

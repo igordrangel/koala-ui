@@ -16,6 +16,7 @@ export const appConfig: ApplicationConfig = {
       authConfig: {
         storageTokenKey: '@koalarx_ui:access_token',
         storageRefreshTokenKey: '@koalarx_ui:refresh_token',
+        homeRoute: '/docs/auth/authorization',
         refreshToken: {
           url: 'https://dummyjson.com/auth/refresh',
           data: {

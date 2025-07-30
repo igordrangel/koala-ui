@@ -1,0 +1,35 @@
+<div class="flex gap-15 w-full">
+  <div class="flex flex-col gap-6 py-10 px-5 lg:px-0 w-3/4">
+    <section id="authorization">
+      <h1 class="text-5xl font-bold">Authorization</h1>
+      <small class="text-lg font-light opacity-60">A sample to authenticate with Authorization Koala Class.</small>
+    </section>
+
+    <section id="authorization-preview">
+      <h2 class="text-xl font-bold">Preview</h2>
+      <app-authorization-sample />
+    </section>
+
+    <section id="authorization-code">
+      <h2 class="text-xl font-bold">Code</h2>
+      <kl-code-viewer
+        name="authorization-sample.ts"
+        language="typescript"
+        src="markdown/auth/authorization/authorization-sample.ts.md"
+        lineNumbers
+        lineHighlight="3,19,21,24"
+      />
+      <kl-code-viewer
+        name="authorization-sample.html"
+        language="html"
+        src="markdown/auth/authorization/authorization-sample.html.md"
+      />
+    </section>
+  </div>
+
+  <kl-on-this-page class="hidden lg:block min-w-3xs" [links]="[
+    { label: 'Introduction', elementId: 'authorization' },
+    { label: 'Preview', elementId: 'authorization-preview' },
+    { label: 'Code', elementId: 'authorization-code' },
+  ]"/>
+</div>
