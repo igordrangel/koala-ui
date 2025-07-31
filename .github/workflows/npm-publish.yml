@@ -1,7 +1,9 @@
 name: NPM PUBLISH
 on:
   push:
-    branches: [master]
+    branches: [main]
+    paths:
+      - 'projects/koala-ui/package.json'
 jobs:
   build:
     name: "npm publish library"
