@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'projects/koala-ui/package.json'
+      - 'package.json'
 jobs:
   build:
     name: "npm publish library"
