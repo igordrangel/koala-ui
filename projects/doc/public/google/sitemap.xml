@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
   <url><loc>https://koalaui.igordrangel.com.br/#/docs/installation</loc></url>
   <url><loc>https://koalaui.igordrangel.com.br/#/docs/introduction</loc></url>
   <url><loc>https://koalaui.igordrangel.com.br/#/docs/theming</loc></url>
@@ -40,5 +39,4 @@
   <url><loc>https://koalaui.igordrangel.com.br/#/docs/auth/configuration</loc></url>
   <url><loc>https://koalaui.igordrangel.com.br/#/docs/auth/authentication</loc></url>
   <url><loc>https://koalaui.igordrangel.com.br/#/docs/auth/authorization</loc></url>
-
 </urlset>
