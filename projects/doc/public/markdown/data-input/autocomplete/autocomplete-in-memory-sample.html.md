@@ -6,6 +6,7 @@
     label="Person"
     [control]="form.controls.personId"
     [options]="options"
+    multiple
   />
 </div>
 ```
