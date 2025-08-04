@@ -66,9 +66,12 @@ export function provideKoala(config?: KoalaSettings): Provider {
   ];
 
   if (config?.authConfig) {
+    const interceptor =
+      config.authorizationInterceptor || AuthorizationInterceptor;
+
     providers.push({
       provide: HTTP_INTERCEPTORS,
-      useClass: config?.authorizationInterceptor ?? AuthorizationInterceptor,
+      useClass: interceptor,
       multi: true,
     });
   }
