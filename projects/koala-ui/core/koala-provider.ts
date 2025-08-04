@@ -5,7 +5,7 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import { Provider } from '@angular/core';
+import { Provider, Type } from '@angular/core';
 import { AppConfig } from '@koalarx/ui/core/config';
 import { HttpClientErrorsMiddleware } from '@koalarx/ui/core/middlewares';
 import { AuthConfig } from '@koalarx/ui/core/models';
@@ -28,7 +28,7 @@ interface KoalaSettings {
   language?: KoalaLanguage;
   httpClientErrorsMiddleware?: HttpClientErrorsMiddleware;
   authConfig?: AuthConfig;
-  authorizationInterceptor?: HttpInterceptor;
+  authorizationInterceptor?: Type<HttpInterceptor>;
 }
 
 export function provideKoala(config?: KoalaSettings): Provider {
