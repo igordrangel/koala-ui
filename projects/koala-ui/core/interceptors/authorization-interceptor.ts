@@ -36,8 +36,6 @@ export class AuthorizationInterceptor implements AngularHttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const clonedReq = this.setAuthorization(request);
-
     if (
       this.authorization.hasToken() &&
       this.authorization.isExpired() &&
@@ -48,6 +46,6 @@ export class AuthorizationInterceptor implements AngularHttpInterceptor {
         .pipe(switchMap(() => next.handle(this.setAuthorization(request))));
     }
 
-    return next.handle(clonedReq);
+    return next.handle(this.setAuthorization(request));
   }
 }
