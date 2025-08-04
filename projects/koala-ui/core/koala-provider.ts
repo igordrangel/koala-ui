@@ -27,7 +27,7 @@ interface KoalaSettings {
   hostApi?: string;
   language?: KoalaLanguage;
   httpClientErrorsMiddleware?: HttpClientErrorsMiddleware;
-  authConfig: AuthConfig;
+  authConfig?: AuthConfig;
   authorizationInterceptor?: HttpInterceptor;
 }
 
