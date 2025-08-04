@@ -14,12 +14,8 @@ export class Authorization<TUser = any> {
   private readonly translation =
     this.appConfig.translation.jwtAuthorizationService;
   private readonly authConfig = this.appConfig.authConfig as AuthConfig;
-  private _accessToken = signal<string | null>(
-    localStorage.getItem(this.authConfig.storageTokenKey)
-  );
-  private _refreshToken = signal<string | null>(
-    localStorage.getItem(this.authConfig.storageRefreshTokenKey)
-  );
+  private _accessToken = signal<string | null>(null);
+  private _refreshToken = signal<string | null>(null);
   private _isAuthenticated = signal<boolean>(false);
   private _userinfo = signal<TUser | null>(null);
   private readonly router = inject(Router);
@@ -97,6 +93,13 @@ export class Authorization<TUser = any> {
   }
 
   private init() {
+    this._accessToken.set(
+      localStorage.getItem(this.authConfig.storageTokenKey)
+    );
+    this._refreshToken.set(
+      localStorage.getItem(this.authConfig?.storageRefreshTokenKey)
+    );
+
     effect(() => {
       const userInfo = this._userinfo();
 
