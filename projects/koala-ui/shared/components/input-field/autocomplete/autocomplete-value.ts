@@ -100,7 +100,7 @@ export class AutocompleteValue {
   }
 
   get hasValue() {
-    return this._hasValue();
+    return this._hasValue;
   }
 
   get currentValue() {
@@ -108,11 +108,11 @@ export class AutocompleteValue {
   }
 
   get selectedOption() {
-    return this._selectedOption();
+    return this._selectedOption;
   }
 
   get selectedOptions() {
-    return this._selectedOptions();
+    return this._selectedOptions;
   }
 
   get autofill() {
