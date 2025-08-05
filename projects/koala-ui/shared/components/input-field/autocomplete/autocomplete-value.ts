@@ -1,8 +1,8 @@
 import {
+  computed,
   DestroyRef,
   inject,
   Injectable,
-  linkedSignal,
   ResourceRef,
   signal,
   Signal,
@@ -25,6 +25,7 @@ export type AutocompleteList = AutocompleteOption[];
 export interface AutocompleteDataOptionsFnParams {
   filter?: string | null;
   autofill?: any | null;
+  internalFilter?: string | null;
 }
 
 export type AutocompleteDataOptionsFn = (
@@ -49,13 +50,15 @@ export class AutocompleteValue {
   private _options?: Signal<AutocompleteList>;
   private _autofill = signal<any | null>(null);
   private _isLoading?: Signal<boolean>;
+  private _internalFilter = signal<string | null>(null);
+  private _isOnDemand?: Signal<boolean>;
   private readonly _requestOptionsParams =
     signal<AutocompleteDataOptionsFnParams>({
       filter: null,
       autofill: null,
     });
 
-  private readonly _selectedOption = linkedSignal(() => {
+  private readonly _selectedOption = computed(() => {
     const currentValue = this._currentValue();
 
     if (Array.isArray(currentValue)) {
@@ -65,7 +68,7 @@ export class AutocompleteValue {
     return currentValue;
   });
 
-  private readonly _selectedOptions = linkedSignal(() => {
+  private readonly _selectedOptions = computed(() => {
     const currentValue = this._currentValue();
 
     if (Array.isArray(currentValue)) {
@@ -75,7 +78,7 @@ export class AutocompleteValue {
     return [];
   });
 
-  private readonly _hasValue = linkedSignal(() => {
+  private readonly _hasValue = computed(() => {
     const currentValue = this._currentValue();
     const value = Array.isArray(currentValue)
       ? currentValue
@@ -97,7 +100,7 @@ export class AutocompleteValue {
   }
 
   get hasValue() {
-    return this._hasValue.asReadonly();
+    return this._hasValue();
   }
 
   get currentValue() {
@@ -105,11 +108,11 @@ export class AutocompleteValue {
   }
 
   get selectedOption() {
-    return this._selectedOption.asReadonly();
+    return this._selectedOption();
   }
 
   get selectedOptions() {
-    return this._selectedOptions.asReadonly();
+    return this._selectedOptions();
   }
 
   get autofill() {
@@ -118,6 +121,15 @@ export class AutocompleteValue {
 
   get requestOptionsParams() {
     return this._requestOptionsParams.asReadonly();
+  }
+
+  set internalFilter(value: string | null) {
+    this._internalFilter.set(value);
+    this._requestOptionsParams.update(() => ({
+      filter: this.filterControl.enabled ? null : this.filterControl.value,
+      internalFilter: this._internalFilter(),
+      autofill: null,
+    }));
   }
 
   private async selectOption(value: any) {
@@ -132,6 +144,15 @@ export class AutocompleteValue {
     const options = this._multiple
       ? this._options()?.filter((opt) => `${value}`?.includes(`${opt.value}`))
       : this._options()?.find((opt) => `${opt.value}` === `${value}`);
+
+    if (!isEmpty(value) && !options && this._isOnDemand!()) {
+      this._requestOptionsParams.update(() => ({
+        internalFilter: this._internalFilter(),
+        autofill: value,
+      }));
+
+      return this.makeAutofill();
+    }
 
     if (options) {
       this._currentValue.update(() => {
@@ -167,6 +188,7 @@ export class AutocompleteValue {
         this._autofill.set(this._control?.value);
         this._requestOptionsParams.update((params) => ({
           ...params,
+          internalFilter: this._internalFilter(),
           autofill: this._autofill(),
         }));
       }
@@ -177,12 +199,14 @@ export class AutocompleteValue {
     control: FormControl<any>,
     options: Signal<AutocompleteList>,
     isLoading: Signal<boolean>,
+    isOnDemand: Signal<boolean>,
     multiple = false
   ) {
     this._control = control;
     this._options = options;
     this._multiple = multiple;
     this._isLoading = isLoading;
+    this._isOnDemand = isOnDemand;
 
     this.filterControl.valueChanges
       .pipe(takeUntilDestroyed(this.destroyRef), debounceTime(500))
@@ -191,6 +215,7 @@ export class AutocompleteValue {
         this._filter.set(value);
         this._requestOptionsParams.update(() => ({
           filter: value,
+          internalFilter: this._internalFilter(),
           autofill: null,
         }));
       });
@@ -206,6 +231,7 @@ export class AutocompleteValue {
     this._currentValue.set(null);
     this._requestOptionsParams.update(() => ({
       filter: null,
+      internalFilter: this._internalFilter(),
       autofill: null,
     }));
   }

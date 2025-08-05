@@ -6,6 +6,7 @@ import {
   Injector,
   input,
   isSignal,
+  linkedSignal,
   OnInit,
   ResourceRef,
   runInInjectionContext,
@@ -44,15 +45,20 @@ export class AutocompleteField extends InputFieldBase implements OnInit {
   readonly autocompleteValue = inject(AutocompleteValue);
   readonly autocomplete = inject(Autocomplete);
 
-  options = input.required<AutocompleteDataOptions>();
-  multiple = input(false, { transform: booleanAttribute });
-  placeholderSearchField = input<string>();
-  disableAutoTypeConversion = input(false, { transform: booleanAttribute });
+  readonly options = input.required<AutocompleteDataOptions>();
+  readonly multiple = input(false, { transform: booleanAttribute });
+  readonly placeholderSearchField = input<string>();
+  readonly disableAutoTypeConversion = input(false, {
+    transform: booleanAttribute,
+  });
 
-  isLoading = signal<boolean>(false);
-  optionList = signal<AutocompleteList>([]);
+  readonly isLoading = signal<boolean>(false);
+  readonly optionList = signal<AutocompleteList>([]);
 
-  optionsResource = signal<OptionsResource | null>(null);
+  readonly optionsResource = signal<OptionsResource | null>(null);
+  readonly isOnDemand = linkedSignal(
+    () => this.optionsResource()?.onDemand !== undefined
+  );
 
   constructor() {
     super();
@@ -137,6 +143,7 @@ export class AutocompleteField extends InputFieldBase implements OnInit {
       this.control(),
       this.optionList,
       this.isLoading,
+      this.isOnDemand,
       this.multiple()
     );
     this.optionsResource.set(this.generateOptionsResource());
