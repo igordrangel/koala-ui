@@ -129,7 +129,7 @@ export class Autocomplete {
       autocompleteField.querySelector<HTMLButtonElement>('button');
 
     if (autocompleteFieldButton) {
-      await this.waitForButtonEnabled(autocompleteFieldButton, 5000); // 5s timeout
+      await this.waitForButtonEnabled(autocompleteFieldButton, 5000);
     }
 
     const position = this.calculatePosition(container);
