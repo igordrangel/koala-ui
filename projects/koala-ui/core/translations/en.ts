@@ -35,6 +35,7 @@ export const en: Translation = {
     reloadListTooltip: 'Reload data',
     labelItemsPerPage: 'Items per page limit',
     loadMoreBtnLabel: 'Load more',
+    errorLoadDataLabel: 'Error to load data',
     paginatorPagesFeedback: (currentPage: number, lastPage: number) =>
       `Page ${currentPage} of ${lastPage}`,
   },

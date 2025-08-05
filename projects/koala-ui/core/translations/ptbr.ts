@@ -35,6 +35,7 @@ export const ptBr: Translation = {
     reloadListTooltip: 'Recarregar dados',
     labelItemsPerPage: 'Limite de itens por carregamento',
     loadMoreBtnLabel: 'Carregar mais',
+    errorLoadDataLabel: 'Erro ao carregar os dados',
     paginatorPagesFeedback: (currentPage: number, lastPage: number) =>
       `Página ${currentPage} de ${lastPage}`,
   },

@@ -4,4 +4,5 @@ export * from './sort-column/sorted-item';
 export * from './filter/datatable-filter';
 export * from './filter/filter-factory';
 export * from './filter/filter';
+export * from './datatable-config';
 export * from './datatable';

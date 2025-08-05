@@ -1,6 +1,6 @@
 <div class="flex flex-col h-full">
   <div class="datatable-menu-container pl-2 pr-4 w-full flex items-center justify-between gap-2 z-10">
-    <div class="datatable-menu flex items-center py-2 opacity-80 gap-2">
+    <div class="datatable-menu flex items-center py-2 px-0.5 opacity-80 gap-2">
       <div class="addicional-options-menu flex items-center opacity-80">
         <ng-content select="[menu]" />
       </div>
@@ -18,7 +18,10 @@
 
           <span class="relative top-[-0.10rem] opacity-20">|</span>
         } @else {
-          <button class="btn btn-neutral btn-xs text-sm font-light"
+          <button klButton
+            size="extraSmall"
+            class="text-sm font-light"
+            [color]="filterBtnColor()"
             (click)="openFilter()">
             <i class="fa-solid fa-filter text-xs"></i>
             {{translations.btnFilterLabel}}
@@ -58,30 +61,38 @@
         </tr>
       </thead>
       <tbody>
-        <ng-content select="[body]" />
-
-        @if (!withPaginator() && !isLoading() && totalItemsOnPage() < totalItems()) {
+        @if (hasError()) {
           <tr>
-            <td colspan="7">
-              <button
-                klButton
-                outline
-                [color]="loadMoreBtnColor()"
-                class="w-full"
-                (click)="loadMore.emit()">
-                {{translations.loadMoreBtnLabel}}
-              </button>
+            <td [attr.colspan]="colspan()" class="text-center">
+              {{translations.errorLoadDataLabel}}
             </td>
           </tr>
-        }
+        } @else {
+          <ng-content select="[body]" />
 
-        @if (isLoading()) {
-          @for (row of skeletonRows(); track $index) {
+          @if (!withPaginator() && !isLoading() && totalItemsOnPage() < totalItems()) {
             <tr>
-              @for (col of skeletonCols(); track $index) {
-                <td><span class="block skeleton w-full h-4"></span></td>
-              }
+              <td [attr.colspan]="colspan()">
+                <button
+                  klButton
+                  outline
+                  [color]="loadMoreBtnColor()"
+                  class="w-full"
+                  (click)="loadMore.emit()">
+                  {{translations.loadMoreBtnLabel}}
+                </button>
+              </td>
             </tr>
+          }
+
+          @if (isLoading()) {
+            @for (row of skeletonRows(); track $index) {
+              <tr>
+                @for (col of skeletonCols(); track $index) {
+                  <td><span class="block skeleton w-full h-4"></span></td>
+                }
+              </tr>
+            }
           }
         }
       </tbody>

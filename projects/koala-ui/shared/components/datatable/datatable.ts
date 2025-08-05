@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { AppConfig } from '@koalarx/ui/core/config';
 import { SideWindow } from '@koalarx/ui/shared/components/side-window';
 import { Button, ButtonColor } from '@koalarx/ui/shared/directives';
+import { DatatableConfig } from './datatable-config';
 import { FilterData } from './filter/datatable-filter';
 import { Filter } from './filter/filter';
 
@@ -27,15 +28,20 @@ export class Datatable {
 
   readonly translations = inject(AppConfig).translation.datatable;
 
-  currentPage = input.required<number>();
-  totalItems = input.required<number>();
-  totalItemsOnPage = input.required<number>();
-  currentPageSize = input.required<number>();
-  isLoading = input.required();
+  config = input.required<DatatableConfig>();
   colspan = input.required<number>();
   loadMoreBtnColor = input<ButtonColor>('accent');
+  filterBtnColor = input<ButtonColor>('primary');
   componentFilter = input<Type<any>>();
   withPaginator = input(false, { transform: booleanAttribute });
+
+  currentPage = computed(() => this.config().currentPage);
+  totalItems = computed(() => this.config().totalItems);
+  totalItemsOnPage = computed(() => this.config().totalItemsOnPage);
+  currentPageSize = computed(() => this.config().currentPageSize);
+  isLoading = computed(() => this.config().isLoading);
+  hasError = computed(() => this.config().hasError);
+
   filter = signal<FilterData[]>([]);
   hasFilter = computed(() => {
     return this.filter().length > 0;

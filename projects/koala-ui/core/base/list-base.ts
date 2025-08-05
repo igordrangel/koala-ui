@@ -5,6 +5,7 @@ import {
   effect,
   inject,
   input,
+  linkedSignal,
   model,
   signal,
   Type,
@@ -14,6 +15,7 @@ import {
   QueryPagination,
   SortFilterType,
 } from '@koalarx/ui/core/models';
+import { DatatableConfig } from '@koalarx/ui/shared/components/datatable';
 import { HttpBase } from './http-base';
 
 type PaginationType = 'paginator' | 'loadMore';
@@ -41,6 +43,17 @@ export abstract class ListBase<
     this.currentPaginationType = this.paginationType();
     return this.currentPaginationType === 'paginator';
   });
+  protected readonly datatableConfig = linkedSignal(
+    () =>
+      ({
+        currentPage: this.page(),
+        totalItems: this.totalItems(),
+        totalItemsOnPage: this.totalItemsOnPage(),
+        currentPageSize: this.limitPage(),
+        isLoading: this.resourceRef.isLoading(),
+        hasError: !!this.resourceRef.error(),
+      } as DatatableConfig)
+  );
 
   queryParams = computed<QueryType>(
     () =>
