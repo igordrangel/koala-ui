@@ -3,11 +3,7 @@
   class="flex items-center justify-center w-full h-[26rem] border border-neutral-700 rounded-2xl mt-4"
 >
   <kl-datatable class="w-full h-full"
-    [currentPage]="page()"
-    [totalItems]="totalItems()"
-    [totalItemsOnPage]="totalItemsOnPage()"
-    [currentPageSize]="limitPage()"
-    [isLoading]="resourceRef.isLoading()"
+    [config]="datatableConfig()"
     [colspan]="7"
     [componentFilter]="componentFilter"
     [withPaginator]="withPagination()"

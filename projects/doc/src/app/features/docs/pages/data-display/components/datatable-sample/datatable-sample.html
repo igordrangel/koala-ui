@@ -1,10 +1,6 @@
 <app-sample-container>
   <kl-datatable class="w-full h-full"
-    [currentPage]="page()"
-    [totalItems]="totalItems()"
-    [totalItemsOnPage]="totalItemsOnPage()"
-    [currentPageSize]="limitPage()"
-    [isLoading]="resourceRef.isLoading()"
+    [config]="datatableConfig()"
     [colspan]="7"
     [componentFilter]="componentFilter"
     [withPaginator]="withPagination()"

@@ -31,6 +31,7 @@ export interface Translation {
     reloadListTooltip: string;
     labelItemsPerPage: string;
     loadMoreBtnLabel: string;
+    errorLoadDataLabel: string;
     paginatorPagesFeedback: (currentPage: number, lastPage: number) => string;
   };
   feedbackRequestInterceptor: {
