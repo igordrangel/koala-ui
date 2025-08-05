@@ -81,7 +81,7 @@ export class Autocomplete {
       const percentFillOnScreen = (height * 100) / screenHeight;
 
       if (percentFillOnScreen <= 20) {
-        const optionsHeight = optionsContainer?.clientHeight || 0;
+        const optionsHeight = optionsContainer?.scrollHeight || 0;
         const currentHeight = optionsHeight + filterContainerHeight;
 
         if (optionsHeight > 0 && currentHeight <= maxHeight) {
