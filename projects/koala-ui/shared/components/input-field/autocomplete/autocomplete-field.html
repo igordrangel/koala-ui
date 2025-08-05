@@ -14,7 +14,7 @@
   }
 
   <div class="flex flex-wrap gap-1 pt-3 pb-2 items-center w-full h-full selected-options"
-    [hookChange]="autocompleteValue.currentValue()"
+    [hookChange]="!isLoading() && (autocompleteValue.filter() || autocompleteValue.currentValue())"
     [class.hidden]="!autocompleteValue.hasValue()">
     @if (multiple()) {
       @for (item of autocompleteValue.selectedOptions(); track $index) {
