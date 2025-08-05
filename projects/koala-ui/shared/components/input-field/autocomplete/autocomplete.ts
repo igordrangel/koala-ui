@@ -115,9 +115,7 @@ export class Autocomplete {
       autocompleteField.querySelector<HTMLButtonElement>('button');
 
     if (autocompleteFieldButton) {
-      while (autocompleteFieldButton.disabled) {
-        await delay(50);
-      }
+      await this.waitForButtonEnabled(autocompleteFieldButton, 5000); // 5s timeout
     }
 
     const position = this.calculatePosition(container);
