@@ -59,6 +59,9 @@ export class Autocomplete {
       .nativeElement as HTMLElement;
     const currentTop = window.scrollY;
     const position = autocompleteField.getBoundingClientRect();
+    const optionsContainer = container.querySelector<HTMLDivElement>(
+      '.kl-autocomplete-options-container'
+    );
 
     if (position) {
       const screenHeight = document.body.clientHeight;
@@ -73,10 +76,17 @@ export class Autocomplete {
       const percentFillOnScreen = (height * 100) / screenHeight;
 
       if (percentFillOnScreen <= 20) {
-        height = Math.abs(screenHeight - (screenHeight - position.top));
+        const optionsHeight = optionsContainer?.scrollHeight || 0;
+        const currentHeight = optionsHeight + height;
 
-        if (height > maxHeight) {
-          height = maxHeight;
+        if (optionsHeight > 0 && currentHeight <= maxHeight) {
+          height = currentHeight;
+        } else {
+          height = Math.abs(screenHeight - (screenHeight - position.top));
+
+          if (height > maxHeight) {
+            height = maxHeight;
+          }
         }
 
         top = position.top - height;
@@ -93,6 +103,7 @@ export class Autocomplete {
       container.style.maxHeight = `${height}px`;
       container.style.zIndex = '99';
       container.style.overflow = 'hidden';
+      container.style.transition = 'all 0.1s ease-in-out';
 
       const selectedOptions =
         autocompleteField.querySelector<HTMLDivElement>('.selected-options');
@@ -100,6 +111,7 @@ export class Autocomplete {
       if (selectedOptions) {
         selectedOptions.onchange = () =>
           setTimeout(() => {
+            console.log('Repositioning autocomplete options');
             this.positionOnScreen(container);
           }, 50);
       }
