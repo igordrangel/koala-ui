@@ -108,6 +108,20 @@ export class Autocomplete {
     return null;
   }
 
+  private async waitForButtonEnabled(
+    buttonElement: HTMLButtonElement,
+    timeout: number
+  ) {
+    const delayTime = 50;
+
+    let ellapsedTime = 0;
+
+    while (buttonElement.disabled && ellapsedTime <= timeout) {
+      await delay(delayTime);
+      ellapsedTime += delayTime;
+    }
+  }
+
   private async positionOnScreen(container: HTMLDivElement) {
     const autocompleteField = this.viewContainerRef.element
       .nativeElement as HTMLElement;
