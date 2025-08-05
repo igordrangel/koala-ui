@@ -6,6 +6,7 @@ import {
   ResourceRef,
   signal,
   Signal,
+  WritableSignal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl } from '@angular/forms';
@@ -51,7 +52,7 @@ export class AutocompleteValue {
   private _autofill = signal<any | null>(null);
   private _isLoading?: Signal<boolean>;
   private _internalFilter = signal<string | null>(null);
-  private _isOnDemand?: Signal<boolean>;
+  private _isOnDemand?: WritableSignal<boolean>;
   private readonly _requestOptionsParams =
     signal<AutocompleteDataOptionsFnParams>({
       filter: null,
@@ -132,6 +133,32 @@ export class AutocompleteValue {
     }));
   }
 
+  get isOnDemand() {
+    if (!this._isOnDemand) {
+      return signal(false);
+    }
+    return this._isOnDemand.asReadonly();
+  }
+
+  private selectedOptionIsDiff(
+    options: AutocompleteOption | AutocompleteOption[]
+  ) {
+    if (this._multiple) {
+      return (
+        !Array.isArray(options) ||
+        options.length !== this._selectedOptions().length ||
+        options.some(
+          (opt, index) => opt.value !== this._selectedOptions()[index].value
+        )
+      );
+    }
+
+    return (
+      !options ||
+      (options as AutocompleteOption).value !== this._selectedOption()?.value
+    );
+  }
+
   private async selectOption(value: any) {
     while (this._isLoading!()) {
       await delay(100);
@@ -151,10 +178,14 @@ export class AutocompleteValue {
         autofill: value,
       }));
 
-      return this.makeAutofill();
+      await delay(100);
+
+      this.selectOption(value);
+
+      return;
     }
 
-    if (options) {
+    if (options && this.selectedOptionIsDiff(options)) {
       this._currentValue.update(() => {
         if (this._multiple) {
           if (Array.isArray(options)) {
@@ -199,7 +230,7 @@ export class AutocompleteValue {
     control: FormControl<any>,
     options: Signal<AutocompleteList>,
     isLoading: Signal<boolean>,
-    isOnDemand: Signal<boolean>,
+    isOnDemand: WritableSignal<boolean>,
     multiple = false
   ) {
     this._control = control;
