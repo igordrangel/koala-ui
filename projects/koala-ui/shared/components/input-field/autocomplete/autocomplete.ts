@@ -63,6 +63,10 @@ export class Autocomplete {
     const optionsContainer = container.querySelector<HTMLDivElement>(
       '.kl-autocomplete-options-container'
     );
+    const filterContainer = container?.querySelector<HTMLDivElement>(
+      '.kl-autocomplete-filter'
+    );
+    const filterContainerHeight = (filterContainer?.clientHeight || 0) + 2;
 
     if (position) {
       const screenHeight = document.body.clientHeight;
@@ -77,8 +81,8 @@ export class Autocomplete {
       const percentFillOnScreen = (height * 100) / screenHeight;
 
       if (percentFillOnScreen <= 20) {
-        const optionsHeight = optionsContainer?.scrollHeight || 0;
-        const currentHeight = optionsHeight + 38;
+        const optionsHeight = optionsContainer?.clientHeight || 0;
+        const currentHeight = optionsHeight + filterContainerHeight;
 
         if (optionsHeight > 0 && currentHeight <= maxHeight) {
           height = currentHeight;
