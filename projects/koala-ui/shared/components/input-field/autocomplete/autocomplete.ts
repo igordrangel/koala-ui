@@ -111,7 +111,6 @@ export class Autocomplete {
       if (selectedOptions) {
         selectedOptions.onchange = () =>
           setTimeout(() => {
-            console.log('Repositioning autocomplete options');
             this.positionOnScreen(container);
           }, 50);
       }
