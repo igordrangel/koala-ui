@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { GENERIC_COMPONENT_CONTAINER_NAME } from '@koalarx/ui/core/config';
+import { delay } from '@koalarx/utils/KlDelay';
 import { randomString } from '@koalarx/utils/KlString';
 import { AutocompleteOptions } from './autocomplete-options';
 import { AUTOCOMPLETE_REF_TOKEN, AutocompleteRef } from './autocomplete-ref';
@@ -54,7 +55,7 @@ export class Autocomplete {
     return elementId;
   }
 
-  private positionOnScreen(container: HTMLDivElement) {
+  private calculatePosition(container: HTMLDivElement) {
     const autocompleteField = this.viewContainerRef.element
       .nativeElement as HTMLElement;
     const currentTop = window.scrollY;
@@ -62,6 +63,10 @@ export class Autocomplete {
     const optionsContainer = container.querySelector<HTMLDivElement>(
       '.kl-autocomplete-options-container'
     );
+    const filterContainer = container?.querySelector<HTMLDivElement>(
+      '.kl-autocomplete-filter'
+    );
+    const filterContainerHeight = (filterContainer?.clientHeight || 0) + 2;
 
     if (position) {
       const screenHeight = document.body.clientHeight;
@@ -76,8 +81,8 @@ export class Autocomplete {
       const percentFillOnScreen = (height * 100) / screenHeight;
 
       if (percentFillOnScreen <= 20) {
-        const optionsHeight = optionsContainer?.scrollHeight || 0;
-        const currentHeight = optionsHeight + height;
+        const optionsHeight = optionsContainer?.clientHeight || 0;
+        const currentHeight = optionsHeight + filterContainerHeight;
 
         if (optionsHeight > 0 && currentHeight <= maxHeight) {
           height = currentHeight;
@@ -94,13 +99,49 @@ export class Autocomplete {
 
       top += currentTop;
 
+      container.style.top = `${top}px`;
+      container.style.maxHeight = `${height}px`;
+
+      return { top, left: position.left, width: position.width, height };
+    }
+
+    return null;
+  }
+
+  private async waitForButtonEnabled(
+    buttonElement: HTMLButtonElement,
+    timeout: number
+  ) {
+    const delayTime = 50;
+
+    let ellapsedTime = 0;
+
+    while (buttonElement.disabled && ellapsedTime <= timeout) {
+      await delay(delayTime);
+      ellapsedTime += delayTime;
+    }
+  }
+
+  private async positionOnScreen(container: HTMLDivElement) {
+    const autocompleteField = this.viewContainerRef.element
+      .nativeElement as HTMLElement;
+    const autocompleteFieldButton =
+      autocompleteField.querySelector<HTMLButtonElement>('button');
+
+    if (autocompleteFieldButton) {
+      await this.waitForButtonEnabled(autocompleteFieldButton, 5000);
+    }
+
+    const position = this.calculatePosition(container);
+
+    if (position) {
+      const { left, width } = position;
+
       container.style.position = 'absolute';
       container.style.display = 'flex';
-      container.style.top = `${top}px`;
-      container.style.left = `${position.left}px`;
-      container.style.width = `${position.width}px`;
+      container.style.left = `${left}px`;
+      container.style.width = `${width}px`;
       container.style.height = `auto`;
-      container.style.maxHeight = `${height}px`;
       container.style.zIndex = '99';
       container.style.overflow = 'hidden';
       container.style.transition = 'all 0.1s ease-in-out';
@@ -109,15 +150,12 @@ export class Autocomplete {
         autocompleteField.querySelector<HTMLDivElement>('.selected-options');
 
       if (selectedOptions) {
-        selectedOptions.onchange = () =>
-          setTimeout(() => {
-            this.positionOnScreen(container);
-          }, 50);
+        selectedOptions.onchange = () => this.positionOnScreen(container);
       }
     }
   }
 
-  open(data: AutocompleteOpenData) {
+  async open(data: AutocompleteOpenData) {
     const main = document.querySelector<HTMLElement>(
       GENERIC_COMPONENT_CONTAINER_NAME
     );
@@ -128,7 +166,7 @@ export class Autocomplete {
 
       container.id = elementId;
 
-      this.positionOnScreen(container);
+      await this.positionOnScreen(container);
 
       const componentRef = createComponent(AutocompleteOptions, {
         environmentInjector: this.injector,
@@ -156,6 +194,8 @@ export class Autocomplete {
       this.appRef.attachView(componentRef.hostView);
 
       componentRef.changeDetectorRef.detectChanges();
+
+      this.calculatePosition(container);
     }
   }
 }
