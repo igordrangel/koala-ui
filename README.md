@@ -5,4 +5,4 @@ It provides a set of reusable components and utilities to help you build your An
 
 ## Documentation
 
-https://koalaui.igordrangel.com.br
+https://ui.koalarx.com
