@@ -160,6 +160,11 @@ export class AutocompleteValue {
   }
 
   private async selectOption(value: any) {
+    if (isEmpty(value)) {
+      this._currentValue.set(null);
+      return;
+    }
+
     while (this._isLoading!()) {
       await delay(100);
     }
@@ -197,8 +202,6 @@ export class AutocompleteValue {
 
         return options;
       });
-    } else if (isEmpty(value)) {
-      this._currentValue.set(null);
     }
   }
 
