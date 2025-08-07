@@ -197,6 +197,8 @@ export class AutocompleteValue {
 
         return options;
       });
+    } else if (isEmpty(value)) {
+      this._currentValue.set(null);
     }
   }
 
@@ -260,11 +262,7 @@ export class AutocompleteValue {
     event.preventDefault();
     this._control?.setValue(null);
     this._currentValue.set(null);
-    this._requestOptionsParams.update(() => ({
-      filter: null,
-      internalFilter: this._internalFilter(),
-      autofill: null,
-    }));
+    this.filterControl.setValue(null);
   }
 
   remove(event: MouseEvent, value: AutocompleteOptionValue) {
