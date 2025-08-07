@@ -160,6 +160,11 @@ export class AutocompleteValue {
   }
 
   private async selectOption(value: any) {
+    if (isEmpty(value)) {
+      this._currentValue.set(null);
+      return;
+    }
+
     while (this._isLoading!()) {
       await delay(100);
     }
@@ -260,11 +265,7 @@ export class AutocompleteValue {
     event.preventDefault();
     this._control?.setValue(null);
     this._currentValue.set(null);
-    this._requestOptionsParams.update(() => ({
-      filter: null,
-      internalFilter: this._internalFilter(),
-      autofill: null,
-    }));
+    this.filterControl.setValue(null);
   }
 
   remove(event: MouseEvent, value: AutocompleteOptionValue) {
