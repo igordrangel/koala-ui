@@ -159,7 +159,7 @@ export class AutocompleteValue {
     );
   }
 
-  private async selectOption(value: any) {
+  private async selectOption(value: any, searchIfNotFound = true) {
     if (isEmpty(value)) {
       this._currentValue.set(null);
       return;
@@ -177,7 +177,12 @@ export class AutocompleteValue {
       ? this._options()?.filter((opt) => `${value}`?.includes(`${opt.value}`))
       : this._options()?.find((opt) => `${opt.value}` === `${value}`);
 
-    if (!isEmpty(value) && !options && this._isOnDemand!()) {
+    if (
+      !isEmpty(value) &&
+      !options &&
+      this._isOnDemand!() &&
+      searchIfNotFound
+    ) {
       this._requestOptionsParams.update(() => ({
         internalFilter: this._internalFilter(),
         autofill: value,
@@ -185,7 +190,7 @@ export class AutocompleteValue {
 
       await delay(100);
 
-      this.selectOption(value);
+      await this.selectOption(value, false);
 
       return;
     }
@@ -206,29 +211,17 @@ export class AutocompleteValue {
   }
 
   async makeAutofill() {
-    if (!isEmpty(this._control?.value)) {
-      while (this._isLoading!()) {
-        await delay(100);
-      }
+    const value = this._control?.value;
 
-      this.selectOption(this._control?.value);
-
-      const currentValue = this._currentValue();
-
-      if (
-        (this._multiple &&
-          ((Array.isArray(currentValue) && currentValue.length === 0) ||
-            !Array.isArray(currentValue))) ||
-        (!this._multiple && isEmpty(currentValue))
-      ) {
-        this._autofill.set(this._control?.value);
-        this._requestOptionsParams.update((params) => ({
-          ...params,
-          internalFilter: this._internalFilter(),
-          autofill: this._autofill(),
-        }));
-      }
+    if (isEmpty(value)) {
+      return;
     }
+
+    while (this._isLoading!()) {
+      await delay(100);
+    }
+
+    await this.selectOption(value);
   }
 
   init(
