@@ -52,7 +52,7 @@ export class AutocompleteField extends InputFieldBase implements OnInit {
     transform: booleanAttribute,
   });
 
-  readonly isLoading = signal<boolean>(false);
+  readonly isLoading = signal<boolean>(true);
   readonly optionList = signal<AutocompleteList>([]);
 
   readonly optionsResource = signal<OptionsResource | null>(null);

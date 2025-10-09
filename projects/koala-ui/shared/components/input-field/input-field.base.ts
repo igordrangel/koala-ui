@@ -26,6 +26,7 @@ export abstract class InputFieldBase implements AfterViewInit {
   control = input.required<FormControl>();
   label = input<string>();
   placeholder = input<string>('');
+  hint = input<string>();
   disabled = input(false, { transform: booleanAttribute });
 
   constructor() {
