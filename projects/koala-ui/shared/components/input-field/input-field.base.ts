@@ -8,18 +8,14 @@ import {
   linkedSignal,
   signal,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, Validators } from '@angular/forms';
-import { ThemeName } from '@koalarx/ui/theme';
+import { CURRENT_THEME } from '@koalarx/ui/core/config';
 import { randomString } from '@koalarx/utils/KlString';
-import { interval } from 'rxjs/internal/observable/interval';
-import { startWith } from 'rxjs/internal/operators/startWith';
 
 @Directive()
 export abstract class InputFieldBase {
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly required = signal(false);
-  private readonly currentTheme = signal<ThemeName | null>(null);
   protected readonly isDisabled = linkedSignal(() => this.disabled());
   protected readonly isRequired = this.required.asReadonly();
   protected readonly fieldId = randomString(10, {
@@ -37,7 +33,7 @@ export abstract class InputFieldBase {
     effect(() => this.checkIsRequired(this.control()));
 
     effect(() => {
-      this.currentTheme();
+      CURRENT_THEME();
 
       if (
         this.elementRef.nativeElement?.tagName.toLowerCase() !==
@@ -52,20 +48,6 @@ export abstract class InputFieldBase {
         }
       }
     });
-
-    interval(50)
-      .pipe(startWith(0), takeUntilDestroyed())
-      .subscribe(() => {
-        const theme = document
-          .querySelector('html')
-          ?.getAttribute('data-theme') as ThemeName | null;
-
-        if (theme === this.currentTheme()) {
-          return;
-        }
-
-        this.currentTheme.set(theme);
-      });
   }
 
   private getBgColorParent(element: HTMLElement): string {
