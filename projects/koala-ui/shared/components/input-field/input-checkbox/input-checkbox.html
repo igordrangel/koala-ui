@@ -1,7 +1,18 @@
-<input #inputCheckbox
-  type="checkbox"
-  class="checkbox"
-  [checked]="control().value"
-  [disabled]="disabled()"
-  (change)="toggle($event)"
-/>
+<label [attr.for]="fieldId" class="flex items-center gap-2 cursor-pointer">
+  <input #inputCheckbox
+    [id]="fieldId"
+    type="checkbox"
+    class="checkbox"
+    [checked]="control().value"
+    [disabled]="disabled()"
+    (change)="toggle($event)"
+  />
+
+  <ng-content />
+</label>
+
+@if (hint()) {
+  <span class="hint-content">
+    <i class="fa-regular fa-circle-question"></i> {{hint()}}
+  </span>
+}

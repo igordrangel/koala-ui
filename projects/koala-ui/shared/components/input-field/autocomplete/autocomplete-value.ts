@@ -258,7 +258,11 @@ export class AutocompleteValue {
     event.preventDefault();
     this._control?.setValue(null);
     this._currentValue.set(null);
-    this.filterControl.setValue(null);
+    this._requestOptionsParams.update(() => ({
+      filter: this.filterControl.enabled ? null : this.filterControl.value,
+      internalFilter: this._internalFilter(),
+      autofill: null,
+    }));
   }
 
   remove(event: MouseEvent, value: AutocompleteOptionValue) {

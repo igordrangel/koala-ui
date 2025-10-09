@@ -17,6 +17,12 @@
   </textarea>
 </label>
 
+@if (hint()) {
+  <span class="hint-content">
+    <i class="fa-regular fa-circle-question"></i> {{hint()}}
+  </span>
+}
+
 <kl-field-errors [field]="control()">
   <ng-container errors>
     <ng-content select="[errors]" />

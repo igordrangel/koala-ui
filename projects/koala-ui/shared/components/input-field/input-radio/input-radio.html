@@ -1,9 +1,20 @@
-<input #inputRadio
-  type="radio"
-  class="radio"
-  [name]="name()"
-  [value]="value()"
-  [checked]="value() === control().value"
-  [disabled]="disabled()"
-  (change)="toggle($event)"
-/>
+<label [attr.for]="fieldId" class="flex items-center gap-2 cursor-pointer">
+  <input #inputRadio
+    [id]="fieldId"
+    type="radio"
+    class="radio"
+    [name]="name()"
+    [value]="value()"
+    [checked]="value() === control().value"
+    [disabled]="disabled()"
+    (change)="toggle($event)"
+  />
+
+  <ng-content />
+</label>
+
+@if (hint()) {
+  <span class="hint-content">
+    <i class="fa-regular fa-circle-question"></i> {{hint()}}
+  </span>
+}

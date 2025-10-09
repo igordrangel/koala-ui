@@ -69,7 +69,7 @@ kl-datatable .textarea {
 .select,
 .textarea,
 .input span,
-.select span,
+.select span.autocomplete-label,
 .textarea span {
   background-color: var(--bg-input);
 }
@@ -85,4 +85,14 @@ button:focus {
 .select:has(.ng-touched.ng-invalid),
 .textarea:has(.ng-touched.ng-invalid) {
   --input-color: var(--color-error);
+}
+
+.hint-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0 0;
+  color: var(--color-neutral-700);
+  font-size: 0.65rem;
+  text-transform: uppercase;
 }
