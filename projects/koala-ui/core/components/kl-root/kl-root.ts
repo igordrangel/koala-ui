@@ -3,9 +3,9 @@ import { DialogContainer } from '@koalarx/ui/core/components/dialog';
 import { LoaderPageContent } from '@koalarx/ui/core/components/loader-page';
 import { SideWindowContainer } from '@koalarx/ui/core/components/side-window';
 import { SnackbarContainer } from '@koalarx/ui/core/components/snackbar';
+import { CURRENT_THEME } from '@koalarx/ui/core/config';
 import { ThemeName } from '@koalarx/ui/theme';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
-import { CURRENT_THEME } from '../../config';
 
 @Component({
   selector: 'kl-root',
