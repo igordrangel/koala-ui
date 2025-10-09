@@ -2,45 +2,8 @@ import { Component, effect, model, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Dropdown } from '@koalarx/ui/shared/components/dropdown';
 import { Tooltip } from '@koalarx/ui/shared/directives';
+import { ThemeName } from '@koalarx/ui/theme';
 import { THEME_STORAGE_NAME } from '../../config/constants';
-
-type ThemeName =
-  | 'koala'
-  | 'light'
-  | 'dark'
-  | 'cupcake'
-  | 'bumblebee'
-  | 'emerald'
-  | 'corporate'
-  | 'synthwave'
-  | 'retro'
-  | 'cyberpunk'
-  | 'valentine'
-  | 'halloween'
-  | 'garden'
-  | 'forest'
-  | 'aqua'
-  | 'lofi'
-  | 'pastel'
-  | 'fantasy'
-  | 'wireframe'
-  | 'black'
-  | 'luxury'
-  | 'dracula'
-  | 'cmyk'
-  | 'autumn'
-  | 'business'
-  | 'acid'
-  | 'lemonade'
-  | 'night'
-  | 'coffee'
-  | 'winter'
-  | 'dim'
-  | 'nord'
-  | 'sunset'
-  | 'caramellatte'
-  | 'abyss'
-  | 'silk';
 
 interface ThemeOption {
   isDark: boolean;

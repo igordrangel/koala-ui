@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   booleanAttribute,
   Directive,
   effect,
@@ -9,13 +8,18 @@ import {
   linkedSignal,
   signal,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, Validators } from '@angular/forms';
+import { ThemeName } from '@koalarx/ui/theme';
 import { randomString } from '@koalarx/utils/KlString';
+import { interval } from 'rxjs/internal/observable/interval';
+import { startWith } from 'rxjs/internal/operators/startWith';
 
 @Directive()
-export abstract class InputFieldBase implements AfterViewInit {
+export abstract class InputFieldBase {
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly required = signal(false);
+  private readonly currentTheme = signal<ThemeName | null>(null);
   protected readonly isDisabled = linkedSignal(() => this.disabled());
   protected readonly isRequired = this.required.asReadonly();
   protected readonly fieldId = randomString(10, {
@@ -31,6 +35,37 @@ export abstract class InputFieldBase implements AfterViewInit {
 
   constructor() {
     effect(() => this.checkIsRequired(this.control()));
+
+    effect(() => {
+      this.currentTheme();
+
+      if (
+        this.elementRef.nativeElement?.tagName.toLowerCase() !==
+        'kl-input-field'
+      ) {
+        const container = this.elementRef.nativeElement.parentElement;
+
+        if (container) {
+          const containerBgColor = this.getBgColorParent(container);
+
+          this.elementRef.nativeElement.style = `--bg-input: ${containerBgColor}`;
+        }
+      }
+    });
+
+    interval(50)
+      .pipe(startWith(0), takeUntilDestroyed())
+      .subscribe(() => {
+        const theme = document
+          .querySelector('html')
+          ?.getAttribute('data-theme') as ThemeName | null;
+
+        if (theme === this.currentTheme()) {
+          return;
+        }
+
+        this.currentTheme.set(theme);
+      });
   }
 
   private getBgColorParent(element: HTMLElement): string {
@@ -49,22 +84,5 @@ export abstract class InputFieldBase implements AfterViewInit {
 
   private checkIsRequired(control: FormControl) {
     this.required.set(control.hasValidator(Validators.required));
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      if (
-        this.elementRef.nativeElement?.tagName.toLowerCase() !==
-        'kl-input-field'
-      ) {
-        const container = this.elementRef.nativeElement.parentElement;
-
-        if (container) {
-          const containerBgColor = this.getBgColorParent(container);
-
-          this.elementRef.nativeElement.style = `--bg-input: ${containerBgColor}`;
-        }
-      }
-    }, 50);
   }
 }
