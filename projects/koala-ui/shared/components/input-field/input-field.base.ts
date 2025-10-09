@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   booleanAttribute,
   Directive,
   effect,
@@ -10,10 +9,11 @@ import {
   signal,
 } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { CURRENT_THEME } from '@koalarx/ui/core/config';
 import { randomString } from '@koalarx/utils/KlString';
 
 @Directive()
-export abstract class InputFieldBase implements AfterViewInit {
+export abstract class InputFieldBase {
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly required = signal(false);
   protected readonly isDisabled = linkedSignal(() => this.disabled());
@@ -31,6 +31,23 @@ export abstract class InputFieldBase implements AfterViewInit {
 
   constructor() {
     effect(() => this.checkIsRequired(this.control()));
+
+    effect(() => {
+      CURRENT_THEME();
+
+      if (
+        this.elementRef.nativeElement?.tagName.toLowerCase() !==
+        'kl-input-field'
+      ) {
+        const container = this.elementRef.nativeElement.parentElement;
+
+        if (container) {
+          const containerBgColor = this.getBgColorParent(container);
+
+          this.elementRef.nativeElement.style = `--bg-input: ${containerBgColor}`;
+        }
+      }
+    });
   }
 
   private getBgColorParent(element: HTMLElement): string {
@@ -49,22 +66,5 @@ export abstract class InputFieldBase implements AfterViewInit {
 
   private checkIsRequired(control: FormControl) {
     this.required.set(control.hasValidator(Validators.required));
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      if (
-        this.elementRef.nativeElement?.tagName.toLowerCase() !==
-        'kl-input-field'
-      ) {
-        const container = this.elementRef.nativeElement.parentElement;
-
-        if (container) {
-          const containerBgColor = this.getBgColorParent(container);
-
-          this.elementRef.nativeElement.style = `--bg-input: ${containerBgColor}`;
-        }
-      }
-    }, 50);
   }
 }
