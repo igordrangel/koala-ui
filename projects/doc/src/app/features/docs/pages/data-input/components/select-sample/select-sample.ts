@@ -5,6 +5,7 @@ import {
   Select,
   SelectOption,
 } from '@koalarx/ui/shared/components/input-field/select';
+import { delay } from '@koalarx/utils/KlDelay';
 
 @Component({
   selector: 'app-select-sample',
@@ -20,6 +21,7 @@ export class SelectSample {
     defaultValue: [],
     loader: ({ abortSignal }) =>
       fetch(`https://dummyjson.com/users`, { signal: abortSignal })
+        .then((res) => delay(5000).then(() => res)) // Simulate loading delay
         .then((res) => res.json())
         .then((data: { users: { id: number; firstName: string }[] }) =>
           data.users.map(

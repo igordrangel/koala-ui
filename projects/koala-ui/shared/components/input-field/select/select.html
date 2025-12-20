@@ -1,26 +1,44 @@
 @if (options(); as items) {
-  <label [attr.for]="fieldId" class="floating-label select w-full">
+  <label [attr.for]="fieldId" class="relative floating-label w-full has-[select:disabled]:cursor-not-allowed">
 
     @if (label(); as label) {
-      <span>{{ label }} {{ isRequired() ? '*' : '' }}</span>
+      @if (isDisabled()) {
+        <span class="text-neutral-200 dark:text-neutral-600">
+          {{ label }} {{ isRequired() ? '*' : '' }}
+        </span>
+      } @else {
+        <span>{{ label }} {{ isRequired() ? '*' : '' }}</span>
+      }
     }
 
-    <select
+    @if (!isDisabled() && control().value) {
+      <button class="absolute right-9 top-2.5 z-10 text-neutral-400 hover:cursor-pointer text-sm focus:!shadow-none" type="button" (click)="clear($event)">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    }
+
+    <select class="disabled:!border-neutral-200 disabled:dark:!border-neutral-800"
       [id]="fieldId"
       [value]="control().value"
       (change)="onSelectChange($event)"
-      [disabled]="items.isLoading()">
+      [disabled]="isDisabled()">
 
-      @if (items.isLoading()) {
-        <option [value]="null">Carregando...</option>
-      } @else {
-        <option [value]="null">Selecione uma opção...</option>
-      }
+      <button>
+        <selectedcontent></selectedcontent>
+        <span class="picker">
+          @if (items.isLoading()) {
+            <kl-loader size="small" />
+          } @else {
+            <i class="fa-solid fa-caret-down"></i>
+          }
+        </span>
+      </button>
+
       @for (item of items.value(); track $index) {
         <option
           [value]="`${item.value}`"
           [selected]="item.value === control().value">
-          {{ item.label }}
+          <span>{{ item.label }}</span>
         </option>
       }
     </select>
