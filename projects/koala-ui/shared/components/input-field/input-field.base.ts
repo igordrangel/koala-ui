@@ -16,9 +16,10 @@ import { randomString } from '@koalarx/utils/KlString';
 export abstract class InputFieldBase {
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly required = signal(false);
-  protected readonly isDisabled = linkedSignal(() => this.disabled());
-  protected readonly isRequired = this.required.asReadonly();
-  protected readonly fieldId = randomString(10, {
+
+  readonly isDisabled = linkedSignal(() => this.disabled());
+  readonly isRequired = this.required.asReadonly();
+  readonly fieldId = randomString(10, {
     lowercase: true,
     uppercase: true,
   });

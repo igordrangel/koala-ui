@@ -1,11 +1,14 @@
 import { SampleContainer } from '@/app/shared/components/sample-container/sample-container';
 import { Component, inject, resource } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import {
-  Select,
-  SelectOption,
-} from '@koalarx/ui/shared/components/input-field/select';
+import { Select } from '@koalarx/ui/shared/components/input-field/select';
+import { SelectOption } from '@koalarx/ui/shared/components/input-field/select/select.type';
 import { delay } from '@koalarx/utils/KlDelay';
+
+interface User {
+  id: number;
+  firstName: string;
+}
 
 @Component({
   selector: 'app-select-sample',
@@ -21,9 +24,9 @@ export class SelectSample {
     defaultValue: [],
     loader: ({ abortSignal }) =>
       fetch(`https://dummyjson.com/users`, { signal: abortSignal })
-        .then((res) => delay(5000).then(() => res)) // Simulate loading delay
+        .then((res) => delay(2000).then(() => res)) // Simulate loading delay
         .then((res) => res.json())
-        .then((data: { users: { id: number; firstName: string }[] }) =>
+        .then((data: { users: User[] }) =>
           data.users.map(
             (user) =>
               ({

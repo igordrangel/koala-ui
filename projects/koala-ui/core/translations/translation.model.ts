@@ -20,6 +20,7 @@ export interface Translation {
     invalidPasswordHasUppercase: string;
     invalidPasswordHasNumber: string;
     invalidConfirmPassword: string;
+    selectTypeSearch: string;
   };
   onThisPage: {
     title: string;

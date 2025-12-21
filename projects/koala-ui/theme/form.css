@@ -108,6 +108,49 @@ label.floating-label:not(:has(option:checked)) > span {
   scale: 1;
 }
 
+kl-select .kl-select-container {
+  position: relative;
+  overflow: unset;
+}
+
+kl-select .kl-select-label {
+  position: absolute;
+  display: block;
+  top: 0.5rem;
+  left: 1rem;
+  font-size: 1rem;
+  transition: all 0.1s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+kl-select .has-value:has(selectedcontent > *) .kl-select-label {
+  font-size: 0.75rem;
+  top: -0.6rem;
+  left: 0.6rem;
+  padding: 0 0.3rem;
+}
+
+kl-select .has-value .kl-select-label > span {
+  position: relative;
+  z-index: 2;
+}
+
+kl-select .has-value .kl-select-label:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: var(--bg-input);
+  bottom: 0.4rem;
+  left: 0;
+  z-index: 1;
+}
+
+kl-select .has-value:focus .kl-select-label:after {
+  height: 4px;
+}
+
 select,
 ::picker(select) {
   appearance: base-select;
@@ -149,14 +192,15 @@ select:open .picker {
   position: relative;
   max-width: var(--select-width);
   box-sizing: border-box;
-  padding: calc(var(--spacing) * 1);
   margin-block-start: 0.5rem;
   margin-block-end: 0.5rem;
+  padding: 0;
   background-color: var(--color-base-300);
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-neutral-600);
-  transform: translateY(-0.5rem);
+  transform: translateY(-1rem);
   opacity: 0;
+  overflow: hidden;
   transition: transform 0.3s ease allow-discrete,
     opacity 0.3s ease allow-discrete, display 0.3s allow-discrete,
     overlay 0.3s allow-discrete;
@@ -169,12 +213,12 @@ select:open .picker {
 
 select selectedcontent span:not(.not-animate) {
   position: relative;
-  animation: 0.4s ease bounce;
+  animation: 0.5s ease bounce;
 }
 
 @starting-style {
   ::picker(select):popover-open {
-    transform: translateY(-0.5rem);
+    transform: translateY(-1rem);
     opacity: 0;
   }
 }

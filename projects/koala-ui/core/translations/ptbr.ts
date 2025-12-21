@@ -24,6 +24,7 @@ export const ptBr: Translation = {
     invalidPasswordHasUppercase: 'A senha deve conter letras maiúsculas.',
     invalidPasswordHasNumber: 'A senha deve conter números.',
     invalidConfirmPassword: 'A confirmação da senha não confere.',
+    selectTypeSearch: 'Digite para buscar...',
   },
   onThisPage: {
     title: 'Nesta página',

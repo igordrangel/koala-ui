@@ -1,58 +1,98 @@
 import {
-  afterRenderEffect,
   Component,
+  DestroyRef,
+  ElementRef,
+  inject,
+  Injector,
   input,
-  ResourceRef,
+  model,
+  output,
+  signal,
+  viewChild,
 } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Loader } from '@koalarx/ui/core/components/loader';
+import { AppConfig } from '@koalarx/ui/core/config';
 import { FieldErrors } from '@koalarx/ui/shared/components/field-errors';
 import { InputFieldBase } from '@koalarx/ui/shared/components/input-field';
-import { delay } from '@koalarx/utils/KlDelay';
-
-type SelectValue = string | number | boolean | null;
-export interface SelectOption<TData = any> {
-  label: string;
-  value: SelectValue;
-  data?: TData;
-}
-export type SelectList<TData = any> = SelectOption<TData>[];
+import {
+  OptionsResource,
+  SelectDataOptions,
+  SelectDataOptionsFnParams,
+  SelectList,
+  SelectValue,
+} from './select.type';
+import { SelectFilter } from './services/select-filter';
+import { ajustFilteredValueOnSelect } from './utils/ajust-filtered-value-on-select';
+import { ajustOptionsContainerSize } from './utils/ajust-options-container-size';
+import { assessibility } from './utils/assessibility';
+import { generateOptionsResource } from './utils/generate-options-resource';
+import { loadOptions } from './utils/options-loader';
+import { setValueOnElement } from './utils/set-value-on-element';
 
 @Component({
   selector: 'kl-select',
   templateUrl: './select.html',
-  imports: [ReactiveFormsModule, FieldErrors, Loader],
+  imports: [FormsModule, ReactiveFormsModule, FieldErrors, Loader],
+  providers: [SelectFilter],
 })
 export class Select extends InputFieldBase {
-  options = input.required<ResourceRef<SelectList>>();
+  readonly destroyRef = inject(DestroyRef);
+  readonly selectFilter = inject(SelectFilter);
+  readonly injector = inject(Injector);
+  readonly selectField =
+    viewChild<ElementRef<HTMLSelectElement>>('selectField');
+
+  readonly optionsResource = signal<OptionsResource | null>(null);
+  readonly optionList = signal<SelectList>([]);
+  readonly isLoading = signal<boolean>(true);
+  readonly requestOptionsParams = signal<SelectDataOptionsFnParams>({
+    filter: null,
+    autofill: null,
+  });
+  readonly translations = inject(AppConfig).translation.form;
+
+  filter = model<string>();
+  options = input.required<SelectDataOptions>();
+  selectedItem = output<any | null>();
+
+  get selectElement() {
+    const selectField = this.selectField();
+
+    if (!selectField) {
+      throw new Error('Select element not found');
+    }
+
+    return selectField.nativeElement;
+  }
 
   constructor() {
     super();
 
-    afterRenderEffect(async () => {
-      const selectElement = document.getElementById(
-        this.fieldId
-      ) as HTMLSelectElement;
-      const currentWidth = selectElement.offsetWidth;
-      selectElement.style.setProperty('--select-width', `${currentWidth}px`);
+    setValueOnElement(this);
+    loadOptions(this);
+    generateOptionsResource(this);
+    ajustOptionsContainerSize(this);
+    ajustFilteredValueOnSelect(this);
+    assessibility(this);
 
-      while (this.options().isLoading()) {
-        this.isDisabled.set(true);
-        await delay(50);
-      }
-
-      this.isDisabled.set(false);
-      selectElement.value = this.control().value;
-    });
+    this.selectFilter.init(this, this.filter);
   }
 
-  onSelectChange(event: Event) {
+  applyFilter(options: SelectList) {
+    const filter = this.filter() ?? '';
+    return options.filter((option) =>
+      option.label.toLowerCase().includes(filter.toLowerCase())
+    );
+  }
+
+  setValue(event: Event) {
     const select = event.target as HTMLSelectElement;
     let value: SelectValue = select.value;
 
-    const selectedOption = this.options()
-      .value()
-      .find((item) => String(item.value) === value);
+    const selectedOption = this.optionList().find(
+      (item) => String(item.value) === value
+    );
 
     if (selectedOption) {
       if (typeof selectedOption.value === 'number') {
@@ -64,15 +104,14 @@ export class Select extends InputFieldBase {
       }
       this.control().setValue(value, { emitEvent: true });
     }
+
+    this.selectedItem.emit(selectedOption?.data ?? null);
   }
 
   clear(event: MouseEvent) {
     event.preventDefault();
     this.control().setValue(null);
 
-    const selectElement = document.getElementById(
-      this.fieldId
-    ) as HTMLSelectElement;
-    selectElement.selectedIndex = -1;
+    this.selectElement.selectedIndex = -1;
   }
 }
