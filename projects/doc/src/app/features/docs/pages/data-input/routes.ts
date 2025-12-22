@@ -2,11 +2,9 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: 'autocomplete',
+    path: 'select',
     loadComponent: () =>
-      import('./pages/autocomplete/autocomplete.page').then(
-        (c) => c.AutocompletePage
-      ),
+      import('./pages/select/select.page').then((c) => c.SelectPage),
   },
   {
     path: 'field-group',
@@ -98,11 +96,6 @@ export const routes: Routes = [
     path: 'input-url',
     loadComponent: () =>
       import('./pages/input-url/input-url.page').then((c) => c.InputUrlPage),
-  },
-  {
-    path: 'select',
-    loadComponent: () =>
-      import('./pages/select/select.page').then((c) => c.SelectPage),
   },
   {
     path: 'switcher',

@@ -2,7 +2,7 @@ import { ResourceRef, Signal } from '@angular/core';
 
 export interface SelectDataOptionsFnParams {
   filter?: string | null;
-  autofill?: any | null;
+  currentValue?: any | null;
   internalFilter?: string | null;
 }
 

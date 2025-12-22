@@ -3,7 +3,6 @@ import { inject, Injector, Signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { AppConfig } from '@koalarx/ui/core/config';
 import { GetManyResult } from '@koalarx/ui/core/models';
-import { AutocompleteOption } from '@koalarx/ui/shared/components/input-field/autocomplete';
 import { SelectOption } from '@koalarx/ui/shared/components/input-field/select';
 import { first } from 'rxjs/internal/operators/first';
 import { map } from 'rxjs/internal/operators/map';
@@ -13,12 +12,7 @@ export interface HttpResourceRequestOptions<EntityType> {
   endpoint?: string;
   mapOption?: (
     item: any
-  ) => Omit<
-    | AutocompleteOption<EntityType>
-    | SelectOption<EntityType>
-    | GetManyResult<EntityType>,
-    'data'
-  >;
+  ) => Omit<SelectOption<EntityType> | GetManyResult<EntityType>, 'data'>;
 }
 
 export abstract class HttpBase<
@@ -130,9 +124,7 @@ export abstract class HttpBase<
 
   getManyForSelector<TResponse = EntityType>(
     query: QueryType | Signal<QueryType>,
-    mapOption: (
-      item: TResponse
-    ) => Omit<AutocompleteOption<TResponse> | SelectOption<TResponse>, 'data'>
+    mapOption: (item: TResponse) => Omit<SelectOption<TResponse>, 'data'>
   ) {
     return rxResource({
       defaultValue: [],

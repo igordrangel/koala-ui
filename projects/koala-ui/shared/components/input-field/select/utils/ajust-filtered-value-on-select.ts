@@ -7,6 +7,10 @@ export function ajustFilteredValueOnSelect(component: Select) {
     const isLoading = component.isLoading();
 
     if (!isLoading) {
+      while (!component.selectField()) {
+        await delay(50);
+      }
+
       const selectedContent = component.selectElement.querySelector(
         'selectedcontent'
       ) as HTMLElement;
@@ -26,7 +30,6 @@ export function ajustFilteredValueOnSelect(component: Select) {
 
       selectedContent.style.opacity = '1';
       component.selectElement.selectedIndex = selectedIndex;
-      component.selectElement.value = selectedValue;
     } else {
       component.isDisabled.set(true);
     }

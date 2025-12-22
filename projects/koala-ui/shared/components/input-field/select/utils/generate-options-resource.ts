@@ -1,5 +1,4 @@
 import {
-  afterRenderEffect,
   isSignal,
   ResourceRef,
   runInInjectionContext,
@@ -13,29 +12,27 @@ import {
 } from '../select.type';
 
 export function generateOptionsResource(component: Select) {
-  afterRenderEffect(() => {
-    const options = component.options();
+  const options = component.options();
 
-    let optionsResource: OptionsResource;
+  let optionsResource: OptionsResource;
 
-    if (Object.hasOwn(options, 'value')) {
-      optionsResource = { onServer: options as ResourceRef<SelectList> };
-    } else if (isSignal(options)) {
-      optionsResource = {
-        inMemoryWithLoading: options as Signal<SelectList>,
-      };
-    } else if (typeof options === 'function') {
-      const resourceFnOptions = options as SelectDataOptionsFn;
+  if (Object.hasOwn(options, 'value')) {
+    optionsResource = { onServer: options as ResourceRef<SelectList> };
+  } else if (isSignal(options)) {
+    optionsResource = {
+      inMemoryWithLoading: options as Signal<SelectList>,
+    };
+  } else if (typeof options === 'function') {
+    const resourceFnOptions = options as SelectDataOptionsFn;
 
-      optionsResource = {
-        onDemand: runInInjectionContext(component.injector, () =>
-          resourceFnOptions(component.requestOptionsParams)
-        ),
-      };
-    } else {
-      optionsResource = { inMemory: options as SelectList };
-    }
+    optionsResource = {
+      onDemand: runInInjectionContext(component.injector, () =>
+        resourceFnOptions(component.requestOptionsParams)
+      ),
+    };
+  } else {
+    optionsResource = { inMemory: options as SelectList };
+  }
 
-    component.optionsResource.set(optionsResource);
-  });
+  component.optionsResource.set(optionsResource);
 }

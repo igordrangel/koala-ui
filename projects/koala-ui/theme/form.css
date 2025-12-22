@@ -4,17 +4,17 @@
   display: block;
 }
 
-kl-autocomplete-field .autocomplete-button {
+kl-select-multiple .select-multiple-button {
   overflow: unset;
 }
 
-kl-autocomplete-field .autocomplete-label {
+kl-select-multiple .select-multiple-label {
   top: 0;
   left: 0.75rem;
   transition: top 0.2s, font-size 0.2s;
 }
 
-kl-autocomplete-field .has-value .autocomplete-label {
+kl-select-multiple .has-value .select-multiple-label {
   position: absolute;
   display: block;
   font-size: 0.75rem;
@@ -23,12 +23,12 @@ kl-autocomplete-field .has-value .autocomplete-label {
   padding: 0 0.3rem;
 }
 
-kl-autocomplete-field .has-value .autocomplete-label span {
+kl-select-multiple .has-value .select-multiple-label span {
   position: relative;
   z-index: 2;
 }
 
-kl-autocomplete-field .has-value .autocomplete-label:after {
+kl-select-multiple .has-value .select-multiple-label:after {
   content: "";
   position: absolute;
   width: 100%;
@@ -38,21 +38,21 @@ kl-autocomplete-field .has-value .autocomplete-label:after {
   left: 0;
 }
 
-kl-autocomplete-field .has-value:focus .autocomplete-label:after {
+kl-select-multiple .has-value:focus .select-multiple-label:after {
   height: 4px;
 }
 
-.kl-autocomplete-options-container input {
+.kl-select-multiple-options-container input {
   -webkit-appearance: none;
   appearance: none;
 }
 
-.kl-autocomplete-options-container label.active {
+.kl-select-multiple-options-container label.active {
   background-color: rgba(63, 63, 63, 0.7);
   transition: background-color 0.1s;
 }
 
-.kl-autocomplete-options-container label:has(input:checked):after {
+.kl-select-multiple-options-container label:has(input:checked):after {
   content: "\f00c";
   color: var(--color-neutral-500);
   font-family: "Font Awesome 6 Free";
@@ -203,12 +203,17 @@ select:open .picker {
   overflow: hidden;
   transition: transform 0.3s ease allow-discrete,
     opacity 0.3s ease allow-discrete, display 0.3s allow-discrete,
-    overlay 0.3s allow-discrete;
+    overlay 0.3s allow-discrete, height 0.3s allow-discrete;
+  position-area: var(--select-position-area, bottom);
 }
 
 ::picker(select):popover-open {
   transform: translateY(0);
   opacity: 1;
+}
+
+select {
+  anchor-name: --select-content;
 }
 
 select selectedcontent span:not(.not-animate) {

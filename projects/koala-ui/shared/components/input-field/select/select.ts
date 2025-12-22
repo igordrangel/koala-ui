@@ -1,4 +1,5 @@
 import {
+  booleanAttribute,
   Component,
   DestroyRef,
   ElementRef,
@@ -6,6 +7,7 @@ import {
   Injector,
   input,
   model,
+  OnInit,
   output,
   signal,
   viewChild,
@@ -22,23 +24,20 @@ import {
   SelectList,
   SelectValue,
 } from './select.type';
-import { SelectFilter } from './services/select-filter';
 import { ajustFilteredValueOnSelect } from './utils/ajust-filtered-value-on-select';
 import { ajustOptionsContainerSize } from './utils/ajust-options-container-size';
 import { assessibility } from './utils/assessibility';
 import { generateOptionsResource } from './utils/generate-options-resource';
+import { onServerFilter } from './utils/on-server-filter';
 import { loadOptions } from './utils/options-loader';
-import { setValueOnElement } from './utils/set-value-on-element';
 
 @Component({
   selector: 'kl-select',
   templateUrl: './select.html',
   imports: [FormsModule, ReactiveFormsModule, FieldErrors, Loader],
-  providers: [SelectFilter],
 })
-export class Select extends InputFieldBase {
+export class Select extends InputFieldBase implements OnInit {
   readonly destroyRef = inject(DestroyRef);
-  readonly selectFilter = inject(SelectFilter);
   readonly injector = inject(Injector);
   readonly selectField =
     viewChild<ElementRef<HTMLSelectElement>>('selectField');
@@ -48,12 +47,17 @@ export class Select extends InputFieldBase {
   readonly isLoading = signal<boolean>(true);
   readonly requestOptionsParams = signal<SelectDataOptionsFnParams>({
     filter: null,
-    autofill: null,
+    currentValue: null,
+    internalFilter: null,
   });
   readonly translations = inject(AppConfig).translation.form;
 
   filter = model<string>();
+  filteredValue = signal<string | null>(null);
   options = input.required<SelectDataOptions>();
+  internalFilter = input<string | null>(null);
+  multiple = input(false, { transform: booleanAttribute });
+  withoutFilter = input(false, { transform: booleanAttribute });
   selectedItem = output<any | null>();
 
   get selectElement() {
@@ -69,14 +73,15 @@ export class Select extends InputFieldBase {
   constructor() {
     super();
 
-    setValueOnElement(this);
     loadOptions(this);
-    generateOptionsResource(this);
     ajustOptionsContainerSize(this);
     ajustFilteredValueOnSelect(this);
     assessibility(this);
+  }
 
-    this.selectFilter.init(this, this.filter);
+  ngOnInit() {
+    onServerFilter(this);
+    generateOptionsResource(this);
   }
 
   applyFilter(options: SelectList) {

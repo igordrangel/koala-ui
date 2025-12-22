@@ -109,10 +109,6 @@ export class NavMenu {
       module: 'Data Input',
       items: new KlArray([
         {
-          label: 'Autocomplete',
-          link: '/docs/data-input/autocomplete',
-        },
-        {
           label: 'Field Group',
           link: '/docs/data-input/field-group',
         },

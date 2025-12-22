@@ -24,9 +24,9 @@
     <select class="disabled:border-neutral-200! disabled:dark:border-neutral-800!"
       #selectField
       [id]="fieldId"
-      [value]="control().value"
+      [formControl]="control()"
       (change)="setValue($event)"
-      [disabled]="isDisabled()">
+      [multiple]="multiple()">
 
       <button>
         <selectedcontent></selectedcontent>
@@ -42,17 +42,19 @@
 
       <div class="kl-select-options-container relative h-full flex flex-col overflow-hidden"
         [attr.aria-labelledby]="fieldId">
-        <div class="kl-select-filter-container border-b border-neutral-200 dark:border-neutral-700">
-          <label class="flex items-center text-sm">
-            <i class="fa-solid fa-magnifying-glass opacity-60 absolute top-3 left-4"></i>
-            <input class="w-full p-2 pr-3 pl-10 outline-none placeholder:opacity-60"
-              #searchInput
-              type="search"
-              [(ngModel)]="filter"
-              [placeholder]="translations.selectTypeSearch"
-            />
-          </label>
-        </div>
+        @if (!withoutFilter()) {
+          <div class="kl-select-filter-container border-b border-neutral-200 dark:border-neutral-700">
+            <label class="flex items-center text-sm">
+              <i class="fa-solid fa-magnifying-glass opacity-60 absolute top-3 left-4"></i>
+              <input class="w-full p-2 pr-3 pl-10 outline-none placeholder:opacity-60"
+                #searchInput
+                type="search"
+                [(ngModel)]="filter"
+                [placeholder]="translations.selectTypeSearch"
+              />
+            </label>
+          </div>
+        }
 
         <div class="kl-select-options-content p-1 overflow-auto">
           @for (item of optionList(); track $index) {
