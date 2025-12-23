@@ -1,8 +1,11 @@
 import { effect } from '@angular/core';
 import { delay } from '@koalarx/utils/KlDelay';
 import { Select } from '../select';
+import { SelectExperimental } from '../select-experimental';
 
-export function ajustFilteredValueOnSelect(component: Select) {
+export function ajustFilteredValueOnSelect(
+  component: Select | SelectExperimental
+) {
   effect(async () => {
     const isLoading = component.isLoading();
 
@@ -11,9 +14,10 @@ export function ajustFilteredValueOnSelect(component: Select) {
         await delay(50);
       }
 
-      const selectedContent = component.selectElement.querySelector(
+      const selectedContent = (component.selectElement.querySelector(
         'selectedcontent'
-      ) as HTMLElement;
+      ) ??
+        component.selectElement.querySelector('.selectcontent')) as HTMLElement;
 
       selectedContent.style.opacity = '0';
 
@@ -29,7 +33,10 @@ export function ajustFilteredValueOnSelect(component: Select) {
       await delay(1);
 
       selectedContent.style.opacity = '1';
-      component.selectElement.selectedIndex = selectedIndex;
+
+      if (component.selectElement instanceof HTMLSelectElement) {
+        component.selectElement.selectedIndex = selectedIndex;
+      }
     } else {
       component.isDisabled.set(true);
     }

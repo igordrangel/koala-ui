@@ -1,7 +1,8 @@
 import { effect } from '@angular/core';
 import { Select } from '../select';
+import { SelectExperimental } from '../select-experimental';
 
-export function loadOptions(component: Select) {
+export function loadOptions(component: Select | SelectExperimental) {
   effect(() => {
     const options = component.optionsResource();
 

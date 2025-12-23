@@ -1,7 +1,10 @@
 import { afterRenderEffect } from '@angular/core';
 import { Select } from '../select';
+import { SelectExperimental } from '../select-experimental';
 
-export function ajustOptionsContainerSize(component: Select) {
+export function ajustOptionsContainerSize(
+  component: Select | SelectExperimental
+) {
   afterRenderEffect(() => {
     const selectElement = component.selectElement;
     const optionsContainer = selectElement.parentElement?.querySelector(
@@ -16,12 +19,14 @@ export function ajustOptionsContainerSize(component: Select) {
     function setMaxHeight() {
       const optionsRect = selectElement.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
+      const sizeDiscount =
+        component instanceof SelectExperimental ? 16 : 16 + optionsRect.height;
 
-      let availableHeight = viewportHeight - optionsRect.top - 16;
+      let availableHeight = viewportHeight - optionsRect.top - sizeDiscount;
 
       if (availableHeight < 150) {
         availableHeight =
-          viewportHeight - (viewportHeight - optionsRect.bottom) - 16;
+          viewportHeight - (viewportHeight - optionsRect.bottom) - sizeDiscount;
         selectElement.style.setProperty('--select-position-area', 'top');
       } else {
         selectElement.style.setProperty('--select-position-area', 'bottom');
@@ -53,13 +58,20 @@ export function ajustOptionsContainerSize(component: Select) {
       }
     }
 
+    function touchControl() {
+      component.control().markAsTouched();
+    }
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
+          component.selectElement.classList.add('opened');
           setMaxWidth();
           setMaxHeight();
           enableAndFocusFilter();
+          touchControl();
         } else {
+          component.selectElement.classList.remove('opened');
           disableFilter();
         }
       });

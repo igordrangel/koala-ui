@@ -124,7 +124,10 @@ kl-select .kl-select-label {
   z-index: 1;
 }
 
-kl-select .has-value:has(selectedcontent > *) .kl-select-label {
+kl-select .has-value:has(selectedcontent > *) .kl-select-label,
+kl-select
+  .has-value:has(.kl-select-content .selectcontent > *)
+  .kl-select-label {
   font-size: 0.75rem;
   top: -0.6rem;
   left: 0.6rem;
@@ -156,7 +159,8 @@ select,
   appearance: base-select;
 }
 
-select {
+select,
+.kl-select-button {
   position: relative;
   justify-content: space-between;
   align-items: center;
@@ -174,7 +178,7 @@ select::picker-icon {
   display: none;
 }
 
-select .picker {
+kl-select .picker {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -184,13 +188,19 @@ select .picker {
   color: var(--color-neutral-400);
 }
 
-select:open .picker {
+select:open .picker,
+kl-select .kl-select-button:popover-open .picker {
   rotate: 180deg;
 }
 
-::picker(select) {
+.kl-select-options-container[popover] {
+  display: none;
+}
+
+::picker(select),
+.kl-select-options-container[popover] {
   position: relative;
-  max-width: var(--select-width);
+  width: var(--select-width);
   box-sizing: border-box;
   margin-block-start: 0.5rem;
   margin-block-end: 0.5rem;
@@ -207,9 +217,11 @@ select:open .picker {
   position-area: var(--select-position-area, bottom);
 }
 
-::picker(select):popover-open {
+::picker(select):popover-open,
+.kl-select-options-container.with-popover:popover-open {
   transform: translateY(0);
   opacity: 1;
+  display: flex;
 }
 
 select {
@@ -222,13 +234,15 @@ select selectedcontent span:not(.not-animate) {
 }
 
 @starting-style {
-  ::picker(select):popover-open {
+  ::picker(select):popover-open,
+  .kl-select-options-container.with-popover:popover-open {
     transform: translateY(-1rem);
     opacity: 0;
   }
 }
 
-select option {
+select option,
+.kl-select-options-container.with-popover .kl-select-option-content {
   display: flex;
   justify-content: space-between;
   padding: 0.25rem 0.5rem;
@@ -237,18 +251,30 @@ select option {
   white-space: break-spaces;
 }
 
-select option:focus {
+.kl-select-options-container.with-popover .kl-select-option-content input {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+select option:focus,
+.kl-select-options-container.with-popover
+  .kl-select-option-content
+  input:focus {
   background-color: rgba(63, 63, 63, 0.7);
   outline: none;
   transition: background-color 0.1s;
 }
 
-select option:checked {
+select option:checked,
+.kl-select-options-container.with-popover
+  .kl-select-option-content:has(input:checked) {
   background-color: rgba(63, 63, 63, 0.7);
   transition: background-color 0.1s;
 }
 
-select option::checkmark {
+select option::checkmark,
+.kl-select-options-container.with-popover
+  .kl-select-option-content:has(input:checked):after {
   content: "\f00c";
   color: var(--color-neutral-500);
   font-family: "Font Awesome 6 Free";
@@ -256,4 +282,9 @@ select option::checkmark {
   font-size: 1rem;
   margin-left: auto;
   order: 1;
+}
+
+.kl-select-options-container.with-popover label.active {
+  background-color: rgba(63, 63, 63, 0.7);
+  transition: background-color 0.1s;
 }

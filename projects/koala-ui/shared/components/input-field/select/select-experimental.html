@@ -1,12 +1,4 @@
-@if (supportsExperimentalSelect) {
-  <kl-select-experimental
-    [label]="label()"
-    [control]="control()"
-    [options]="options()"
-    [internalFilter]="internalFilter()"
-    [withoutFilter]="withoutFilter()"
-  />
-} @else {
+@if (options(); as items) {
   <div class="kl-select-container relative w-full has-[select:disabled]:cursor-not-allowed"
     [class.has-value]="!!control().value">
 
@@ -29,12 +21,14 @@
       </button>
     }
 
-    <div class="kl-select-content" #selectField>
-      <button type="button" class="kl-select-button flex disabled:border-neutral-200! disabled:dark:border-neutral-800!"
-        [attr.popovertarget]="fieldId"
-        popovertargetaction="toggle">
+    <select class="disabled:border-neutral-200! disabled:dark:border-neutral-800!"
+      #selectField
+      [id]="fieldId"
+      [formControl]="control()"
+      (change)="setValue($event)">
 
-        <span class="selectcontent"></span>
+      <button>
+        <selectedcontent></selectedcontent>
 
         <span class="picker">
           @if (isLoading()) {
@@ -45,7 +39,8 @@
         </span>
       </button>
 
-      <div [id]="fieldId" popover class="kl-select-options-container with-popover relative flex flex-col overflow-hidden">
+      <div class="kl-select-options-container relative h-full flex flex-col overflow-hidden"
+        [attr.aria-labelledby]="fieldId">
         @if (!withoutFilter()) {
           <div class="kl-select-filter-container border-b border-neutral-200 dark:border-neutral-700">
             <label class="flex items-center text-sm">
@@ -62,39 +57,14 @@
 
         <div class="kl-select-options-content p-1 overflow-auto">
           @for (item of optionList(); track $index) {
-            @let optionLabelId = fieldId + '-' + item.value;
-
-            <label class="kl-select-option-content relative py-1 px-2 pr-8 rounded-md"
-              [attr.for]="optionLabelId"
-              [attr.data-index]="$index">
-              <span class="w-full">
-                <input
-                  type="radio"
-                  [id]="optionLabelId"
-                  [name]="fieldId"
-                  [attr.value]="item.value"
-                  [checked]="item.value === control().value"
-                  (change)="setValue($event)"
-                />
-                <span>{{ item.label }}</span>
-              </span>
-            </label>
+            <option
+              [value]="`${item.value}`"
+              [selected]="item.value === control().value">
+              <span>{{ item.label }}</span>
+            </option>
           }
         </div>
       </div>
-    </div>
-
+    </select>
   </div>
 }
-
-@if (hint()) {
-  <span class="hint-content">
-    <i class="fa-regular fa-circle-question"></i> {{hint()}}
-  </span>
-}
-
-<kl-field-errors [field]="control()">
-  <ng-container errors>
-    <ng-content select="[errors]" />
-  </ng-container>
-</kl-field-errors>

@@ -15,10 +15,8 @@ import {
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Loader } from '@koalarx/ui/core/components/loader';
 import { AppConfig } from '@koalarx/ui/core/config';
-import { FieldErrors } from '@koalarx/ui/shared/components/field-errors';
 import { InputFieldBase } from '@koalarx/ui/shared/components/input-field';
 import { assessibility } from './accessibility';
-import { SelectExperimental } from './select-experimental';
 import {
   OptionsResource,
   SelectDataOptions,
@@ -31,24 +29,17 @@ import { ajustOptionsContainerSize } from './utils/ajust-options-container-size'
 import { generateOptionsResource } from './utils/generate-options-resource';
 import { onServerFilter } from './utils/on-server-filter';
 import { loadOptions } from './utils/options-loader';
-import { setSelectedOptionContent } from './utils/set-selected-option-content';
 
 @Component({
-  selector: 'kl-select',
-  templateUrl: './select.html',
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    FieldErrors,
-    Loader,
-    SelectExperimental,
-  ],
+  selector: 'kl-select-experimental',
+  templateUrl: './select-experimental.html',
+  imports: [FormsModule, ReactiveFormsModule, Loader],
 })
-export class Select extends InputFieldBase implements OnInit {
+export class SelectExperimental extends InputFieldBase implements OnInit {
   readonly destroyRef = inject(DestroyRef);
   readonly injector = inject(Injector);
   readonly selectField =
-    viewChild<ElementRef<HTMLSelectElement>>('selectField');
+    viewChild<ElementRef<HTMLSelectElement | HTMLDivElement>>('selectField');
 
   readonly optionsResource = signal<OptionsResource | null>(null);
   readonly optionList = signal<SelectList>([]);
@@ -59,10 +50,6 @@ export class Select extends InputFieldBase implements OnInit {
     internalFilter: null,
   });
   readonly translations = inject(AppConfig).translation.form;
-  readonly supportsExperimentalSelect = !CSS.supports(
-    'appearance',
-    'base-select'
-  );
 
   filter = model<string>();
   filteredValue = signal<string | null>(null);
@@ -93,7 +80,6 @@ export class Select extends InputFieldBase implements OnInit {
   ngOnInit() {
     onServerFilter(this);
     generateOptionsResource(this);
-    setSelectedOptionContent(this);
   }
 
   applyFilter(options: SelectList) {
@@ -128,7 +114,10 @@ export class Select extends InputFieldBase implements OnInit {
   clear(event: MouseEvent) {
     event.preventDefault();
     this.control().setValue(null);
+    this.control().markAsTouched();
 
-    this.selectElement.selectedIndex = -1;
+    if (this.selectElement instanceof HTMLSelectElement) {
+      this.selectElement.selectedIndex = -1;
+    }
   }
 }
