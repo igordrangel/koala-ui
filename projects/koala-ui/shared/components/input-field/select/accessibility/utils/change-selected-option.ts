@@ -1,9 +1,8 @@
 import { Select } from '../../select';
-import { SelectExperimental } from '../../select-experimental';
 import { ScrollDirection } from './update-scroll-position';
 
 export function changeSelectedOption(
-  component: Select | SelectExperimental,
+  component: Select,
   direction: ScrollDirection = 'down'
 ) {
   if (!component.selectElement.classList.contains('opened')) {

@@ -1,91 +1,82 @@
-@if (supportsExperimentalSelect) {
-  <kl-select-experimental
-    [label]="label()"
-    [control]="control()"
-    [options]="options()"
-    [internalFilter]="internalFilter()"
-    [withoutFilter]="withoutFilter()"
-  />
-} @else {
-  <div class="kl-select-container relative w-full has-[select:disabled]:cursor-not-allowed"
-    [class.has-value]="!!control().value">
+<div class="kl-select-container relative w-full has-[select:disabled]:cursor-not-allowed"
+  [class.has-value]="hasValue()">
 
-    @if (label(); as label) {
-      <label class="kl-select-label flex items-center gap-2 whitespace-nowrap text-neutral-900 dark:text-neutral-300"
-        [attr.for]="fieldId">
-        @if (isDisabled()) {
-          <span class="text-neutral-200 dark:text-neutral-600">
-            {{ label }} {{ isRequired() ? '*' : '' }}
-          </span>
-        } @else {
-          <span>{{ label }} {{ isRequired() ? '*' : '' }}</span>
-        }
-      </label>
-    }
-
-    @if (!isDisabled() && control().value) {
-      <button class="kl-select-clear-button absolute right-9 top-2.5 z-10 text-neutral-400 hover:cursor-pointer text-sm focus:shadow-none!" type="button" (click)="clear($event)">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-    }
-
-    <div class="kl-select-content" #selectField>
-      <button type="button" class="kl-select-button flex disabled:border-neutral-200! disabled:dark:border-neutral-800!"
-        [attr.popovertarget]="fieldId"
-        popovertargetaction="toggle">
-
-        <span class="selectcontent"></span>
-
-        <span class="picker">
-          @if (isLoading()) {
-            <kl-loader size="small" />
-          } @else {
-            <i class="fa-solid fa-caret-down"></i>
-          }
+  @if (label(); as label) {
+    <label class="kl-select-label flex items-center gap-2 whitespace-nowrap text-neutral-900 dark:text-neutral-300"
+      [attr.for]="fieldId">
+      @if (isDisabled()) {
+        <span class="text-neutral-200 dark:text-neutral-600">
+          {{ label }} {{ isRequired() ? '*' : '' }}
         </span>
-      </button>
+      } @else {
+        <span>{{ label }} {{ isRequired() ? '*' : '' }}</span>
+      }
+    </label>
+  }
 
-      <div [id]="fieldId" popover class="kl-select-options-container with-popover relative flex flex-col overflow-hidden">
-        @if (!withoutFilter()) {
-          <div class="kl-select-filter-container border-b border-neutral-200 dark:border-neutral-700">
-            <label class="flex items-center text-sm">
-              <i class="fa-solid fa-magnifying-glass opacity-60 absolute top-3 left-4"></i>
-              <input class="w-full p-2 pr-3 pl-10 outline-none placeholder:opacity-60"
-                #searchInput
-                type="search"
-                [(ngModel)]="filter"
-                [placeholder]="translations.selectTypeSearch"
-              />
-            </label>
-          </div>
+  @if (!isDisabled() && hasValue()) {
+    <button class="kl-select-clear-button absolute right-9 top-2.5 z-10 text-neutral-400 hover:cursor-pointer text-sm focus:shadow-none!" type="button" (click)="clear($event)">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  }
+
+  <div class="kl-select-content" #selectField>
+    <button type="button" class="kl-select-button flex disabled:border-neutral-200! disabled:dark:border-neutral-800!"
+      [attr.popovertarget]="fieldId"
+      popovertargetaction="toggle">
+
+      <span class="selectcontent flex flex-wrap gap-1 pt-3 pb-2 items-center w-full h-full"></span>
+
+      <span class="picker">
+        @if (isLoading()) {
+          <kl-loader size="small" />
+        } @else {
+          <i class="fa-solid fa-caret-down"></i>
         }
+      </span>
+    </button>
 
-        <div class="kl-select-options-content p-1 overflow-auto">
-          @for (item of optionList(); track $index) {
-            @let optionLabelId = fieldId + '-' + item.value;
-
-            <label class="kl-select-option-content relative py-1 px-2 pr-8 rounded-md"
-              [attr.for]="optionLabelId"
-              [attr.data-index]="$index">
-              <span class="w-full">
-                <input
-                  type="radio"
-                  [id]="optionLabelId"
-                  [name]="fieldId"
-                  [attr.value]="item.value"
-                  [checked]="item.value === control().value"
-                  (change)="setValue($event)"
-                />
-                <span>{{ item.label }}</span>
-              </span>
-            </label>
-          }
+    <div [id]="fieldId" popover class="kl-select-options-container with-popover relative flex flex-col overflow-hidden">
+      @if (!withoutFilter()) {
+        <div class="kl-select-filter-container border-b border-neutral-200 dark:border-neutral-700">
+          <label class="flex items-center text-sm">
+            <i class="fa-solid fa-magnifying-glass opacity-60 absolute top-3 left-4"></i>
+            <input class="w-full p-2 pr-3 pl-10 outline-none placeholder:opacity-60"
+              #searchInput
+              type="search"
+              [(ngModel)]="filter"
+              [placeholder]="translations.selectTypeSearch"
+            />
+          </label>
         </div>
+      }
+
+      <div class="kl-select-options-content p-1 overflow-auto">
+        @for (item of optionList(); track $index) {
+          @let optionLabelId = fieldId + '-' + item.value;
+
+          <label class="kl-select-option-content relative py-1 px-2 pr-8 rounded-md"
+            [attr.for]="optionLabelId"
+            [attr.data-index]="$index">
+            <span class="w-full">
+              @let isChecked = multiple() ? (control().value || []).includes(item.value) : item.value === control().value;
+
+              <input
+                [type]="multiple() ? 'checkbox' : 'radio'"
+                [id]="optionLabelId"
+                [name]="fieldId"
+                [attr.value]="item.value"
+                [checked]="isChecked"
+                (change)="setValue($event)"
+              />
+              <span>{{ item.label }}</span>
+            </span>
+          </label>
+        }
       </div>
     </div>
-
   </div>
-}
+</div>
 
 @if (hint()) {
   <span class="hint-content">

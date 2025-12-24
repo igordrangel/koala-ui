@@ -1,4 +1,5 @@
 import {
+  ApplicationRef,
   booleanAttribute,
   Component,
   DestroyRef,
@@ -18,7 +19,6 @@ import { AppConfig } from '@koalarx/ui/core/config';
 import { FieldErrors } from '@koalarx/ui/shared/components/field-errors';
 import { InputFieldBase } from '@koalarx/ui/shared/components/input-field';
 import { assessibility } from './accessibility';
-import { SelectExperimental } from './select-experimental';
 import {
   OptionsResource,
   SelectDataOptions,
@@ -26,9 +26,9 @@ import {
   SelectList,
   SelectValue,
 } from './select.type';
-import { ajustFilteredValueOnSelect } from './utils/ajust-filtered-value-on-select';
 import { ajustOptionsContainerSize } from './utils/ajust-options-container-size';
 import { generateOptionsResource } from './utils/generate-options-resource';
+import { isLoadingFeedback } from './utils/is-loading-feedback';
 import { onServerFilter } from './utils/on-server-filter';
 import { loadOptions } from './utils/options-loader';
 import { setSelectedOptionContent } from './utils/set-selected-option-content';
@@ -36,19 +36,13 @@ import { setSelectedOptionContent } from './utils/set-selected-option-content';
 @Component({
   selector: 'kl-select',
   templateUrl: './select.html',
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    FieldErrors,
-    Loader,
-    SelectExperimental,
-  ],
+  imports: [FormsModule, ReactiveFormsModule, FieldErrors, Loader],
 })
 export class Select extends InputFieldBase implements OnInit {
+  readonly appRef = inject(ApplicationRef);
   readonly destroyRef = inject(DestroyRef);
   readonly injector = inject(Injector);
-  readonly selectField =
-    viewChild<ElementRef<HTMLSelectElement>>('selectField');
+  readonly selectField = viewChild<ElementRef<HTMLDivElement>>('selectField');
 
   readonly optionsResource = signal<OptionsResource | null>(null);
   readonly optionList = signal<SelectList>([]);
@@ -63,12 +57,14 @@ export class Select extends InputFieldBase implements OnInit {
     'appearance',
     'base-select'
   );
+  readonly hasValue = signal<boolean>(false);
 
   filter = model<string>();
   filteredValue = signal<string | null>(null);
   options = input.required<SelectDataOptions>();
   internalFilter = input<string | null>(null);
   withoutFilter = input(false, { transform: booleanAttribute });
+  multiple = input(false, { transform: booleanAttribute });
   selectedItem = output<any | null>();
 
   get selectElement() {
@@ -86,7 +82,7 @@ export class Select extends InputFieldBase implements OnInit {
 
     loadOptions(this);
     ajustOptionsContainerSize(this);
-    ajustFilteredValueOnSelect(this);
+    isLoadingFeedback(this);
     assessibility(this);
   }
 
@@ -104,22 +100,33 @@ export class Select extends InputFieldBase implements OnInit {
   }
 
   setValue(event: Event) {
-    const select = event.target as HTMLSelectElement;
-    let value: SelectValue = select.value;
+    if (this.multiple()) {
+      const selectedOptionsElements = this.selectElement.querySelectorAll(
+        '.kl-select-options-content input[type="checkbox"]:checked'
+      ) as NodeListOf<HTMLInputElement>;
+
+      const values: string[] = [];
+
+      selectedOptionsElements.forEach((option) => values.push(option.value));
+
+      const selectedValues = this.optionList()
+        .filter((item) => values.includes(String(item.value)))
+        .map((item) => item.value);
+
+      this.control().setValue(selectedValues, { emitEvent: true });
+
+      return;
+    }
+
+    const select = event.target as HTMLInputElement;
+    const value: SelectValue = select.value;
 
     const selectedOption = this.optionList().find(
       (item) => String(item.value) === value
     );
 
     if (selectedOption) {
-      if (typeof selectedOption.value === 'number') {
-        value = Number(value);
-      } else if (typeof selectedOption.value === 'boolean') {
-        value = value === 'true';
-      } else {
-        value = selectedOption.value;
-      }
-      this.control().setValue(value, { emitEvent: true });
+      this.control().setValue(selectedOption.value, { emitEvent: true });
     }
 
     this.selectedItem.emit(selectedOption?.data ?? null);
@@ -128,7 +135,18 @@ export class Select extends InputFieldBase implements OnInit {
   clear(event: MouseEvent) {
     event.preventDefault();
     this.control().setValue(null);
+  }
 
-    this.selectElement.selectedIndex = -1;
+  removeOption(event: MouseEvent) {
+    event.preventDefault();
+
+    const target = event.target as HTMLSpanElement;
+    const value = target.parentElement?.dataset['value'];
+
+    const inputValue = this.selectElement.querySelector(
+      `.kl-select-options-content input[value="${value}"]`
+    ) as HTMLInputElement;
+
+    inputValue.click();
   }
 }

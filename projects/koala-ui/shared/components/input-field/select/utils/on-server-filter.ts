@@ -2,9 +2,8 @@ import { effect } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { debounceTime } from 'rxjs/internal/operators/debounceTime';
 import { Select } from '../select';
-import { SelectExperimental } from '../select-experimental';
 
-export function onServerFilter(component: Select | SelectExperimental) {
+export function onServerFilter(component: Select) {
   toObservable(component.filter, { injector: component.injector })
     .pipe(debounceTime(300), takeUntilDestroyed(component.destroyRef))
     .subscribe((value) => component.filteredValue.set(value ?? null));

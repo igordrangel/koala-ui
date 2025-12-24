@@ -1,9 +1,8 @@
 import { Select } from '../select';
-import { SelectExperimental } from '../select-experimental';
 import { changeSelectedOption } from './utils/change-selected-option';
 import { updateScrollPosition } from './utils/update-scroll-position';
 
-export function initOnKeyDownListener(component: Select | SelectExperimental) {
+export function initOnKeyDownListener(component: Select) {
   function onKeyDown(event: KeyboardEvent) {
     switch (event.key) {
       case 'ArrowDown': {

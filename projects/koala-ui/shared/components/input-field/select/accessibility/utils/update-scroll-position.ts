@@ -1,10 +1,9 @@
 import { Select } from '../../select';
-import { SelectExperimental } from '../../select-experimental';
 
 export type ScrollDirection = 'down' | 'up';
 
 export function updateScrollPosition(
-  component: Select | SelectExperimental,
+  component: Select,
   direction: ScrollDirection = 'down'
 ) {
   if (!component.selectElement.classList.contains('opened')) {

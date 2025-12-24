@@ -1,13 +1,15 @@
 import { SampleContainer } from '@/app/shared/components/sample-container/sample-container';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { SelectBuilder } from '@koalarx/ui/shared/components/input-field/select';
-import { SelectMultiple } from '@koalarx/ui/shared/components/input-field/select-multiple';
+import {
+  Select,
+  SelectBuilder,
+} from '@koalarx/ui/shared/components/input-field/select';
 
 @Component({
   selector: 'app-select-multiple-sample',
   templateUrl: './select-multiple-sample.html',
-  imports: [SampleContainer, SelectMultiple],
+  imports: [SampleContainer, Select],
 })
 export class SelectMultipleSample {
   form = inject(FormBuilder).group({

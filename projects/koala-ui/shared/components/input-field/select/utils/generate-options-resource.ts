@@ -5,16 +5,13 @@ import {
   Signal,
 } from '@angular/core';
 import { Select } from '../select';
-import { SelectExperimental } from '../select-experimental';
 import {
   OptionsResource,
   SelectDataOptionsFn,
   SelectList,
 } from '../select.type';
 
-export function generateOptionsResource(
-  component: Select | SelectExperimental
-) {
+export function generateOptionsResource(component: Select) {
   const options = component.options();
 
   let optionsResource: OptionsResource;

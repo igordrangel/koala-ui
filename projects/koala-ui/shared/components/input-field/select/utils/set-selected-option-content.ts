@@ -1,6 +1,30 @@
+import { createComponent } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Select } from '../select';
+import { isEmpty } from '@koalarx/ui/shared/utils';
 import { delay } from '@koalarx/utils/KlDelay';
+import { Select } from '../select';
+import { SelectOptionBadge } from '../select-option-badge';
+
+function hasValue(value: any) {
+  return Array.isArray(value) ? value.length > 0 : !isEmpty(value);
+}
+
+function createBadgeElement(component: Select, content: Node, value: any) {
+  const badgeComponent = createComponent(SelectOptionBadge, {
+    environmentInjector: component.appRef.injector,
+    projectableNodes: [[content]],
+  });
+
+  badgeComponent.instance.removeCallback = (event: MouseEvent) =>
+    component.removeOption(event);
+
+  const element: HTMLElement = badgeComponent.location.nativeElement;
+  const spanElement = element.firstElementChild as HTMLSpanElement;
+
+  spanElement.dataset['value'] = value;
+
+  return element;
+}
 
 async function appendSelectedOptionContent(component: Select, value: any) {
   while (component.isLoading()) {
@@ -11,23 +35,38 @@ async function appendSelectedOptionContent(component: Select, value: any) {
     '.selectcontent'
   ) as HTMLElement;
 
-  const selectedIndex = component
-    .optionList()
-    .findIndex((item) => item.value === value);
-
-  const selectedOption = component.selectElement.querySelector(
-    `.kl-select-option-content[data-index="${selectedIndex}"] span span`
-  ) as HTMLSpanElement;
+  if (!Array.isArray(value)) {
+    value = [value];
+  }
 
   selectedContent.innerHTML = '';
 
-  if (selectedOption) {
-    selectedContent.appendChild(selectedOption.cloneNode(true));
+  for (const v of value) {
+    const selectedIndex = component
+      .optionList()
+      .findIndex((item) => item.value === v);
+
+    const selectedOptions = component.selectElement.querySelector(
+      `.kl-select-option-content[data-index="${selectedIndex}"] span span`
+    ) as HTMLSpanElement;
+
+    if (selectedOptions) {
+      const optionContent = selectedOptions.cloneNode(true);
+      const optionBadge = component.multiple()
+        ? createBadgeElement(component, optionContent, v)
+        : optionContent;
+
+      selectedContent.appendChild(optionBadge);
+    }
   }
+
+  component.hasValue.set(hasValue(value));
 }
 
 export function setSelectedOptionContent(component: Select) {
   appendSelectedOptionContent(component, component.control().value);
+
+  component.hasValue.set(hasValue(component.control().value));
 
   component
     .control()

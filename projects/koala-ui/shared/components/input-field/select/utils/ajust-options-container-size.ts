@@ -1,10 +1,7 @@
 import { afterRenderEffect } from '@angular/core';
 import { Select } from '../select';
-import { SelectExperimental } from '../select-experimental';
 
-export function ajustOptionsContainerSize(
-  component: Select | SelectExperimental
-) {
+export function ajustOptionsContainerSize(component: Select) {
   afterRenderEffect(() => {
     const selectElement = component.selectElement;
     const optionsContainer = selectElement.parentElement?.querySelector(
@@ -19,8 +16,7 @@ export function ajustOptionsContainerSize(
     function setMaxHeight() {
       const optionsRect = selectElement.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
-      const sizeDiscount =
-        component instanceof SelectExperimental ? 16 : 16 + optionsRect.height;
+      const sizeDiscount = 16 + optionsRect.height;
 
       let availableHeight = viewportHeight - optionsRect.top - sizeDiscount;
 
