@@ -8,7 +8,7 @@ if (fs.existsSync("dist")) {
   fs.rmSync("dist", { recursive: true });
 }
 
-execSync(`npm run build:lib`, { stdio: "inherit" });
+execSync(`bun run build:lib`, { stdio: "inherit" });
 
 const packageJson = JSON.parse(
   fs.readFileSync("dist/package.json", { encoding: "utf8" }).toString()
