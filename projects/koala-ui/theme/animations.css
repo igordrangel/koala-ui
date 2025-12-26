@@ -19,4 +19,16 @@
       transform: translateX(100%);
     }
   }
+
+  @keyframes bounce {
+    0% {
+      top: 10px;
+    }
+    60% {
+      top: -5px;
+    }
+    100% {
+      top: 0;
+    }
+  }
 }

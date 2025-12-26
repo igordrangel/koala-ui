@@ -4,13 +4,17 @@
   display: block;
 }
 
-kl-autocomplete-field .autocomplete-label {
+kl-select-multiple .select-multiple-button {
+  overflow: unset;
+}
+
+kl-select-multiple .select-multiple-label {
   top: 0;
   left: 0.75rem;
   transition: top 0.2s, font-size 0.2s;
 }
 
-kl-autocomplete-field .has-value .autocomplete-label {
+kl-select-multiple .has-value .select-multiple-label {
   position: absolute;
   display: block;
   font-size: 0.75rem;
@@ -19,12 +23,12 @@ kl-autocomplete-field .has-value .autocomplete-label {
   padding: 0 0.3rem;
 }
 
-kl-autocomplete-field .has-value .autocomplete-label span {
+kl-select-multiple .has-value .select-multiple-label span {
   position: relative;
   z-index: 2;
 }
 
-kl-autocomplete-field .has-value .autocomplete-label:after {
+kl-select-multiple .has-value .select-multiple-label:after {
   content: "";
   position: absolute;
   width: 100%;
@@ -34,21 +38,21 @@ kl-autocomplete-field .has-value .autocomplete-label:after {
   left: 0;
 }
 
-kl-autocomplete-field .has-value:focus .autocomplete-label:after {
+kl-select-multiple .has-value:focus .select-multiple-label:after {
   height: 4px;
 }
 
-.kl-autocomplete-options-container input {
+.kl-select-multiple-options-container input {
   -webkit-appearance: none;
   appearance: none;
 }
 
-.kl-autocomplete-options-container label.active {
+.kl-select-multiple-options-container label.active {
   background-color: rgba(63, 63, 63, 0.7);
   transition: background-color 0.1s;
 }
 
-.kl-autocomplete-options-container label:has(input:checked):after {
+.kl-select-multiple-options-container label:has(input:checked):after {
   content: "\f00c";
   color: var(--color-neutral-500);
   font-family: "Font Awesome 6 Free";
@@ -95,4 +99,192 @@ button:focus {
   color: var(--color-neutral-700);
   font-size: 0.65rem;
   text-transform: uppercase;
+}
+
+label.floating-label:not(:has(option:checked)) > span {
+  top: calc(var(--size-field, 0.25rem) * 10 / 2);
+  translate: 0 -50%;
+  pointer-events: none;
+  scale: 1;
+}
+
+kl-select .kl-select-container {
+  position: relative;
+  overflow: unset;
+}
+
+kl-select .kl-select-label {
+  position: absolute;
+  display: block;
+  top: 0.5rem;
+  left: 1rem;
+  font-size: 1rem;
+  transition: all 0.1s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+kl-select .has-value:has(selectedcontent > *) .kl-select-label,
+kl-select
+  .has-value:has(.kl-select-content .selectcontent > *)
+  .kl-select-label {
+  font-size: 0.75rem;
+  top: -0.6rem;
+  left: 0.6rem;
+  padding: 0 0.3rem;
+}
+
+kl-select .has-value .kl-select-label > span {
+  position: relative;
+  z-index: 2;
+}
+
+kl-select .has-value .kl-select-label:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: var(--bg-input);
+  bottom: 0.4rem;
+  left: 0;
+  z-index: 1;
+}
+
+kl-select .has-value:focus .kl-select-label:after {
+  height: 4px;
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+}
+
+select,
+.kl-select-button {
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: calc(var(--spacing) * 10);
+  background-color: var(--color-base-100);
+  padding-inline: 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-neutral-600);
+  transition: opacity 0.3s;
+}
+
+select::picker-icon {
+  display: none;
+}
+
+kl-select .picker {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.8rem;
+  transition: rotate 0.3s ease;
+  color: var(--color-neutral-400);
+}
+
+select:open .picker,
+kl-select .kl-select-button:popover-open .picker {
+  rotate: 180deg;
+}
+
+.kl-select-options-container[popover] {
+  display: none;
+}
+
+::picker(select),
+.kl-select-options-container[popover] {
+  position: relative;
+  width: var(--select-width);
+  box-sizing: border-box;
+  margin-block-start: 0.5rem;
+  margin-block-end: 0.5rem;
+  padding: 0;
+  background-color: var(--color-base-300);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-neutral-600);
+  transform: translateY(-1rem);
+  opacity: 0;
+  overflow: hidden;
+  transition: transform 0.3s ease allow-discrete,
+    opacity 0.3s ease allow-discrete, display 0.3s allow-discrete,
+    overlay 0.3s allow-discrete, height 0.3s allow-discrete;
+  position-area: var(--select-position-area, bottom);
+}
+
+::picker(select):popover-open,
+.kl-select-options-container.with-popover:popover-open {
+  transform: translateY(0);
+  opacity: 1;
+  display: flex;
+}
+
+select {
+  anchor-name: --select-content;
+}
+
+select selectedcontent span:not(.not-animate) {
+  position: relative;
+  animation: 0.5s ease bounce;
+}
+
+@starting-style {
+  ::picker(select):popover-open,
+  .kl-select-options-container.with-popover:popover-open {
+    transform: translateY(-1rem);
+    opacity: 0;
+  }
+}
+
+select option,
+.kl-select-options-container.with-popover .kl-select-option-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-md);
+  color: var(--color-neutral-300);
+  white-space: break-spaces;
+}
+
+.kl-select-options-container.with-popover .kl-select-option-content input {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+select option:focus,
+.kl-select-options-container.with-popover
+  .kl-select-option-content
+  input:focus {
+  background-color: rgba(63, 63, 63, 0.7);
+  outline: none;
+  transition: background-color 0.1s;
+}
+
+select option:checked,
+.kl-select-options-container.with-popover
+  .kl-select-option-content:has(input:checked) {
+  background-color: rgba(63, 63, 63, 0.7);
+  transition: background-color 0.1s;
+}
+
+select option::checkmark,
+.kl-select-options-container.with-popover
+  .kl-select-option-content:has(input:checked):after {
+  content: "\f00c";
+  color: var(--color-neutral-500);
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 1rem;
+  margin-left: auto;
+  order: 1;
+}
+
+.kl-select-options-container.with-popover label.active {
+  background-color: rgba(63, 63, 63, 0.7);
+  transition: background-color 0.1s;
 }

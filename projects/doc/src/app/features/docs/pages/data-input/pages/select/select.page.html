@@ -2,20 +2,104 @@
   <div class="flex flex-col gap-6 py-10 px-5 lg:px-0 w-full">
     <section id="select">
       <h1 class="text-5xl font-bold">Select</h1>
+      <small class="text-lg font-light opacity-60">Select input and command palette with a list of suggestions.</small>
+    </section>
+
+    <section id="select-on-demand">
+      <h2 class="text-2xl font-bold">Select On Demand</h2>
+      <small class="text-base font-light opacity-70">
+        This loading mode fetches suggestions dynamically based on the current filter or field value, enabling efficient and responsive autocomplete.
+      </small>
+    </section>
+
+    <section id="select-on-demand-preview">
+      <h2 class="text-xl font-bold">Preview</h2>
+      <app-select-on-demand-sample />
+    </section>
+
+    <section id="select-on-demand-code">
+      <h2 class="text-xl font-bold">Code</h2>
+      <kl-code-viewer
+        name="select-on-demand-sample.ts"
+        language="typescript"
+        src="markdown/data-input/select/select-on-demand-sample.ts.md"
+      />
+      <kl-code-viewer
+        name="select-on-demand-sample.html"
+        language="html"
+        src="markdown/data-input/select/select-sample.html.md"
+      />
+    </section>
+
+    <section id="select-on-server">
+      <h2 class="text-2xl font-bold">Select On Server</h2>
+      <small class="text-base font-light opacity-70">
+        In this mode, suggestions are fetched from the server, but the filtering of results is performed in-memory on the client side, providing fast responses without overloading the backend.
+      </small>
+    </section>
+
+    <section id="select-on-server-preview">
+      <h2 class="text-xl font-bold">Preview</h2>
+      <app-select-on-server-sample />
+    </section>
+
+    <section id="select-on-server-code">
+      <h2 class="text-xl font-bold">Code</h2>
+      <kl-code-viewer
+        name="select-on-server-sample.ts"
+        language="typescript"
+        src="markdown/data-input/select/select-on-server-sample.ts.md"
+      />
+      <kl-code-viewer
+        name="select-on-server-sample.html"
+        language="html"
+        src="markdown/data-input/select/select-sample.html.md"
+      />
+    </section>
+
+    <section id="select-in-memory">
+      <h2 class="text-2xl font-bold">Select In Memory</h2>
+      <small class="text-base font-light opacity-70">
+        This mode is ideal for cases where the options are already available locally, such as enum lists or fixed values, and do not need to be fetched from the server. The options are loaded directly into an array and filtering is performed in memory, providing fast and efficient responses.
+      </small>
+    </section>
+
+    <section id="select-in-memory-preview">
+      <h2 class="text-xl font-bold">Preview</h2>
+      <app-select-in-memory-sample />
+    </section>
+
+    <section id="select-in-memory-code">
+      <h2 class="text-xl font-bold">Code</h2>
+      <kl-code-viewer
+        name="select-in-memory-sample.ts"
+        language="typescript"
+        src="markdown/data-input/select/select-in-memory-sample.ts.md"
+      />
+      <kl-code-viewer
+        name="select-in-memory-sample.html"
+        language="html"
+        src="markdown/data-input/select/select-sample.html.md"
+      />
+    </section>
+
+    <section id="select-without-filter" class="mt-10">
+      <h1 class="text-5xl font-bold">Select Without Filter</h1>
       <small class="text-lg font-light opacity-60">A simple select field.</small>
     </section>
 
     <section id="select-preview">
       <h2 class="text-xl font-bold">Preview</h2>
-      <app-select-sample />
+      <app-select-without-filter-sample />
     </section>
 
     <section id="select-code">
       <h2 class="text-xl font-bold">Code</h2>
+
       <kl-code-viewer
         name="select-sample.ts"
         language="typescript"
-        src="markdown/data-input/select/select-sample.ts.md"
+        src="markdown/data-input/select/select-in-memory-sample.ts.md"
       />
       <kl-code-viewer
         name="select-sample.html"
@@ -23,11 +107,39 @@
         src="markdown/data-input/select/select-sample.html.md"
       />
     </section>
+
+    <section id="select-multiple" class="mt-10">
+      <h1 class="text-5xl font-bold">Select Multiple</h1>
+      <small class="text-lg font-light opacity-60">A simple select field that allows multiple selections.</small>
+    </section>
+
+    <section id="select-multiple-preview">
+      <h2 class="text-xl font-bold">Preview</h2>
+      <app-select-multiple-sample />
+    </section>
+
+    <section id="select-multiple-code">
+      <h2 class="text-xl font-bold">Code</h2>
+
+      <kl-code-viewer
+        name="select-multiple-sample.ts"
+        language="typescript"
+        src="markdown/data-input/select/select-multiple-sample.ts.md"
+      />
+      <kl-code-viewer
+        name="select-multiple-sample.html"
+        language="html"
+        src="markdown/data-input/select/select-multiple-sample.html.md"
+      />
+    </section>
   </div>
 
   <kl-on-this-page class="hidden lg:block min-w-3xs" [links]="[
     { label: 'Introduction', elementId: 'select' },
-    { label: 'Preview', elementId: 'select-preview' },
-    { label: 'Code', elementId: 'select-code' },
+    { label: 'On Demand', elementId: 'select-on-demand' },
+    { label: 'On Server', elementId: 'select-on-server' },
+    { label: 'In Memory', elementId: 'select-in-memory' },
+    { label: 'Select Without Filter', elementId: 'select-without-filter' },
+    { label: 'Select Multiple', elementId: 'select-multiple' }
   ]"/>
 </div>

@@ -24,6 +24,7 @@ export const en: Translation = {
     invalidPasswordHasUppercase: 'The password must contain uppercase letters.',
     invalidPasswordHasNumber: 'The password must contain numbers.',
     invalidConfirmPassword: 'The confirmation password does not match.',
+    selectTypeSearch: 'Type to search...',
   },
   onThisPage: {
     title: 'On this page',
