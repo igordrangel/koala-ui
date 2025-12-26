@@ -1,9 +1,10 @@
-import { Component, resource } from '@angular/core';
+import { ChangeDetectionStrategy, Component, resource } from '@angular/core';
 import { Button } from '@koalarx/ui/shared/directives';
 
 @Component({
   selector: 'app-github-stars',
   templateUrl: './github-stars.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [Button],
 })
 export class GithubStars {

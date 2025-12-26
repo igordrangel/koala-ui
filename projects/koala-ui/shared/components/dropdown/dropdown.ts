@@ -1,9 +1,16 @@
-import { Component, effect, ElementRef, viewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  ElementRef,
+  viewChild,
+} from '@angular/core';
 import { KlString, randomString } from '@koalarx/utils/KlString';
 
 @Component({
   selector: 'kl-dropdown',
   templateUrl: './dropdown.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Dropdown {
   private readonly dropdownTriggerElement =

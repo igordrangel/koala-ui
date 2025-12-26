@@ -1,4 +1,9 @@
-import { Component, effect, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject,
+} from '@angular/core';
 import { AppConfig } from '@koalarx/ui/core/config';
 import { InputFieldBase } from '@koalarx/ui/shared/components/input-field';
 import { InputText } from '@koalarx/ui/shared/components/input-field/input-text';
@@ -7,6 +12,7 @@ import { CPFValidator } from './cpf.validator';
 @Component({
   selector: 'kl-input-cpf',
   templateUrl: './input-cpf.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [InputText],
 })
 export class InputCpf extends InputFieldBase {

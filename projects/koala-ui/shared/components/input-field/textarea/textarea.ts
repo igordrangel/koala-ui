@@ -1,5 +1,6 @@
 import {
   booleanAttribute,
+  ChangeDetectionStrategy,
   Component,
   effect,
   ElementRef,
@@ -14,6 +15,7 @@ import { InputFieldBase } from '@koalarx/ui/shared/components/input-field';
   selector: 'kl-textarea',
   templateUrl: './textarea.html',
   imports: [ReactiveFormsModule, FieldErrors],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Textarea extends InputFieldBase {
   private readonly textareaElement =

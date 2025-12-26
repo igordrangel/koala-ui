@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
 import {
@@ -13,6 +13,7 @@ import { ThemeSwitcher } from '../theme-switcher/theme-switcher';
 @Component({
   selector: 'app-header',
   templateUrl: './app-header.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     Logotype,
     HorizontalMenuContainer,

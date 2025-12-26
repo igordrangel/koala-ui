@@ -1,5 +1,6 @@
 import {
   booleanAttribute,
+  ChangeDetectionStrategy,
   Component,
   inject,
   input,
@@ -21,6 +22,7 @@ type InputPasswordType = 'password' | 'text';
   selector: 'kl-input-password',
   templateUrl: './input-password.html',
   imports: [ReactiveFormsModule, FieldErrors],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputPassword extends InputFieldBase implements OnInit {
   readonly translations = inject(AppConfig).translation.form;

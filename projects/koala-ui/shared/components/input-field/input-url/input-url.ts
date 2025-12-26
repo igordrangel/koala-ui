@@ -1,4 +1,9 @@
-import { Component, effect, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject,
+} from '@angular/core';
 import { Validators } from '@angular/forms';
 import { AppConfig } from '@koalarx/ui/core/config';
 import {
@@ -10,6 +15,7 @@ import {
   selector: 'kl-input-url',
   templateUrl: './input-url.html',
   imports: [InputField],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputUrl extends InputFieldBase {
   readonly translations = inject(AppConfig).translation.form;

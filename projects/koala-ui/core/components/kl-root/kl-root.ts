@@ -1,4 +1,9 @@
-import { Component, input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  OnInit,
+} from '@angular/core';
 import { DialogContainer } from '@koalarx/ui/core/components/dialog';
 import { LoaderPageContent } from '@koalarx/ui/core/components/loader-page';
 import { SideWindowContainer } from '@koalarx/ui/core/components/side-window';
@@ -10,6 +15,7 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 @Component({
   selector: 'kl-root',
   templateUrl: './kl-root.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     DialogContainer,
     LoadingBarRouterModule,

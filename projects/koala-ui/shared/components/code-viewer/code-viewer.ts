@@ -10,6 +10,7 @@ import 'prismjs/plugins/line-numbers/prism-line-numbers';
 
 import {
   booleanAttribute,
+  ChangeDetectionStrategy,
   Component,
   inject,
   input,
@@ -40,6 +41,7 @@ export interface CodeViewerConfig {
 @Component({
   selector: 'kl-code-viewer',
   templateUrl: './code-viewer.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MarkdownModule, Tooltip],
 })
 export class CodeViewer {

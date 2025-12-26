@@ -1,5 +1,6 @@
 import {
   booleanAttribute,
+  ChangeDetectionStrategy,
   Component,
   effect,
   ElementRef,
@@ -31,6 +32,7 @@ export type RadioSize =
   selector: 'kl-input-radio',
   templateUrl: './input-radio.html',
   imports: [ReactiveFormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputRadio extends InputFieldBase {
   private readonly inputRadioElement =

@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import {
   InputField,
   InputFieldBase,
@@ -8,6 +8,7 @@ import {
   selector: 'kl-input-month',
   templateUrl: './input-month.html',
   imports: [InputField],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputMonth extends InputFieldBase {
   min = input<string>();

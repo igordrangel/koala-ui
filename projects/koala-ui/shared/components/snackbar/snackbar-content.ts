@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   effect,
   ElementRef,
@@ -17,6 +18,7 @@ import { map } from 'rxjs/internal/operators/map';
 @Component({
   selector: 'kl-snackbar-content',
   templateUrl: './snackbar-content.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SnackbarContent implements OnInit {
   private readonly alertContentRef =
