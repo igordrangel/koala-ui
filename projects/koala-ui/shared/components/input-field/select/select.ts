@@ -46,6 +46,7 @@ export class Select extends InputFieldBase implements OnInit {
 
   readonly optionsResource = signal<OptionsResource | null>(null);
   readonly optionList = signal<SelectList>([]);
+  readonly selectedOptions = signal<SelectList>([]);
   readonly isLoading = signal<boolean>(true);
   readonly requestOptionsParams = signal<SelectDataOptionsFnParams>({
     filter: null,
@@ -61,6 +62,7 @@ export class Select extends InputFieldBase implements OnInit {
 
   filter = model<string>();
   filteredValue = signal<string | null>(null);
+
   options = input.required<SelectDataOptions>();
   internalFilter = input<string | null>(null);
   withoutFilter = input(false, { transform: booleanAttribute });
@@ -94,12 +96,16 @@ export class Select extends InputFieldBase implements OnInit {
 
   applyFilter(options: SelectList) {
     const filter = this.filter() ?? '';
+
     return options.filter((option) =>
       option.label.toLowerCase().includes(filter.toLowerCase())
     );
   }
 
   setValue(event: Event) {
+    const select = event.target as HTMLInputElement;
+    const value: SelectValue = select.value;
+
     if (this.multiple()) {
       const selectedOptionsElements = this.selectElement.querySelectorAll(
         '.kl-select-options-content input[type="checkbox"]:checked'
@@ -109,17 +115,23 @@ export class Select extends InputFieldBase implements OnInit {
 
       selectedOptionsElements.forEach((option) => values.push(option.value));
 
-      const selectedValues = this.optionList()
-        .filter((item) => values.includes(String(item.value)))
-        .map((item) => item.value);
+      if (select.checked) {
+        this.selectedOptions.update((current) => [
+          ...current,
+          this.optionList().find((item) => String(item.value) === value)!,
+        ]);
+      } else {
+        this.selectedOptions.update((current) =>
+          current.filter((item) => String(item.value) !== value)
+        );
+      }
+
+      const selectedValues = this.selectedOptions().map((item) => item.value);
 
       this.control().setValue(selectedValues, { emitEvent: true });
 
       return;
     }
-
-    const select = event.target as HTMLInputElement;
-    const value: SelectValue = select.value;
 
     const selectedOption = this.optionList().find(
       (item) => String(item.value) === value
