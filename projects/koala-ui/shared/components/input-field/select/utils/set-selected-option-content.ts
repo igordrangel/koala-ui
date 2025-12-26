@@ -36,7 +36,7 @@ async function appendSelectedOptionContent(component: Select, value: any) {
   ) as HTMLElement;
 
   if (!Array.isArray(value)) {
-    value = [value];
+    value = isEmpty(value) ? [] : [value];
   }
 
   if (!component.multiple()) {

@@ -4,65 +4,6 @@
   display: block;
 }
 
-kl-select-multiple .select-multiple-button {
-  overflow: unset;
-}
-
-kl-select-multiple .select-multiple-label {
-  top: 0;
-  left: 0.75rem;
-  transition: top 0.2s, font-size 0.2s;
-}
-
-kl-select-multiple .has-value .select-multiple-label {
-  position: absolute;
-  display: block;
-  font-size: 0.75rem;
-  top: -0.6rem;
-  left: 0.75rem;
-  padding: 0 0.3rem;
-}
-
-kl-select-multiple .has-value .select-multiple-label span {
-  position: relative;
-  z-index: 2;
-}
-
-kl-select-multiple .has-value .select-multiple-label:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 1px;
-  background-color: var(--bg-input);
-  bottom: 0.5rem;
-  left: 0;
-}
-
-kl-select-multiple .has-value:focus .select-multiple-label:after {
-  height: 4px;
-}
-
-.kl-select-multiple-options-container input {
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-.kl-select-multiple-options-container label.active {
-  background-color: rgba(63, 63, 63, 0.7);
-  transition: background-color 0.1s;
-}
-
-.kl-select-multiple-options-container label:has(input:checked):after {
-  content: "\f00c";
-  color: var(--color-neutral-500);
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
-  position: absolute;
-  right: 0.5rem;
-  top: 0.25rem;
-  font-size: 1rem;
-}
-
 kl-datatable .input,
 kl-datatable .select,
 kl-datatable .textarea {
@@ -154,13 +95,13 @@ kl-select .has-value:focus .kl-select-label:after {
   height: 4px;
 }
 
-select,
-::picker(select) {
+kl-select select,
+kl-select ::picker(select) {
   appearance: base-select;
 }
 
-select,
-.kl-select-button {
+kl-select select,
+kl-select .kl-select-button {
   position: relative;
   justify-content: space-between;
   align-items: center;
@@ -174,7 +115,7 @@ select,
   transition: opacity 0.3s;
 }
 
-select::picker-icon {
+kl-select select::picker-icon {
   display: none;
 }
 
@@ -188,17 +129,17 @@ kl-select .picker {
   color: var(--color-neutral-400);
 }
 
-select:open .picker,
+kl-select select:open .picker,
 kl-select .kl-select-button:popover-open .picker {
   rotate: 180deg;
 }
 
-.kl-select-options-container[popover] {
+kl-select .kl-select-options-container[popover] {
   display: none;
 }
 
-::picker(select),
-.kl-select-options-container[popover] {
+kl-select ::picker(select),
+kl-select .kl-select-options-container[popover] {
   position: relative;
   width: var(--select-width);
   box-sizing: border-box;
@@ -217,32 +158,32 @@ kl-select .kl-select-button:popover-open .picker {
   position-area: var(--select-position-area, bottom);
 }
 
-::picker(select):popover-open,
-.kl-select-options-container.with-popover:popover-open {
+kl-select ::picker(select):popover-open,
+kl-select .kl-select-options-container.with-popover:popover-open {
   transform: translateY(0);
   opacity: 1;
   display: flex;
 }
 
-select {
+kl-select select {
   anchor-name: --select-content;
 }
 
-select selectedcontent span:not(.not-animate) {
+kl-select select selectedcontent span:not(.not-animate) {
   position: relative;
   animation: 0.5s ease bounce;
 }
 
 @starting-style {
-  ::picker(select):popover-open,
-  .kl-select-options-container.with-popover:popover-open {
+  kl-select ::picker(select):popover-open,
+  kl-select .kl-select-options-container.with-popover:popover-open {
     transform: translateY(-1rem);
     opacity: 0;
   }
 }
 
-select option,
-.kl-select-options-container.with-popover .kl-select-option-content {
+kl-select select option,
+kl-select .kl-select-options-container.with-popover .kl-select-option-content {
   display: flex;
   justify-content: space-between;
   padding: 0.25rem 0.5rem;
@@ -251,13 +192,17 @@ select option,
   white-space: break-spaces;
 }
 
-.kl-select-options-container.with-popover .kl-select-option-content input {
+kl-select
+  .kl-select-options-container.with-popover
+  .kl-select-option-content
+  input {
   -webkit-appearance: none;
   appearance: none;
 }
 
-select option:focus,
-.kl-select-options-container.with-popover
+kl-select select option:focus,
+kl-select
+  .kl-select-options-container.with-popover
   .kl-select-option-content
   input:focus {
   background-color: rgba(63, 63, 63, 0.7);
@@ -265,15 +210,17 @@ select option:focus,
   transition: background-color 0.1s;
 }
 
-select option:checked,
-.kl-select-options-container.with-popover
+kl-select select option:checked,
+kl-select
+  .kl-select-options-container.with-popover
   .kl-select-option-content:has(input:checked) {
   background-color: rgba(63, 63, 63, 0.7);
   transition: background-color 0.1s;
 }
 
-select option::checkmark,
-.kl-select-options-container.with-popover
+kl-select select option::checkmark,
+kl-select
+  .kl-select-options-container.with-popover
   .kl-select-option-content:has(input:checked):after {
   content: "\f00c";
   color: var(--color-neutral-500);
@@ -284,7 +231,7 @@ select option::checkmark,
   order: 1;
 }
 
-.kl-select-options-container.with-popover label.active {
+kl-select .kl-select-options-container.with-popover label.active {
   background-color: rgba(63, 63, 63, 0.7);
   transition: background-color 0.1s;
 }
