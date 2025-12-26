@@ -12,17 +12,20 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v2.3.2
 
+      - name: 🔨 Install Bun
+        uses: oven-sh/setup-bun@v1
+
       - name: 🔨 Install Dependencies
-        run: npm ci
+        run: bun install
 
       - name: 🔨 Build Project
-        run: npm run build:publish
+        run: bun run build:publish
 
       - name: Publish npm package
         uses: actions/setup-node@v2-beta
         with:
           node-version: 14
           registry-url: https://registry.npmjs.org/
-      - run: cd ./dist && npm publish --access public --ignore-scripts
+      - run: cd ./dist && bun publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
