@@ -15,7 +15,7 @@
   }
 
   @if (!isDisabled() && hasValue()) {
-    <button class="kl-select-clear-button absolute right-9 top-2.5 z-10 text-neutral-400 hover:cursor-pointer text-sm focus:shadow-none!" type="button" (click)="clear($event)">
+    <button class="kl-select-clear-button absolute right-9 top-[0.7rem] z-10 text-neutral-400 hover:cursor-pointer text-sm focus:shadow-none!" type="button" (click)="clear($event)">
       <i class="fa-solid fa-xmark"></i>
     </button>
   }
@@ -25,7 +25,7 @@
       [attr.popovertarget]="fieldId"
       popovertargetaction="toggle">
 
-      <span class="selectcontent flex flex-wrap gap-1 pt-3 pb-2 items-center w-full h-full"></span>
+      <span class="selectcontent flex flex-wrap gap-1 items-center w-full h-full"></span>
 
       <span class="picker">
         @if (isLoading()) {
