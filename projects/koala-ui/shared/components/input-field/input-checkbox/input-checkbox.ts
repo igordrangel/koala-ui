@@ -1,4 +1,11 @@
-import { Component, effect, ElementRef, input, viewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  ElementRef,
+  input,
+  viewChild,
+} from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputFieldBase } from '@koalarx/ui/shared/components/input-field';
 
@@ -23,6 +30,7 @@ export type CheckboxSize =
 @Component({
   selector: 'kl-input-checkbox',
   templateUrl: './input-checkbox.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ReactiveFormsModule],
 })
 export class InputCheckbox extends InputFieldBase {

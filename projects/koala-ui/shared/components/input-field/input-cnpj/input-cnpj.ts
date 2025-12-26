@@ -1,4 +1,9 @@
-import { Component, effect, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject,
+} from '@angular/core';
 import { AppConfig } from '@koalarx/ui/core/config';
 import { InputFieldBase } from '@koalarx/ui/shared/components/input-field';
 import { InputText } from '@koalarx/ui/shared/components/input-field/input-text';
@@ -7,6 +12,7 @@ import { CNPJValidator } from './cnpj.validator';
 @Component({
   selector: 'kl-input-cnpj',
   templateUrl: './input-cnpj.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [InputText],
 })
 export class InputCnpj extends InputFieldBase {

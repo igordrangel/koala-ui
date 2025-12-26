@@ -41,7 +41,7 @@
         <span class="flex items-center justify-end gap-1 opacity-60">
           <span class="whitespace-nowrap">{{translations.labelItemsPerPage}}:</span>
 
-          <select class="select select-md p-0 pl-2 pr-8 h-[1.5rem] w-auto" [(ngModel)]="pageSize">
+          <select class="select select-md p-0 pl-2 pr-8 h-6 w-auto" [(ngModel)]="pageSize">
             @for (item of pageSizes; track $index) {
               <option [value]="item">{{ item }}</option>
             }
@@ -105,7 +105,7 @@
         <span class="flex items-center justify-end gap-1 opacity-60">
           <span>{{translations.labelItemsPerPage}}:</span>
 
-          <select class="select select-sm p-0 pl-2 pr-0 w-15 h-[1.5rem]" [(ngModel)]="pageSize">
+          <select class="select select-sm p-0 pl-2 pr-0 w-15 h-6" [(ngModel)]="pageSize">
             @for (item of pageSizes; track $index) {
               <option [value]="item">{{ item }}</option>
             }

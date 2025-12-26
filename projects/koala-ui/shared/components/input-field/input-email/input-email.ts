@@ -1,4 +1,4 @@
-import { Component, effect } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect } from '@angular/core';
 import { Validators } from '@angular/forms';
 import {
   InputField,
@@ -9,6 +9,7 @@ import {
   selector: 'kl-input-email',
   templateUrl: './input-email.html',
   imports: [InputField],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputEmail extends InputFieldBase {
   constructor() {

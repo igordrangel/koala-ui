@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AppConfig } from '@koalarx/ui/core/config';
 import {
   DIALOG_DATA,
@@ -11,6 +11,7 @@ import { Button } from '@koalarx/ui/shared/directives';
   selector: 'kl-confirm-content',
   templateUrl: './confirm-content.html',
   imports: [DialogContent, Button],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfirmContent {
   readonly translations = inject(AppConfig).translation.confirm;

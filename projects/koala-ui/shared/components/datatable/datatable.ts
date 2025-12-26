@@ -1,5 +1,6 @@
 import {
   booleanAttribute,
+  ChangeDetectionStrategy,
   Component,
   computed,
   effect,
@@ -21,6 +22,7 @@ import { Filter } from './filter/filter';
 @Component({
   selector: 'kl-datatable',
   templateUrl: './datatable.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [FormsModule, Filter, Button],
 })
 export class Datatable {

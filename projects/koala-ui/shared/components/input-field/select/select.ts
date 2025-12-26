@@ -1,6 +1,7 @@
 import {
   ApplicationRef,
   booleanAttribute,
+  ChangeDetectionStrategy,
   Component,
   DestroyRef,
   ElementRef,
@@ -37,6 +38,7 @@ import { setSelectedOptionContent } from './utils/set-selected-option-content';
   selector: 'kl-select',
   templateUrl: './select.html',
   imports: [FormsModule, ReactiveFormsModule, FieldErrors, Loader],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Select extends InputFieldBase implements OnInit {
   readonly appRef = inject(ApplicationRef);

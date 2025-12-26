@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   inject,
   input,
@@ -19,6 +20,7 @@ export interface OnThisPageLink {
 @Component({
   selector: 'kl-on-this-page',
   templateUrl: './on-this-page.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OnThisPage implements OnInit, OnDestroy {
   private readonly router = inject(Router);

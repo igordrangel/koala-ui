@@ -1,4 +1,11 @@
-import { Component, effect, inject, input, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject,
+  input,
+  output,
+} from '@angular/core';
 import { Tooltip } from '@koalarx/ui/shared/directives';
 import { DatatableFilter, FilterData } from './datatable-filter';
 import { AppConfig } from '@koalarx/ui/core/config';
@@ -6,6 +13,7 @@ import { AppConfig } from '@koalarx/ui/core/config';
 @Component({
   selector: 'kl-filter',
   templateUrl: './filter.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [DatatableFilter],
   imports: [Tooltip],
 })
