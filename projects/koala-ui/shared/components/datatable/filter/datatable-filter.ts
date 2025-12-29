@@ -16,6 +16,11 @@ export class DatatableFilter {
     effect(() => {
       const filters = this._filters();
 
+      if (filters.length === 0) {
+        this._payload.set({});
+        return;
+      }
+
       filters.forEach((filter) => {
         this._payload.update((current) => {
           return {
