@@ -42,13 +42,6 @@ button:focus {
   text-transform: uppercase;
 }
 
-label.floating-label:not(:has(option:checked)) > span {
-  top: calc(var(--size-field, 0.25rem) * 10 / 2);
-  translate: 0 -50%;
-  pointer-events: none;
-  scale: 1;
-}
-
 kl-select .kl-select-container {
   position: relative;
   overflow: unset;
