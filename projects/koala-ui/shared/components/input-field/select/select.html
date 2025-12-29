@@ -25,7 +25,7 @@
       [attr.popovertarget]="fieldId"
       popovertargetaction="toggle">
 
-      <span class="selectcontent flex flex-wrap gap-1 items-center w-full h-full"></span>
+      <span class="selectcontent flex flex-wrap gap-1 items-center w-full h-full" [class.py-3]="multiple()"></span>
 
       <span class="picker">
         @if (isLoading()) {

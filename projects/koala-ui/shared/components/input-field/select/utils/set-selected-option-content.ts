@@ -76,6 +76,12 @@ async function appendSelectedOptionContent(component: Select, value: any) {
   }
 
   component.hasValue.set(hasValue(value));
+
+  component.selectElement
+    .querySelectorAll<HTMLInputElement>('input[type=checkbox]')
+    .forEach((input) => {
+      input.checked = value.map(String).includes(input.value);
+    });
 }
 
 export async function setSelectedOptionContent(component: Select) {

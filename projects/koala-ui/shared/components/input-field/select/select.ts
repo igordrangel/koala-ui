@@ -148,6 +148,7 @@ export class Select extends InputFieldBase implements OnInit {
 
   clear(event: MouseEvent) {
     event.preventDefault();
+    this.selectedOptions.set([]);
     this.control().setValue(null);
   }
 
