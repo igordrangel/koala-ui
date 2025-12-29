@@ -84,15 +84,7 @@ async function appendSelectedOptionContent(component: Select, value: any) {
     });
 }
 
-export async function setSelectedOptionContent(component: Select) {
-  const value = component.control().value;
-
-  component.hasValue.set(hasValue(value));
-
-  while (component.isLoading()) {
-    await delay(50);
-  }
-
+function setSelectedOptionsOnComponent(component: Select, value: any) {
   component.selectedOptions.set(
     component
       .optionList()
@@ -102,11 +94,26 @@ export async function setSelectedOptionContent(component: Select) {
           : String(item.value) === String(value)
       )
   );
+}
+
+export async function setSelectedOptionContent(component: Select) {
+  const value = component.control().value;
+
+  component.hasValue.set(hasValue(value));
+
+  while (component.isLoading()) {
+    await delay(50);
+  }
+
+  setSelectedOptionsOnComponent(component, value);
 
   await appendSelectedOptionContent(component, value);
 
   component
     .control()
     .valueChanges.pipe(takeUntilDestroyed(component.destroyRef))
-    .subscribe((value) => appendSelectedOptionContent(component, value));
+    .subscribe((value) => {
+      setSelectedOptionsOnComponent(component, value);
+      appendSelectedOptionContent(component, value);
+    });
 }
