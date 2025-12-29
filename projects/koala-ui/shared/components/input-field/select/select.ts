@@ -140,6 +140,7 @@ export class Select extends InputFieldBase implements OnInit {
     );
 
     if (selectedOption) {
+      this.selectedOptions.set([selectedOption]);
       this.control().setValue(selectedOption.value, { emitEvent: true });
     }
 
