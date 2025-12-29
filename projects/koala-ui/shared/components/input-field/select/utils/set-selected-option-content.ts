@@ -2,6 +2,7 @@ import { createComponent } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { isEmpty } from '@koalarx/ui/shared/utils';
 import { delay } from '@koalarx/utils/KlDelay';
+import { debounceTime } from 'rxjs/internal/operators/debounceTime';
 import { Select } from '../select';
 import { SelectOptionBadge } from '../select-option-badge';
 
@@ -111,7 +112,10 @@ export async function setSelectedOptionContent(component: Select) {
 
   component
     .control()
-    .valueChanges.pipe(takeUntilDestroyed(component.destroyRef))
+    .valueChanges.pipe(
+      debounceTime(50),
+      takeUntilDestroyed(component.destroyRef)
+    )
     .subscribe((value) => {
       setSelectedOptionsOnComponent(component, value);
       appendSelectedOptionContent(component, value);
