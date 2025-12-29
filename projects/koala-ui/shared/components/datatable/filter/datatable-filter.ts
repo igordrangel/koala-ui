@@ -16,8 +16,10 @@ export class DatatableFilter {
     effect(() => {
       const filters = this._filters();
 
-      if (filters.length === 0) {
+      if (filters.length === 0 && Object.keys(this.payload()).length > 0) {
         this._payload.set({});
+        this._clearFilter.set(true);
+        setTimeout(() => this._clearFilter.set(false));
         return;
       }
 
@@ -49,9 +51,9 @@ export class DatatableFilter {
   }
 
   removeFilter(propName: string) {
-    this._filters.update((current) => {
-      return current.filter((filter) => filter.propName !== propName);
-    });
+    this._filters.update((current) =>
+      current.filter((filter) => filter.propName !== propName)
+    );
   }
 
   clearFilters() {
