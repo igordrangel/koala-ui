@@ -15,9 +15,13 @@
   }
 
   @if (!isDisabled() && hasValue()) {
-    <button class="kl-select-clear-button absolute right-9 top-[0.7rem] z-10 text-neutral-400 hover:cursor-pointer text-sm focus:shadow-none!" type="button" (click)="clear($event)">
-      <i class="fa-solid fa-xmark"></i>
-    </button>
+    <div class="flex items-center justify-center h-full absolute top-0 right-7 z-10 pr-2">
+      <button class="kl-select-clear-button text-neutral-400 hover:cursor-pointer text-sm focus:shadow-none!"
+        type="button"
+        (click)="clear($event)">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
   }
 
   <div class="kl-select-content" #selectField>
