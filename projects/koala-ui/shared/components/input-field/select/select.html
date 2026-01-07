@@ -40,12 +40,12 @@
       </span>
     </button>
 
-    <div [id]="fieldId" popover class="kl-select-options-container with-popover relative flex flex-col overflow-hidden">
+    <div [id]="fieldId" popover class="kl-select-options-container with-popover relative flex flex-col overflow-hidden bg-base-100 dark:bg-base-300">
       @if (!withoutFilter()) {
-        <div class="kl-select-filter-container border-b border-neutral-200 dark:border-neutral-700">
+        <div class="kl-select-filter-container border-b border-neutral-700">
           <label class="flex items-center text-sm">
             <i class="fa-solid fa-magnifying-glass opacity-60 absolute top-3 left-4"></i>
-            <input class="w-full p-2 pr-3 pl-10 outline-none placeholder:opacity-60"
+            <input class="w-full p-2 pr-3 pl-10 outline-none dark:placeholder:opacity-80"
               #searchInput
               type="search"
               [(ngModel)]="filter"
@@ -59,7 +59,7 @@
         @for (item of optionList(); track $index) {
           @let optionLabelId = fieldId + '-' + item.value;
 
-          <label class="kl-select-option-content relative py-1 px-2 pr-8 rounded-md"
+          <label class="kl-select-option-content relative py-1 px-2 pr-8 rounded-md text-neutral-900 dark:text-neutral-300 has-[input:checked]:bg-neutral-200 dark:has-[input:checked]:bg-neutral-700 hover:bg-neutral-300 dark:hover:bg-neutral-600 cursor-pointer"
             [attr.for]="optionLabelId"
             [attr.data-index]="$index">
             <span class="w-full">
