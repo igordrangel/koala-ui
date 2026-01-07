@@ -1,9 +1,23 @@
-idr-snackbar-content {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-}
-
 progress::-webkit-progress-value {
   transition: width 1s ease;
+}
+
+html[data-theme="light"] .alert-warning {
+  background: var(--color-yellow-500);
+  color: var(--color-neutral-800);
+}
+
+html[data-theme="light"] .alert-success {
+  background: var(--color-green-600);
+  color: var(--color-base-100);
+}
+
+html[data-theme="light"] .alert-error {
+  background: var(--color-red-700);
+  color: var(--color-base-100);
+}
+
+html[data-theme="light"] .alert-info {
+  background: var(--color-blue-500);
+  color: var(--color-base-100);
 }
