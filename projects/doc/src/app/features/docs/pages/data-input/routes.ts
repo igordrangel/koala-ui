@@ -10,7 +10,7 @@ export const routes: Routes = [
     path: 'field-group',
     loadComponent: () =>
       import('./pages/field-group/field-group.page').then(
-        (c) => c.FieldGroupPage
+        (c) => c.FieldGroupPage,
       ),
   },
   {
@@ -22,7 +22,7 @@ export const routes: Routes = [
     path: 'input-checkbox',
     loadComponent: () =>
       import('./pages/input-checkbox/input-checkbox.page').then(
-        (c) => c.InputCheckboxPage
+        (c) => c.InputCheckboxPage,
       ),
   },
   {
@@ -39,7 +39,7 @@ export const routes: Routes = [
     path: 'input-currency',
     loadComponent: () =>
       import('./pages/input-currency/input-currency.page').then(
-        (c) => c.InputCurrencyPage
+        (c) => c.InputCurrencyPage,
       ),
   },
   {
@@ -51,35 +51,35 @@ export const routes: Routes = [
     path: 'input-datetime',
     loadComponent: () =>
       import('./pages/input-datetime/input-datetime.page').then(
-        (c) => c.InputDatetimePage
+        (c) => c.InputDatetimePage,
       ),
   },
   {
     path: 'input-email',
     loadComponent: () =>
       import('./pages/input-email/input-email.page').then(
-        (c) => c.InputEmailPage
+        (c) => c.InputEmailPage,
       ),
   },
   {
     path: 'input-month',
     loadComponent: () =>
       import('./pages/input-month/input-month.page').then(
-        (c) => c.InputMonthPage
+        (c) => c.InputMonthPage,
       ),
   },
   {
     path: 'input-password',
     loadComponent: () =>
       import('./pages/input-password/input-password.page').then(
-        (c) => c.InputPasswordPage
+        (c) => c.InputPasswordPage,
       ),
   },
   {
     path: 'input-radio',
     loadComponent: () =>
       import('./pages/input-radio/input-radio.page').then(
-        (c) => c.InputRadioPage
+        (c) => c.InputRadioPage,
       ),
   },
   {
@@ -96,6 +96,20 @@ export const routes: Routes = [
     path: 'input-url',
     loadComponent: () =>
       import('./pages/input-url/input-url.page').then((c) => c.InputUrlPage),
+  },
+  {
+    path: 'input-number',
+    loadComponent: () =>
+      import('./pages/input-number/input-number.page').then(
+        (c) => c.InputNumberPage,
+      ),
+  },
+  {
+    path: 'input-range',
+    loadComponent: () =>
+      import('./pages/input-range/input-range.page').then(
+        (c) => c.InputRangePage,
+      ),
   },
   {
     path: 'switcher',

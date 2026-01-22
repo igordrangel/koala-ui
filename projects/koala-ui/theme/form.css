@@ -36,10 +36,14 @@ button:focus {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 0 0;
-  color: var(--color-neutral-700);
-  font-size: 0.65rem;
+  padding: 0.2rem 0 0.5rem;
+  color: var(--color-neutral-500);
+  font-size: var(--text-sm);
   text-transform: uppercase;
+}
+
+.dark .hint-content {
+  color: var(--color-neutral-700);
 }
 
 kl-select .kl-select-container {
@@ -131,9 +135,12 @@ kl-select .kl-select-options-container[popover] {
   transform: translateY(-1rem);
   opacity: 0;
   overflow: hidden;
-  transition: transform 0.3s ease allow-discrete,
-    opacity 0.3s ease allow-discrete, display 0.3s allow-discrete,
-    overlay 0.3s allow-discrete, height 0.3s allow-discrete;
+  transition:
+    transform 0.3s ease allow-discrete,
+    opacity 0.3s ease allow-discrete,
+    display 0.3s allow-discrete,
+    overlay 0.3s allow-discrete,
+    height 0.3s allow-discrete;
   position-area: var(--select-position-area, bottom);
 }
 

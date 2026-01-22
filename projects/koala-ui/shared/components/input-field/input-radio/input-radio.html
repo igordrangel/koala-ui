@@ -7,14 +7,12 @@
     [value]="value()"
     [checked]="value() === control().value"
     [disabled]="disabled()"
-    (change)="toggle($event)"
+    (click)="toggle($event)"
   />
 
   <ng-content />
 </label>
 
 @if (hint()) {
-  <span class="hint-content">
-    <i class="fa-regular fa-circle-question"></i> {{hint()}}
-  </span>
+  <span class="hint-content">{{hint()}}</span>
 }

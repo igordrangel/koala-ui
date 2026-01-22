@@ -1,0 +1,27 @@
+<div class="w-full">
+  <input type="range"
+    [min]="min()"
+    [max]="max()"
+    [value]="value()"
+    class="range w-full"
+    [class]="colorClass() + ' ' + sizeClass()"
+    [step]="step()"
+    (change)="setValue($event)"
+  />
+
+  <div class="flex justify-between px-2.5 mt-2 text-xs">
+    @for (step of steps(); track $index) {
+      <span>|</span>
+    }
+  </div>
+
+  <div class="flex justify-between px-2.5 mt-2 text-xs">
+    @for (step of steps(); track $index) {
+      <span>{{step}}</span>
+    }
+  </div>
+</div>
+
+@if (hint()) {
+  <span class="hint-content">{{hint()}}</span>
+}

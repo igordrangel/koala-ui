@@ -1,0 +1,11 @@
+<kl-input-field
+  type="number"
+  [control]="control()"
+  [label]="label()"
+  [placeholder]="placeholder()"
+  [hint]="hint()">
+
+  <ng-container errors>
+    <ng-content select="[errors]" />
+  </ng-container>
+</kl-input-field>

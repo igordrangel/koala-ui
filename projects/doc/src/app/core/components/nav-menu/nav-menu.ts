@@ -169,6 +169,14 @@ export class NavMenu {
           link: '/docs/data-input/input-url',
         },
         {
+          label: 'Input Number',
+          link: '/docs/data-input/input-number',
+        },
+        {
+          label: 'Input Range',
+          link: '/docs/data-input/input-range',
+        },
+        {
           label: 'Select',
           link: '/docs/data-input/select',
         },
