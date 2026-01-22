@@ -83,9 +83,7 @@
 </div>
 
 @if (hint()) {
-  <span class="hint-content">
-    <i class="fa-regular fa-circle-question"></i> {{hint()}}
-  </span>
+  <span class="hint-content"><i class="fa-regular fa-circle-question"></i> {{hint()}}</span>
 }
 
 <kl-field-errors [field]="control()">

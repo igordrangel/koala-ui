@@ -119,6 +119,11 @@ export class InputRadio extends InputFieldBase {
       value = Number(value);
     }
 
+    if (this.control().value === value) {
+      this.control().setValue(null);
+      return;
+    }
+
     this.control().setValue(value);
   }
 }
