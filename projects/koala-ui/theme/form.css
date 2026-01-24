@@ -181,6 +181,6 @@ kl-select .kl-select-option-content:has(input:checked):after {
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
   font-size: 1rem;
-  margin-left: auto;
+  margin: auto;
   order: 1;
 }

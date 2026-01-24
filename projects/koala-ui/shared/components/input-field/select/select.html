@@ -62,7 +62,7 @@
           <label class="kl-select-option-content relative py-1 px-2 pr-8 rounded-md text-neutral-900 dark:text-neutral-300 has-[input:checked]:bg-neutral-200 dark:has-[input:checked]:bg-neutral-700 hover:bg-neutral-300 dark:hover:bg-neutral-600 cursor-pointer"
             [attr.for]="optionLabelId"
             [attr.data-index]="$index">
-            <span class="w-full">
+            <span class="w-full flex flex-col justify-center">
               @let isChecked = multiple() ? (control().value || []).includes(item.value) : item.value === control().value;
 
               <input
@@ -74,6 +74,7 @@
                 (change)="setValue($event)"
               />
               <span>{{ item.label }}</span>
+              <small class="empty:hidden opacity-60">{{ item.description }}</small>
             </span>
           </label>
         }

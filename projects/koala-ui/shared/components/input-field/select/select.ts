@@ -58,7 +58,7 @@ export class Select extends InputFieldBase implements OnInit {
   readonly translations = inject(AppConfig).translation.form;
   readonly supportsExperimentalSelect = !CSS.supports(
     'appearance',
-    'base-select'
+    'base-select',
   );
   readonly hasValue = signal<boolean>(false);
 
@@ -100,7 +100,7 @@ export class Select extends InputFieldBase implements OnInit {
     const filter = this.filter() ?? '';
 
     return options.filter((option) =>
-      option.label.toLowerCase().includes(filter.toLowerCase())
+      option.label.toLowerCase().includes(filter.toLowerCase()),
     );
   }
 
@@ -110,7 +110,7 @@ export class Select extends InputFieldBase implements OnInit {
 
     if (this.multiple()) {
       const selectedOptionsElements = this.selectElement.querySelectorAll(
-        '.kl-select-options-content input[type="checkbox"]:checked'
+        '.kl-select-options-content input[type="checkbox"]:checked',
       ) as NodeListOf<HTMLInputElement>;
 
       const values: string[] = [];
@@ -124,7 +124,7 @@ export class Select extends InputFieldBase implements OnInit {
         ]);
       } else {
         this.selectedOptions.update((current) =>
-          current.filter((item) => String(item.value) !== value)
+          current.filter((item) => String(item.value) !== value),
         );
       }
 
@@ -136,7 +136,7 @@ export class Select extends InputFieldBase implements OnInit {
     }
 
     const selectedOption = this.optionList().find(
-      (item) => String(item.value) === value
+      (item) => String(item.value) === value,
     );
 
     if (selectedOption) {
@@ -145,6 +145,10 @@ export class Select extends InputFieldBase implements OnInit {
     }
 
     this.selectedItem.emit(selectedOption?.data ?? null);
+
+    document
+      .querySelector<HTMLElement>(`#${this.fieldId}[popover]`)
+      ?.hidePopover();
   }
 
   clear(event: MouseEvent) {
@@ -160,7 +164,7 @@ export class Select extends InputFieldBase implements OnInit {
     const value = target.parentElement?.dataset['value'];
 
     const inputValue = this.selectElement.querySelector(
-      `.kl-select-options-content input[value="${value}"]`
+      `.kl-select-options-content input[value="${value}"]`,
     ) as HTMLInputElement;
 
     inputValue.click();

@@ -5,7 +5,7 @@ export function ajustOptionsContainerSize(component: Select) {
   afterRenderEffect(() => {
     const selectElement = component.selectElement;
     const optionsContainer = selectElement.parentElement?.querySelector(
-      '.kl-select-options-container'
+      '.kl-select-options-container',
     ) as HTMLElement;
 
     function setMaxWidth() {
@@ -33,7 +33,7 @@ export function ajustOptionsContainerSize(component: Select) {
 
     function getFilterInput() {
       return optionsContainer.querySelector(
-        '.kl-select-filter-container input'
+        '.kl-select-filter-container input',
       ) as HTMLInputElement | null;
     }
 

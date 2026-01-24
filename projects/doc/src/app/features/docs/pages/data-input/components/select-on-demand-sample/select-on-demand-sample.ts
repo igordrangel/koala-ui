@@ -32,7 +32,7 @@ export class SelectOnDemandSample {
                     label: user.firstName,
                     value: user.id,
                     data: user,
-                  } as SelectOption)
+                  }) as SelectOption,
               )
               .filter(
                 (option) =>
@@ -42,9 +42,9 @@ export class SelectOnDemandSample {
                     option.label
                       .toLowerCase()
                       .includes(params.filter.toLowerCase())) ||
-                  (!params.currentValue && !params.filter)
-              )
+                  (!params.currentValue && !params.filter),
+              ),
           ),
-    })
+    }),
   );
 }

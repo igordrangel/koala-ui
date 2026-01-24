@@ -10,11 +10,12 @@ export type SelectValue = string | number | boolean | null;
 export interface SelectOption<TData = any> {
   label: string;
   value: SelectValue;
+  description?: string;
   data?: TData;
 }
 export type SelectList<TData = any> = SelectOption<TData>[];
 export type SelectDataOptionsFn = (
-  data: Signal<SelectDataOptionsFnParams>
+  data: Signal<SelectDataOptionsFnParams>,
 ) => ResourceRef<SelectList>;
 
 export type SelectDataOptions =
