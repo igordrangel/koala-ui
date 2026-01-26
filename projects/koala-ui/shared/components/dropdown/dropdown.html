@@ -1,10 +1,12 @@
-<div #dropdownTrigger
+<button #dropdownTrigger
+  type="button"
+  class="p-0!"
   tabindex="0"
   role="button"
   [attr.popovertarget]="id"
   (click)="ajustPosition()">
   <ng-content select="[trigger]" />
-</div>
+</button>
 
 <div #dropdownContent
   tabindex="0"
