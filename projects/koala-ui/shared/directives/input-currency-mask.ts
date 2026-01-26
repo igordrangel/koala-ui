@@ -17,7 +17,7 @@ import { NgxMaskPipe } from 'ngx-mask';
 })
 export class InputCurrencyMask implements OnInit {
   private readonly elementRef = inject<ElementRef<HTMLInputElement>>(
-    ElementRef<HTMLInputElement>
+    ElementRef<HTMLInputElement>,
   );
   private readonly appConfig = inject(AppConfig);
   private writedValue = 0.0;
@@ -27,14 +27,16 @@ export class InputCurrencyMask implements OnInit {
 
   private maskCoin(value: number) {
     let prefix = '$';
-    const thousandSeparator = ',';
-    const decimalSeparator = '.';
+    let thousandSeparator = ',';
+    let decimalSeparator = '.';
 
     switch (this.appConfig.language) {
       case 'en':
         prefix = '$';
         break;
       case 'ptBr':
+        thousandSeparator = '.';
+        decimalSeparator = ',';
         prefix = 'R$';
         break;
     }
@@ -43,7 +45,7 @@ export class InputCurrencyMask implements OnInit {
       prefix,
       thousandSeparator,
       decimalSeparator,
-      this.decimalCount()
+      this.decimalCount(),
     );
   }
 
@@ -134,8 +136,8 @@ export class InputCurrencyMask implements OnInit {
     setTimeout(() =>
       this.input.setSelectionRange(
         this.currentValue.length,
-        this.currentValue.length
-      )
+        this.currentValue.length,
+      ),
     );
   }
 
