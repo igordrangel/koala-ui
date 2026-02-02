@@ -15,22 +15,23 @@ export class DatatableFilter {
   constructor() {
     effect(() => {
       const filters = this._filters();
+      const payload = this.payload();
 
-      if (filters.length === 0 && Object.keys(this.payload()).length > 0) {
-        this._payload.set({});
+      if (filters.length === 0 && Object.keys(payload).length > 0) {
         this._clearFilter.set(true);
         setTimeout(() => this._clearFilter.set(false));
         return;
       }
+    });
+
+    effect(() => {
+      const filters = this._filters();
 
       this._payload.update(() => {
-        const result = {};
+        const result: any = {};
 
         filters.forEach((filter) => {
-          return {
-            ...result,
-            [filter.propName]: filter.value,
-          };
+          result[filter.propName] = filter.value;
         });
 
         return result;
