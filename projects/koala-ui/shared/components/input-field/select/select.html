@@ -25,11 +25,11 @@
   }
 
   <div class="kl-select-content" #selectField>
-    <button type="button" class="kl-select-button flex disabled:border-neutral-200! disabled:dark:border-neutral-800!"
+    <button type="button" class="kl-select-button flex gap-4 disabled:border-neutral-200! disabled:dark:border-neutral-800!"
       [attr.popovertarget]="fieldId"
       popovertargetaction="toggle">
 
-      <span class="selectcontent flex flex-wrap gap-1 items-center w-full h-full" [class.py-3]="multiple()"></span>
+      <span class="selectcontent flex flex-wrap gap-1 items-center w-[calc(100%-3rem)] h-full text-left py-1" [class.py-3]="multiple()"></span>
 
       <span class="picker">
         @if (isLoading()) {
@@ -84,7 +84,7 @@
 </div>
 
 @if (hint()) {
-  <span class="hint-content"><i class="fa-regular fa-circle-question"></i> {{hint()}}</span>
+  <span class="hint-content">{{hint()}}</span>
 }
 
 <kl-field-errors [field]="control()">

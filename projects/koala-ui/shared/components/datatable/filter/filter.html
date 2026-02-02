@@ -10,7 +10,7 @@
 
     <div class="flex items-center flex-wrap gap-1">
       @for (item of datatableFilter.filters(); track $index) {
-        <div class="badge badge-ghost text-xs">
+        <div class="badge badge-outline text-xs">
           <span>{{item.templateValue}}</span>
           <button class="hover:cursor-pointer" (click)="datatableFilter.removeFilter(item.propName)">
             <i class="fa-solid fa-xmark"></i>
