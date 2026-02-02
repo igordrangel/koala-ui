@@ -23,13 +23,17 @@ export class DatatableFilter {
         return;
       }
 
-      filters.forEach((filter) => {
-        this._payload.update((current) => {
+      this._payload.update(() => {
+        const result = {};
+
+        filters.forEach((filter) => {
           return {
-            ...current,
+            ...result,
             [filter.propName]: filter.value,
           };
         });
+
+        return result;
       });
     });
   }
@@ -52,7 +56,7 @@ export class DatatableFilter {
 
   removeFilter(propName: string) {
     this._filters.update((current) =>
-      current.filter((filter) => filter.propName !== propName)
+      current.filter((filter) => filter.propName !== propName),
     );
   }
 
