@@ -16,6 +16,7 @@
     type="tel"
     currencyMask
     [decimalCount]="decimalCount()"
+    [hookChange]="valueChange()"
     (currencyValue)="control().setValue($event)"
   />
 

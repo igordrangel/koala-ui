@@ -1,5 +1,7 @@
 import {
+  afterRenderEffect,
   booleanAttribute,
+  DestroyRef,
   Directive,
   effect,
   ElementRef,
@@ -8,6 +10,7 @@ import {
   linkedSignal,
   signal,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, Validators } from '@angular/forms';
 import { CURRENT_THEME } from '@koalarx/ui/core/config';
 import { randomString } from '@koalarx/utils/KlString';
@@ -17,12 +20,14 @@ export abstract class InputFieldBase {
   private readonly elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly required = signal(false);
 
+  readonly destroyRef = inject(DestroyRef);
   readonly isDisabled = linkedSignal(() => this.disabled());
   readonly isRequired = this.required.asReadonly();
   readonly fieldId = randomString(10, {
     lowercase: true,
     uppercase: true,
   });
+  readonly valueChange = signal<any>(null);
 
   control = input.required<FormControl>();
   label = input<string>();
@@ -48,6 +53,12 @@ export abstract class InputFieldBase {
           this.elementRef.nativeElement.style = `--bg-input: ${containerBgColor}`;
         }
       }
+    });
+
+    afterRenderEffect(() => {
+      this.control()
+        .valueChanges.pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe(this.valueChange.set);
     });
   }
 
