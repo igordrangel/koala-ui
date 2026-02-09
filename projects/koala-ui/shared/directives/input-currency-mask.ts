@@ -3,6 +3,7 @@ import {
   ElementRef,
   inject,
   input,
+  OnDestroy,
   OnInit,
   output,
 } from '@angular/core';
@@ -15,7 +16,7 @@ import { NgxMaskPipe } from 'ngx-mask';
   selector: 'input[currencyMask]',
   providers: [NgxMaskPipe],
 })
-export class InputCurrencyMask implements OnInit {
+export class InputCurrencyMask implements OnInit, OnDestroy {
   private readonly elementRef = inject<ElementRef<HTMLInputElement>>(
     ElementRef<HTMLInputElement>,
   );
@@ -69,68 +70,61 @@ export class InputCurrencyMask implements OnInit {
     return this.elementRef.nativeElement;
   }
 
-  private onFocus() {
-    this.elementRef.nativeElement.addEventListener('focus', () => {
-      this.putInputCaretOnTheEnd();
-    });
-  }
+  private onFocus = () => {
+    this.putInputCaretOnTheEnd();
+  };
 
-  private onKeyUp() {
-    this.elementRef.nativeElement.addEventListener('keyup', (event) => {
-      if (/\d/.test(event.key) || event.key === 'Backspace') {
-        this.updateWritedValue(event.key, event.key === 'Backspace');
+  private onKeyUp = (event: KeyboardEvent) => {
+    if (/\d/.test(event.key) || event.key === 'Backspace') {
+      this.updateWritedValue(event.key, event.key === 'Backspace');
 
-        if (isNaN(this.writedValue)) {
-          this.writedValue = 0;
-        }
-
-        this.applyMask();
-      } else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-        this.putInputCaretOnTheEnd();
-      }
-    });
-  }
-
-  private onKeyPress() {
-    this.elementRef.nativeElement.addEventListener('keypress', (event) => {
-      event.preventDefault();
-    });
-  }
-
-  private onKeyDown() {
-    this.elementRef.nativeElement.addEventListener('keydown', (event) => {
-      if (event.key === 'Backspace') {
-        event.preventDefault();
-      }
-    });
-  }
-
-  private onPaste() {
-    this.elementRef.nativeElement.addEventListener('paste', (event) => {
-      event.preventDefault();
-
-      if (!event.clipboardData) {
-        return;
+      if (isNaN(this.writedValue)) {
+        this.writedValue = 0;
       }
 
-      const pastedValue = event.clipboardData.getData('Text');
-
-      let unmaskedValue = parseFloat(pastedValue);
-
-      if (pastedValue.includes(',')) {
-        unmaskedValue = this.unmaskCoin(event.clipboardData.getData('Text'));
-      }
-
-      this.setValue(this.maskCoin(unmaskedValue));
-    });
-  }
-
-  private onReset() {
-    this.elementRef.nativeElement.addEventListener('reset', () => {
-      this.writedValue = 0.0;
       this.applyMask();
-    });
-  }
+    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      this.putInputCaretOnTheEnd();
+    }
+  };
+
+  private onKeyPress = (event: KeyboardEvent) => {
+    event.preventDefault();
+  };
+
+  private onKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Backspace') {
+      event.preventDefault();
+    }
+  };
+
+  private onPaste = (event: ClipboardEvent) => {
+    event.preventDefault();
+
+    if (!event.clipboardData) {
+      return;
+    }
+
+    const pastedValue = event.clipboardData.getData('Text');
+
+    let unmaskedValue = parseFloat(pastedValue);
+
+    if (pastedValue.includes(',')) {
+      unmaskedValue = this.unmaskCoin(event.clipboardData.getData('Text'));
+    }
+
+    this.setValue(this.maskCoin(unmaskedValue));
+  };
+
+  private onReset = () => {
+    this.writedValue = 0.0;
+    this.applyMask();
+  };
+
+  private onChange = () => {
+    this.writedValue = this.unmaskCoin(this.currentValue);
+    this.applyMask();
+  };
 
   private putInputCaretOnTheEnd() {
     setTimeout(() =>
@@ -164,17 +158,31 @@ export class InputCurrencyMask implements OnInit {
     this.currencyValue.emit(this.writedValue);
   }
 
+  ngOnDestroy(): void {
+    const inputElement = this.elementRef.nativeElement;
+
+    inputElement.removeEventListener('focus', this.onFocus);
+    inputElement.removeEventListener('keyup', this.onKeyUp);
+    inputElement.removeEventListener('keypress', this.onKeyPress);
+    inputElement.removeEventListener('keydown', this.onKeyDown);
+    inputElement.removeEventListener('paste', this.onPaste);
+    inputElement.removeEventListener('reset', this.onReset);
+  }
+
   ngOnInit(): void {
     this.writedValue = this.unmaskCoin(this.currentValue);
 
     this.input.style.textAlign = 'right';
 
-    this.onFocus();
-    this.onKeyUp();
-    this.onKeyPress();
-    this.onKeyDown();
-    this.onPaste();
-    this.onReset();
+    const inputElement = this.elementRef.nativeElement;
+
+    inputElement.addEventListener('focus', this.onFocus);
+    inputElement.addEventListener('keyup', this.onKeyUp);
+    inputElement.addEventListener('keypress', this.onKeyPress);
+    inputElement.addEventListener('keydown', this.onKeyDown);
+    inputElement.addEventListener('paste', this.onPaste);
+    inputElement.addEventListener('reset', this.onReset);
+    inputElement.onchange = this.onChange;
 
     setTimeout(() => this.applyMask());
   }

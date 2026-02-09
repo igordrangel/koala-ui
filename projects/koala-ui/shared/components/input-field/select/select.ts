@@ -3,7 +3,6 @@ import {
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
-  DestroyRef,
   ElementRef,
   inject,
   Injector,
@@ -42,7 +41,6 @@ import { setSelectedOptionContent } from './utils/set-selected-option-content';
 })
 export class Select extends InputFieldBase implements OnInit {
   readonly appRef = inject(ApplicationRef);
-  readonly destroyRef = inject(DestroyRef);
   readonly injector = inject(Injector);
   readonly selectField = viewChild<ElementRef<HTMLDivElement>>('selectField');
 
