@@ -122,7 +122,17 @@ export class InputCurrencyMask implements OnInit, OnDestroy {
   };
 
   private onChange = () => {
-    this.writedValue = this.unmaskCoin(this.currentValue);
+    if (this.writedValue !== 0) {
+      return;
+    }
+
+    let unmaskedValue = +this.currentValue;
+
+    if (isNaN(unmaskedValue)) {
+      unmaskedValue = this.unmaskCoin(this.currentValue);
+    }
+
+    this.writedValue = unmaskedValue;
     this.applyMask();
   };
 
