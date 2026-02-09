@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { AppConfig } from '@koalarx/ui/core/config';
 import { KlNumber } from '@koalarx/utils/KlNumber';
-import { unmaskCoin } from '@koalarx/utils/KlString';
 import { NgxMaskPipe } from 'ngx-mask';
 
 @Directive({
@@ -26,7 +25,7 @@ export class InputCurrencyMask implements OnInit, OnDestroy {
   decimalCount = input<number>(2);
   currencyValue = output<number>();
 
-  private maskCoin(value: number) {
+  private get decimalFormatConfig() {
     let prefix = '$';
     let thousandSeparator = ',';
     let decimalSeparator = '.';
@@ -42,6 +41,17 @@ export class InputCurrencyMask implements OnInit, OnDestroy {
         break;
     }
 
+    return {
+      prefix,
+      thousandSeparator,
+      decimalSeparator,
+    };
+  }
+
+  private maskCoin(value: number) {
+    const { prefix, thousandSeparator, decimalSeparator } =
+      this.decimalFormatConfig;
+
     return new KlNumber(value).maskCoin(
       prefix,
       thousandSeparator,
@@ -51,7 +61,16 @@ export class InputCurrencyMask implements OnInit, OnDestroy {
   }
 
   private unmaskCoin(value: string): number {
-    return unmaskCoin(value, this.decimalCount());
+    const { prefix, thousandSeparator, decimalSeparator } =
+      this.decimalFormatConfig;
+
+    return parseFloat(
+      value
+        .replace(prefix, '')
+        .replace(new RegExp(`\\${thousandSeparator}`, 'g'), '')
+        .replace(decimalSeparator, '.')
+        .trim(),
+    );
   }
 
   private applyMask() {
