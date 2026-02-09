@@ -1,5 +1,5 @@
 import { SampleContainer } from '@/app/shared/components/sample-container/sample-container';
-import { afterRenderEffect, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { InputCurrency } from '@koalarx/ui/shared/components/input-field/input-currency';
 
@@ -10,12 +10,4 @@ import { InputCurrency } from '@koalarx/ui/shared/components/input-field/input-c
 })
 export class InputCurrencySample {
   currencyControl = new FormControl<number>(0);
-
-  constructor() {
-    afterRenderEffect(() => {
-      setTimeout(() => {
-        this.currencyControl.setValue(1234.5);
-      });
-    });
-  }
 }
