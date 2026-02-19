@@ -33,7 +33,7 @@ async function appendSelectedOptionContent(component: Select, value: any) {
   }
 
   const selectedContent = component.selectElement.querySelector(
-    '.selectcontent'
+    '.selectcontent',
   ) as HTMLElement;
 
   if (!Array.isArray(value)) {
@@ -92,8 +92,8 @@ function setSelectedOptionsOnComponent(component: Select, value: any) {
       .filter((item) =>
         Array.isArray(value)
           ? value.map(String).includes(String(item.value))
-          : String(item.value) === String(value)
-      )
+          : String(item.value) === String(value),
+      ),
   );
 }
 
@@ -114,7 +114,7 @@ export async function setSelectedOptionContent(component: Select) {
     .control()
     .valueChanges.pipe(
       debounceTime(50),
-      takeUntilDestroyed(component.destroyRef)
+      takeUntilDestroyed(component.destroyRef),
     )
     .subscribe((value) => {
       setSelectedOptionsOnComponent(component, value);
