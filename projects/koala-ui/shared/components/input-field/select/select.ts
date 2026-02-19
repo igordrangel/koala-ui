@@ -3,6 +3,7 @@ import {
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
+  effect,
   ElementRef,
   inject,
   Injector,
@@ -86,6 +87,12 @@ export class Select extends InputFieldBase implements OnInit {
     ajustOptionsContainerSize(this);
     isLoadingFeedback(this);
     assessibility(this);
+
+    effect(() => {
+      this.selectedItem.emit(
+        this.selectedOptions().map((item) => item.data ?? null)[0] ?? null,
+      );
+    });
   }
 
   ngOnInit() {
@@ -141,8 +148,6 @@ export class Select extends InputFieldBase implements OnInit {
       this.selectedOptions.set([selectedOption]);
       this.control().setValue(selectedOption.value, { emitEvent: true });
     }
-
-    this.selectedItem.emit(selectedOption?.data ?? null);
 
     document
       .querySelector<HTMLElement>(`#${this.fieldId}[popover]`)
