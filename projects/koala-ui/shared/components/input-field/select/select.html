@@ -27,14 +27,15 @@
   <div class="kl-select-content" #selectField>
     <button type="button" class="kl-select-button flex gap-4 disabled:border-neutral-200! disabled:dark:border-neutral-800!"
       [attr.popovertarget]="fieldId"
-      popovertargetaction="toggle">
+      popovertargetaction="toggle"
+      [disabled]="isDisabled()">
 
       <span class="selectcontent flex flex-wrap gap-1 items-center w-[calc(100%-3rem)] h-full text-left py-1" [class.py-3]="multiple()"></span>
 
       <span class="picker">
         @if (isLoading()) {
           <kl-loader size="small" />
-        } @else {
+        } @else if (!isDisabled()) {
           <i class="fa-solid fa-caret-down"></i>
         }
       </span>
