@@ -89,7 +89,13 @@ export class Datatable {
       data,
       afterClosed: {
         trigger: [],
-        callback: (filters: FilterData[]) => this.filter.set(filters),
+        callback: (filters: FilterData[]) => {
+          this.filter.set(filters);
+
+          if (filters.length === 0) {
+            this.filterChange.emit({});
+          }
+        },
       },
     });
   }
