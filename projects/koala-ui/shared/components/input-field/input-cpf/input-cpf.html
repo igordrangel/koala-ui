@@ -9,5 +9,6 @@
     @if (control().errors?.['cpfInvalid']) {
       <div class="error-message">{{ translations.invalidCPF }}</div>
     }
+    <ng-content select="[errors]" />
   </ng-container>
 </kl-input-text>
