@@ -5,7 +5,7 @@
     class="radio"
     [name]="name()"
     [value]="value()"
-    [checked]="value() === control().value"
+    [checked]="value() === valueChange()"
     [disabled]="disabled()"
     (click)="toggle($event)"
   />
