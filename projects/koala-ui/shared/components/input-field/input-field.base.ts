@@ -56,6 +56,8 @@ export abstract class InputFieldBase {
     });
 
     afterRenderEffect(() => {
+      this.valueChange.set(this.control().value);
+
       this.control()
         .valueChanges.pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(this.valueChange.set);
