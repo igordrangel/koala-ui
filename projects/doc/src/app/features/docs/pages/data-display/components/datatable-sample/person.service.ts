@@ -16,7 +16,7 @@ export class PersonService extends HttpBase<Person, any, PersonFilterData> {
   }
 
   override getManyWithResource<TResponse = Person>(
-    query: Signal<PersonFilterData>
+    query: Signal<PersonFilterData>,
   ) {
     return super.getManyWithResource(
       linkedSignal(() => {
@@ -52,8 +52,8 @@ export class PersonService extends HttpBase<Person, any, PersonFilterData> {
                   .includes(params?.lastName?.toLowerCase() || '') &&
                 user.email
                   .toLowerCase()
-                  .includes(params?.email?.toLowerCase() || '')
-            )
+                  .includes(params?.email?.toLowerCase() || ''),
+            ),
           );
 
           return {
@@ -61,7 +61,7 @@ export class PersonService extends HttpBase<Person, any, PersonFilterData> {
             items: filteredItems.split(limit)[pageIndex] || [],
           } as GetManyResult<Person>;
         },
-      } as Omit<HttpResourceRequestOptions<TResponse>, 'debounceTime'>
+      } as Omit<HttpResourceRequestOptions<TResponse>, 'debounceTime'>,
     );
   }
 }

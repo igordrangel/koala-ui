@@ -23,7 +23,12 @@ type PaginationType = 'paginator' | 'loadMore';
 @Directive()
 export abstract class ListBase<
   QueryType extends QueryPagination,
-  TEntity = any
+  TEntity = any,
+  TService extends HttpBase<TEntity, any, QueryType> = HttpBase<
+    TEntity,
+    any,
+    QueryType
+  >,
 > {
   private reloading = false;
   private currentPaginationType: PaginationType = 'paginator';
@@ -33,7 +38,7 @@ export abstract class ListBase<
   protected readonly limitPage = signal(30);
   protected readonly page = signal(1);
   protected readonly filter = signal<QueryType>({} as any);
-  protected readonly resource: HttpBase<TEntity, any, QueryType>;
+  protected readonly service: TService;
   protected readonly totalItemsOnPage = signal(0);
   protected readonly totalItems = signal(0);
   protected readonly list = signal<TEntity[]>([]);
@@ -52,7 +57,7 @@ export abstract class ListBase<
         currentPageSize: this.limitPage(),
         isLoading: this.resourceRef.isLoading(),
         hasError: !!this.resourceRef.error(),
-      } as DatatableConfig)
+      }) as DatatableConfig,
   );
 
   queryParams = computed<QueryType>(
@@ -62,18 +67,18 @@ export abstract class ListBase<
         limit: this.limitPage(),
         ...(this.sortFilter() ?? {}),
         ...this.filter(),
-      } as QueryType)
+      }) as QueryType,
   );
   reload = input<boolean>(false);
 
   constructor(
     // eslint-disable-next-line @angular-eslint/prefer-inject
-    resource: Type<HttpBase<TEntity, any, QueryType>>,
+    service: Type<TService>,
     // eslint-disable-next-line @angular-eslint/prefer-inject
-    protected readonly componentFilter?: Type<any>
+    protected readonly componentFilter?: Type<any>,
   ) {
-    this.resource = inject(resource);
-    this.resourceRef = this.resource.getManyWithResource(this.queryParams);
+    this.service = inject(service);
+    this.resourceRef = this.service.getManyWithResource(this.queryParams);
 
     effect(() => {
       this.filter();
@@ -97,7 +102,7 @@ export abstract class ListBase<
         if (result) {
           this.list.update((current) => [...current, ...result.items]);
           this.totalItemsOnPage.update(
-            (current) => current + result.items.length
+            (current) => current + result.items.length,
           );
           this.totalItems.set(result.count);
         }
