@@ -4,6 +4,7 @@ import {
   inject,
   Injectable,
   InjectionToken,
+  OnDestroy,
   Type,
 } from '@angular/core';
 import {
@@ -16,14 +17,40 @@ import {
 export const SIDE_WINDOW_REF_TOKEN = new InjectionToken('SideWindowRefToken');
 
 @Injectable()
-export class SideWindowRef {
+export class SideWindowRef implements OnDestroy {
   private readonly appRef = inject<ApplicationRef>(SIDE_WINDOW_APP_REF);
   private readonly componentRef = inject<() => ComponentRef<Type<any>>>(
-    SIDE_WINDOW_REF_TOKEN
+    SIDE_WINDOW_REF_TOKEN,
   );
   private readonly afterCloseTrigger = inject<SideWindowAfterCloseTriggerFn>(
-    SIDE_WINDOW_AFTER_CLOSE_TRIGGER
+    SIDE_WINDOW_AFTER_CLOSE_TRIGGER,
   );
+  private readonly onKeyUp = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      this.dismiss();
+    }
+  };
+  private readonly onClick = (event: MouseEvent) => {
+    const contentElement =
+      this.componentRef().location.nativeElement.querySelector(
+        '.side-window-content',
+      );
+    if (contentElement && !contentElement.contains(event.target as Node)) {
+      this.dismiss();
+    }
+  };
+
+  constructor() {
+    setTimeout(() => {
+      document.addEventListener('keyup', this.onKeyUp);
+      document.addEventListener('click', this.onClick);
+    }, 150);
+  }
+
+  ngOnDestroy() {
+    document.removeEventListener('keyup', this.onKeyUp);
+    document.removeEventListener('click', this.onClick);
+  }
 
   dismiss(afterCloseTrigger?: SideWindowAfterCloseTrigger) {
     const componentRef = this.componentRef();
