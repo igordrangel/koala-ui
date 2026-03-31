@@ -11,6 +11,14 @@ export class HttpErrorFeedbackAlert {
   tapError(error: HttpErrorResponse) {
     const httpClientErrorsMiddleware =
       this.appConfig.httpClientErrorsMiddleware;
+
+    if (
+      httpClientErrorsMiddleware &&
+      httpClientErrorsMiddleware.ignoreError(error)
+    ) {
+      return;
+    }
+
     const translations = this.appConfig.translation.feedbackRequestInterceptor;
     const statusCode = error.status.toString();
 
@@ -19,7 +27,7 @@ export class HttpErrorFeedbackAlert {
 
       this.snackbar.warning(
         httpClientErrorsMiddleware?.handleError(error) ??
-          (translations as any)[statusCode]
+          (translations as any)[statusCode],
       );
       return;
     } else if (statusCode.charAt(0) === '5') {
@@ -27,7 +35,7 @@ export class HttpErrorFeedbackAlert {
 
       this.snackbar.error(
         httpClientErrorsMiddleware?.handleError(error) ??
-          (translations as any)[statusCode]
+          (translations as any)[statusCode],
       );
       return;
     } else {
@@ -35,7 +43,7 @@ export class HttpErrorFeedbackAlert {
 
       this.snackbar.info(
         httpClientErrorsMiddleware?.handleError(error) ??
-          translations.unknowError
+          translations.unknowError,
       );
       return;
     }
