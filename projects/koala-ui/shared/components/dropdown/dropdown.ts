@@ -1,8 +1,12 @@
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
   effect,
   ElementRef,
+  input,
+  OnDestroy,
+  OnInit,
   viewChild,
 } from '@angular/core';
 import { KlString, randomString } from '@koalarx/utils/KlString';
@@ -12,15 +16,31 @@ import { KlString, randomString } from '@koalarx/utils/KlString';
   templateUrl: './dropdown.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Dropdown {
+export class Dropdown implements OnInit, OnDestroy {
   private readonly dropdownTriggerElement =
     viewChild<ElementRef<HTMLButtonElement>>('dropdownTrigger');
   private readonly dropdownContentElement =
     viewChild<ElementRef<HTMLDivElement>>('dropdownContent');
+  private readonly closeInsideClick = (event: PointerEvent) => {
+    if (this.insideClick()) {
+      return;
+    }
 
-  id = randomString(10, { numbers: true, uppercase: false, lowercase: false });
+    const contentElement = this.dropdownContentElement()?.nativeElement;
+    const clickElement = event.target as HTMLElement;
 
-  private readonly anchorName = new KlString('--anchor-').concat(this.id);
+    if (contentElement && contentElement.contains(clickElement)) {
+      contentElement.hidePopover();
+    }
+  };
+
+  readonly id = randomString(10, {
+    numbers: true,
+    uppercase: false,
+    lowercase: false,
+  });
+  readonly insideClick = input(false, { transform: booleanAttribute });
+  readonly anchorName = new KlString('--anchor-').concat(this.id);
 
   constructor() {
     effect(() => {
@@ -32,6 +52,14 @@ export class Dropdown {
         contentElement.style = `position-anchor: ${this.anchorName};`;
       }
     });
+  }
+
+  ngOnDestroy() {
+    document.removeEventListener('click', this.closeInsideClick);
+  }
+
+  ngOnInit() {
+    document.addEventListener('click', this.closeInsideClick);
   }
 
   ajustPosition() {
