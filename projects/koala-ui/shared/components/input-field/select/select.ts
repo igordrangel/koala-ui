@@ -25,6 +25,7 @@ import {
   SelectDataOptions,
   SelectDataOptionsFnParams,
   SelectList,
+  SelectOption,
   SelectValue,
 } from './select.type';
 import { ajustOptionsContainerSize } from './utils/ajust-options-container-size';
@@ -68,7 +69,7 @@ export class Select extends InputFieldBase implements OnInit {
   internalFilter = input<string | null>(null);
   withoutFilter = input(false, { transform: booleanAttribute });
   multiple = input(false, { transform: booleanAttribute });
-  selectedItem = output<any | null>();
+  selectedItem = output<SelectOption | SelectOption[] | null>();
 
   get selectElement() {
     const selectField = this.selectField();
@@ -90,7 +91,9 @@ export class Select extends InputFieldBase implements OnInit {
 
     effect(() => {
       this.selectedItem.emit(
-        this.selectedOptions().map((item) => item.data ?? null)[0] ?? null,
+        this.multiple()
+          ? this.selectedOptions()
+          : this.selectedOptions()[0] || null,
       );
     });
   }
