@@ -31,11 +31,10 @@ export class SideWindowRef implements OnDestroy {
     }
   };
   private readonly onClick = (event: MouseEvent) => {
-    const contentElement =
-      this.componentRef().location.nativeElement.querySelector(
-        '.side-window-content',
-      );
-    if (contentElement && !contentElement.contains(event.target as Node)) {
+    if (
+      event.target instanceof HTMLElement &&
+      event.target.classList.contains('backdrop')
+    ) {
       this.dismiss();
     }
   };
