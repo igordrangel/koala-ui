@@ -3,6 +3,7 @@ export interface AuthConfig {
   storageRefreshTokenKey: string;
   homeRoute?: string;
   loginRoute?: string;
+  publicRoutes?: string[];
   userInfo: {
     url: string;
   };
