@@ -46,7 +46,7 @@ export class Authorization<TUser = any> {
     if (refreshToken) {
       localStorage.setItem(
         this.authConfig.storageRefreshTokenKey,
-        refreshToken
+        refreshToken,
       );
     } else {
       localStorage.removeItem(this.authConfig.storageRefreshTokenKey);
@@ -94,10 +94,10 @@ export class Authorization<TUser = any> {
 
   private init() {
     this._accessToken.set(
-      localStorage.getItem(this.authConfig.storageTokenKey)
+      localStorage.getItem(this.authConfig.storageTokenKey),
     );
     this._refreshToken.set(
-      localStorage.getItem(this.authConfig?.storageRefreshTokenKey)
+      localStorage.getItem(this.authConfig?.storageRefreshTokenKey),
     );
 
     effect(() => {
@@ -124,12 +124,17 @@ export class Authorization<TUser = any> {
 
     effect(() => {
       const hasToken = this.hasToken();
+      const publicRoutes = this.authConfig.publicRoutes ?? [];
+
+      if (this.authConfig.loginRoute) {
+        publicRoutes.push(this.authConfig.loginRoute);
+      }
 
       if (hasToken) {
         this.loadUserInfo();
       } else if (
         this.authConfig.loginRoute &&
-        !location.hash.includes(this.authConfig.loginRoute)
+        !publicRoutes.some((route) => location.hash.includes(route))
       ) {
         this.router.navigate([this.authConfig.loginRoute]);
       }
@@ -138,7 +143,7 @@ export class Authorization<TUser = any> {
 
   private updateAuthState() {
     this._isAuthenticated.set(
-      this.hasToken() && !this.isExpired() && !!this._userinfo()
+      this.hasToken() && !this.isExpired() && !!this._userinfo(),
     );
   }
 
@@ -185,7 +190,7 @@ export class Authorization<TUser = any> {
           this.router.navigate([this.authConfig.loginRoute]);
         },
       }),
-      first()
+      first(),
     );
   }
 }
