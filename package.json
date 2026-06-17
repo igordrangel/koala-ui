@@ -1,6 +1,6 @@
 {
   "name": "@koalarx/ui",
-  "version": "21.0.0",
+  "version": "22.0.0",
   "scripts": {
     "build": "bun scripts/build",
     "build:doc": "cd libs/ui && bun run build:prod",
