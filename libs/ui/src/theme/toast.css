@@ -1,0 +1,90 @@
+@theme {
+  --animate-fade-out: animate-fade-out 0.3s ease-in-out;
+  --animate-fade-up-out: animate-fade-up-out 0.3s ease-in-out;
+  --animate-fade-down-in: animate-fade-down-in 0.3s ease-in-out;
+
+  @keyframes animate-fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes animate-fade-up-out {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+  }
+
+  @keyframes animate-fade-down-in {
+    from {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.toast-container {
+  width: 100%;
+  max-width: 20rem;
+  display: flex;
+  flex-direction: column;
+
+  --sooner-toast-scale: 1;
+  --sooner-toast-translate: 0;
+}
+
+.toast-container:hover > div:first-child {
+  position: relative;
+}
+
+.toast-container:hover > div:nth-child(n + 2) {
+  --sooner-toast-scale: 1;
+  --sooner-toast-translate: 0;
+
+  position: relative;
+  pointer-events: auto;
+  opacity: 1 !important;
+}
+
+.toast-container > div {
+  position: absolute;
+  transition: all 0.3s ease-in-out;
+  width: 100%;
+}
+
+.toast-container > div:first-child {
+  z-index: 3;
+}
+
+.toast-container > div:nth-child(n + 2) {
+  --sooner-toast-scale: 0.93;
+  --sooner-toast-translate: 20%;
+
+  pointer-events: none;
+
+  transform: scale(var(--sooner-toast-scale)) translateY(var(--sooner-toast-translate));
+  z-index: 2;
+}
+
+.toast-container > div:nth-child(n + 3) {
+  --sooner-toast-scale: 0.88;
+  --sooner-toast-translate: 40%;
+
+  z-index: 1;
+}
+
+.toast-container > div:nth-child(n + 4) {
+  opacity: 0 !important;
+}

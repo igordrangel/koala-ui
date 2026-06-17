@@ -1,0 +1,146 @@
+<app-section-container>
+  <ng-container title>Bottom Sheet</ng-container>
+  <ng-container description>
+    The bottom sheet is a modal that slides in from the bottom of the screen. It is commonly used to
+    display additional information or options without navigating away from the current page.
+  </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description
+      >Use the Koala CLI to generate a new bottom sheet component.</ng-container
+    >
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/bottom-sheet-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Bottom Sheet</ng-container>
+    <ng-container description>
+      The bottom sheet is a modal component that slides in from the bottom of the screen. It is
+      commonly used to display additional information or options without navigating away from the
+      current page.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <button appButton (click)="open({ pressEscape: true, clickOutside: false })">
+            open bottom sheet
+          </button>
+        </div>
+      </div>
+
+      <div appTab label="HTML Trigger">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="bottom-sheet-trigger-sample.html"
+            src="markdown/usage/bottom-sheet/bottom-sheet-trigger.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS Trigger">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="bottom-sheet-trigger-sample.ts"
+            src="markdown/usage/bottom-sheet/bottom-sheet-trigger.ts.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="HTML Window">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="bottom-sheet-sample.html"
+            src="markdown/usage/bottom-sheet/bottom-sheet-sample.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS Window">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="bottom-sheet-sample.ts"
+            src="markdown/usage/bottom-sheet/bottom-sheet-sample.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Bottom Sheet with a close button at corner</ng-container>
+    <ng-container description>
+      The bottom sheet can be configured to have a close button at the corner. This is a common
+      design pattern for bottom sheets that are used to display critical information or that require
+      user interaction.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <button appButton (click)="open({ pressEscape: true, clickOutside: false }, true)">
+            open bottom sheet
+          </button>
+        </div>
+      </div>
+
+      <div appTab label="HTML Trigger">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="bottom-sheet-trigger-close-corner.sample.html"
+            src="markdown/usage/bottom-sheet/bottom-sheet-trigger.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS Trigger">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="bottom-sheet-trigger-close-corner.sample.ts"
+            src="markdown/usage/bottom-sheet/bottom-sheet-trigger-close-corner.ts.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="HTML Dialog">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="bottom-sheet-close-corner-sample.html"
+            src="markdown/usage/bottom-sheet/bottom-sheet-close-corner.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS Dialog">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="bottom-sheet-close-corner-sample.ts"
+            src="markdown/usage/bottom-sheet/bottom-sheet-close-corner.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

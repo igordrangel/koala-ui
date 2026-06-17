@@ -1,34 +1,38 @@
 {
-  "compileOnSave": false,
   "compilerOptions": {
-    "strict": true,
-    "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
+    "module": "commonJs",
+    "outDir": "./dist",
+    "types": [
+      "bun",
+      "node"
+    ],
     "paths": {
       "@/*": [
-        "./projects/doc/src/*"
-      ],
-      "@koalarx/ui": [
-        "./projects/koala-ui",
-      ],
-      "@koalarx/ui/*": [
-        "./projects/koala-ui/*"
+        "./libs/ui/src/app/*"
       ],
     },
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "skipLibCheck": true,
-    "isolatedModules": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "ES2022",
-    "module": "preserve"
+    "allowSyntheticDefaultImports": true,
+    "target": "es2022",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "resolveJsonModule": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "typeCheckHostBindings": true,
     "strictTemplates": true
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

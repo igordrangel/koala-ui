@@ -1,0 +1,140 @@
+<app-section-container>
+  <ng-container title>Toggle</ng-container>
+  <ng-container description>A simple toggle component.</ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description>Use the Koala CLI to generate a new toggle component.</ng-container>
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/toggle-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Variants</ng-container>
+    <ng-container description>
+      The toggle component supports several variants to fit different use cases and design
+      requirements.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <input type="checkbox" appToggle variant="neutral" [formControl]="toggleControl" />
+          <input type="checkbox" appToggle variant="primary" [formControl]="toggleControl" />
+          <input type="checkbox" appToggle variant="secondary" [formControl]="toggleControl" />
+          <input type="checkbox" appToggle variant="accent" [formControl]="toggleControl" />
+          <input type="checkbox" appToggle variant="info" [formControl]="toggleControl" />
+          <input type="checkbox" appToggle variant="success" [formControl]="toggleControl" />
+          <input type="checkbox" appToggle variant="warning" [formControl]="toggleControl" />
+          <input type="checkbox" appToggle variant="error" [formControl]="toggleControl" />
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="toggle-sample.html"
+            src="markdown/usage/toggle/toggle-variants.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="toggle-sample.ts"
+            src="markdown/usage/toggle/toggle.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Sizes</ng-container>
+    <ng-container description>
+      The toggle component supports different sizes to accommodate various design needs.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <input type="checkbox" appToggle size="xs" />
+          <input type="checkbox" appToggle size="sm" />
+          <input type="checkbox" appToggle size="md" />
+          <input type="checkbox" appToggle size="lg" />
+          <input type="checkbox" appToggle size="xl" />
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="toggle-sample.html"
+            src="markdown/usage/toggle/toggle-sizes.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="toggle-sample.ts"
+            src="markdown/usage/toggle/toggle.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Disabled</ng-container>
+    <ng-container description>
+      The disabled state indicates that the button is not interactive and cannot be clicked.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <input type="checkbox" appToggle disabled />
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="toggle-sample.html"
+            src="markdown/usage/toggle/toggle-disabled.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="toggle-sample.ts"
+            src="markdown/usage/toggle/toggle.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

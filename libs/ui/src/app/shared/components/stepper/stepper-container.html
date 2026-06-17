@@ -1,0 +1,19 @@
+<div
+  class="flex flex-col"
+  [class.flex-col]="orientation() === 'horizontal'"
+  [class.items-center]="orientation() === 'horizontal'"
+  [class.flex-row]="orientation() === 'vertical'"
+  [class.items-start]="orientation() === 'vertical'"
+>
+  <div
+    class="steps w-full"
+    [class.steps-vertical]="orientation() === 'vertical'"
+    [class.steps-horizontal]="orientation() === 'horizontal'"
+  >
+    <ng-content select="[steps]" />
+  </div>
+
+  <div class="flex justify-center w-full">
+    <ng-content />
+  </div>
+</div>

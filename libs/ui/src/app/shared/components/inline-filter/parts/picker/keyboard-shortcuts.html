@@ -1,0 +1,57 @@
+<app-dropdown>
+  <button
+    trigger
+    appTooltip="Keyboard shortcuts"
+    type="button"
+    class="opacity-60 hover:opacity-100 px-2 cursor-pointer"
+  >
+    <i class="fa-regular fa-keyboard"></i>
+  </button>
+
+  <div class="lg:w-120 p-3" options>
+    <p class="px-1.5 mb-2 text-xs font-semibold uppercase tracking-wide text-base-content/60">
+      Keyboard shortcuts
+    </p>
+
+    <div class="space-y-1 text-sm text-base-content/80">
+      <div class="grid grid-cols-[1fr_auto] items-center gap-4 rounded-md px-1.5 py-1">
+        <span>Apply value in edit mode</span>
+        <div class="flex items-center gap-1 whitespace-nowrap">
+          <kbd class="kbd kbd-sm min-w-8 px-2">Enter</kbd>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-[1fr_auto] items-center gap-4 rounded-md px-1.5 py-1">
+        <span>Cancel edit (or remove empty filter)</span>
+        <div class="flex items-center gap-1 whitespace-nowrap">
+          <kbd class="kbd kbd-sm min-w-8 px-2">Esc</kbd>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-[1fr_auto] items-center gap-4 rounded-md px-1.5 py-1">
+        <span>Edit nearest chip from picker (empty input)</span>
+        <div class="flex items-center gap-1 whitespace-nowrap">
+          <kbd class="kbd kbd-sm min-w-8 px-2">
+            <i class="fa-solid fa-arrow-left text-sm"></i>
+          </kbd>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-[1fr_auto] items-center gap-4 rounded-md px-1.5 py-1">
+        <span>Remove last chip from picker (empty input)</span>
+        <div class="flex items-center gap-1 whitespace-nowrap">
+          <kbd class="kbd kbd-sm min-w-8 px-2">Backspace</kbd>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-[1fr_auto] items-center gap-4 rounded-md px-1.5 py-1">
+        <span>Select type in picker list</span>
+        <div class="flex items-center gap-1 whitespace-nowrap">
+          <kbd class="kbd kbd-sm min-w-8 px-2">Enter</kbd>
+          <span class="text-xs text-base-content/50">/</span>
+          <kbd class="kbd kbd-sm min-w-8 px-2">Tab</kbd>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-dropdown>

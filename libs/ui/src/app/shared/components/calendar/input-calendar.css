@@ -1,0 +1,38 @@
+.time-input::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+.time-input::-webkit-clear-button,
+.time-input::-webkit-inner-spin-button {
+  display: none;
+}
+
+.input-calendar-popover {
+  position: absolute;
+  inset: auto;
+  z-index: 50;
+}
+
+.input-calendar-popover:not(:popover-open) {
+  display: none !important;
+  pointer-events: none;
+}
+
+.input-calendar-popover:popover-open {
+  display: flex;
+}
+
+.datetime-calendar-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+.datetime-time-row {
+  position: relative;
+  z-index: 10;
+  background: var(--color-base-100);
+  border-radius: 0 0 var(--radius-box) var(--radius-box) !important;
+  border-color: var(--color-base-300) !important;
+  border-top: none !important;
+}

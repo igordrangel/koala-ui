@@ -1,0 +1,116 @@
+<app-section-container>
+  <ng-container title>Tooltip</ng-container>
+  <ng-container description>A simple tooltip component.</ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description>Use the Koala CLI to generate a new tooltip component.</ng-container>
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/tooltip-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Variants</ng-container>
+    <ng-container description>
+      The tooltip component supports several variants to fit different use cases and design
+      requirements.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <button appButton btnVariant="primary" appTooltip="Primary" tooltipVariant="primary">
+            Primary
+          </button>
+          <button
+            appButton
+            btnVariant="secondary"
+            appTooltip="Secondary"
+            tooltipVariant="secondary"
+          >
+            Secondary
+          </button>
+          <button appButton btnVariant="error" appTooltip="Error" tooltipVariant="error">
+            Error
+          </button>
+          <button appButton btnVariant="success" appTooltip="Success" tooltipVariant="success">
+            Success
+          </button>
+          <button appButton btnVariant="warning" appTooltip="Warning" tooltipVariant="warning">
+            Warning
+          </button>
+          <button appButton btnVariant="info" appTooltip="Info" tooltipVariant="info">Info</button>
+          <button appButton btnVariant="neutral" appTooltip="Neutral" tooltipVariant="neutral">
+            Neutral
+          </button>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="tooltip-sample.html"
+            src="markdown/usage/tooltip/tooltip-variants.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="tooltip-sample.ts"
+            src="markdown/usage/tooltip/tooltip.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Positions</ng-container>
+    <ng-container description>
+      The tooltip component supports different positions to accommodate various design needs.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <button appButton appTooltip="Top" tooltipPosition="top">Top</button>
+          <button appButton appTooltip="Right" tooltipPosition="right">Right</button>
+          <button appButton appTooltip="Bottom" tooltipPosition="bottom">Bottom</button>
+          <button appButton appTooltip="Left" tooltipPosition="left">Left</button>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="tooltip-sample.html"
+            src="markdown/usage/tooltip/tooltip-positions.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="tooltip-sample.ts"
+            src="markdown/usage/tooltip/tooltip.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

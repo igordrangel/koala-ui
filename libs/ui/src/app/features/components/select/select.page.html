@@ -1,0 +1,190 @@
+<app-section-container>
+  <ng-container title>Select</ng-container>
+  <ng-container description>
+    A select component that supports both single and multiple selection via a popover.
+  </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description>Use the Koala CLI to generate a new select component.</ng-container>
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/select-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Single selection</ng-container>
+    <ng-container description>
+      Default mode. Selecting an option closes the popover and emits a single value.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div class="flex flex-col gap-4 p-6 border border-t-0 border-base-300 rounded-b-lg">
+          <app-select
+            class="w-full max-w-sm"
+            placeholder="Select an option"
+            [options]="options"
+            [formControl]="singleControl"
+          />
+          <div class="rounded-lg border border-dashed border-base-300 bg-base-200/50 p-4">
+            <p class="mb-2 text-sm font-medium">Value</p>
+            <pre class="text-sm whitespace-pre-wrap">{{ singleValueChanges() | json }}</pre>
+          </div>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="select-single.html"
+            src="markdown/usage/select/select-single.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="select-sample.ts"
+            src="markdown/usage/select/select.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Multiple selection</ng-container>
+    <ng-container description>
+      Add <span class="kbd">multiple</span> to allow selecting more than one option. The value is
+      reported as an array.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div class="flex flex-col gap-4 p-6 border border-t-0 border-base-300 rounded-b-lg">
+          <app-select
+            multiple
+            placeholder="Select options"
+            class="w-full max-w-sm"
+            [options]="options"
+            [formControl]="multipleControl"
+          />
+          <div class="rounded-lg border border-dashed border-base-300 bg-base-200/50 p-4">
+            <p class="mb-2 text-sm font-medium">Value</p>
+            <pre class="text-sm whitespace-pre-wrap">{{ multipleValueChanges() | json }}</pre>
+          </div>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="select-multiple.html"
+            src="markdown/usage/select/select-multiple.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="select-sample.ts"
+            src="markdown/usage/select/select.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Sizes</ng-container>
+    <ng-container description>
+      The select component supports different sizes to accommodate various design needs.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex flex-col items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <app-select size="xs" class="w-56" placeholder="xs" [options]="options" />
+          <app-select size="sm" class="w-56" placeholder="sm" [options]="options" />
+          <app-select size="md" class="w-56" placeholder="md" [options]="options" />
+          <app-select size="lg" class="w-56" placeholder="lg" [options]="options" />
+          <app-select size="xl" class="w-56" placeholder="xl" [options]="options" />
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="select-sizes.html"
+            src="markdown/usage/select/select-sizes.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="select-sample.ts"
+            src="markdown/usage/select/select.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Disabled</ng-container>
+    <ng-container description>
+      The disabled state indicates that the select component is not interactive and cannot be
+      changed.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <app-select disabled class="w-56" placeholder="Disabled" [options]="options" />
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="select-disabled.html"
+            src="markdown/usage/select/select-disabled.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="select-sample.ts"
+            src="markdown/usage/select/select.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

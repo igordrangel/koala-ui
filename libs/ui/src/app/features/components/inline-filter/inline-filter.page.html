@@ -1,0 +1,62 @@
+<app-section-container>
+  <ng-container title>Inline Filter</ng-container>
+  <ng-container description>
+    A flexible filter builder for creating dynamic query rules. Choose a filter type and fill each
+    rule with text, select, selectMultiple, currency, date, or combobox inputs.
+  </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description>Use the Koala CLI to generate a new filter component.</ng-container>
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/inline-filter-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Builder</ng-container>
+    <ng-container description>
+      This component focuses on filtering workflows. Applied rules sync to query params and are
+      automatically rehydrated when you return to this screen.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div class="border border-t-0 border-base-300 rounded-b-lg p-5">
+          <app-inline-filter [config]="inlineFilterConfig" (payload)="appliedFilters.set($event)" />
+
+          <div class="mt-6 border border-base-300 rounded-lg bg-base-100 p-4 text-sm">
+            <ng-container title>Applied Filters</ng-container>
+            <ng-container description>
+              Live output of the current filter payload, useful to plug directly into API query
+              builders.
+            </ng-container>
+
+            <pre class="overflow-x-auto text-xs leading-6">{{ appliedFilters() | json }}</pre>
+          </div>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="inline-filter.html"
+            src="markdown/usage/inline-filter/inline-filter.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="inline-filter.ts"
+            src="markdown/usage/inline-filter/inline-filter.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

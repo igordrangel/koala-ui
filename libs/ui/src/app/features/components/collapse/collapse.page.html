@@ -1,0 +1,115 @@
+<app-section-container>
+  <ng-container title>Collapse</ng-container>
+  <ng-container description>
+    Collapse components can be used to show and hide content in a collapsible format.
+  </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description>Use the Koala CLI to generate a new collapse component.</ng-container>
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/collapse-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Expansive panel</ng-container>
+    <ng-container description>
+      The expansive panel is a collapsible component that can be used to show and hide content. It
+      is a simple and effective way to manage space on a page while still providing access to
+      additional information when needed.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <app-collapse class="w-full" type="collapse">
+            <ng-container title>How do I create an account?</ng-container>
+
+            Click the "Sign Up" button in the top right corner and follow the registration process.
+          </app-collapse>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="collapse-sample.html"
+            src="markdown/usage/collapse/collapse.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="collapse-sample.ts"
+            src="markdown/usage/collapse/collapse.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Accordion</ng-container>
+    <ng-container description>
+      The accordion is a collapsible component that can be used to show and hide content. It is
+      similar to the expansive panel, but it allows for multiple panels to be open at the same time.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex flex-col items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <app-collapse class="w-full" type="accordion" name="help">
+            <ng-container title>How do I create an account?</ng-container>
+
+            Click the "Sign Up" button in the top right corner and follow the registration process.
+          </app-collapse>
+
+          <app-collapse class="w-full" type="accordion" name="help">
+            <ng-container title>I forgot my password. What should I do?</ng-container>
+
+            Click on "Forgot Password" on the login page and follow the instructions sent to your
+            email.
+          </app-collapse>
+
+          <app-collapse class="w-full" type="accordion" name="help">
+            <ng-container title>How do I update my profile information?</ng-container>
+
+            Go to "My Account" settings and select "Edit Profile" to make changes.
+          </app-collapse>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="accordion-sample.html"
+            src="markdown/usage/collapse/accordion.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="accordion-sample.ts"
+            src="markdown/usage/collapse/accordion.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

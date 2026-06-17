@@ -1,0 +1,24 @@
+<app-modal>
+  @let pressEscape = modalOptions.closeOptions?.pressEscape ?? false;
+  @let clickOutside = modalOptions.closeOptions?.clickOutside ?? false;
+
+  <div class="flex justify-between items-center" title>
+    <span>Hello!</span>
+
+    @if (closeButtonCorner) {
+      <button appButton circle variant="ghost" size="sm" (click)="modalRef.dismiss()">X</button>
+    }
+  </div>
+  <div [class]="customWidth" content>
+    @if (pressEscape && !clickOutside) {
+      Press ESC key or click the button below to close
+    } @else if (pressEscape && clickOutside) {
+      Press ESC key or click outside to close
+    }
+  </div>
+  <ng-container actions>
+    @if (pressEscape && !clickOutside && !closeButtonCorner) {
+      <button appButton (click)="modalRef.dismiss()">Close</button>
+    }
+  </ng-container>
+</app-modal>

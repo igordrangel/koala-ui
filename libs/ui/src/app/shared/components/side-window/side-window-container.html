@@ -1,0 +1,15 @@
+<div
+  class="flex flex-col w-full h-full bg-base-100 dark:bg-base-200 rounded-2xl animate-slide-in-left border-3 border-base-300"
+>
+  <div class="flex items-center border-b border-base-300 p-4 text-lg font-bold empty:hidden">
+    <ng-content select="[title]" />
+  </div>
+
+  <div class="h-full empty:hidden">
+    <ng-content select="[content]" />
+  </div>
+
+  <div class="flex items-center justify-end border-t border-base-300 p-4 empty:hidden">
+    <ng-content select="[actions]" />
+  </div>
+</div>

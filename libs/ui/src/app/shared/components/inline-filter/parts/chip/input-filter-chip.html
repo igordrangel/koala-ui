@@ -1,0 +1,26 @@
+@if (field(); as field) {
+  <span class="badge badge-success dark:badge-soft badge-sm cursor-pointer flex items-center">
+    {{ field.label }}:
+
+    @if (field.templateValue(); as templateValue) {
+      <b>{{ templateValue }}</b>
+    } @else if (field.loading()) {
+      <i class="flex items-end gap-0.5 text-neutral-content font-light">
+        loading
+        <span appLoading class="relative top-[-0.05rem] size-[0.7rem]" variant="dots"></span>
+      </i>
+    } @else {
+      <i class="text-neutral-content font-light">empty</i>
+    }
+
+    @if (!field.loading()) {
+      <button
+        type="button"
+        class="text-neutral-content opacity-40 hover:opacity-70 transition-opacity duration-100 cursor-pointer"
+        (click)="removeAction.emit()"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    }
+  </span>
+}

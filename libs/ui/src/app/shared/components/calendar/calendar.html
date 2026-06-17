@@ -1,0 +1,29 @@
+@if (type() === 'daterange') {
+  <calendar-range
+    #calendar
+    class="cally bg-base-100 border border-base-300 shadow-lg w-full"
+    [class.border-none]="noBorder()"
+    [class.rounded-box]="!squareBottom()"
+    [class.rounded-t-box]="squareBottom()"
+    [value]="value()"
+  >
+    <i aria-label="Previous" class="fa-solid fa-chevron-left" slot="previous"></i>
+    <i aria-label="Next" class="fa-solid fa-chevron-right" slot="next"></i>
+    <calendar-select-year slot="heading" max-years="100" />
+    <calendar-month />
+  </calendar-range>
+} @else {
+  <calendar-date
+    #calendar
+    class="cally bg-base-100 border border-base-300 shadow-lg w-full"
+    [class.border-none]="noBorder()"
+    [class.rounded-box]="!squareBottom()"
+    [class.rounded-t-box]="squareBottom()"
+    [value]="value()"
+  >
+    <i aria-label="Previous" class="fa-solid fa-chevron-left" slot="previous"></i>
+    <i aria-label="Next" class="fa-solid fa-chevron-right" slot="next"></i>
+    <calendar-select-year slot="heading" max-years="100" />
+    <calendar-month />
+  </calendar-date>
+}

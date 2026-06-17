@@ -1,0 +1,56 @@
+<app-section-container>
+  <ng-container title>Breadcrumb</ng-container>
+  <ng-container description>
+    A breadcrumb is a navigation aid that helps users understand their location within a website or
+    application. It provides a trail of links back to the previous pages or sections.
+  </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description
+      >Use the Koala CLI to generate a new breadcrumb component.</ng-container
+    >
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/breadcrumb-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Usage</ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <app-breadcrumb>
+            <li>Home</li>
+            <li>Documents</li>
+            <li>Add Document</li>
+          </app-breadcrumb>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="breadcrumb-sample.html"
+            src="markdown/usage/breadcrumb/breadcrumb.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="breadcrumb-sample.ts"
+            src="markdown/usage/breadcrumb/breadcrumb.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

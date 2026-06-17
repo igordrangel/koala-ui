@@ -6,7 +6,7 @@ on:
       - 'package.json'
 jobs:
   build:
-    name: "npm publish library"
+    name: 'npm publish library'
     runs-on: ubuntu-latest
     steps:
       - name: 🚚 Get latest code
@@ -16,10 +16,10 @@ jobs:
         uses: oven-sh/setup-bun@v1
 
       - name: 🔨 Install Dependencies
-        run: bun install
+        run: bun ci
 
       - name: 🔨 Build Project
-        run: bun run build:publish
+        run: bun run build
 
       - name: Publish npm package
         uses: actions/setup-node@v2-beta

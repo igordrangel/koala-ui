@@ -1,0 +1,46 @@
+```html
+<input
+  type="radio"
+  appRadio="sample"
+  variant="neutral"
+  value="neutral"
+  [formControl]="radioControl"
+/>
+<input
+  type="radio"
+  appRadio="sample"
+  variant="primary"
+  value="primary"
+  [formControl]="radioControl"
+/>
+<input
+  type="radio"
+  appRadio="sample"
+  variant="secondary"
+  value="secondary"
+  [formControl]="radioControl"
+/>
+<input
+  type="radio"
+  appRadio="sample"
+  variant="accent"
+  value="accent"
+  [formControl]="radioControl"
+/>
+<input type="radio" appRadio="sample" variant="info" value="info" [formControl]="radioControl" />
+<input
+  type="radio"
+  appRadio="sample"
+  variant="success"
+  value="success"
+  [formControl]="radioControl"
+/>
+<input
+  type="radio"
+  appRadio="sample"
+  variant="warning"
+  value="warning"
+  [formControl]="radioControl"
+/>
+<input type="radio" appRadio="sample" variant="error" value="error" [formControl]="radioControl" />
+```

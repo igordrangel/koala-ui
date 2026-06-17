@@ -1,0 +1,273 @@
+<app-section-container>
+  <ng-container title>Modal</ng-container>
+  <ng-container description>A simple modal component.</ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description>Use the Koala CLI to generate a new modal component.</ng-container>
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/modal-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Dialog modal</ng-container>
+    <ng-container description>
+      The dialog modal is a classic modal component that can be used to display content in a
+      centered overlay. It is commonly used to display important information or prompt the user for
+      a decision.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <button appButton (click)="openModal({ pressEscape: true, clickOutside: false })">
+            open modal
+          </button>
+        </div>
+      </div>
+
+      <div appTab label="HTML Trigger">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="modal-trigger-dialog-sample.html"
+            src="markdown/usage/modal/modal-trigger.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS Trigger">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="modal-trigger-dialog-sample.ts"
+            src="markdown/usage/modal/modal-trigger-dialog.ts.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="HTML Dialog">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="modal-dialog-sample.html"
+            src="markdown/usage/modal/modal-dialog.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS Dialog">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="modal-dialog-sample.ts"
+            src="markdown/usage/modal/modal-dialog.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Dialog modal, closes when clicked outside</ng-container>
+    <ng-container description>
+      The dialog modal can be configured to close when the user clicks outside of it. This is a
+      common behavior for modals that are used to display non-critical information or that do not
+      require user interaction.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <button appButton (click)="openModal({ pressEscape: true, clickOutside: true })">
+            open modal
+          </button>
+        </div>
+      </div>
+
+      <div appTab label="HTML Trigger">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="modal-trigger-dialog-alert-sample.html"
+            src="markdown/usage/modal/modal-trigger.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS Trigger">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="modal-trigger-dialog-alert-sample.ts"
+            src="markdown/usage/modal/modal-trigger-dialog-alert.ts.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="HTML Dialog">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="modal-dialog-alert-sample.html"
+            src="markdown/usage/modal/modal-dialog-alert.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS Dialog">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="modal-dialog-alert-sample.ts"
+            src="markdown/usage/modal/modal-dialog-alert.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Dialog modal with a close button at corner</ng-container>
+    <ng-container description>
+      The dialog modal can be configured to have a close button at the corner. This is a common
+      design pattern for modals that are used to display critical information or that require user
+      interaction.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <button appButton (click)="openModal({ pressEscape: true, clickOutside: false }, true)">
+            open modal
+          </button>
+        </div>
+      </div>
+
+      <div appTab label="HTML Trigger">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="modal-trigger-dialog-sample.html"
+            src="markdown/usage/modal/modal-trigger.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS Trigger">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="modal-trigger-dialog-sample.ts"
+            src="markdown/usage/modal/modal-trigger-dialog-close-corner.ts.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="HTML Dialog">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="modal-dialog-close-corner-sample.html"
+            src="markdown/usage/modal/modal-dialog-close-corner.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS Dialog">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="modal-dialog-close-corner-sample.ts"
+            src="markdown/usage/modal/modal-dialog-close-corner.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Dialog modal with custom width</ng-container>
+    <ng-container description>
+      The dialog modal can be configured to have a custom width. This is useful for modals that need
+      to display more content or require a specific layout.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <button
+            appButton
+            (click)="openModal({ pressEscape: true, clickOutside: false }, false, 'w-200')"
+          >
+            open modal
+          </button>
+        </div>
+      </div>
+
+      <div appTab label="HTML Trigger">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="modal-trigger-custom-width-sample.html"
+            src="markdown/usage/modal/modal-trigger.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS Trigger">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="modal-trigger-custom-width-sample.ts"
+            src="markdown/usage/modal/modal-trigger-custom-width.ts.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="HTML Dialog">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="modal-dialog-custom-width-sample.html"
+            src="markdown/usage/modal/modal-dialog-custom-width.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS Dialog">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="modal-dialog-custom-width-sample.ts"
+            src="markdown/usage/modal/modal-dialog-custom-width.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

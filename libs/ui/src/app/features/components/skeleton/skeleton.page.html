@@ -1,0 +1,181 @@
+<app-section-container>
+  <ng-container title>Skeleton</ng-container>
+  <ng-container description>A simple skeleton component.</ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description>Use the Koala CLI to generate a new skeleton component.</ng-container>
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/skeleton-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Skeleton</ng-container>
+    <ng-container description>
+      The skeleton component is a placeholder that can be used to indicate that content is loading.
+      It is commonly used to improve the user experience by providing a visual indication that data
+      is being fetched or processed.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <app-skeleton class="w-32 h-32" variant="rect" />
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="skeleton-sample.html"
+            src="markdown/usage/skeleton/skeleton-rect.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="skeleton-sample.ts"
+            src="markdown/usage/skeleton/skeleton.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Skeleton circle</ng-container>
+    <ng-container description>
+      The skeleton component also supports a circular variant, which can be used to indicate loading
+      states for circular elements such as avatars or profile pictures.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <app-skeleton class="w-32 h-32" variant="circle" />
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="skeleton-circle-sample.html"
+            src="markdown/usage/skeleton/skeleton-circle.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="skeleton-circle-sample.ts"
+            src="markdown/usage/skeleton/skeleton.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Skeleton text</ng-container>
+    <ng-container description>
+      The skeleton component also supports a text variant, which can be used to indicate loading
+      states for textual content such as paragraphs or headings.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <app-skeleton variant="text">AI is thinking harder...</app-skeleton>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="skeleton-text-sample.html"
+            src="markdown/usage/skeleton/skeleton-text.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="skeleton-text-sample.ts"
+            src="markdown/usage/skeleton/skeleton.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Skeleton Composition</ng-container>
+    <ng-container description>
+      The skeleton component allows for composition, enabling the creation of complex loading
+      placeholders by combining multiple skeleton elements.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <div class="flex w-52 flex-col gap-4">
+            <div class="flex items-center gap-4">
+              <app-skeleton class="h-16 w-16 shrink-0 rounded-full" variant="circle"></app-skeleton>
+              <div class="flex flex-col gap-4">
+                <app-skeleton class="h-4 w-20" variant="rect"></app-skeleton>
+                <app-skeleton class="h-4 w-28" variant="rect"></app-skeleton>
+              </div>
+            </div>
+            <app-skeleton class="h-32 w-full" variant="rect"></app-skeleton>
+          </div>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="skeleton-composition-sample.html"
+            src="markdown/usage/skeleton/skeleton-composition.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="skeleton-circle-sample.ts"
+            src="markdown/usage/skeleton/skeleton.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

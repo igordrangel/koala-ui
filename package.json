@@ -1,64 +1,87 @@
 {
-  "name": "koala-ui",
-  "version": "21.2.4",
+  "name": "@koalarx/ui",
+  "version": "22.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve doc",
-    "build:app": "ng build doc",
-    "build:lib": "ng build koala-ui",
-    "build:publish": "bun .github/scripts/publish.mjs",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test --browsers=chrome",
-    "version": "git add -A projects",
+    "build": "bun scripts/build",
+    "build:doc": "bun run build:docs",
+    "build:docs": "bun run generate:llms && cd libs/ui && bun run build:prod",
+    "dev:docs": "bun run generate:llms && cd libs/ui && bun start",
+    "preview:docs": "bunx serve dist/browser -p 4321",
+    "start": "bun run build && bun ./bin/run",
+    "ui:start": "cd libs/ui && bun start",
+    "generate:command": "bun scripts/generate-command",
+    "generate:llms": "node scripts/generate-llms.js",
+    "version": "node scripts/sync-ui-version.js && git add -A libs",
     "postversion": "git push && git push --tags",
-    "deploy:hotfix": "npm version patch",
-    "deploy:feature": "npm version minor",
-    "deploy:release": "npm version major"
+    "prepare:hotfix": "npm version patch",
+    "prepare:feature": "npm version minor",
+    "prepare:release": "npm version major",
+    "test:cli": "vitest run libs/cli",
+    "test:cli:watch": "vitest libs/cli",
+    "test:ui": "cd libs/ui && bun run test:unit && bun run e2e",
+    "test": "bun run test:cli && bun run test:ui"
   },
-  "private": true,
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      },
+      {
+        "files": ".dockerignore",
+        "options": {
+          "parser": "yaml"
+        }
+      }
+    ]
+  },
+  "packageManager": "bun@1.3.6",
   "dependencies": {
-    "@angular/common": "21.2.8",
-    "@angular/compiler": "21.2.8",
-    "@angular/core": "21.2.8",
-    "@angular/forms": "21.2.8",
-    "@angular/platform-browser": "21.2.8",
-    "@angular/router": "21.2.8",
-    "@koalarx/utils": "4.2.1",
-    "@ngx-loading-bar/core": "7.0.0",
-    "@ngx-loading-bar/router": "7.0.0",
-    "@tailwindcss/postcss": "4.1.18",
-    "daisyui": "5.5.14",
-    "date-fns": "4.1.0",
-    "jwt-decode": "4.0.0",
-    "marked": "15.0.0",
-    "ngx-markdown": "21.0.0",
-    "ngx-mask": "19.0.7",
-    "postcss": "8.5.6",
-    "prism-themes": "1.9.0",
-    "prismjs": "1.30.0",
-    "rxjs": "7.8.0",
-    "tailwindcss": "4.1.18",
-    "tslib": "2.3.0"
+    "@koalarx/utils": "^4.2.3",
+    "chalk": "4.1.2",
+    "clsx": "^2.1.1",
+    "prompts": "^2.4.2"
   },
   "devDependencies": {
-    "@angular/build": "21.2.7",
-    "@angular/cli": "21.2.7",
-    "@angular/compiler-cli": "21.2.8",
-    "@testing-library/angular": "19.2.1",
-    "@testing-library/dom": "10.0.0",
-    "@testing-library/user-event": "14.0.0",
-    "@types/jasmine": "5.1.0",
-    "@types/node": "24.0.10",
-    "@vitest/coverage-v8": "1.0.0",
-    "@vitest/ui": "4.0.16",
-    "angular-eslint": "21.3.1",
-    "eslint": "9.30.1",
-    "jasmine-core": "5.7.0",
-    "less": "4.2.0",
-    "ng-packagr": "21.0.1",
-    "postcss": "8.5.3",
-    "typescript": "5.9.3",
-    "typescript-eslint": "8.35.1",
-    "vitest": "4.0.16"
-  }
+    "@types/bun": "latest",
+    "@types/node": "25.3.0",
+    "@typescript-eslint/eslint-plugin": "8.53.1",
+    "@typescript-eslint/parser": "8.53.1",
+    "@vitest/coverage-v8": "4.0.16",
+    "@vitest/eslint-plugin": "1.6.6",
+    "eslint": "9.39.2",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-prettier": "5.5.5",
+    "prettier": "3.7.4",
+    "typescript": "5.9.2",
+    "typescript-eslint": "8.53.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "bin": {
+    "kl": "./bin/run.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/igordrangel/koala.git"
+  },
+  "author": "Igor D. Rangel",
+  "bugs": {
+    "url": "https://github.com/igordrangel/koala/issues"
+  },
+  "homepage": "https://github.com/igordrangel/koala#readme",
+  "keywords": [
+    "koalarx",
+    "ui",
+    "angular",
+    "components",
+    "library",
+    "tailwindcss",
+    "daisyui"
+  ]
 }

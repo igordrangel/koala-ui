@@ -1,0 +1,10 @@
+<app-modal>
+  <div class="text-center px-10" content [innerHTML]="data.text"></div>
+
+  <ng-container actions>
+    <button appButton btnVariant="error" (click)="modalRef.dismiss({ answer: false })">No</button>
+    <button appButton btnSoft btnVariant="primary" (click)="modalRef.dismiss({ answer: true })">
+      Yes
+    </button>
+  </ng-container>
+</app-modal>

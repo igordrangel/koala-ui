@@ -1,0 +1,53 @@
+<app-section-container>
+  <ng-container title>Alert</ng-container>
+  <ng-container description>
+    An alert dialog is a modal that displays important information to the user. It is commonly used
+    to notify the user about a specific event or action that requires their attention.
+  </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description>Use the Koala CLI to generate a new alert component.</ng-container>
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/alert-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Usage</ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <button appButton btnVariant="info" (click)="showAlert('info')">Info</button>
+          <button appButton btnVariant="warning" (click)="showAlert('warning')">Warning</button>
+          <button appButton btnVariant="error" (click)="showAlert('error')">Error</button>
+          <button appButton btnVariant="success" (click)="showAlert('success')">Success</button>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="alert-sample.html"
+            src="markdown/usage/alert/alert.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="alert-sample.ts"
+            src="markdown/usage/alert/alert.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

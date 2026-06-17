@@ -1,0 +1,51 @@
+<app-section-container>
+  <ng-container title>Confirm</ng-container>
+  <ng-container description>
+    A confirm dialog is a modal that asks the user to confirm or reject an action. It is commonly
+    used to prevent accidental actions or to ask for confirmation before performing a critical
+    operation.
+  </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description>Use the Koala CLI to generate a new confirm component.</ng-container>
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/confirm-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Usage</ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <button appButton (click)="ask()">Confirm</button>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="confirm-sample.html"
+            src="markdown/usage/confirm/confirm.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="confirm-sample.ts"
+            src="markdown/usage/confirm/confirm.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

@@ -1,0 +1,16 @@
+@if (config(); as config) {
+  @switch (config.type) {
+    @case ('select') {
+      <app-select
+        #selectField
+        size="xs"
+        [options]="options()"
+        [placeholder]="config.placeholder || 'Select an option'"
+        [multiple]="config.multiple"
+        [formControl]="valueControl"
+        [inline]="!isMobile"
+        hideClear
+      />
+    }
+  }
+}

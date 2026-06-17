@@ -1,0 +1,146 @@
+<app-section-container>
+  <ng-container title>Side Window</ng-container>
+  <ng-container description>
+    The side window is a modal that slides in from the side of the screen. It is commonly used to
+    display additional information or options without navigating away from the current page.
+  </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description
+      >Use the Koala CLI to generate a new side window component.</ng-container
+    >
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/side-window-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Side Window</ng-container>
+    <ng-container description>
+      The side window is a modal component that slides in from the side of the screen. It is
+      commonly used to display additional information or options without navigating away from the
+      current page.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <button appButton (click)="open({ pressEscape: true, clickOutside: false })">
+            open side window
+          </button>
+        </div>
+      </div>
+
+      <div appTab label="HTML Trigger">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="side-window-trigger-sample.html"
+            src="markdown/usage/side-window/side-window-trigger.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS Trigger">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="side-window-trigger-sample.ts"
+            src="markdown/usage/side-window/side-window-trigger.ts.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="HTML Window">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="side-window-sample.html"
+            src="markdown/usage/side-window/side-window-sample.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS Window">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="side-window-sample.ts"
+            src="markdown/usage/side-window/side-window-sample.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Side Window with a close button at corner</ng-container>
+    <ng-container description>
+      The side window can be configured to have a close button at the corner. This is a common
+      design pattern for side windows that are used to display critical information or that require
+      user interaction.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <button appButton (click)="open({ pressEscape: true, clickOutside: false }, true)">
+            open side window
+          </button>
+        </div>
+      </div>
+
+      <div appTab label="HTML Trigger">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="side-window-trigger-close-corner.sample.html"
+            src="markdown/usage/side-window/side-window-trigger.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS Trigger">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="side-window-trigger-close-corner.sample.ts"
+            src="markdown/usage/side-window/side-window-trigger-close-corner.ts.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="HTML Dialog">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="side-window-close-corner-sample.html"
+            src="markdown/usage/side-window/side-window-close-corner.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS Dialog">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="side-window-close-corner-sample.ts"
+            src="markdown/usage/side-window/side-window-close-corner.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

@@ -1,0 +1,57 @@
+# Koala UI
+
+> An Angular component library in the style of shadcn/ui.
+> Components are copied directly into your project via the Koala CLI.
+
+## Docs
+
+- [Get Started](https://ui.koalarx.com/docs/get-started.md): Installation and setup
+- [Alert](https://ui.koalarx.com/docs/alert.md): Alert component
+- [Bottom Sheet](https://ui.koalarx.com/docs/bottom-sheet.md): Bottom Sheet component
+- [Breadcrumb](https://ui.koalarx.com/docs/breadcrumb.md): Breadcrumb component
+- [Button](https://ui.koalarx.com/docs/button.md): Button component
+- [Calendar](https://ui.koalarx.com/docs/calendar.md): Calendar component
+- [Checkbox](https://ui.koalarx.com/docs/checkbox.md): Checkbox component
+- [Collapse](https://ui.koalarx.com/docs/collapse.md): Collapse component
+- [Combobox](https://ui.koalarx.com/docs/combobox.md): Combobox component
+- [Confirm](https://ui.koalarx.com/docs/confirm.md): Confirm component
+- [DataTable](https://ui.koalarx.com/docs/datatable.md): DataTable component
+- [Dropdown](https://ui.koalarx.com/docs/dropdown.md): Dropdown component
+- [Fieldset](https://ui.koalarx.com/docs/fieldset.md): Fieldset component
+- [Inline Filter](https://ui.koalarx.com/docs/inline-filter.md): Inline Filter component
+- [Input CNPJ](https://ui.koalarx.com/docs/input-cnpj.md): Input CNPJ component
+- [Input CPF](https://ui.koalarx.com/docs/input-cpf.md): Input CPF component
+- [Input Currency](https://ui.koalarx.com/docs/input-currency.md): Input Currency component
+- [Input Field](https://ui.koalarx.com/docs/input-field.md): Input Field component
+- [Loading](https://ui.koalarx.com/docs/loading.md): Loading component
+- [Login](https://ui.koalarx.com/docs/login.md): Login component
+- [Modal](https://ui.koalarx.com/docs/modal.md): Modal component
+- [Pagination](https://ui.koalarx.com/docs/pagination.md): Pagination component
+- [Radio](https://ui.koalarx.com/docs/radio.md): Radio component
+- [Range](https://ui.koalarx.com/docs/range.md): Range component
+- [Select](https://ui.koalarx.com/docs/select.md): Select component
+- [Side Window](https://ui.koalarx.com/docs/side-window.md): Side Window component
+- [Skeleton](https://ui.koalarx.com/docs/skeleton.md): Skeleton component
+- [Stepper](https://ui.koalarx.com/docs/stepper.md): Stepper component
+- [Table](https://ui.koalarx.com/docs/table.md): Table component
+- [Tabs](https://ui.koalarx.com/docs/tabs.md): Tabs component
+- [Textarea](https://ui.koalarx.com/docs/textarea.md): Textarea component
+- [Toast](https://ui.koalarx.com/docs/toast.md): Toast component
+- [Toggle](https://ui.koalarx.com/docs/toggle.md): Toggle component
+- [Tooltip](https://ui.koalarx.com/docs/tooltip.md): Tooltip component
+- [Validator](https://ui.koalarx.com/docs/validator.md): Validator component
+- [List Base](https://ui.koalarx.com/docs/list-base.md): List Base component
+- [Auth](https://ui.koalarx.com/docs/auth.md): Auth component
+
+## CLI
+
+```bash
+# Install CLI
+bun add -g @koalarx/ui
+
+# Create project
+kl new my-app
+
+# Add components
+kl install button,modal,dropdown
+```

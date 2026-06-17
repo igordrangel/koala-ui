@@ -1,0 +1,25 @@
+<div class="cally bg-base-100 border border-base-300 shadow-lg rounded-box p-3 w-full">
+  <div class="flex items-center justify-between mb-2">
+    <button type="button" class="btn btn-ghost btn-xs" (click)="previousYear.emit()">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <span class="font-semibold">{{ displayedYear() }}</span>
+    <button type="button" class="btn btn-ghost btn-xs" (click)="nextYear.emit()">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+  </div>
+
+  <div class="grid grid-cols-3 gap-1">
+    @for (month of monthOptions(); track month.monthIndex) {
+      <button
+        type="button"
+        class="btn btn-sm"
+        [class.btn-primary]="isSelectedMonth(month.monthIndex)"
+        [class.btn-ghost]="!isSelectedMonth(month.monthIndex)"
+        (click)="monthSelect.emit(month.monthIndex)"
+      >
+        {{ month.label }}
+      </button>
+    }
+  </div>
+</div>

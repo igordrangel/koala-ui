@@ -1,0 +1,17 @@
+<fieldset class="fieldset">
+  <legend class="fieldset-legend mb-0 pb-[0.1rem]">
+    <ng-content select="[label]" />
+  </legend>
+
+  <div class="relative">
+    <ng-content select="[field]" />
+    <div class="absolute right-1 top-1/2 -translate-y-1/2">
+      <ng-content select="[action]" />
+    </div>
+  </div>
+  <ng-content select="[appValidatorHint]" />
+
+  <div class="flex w-full opacity-60 empty:hidden">
+    <ng-content select="[hint]" />
+  </div>
+</fieldset>

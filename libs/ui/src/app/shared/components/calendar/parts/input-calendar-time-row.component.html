@@ -1,0 +1,9 @@
+<input
+  #timeInput
+  appInput
+  class="text-right border-0 border-t rounded-none"
+  type="time"
+  [value]="value()"
+  (click)="openPicker($event)"
+  (input)="onInput($event)"
+/>

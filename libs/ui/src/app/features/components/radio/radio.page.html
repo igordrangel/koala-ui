@@ -1,0 +1,188 @@
+<app-section-container>
+  <ng-container title>Radio</ng-container>
+  <ng-container description>A simple radio component.</ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description>Use the Koala CLI to generate a new radio component.</ng-container>
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/radio-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Variants</ng-container>
+    <ng-container description>
+      The radio component supports several variants to fit different use cases and design
+      requirements.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <input
+            type="radio"
+            appRadio="sample"
+            variant="neutral"
+            value="neutral"
+            [formControl]="radioControl"
+          />
+          <input
+            type="radio"
+            appRadio="sample"
+            variant="primary"
+            value="primary"
+            [formControl]="radioControl"
+          />
+          <input
+            type="radio"
+            appRadio="sample"
+            variant="secondary"
+            value="secondary"
+            [formControl]="radioControl"
+          />
+          <input
+            type="radio"
+            appRadio="sample"
+            variant="accent"
+            value="accent"
+            [formControl]="radioControl"
+          />
+          <input
+            type="radio"
+            appRadio="sample"
+            variant="info"
+            value="info"
+            [formControl]="radioControl"
+          />
+          <input
+            type="radio"
+            appRadio="sample"
+            variant="success"
+            value="success"
+            [formControl]="radioControl"
+          />
+          <input
+            type="radio"
+            appRadio="sample"
+            variant="warning"
+            value="warning"
+            [formControl]="radioControl"
+          />
+          <input
+            type="radio"
+            appRadio="sample"
+            variant="error"
+            value="error"
+            [formControl]="radioControl"
+          />
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="radio-sample.html"
+            src="markdown/usage/radio/radio-variants.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="radio-sample.ts"
+            src="markdown/usage/radio/radio.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Sizes</ng-container>
+    <ng-container description>
+      The radio component supports different sizes to accommodate various design needs.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <input type="radio" appRadio="sample" size="xs" value="xs" [formControl]="radioControl" />
+          <input type="radio" appRadio="sample" size="sm" value="sm" [formControl]="radioControl" />
+          <input type="radio" appRadio="sample" size="md" value="md" [formControl]="radioControl" />
+          <input type="radio" appRadio="sample" size="lg" value="lg" [formControl]="radioControl" />
+          <input type="radio" appRadio="sample" size="xl" value="xl" [formControl]="radioControl" />
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="radio-sample.html"
+            src="markdown/usage/radio/radio-sizes.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="radio-sample.ts"
+            src="markdown/usage/radio/radio.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Disabled</ng-container>
+    <ng-container description>
+      The disabled state indicates that the radio button is not interactive and cannot be selected.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <input type="radio" appRadio disabled />
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="radio-sample.html"
+            src="markdown/usage/radio/radio-disabled.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="radio-sample.ts"
+            src="markdown/usage/radio/radio.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

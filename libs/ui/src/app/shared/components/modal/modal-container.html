@@ -1,0 +1,15 @@
+<div role="dialog" class="modal modal-open animate-fade-in z-10000">
+  <div class="modal-box w-auto max-w-full border-4 border-base-300 bg-base-200 animate-zoom-in">
+    <h3 class="text-lg font-bold empty:hidden">
+      <ng-content select="[title]" />
+    </h3>
+
+    <p class="py-4 empty:hidden">
+      <ng-content select="[content]" />
+    </p>
+
+    <div class="modal-action empty:hidden">
+      <ng-content select="[actions]" />
+    </div>
+  </div>
+</div>

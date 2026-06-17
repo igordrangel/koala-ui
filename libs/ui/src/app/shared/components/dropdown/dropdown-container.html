@@ -1,0 +1,40 @@
+@let anchorName = '--anchor-' + id;
+
+<button
+  #dropdownTrigger
+  type="button"
+  class="p-0! w-full"
+  tabindex="0"
+  role="button"
+  [attr.popovertarget]="id"
+  [style.anchor-name]="anchorName"
+  [disabled]="disabled()"
+  (click)="ajustPosition()"
+>
+  <ng-content select="[trigger]" />
+</button>
+
+@let isMenu = mode() === 'menu';
+@let isOptions = mode() === 'options';
+@let isMenuOptions = mode() === 'menuOptions';
+
+<div
+  #dropdownContent
+  tabindex="0"
+  popover
+  [id]="id"
+  [style.position-anchor]="anchorName"
+  class="dropdown menu p-0 bg-base-100 rounded-box shadow-sm border-2 border-base-300 rounded-md overflow-y-auto overflow-x-hidden w-auto"
+  [class.mt-2]="isOptions"
+  [class.min-w-[calc(100%-1rem)]!]="isMenu || isMenuOptions"
+  [class.max-w-[calc(100vw-1rem)]!]="isMenu || isMenuOptions"
+  [class.lg:min-w-auto!]="isMenu || isMenuOptions"
+  [class.max-h-55]="isOptions"
+  [class.max-h-85]="isMenu || isMenuOptions"
+  [style.min-width.px]="isOptions ? triggerWidth.value() : null"
+  [style.max-width]="
+    isOptions ? 'min(' + triggerWidth.value() + 'px, calc(100vw - 1rem))' : null
+  "
+>
+  <ng-content select="[options]" />
+</div>

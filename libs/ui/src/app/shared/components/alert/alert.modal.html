@@ -1,0 +1,24 @@
+<app-modal>
+  <div class="text-center px-15 flex flex-col items-center gap-3" content>
+    @switch (data.type) {
+      @case ('success') {
+        <i class="fa-regular fa-circle-check text-6xl text-success"></i>
+      }
+      @case ('error') {
+        <i class="fa-regular fa-circle-xmark text-6xl text-error"></i>
+      }
+      @case ('warning') {
+        <i class="fa-solid fa-triangle-exclamation text-6xl text-warning"></i>
+      }
+      @case ('info') {
+        <i class="fa-solid fa-circle-info text-6xl text-info"></i>
+      }
+    }
+
+    <p [innerHTML]="data.text"></p>
+  </div>
+
+  <div class="flex justify-center w-full" actions>
+    <button appButton [btnVariant]="data.type" (click)="modalRef.dismiss()">Ok</button>
+  </div>
+</app-modal>

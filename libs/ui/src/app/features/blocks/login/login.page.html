@@ -1,0 +1,90 @@
+<app-section-container>
+  <ng-container title>Login</ng-container>
+  <ng-container description>
+    The login block provides a user interface for users to enter their credentials and access the
+    application. It typically includes fields for username/email and password, along with a submit
+    button to initiate the login process.
+  </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description> Use the Koala CLI to generate a new login block. </ng-container>
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/login-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Sample</ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex flex-col items-center justify-center gap-2 border border-t-0 p-4 border-base-300 rounded-b-lg"
+        >
+          @switch (authorization.event()?.type) {
+            @case ('loadingUserInfo') {
+              @if (authorization.loggedUser()) {
+                <app-logged-sample />
+              } @else {
+                <div class="flex flex-col items-center gap-2">
+                  <app-loading size="lg" />
+                  Loading user information...
+                </div>
+              }
+            }
+            @case ('authenticated') {
+              <app-logged-sample />
+            }
+            @default {
+              <app-login-form-sample />
+            }
+          }
+        </div>
+      </div>
+
+      <div appTab label="Form HTML Page">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="login-form-sample.html"
+            src="markdown/usage/login/login-form.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="Form TS Page">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="login-form-sample.ts"
+            src="markdown/usage/login/login-form.ts.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="Logged HTML Page">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="logged-sample.html"
+            src="markdown/usage/login/logged-sample.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="Logged TS Page">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="logged-sample.ts"
+            src="markdown/usage/login/logged-sample.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

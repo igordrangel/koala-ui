@@ -1,0 +1,100 @@
+@if (currentModulePage()) {
+  <ul
+    class="menu bg-base-100 w-full lg:w-60 mt-0 lg:mt-16 h-auto lg:h-[calc(100vh-4rem)] overflow-y-visible lg:overflow-y-auto no-scrollbar pb-6 lg:pb-15"
+  >
+    <li>
+      @switch (currentModulePage()) {
+        @case ('getting-started') {
+          <ul>
+            @for (item of gettingStarted; track $index) {
+              <li>
+                <a class="opacity-60" [routerLink]="item.routerLink" routerLinkActive="opacity-100">
+                  <span class="flex items-center gap-2">
+                    {{ item.name }}
+
+                    @if (item.commingSoon) {
+                      <span class="badge badge-xs badge-soft bg-neutral-700 text-white">
+                        soon
+                      </span>
+                    }
+                  </span>
+                </a>
+              </li>
+            }
+          </ul>
+        }
+        @case ('components') {
+          @for (item of components; track $index) {
+            <h2 class="menu-title">{{ item.name }}</h2>
+            <ul>
+              @for (subItem of item.items; track $index) {
+                <li>
+                  <a
+                    class="opacity-60"
+                    [routerLink]="subItem.routerLink"
+                    routerLinkActive="opacity-100"
+                  >
+                    <span class="flex items-center gap-2">
+                      {{ subItem.name }}
+
+                      @if (subItem.commingSoon) {
+                        <span class="badge badge-xs badge-soft bg-neutral-700 text-white">
+                          soon
+                        </span>
+                      }
+                    </span>
+                  </a>
+                </li>
+              }
+            </ul>
+          }
+        }
+        @case ('blocks') {
+          <ul>
+            @for (item of blocks; track $index) {
+              <li>
+                <a class="opacity-60" [routerLink]="item.routerLink" routerLinkActive="opacity-100">
+                  <span class="flex items-center gap-2">
+                    {{ item.name }}
+
+                    @if (item.commingSoon) {
+                      <span class="badge badge-xs badge-soft bg-neutral-700 text-white">
+                        soon
+                      </span>
+                    }
+                  </span>
+                </a>
+              </li>
+            }
+          </ul>
+        }
+        @case ('resources') {
+          @for (item of resources; track $index) {
+            <h2 class="menu-title">{{ item.name }}</h2>
+            <ul>
+              @for (subItem of item.items; track $index) {
+                <li>
+                  <a
+                    class="opacity-60"
+                    [routerLink]="subItem.routerLink"
+                    routerLinkActive="opacity-100"
+                  >
+                    <span class="flex items-center gap-2">
+                      {{ subItem.name }}
+
+                      @if (subItem.commingSoon) {
+                        <span class="badge badge-xs badge-soft bg-neutral-700 text-white">
+                          soon
+                        </span>
+                      }
+                    </span>
+                  </a>
+                </li>
+              }
+            </ul>
+          }
+        }
+      }
+    </li>
+  </ul>
+}

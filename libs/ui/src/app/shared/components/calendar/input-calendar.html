@@ -1,0 +1,64 @@
+@let widthField = textInput.value.length - textInput.value.split(' ').length / 2;
+
+<app-dropdown #dropdownComponent class="relative w-full" mode="menuOptions">
+  <ng-container trigger>
+    <input
+      #textInput
+      appInput
+      type="text"
+      class="bg-transparent"
+      [class.pr-10]="!inline()"
+      [inline]="inline()"
+      [size]="size()"
+      [appMask]="inputMask()"
+      [style.width]="!inline() ? '100%' : widthField + 'ch'"
+      [value]="inputValue()"
+      [placeholder]="placeholder()"
+      (input)="onInputChange($event)"
+      (keydown)="onInputKeydown($event)"
+      (click)="$event.stopPropagation()"
+      (focus)="openPopover()"
+    />
+
+    @if (value() && !inline()) {
+      <button
+        type="button"
+        class="btn btn-ghost btn-xs absolute top-1/2 right-2 -translate-y-1/2 min-h-0 h-6 w-6 p-0"
+        aria-label="Clear selected date"
+        (click)="clear($event)"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    }
+  </ng-container>
+
+  <ng-container options>
+    @if (type() === 'month') {
+      <app-input-calendar-month-picker
+        class="w-full"
+        [displayedYear]="displayedYear()"
+        [value]="value()"
+        [monthOptions]="monthOptions"
+        (previousYear)="changeDisplayedYear(-1)"
+        (nextYear)="changeDisplayedYear(1)"
+        (monthSelect)="setMonthValue($event)"
+      />
+    } @else {
+      <div class="datetime-calendar-wrapper">
+        <app-calendar
+          class="w-full"
+          noBorder
+          [type]="type() === 'daterange' ? 'daterange' : 'date'"
+          [squareBottom]="type() === 'datetime'"
+          [value]="value()"
+          (selectedDate)="setDateValue($event)"
+          (selectedRange)="setRangeValue($event)"
+        />
+      </div>
+    }
+
+    @if (type() === 'datetime') {
+      <app-input-calendar-time-row [value]="timeValue()" (valueChange)="setTimeValue($event)" />
+    }
+  </ng-container>
+</app-dropdown>

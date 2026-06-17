@@ -1,0 +1,27 @@
+@keyframes show-border-scroll {
+  from,
+  to {
+    --border-scroll-color: var(--color-base-300);
+  }
+}
+
+@utility listbox-scrollbar {
+  scrollbar-color: var(--color-zinc-400) var(--color-base-200);
+}
+
+table :where(.table-pin-rows thead tr) {
+  background-color: var(--color-base-200);
+}
+
+.table-container {
+  scroll-timeline: --check-table-scroll y;
+  --border-scroll-color: transparent;
+
+  animation: show-border-scroll forwards;
+  animation-timeline: --check-table-scroll;
+}
+
+table th:last-child,
+table td:last-child {
+  border-right: 1px solid var(--border-scroll-color);
+}
