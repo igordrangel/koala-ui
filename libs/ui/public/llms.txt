@@ -47,7 +47,7 @@
 
 ```bash
 # Install CLI
-bun add -g @koalarx/ui-cli
+bun add -g @koalarx/ui
 
 # Create project
 kl new my-app

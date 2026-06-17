@@ -1,9 +1,9 @@
 <div align="center">
-  <h1>@koalarx/ui-cli</h1>
+  <h1>@koalarx/ui</h1>
   <p>CLI for creating and managing Angular projects with ready-to-use UI components.</p>
 
-[![npm version](https://img.shields.io/npm/v/@koalarx/ui-cli)](https://www.npmjs.com/package/@koalarx/ui-cli)
-[![license](https://img.shields.io/npm/l/@koalarx/ui-cli)](./LICENSE)
+[![npm version](https://img.shields.io/npm/v/@koalarx/ui)](https://www.npmjs.com/package/@koalarx/ui)
+[![license](https://img.shields.io/npm/l/@koalarx/ui)](./LICENSE)
 
 **[📖 Full Documentation → koalarx.com](https://koalarx.com)**
 
@@ -14,13 +14,13 @@
 ## Installation
 
 ```bash
-npm install -g @koalarx/ui-cli
+npm install -g @koalarx/ui
 ```
 
 or with bun:
 
 ```bash
-bun add -g @koalarx/ui-cli
+bun add -g @koalarx/ui
 ```
 
 ---

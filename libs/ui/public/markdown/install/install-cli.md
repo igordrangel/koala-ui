@@ -1,6 +1,6 @@
 ```bash
-npm install -g @koalarx/ui-cli
+npm install -g @koalarx/ui
 
 # or
-bun add -g @koalarx/ui-cli
+bun add -g @koalarx/ui
 ```

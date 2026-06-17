@@ -116,7 +116,7 @@ const COMPONENTS = [
 function buildGetStartedDoc() {
   const installCli = existsSync(join(INSTALL_DIR, 'install-cli.md'))
     ? read(join(INSTALL_DIR, 'install-cli.md'))
-    : '`bun add -g @koalarx/ui-cli`';
+    : '`bun add -g @koalarx/ui`';
 
   const createProject = existsSync(join(INSTALL_DIR, 'create-project.md'))
     ? read(join(INSTALL_DIR, 'create-project.md'))
@@ -276,7 +276,7 @@ ${generated
 
 \`\`\`bash
 # Install CLI
-bun add -g @koalarx/ui-cli
+bun add -g @koalarx/ui
 
 # Create project
 kl new my-app

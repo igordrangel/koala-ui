@@ -8,10 +8,10 @@ Components are installed directly into your project via the **Koala CLI**, givin
 ## 1. Install the CLI
 
 ```bash
-npm install -g @koalarx/ui-cli
+npm install -g @koalarx/ui
 
 # or
-bun add -g @koalarx/ui-cli
+bun add -g @koalarx/ui
 ```
 
 ## 2. Create a new project
