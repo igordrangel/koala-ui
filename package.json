@@ -3,7 +3,10 @@
   "version": "22.0.0",
   "scripts": {
     "build": "bun scripts/build",
-    "build:doc": "cd libs/ui && bun run build:prod",
+    "build:doc": "bun run build:docs",
+    "build:docs": "bun run generate:llms && cd libs/ui && bun run build:prod",
+    "dev:docs": "bun run generate:llms && cd libs/ui && bun start",
+    "preview:docs": "bunx serve dist/browser -p 4321",
     "start": "bun run build && bun ./bin/run",
     "ui:start": "cd libs/ui && bun start",
     "generate:command": "bun scripts/generate-command",

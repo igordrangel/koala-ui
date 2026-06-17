@@ -7,7 +7,7 @@
     "start": "ng serve",
     "prebuild": "node generate-icons.js",
     "build": "ng build",
-    "build:prod": "bunx ng build --configuration production",
+    "build:prod": "bunx ng build --configuration production && node scripts/post-build.mjs",
     "generate:llms": "node ../../scripts/generate-llms.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

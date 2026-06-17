@@ -5,7 +5,7 @@
 [![npm version](https://img.shields.io/npm/v/@koalarx/ui)](https://www.npmjs.com/package/@koalarx/ui)
 [![license](https://img.shields.io/npm/l/@koalarx/ui)](./LICENSE)
 
-**[📖 Full Documentation → koalarx.com](https://koalarx.com)**
+**[📖 Full Documentation → ui.koalarx.com](https://ui.koalarx.com)**
 
 </div>
 
@@ -85,4 +85,4 @@ kl version
 
 For detailed installation guides, usage instructions, and examples for each component, visit the official documentation:
 
-**[koalarx.com](https://koalarx.com)**
+**[ui.koalarx.com](https://ui.koalarx.com)**

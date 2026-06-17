@@ -257,7 +257,7 @@ for (const component of COMPONENTS) {
 // llms.txt  (https://llmstxt.org/)
 // ---------------------------------------------------------------------------
 
-const BASE_URL = 'https://koalarx.com';
+const BASE_URL = 'https://ui.koalarx.com';
 
 const llmsTxt = `# Koala UI
 

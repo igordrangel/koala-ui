@@ -32,9 +32,7 @@ kl install modal --project my-angular-app
 
 ## 4. Add resources (optional)
 
-```bash
-kl init --project my-angular-app
-```
+
 
 ## Available components
 
