@@ -1,0 +1,68 @@
+<app-section-container>
+  <ng-container title>Currency</ng-container>
+  <ng-container description>
+    The <strong>Currency</strong> component is a specialized input field designed for entering
+    currency values. It provides built-in validation to ensure that the entered value is in the
+    correct format and is valid according to the currency rules. This component enhances user
+    experience by guiding users to input their currency values correctly and providing immediate
+    feedback on any errors.
+  </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description
+      >Use the Koala CLI to generate a new Input Currency component.</ng-container
+    >
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/input-currency-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Usage</ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex flex-col items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <app-fieldset>
+            <ng-container label>Currency</ng-container>
+            <input
+              field
+              appInput
+              type="text"
+              placeholder="Type here"
+              [formControl]="currencyControl"
+              appCurrency
+            />
+            @if (currencyControl.hasError('required')) {
+              <span appValidatorHint>Currency is required</span>
+            }
+          </app-fieldset>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="input-currency-sample.html"
+            src="markdown/usage/input-currency/input-currency.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="input-currency-sample.ts"
+            src="markdown/usage/input-currency/input-currency.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

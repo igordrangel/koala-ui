@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "module": "commonJs",
+    "outDir": "./dist",
+    "types": [
+      "bun",
+      "node"
+    ],
+    "paths": {
+      "@/*": [
+        "./libs/ui/src/app/*"
+      ],
+    },
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2022",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "resolveJsonModule": true
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

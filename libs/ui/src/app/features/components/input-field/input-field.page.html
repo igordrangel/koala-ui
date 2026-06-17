@@ -1,0 +1,59 @@
+<app-section-container>
+  <ng-container title>Input Field</ng-container>
+  <ng-container description>
+    Input fields can be used to capture user input in a form.
+  </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description
+      >Use the Koala CLI to generate a new input field component.</ng-container
+    >
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/input-field-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Sizes</ng-container>
+    <ng-container description>
+      Input fields are available in 5 different sizes: xs, sm, md, lg, and xl. The default size is
+      md.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex flex-col items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <input appInput size="xs" type="text" placeholder="Type here" />
+          <input appInput size="sm" type="text" placeholder="Type here" />
+          <input appInput size="md" type="text" placeholder="Type here" />
+          <input appInput size="lg" type="text" placeholder="Type here" />
+          <input appInput size="xl" type="text" placeholder="Type here" />
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="input-field-sample.html"
+            src="markdown/usage/input-field/input-field-sizes.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="input-field-sample.ts"
+            src="markdown/usage/input-field/input-field.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

@@ -1,0 +1,25 @@
+@if (field(); as field) {
+  <span class="flex items-center gap-1 py-1 px-1 h-0">
+    <span class="kbd kbd-xs">Enter/Tab</span>
+    <span class="text-xs font-semibold" [class.text-error]="invalid()">{{ field.label }}:</span>
+
+    @switch (field.type) {
+      @case ('input') {
+        <app-inline-filter-input
+          class="relative top-[-0.05rem]"
+          [config]="field"
+          (isInvalid)="invalid.set($event)"
+        />
+      }
+      @case ('calendar') {
+        <app-inline-filter-calendar [config]="field" (isInvalid)="invalid.set($event)" />
+      }
+      @case ('select') {
+        <app-inline-filter-select [config]="field" (isInvalid)="invalid.set($event)" />
+      }
+      @case ('combobox') {
+        <app-inline-filter-combobox [config]="field" (isInvalid)="invalid.set($event)" />
+      }
+    }
+  </span>
+}

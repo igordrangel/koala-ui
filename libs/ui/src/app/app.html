@@ -1,0 +1,84 @@
+<ngx-loading-bar color="#6A1B9A" height="4px" [includeSpinner]="false" />
+
+<div class="flex flex-col px-5 lg:px-15 mx-auto overflow-x-hidden">
+  <app-header
+    class="fixed left-4 right-4 lg:left-15 lg:right-15 px-0 lg:px-0 lg:pl-5 z-10 box-border"
+  />
+
+  <div class="flex w-full">
+    <app-nav-menu class="fixed hidden lg:block empty:hidden" />
+
+    <section
+      class="min-w-0 flex-1 lg:ml-60 mt-16 min-h-[calc(100vh-4rem)] flex flex-col"
+      [class.ml-0!]="isHomePage()"
+    >
+      <div class="flex-1">
+        <router-outlet />
+      </div>
+
+      <footer
+        class="md:w-[calc(100%-16rem)] mt-25 mb-8 rounded-2xl border border-base-300 bg-base-100/80 backdrop-blur-sm"
+        [class.ml-6]="isHomePage()"
+        [class.w-[calc(100%-3rem)]!]="isHomePage()"
+      >
+        <div class="grid grid-cols-1 gap-6 p-6 md:grid-cols-4">
+          <div>
+            <h4 class="mb-2 text-sm font-semibold opacity-90">Koala UI</h4>
+            <p class="text-sm opacity-70">
+              Angular components focused on productivity, consistency, and a modern developer
+              experience.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="mb-2 text-sm font-semibold opacity-90">Creator</h4>
+            <a
+              href="https://igordrangel.com.br/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 text-sm opacity-80 transition-opacity hover:opacity-100"
+            >
+              igordrangel.com.br
+              <i class="fa-solid fa-arrow-up-long rotate-45 text-[0.6rem]"></i>
+            </a>
+            <p class="mt-2 text-xs opacity-60">Design, front-end, and product strategy.</p>
+          </div>
+
+          <div>
+            <h4 class="mb-2 text-sm font-semibold opacity-90">Docs & AI</h4>
+            <ul class="space-y-1 text-sm opacity-80">
+              <li>
+                <a href="/llms.txt" target="_blank" rel="noopener noreferrer">llms.txt (index)</a>
+              </li>
+              <li>
+                <a href="/llms-full.txt" target="_blank" rel="noopener noreferrer">llms-full.txt</a>
+              </li>
+              <li>
+                <a href="/docs/get-started.md" target="_blank" rel="noopener noreferrer"
+                  >Docs markdown</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="mb-2 text-sm font-semibold opacity-90">Quick Commands</h4>
+            <ul class="space-y-1 text-sm opacity-80 font-mono">
+              <li>kl new my-app --pm pnpm</li>
+              <li>kl init --project my-app</li>
+              <li>kl install button,modal</li>
+              <li>kl version</li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          class="flex flex-col gap-2 border-t border-base-300 px-6 py-3 text-xs opacity-60 md:flex-row md:items-center md:justify-between"
+        >
+          <span>© 2026 Koala UI</span>
+          <span>Built for Angular developers and AI-assisted workflows.</span>
+        </div>
+      </footer>
+    </section>
+  </div>
+</div>

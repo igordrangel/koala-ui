@@ -1,0 +1,26 @@
+<article class="py-2">
+  <div class="flex flex-col mb-2">
+    <a
+      [routerLink]="[]"
+      [fragment]="sectionId()"
+      [id]="sectionId()"
+      class="block scroll-mt-40 scroll-hash-link outline-none"
+    >
+      <h2 class="relative text-3xl font-bold group empty:hidden">
+        <span
+          class="absolute top-3.5 transform -translate-y-1/2 -left-6 opacity-60 hidden group-hover:block group-hover:animate-fade-in"
+        >
+          <i class="fa-solid fa-hashtag text-xl"></i>
+        </span>
+        <span #titleElement>
+          <ng-content select="[title]" />
+        </span>
+      </h2>
+    </a>
+    <small class="text-base font-light opacity-75 empty:hidden">
+      <ng-content select="[description]" />
+    </small>
+  </div>
+
+  <ng-content />
+</article>

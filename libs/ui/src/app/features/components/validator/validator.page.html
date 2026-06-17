@@ -1,0 +1,69 @@
+<app-section-container>
+  <ng-container title>Validator</ng-container>
+  <ng-container description>
+    Validators can be used to ensure that user input meets specific criteria.
+  </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description
+      >Use the Koala CLI to generate a new validator component.</ng-container
+    >
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/validator-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Usage</ng-container>
+    <ng-container description>
+      Validators are used to ensure that user input meets specific criteria. They can be applied to
+      input fields to provide real-time feedback and enforce rules.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex flex-col items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <div class="flex flex-col">
+            <input
+              field
+              appInput
+              type="text"
+              placeholder="Type here"
+              [formControl]="emailControl"
+            />
+
+            @if (emailControl.hasError('required')) {
+              <span appValidatorHint>Email is required</span>
+            } @else if (emailControl.hasError('email')) {
+              <span appValidatorHint>Invalid email</span>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="validator-sample.html"
+            src="markdown/usage/validator/validator.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="validator-sample.ts"
+            src="markdown/usage/validator/validator.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

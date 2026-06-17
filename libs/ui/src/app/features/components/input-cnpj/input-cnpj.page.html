@@ -1,0 +1,72 @@
+<app-section-container>
+  <ng-container title>Input CNPJ</ng-container>
+  <ng-container description>
+    The <strong>Input CNPJ</strong> component is a specialized input field designed for entering
+    Brazilian CNPJ (Cadastro Nacional da Pessoa Jurídica) numbers. It provides built-in validation
+    to ensure that the entered CNPJ number is in the correct format and is valid according to the
+    CNPJ rules. This component enhances user experience by guiding users to input their CNPJ
+    correctly and providing immediate feedback on any errors.
+  </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description>
+      Use the Koala CLI to generate a new Input CNPJ component.
+    </ng-container>
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/input-cnpj-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Usage</ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex flex-col items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <app-fieldset>
+            <ng-container label>CNPJ</ng-container>
+            <input
+              field
+              appInput
+              type="text"
+              placeholder="Type here"
+              [formControl]="cnpjControl"
+              appMask="SS.SSS.SSS/SSSS-SS"
+            />
+            <ng-container hint>Inform a valid CNPJ</ng-container>
+
+            @if (cnpjControl.hasError('required')) {
+              <span appValidatorHint>CNPJ is required</span>
+            } @else if (cnpjControl.hasError('cnpjInvalid')) {
+              <span appValidatorHint>Invalid CNPJ</span>
+            }
+          </app-fieldset>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="input-cnpj-sample.html"
+            src="markdown/usage/input-cnpj/input-cnpj.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="input-cnpj-sample.ts"
+            src="markdown/usage/input-cnpj/input-cnpj.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

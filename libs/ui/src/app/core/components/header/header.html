@@ -1,0 +1,168 @@
+<ng-template #logotype>
+  <a routerLink="/">
+    <span class="flex items-center gap-3 mr-6">
+      <i class="app-icon kl-logotype size-6!"></i>
+      <span class="badge badge-sm badge-soft bg-neutral-800 font-semibold sm:inline-flex">
+        {{ version }}
+      </span>
+    </span>
+  </a>
+</ng-template>
+
+<ng-template #navButtons>
+  <a
+    class="opacity-60 justify-start lg:justify-center md:inline-flex"
+    appButton
+    btnSize="sm"
+    btnVariant="ghost"
+    routerLink="getting-started"
+    routerLinkActive="opacity-100"
+  >
+    Getting Started
+  </a>
+
+  <a
+    class="opacity-60 justify-start lg:justify-center md:inline-flex"
+    appButton
+    btnSize="sm"
+    btnVariant="ghost"
+    routerLink="components"
+    routerLinkActive="opacity-100"
+  >
+    Components
+  </a>
+
+  <a
+    class="opacity-60 justify-start lg:justify-center md:inline-flex"
+    appButton
+    btnSize="sm"
+    btnVariant="ghost"
+    routerLink="blocks"
+    routerLinkActive="opacity-100"
+  >
+    Blocks
+  </a>
+
+  <a
+    class="opacity-60 justify-start lg:justify-center md:inline-flex"
+    appButton
+    btnSize="sm"
+    btnVariant="ghost"
+    routerLink="resources"
+    routerLinkActive="opacity-100"
+  >
+    Resources
+  </a>
+</ng-template>
+
+<ng-template #externalLinks>
+  <a
+    href="https://www.npmjs.com/package/@koalarx/ui-cli"
+    target="_blank"
+    appButton
+    class="justify-start lg:justify-center md:inline-flex"
+    btnSize="sm"
+    btnVariant="ghost"
+  >
+    @koalarx/ui-cli
+    <i class="fa-solid fa-arrow-up-long opacity-50 rotate-45 text-[0.6rem]"></i>
+  </a>
+  <a
+    href="https://www.npmjs.com/package/@koalarx/utils"
+    target="_blank"
+    appButton
+    class="justify-start lg:justify-center md:inline-flex"
+    btnSize="sm"
+    btnVariant="ghost"
+  >
+    @koalarx/utils
+    <i class="fa-solid fa-arrow-up-long opacity-50 rotate-45 text-[0.6rem]"></i>
+  </a>
+  <a
+    href="https://nest.koalarx.com"
+    target="_blank"
+    appButton
+    class="justify-start lg:justify-center md:inline-flex"
+    btnSize="sm"
+    btnVariant="ghost"
+  >
+    @koalarx/nest
+    <i class="fa-solid fa-arrow-up-long opacity-50 rotate-45 text-[0.6rem]"></i>
+  </a>
+</ng-template>
+
+@if (mobileMenuVisible()) {
+  <button
+    class="fixed inset-0 z-30 bg-black/40 transition-opacity duration-200 ease-out lg:hidden"
+    [class.opacity-100]="mobileMenuOpen()"
+    [class.opacity-0]="!mobileMenuOpen()"
+    (click)="closeMobileMenu()"
+    aria-label="Close navigation menu"
+    type="button"
+  ></button>
+}
+
+<aside
+  class="fixed left-0 top-0 z-40 h-full w-72 max-w-[85vw] bg-base-100 border-r border-base-300 shadow-xl transition-transform duration-200 ease-out lg:hidden flex flex-col"
+  [class.translate-x-0]="mobileMenuOpen()"
+  [class.-translate-x-full]="!mobileMenuOpen()"
+>
+  <div class="px-4 py-4 border-b border-base-300 flex items-center justify-between gap-3 shrink-0">
+    <ng-container *ngTemplateOutlet="logotype" />
+  </div>
+
+  <app-nav-menu class="block flex-1 overflow-y-auto"></app-nav-menu>
+
+  <div class="px-3 py-3 border-t border-base-300 shrink-0">
+    <div class="grid grid-cols-1 gap-2">
+      <ng-container *ngTemplateOutlet="navButtons" />
+      <ng-container *ngTemplateOutlet="externalLinks" />
+    </div>
+  </div>
+</aside>
+
+<div class="flex items-center justify-between py-2 w-full bg-base-100 min-w-0">
+  <button
+    class="lg:hidden flex items-center gap-2 rounded-lg border border-base-300 bg-base-100 px-3 py-1.5 text-sm font-medium shrink-0"
+    (click)="toggleMobileMenu()"
+    aria-label="Toggle navigation menu"
+    type="button"
+  >
+    <i class="fa-solid fa-bars"></i>
+    Menu
+  </button>
+
+  <div class="hidden lg:flex items-center shrink-0">
+    <ng-container *ngTemplateOutlet="logotype" />
+    <ng-container *ngTemplateOutlet="navButtons" />
+  </div>
+
+  <div class="flex items-center min-w-0 gap-1 ml-auto shrink-0">
+    <div class="hidden md:flex items-center gap-1">
+      <ng-container *ngTemplateOutlet="externalLinks" />
+    </div>
+
+    <span class="ml-2 mr-1 opacity-20 hidden lg:inline">|</span>
+
+    <button
+      appButton
+      btnSize="sm"
+      btnVariant="ghost"
+      (click)="copyLlmsUrl()"
+      appTooltip="Copy docs index URL (llms.txt) to use with AI"
+      tooltipPosition="bottom"
+      class="relative transition-colors whitespace-nowrap"
+    >
+      @if (copied()) {
+        <i class="fa-solid fa-check text-success"></i>
+        <span class="text-success">Copied!</span>
+      } @else {
+        <i class="fa-regular fa-clipboard"></i>
+        <span class="sm:hidden">Copy AI</span>
+        <span class="hidden sm:inline">Copy AI docs index</span>
+      }
+    </button>
+
+    <app-github-stars class="w-auto" />
+  </div>
+</div>

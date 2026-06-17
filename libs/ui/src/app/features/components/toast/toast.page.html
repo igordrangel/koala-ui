@@ -1,0 +1,53 @@
+<app-section-container>
+  <ng-container title>Toast</ng-container>
+  <ng-container description>
+    A toast is a non-blocking notification that provides feedback to the user. It is commonly used
+    to inform the user about the result of an action or a system event.
+  </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description>Use the Koala CLI to generate a new toast component.</ng-container>
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/toast-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Usage</ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <button appButton btnVariant="info" (click)="showToast('info')">Info</button>
+          <button appButton btnVariant="warning" (click)="showToast('warning')">Warning</button>
+          <button appButton btnVariant="error" (click)="showToast('error')">Error</button>
+          <button appButton btnVariant="success" (click)="showToast('success')">Success</button>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="toast-sample.html"
+            src="markdown/usage/toast/toast.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="toast-sample.ts"
+            src="markdown/usage/toast/toast.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

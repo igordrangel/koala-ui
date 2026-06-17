@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- UI - Get Started -->
+  <url><loc>https://ui.koalarx.com/#/getting-started/installation</loc></url>
+  <url><loc>https://ui.koalarx.com/#/getting-started/introduction</loc></url>
+  <!-- UI - Components - Actions -->
+  <url><loc>https://ui.koalarx.com/#/components/bottom-sheet</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/button</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/confirm</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/dropdown</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/modal</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/side-window</loc></url>
+  <!-- UI - Components - Data Display -->
+  <url><loc>https://ui.koalarx.com/#/components/collapse</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/table</loc></url>
+  <!-- UI - Components - Data Input -->
+  <url><loc>https://ui.koalarx.com/#/components/input-cnpj</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/input-cpf</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/calendar</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/checkbox</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/combobox</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/currency</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/fieldset</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/inline-filter</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/input-field</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/radio</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/range</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/select</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/textarea</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/toggle</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/validator</loc></url>
+  <!-- UI - Components - Feedback -->
+  <url><loc>https://ui.koalarx.com/#/components/alert</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/loading</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/skeleton</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/toast</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/tooltip</loc></url>
+  <!-- UI - Components - Navigation -->
+  <url><loc>https://ui.koalarx.com/#/components/breadcrumb</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/pagination</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/stepper</loc></url>
+  <url><loc>https://ui.koalarx.com/#/components/tab</loc></url>
+  <!-- UI - Blocks -->
+  <url><loc>https://ui.koalarx.com/#/blocks/datatable</loc></url>
+  <url><loc>https://ui.koalarx.com/#/blocks/login</loc></url>
+  <!-- UI - Resources -->
+  <url><loc>https://ui.koalarx.com/#/resources/list-base</loc></url>
+  <url><loc>https://ui.koalarx.com/#/resources/auth</loc></url>
+  <!-- Nest -->
+  <url><loc>https://nest.koalarx.com</loc></url>
+  <url><loc>https://nest.koalarx.com/guia-instalacao</loc></url>
+  <url><loc>https://nest.koalarx.com/cli-reference</loc></url>
+  <url><loc>https://nest.koalarx.com/configuracao-inicial</loc></url>
+  <url><loc>https://nest.koalarx.com/tratamento-erros</loc></url>
+  <url><loc>https://nest.koalarx.com/features-avancadas</loc></url>
+  <url><loc>https://nest.koalarx.com/decoradores</loc></url>
+  <url><loc>https://nest.koalarx.com/guia-bun</loc></url>
+  <url><loc>https://nest.koalarx.com/prisma-client</loc></url>
+  <url><loc>https://nest.koalarx.com/mcp-vscode-extension</loc></url>
+  <url><loc>https://nest.koalarx.com/exemplo</loc></url>
+</urlset>

@@ -1,0 +1,32 @@
+<app-bottom-sheet>
+  @let pressEscape = bottomSheetOptions.closeOptions?.pressEscape ?? false;
+  @let clickOutside = bottomSheetOptions.closeOptions?.clickOutside ?? false;
+
+  <div class="flex w-full justify-between items-center" title>
+    <span>Hello!</span>
+
+    @if (closeButtonCorner) {
+      <button
+        appButton
+        btnCircle
+        btnVariant="ghost"
+        btnSize="sm"
+        (click)="bottomSheetRef.dismiss()"
+      >
+        X
+      </button>
+    }
+  </div>
+  <div class="p-4" content>
+    @if (pressEscape && !clickOutside) {
+      Press ESC key or click the button below to close
+    } @else if (pressEscape && clickOutside) {
+      Press ESC key or click outside to close
+    }
+  </div>
+  <ng-container actions>
+    @if (pressEscape && !clickOutside && !closeButtonCorner) {
+      <button appButton btnVariant="primary" (click)="bottomSheetRef.dismiss()">Close</button>
+    }
+  </ng-container>
+</app-bottom-sheet>

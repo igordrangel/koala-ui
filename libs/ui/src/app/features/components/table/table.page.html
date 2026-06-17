@@ -1,0 +1,471 @@
+<app-section-container>
+  <ng-container title>Table</ng-container>
+  <ng-container description>
+    Tables can be used to display data in a structured format.
+  </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description>Use the Koala CLI to generate a new table component.</ng-container>
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/table-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Tables</ng-container>
+    <ng-container description>
+      Tables are a classic UI component that can be used to display data in a structured format.
+      They are commonly used to organize information and improve navigation within an application.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex flex-col items-center justify-center gap-10 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <app-table class="w-full">
+            <ng-container header>
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Job</th>
+                <th>Favorite Color</th>
+              </tr>
+            </ng-container>
+            <ng-container body>
+              <tr>
+                <th>1</th>
+                <td>Cy Ganderton</td>
+                <td>Quality Control Specialist</td>
+                <td>Blue</td>
+              </tr>
+              <tr>
+                <th>2</th>
+                <td>Hart Hagerty</td>
+                <td>Desktop Support Technician</td>
+                <td>Purple</td>
+              </tr>
+              <tr>
+                <th>3</th>
+                <td>Brice Swyre</td>
+                <td>Tax Accountant</td>
+                <td>Red</td>
+              </tr>
+            </ng-container>
+          </app-table>
+
+          <app-table class="w-full" size="xs">
+            <ng-container header>
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Job</th>
+                <th>Favorite Color</th>
+              </tr>
+            </ng-container>
+            <ng-container body>
+              <tr>
+                <th>1</th>
+                <td>Cy Ganderton</td>
+                <td>Quality Control Specialist</td>
+                <td>Blue</td>
+              </tr>
+              <tr>
+                <th>2</th>
+                <td>Hart Hagerty</td>
+                <td>Desktop Support Technician</td>
+                <td>Purple</td>
+              </tr>
+              <tr>
+                <th>3</th>
+                <td>Brice Swyre</td>
+                <td>Tax Accountant</td>
+                <td>Red</td>
+              </tr>
+            </ng-container>
+          </app-table>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="table-sample.html"
+            src="markdown/usage/table/table.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="table-sample.ts"
+            src="markdown/usage/table/table.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Ordenable Table</ng-container>
+    <ng-container description>
+      Ordenable tables are a variation of the classic table component that allows users to sort
+      columns by clicking on the column header. They are commonly used to improve the usability and
+      interactivity of tables, allowing users to easily find and organize data.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex flex-col items-center justify-center gap-10 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <app-table class="w-full">
+            <ng-container header>
+              <tr>
+                <th appTableOrderedHeaderCol="name" [orderBy]="orderedBy">Name</th>
+                <th appTableOrderedHeaderCol="job" [orderBy]="orderedBy">Job</th>
+                <th appTableOrderedHeaderCol="favoriteColor" [orderBy]="orderedBy">
+                  Favorite Color
+                </th>
+              </tr>
+            </ng-container>
+            <ng-container body>
+              @for (item of orderedTableData(); track $index) {
+                <tr>
+                  <td appTableOrderedBodyCol="name" [currentOrder]="orderedBy()">
+                    {{ item.name }}
+                  </td>
+                  <td appTableOrderedBodyCol="job" [currentOrder]="orderedBy()">{{ item.job }}</td>
+                  <td appTableOrderedBodyCol="favoriteColor" [currentOrder]="orderedBy()">
+                    {{ item.favoriteColor }}
+                  </td>
+                </tr>
+              }
+            </ng-container>
+          </app-table>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="table-ordered-sample.html"
+            src="markdown/usage/table/table-ordered.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="table-ordered-sample.ts"
+            src="markdown/usage/table/table-ordered.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Tables zebra</ng-container>
+    <ng-container description>
+      Zebra tables are a variation of the classic table component that alternates row colors for
+      better readability. They are commonly used to improve the visual distinction between rows and
+      enhance the overall user experience.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <app-table zebra>
+            <ng-container header>
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Job</th>
+                <th>Favorite Color</th>
+              </tr>
+            </ng-container>
+            <ng-container body>
+              <tr>
+                <th>1</th>
+                <td>Cy Ganderton</td>
+                <td>Quality Control Specialist</td>
+                <td>Blue</td>
+              </tr>
+              <tr>
+                <th>2</th>
+                <td>Hart Hagerty</td>
+                <td>Desktop Support Technician</td>
+                <td>Purple</td>
+              </tr>
+              <tr>
+                <th>3</th>
+                <td>Brice Swyre</td>
+                <td>Tax Accountant</td>
+                <td>Red</td>
+              </tr>
+            </ng-container>
+          </app-table>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="table-zebra-sample.html"
+            src="markdown/usage/table/table-zebra.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="table-striped-sample.ts"
+            src="markdown/usage/table/table.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Tables pin header</ng-container>
+    <ng-container description>
+      Pin header tables are a variation of the classic table component where the header remains
+      fixed while scrolling through the table rows. They are commonly used to improve the visibility
+      of column headers and enhance the overall user experience.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <app-table pinnedHeader class="h-96">
+            <ng-container header>
+              <tr>
+                <td>Name</td>
+                <td>Job</td>
+                <td>company</td>
+                <td>location</td>
+                <td>Last Login</td>
+                <td>Favorite Color</td>
+              </tr>
+            </ng-container>
+            <ng-container body>
+              <tr>
+                <td>Cy Ganderton</td>
+                <td>Quality Control Specialist</td>
+                <td>Littel, Schaden and Vandervort</td>
+                <td>Canada</td>
+                <td>12/16/2020</td>
+                <td>Blue</td>
+              </tr>
+              <tr>
+                <td>Hart Hagerty</td>
+                <td>Desktop Support Technician</td>
+                <td>Zemlak, Daniel and Leannon</td>
+                <td>United States</td>
+                <td>12/5/2020</td>
+                <td>Purple</td>
+              </tr>
+              <tr>
+                <td>Brice Swyre</td>
+                <td>Tax Accountant</td>
+                <td>Carroll Group</td>
+                <td>China</td>
+                <td>8/15/2020</td>
+                <td>Red</td>
+              </tr>
+              <tr>
+                <td>Marjy Ferencz</td>
+                <td>Office Assistant I</td>
+                <td>Rowe-Schoen</td>
+                <td>Russia</td>
+                <td>3/25/2021</td>
+                <td>Crimson</td>
+              </tr>
+              <tr>
+                <td>Yancy Tear</td>
+                <td>Community Outreach Specialist</td>
+                <td>Wyman-Ledner</td>
+                <td>Brazil</td>
+                <td>5/22/2020</td>
+                <td>Indigo</td>
+              </tr>
+              <tr>
+                <td>Irma Vasilik</td>
+                <td>Editor</td>
+                <td>Wiza, Bins and Emard</td>
+                <td>Venezuela</td>
+                <td>12/8/2020</td>
+                <td>Purple</td>
+              </tr>
+              <tr>
+                <td>Meghann Durtnal</td>
+                <td>Staff Accountant IV</td>
+                <td>Schuster-Schimmel</td>
+                <td>Philippines</td>
+                <td>2/17/2021</td>
+                <td>Yellow</td>
+              </tr>
+              <tr>
+                <td>Sammy Seston</td>
+                <td>Accountant I</td>
+                <td>O'Hara, Welch and Keebler</td>
+                <td>Indonesia</td>
+                <td>5/23/2020</td>
+                <td>Crimson</td>
+              </tr>
+              <tr>
+                <td>Lesya Tinham</td>
+                <td>Safety Technician IV</td>
+                <td>Turner-Kuhlman</td>
+                <td>Philippines</td>
+                <td>2/21/2021</td>
+                <td>Maroon</td>
+              </tr>
+              <tr>
+                <td>Zaneta Tewkesbury</td>
+                <td>VP Marketing</td>
+                <td>Sauer LLC</td>
+                <td>Chad</td>
+                <td>6/23/2020</td>
+                <td>Green</td>
+              </tr>
+              <tr>
+                <td>Andy Tipple</td>
+                <td>Librarian</td>
+                <td>Hilpert Group</td>
+                <td>Poland</td>
+                <td>7/9/2020</td>
+                <td>Indigo</td>
+              </tr>
+              <tr>
+                <td>Sophi Biles</td>
+                <td>Recruiting Manager</td>
+                <td>Gutmann Inc</td>
+                <td>Indonesia</td>
+                <td>2/12/2021</td>
+                <td>Maroon</td>
+              </tr>
+              <tr>
+                <td>Florida Garces</td>
+                <td>Web Developer IV</td>
+                <td>Gaylord, Pacocha and Baumbach</td>
+                <td>Poland</td>
+                <td>5/31/2020</td>
+                <td>Purple</td>
+              </tr>
+              <tr>
+                <td>Maribeth Popping</td>
+                <td>Analyst Programmer</td>
+                <td>Deckow-Pouros</td>
+                <td>Portugal</td>
+                <td>4/27/2021</td>
+                <td>Aquamarine</td>
+              </tr>
+              <tr>
+                <td>Moritz Dryburgh</td>
+                <td>Dental Hygienist</td>
+                <td>Schiller, Cole and Hackett</td>
+                <td>Sri Lanka</td>
+                <td>8/8/2020</td>
+                <td>Crimson</td>
+              </tr>
+              <tr>
+                <td>Reid Semiras</td>
+                <td>Teacher</td>
+                <td>Sporer, Sipes and Rogahn</td>
+                <td>Poland</td>
+                <td>7/30/2020</td>
+                <td>Green</td>
+              </tr>
+              <tr>
+                <td>Alec Lethby</td>
+                <td>Teacher</td>
+                <td>Reichel, Glover and Hamill</td>
+                <td>China</td>
+                <td>2/28/2021</td>
+                <td>Khaki</td>
+              </tr>
+              <tr>
+                <td>Aland Wilber</td>
+                <td>Quality Control Specialist</td>
+                <td>Kshlerin, Rogahn and Swaniawski</td>
+                <td>Czech Republic</td>
+                <td>9/29/2020</td>
+                <td>Purple</td>
+              </tr>
+              <tr>
+                <td>Teddie Duerden</td>
+                <td>Staff Accountant III</td>
+                <td>Pouros, Ullrich and Windler</td>
+                <td>France</td>
+                <td>10/27/2020</td>
+                <td>Aquamarine</td>
+              </tr>
+              <tr>
+                <td>Lorelei Blackstone</td>
+                <td>Data Coordinator</td>
+                <td>Witting, Kutch and Greenfelder</td>
+                <td>Kazakhstan</td>
+                <td>6/3/2020</td>
+                <td>Red</td>
+              </tr>
+            </ng-container>
+            <ng-container footer>
+              <tr>
+                <td>Name</td>
+                <td>Job</td>
+                <td>company</td>
+                <td>location</td>
+                <td>Last Login</td>
+                <td>Favorite Color</td>
+              </tr>
+            </ng-container>
+          </app-table>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="table-pin-header-sample.html"
+            src="markdown/usage/table/table-pin-header.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="table-pin-header-sample.ts"
+            src="markdown/usage/table/table.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

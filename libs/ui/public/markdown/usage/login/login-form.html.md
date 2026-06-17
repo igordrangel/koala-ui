@@ -1,0 +1,83 @@
+```html
+<form
+  class="flex flex-col items-center justify-center py-20 gap-2"
+  [formGroup]="formCredentials"
+  (submit)="authenticate()"
+>
+  <app-fieldset class="w-full max-w-xs">
+    <ng-container label>Username</ng-container>
+    <input
+      field
+      appInput
+      size="md"
+      type="text"
+      placeholder="Enter your username"
+      [formControl]="formCredentials.controls.username"
+    />
+
+    @if (formCredentials.controls.username.hasError('required')) {
+      <span appValidatorHint>Username is required</span>
+    }
+  </app-fieldset>
+
+  <app-fieldset class="w-full max-w-xs">
+    <ng-container label>Password</ng-container>
+    <input
+      #inputPassword
+      field
+      appInput
+      size="md"
+      type="password"
+      [formControl]="formCredentials.controls.password"
+    />
+
+    <ng-container action>
+      @if (inputPassword.type === 'password') {
+        <button
+          type="button"
+          appButton
+          btnCircle
+          btnVariant="ghost"
+          (click)="inputPassword.type = 'text'"
+        >
+          <i class="fa-regular fa-eye-slash"></i>
+        </button>
+      } @else {
+        <button
+          type="button"
+          appButton
+          btnCircle
+          btnVariant="ghost"
+          (click)="inputPassword.type = 'password'"
+        >
+          <i class="fa-regular fa-eye"></i>
+        </button>
+      }
+    </ng-container>
+
+    @if (formCredentials.controls.password.hasError('required')) {
+      <span appValidatorHint>Password is required</span>
+    } @else if (formCredentials.controls.password.hasError('minlength')) {
+      <span appValidatorHint>Password must be at least 8 characters</span>
+    }
+  </app-fieldset>
+
+  <div class="flex w-full max-w-xs">
+    @let logingIn = authorization.event()?.type === 'loginInProgress';
+
+    <button
+      type="submit"
+      appButton
+      btnVariant="primary"
+      class="w-full"
+      [disabled]="logingIn || formCredentials.invalid"
+    >
+      @if (logingIn) {
+        <app-loading size="sm"></app-loading>
+      }
+
+      Login
+    </button>
+  </div>
+</form>
+```

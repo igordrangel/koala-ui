@@ -1,0 +1,49 @@
+name: PR TESTS
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  cli-tests:
+    name: Unit Tests (CLI)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+
+      - name: Install deps
+        run: bun install --frozen-lockfile
+
+      - name: Run CLI unit tests
+        run: bun run test:cli
+
+  ui-tests:
+    name: Unit + E2E (UI)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+
+      - name: Install deps
+        run: bun install --frozen-lockfile
+
+      - name: Install UI deps
+        run: cd libs/ui && bun install
+
+      - name: Install Playwright Chromium
+        run: cd libs/ui && bunx playwright install --with-deps chromium
+
+      - name: Run unit tests
+        run: cd libs/ui && bun run test:unit
+
+      - name: Run e2e tests
+        run: cd libs/ui && bun run e2e

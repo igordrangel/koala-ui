@@ -1,0 +1,127 @@
+<app-section-container>
+  <ng-container title>Calendar</ng-container>
+  <ng-container description> Calendars can be used to select dates in a form. </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description>Use the Koala CLI to generate a new calendar component.</ng-container>
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/calendar-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Date picker</ng-container>
+    <ng-container description>
+      The calendar component can also be used as a date picker. To do this, you can use the popover
+      directive to display the calendar when the user clicks on an input field. The input-calendar
+      demo below includes the date, datetime, month and daterange modes.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="grid w-full gap-4 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg md:grid-cols-2"
+        >
+          <div class="flex flex-col gap-2">
+            <span class="text-sm font-semibold">date</span>
+            <app-input-calendar class="w-full" [formControl]="formDate.controls.date" />
+            <span class="px-2 opacity-60">value: {{ dateValue() }}</span>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <span class="text-sm font-semibold">datetime</span>
+            <app-input-calendar
+              class="w-full"
+              type="datetime"
+              [formControl]="formDate.controls.datetime"
+            />
+            <span class="px-2 opacity-60">value: {{ datetimeValue() }}</span>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <span class="text-sm font-semibold">month</span>
+            <app-input-calendar
+              class="w-full"
+              type="month"
+              [formControl]="formDate.controls.month"
+            />
+            <span class="px-2 opacity-60">value: {{ monthValue() }}</span>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <span class="text-sm font-semibold">daterange</span>
+            <app-input-calendar
+              class="w-full"
+              type="daterange"
+              [formControl]="formDate.controls.daterange"
+            />
+            <span class="px-2 opacity-60">value: {{ daterangeValue() }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="input-calendar-sample.html"
+            src="markdown/usage/calendar/input-calendar.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="input-calendar-sample.ts"
+            src="markdown/usage/calendar/input-calendar.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Calendar</ng-container>
+    <ng-container description>
+      The calendar component is a date picker that can be used to select dates in a form. It is
+      built using the Cally library, which provides a simple and customizable API for creating date
+      pickers.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex flex-col items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <app-calendar />
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="calendar-sample.html"
+            src="markdown/usage/calendar/calendar.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="calendar-sample.ts"
+            src="markdown/usage/calendar/calendar.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

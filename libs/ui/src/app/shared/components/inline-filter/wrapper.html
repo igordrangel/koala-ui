@@ -1,0 +1,18 @@
+@if (isMobile) {
+  <div class="indicator">
+    @if (qtyFieldsFiltered() > 0) {
+      <span class="indicator-item badge badge-sm badge-primary">{{ qtyFieldsFiltered() }}</span>
+    }
+
+    <button appButton btnVariant="primary" btnSoft btnSize="md" (click)="openMobilePicker()">
+      <i class="fa-solid fa-filter"></i>
+      Filter
+    </button>
+  </div>
+} @else {
+  <app-input-picker
+    [filterOptions]="config().fields"
+    [placeholder]="placeholder()"
+    (payload)="payload.emit($event)"
+  />
+}

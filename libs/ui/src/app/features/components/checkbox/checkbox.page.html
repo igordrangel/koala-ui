@@ -1,0 +1,140 @@
+<app-section-container>
+  <ng-container title>Checkbox</ng-container>
+  <ng-container description>A simple checkbox component.</ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description>Use the Koala CLI to generate a new checkbox component.</ng-container>
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/checkbox-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Variants</ng-container>
+    <ng-container description>
+      The checkbox component supports several variants to fit different use cases and design
+      requirements.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <input type="checkbox" appCheckbox variant="neutral" [formControl]="checkboxControl" />
+          <input type="checkbox" appCheckbox variant="primary" [formControl]="checkboxControl" />
+          <input type="checkbox" appCheckbox variant="secondary" [formControl]="checkboxControl" />
+          <input type="checkbox" appCheckbox variant="accent" [formControl]="checkboxControl" />
+          <input type="checkbox" appCheckbox variant="info" [formControl]="checkboxControl" />
+          <input type="checkbox" appCheckbox variant="success" [formControl]="checkboxControl" />
+          <input type="checkbox" appCheckbox variant="warning" [formControl]="checkboxControl" />
+          <input type="checkbox" appCheckbox variant="error" [formControl]="checkboxControl" />
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="checkbox-sample.html"
+            src="markdown/usage/checkbox/checkbox-variants.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="checkbox-sample.ts"
+            src="markdown/usage/checkbox/checkbox.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Sizes</ng-container>
+    <ng-container description>
+      The checkbox component supports different sizes to accommodate various design needs.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <input type="checkbox" appCheckbox size="xs" />
+          <input type="checkbox" appCheckbox size="sm" />
+          <input type="checkbox" appCheckbox size="md" />
+          <input type="checkbox" appCheckbox size="lg" />
+          <input type="checkbox" appCheckbox size="xl" />
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="checkbox-sample.html"
+            src="markdown/usage/checkbox/checkbox-sizes.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="checkbox-sample.ts"
+            src="markdown/usage/checkbox/checkbox.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Disabled</ng-container>
+    <ng-container description>
+      The disabled state indicates that the button is not interactive and cannot be clicked.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <input type="checkbox" appCheckbox disabled />
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="checkbox-sample.html"
+            src="markdown/usage/checkbox/checkbox-disabled.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="checkbox-sample.ts"
+            src="markdown/usage/checkbox/checkbox.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

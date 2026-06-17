@@ -1,0 +1,14 @@
+<div class="collapse bg-base-100 border border-base-300">
+  <input
+    [type]="multiple() || type() === 'collapse' ? 'checkbox' : 'radio'"
+    [name]="name()"
+    [checked]="active()"
+  />
+
+  <div class="collapse-title font-semibold">
+    <ng-content select="[title]" />
+  </div>
+  <div class="collapse-content text-sm">
+    <ng-content />
+  </div>
+</div>

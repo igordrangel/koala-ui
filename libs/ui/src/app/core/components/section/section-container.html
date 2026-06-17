@@ -1,0 +1,54 @@
+<section class="relative flex py-4">
+  <article class="md:w-[calc(100%-16rem)]">
+    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-6 gap-4">
+      <div class="flex flex-col">
+        <h1 class="text-4xl sm:text-5xl font-bold empty:hidden">
+          <ng-content select="[title]" />
+        </h1>
+        <small class="text-base font-light opacity-75 empty:hidden">
+          <ng-content select="[description]" />
+        </small>
+      </div>
+
+      @if (!ignoreAIDoc()) {
+        <button
+          (click)="copyAiDocUrl()"
+          appTooltip="Copy this component's Markdown doc URL to use with AI"
+          tooltipPosition="bottom"
+          class="flex items-center gap-1.5 shrink-0 self-start sm:self-auto mt-0 sm:mt-1 px-3 py-1.5 rounded-lg border border-base-300 bg-base-100 hover:bg-base-200 text-xs font-medium text-base-content/70 hover:text-base-content transition-colors cursor-pointer"
+        >
+          @if (copied()) {
+            <i class="fa-solid fa-check"></i>
+            <span class="text-success">Copied!</span>
+          } @else {
+            <i class="fa-regular fa-clipboard"></i>
+            Copy for AI
+          }
+        </button>
+      }
+    </div>
+
+    <ng-content />
+  </article>
+
+  <aside class="fixed hidden md:block w-64 right-4 top-20 text-xs pl-4">
+    <h4 class="opacity-70">On This Page</h4>
+    <ul class="mt-4 space-y-1">
+      @for (item of onThisPage.value(); track $index) {
+        @let isActive = activeSectionId() === item.fragment;
+
+        <a
+          class="opacity-70 hover:opacity-100 transition-opacity"
+          [class.opacity-100]="isActive"
+          [class.font-semibold]="isActive"
+          [routerLink]="[]"
+          [fragment]="item.fragment"
+        >
+          <li class="py-1">
+            {{ item.label }}
+          </li>
+        </a>
+      }
+    </ul>
+  </aside>
+</section>

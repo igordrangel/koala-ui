@@ -1,0 +1,56 @@
+<app-section-container>
+  <ng-container title>Pagination</ng-container>
+  <ng-container description>A simple pagination component.</ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description
+      >Use the Koala CLI to generate a new pagination component.</ng-container
+    >
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/pagination-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Sizes</ng-container>
+    <ng-container description>
+      The pagination component supports different sizes to accommodate various design needs.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex flex-col items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <app-pagination class="w-full" size="xs" [page]="1" [pageSize]="10" [total]="100" />
+          <app-pagination class="w-full" size="sm" [page]="1" [pageSize]="10" [total]="100" />
+          <app-pagination class="w-full" size="md" [page]="1" [pageSize]="10" [total]="100" />
+          <app-pagination class="w-full" size="lg" [page]="1" [pageSize]="10" [total]="100" />
+          <app-pagination class="w-full" size="xl" [page]="1" [pageSize]="10" [total]="100" />
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="pagination-sample.html"
+            src="markdown/usage/pagination/pagination.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="pagination-sample.ts"
+            src="markdown/usage/pagination/pagination.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

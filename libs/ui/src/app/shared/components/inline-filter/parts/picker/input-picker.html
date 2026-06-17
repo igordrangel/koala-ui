@@ -1,0 +1,68 @@
+<div
+  class="flex flex-wrap justify-start items-center gap-1 border border-base-300 rounded-lg px-2 py-1 text-sm h-10"
+>
+  @if (selectedOptions().length > 0) {
+    <button
+      appTooltip="Clear all filters"
+      type="button"
+      class="opacity-60 hover:opacity-100 px-2 cursor-pointer"
+      (click)="selectedOptions.set([])"
+    >
+      <i class="fa-solid fa-filter-circle-xmark"></i>
+    </button>
+  }
+
+  @let editMode = selectedOptions().find((option) => option.editing);
+
+  @for (item of selectedOptions(); track $index) {
+    @if (item.editing) {
+      <app-input-filter-edit
+        [field]="item"
+        (exitEditMode)="exitEditMode(item)"
+        (cancelEdit)="removeOption(item)"
+      />
+    } @else {
+      <app-input-filter-chip
+        [field]="item"
+        (removeAction)="removeOption(item)"
+        (click)="edit(item)"
+      />
+    }
+  }
+
+  <div class="relative flex flex-1 w-fit" [class.hidden]="editMode" ngCombobox>
+    <input
+      #inputFilter
+      class="relative flex-1 outline-0 w-full min-w-20 z-10 pl-1"
+      type="search"
+      [attr.list]="inlineFilterElementId"
+      [placeholder]="placeholder()"
+      [(ngModel)]="filter"
+      (click)="toggleOptions()"
+    />
+
+    <app-dropdown
+      class="absolute top-0 left-0 z-0 w-full"
+      mode="menuOptions"
+      (isOpen)="optionsVisible.set($event)"
+    >
+      <button #triggerOptions type="button" class="flex-1 h-fit invisible" trigger>
+        Filter Trigger
+      </button>
+      <div #filterOptions class="p-1 w-full" options>
+        @for (option of filteredOptions(); track $index) {
+          <li
+            class="data-[active=true]:bg-neutral-300 dark:data-[active=true]:bg-neutral-800 rounded cursor-pointer text-left w-full group"
+            [attr.data-value]="option.value()"
+            (click)="chooseOption(option)"
+          >
+            <span>{{ option.label }}</span>
+            <span class="empty:hidden">{{ option.hint }}</span>
+          </li>
+        }
+      </div>
+    </app-dropdown>
+
+    <app-inline-filter-keyboard-shortcuts />
+  </div>
+</div>

@@ -1,0 +1,48 @@
+@if (config(); as config) {
+  @let mask = config.inputType === 'cpf' ? '000.000.000-00' : 'SS.SSS.SSS/SSSS-SS';
+  @let valueTemplate =
+    config.inputType === 'cpf' || config.inputType === 'cnpj'
+      ? mask
+      : config.templateValue() || config.placeholder || 'Digite um valor';
+  @let widthField = valueTemplate.length - valueTemplate.split(' ').length / 2;
+
+  @switch (config.inputType) {
+    @case ('text')
+    @case ('email')
+    @case ('number')
+    @case ('tel')
+    @case ('url') {
+      <input
+        #inputField
+        class="outline-0 text-xs [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none appearance-none"
+        [style.width]="widthField + 'ch'"
+        [type]="config.inputType"
+        [placeholder]="config.placeholder ?? 'Digite um valor'"
+        [formControl]="valueControl"
+      />
+    }
+    @case ('cpf')
+    @case ('cnpj') {
+      <input
+        #inputField
+        class="outline-0 min-w-0 w-fit text-xs"
+        [style.width]="widthField + 'ch'"
+        type="text"
+        [appMask]="mask"
+        [placeholder]="mask"
+        [formControl]="valueControl"
+      />
+    }
+    @case ('currency') {
+      <input
+        #inputField
+        class="outline-0 min-w-0 w-fit text-xs"
+        [style.width]="widthField + 'ch'"
+        type="text"
+        appCurrency
+        placeholder="R$ 0,00"
+        [formControl]="valueControl"
+      />
+    }
+  }
+}

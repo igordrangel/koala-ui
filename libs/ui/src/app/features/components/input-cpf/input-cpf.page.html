@@ -1,0 +1,72 @@
+<app-section-container>
+  <ng-container title>Input CPF</ng-container>
+  <ng-container description>
+    The <strong>Input CPF</strong> component is a specialized input field designed for entering
+    Brazilian CPF (Cadastro de Pessoas Físicas) numbers. It provides built-in validation to ensure
+    that the entered CPF number is in the correct format and is valid according to the CPF rules.
+    This component enhances user experience by guiding users to input their CPF correctly and
+    providing immediate feedback on any errors.
+  </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description
+      >Use the Koala CLI to generate a new Input CPF component.</ng-container
+    >
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/input-cpf-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Usage</ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex flex-col items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <app-fieldset>
+            <ng-container label>CPF</ng-container>
+            <input
+              field
+              appInput
+              type="text"
+              placeholder="Type here"
+              [formControl]="cpfControl"
+              appMask="000.000.000-00"
+            />
+            <ng-container hint>Inform a valid CPF</ng-container>
+
+            @if (cpfControl.hasError('required')) {
+              <span appValidatorHint>CPF is required</span>
+            } @else if (cpfControl.hasError('cpfInvalid')) {
+              <span appValidatorHint>Invalid CPF</span>
+            }
+          </app-fieldset>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="input-cpf-sample.html"
+            src="markdown/usage/input-cpf/input-cpf.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="input-cpf-sample.ts"
+            src="markdown/usage/input-cpf/input-cpf.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

@@ -1,0 +1,13 @@
+@if (config(); as config) {
+  @switch (config.type) {
+    @case ('calendar') {
+      <app-input-calendar
+        #calendarField
+        format="dd/MM/yyyy"
+        [formControl]="valueControl"
+        [placeholder]="config.placeholder ?? 'Pick a date'"
+        [inline]="!isMobile"
+      />
+    }
+  }
+}

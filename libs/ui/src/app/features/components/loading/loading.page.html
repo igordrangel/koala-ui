@@ -1,0 +1,279 @@
+<app-section-container>
+  <ng-container title>Loading</ng-container>
+  <ng-container description>A simple loading component.</ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description>Use the Koala CLI to generate a new loading component.</ng-container>
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/loading-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Spinner</ng-container>
+    <ng-container description>
+      The spinner variant is a classic loading indicator that consists of a rotating element. It is
+      commonly used to indicate that a process is ongoing and the user needs to wait.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <app-loading variant="spinner" size="xs">Extra Small</app-loading>
+          <app-loading variant="spinner" size="sm">Small</app-loading>
+          <app-loading variant="spinner" size="md">Medium</app-loading>
+          <app-loading variant="spinner" size="lg">Large</app-loading>
+          <app-loading variant="spinner" size="xl">Extra Large</app-loading>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="loading-sample.html"
+            src="markdown/usage/loading/loading-spinner.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="loading-sample.ts"
+            src="markdown/usage/loading/loading.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Dots</ng-container>
+    <ng-container description>
+      The dots variant is a simple loading indicator that consists of multiple dots that animate in
+      a sequence. It is commonly used to indicate that a process is ongoing and the user needs to
+      wait.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <app-loading variant="dots" size="xs">Extra Small</app-loading>
+          <app-loading variant="dots" size="sm">Small</app-loading>
+          <app-loading variant="dots" size="md">Medium</app-loading>
+          <app-loading variant="dots" size="lg">Large</app-loading>
+          <app-loading variant="dots" size="xl">Extra Large</app-loading>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="loading-sample.html"
+            src="markdown/usage/loading/loading-dots.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="loading-sample.ts"
+            src="markdown/usage/loading/loading.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Ring</ng-container>
+    <ng-container description>
+      The ring variant is a circular loading indicator that animates in a ring shape. It is commonly
+      used to indicate that a process is ongoing and the user needs to wait.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <app-loading variant="ring" size="xs">Extra Small</app-loading>
+          <app-loading variant="ring" size="sm">Small</app-loading>
+          <app-loading variant="ring" size="md">Medium</app-loading>
+          <app-loading variant="ring" size="lg">Large</app-loading>
+          <app-loading variant="ring" size="xl">Extra Large</app-loading>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="loading-sample.html"
+            src="markdown/usage/loading/loading-ring.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="loading-sample.ts"
+            src="markdown/usage/loading/loading.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Ball</ng-container>
+    <ng-container description>
+      The ball variant is a simple loading indicator that consists of multiple balls that animate in
+      a sequence. It is commonly used to indicate that a process is ongoing and the user needs to
+      wait.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <app-loading variant="ball" size="xs">Extra Small</app-loading>
+          <app-loading variant="ball" size="sm">Small</app-loading>
+          <app-loading variant="ball" size="md">Medium</app-loading>
+          <app-loading variant="ball" size="lg">Large</app-loading>
+          <app-loading variant="ball" size="xl">Extra Large</app-loading>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="loading-sample.html"
+            src="markdown/usage/loading/loading-ball.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="loading-sample.ts"
+            src="markdown/usage/loading/loading.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Bars</ng-container>
+    <ng-container description>
+      The bars variant is a simple loading indicator that consists of multiple bars that animate in
+      a sequence. It is commonly used to indicate that a process is ongoing and the user needs to
+      wait.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <app-loading variant="bars" size="xs">Extra Small</app-loading>
+          <app-loading variant="bars" size="sm">Small</app-loading>
+          <app-loading variant="bars" size="md">Medium</app-loading>
+          <app-loading variant="bars" size="lg">Large</app-loading>
+          <app-loading variant="bars" size="xl">Extra Large</app-loading>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="loading-sample.html"
+            src="markdown/usage/loading/loading-bars.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="loading-sample.ts"
+            src="markdown/usage/loading/loading.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Infinity</ng-container>
+    <ng-container description>
+      The infinity variant is a simple loading indicator that consists of multiple dots that animate
+      in a sequence. It is commonly used to indicate that a process is ongoing and the user needs to
+      wait.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <app-loading variant="infinity" size="xs">Extra Small</app-loading>
+          <app-loading variant="infinity" size="sm">Small</app-loading>
+          <app-loading variant="infinity" size="md">Medium</app-loading>
+          <app-loading variant="infinity" size="lg">Large</app-loading>
+          <app-loading variant="infinity" size="xl">Extra Large</app-loading>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="loading-sample.html"
+            src="markdown/usage/loading/loading-infinity.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="loading-sample.ts"
+            src="markdown/usage/loading/loading.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

@@ -1,0 +1,9 @@
+/* Generated Automatically - Do not edit manually */
+
+@utility kl-logotype {
+  &::after {
+    -webkit-mask-image: url('/assets/icons/kl-logotype.svg');
+    mask-image: url('/assets/icons/kl-logotype.svg');
+  }
+}
+

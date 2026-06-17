@@ -1,0 +1,66 @@
+<app-section-container>
+  <ng-container title>Auth</ng-container>
+  <ng-container description>
+    This resource provides interceptor, guard and service to handle authentication in your
+    application. It can be used to protect routes, manage user sessions, and handle
+    authentication-related tasks.
+  </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description> Use the Koala CLI to generate a new auth component. </ng-container>
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/auth-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>API</ng-container>
+    <h3 class="mt-4 mb-2 text-xl font-semibold">Signals and Properties</h3>
+    <ul>
+      <li class="list-disc ml-5">
+        <strong>loggedUser</strong>: Signal holding the currently authenticated user (or undefined).
+      </li>
+      <li class="list-disc ml-5">
+        <strong>event</strong>: Signal that emits authentication events (login, failure, loading,
+        etc).
+      </li>
+      <li class="list-disc ml-5">
+        <strong>hasToken</strong>: Computed signal indicating if an access token is present.
+      </li>
+      <li class="list-disc ml-5">
+        <strong>accessToken</strong>: Getter for the current access token.
+      </li>
+      <li class="list-disc ml-5">
+        <strong>refreshToken</strong>: Getter for the current refresh token.
+      </li>
+      <li class="list-disc ml-5">
+        <strong>isAuthenticated</strong>: Computed signal indicating if a user is authenticated.
+      </li>
+    </ul>
+
+    <h3 class="mt-4 mb-2 text-xl font-semibold">Methods</h3>
+    <ul>
+      <li class="list-disc ml-5">
+        <strong>auth(credentials: Credentials)</strong>: Performs login with the provided
+        credentials.
+      </li>
+      <li class="list-disc ml-5">
+        <strong>logout()</strong>: Logs out, clearing tokens and user state.
+      </li>
+      <li class="list-disc ml-5">
+        <strong>updateToken()</strong>: Updates the access token using the refresh token.
+      </li>
+      <li class="list-disc ml-5">
+        <strong>isExpired()</strong>: Returns true if the access token is expired.
+      </li>
+    </ul>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Usage</ng-container>
+    <ng-container description>
+      You can see the usage in the
+      <a routerLink="/blocks/login" class="underline text-blue-400">login block</a>.
+    </ng-container>
+  </app-section-content>
+</app-section-container>

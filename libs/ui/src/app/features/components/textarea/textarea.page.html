@@ -1,0 +1,56 @@
+<app-section-container>
+  <ng-container title>Textarea</ng-container>
+  <ng-container description>
+    Textareas can be used to capture multi-line user input in a form.
+  </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description>Use the Koala CLI to generate a new textarea component.</ng-container>
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/textarea-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Sizes</ng-container>
+    <ng-container description>
+      Textareas are available in 5 different sizes: xs, sm, md, lg, and xl. The default size is md.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex flex-col items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <textarea appTextarea rows="4" size="xs" placeholder="Type here"></textarea>
+          <textarea appTextarea rows="4" size="sm" placeholder="Type here"></textarea>
+          <textarea appTextarea rows="4" size="md" placeholder="Type here"></textarea>
+          <textarea appTextarea rows="4" size="lg" placeholder="Type here"></textarea>
+          <textarea appTextarea rows="4" size="xl" placeholder="Type here"></textarea>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="textarea-sample.html"
+            src="markdown/usage/textarea/textarea-sizes.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="textarea-sample.ts"
+            src="markdown/usage/textarea/textarea.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

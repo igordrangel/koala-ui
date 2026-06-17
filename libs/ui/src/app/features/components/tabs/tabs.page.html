@@ -1,0 +1,75 @@
+<app-section-container>
+  <ng-container title>Tabs</ng-container>
+  <ng-container description>
+    Tabs can be used to show a list of links in a tabbed format.
+  </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description>Use the Koala CLI to generate a new tab component.</ng-container>
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/tab-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Tabs</ng-container>
+    <ng-container description>
+      Tabs are a classic UI component that can be used to display content in a tabbed format. They
+      are commonly used to organize information and improve navigation within an application.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="flex items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
+        >
+          <div appTabGroup align="start" class="flex items-center w-full">
+            <div appTab label="Tab 1" checked>
+              <div
+                class="flex items-center gap-2 p-5 border border-t-0 border-base-300 rounded-b-lg"
+              >
+                Tab content 1
+              </div>
+            </div>
+            <div appTab label="Tab 2">
+              <div
+                class="flex items-center gap-2 p-5 border border-t-0 border-base-300 rounded-b-lg"
+              >
+                Tab content 2
+              </div>
+            </div>
+            <div appTab label="Tab 3">
+              <div
+                class="flex items-center gap-2 p-5 border border-t-0 border-base-300 rounded-b-lg"
+              >
+                Tab content 3
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="tabs-sample.html"
+            src="markdown/usage/tabs/tabs.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="tabs-sample.ts"
+            src="markdown/usage/tabs/tabs.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

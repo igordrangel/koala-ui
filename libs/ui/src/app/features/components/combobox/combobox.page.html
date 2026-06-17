@@ -1,0 +1,161 @@
+<app-section-container>
+  <ng-container title>Combobox</ng-container>
+  <ng-container description>
+    A searchable select built with Angular Aria, supporting local or remote filtering through a
+    resource and dedicated loading and empty states.
+  </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description>Use the Koala CLI to generate a new combobox component.</ng-container>
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/combobox-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Local Filtering</ng-container>
+    <ng-container description>
+      When you pass a static option list, the component filters it internally and behaves like a
+      searchable select. You can also enable multiple selection.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="grid gap-6 border border-t-0 border-base-300 rounded-b-lg p-6 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)]"
+        >
+          <div class="rounded-2xl border border-base-300 bg-base-100 p-6 shadow-sm">
+            <div class="space-y-4 flex flex-col gap-2">
+              <app-combobox
+                placeholder="Select a state"
+                [options]="localOptions"
+                [formControl]="localComboboxControl"
+              />
+
+              <app-combobox
+                multiple
+                placeholder="Select multiple states"
+                [options]="localOptions"
+                [formControl]="localMultipleComboboxControl"
+              />
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-base-300 bg-base-100 p-6 shadow-sm">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-base-content/60">
+              Selected value
+            </p>
+            <div
+              class="mt-3 inline-flex rounded-full border border-base-300 bg-base-200 px-3 py-1 text-sm text-base-content"
+            >
+              {{ localComboboxChanges() || 'No item selected' }}
+            </div>
+            <p class="mt-4 text-xs font-semibold uppercase tracking-[0.18em] text-base-content/60">
+              Multiple values
+            </p>
+
+            @let localMultipleComboboxValue = localMultipleComboboxChanges() || [];
+            @let localMultipleComboboxHasValue = localMultipleComboboxValue.length > 0;
+            @let localMultipleComboboxValues =
+              localMultipleComboboxHasValue
+                ? localMultipleComboboxValue.join(', ')
+                : 'No items selected';
+
+            <pre
+              class="mt-2 rounded-lg border border-base-300 bg-base-200 px-3 py-2 text-sm text-base-content"
+              >{{ localMultipleComboboxValues }}</pre
+            >
+            <p class="mt-4 text-sm leading-6 text-base-content/70">
+              Filtering happens inside the component by comparing the typed text against each option
+              label.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="combobox-local.html"
+            src="markdown/usage/combobox/combobox-local.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="combobox-local.ts"
+            src="markdown/usage/combobox/combobox-local.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Remote Filtering With Resource</ng-container>
+    <ng-container description>
+      The component accepts a factory that receives the filter signal and creates a resource,
+      httpResource, or rxResource internally to fetch matching results.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="grid gap-6 border border-t-0 border-base-300 rounded-b-lg p-6 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)]"
+        >
+          <div class="rounded-2xl border border-base-300 bg-base-100 p-6 shadow-sm">
+            <app-combobox
+              placeholder="Search for a user"
+              [options]="asyncOptions"
+              [formControl]="remoteComboboxControl"
+            />
+          </div>
+
+          <div class="rounded-2xl border border-base-300 bg-base-100 p-6 shadow-sm">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-base-content/60">
+              Selected value
+            </p>
+            <div
+              class="mt-3 inline-flex rounded-full border border-base-300 bg-base-200 px-3 py-1 text-sm text-base-content"
+            >
+              {{ remoteComboboxChanges() || 'No item selected' }}
+            </div>
+            <p class="mt-4 text-sm leading-6 text-base-content/70">
+              Typing updates the filter signal and triggers the resource. While results are loading,
+              the field shows a spinner and the dropdown replaces the list with a Searching...
+              message.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="combobox-remote.html"
+            src="markdown/usage/combobox/combobox-remote.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="combobox-remote.ts"
+            src="markdown/usage/combobox/combobox-remote.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

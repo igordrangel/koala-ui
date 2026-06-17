@@ -1,0 +1,15 @@
+@if (config(); as config) {
+  @switch (config.type) {
+    @case ('combobox') {
+      <app-combobox
+        #comboboxField
+        size="xs"
+        [options]="options()"
+        [placeholder]="config.placeholder || 'Select an option'"
+        [multiple]="config.multiple"
+        [formControl]="valueControl"
+        [inline]="!isMobile"
+      />
+    }
+  }
+}

@@ -1,0 +1,83 @@
+<app-section-container>
+  <ng-container title>ListBase</ng-container>
+  <ng-container description>
+    The ListBase is a abstraction resource for datatable lists, providing a default structure and
+    functionalities for listing data. It serves as a base component that can be extended to create
+    specific list implementations, such as user lists, product lists, etc.
+  </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description>
+      Use the Koala CLI to generate a new list-base component.
+    </ng-container>
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/list-base-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>API</ng-container>
+
+    <h3 class="mt-4 mb-2 text-xl font-semibold">Attributes</h3>
+    <ul>
+      <li class="list-disc ml-5">
+        <strong>currentPage</strong>: Signal that holds the current page number of the list. It can
+        be used for pagination purposes and to keep track of the user's position within the list.
+      </li>
+      <li class="list-disc ml-5">
+        <strong>pageSize</strong>: Signal that holds the number of items per page in the list. It
+        can be used for pagination purposes and to control the number of items displayed on each
+        page.
+      </li>
+      <li class="list-disc ml-5">
+        <strong>totalItems</strong>: Signal that holds the total number of items in the list. It can
+        be used for pagination purposes and to display the total count of items.
+      </li>
+      <li class="list-disc ml-5">
+        <strong>orderedBy</strong>: Signal that holds the current ordering of the list. It can be
+        used to sort the list based on different criteria.
+      </li>
+      <li class="list-disc ml-5">
+        <strong>filter</strong>: Signal that holds the current filter applied to the list. It can be
+        used to filter the list based on different criteria.
+      </li>
+      <li class="list-disc ml-5">
+        <strong>skeletonItems</strong>: Computed signal that holds the number of skeleton items to
+        display while the list is loading. It can be used to provide a visual indication of loading
+        state.
+      </li>
+      <li class="list-disc ml-5">
+        <strong>defaultList</strong>: Default list response to use in datalist resourceRef.
+      </li>
+      <li class="list-disc ml-5">
+        <strong>filterParams</strong>: Parameters used for filtering the list. It can be used to
+        apply specific filter criteria to the list.
+      </li>
+      <li class="list-disc ml-5">
+        <strong>datalist</strong>: Abstract datalist resource reference that should be implemented
+        in the extending component. It serves as a reference to the data source for the list and
+        provides methods for fetching and manipulating the list data.
+      </li>
+      <li class="list-disc ml-5">
+        <strong>reload</strong>: Signal that triggers a reload of the list. It can be used to
+        refresh the list data.
+      </li>
+    </ul>
+
+    <h3 class="mt-4 mb-2 text-xl font-semibold">Methods</h3>
+    <ul>
+      <li class="list-disc ml-5">
+        <strong>reloadList</strong>: Method that sets the reload signal to true, propagating the
+        reload event to the datatable component.
+      </li>
+    </ul>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Usage</ng-container>
+    <ng-container description>
+      You can see the usage in the
+      <a routerLink="/blocks/datatable" class="underline text-blue-400">datatable block</a>
+    </ng-container>
+  </app-section-content>
+</app-section-container>

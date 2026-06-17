@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist/cli",
+    "rootDir": "./",
+    "module": "node16",
+    "moduleResolution": "node16",
+    "target": "ES2020",
+    "lib": [
+      "ES2020"
+    ]
+  },
+  "exclude": [
+    "**/*.unit.spec.ts",
+    "**/*.spec.ts"
+  ]
+}
