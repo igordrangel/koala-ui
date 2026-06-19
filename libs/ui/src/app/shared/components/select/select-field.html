@@ -8,7 +8,7 @@
   <button
     #triggerOptions
     type="button"
-    class="relative flex flex-wrap gap-1 w-full bg-transparent outline-none"
+    class="relative flex items-center flex-wrap gap-1 w-full bg-transparent outline-none"
     [class.pr-5]="hideClear()"
     [class.input]="!inline()"
     [class.validator]="!inline()"
@@ -26,12 +26,12 @@
     @let option = selectedOptions()[0];
 
     @if (!multiple() && option) {
-      <span>{{ option.label }}</span>
+      <span class="w-[calc(100%-3rem)] text-left">{{ option.label }}</span>
 
-      @if (!hideClear()) {
+      @if (!hideClear() && !isDisabled()) {
         <button
           type="button"
-          class="text-neutral-content opacity-40 hover:opacity-70 transition-opacity duration-100 cursor-pointer"
+          class="text-neutral-content opacity-40 hover:opacity-70 transition-opacity duration-100 cursor-pointer w-5"
           (click)="removeOption(option.value)"
         >
           <i class="fa-solid fa-xmark"></i>
@@ -45,13 +45,16 @@
         @for (item of selectedOptions(); track $index) {
           <span class="badge badge-success dark:badge-soft badge-sm">
             {{ item.label }}
-            <button
-              type="button"
-              class="text-neutral-content opacity-40 hover:opacity-70 transition-opacity duration-100 cursor-pointer top-[0.05rem] relative"
-              (click)="removeOption(item.value)"
-            >
-              <i class="fa-solid fa-xmark"></i>
-            </button>
+
+            @if (!isDisabled()) {
+              <button
+                type="button"
+                class="text-neutral-content opacity-40 hover:opacity-70 transition-opacity duration-100 cursor-pointer top-[0.05rem] relative"
+                (click)="removeOption(item.value)"
+              >
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            }
           </span>
         } @empty {
           <span class="opacity-50">{{ placeholderText }}</span>

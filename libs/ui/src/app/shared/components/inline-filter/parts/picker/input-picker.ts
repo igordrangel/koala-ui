@@ -78,6 +78,8 @@ export class InputPicker implements OnInit {
 
   readonly payload = output<Record<string, any>>();
 
+  private hadActiveFilters = false;
+
   constructor() {
     effect(() => {
       const triggerElement = this.triggerOptionsElement()?.nativeElement;
@@ -104,13 +106,18 @@ export class InputPicker implements OnInit {
     effect(() => {
       const selectedOptions = this.selectedOptions();
       const payload = optionsToQueryParams(selectedOptions);
+      const inEditionMode = selectedOptions.some((option) => option.editing);
 
       this.router.navigate([], { queryParams: payload });
 
-      if (selectedOptions.length > 0 && !selectedOptions.some((option) => option.editing)) {
-        setTimeout(() => this.inputFilterElement()?.nativeElement.focus());
+      if (!inEditionMode && (selectedOptions.length > 0 || this.hadActiveFilters)) {
+        if (selectedOptions.length > 0) {
+          setTimeout(() => this.inputFilterElement()?.nativeElement.focus());
+        }
         this.payload.emit(payload);
       }
+
+      this.hadActiveFilters = selectedOptions.length > 0;
     });
   }
 
