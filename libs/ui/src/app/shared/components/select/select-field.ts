@@ -176,7 +176,7 @@ export class SelectField implements OnInit, ControlValueAccessor {
   }
 
   writeValue(value: any | any[]): void {
-    this.selectedValues.set(Array.isArray(value) ? value : [value]);
+    setTimeout(() => this.selectedValues.set(Array.isArray(value) ? value : [value]));
   }
 
   registerOnChange(fn: any): void {
@@ -188,7 +188,7 @@ export class SelectField implements OnInit, ControlValueAccessor {
   }
 
   setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled.set(isDisabled);
+    setTimeout(() => this.isDisabled.set(isDisabled));
   }
 
   toggleDropdown(opened: boolean) {

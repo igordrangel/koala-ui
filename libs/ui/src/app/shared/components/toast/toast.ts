@@ -59,7 +59,7 @@ export class Toast {
           'toast',
           'toast-center',
           'toast-top',
-          'z-[10000]',
+          'z-[100000]',
           'group',
         );
 
