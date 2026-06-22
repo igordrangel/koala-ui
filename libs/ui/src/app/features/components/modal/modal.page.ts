@@ -1,14 +1,14 @@
 import { Section } from '@/core/components/section';
-import { Button } from '@/shared/components/button';
 import { Modal, ModalConfig } from '@/shared/components/modal';
 import { Tabs } from '@/shared/components/tabs';
 import { Component, inject } from '@angular/core';
 import { ModalSample } from './modal-sample';
+import { ModalTriggerSample } from './modal-trigger.sample';
 
 @Component({
   selector: 'app-modal-page',
   templateUrl: './modal.page.html',
-  imports: [Section, Button, Tabs],
+  imports: [Section, Tabs, ModalTriggerSample],
 })
 export class ModalPage {
   private readonly modal = inject(Modal);

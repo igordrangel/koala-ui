@@ -12,8 +12,9 @@ export type AuthEventType =
   | 'loadingUserInfo'
   | 'authenticated'
   | 'authenticationFailed';
-export const HOME_ROUTE = '/blocks/login';
+export const HOME_ROUTE = '/';
 export const LOGIN_ROUTE = '/blocks/login';
+export const PUBLIC_ROUTES = [HOME_ROUTE, LOGIN_ROUTE];
 
 export interface AuthEvent {
   type: AuthEventType;
@@ -34,7 +35,7 @@ export class AuthorizationService {
 
       if (accessToken && !this._loggedUser()) {
         this._event.set({ type: 'loadingUserInfo', data: accessToken });
-      } else if (!accessToken) {
+      } else if (!accessToken && !this.isAuthOptionalRoute()) {
         this.router.navigate([LOGIN_ROUTE]);
       }
     });
@@ -53,7 +54,7 @@ export class AuthorizationService {
           }
           break;
         case 'authenticated':
-          if (location.hash.includes('login')) {
+          if (location.hash.includes(LOGIN_ROUTE)) {
             this.router.navigate([HOME_ROUTE]);
           }
           break;
@@ -83,6 +84,11 @@ export class AuthorizationService {
           error: () => this.logout(),
         }),
       );
+  }
+
+  private isAuthOptionalRoute() {
+    const url = this.router.url.split('?')[0];
+    return PUBLIC_ROUTES.includes(url);
   }
 
   get loggedUser() {
@@ -153,6 +159,9 @@ export class AuthorizationService {
     Authentication.clearTokens();
     this._loggedUser.set(undefined);
     this._event.set(undefined);
-    this.router.navigate([LOGIN_ROUTE]);
+
+    if (!this.isAuthOptionalRoute()) {
+      this.router.navigate([LOGIN_ROUTE]);
+    }
   }
 }

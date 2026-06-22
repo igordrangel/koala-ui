@@ -1748,7 +1748,7 @@
     "title": "Rules",
     "category": "Resources",
     "route": "resources/rules",
-    "content": "Rules Installation Rules (route permissions) is installed together with Auth. It includes , , and . TypeScript The guard reads from route data and calls . Overview Rules provides route-level permission control. Routes registered with a are protected by , which checks the logged user's permissions. Installation Installed with Auth: API Types - RouteRule : Permission identifier. Redefine in (e.g. ). - RouteConfig : Route definition with optional , , and . - RouteData : Data attached to protected routes ( , , , ). Function - routesRegistre(routes) : Registers routes, applies when is set, and populates . Guard - RouteAccessGuard : Redirects to login when there is no token; otherwise waits for authentication and checks . Model - LoggedUser.hasPermission(rule) : Returns when the user has the required rule(s). Undefined rule allows access. Usage See the Auth resource and Login Block for a full authentication flow."
+    "content": "Rules Installation Rules (route permissions) is installed together with Auth. It includes , , and . TypeScript The guard reads from route data and calls . Overview Rules provides route-level permission control. Routes registered with a are protected by , which checks the logged user's permissions. API Types - RouteRule : Permission identifier. Redefine in (e.g. ). - RouteConfig : Route definition with optional , , and . - RouteData : Data attached to protected routes ( , , , ). Function - routesRegistre(routes) : Registers routes, applies when is set, and populates . Guard - RouteAccessGuard : Redirects to login when there is no token; otherwise waits for authentication and checks . Model - LoggedUser.hasPermission(rule) : Returns when the user has the required rule(s). Undefined rule allows access. Usage See the Auth resource and Login Block for a full authentication flow."
   },
   {
     "id": "resources/rules#installation",
@@ -1773,14 +1773,6 @@
     "route": "resources/rules",
     "fragment": "overview",
     "content": "Rules provides route-level permission control. Routes registered with a are protected by , which checks the logged user's permissions."
-  },
-  {
-    "id": "resources/rules#installation",
-    "title": "Installation",
-    "category": "Resources",
-    "route": "resources/rules",
-    "fragment": "installation",
-    "content": "Installed with Auth:"
   },
   {
     "id": "resources/rules#api",

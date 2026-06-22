@@ -17,7 +17,7 @@ export class TabGroup {
   });
 
   constructor() {
-    this.elementRef.nativeElement.classList.add('tabs', 'tabs-lift', 'w-full');
+    this.elementRef.nativeElement.classList.add('tabs', 'tabs-lift', 'w-full', 'min-w-0');
 
     effect(() => {
       const element = this.elementRef.nativeElement;

@@ -31,27 +31,40 @@
   </nav>
 </section>
 
-<ng-template #examples let-title>
-  <div class="flex flex-col items-center justify-center h-100">
-    <h4 class="font-semibold text-lg">{{ title }}</h4>
-    <span class="text-sm opacity-70">This example is coming soon. Stay tuned!</span>
-  </div>
-</ng-template>
-
-<div appTabGroup align="start" class="flex items-center w-full px-6">
+<div appTabGroup align="start" class="w-full min-w-0 px-4 sm:px-6">
   <div appTab label="Examples" checked>
-    <div class="border border-t-0 border-base-300 rounded-b-lg">
-      <ng-container *ngTemplateOutlet="examples; context: { $implicit: 'Examples' }" />
+    <div class="w-full min-w-0 overflow-x-hidden border border-t-0 border-base-300 rounded-b-lg">
+      @defer (on viewport) {
+        <app-examples-showcase />
+      } @placeholder {
+        <div class="flex h-48 items-center justify-center text-sm opacity-60">
+          Loading showcase...
+        </div>
+      }
     </div>
   </div>
+
   <div appTab label="Dashboard">
-    <div class="border border-t-0 border-base-300 rounded-b-lg">
-      <ng-container *ngTemplateOutlet="examples; context: { $implicit: 'Dashboard' }" />
+    <div class="w-full min-w-0 overflow-x-hidden border border-t-0 border-base-300 rounded-b-lg">
+      @defer (on viewport) {
+        <app-dashboard-showcase />
+      } @placeholder {
+        <div class="flex h-48 items-center justify-center text-sm opacity-60">
+          Loading showcase...
+        </div>
+      }
     </div>
   </div>
+
   <div appTab label="Authentication">
-    <div class="border border-t-0 border-base-300 rounded-b-lg">
-      <ng-container *ngTemplateOutlet="examples; context: { $implicit: 'Authentication' }" />
+    <div class="w-full min-w-0 overflow-x-hidden border border-t-0 border-base-300 rounded-b-lg">
+      @defer (on viewport) {
+        <app-authentication-showcase />
+      } @placeholder {
+        <div class="flex h-48 items-center justify-center text-sm opacity-60">
+          Loading showcase...
+        </div>
+      }
     </div>
   </div>
 </div>

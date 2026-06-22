@@ -100,6 +100,9 @@ export class Tab {
       if (!this.initializedContentClasses) {
         host.classList.add(
           'tab-content',
+          'w-full',
+          'min-w-0',
+          'basis-full',
           'border-0',
           'border-t',
           'border-base-300',
