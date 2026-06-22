@@ -21,7 +21,7 @@ export class App {
   readonly isHomePage = toSignal(
     this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
-      map(() => this.router.url === '/'),
+      map(() => location.pathname === '/'),
     ),
   );
 

@@ -29,6 +29,21 @@
           },
           "configurations": {
             "production": {
+              "optimization": {
+                "scripts": true,
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": true,
+                  "removeSpecialComments": true
+                },
+                "fonts": {
+                  "inline": true
+                }
+              },
+              "sourceMap": false,
+              "outputHashing": "all",
+              "namedChunks": false,
+              "extractLicenses": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -41,7 +56,6 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all",
               "allowedCommonJsDependencies": ["prismjs", "@koalarx/utils"]
             },
             "development": {
@@ -59,7 +73,8 @@
               "buildTarget": "ui:build:production"
             },
             "development": {
-              "buildTarget": "ui:build:development"
+              "buildTarget": "ui:build:development",
+              "hmr": false
             }
           },
           "defaultConfiguration": "development"

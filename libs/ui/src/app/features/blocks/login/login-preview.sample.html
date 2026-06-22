@@ -1,0 +1,18 @@
+@switch (authorization.event()?.type) {
+  @case ('loadingUserInfo') {
+    @if (authorization.loggedUser()) {
+      <app-logged-sample />
+    } @else {
+      <div class="flex flex-col items-center gap-2">
+        <app-loading size="lg" />
+        Loading user information...
+      </div>
+    }
+  }
+  @case ('authenticated') {
+    <app-logged-sample />
+  }
+  @default {
+    <app-login-form-sample />
+  }
+}

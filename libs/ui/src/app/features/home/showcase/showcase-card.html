@@ -1,0 +1,26 @@
+<article
+  class="flex h-full flex-col overflow-hidden rounded-2xl border border-base-300 bg-base-200/20"
+>
+  <header class="p-4 pb-2">
+    <h3 class="text-sm font-semibold">{{ title() }}</h3>
+    @if (description()) {
+      <p class="mt-1 text-xs opacity-60">{{ description() }}</p>
+    }
+  </header>
+
+  <div class="min-h-0 min-w-0 flex-1 overflow-x-auto p-4 pt-2">
+    <ng-content />
+  </div>
+
+  @if (docLink()) {
+    <footer class="px-4 pb-4">
+      <a
+        [routerLink]="docLink()"
+        class="inline-flex items-center gap-1 text-xs opacity-60 transition-opacity hover:opacity-100"
+      >
+        View docs
+        <i class="fa-solid fa-arrow-right text-[0.6rem]"></i>
+      </a>
+    </footer>
+  }
+</article>

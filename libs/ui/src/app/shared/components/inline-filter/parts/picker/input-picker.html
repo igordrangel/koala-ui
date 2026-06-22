@@ -4,6 +4,7 @@
   @if (selectedOptions().length > 0) {
     <button
       appTooltip="Clear all filters"
+      tooltipPosition="bottom"
       type="button"
       class="opacity-60 hover:opacity-100 px-2 cursor-pointer"
       (click)="selectedOptions.set([])"

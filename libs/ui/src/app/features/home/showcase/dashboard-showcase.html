@@ -1,0 +1,50 @@
+<div class="flex w-full min-w-0 flex-col overflow-hidden md:min-h-144 md:flex-row">
+  <aside
+    class="flex w-full shrink-0 flex-row gap-1 overflow-x-auto border-b border-base-300 bg-base-200/30 p-3 md:w-52 md:flex-col md:gap-0 md:border-b-0 md:border-r md:p-4"
+  >
+    <div class="mb-0 flex min-w-max items-center gap-2 px-2 md:mb-6">
+      <div
+        class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-content"
+      >
+        K
+      </div>
+      <span class="text-sm font-semibold">Koala Admin</span>
+    </div>
+
+    <nav class="flex min-w-max flex-row gap-1 text-sm opacity-80 md:min-w-0 md:flex-col md:gap-1">
+      <span class="flex items-center gap-3 rounded-lg bg-base-300/50 px-3 py-2 whitespace-nowrap">
+        <i class="fa-solid fa-users w-4 text-center"></i>
+        <span>Users</span>
+      </span>
+      <span class="flex items-center gap-3 rounded-lg px-3 py-2 whitespace-nowrap opacity-60">
+        <i class="fa-solid fa-chart-line w-4 text-center"></i>
+        <span>Dashboard</span>
+      </span>
+      <span class="flex items-center gap-3 rounded-lg px-3 py-2 whitespace-nowrap opacity-60">
+        <i class="fa-solid fa-gear w-4 text-center"></i>
+        <span>Settings</span>
+      </span>
+    </nav>
+  </aside>
+
+  <main class="flex min-w-0 flex-1 flex-col gap-4 p-4 sm:p-5">
+    <header>
+      <h3 class="text-lg font-semibold">Users</h3>
+      <p class="text-sm opacity-60">CRUD list powered by the datatable block sample.</p>
+    </header>
+
+    <div class="min-w-0 overflow-x-auto">
+      <app-datatable-sample />
+    </div>
+  </main>
+</div>
+
+<footer class="flex justify-end border-t border-base-300 px-4 py-3 sm:px-6">
+  <a
+    routerLink="/blocks/datatable"
+    class="inline-flex items-center gap-1 text-xs opacity-60 transition-opacity hover:opacity-100"
+  >
+    View docs
+    <i class="fa-solid fa-arrow-right text-[0.6rem]"></i>
+  </a>
+</footer>

@@ -1,0 +1,6 @@
+<app-inline-filter [config]="inlineFilterConfig" (payload)="appliedFilters.set($event)" />
+
+<div class="mt-4 rounded-lg border border-base-300 bg-base-100 p-4 text-sm">
+  <p class="mb-2 text-xs font-medium opacity-60">Applied Filters</p>
+  <pre class="overflow-x-auto text-xs leading-6">{{ appliedFilters() | json }}</pre>
+</div>

@@ -79,6 +79,7 @@ export class InputPicker implements OnInit {
   readonly payload = output<Record<string, any>>();
 
   private hadActiveFilters = false;
+  private suppressAutoFocus = true;
 
   constructor() {
     effect(() => {
@@ -111,7 +112,7 @@ export class InputPicker implements OnInit {
       this.router.navigate([], { queryParams: payload });
 
       if (!inEditionMode && (selectedOptions.length > 0 || this.hadActiveFilters)) {
-        if (selectedOptions.length > 0) {
+        if (selectedOptions.length > 0 && !this.suppressAutoFocus) {
           setTimeout(() => this.inputFilterElement()?.nativeElement.focus());
         }
         this.payload.emit(payload);
@@ -144,6 +145,7 @@ export class InputPicker implements OnInit {
 
     const queryParams = this.queryParams() ?? {};
     queryParamsToOptions(this.filterOptions(), this.selectedOptions, queryParams, this.injector);
+    this.suppressAutoFocus = false;
   }
 
   toggleOptions() {
