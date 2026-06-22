@@ -55,42 +55,6 @@
   </a>
 </ng-template>
 
-<ng-template #externalLinks>
-  <a
-    href="https://www.npmjs.com/package/@koalarx/ui"
-    target="_blank"
-    appButton
-    class="justify-start lg:justify-center md:inline-flex"
-    btnSize="sm"
-    btnVariant="ghost"
-  >
-    @koalarx/ui
-    <i class="fa-solid fa-arrow-up-long opacity-50 rotate-45 text-[0.6rem]"></i>
-  </a>
-  <a
-    href="https://www.npmjs.com/package/@koalarx/utils"
-    target="_blank"
-    appButton
-    class="justify-start lg:justify-center md:inline-flex"
-    btnSize="sm"
-    btnVariant="ghost"
-  >
-    @koalarx/utils
-    <i class="fa-solid fa-arrow-up-long opacity-50 rotate-45 text-[0.6rem]"></i>
-  </a>
-  <a
-    href="https://nest.koalarx.com"
-    target="_blank"
-    appButton
-    class="justify-start lg:justify-center md:inline-flex"
-    btnSize="sm"
-    btnVariant="ghost"
-  >
-    @koalarx/nest
-    <i class="fa-solid fa-arrow-up-long opacity-50 rotate-45 text-[0.6rem]"></i>
-  </a>
-</ng-template>
-
 @if (mobileMenuVisible()) {
   <button
     class="fixed inset-0 z-30 bg-black/40 transition-opacity duration-200 ease-out lg:hidden"
@@ -116,7 +80,6 @@
   <div class="px-3 py-3 border-t border-base-300 shrink-0">
     <div class="grid grid-cols-1 gap-2">
       <ng-container *ngTemplateOutlet="navButtons" />
-      <ng-container *ngTemplateOutlet="externalLinks" />
     </div>
   </div>
 </aside>
@@ -138,11 +101,7 @@
   </div>
 
   <div class="flex items-center min-w-0 gap-1 ml-auto shrink-0">
-    <div class="hidden md:flex items-center gap-1">
-      <ng-container *ngTemplateOutlet="externalLinks" />
-    </div>
-
-    <span class="ml-2 mr-1 opacity-20 hidden lg:inline">|</span>
+    <app-doc-search class="mr-1" />
 
     <button
       appButton

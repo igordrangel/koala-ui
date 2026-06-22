@@ -1,0 +1,68 @@
+<app-section-container>
+  <ng-container title>Rules</ng-container>
+  <ng-container description>
+    Rules provides route-level permission control. Routes registered with a rule are protected by
+    RouteAccessGuard, which checks the logged user's permissions.
+  </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description>
+      Rules is installed together with Auth. Use the Koala CLI to add authentication and route
+      permissions.
+    </ng-container>
+    <app-code-viewer language="bash" name="kl" src="markdown/install/rules-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>API</ng-container>
+
+    <h3 class="mt-4 mb-2 text-xl font-semibold">Types</h3>
+    <ul>
+      <li class="list-disc ml-5">
+        <strong>RouteRule</strong>: Permission identifier (redefine in logged-user.ts).
+      </li>
+      <li class="list-disc ml-5">
+        <strong>RouteConfig</strong>: Route definition with optional rule, name, and iconClass.
+      </li>
+      <li class="list-disc ml-5">
+        <strong>RouteData</strong>: Data on protected routes (name, rule, iconClass, parent).
+      </li>
+    </ul>
+
+    <h3 class="mt-4 mb-2 text-xl font-semibold">Function</h3>
+    <ul>
+      <li class="list-disc ml-5">
+        <strong>routesRegistre(routes)</strong>: Registers routes and applies RouteAccessGuard when
+        rule is set.
+      </li>
+    </ul>
+
+    <h3 class="mt-4 mb-2 text-xl font-semibold">Guard &amp; Model</h3>
+    <ul>
+      <li class="list-disc ml-5">
+        <strong>RouteAccessGuard</strong>: Redirects to login without token; checks
+        hasPermission(rule).
+      </li>
+      <li class="list-disc ml-5">
+        <strong>LoggedUser.hasPermission(rule)</strong>: Validates user rules. Undefined rule allows
+        access.
+      </li>
+    </ul>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Usage</ng-container>
+    <ng-container description>
+      See also
+      <a routerLink="/resources/auth" class="underline text-blue-400">Auth</a>
+      and the
+      <a routerLink="/blocks/login" class="underline text-blue-400">Login block</a>.
+    </ng-container>
+    <app-code-viewer
+      language="typescript"
+      name="routes.ts"
+      src="markdown/usage/rules/rules.ts.md"
+    />
+  </app-section-content>
+</app-section-container>

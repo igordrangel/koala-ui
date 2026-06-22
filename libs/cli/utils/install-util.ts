@@ -6,9 +6,9 @@ const originPath = path.join(__dirname, '../../');
 
 export const InstallUtilFlagsList = [
   'currency-mask',
-  'download-buff-file',
+  'download-buffer-file',
   'is-mobile',
-  'make-breadcrumbs',
+  'make-breadcrumb',
   'mime-type-by-extension',
   'string-mask',
   'scroll-into-view',

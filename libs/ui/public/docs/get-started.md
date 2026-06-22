@@ -71,4 +71,8 @@ kl install modal --project my-angular-app
 - **Tooltip** – `kl install -n tooltip`
 - **Validator** – `kl install -n validator`
 - **List Base** – `kl install -n list-base`
+- **Http Base** – `kl install -n http-base`
+- **Page Base** – `kl install -n page-base`
+- **Global Errors** – `kl install -n global-errors`
+- **Rules** – `kl install -n rules`
 - **Auth** – `kl install -n auth`

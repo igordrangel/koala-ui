@@ -5,13 +5,14 @@ import { NavigationEnd, Router, RouterOutlet, Scroll } from '@angular/router';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { filter } from 'rxjs/internal/operators/filter';
 import { map } from 'rxjs/internal/operators/map';
+import { Footer } from './core/components/footer';
 import { Header } from './core/components/header';
 import { NavMenu } from './core/components/nav-menu';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.html',
-  imports: [RouterOutlet, Header, NavMenu, LoadingBarRouterModule],
+  imports: [RouterOutlet, Footer, Header, NavMenu, LoadingBarRouterModule],
 })
 export class App {
   private router = inject(Router);

@@ -8,11 +8,15 @@ export const InstallCoreResourceFlagsList = [
   'constants/security-storage-keys',
   'guards/route-access.guard',
   'interceptors/authorization-interceptor',
+  'interceptors/feedback-request-interceptor',
+  'middlewares/http-errors.midleware',
   'security/authorization.service',
   'models/credentials',
   'models/logged-user',
   'utils/authentication',
   'utils/routes-registre',
+  'utils/http-error-feedback-alert',
+  'utils/sanitize-error-message',
 ] as const;
 export type InstallCoreResourceFlags = (typeof InstallCoreResourceFlagsList)[number];
 
@@ -32,6 +36,15 @@ function includeOnAppConfig(projectName: string, resource: InstallCoreResourceFl
       imports.push(
         `import { HTTP_INTERCEPTORS } from '@angular/common/http';`,
         `import { AuthorizationInterceptor } from './core/interceptors/authorization-interceptor';`,
+      );
+      break;
+    case 'interceptors/feedback-request-interceptor':
+      providers.push(
+        '{ provide: HTTP_INTERCEPTORS, useClass: FeedbackRequestInterceptor, multi: true }',
+      );
+      imports.push(
+        `import { HTTP_INTERCEPTORS } from '@angular/common/http';`,
+        `import { FeedbackRequestInterceptor } from './core/interceptors/feedback-request-interceptor';`,
       );
       break;
   }
@@ -79,6 +92,7 @@ export function installCoreResource(projectName: string, resource: InstallCoreRe
       );
       break;
     case 'interceptors/authorization-interceptor':
+    case 'interceptors/feedback-request-interceptor':
       includeOnAppConfig(projectName, resource);
       break;
   }

@@ -1,0 +1,1888 @@
+[
+  {
+    "id": "getting-started/introduction",
+    "title": "Introduction",
+    "category": "Getting Started",
+    "route": "getting-started/introduction",
+    "content": "Welcome to the Koala UI documentation. Component library for Angular projects.\nBeautiful practical components, community first, full source code control via CLI.\nshadcn style copy components into your project kl new kl install."
+  },
+  {
+    "id": "getting-started/installation",
+    "title": "Installation",
+    "category": "Getting Started",
+    "route": "getting-started/installation",
+    "content": "Koala UI – Get Started Koala UI is an Angular component library inspired by shadcn/ui. Components are installed directly into your project via the Koala CLI , giving you full control over the source code. 1. Install the CLI 2. Create a new project 3. Add components 4. Add resources (optional) Available components - Alert – - Bottom Sheet – - Breadcrumb – - Button – - Calendar – - Checkbox – - Collapse – - Combobox – - Confirm – - DataTable – - Dropdown – - Fieldset – - Inline Filter – - Input CNPJ – - Input CPF – - Input Currency – - Input Field – - Loading – - Login – - Modal – - Pagination – - Radio – - Range – - Select – - Side Window – - Skeleton – - Stepper – - Table – - Tabs – - Textarea – - Toast – - Toggle – - Tooltip – - Validator – - List Base – - Http Base – - Page Base – - Global Errors – - Rules – - Auth –"
+  },
+  {
+    "id": "getting-started/installation#1-install-the-cli",
+    "title": "1. Install the CLI",
+    "category": "Getting Started",
+    "route": "getting-started/installation",
+    "fragment": "1-install-the-cli",
+    "content": ""
+  },
+  {
+    "id": "getting-started/installation#2-create-a-new-project",
+    "title": "2. Create a new project",
+    "category": "Getting Started",
+    "route": "getting-started/installation",
+    "fragment": "2-create-a-new-project",
+    "content": ""
+  },
+  {
+    "id": "getting-started/installation#3-add-components",
+    "title": "3. Add components",
+    "category": "Getting Started",
+    "route": "getting-started/installation",
+    "fragment": "3-add-components",
+    "content": ""
+  },
+  {
+    "id": "getting-started/installation#4-add-resources-optional",
+    "title": "4. Add resources (optional)",
+    "category": "Getting Started",
+    "route": "getting-started/installation",
+    "fragment": "4-add-resources-optional",
+    "content": ""
+  },
+  {
+    "id": "getting-started/installation#available-components",
+    "title": "Available components",
+    "category": "Getting Started",
+    "route": "getting-started/installation",
+    "fragment": "available-components",
+    "content": "- Alert – - Bottom Sheet – - Breadcrumb – - Button – - Calendar – - Checkbox – - Collapse – - Combobox – - Confirm – - DataTable – - Dropdown – - Fieldset – - Inline Filter – - Input CNPJ – - Input CPF – - Input Currency – - Input Field – - Loading – - Login – - Modal – - Pagination – - Radio – - Range – - Select – - Side Window – - Skeleton – - Stepper – - Table – - Tabs – - Textarea – - Toast – - Toggle – - Tooltip – - Validator – - List Base – - Http Base – - Page Base – - Global Errors – - Rules – - Auth –"
+  },
+  {
+    "id": "components/alert",
+    "title": "Alert",
+    "category": "Components",
+    "route": "components/alert",
+    "content": "Alert Installation HTML TypeScript"
+  },
+  {
+    "id": "components/alert#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/alert",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/alert#html",
+    "title": "HTML",
+    "category": "Components",
+    "route": "components/alert",
+    "fragment": "html",
+    "content": ""
+  },
+  {
+    "id": "components/alert#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/alert",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/bottom-sheet",
+    "title": "Bottom Sheet",
+    "category": "Components",
+    "route": "components/bottom-sheet",
+    "content": "Bottom Sheet Installation Close Corner Sample Trigger Trigger Close Corner"
+  },
+  {
+    "id": "components/bottom-sheet#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/bottom-sheet",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/bottom-sheet#close-corner",
+    "title": "Close Corner",
+    "category": "Components",
+    "route": "components/bottom-sheet",
+    "fragment": "close-corner",
+    "content": ""
+  },
+  {
+    "id": "components/bottom-sheet#sample",
+    "title": "Sample",
+    "category": "Components",
+    "route": "components/bottom-sheet",
+    "fragment": "sample",
+    "content": ""
+  },
+  {
+    "id": "components/bottom-sheet#trigger",
+    "title": "Trigger",
+    "category": "Components",
+    "route": "components/bottom-sheet",
+    "fragment": "trigger",
+    "content": ""
+  },
+  {
+    "id": "components/bottom-sheet#trigger-close-corner",
+    "title": "Trigger Close Corner",
+    "category": "Components",
+    "route": "components/bottom-sheet",
+    "fragment": "trigger-close-corner",
+    "content": ""
+  },
+  {
+    "id": "components/breadcrumb",
+    "title": "Breadcrumb",
+    "category": "Components",
+    "route": "components/breadcrumb",
+    "content": "Breadcrumb Installation HTML TypeScript"
+  },
+  {
+    "id": "components/breadcrumb#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/breadcrumb",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/breadcrumb#html",
+    "title": "HTML",
+    "category": "Components",
+    "route": "components/breadcrumb",
+    "fragment": "html",
+    "content": ""
+  },
+  {
+    "id": "components/breadcrumb#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/breadcrumb",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/button",
+    "title": "Button",
+    "category": "Components",
+    "route": "components/button",
+    "content": "Button Installation Circle Dash Disabled Outline Sizes Soft Variants TypeScript"
+  },
+  {
+    "id": "components/button#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/button",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/button#circle",
+    "title": "Circle",
+    "category": "Components",
+    "route": "components/button",
+    "fragment": "circle",
+    "content": ""
+  },
+  {
+    "id": "components/button#dash",
+    "title": "Dash",
+    "category": "Components",
+    "route": "components/button",
+    "fragment": "dash",
+    "content": ""
+  },
+  {
+    "id": "components/button#disabled",
+    "title": "Disabled",
+    "category": "Components",
+    "route": "components/button",
+    "fragment": "disabled",
+    "content": ""
+  },
+  {
+    "id": "components/button#outline",
+    "title": "Outline",
+    "category": "Components",
+    "route": "components/button",
+    "fragment": "outline",
+    "content": ""
+  },
+  {
+    "id": "components/button#sizes",
+    "title": "Sizes",
+    "category": "Components",
+    "route": "components/button",
+    "fragment": "sizes",
+    "content": ""
+  },
+  {
+    "id": "components/button#soft",
+    "title": "Soft",
+    "category": "Components",
+    "route": "components/button",
+    "fragment": "soft",
+    "content": ""
+  },
+  {
+    "id": "components/button#variants",
+    "title": "Variants",
+    "category": "Components",
+    "route": "components/button",
+    "fragment": "variants",
+    "content": ""
+  },
+  {
+    "id": "components/button#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/button",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/calendar",
+    "title": "Calendar",
+    "category": "Components",
+    "route": "components/calendar",
+    "content": "Calendar Installation HTML Input Calendar TypeScript"
+  },
+  {
+    "id": "components/calendar#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/calendar",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/calendar#html",
+    "title": "HTML",
+    "category": "Components",
+    "route": "components/calendar",
+    "fragment": "html",
+    "content": ""
+  },
+  {
+    "id": "components/calendar#input-calendar",
+    "title": "Input Calendar",
+    "category": "Components",
+    "route": "components/calendar",
+    "fragment": "input-calendar",
+    "content": ""
+  },
+  {
+    "id": "components/calendar#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/calendar",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/checkbox",
+    "title": "Checkbox",
+    "category": "Components",
+    "route": "components/checkbox",
+    "content": "Checkbox Installation Disabled Sizes Variants TypeScript"
+  },
+  {
+    "id": "components/checkbox#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/checkbox",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/checkbox#disabled",
+    "title": "Disabled",
+    "category": "Components",
+    "route": "components/checkbox",
+    "fragment": "disabled",
+    "content": ""
+  },
+  {
+    "id": "components/checkbox#sizes",
+    "title": "Sizes",
+    "category": "Components",
+    "route": "components/checkbox",
+    "fragment": "sizes",
+    "content": ""
+  },
+  {
+    "id": "components/checkbox#variants",
+    "title": "Variants",
+    "category": "Components",
+    "route": "components/checkbox",
+    "fragment": "variants",
+    "content": ""
+  },
+  {
+    "id": "components/checkbox#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/checkbox",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/collapse",
+    "title": "Collapse",
+    "category": "Components",
+    "route": "components/collapse",
+    "content": "Collapse Installation Accordion HTML TypeScript"
+  },
+  {
+    "id": "components/collapse#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/collapse",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/collapse#accordion",
+    "title": "Accordion",
+    "category": "Components",
+    "route": "components/collapse",
+    "fragment": "accordion",
+    "content": ""
+  },
+  {
+    "id": "components/collapse#html",
+    "title": "HTML",
+    "category": "Components",
+    "route": "components/collapse",
+    "fragment": "html",
+    "content": ""
+  },
+  {
+    "id": "components/collapse#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/collapse",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/combobox",
+    "title": "Combobox",
+    "category": "Components",
+    "route": "components/combobox",
+    "content": "Combobox Installation Local Remote"
+  },
+  {
+    "id": "components/combobox#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/combobox",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/combobox#local",
+    "title": "Local",
+    "category": "Components",
+    "route": "components/combobox",
+    "fragment": "local",
+    "content": ""
+  },
+  {
+    "id": "components/combobox#remote",
+    "title": "Remote",
+    "category": "Components",
+    "route": "components/combobox",
+    "fragment": "remote",
+    "content": ""
+  },
+  {
+    "id": "components/confirm",
+    "title": "Confirm",
+    "category": "Components",
+    "route": "components/confirm",
+    "content": "Confirm Installation HTML TypeScript"
+  },
+  {
+    "id": "components/confirm#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/confirm",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/confirm#html",
+    "title": "HTML",
+    "category": "Components",
+    "route": "components/confirm",
+    "fragment": "html",
+    "content": ""
+  },
+  {
+    "id": "components/confirm#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/confirm",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "blocks/datatable",
+    "title": "DataTable",
+    "category": "Blocks",
+    "route": "blocks/datatable",
+    "content": "DataTable Installation HTML TypeScript"
+  },
+  {
+    "id": "blocks/datatable#installation",
+    "title": "Installation",
+    "category": "Blocks",
+    "route": "blocks/datatable",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "blocks/datatable#html",
+    "title": "HTML",
+    "category": "Blocks",
+    "route": "blocks/datatable",
+    "fragment": "html",
+    "content": ""
+  },
+  {
+    "id": "blocks/datatable#typescript",
+    "title": "TypeScript",
+    "category": "Blocks",
+    "route": "blocks/datatable",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/dropdown",
+    "title": "Dropdown",
+    "category": "Components",
+    "route": "components/dropdown",
+    "content": "Dropdown Installation Notifications Options Popover TypeScript"
+  },
+  {
+    "id": "components/dropdown#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/dropdown",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/dropdown#notifications",
+    "title": "Notifications",
+    "category": "Components",
+    "route": "components/dropdown",
+    "fragment": "notifications",
+    "content": ""
+  },
+  {
+    "id": "components/dropdown#options",
+    "title": "Options",
+    "category": "Components",
+    "route": "components/dropdown",
+    "fragment": "options",
+    "content": ""
+  },
+  {
+    "id": "components/dropdown#popover",
+    "title": "Popover",
+    "category": "Components",
+    "route": "components/dropdown",
+    "fragment": "popover",
+    "content": ""
+  },
+  {
+    "id": "components/dropdown#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/dropdown",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/fieldset",
+    "title": "Fieldset",
+    "category": "Components",
+    "route": "components/fieldset",
+    "content": "Fieldset Installation HTML Login Sample TypeScript"
+  },
+  {
+    "id": "components/fieldset#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/fieldset",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/fieldset#html",
+    "title": "HTML",
+    "category": "Components",
+    "route": "components/fieldset",
+    "fragment": "html",
+    "content": ""
+  },
+  {
+    "id": "components/fieldset#login-sample",
+    "title": "Login Sample",
+    "category": "Components",
+    "route": "components/fieldset",
+    "fragment": "login-sample",
+    "content": ""
+  },
+  {
+    "id": "components/fieldset#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/fieldset",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/inline-filter",
+    "title": "Inline Filter",
+    "category": "Components",
+    "route": "components/inline-filter",
+    "content": "Inline Filter Installation HTML TypeScript"
+  },
+  {
+    "id": "components/inline-filter#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/inline-filter",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/inline-filter#html",
+    "title": "HTML",
+    "category": "Components",
+    "route": "components/inline-filter",
+    "fragment": "html",
+    "content": ""
+  },
+  {
+    "id": "components/inline-filter#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/inline-filter",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/input-cnpj",
+    "title": "Input CNPJ",
+    "category": "Components",
+    "route": "components/input-cnpj",
+    "content": "Input CNPJ Installation HTML TypeScript"
+  },
+  {
+    "id": "components/input-cnpj#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/input-cnpj",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/input-cnpj#html",
+    "title": "HTML",
+    "category": "Components",
+    "route": "components/input-cnpj",
+    "fragment": "html",
+    "content": ""
+  },
+  {
+    "id": "components/input-cnpj#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/input-cnpj",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/input-cpf",
+    "title": "Input CPF",
+    "category": "Components",
+    "route": "components/input-cpf",
+    "content": "Input CPF Installation HTML TypeScript"
+  },
+  {
+    "id": "components/input-cpf#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/input-cpf",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/input-cpf#html",
+    "title": "HTML",
+    "category": "Components",
+    "route": "components/input-cpf",
+    "fragment": "html",
+    "content": ""
+  },
+  {
+    "id": "components/input-cpf#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/input-cpf",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/input-currency",
+    "title": "Input Currency",
+    "category": "Components",
+    "route": "components/input-currency",
+    "content": "Input Currency Installation HTML TypeScript"
+  },
+  {
+    "id": "components/input-currency#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/input-currency",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/input-currency#html",
+    "title": "HTML",
+    "category": "Components",
+    "route": "components/input-currency",
+    "fragment": "html",
+    "content": ""
+  },
+  {
+    "id": "components/input-currency#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/input-currency",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/input-field",
+    "title": "Input Field",
+    "category": "Components",
+    "route": "components/input-field",
+    "content": "Input Field Installation Sizes TypeScript"
+  },
+  {
+    "id": "components/input-field#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/input-field",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/input-field#sizes",
+    "title": "Sizes",
+    "category": "Components",
+    "route": "components/input-field",
+    "fragment": "sizes",
+    "content": ""
+  },
+  {
+    "id": "components/input-field#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/input-field",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/loading",
+    "title": "Loading",
+    "category": "Components",
+    "route": "components/loading",
+    "content": "Loading Installation Ball Bars Dots Infinity Ring Spinner TypeScript"
+  },
+  {
+    "id": "components/loading#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/loading",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/loading#ball",
+    "title": "Ball",
+    "category": "Components",
+    "route": "components/loading",
+    "fragment": "ball",
+    "content": ""
+  },
+  {
+    "id": "components/loading#bars",
+    "title": "Bars",
+    "category": "Components",
+    "route": "components/loading",
+    "fragment": "bars",
+    "content": ""
+  },
+  {
+    "id": "components/loading#dots",
+    "title": "Dots",
+    "category": "Components",
+    "route": "components/loading",
+    "fragment": "dots",
+    "content": ""
+  },
+  {
+    "id": "components/loading#infinity",
+    "title": "Infinity",
+    "category": "Components",
+    "route": "components/loading",
+    "fragment": "infinity",
+    "content": ""
+  },
+  {
+    "id": "components/loading#ring",
+    "title": "Ring",
+    "category": "Components",
+    "route": "components/loading",
+    "fragment": "ring",
+    "content": ""
+  },
+  {
+    "id": "components/loading#spinner",
+    "title": "Spinner",
+    "category": "Components",
+    "route": "components/loading",
+    "fragment": "spinner",
+    "content": ""
+  },
+  {
+    "id": "components/loading#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/loading",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "blocks/login",
+    "title": "Login",
+    "category": "Blocks",
+    "route": "blocks/login",
+    "content": "Login Installation Logged Sample Form"
+  },
+  {
+    "id": "blocks/login#installation",
+    "title": "Installation",
+    "category": "Blocks",
+    "route": "blocks/login",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "blocks/login#logged-sample",
+    "title": "Logged Sample",
+    "category": "Blocks",
+    "route": "blocks/login",
+    "fragment": "logged-sample",
+    "content": ""
+  },
+  {
+    "id": "blocks/login#form",
+    "title": "Form",
+    "category": "Blocks",
+    "route": "blocks/login",
+    "fragment": "form",
+    "content": ""
+  },
+  {
+    "id": "components/modal",
+    "title": "Modal",
+    "category": "Components",
+    "route": "components/modal",
+    "content": "Modal Installation Dialog Alert Dialog Close Corner Dialog Custom Width Dialog Trigger Trigger Custom Width Trigger Dialog Alert Trigger Dialog Close Corner Trigger Dialog"
+  },
+  {
+    "id": "components/modal#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/modal",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/modal#dialog-alert",
+    "title": "Dialog Alert",
+    "category": "Components",
+    "route": "components/modal",
+    "fragment": "dialog-alert",
+    "content": ""
+  },
+  {
+    "id": "components/modal#dialog-close-corner",
+    "title": "Dialog Close Corner",
+    "category": "Components",
+    "route": "components/modal",
+    "fragment": "dialog-close-corner",
+    "content": ""
+  },
+  {
+    "id": "components/modal#dialog-custom-width",
+    "title": "Dialog Custom Width",
+    "category": "Components",
+    "route": "components/modal",
+    "fragment": "dialog-custom-width",
+    "content": ""
+  },
+  {
+    "id": "components/modal#dialog",
+    "title": "Dialog",
+    "category": "Components",
+    "route": "components/modal",
+    "fragment": "dialog",
+    "content": ""
+  },
+  {
+    "id": "components/modal#trigger",
+    "title": "Trigger",
+    "category": "Components",
+    "route": "components/modal",
+    "fragment": "trigger",
+    "content": ""
+  },
+  {
+    "id": "components/modal#trigger-custom-width",
+    "title": "Trigger Custom Width",
+    "category": "Components",
+    "route": "components/modal",
+    "fragment": "trigger-custom-width",
+    "content": ""
+  },
+  {
+    "id": "components/modal#trigger-dialog-alert",
+    "title": "Trigger Dialog Alert",
+    "category": "Components",
+    "route": "components/modal",
+    "fragment": "trigger-dialog-alert",
+    "content": ""
+  },
+  {
+    "id": "components/modal#trigger-dialog-close-corner",
+    "title": "Trigger Dialog Close Corner",
+    "category": "Components",
+    "route": "components/modal",
+    "fragment": "trigger-dialog-close-corner",
+    "content": ""
+  },
+  {
+    "id": "components/modal#trigger-dialog",
+    "title": "Trigger Dialog",
+    "category": "Components",
+    "route": "components/modal",
+    "fragment": "trigger-dialog",
+    "content": ""
+  },
+  {
+    "id": "components/pagination",
+    "title": "Pagination",
+    "category": "Components",
+    "route": "components/pagination",
+    "content": "Pagination Installation HTML TypeScript"
+  },
+  {
+    "id": "components/pagination#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/pagination",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/pagination#html",
+    "title": "HTML",
+    "category": "Components",
+    "route": "components/pagination",
+    "fragment": "html",
+    "content": ""
+  },
+  {
+    "id": "components/pagination#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/pagination",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/radio",
+    "title": "Radio",
+    "category": "Components",
+    "route": "components/radio",
+    "content": "Radio Installation Disabled Sizes Variants TypeScript"
+  },
+  {
+    "id": "components/radio#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/radio",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/radio#disabled",
+    "title": "Disabled",
+    "category": "Components",
+    "route": "components/radio",
+    "fragment": "disabled",
+    "content": ""
+  },
+  {
+    "id": "components/radio#sizes",
+    "title": "Sizes",
+    "category": "Components",
+    "route": "components/radio",
+    "fragment": "sizes",
+    "content": ""
+  },
+  {
+    "id": "components/radio#variants",
+    "title": "Variants",
+    "category": "Components",
+    "route": "components/radio",
+    "fragment": "variants",
+    "content": ""
+  },
+  {
+    "id": "components/radio#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/radio",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/range",
+    "title": "Range",
+    "category": "Components",
+    "route": "components/range",
+    "content": "Range Installation Disabled Sizes Variants TypeScript"
+  },
+  {
+    "id": "components/range#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/range",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/range#disabled",
+    "title": "Disabled",
+    "category": "Components",
+    "route": "components/range",
+    "fragment": "disabled",
+    "content": ""
+  },
+  {
+    "id": "components/range#sizes",
+    "title": "Sizes",
+    "category": "Components",
+    "route": "components/range",
+    "fragment": "sizes",
+    "content": ""
+  },
+  {
+    "id": "components/range#variants",
+    "title": "Variants",
+    "category": "Components",
+    "route": "components/range",
+    "fragment": "variants",
+    "content": ""
+  },
+  {
+    "id": "components/range#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/range",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/select",
+    "title": "Select",
+    "category": "Components",
+    "route": "components/select",
+    "content": "Select Installation Disabled Multiple Single Sizes TypeScript"
+  },
+  {
+    "id": "components/select#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/select",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/select#disabled",
+    "title": "Disabled",
+    "category": "Components",
+    "route": "components/select",
+    "fragment": "disabled",
+    "content": ""
+  },
+  {
+    "id": "components/select#multiple",
+    "title": "Multiple",
+    "category": "Components",
+    "route": "components/select",
+    "fragment": "multiple",
+    "content": ""
+  },
+  {
+    "id": "components/select#single",
+    "title": "Single",
+    "category": "Components",
+    "route": "components/select",
+    "fragment": "single",
+    "content": ""
+  },
+  {
+    "id": "components/select#sizes",
+    "title": "Sizes",
+    "category": "Components",
+    "route": "components/select",
+    "fragment": "sizes",
+    "content": ""
+  },
+  {
+    "id": "components/select#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/select",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/side-window",
+    "title": "Side Window",
+    "category": "Components",
+    "route": "components/side-window",
+    "content": "Side Window Installation Close Corner Sample Trigger Trigger Close Corner"
+  },
+  {
+    "id": "components/side-window#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/side-window",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/side-window#close-corner",
+    "title": "Close Corner",
+    "category": "Components",
+    "route": "components/side-window",
+    "fragment": "close-corner",
+    "content": ""
+  },
+  {
+    "id": "components/side-window#sample",
+    "title": "Sample",
+    "category": "Components",
+    "route": "components/side-window",
+    "fragment": "sample",
+    "content": ""
+  },
+  {
+    "id": "components/side-window#trigger",
+    "title": "Trigger",
+    "category": "Components",
+    "route": "components/side-window",
+    "fragment": "trigger",
+    "content": ""
+  },
+  {
+    "id": "components/side-window#trigger-close-corner",
+    "title": "Trigger Close Corner",
+    "category": "Components",
+    "route": "components/side-window",
+    "fragment": "trigger-close-corner",
+    "content": ""
+  },
+  {
+    "id": "components/skeleton",
+    "title": "Skeleton",
+    "category": "Components",
+    "route": "components/skeleton",
+    "content": "Skeleton Installation Circle Composition Rect Text TypeScript"
+  },
+  {
+    "id": "components/skeleton#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/skeleton",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/skeleton#circle",
+    "title": "Circle",
+    "category": "Components",
+    "route": "components/skeleton",
+    "fragment": "circle",
+    "content": ""
+  },
+  {
+    "id": "components/skeleton#composition",
+    "title": "Composition",
+    "category": "Components",
+    "route": "components/skeleton",
+    "fragment": "composition",
+    "content": ""
+  },
+  {
+    "id": "components/skeleton#rect",
+    "title": "Rect",
+    "category": "Components",
+    "route": "components/skeleton",
+    "fragment": "rect",
+    "content": ""
+  },
+  {
+    "id": "components/skeleton#text",
+    "title": "Text",
+    "category": "Components",
+    "route": "components/skeleton",
+    "fragment": "text",
+    "content": ""
+  },
+  {
+    "id": "components/skeleton#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/skeleton",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/stepper",
+    "title": "Stepper",
+    "category": "Components",
+    "route": "components/stepper",
+    "content": "Stepper Installation HTML TypeScript"
+  },
+  {
+    "id": "components/stepper#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/stepper",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/stepper#html",
+    "title": "HTML",
+    "category": "Components",
+    "route": "components/stepper",
+    "fragment": "html",
+    "content": ""
+  },
+  {
+    "id": "components/stepper#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/stepper",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/table",
+    "title": "Table",
+    "category": "Components",
+    "route": "components/table",
+    "content": "Table Installation Ordered Pin Header Zebra HTML TypeScript"
+  },
+  {
+    "id": "components/table#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/table",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/table#ordered",
+    "title": "Ordered",
+    "category": "Components",
+    "route": "components/table",
+    "fragment": "ordered",
+    "content": ""
+  },
+  {
+    "id": "components/table#pin-header",
+    "title": "Pin Header",
+    "category": "Components",
+    "route": "components/table",
+    "fragment": "pin-header",
+    "content": ""
+  },
+  {
+    "id": "components/table#zebra",
+    "title": "Zebra",
+    "category": "Components",
+    "route": "components/table",
+    "fragment": "zebra",
+    "content": ""
+  },
+  {
+    "id": "components/table#html",
+    "title": "HTML",
+    "category": "Components",
+    "route": "components/table",
+    "fragment": "html",
+    "content": ""
+  },
+  {
+    "id": "components/table#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/table",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/tabs",
+    "title": "Tabs",
+    "category": "Components",
+    "route": "components/tabs",
+    "content": "Tabs Installation HTML TypeScript"
+  },
+  {
+    "id": "components/tabs#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/tabs",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/tabs#html",
+    "title": "HTML",
+    "category": "Components",
+    "route": "components/tabs",
+    "fragment": "html",
+    "content": ""
+  },
+  {
+    "id": "components/tabs#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/tabs",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/textarea",
+    "title": "Textarea",
+    "category": "Components",
+    "route": "components/textarea",
+    "content": "Textarea Installation Sizes TypeScript"
+  },
+  {
+    "id": "components/textarea#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/textarea",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/textarea#sizes",
+    "title": "Sizes",
+    "category": "Components",
+    "route": "components/textarea",
+    "fragment": "sizes",
+    "content": ""
+  },
+  {
+    "id": "components/textarea#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/textarea",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/toast",
+    "title": "Toast",
+    "category": "Components",
+    "route": "components/toast",
+    "content": "Toast Installation HTML TypeScript"
+  },
+  {
+    "id": "components/toast#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/toast",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/toast#html",
+    "title": "HTML",
+    "category": "Components",
+    "route": "components/toast",
+    "fragment": "html",
+    "content": ""
+  },
+  {
+    "id": "components/toast#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/toast",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/toggle",
+    "title": "Toggle",
+    "category": "Components",
+    "route": "components/toggle",
+    "content": "Toggle Installation Disabled Sizes Variants TypeScript"
+  },
+  {
+    "id": "components/toggle#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/toggle",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/toggle#disabled",
+    "title": "Disabled",
+    "category": "Components",
+    "route": "components/toggle",
+    "fragment": "disabled",
+    "content": ""
+  },
+  {
+    "id": "components/toggle#sizes",
+    "title": "Sizes",
+    "category": "Components",
+    "route": "components/toggle",
+    "fragment": "sizes",
+    "content": ""
+  },
+  {
+    "id": "components/toggle#variants",
+    "title": "Variants",
+    "category": "Components",
+    "route": "components/toggle",
+    "fragment": "variants",
+    "content": ""
+  },
+  {
+    "id": "components/toggle#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/toggle",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/tooltip",
+    "title": "Tooltip",
+    "category": "Components",
+    "route": "components/tooltip",
+    "content": "Tooltip Installation Positions Variants TypeScript"
+  },
+  {
+    "id": "components/tooltip#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/tooltip",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/tooltip#positions",
+    "title": "Positions",
+    "category": "Components",
+    "route": "components/tooltip",
+    "fragment": "positions",
+    "content": ""
+  },
+  {
+    "id": "components/tooltip#variants",
+    "title": "Variants",
+    "category": "Components",
+    "route": "components/tooltip",
+    "fragment": "variants",
+    "content": ""
+  },
+  {
+    "id": "components/tooltip#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/tooltip",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "components/validator",
+    "title": "Validator",
+    "category": "Components",
+    "route": "components/validator",
+    "content": "Validator Installation HTML TypeScript"
+  },
+  {
+    "id": "components/validator#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/validator",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/validator#html",
+    "title": "HTML",
+    "category": "Components",
+    "route": "components/validator",
+    "fragment": "html",
+    "content": ""
+  },
+  {
+    "id": "components/validator#typescript",
+    "title": "TypeScript",
+    "category": "Components",
+    "route": "components/validator",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "resources/list-base",
+    "title": "List Base",
+    "category": "Resources",
+    "route": "resources/list-base",
+    "content": "List Base Installation Md ListBase is an abstraction resource for datatable lists, providing a default structure and functionalities for listing data. It serves as a base component that can be extended to create specific list implementations, such as user lists, product lists, etc. API Attributes - currentPage : Signal that holds the current page number (pagination). - pageSize : Signal that holds the number of items per page. - totalItems : Signal that holds the total number of items. - orderedBy : Signal that holds the ordering criteria. - filter : Signal that holds the applied filter. - skeletonItems : Computed signal for displaying placeholders while loading. - defaultList : Default response for use in datalist. - filterPayload : Payload for filters. - filterParams : Parameters for filters. - datalist : Abstract reference to the data resource. - reload : Signal to reload the list. Methods - reloadList : Triggers list reload. Filter Definitions Define filters in the constructor of the class that extends ListBase. Usage See usage examples in the Database Block."
+  },
+  {
+    "id": "resources/list-base#installation",
+    "title": "Installation",
+    "category": "Resources",
+    "route": "resources/list-base",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "resources/list-base#md",
+    "title": "Md",
+    "category": "Resources",
+    "route": "resources/list-base",
+    "fragment": "md",
+    "content": "ListBase is an abstraction resource for datatable lists, providing a default structure and functionalities for listing data. It serves as a base component that can be extended to create specific list implementations, such as user lists, product lists, etc."
+  },
+  {
+    "id": "resources/list-base#api",
+    "title": "API",
+    "category": "Resources",
+    "route": "resources/list-base",
+    "fragment": "api",
+    "content": ""
+  },
+  {
+    "id": "resources/list-base#attributes",
+    "title": "Attributes",
+    "category": "Resources",
+    "route": "resources/list-base",
+    "fragment": "attributes",
+    "content": "- currentPage : Signal that holds the current page number (pagination). - pageSize : Signal that holds the number of items per page. - totalItems : Signal that holds the total number of items. - orderedBy : Signal that holds the ordering criteria. - filter : Signal that holds the applied filter. - skeletonItems : Computed signal for displaying placeholders while loading. - defaultList : Default response for use in datalist. - filterPayload : Payload for filters. - filterParams : Parameters for filters. - datalist : Abstract reference to the data resource. - reload : Signal to reload the list."
+  },
+  {
+    "id": "resources/list-base#methods",
+    "title": "Methods",
+    "category": "Resources",
+    "route": "resources/list-base",
+    "fragment": "methods",
+    "content": "- reloadList : Triggers list reload."
+  },
+  {
+    "id": "resources/list-base#filter-definitions",
+    "title": "Filter Definitions",
+    "category": "Resources",
+    "route": "resources/list-base",
+    "fragment": "filter-definitions",
+    "content": "Define filters in the constructor of the class that extends ListBase."
+  },
+  {
+    "id": "resources/list-base#usage",
+    "title": "Usage",
+    "category": "Resources",
+    "route": "resources/list-base",
+    "fragment": "usage",
+    "content": "See usage examples in the Database Block."
+  },
+  {
+    "id": "resources/http-base",
+    "title": "Http Base",
+    "category": "Resources",
+    "route": "resources/http-base",
+    "content": "Http Base Installation TypeScript Overview HttpBase is an abstraction resource for HTTP services. It provides a default structure for REST calls, file downloads, and reactive data loading via . API Constructor - baseUrl : API base URL (e.g. ). - endpoint : Resource endpoint segment (e.g. ). Protected methods - url(resourcePath?) : Builds the full request URL. - get(queryParams?, resourcePath?) : HTTP GET. - post(data, resourcePath?) : HTTP POST. - put(data, resourcePath?) : HTTP PUT. - patch(data, resourcePath?) : HTTP PATCH. - delete(resourcePath?) : HTTP DELETE. - getFile(queryParams?, resourcePath?) : GET with response. - downloadFile(filename, resourcePath?, queryParams?) : Triggers a browser file download. - resource(options?, resourcePath?) : Returns an for reactive GET with optional . Usage Pair with Global Errors for automatic HTTP error feedback."
+  },
+  {
+    "id": "resources/http-base#installation",
+    "title": "Installation",
+    "category": "Resources",
+    "route": "resources/http-base",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "resources/http-base#typescript",
+    "title": "TypeScript",
+    "category": "Resources",
+    "route": "resources/http-base",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "resources/http-base#overview",
+    "title": "Overview",
+    "category": "Resources",
+    "route": "resources/http-base",
+    "fragment": "overview",
+    "content": "HttpBase is an abstraction resource for HTTP services. It provides a default structure for REST calls, file downloads, and reactive data loading via ."
+  },
+  {
+    "id": "resources/http-base#api",
+    "title": "API",
+    "category": "Resources",
+    "route": "resources/http-base",
+    "fragment": "api",
+    "content": ""
+  },
+  {
+    "id": "resources/http-base#constructor",
+    "title": "Constructor",
+    "category": "Resources",
+    "route": "resources/http-base",
+    "fragment": "constructor",
+    "content": "- baseUrl : API base URL (e.g. ). - endpoint : Resource endpoint segment (e.g. )."
+  },
+  {
+    "id": "resources/http-base#protected-methods",
+    "title": "Protected methods",
+    "category": "Resources",
+    "route": "resources/http-base",
+    "fragment": "protected-methods",
+    "content": "- url(resourcePath?) : Builds the full request URL. - get(queryParams?, resourcePath?) : HTTP GET. - post(data, resourcePath?) : HTTP POST. - put(data, resourcePath?) : HTTP PUT. - patch(data, resourcePath?) : HTTP PATCH. - delete(resourcePath?) : HTTP DELETE. - getFile(queryParams?, resourcePath?) : GET with response. - downloadFile(filename, resourcePath?, queryParams?) : Triggers a browser file download. - resource(options?, resourcePath?) : Returns an for reactive GET with optional ."
+  },
+  {
+    "id": "resources/http-base#usage",
+    "title": "Usage",
+    "category": "Resources",
+    "route": "resources/http-base",
+    "fragment": "usage",
+    "content": "Pair with Global Errors for automatic HTTP error feedback."
+  },
+  {
+    "id": "resources/page-base",
+    "title": "Page Base",
+    "category": "Resources",
+    "route": "resources/page-base",
+    "content": "Page Base Installation TypeScript Overview PageBase is an abstraction resource for page components. It provides breadcrumb navigation and a reload signal to refresh child lists or tables. API Signals - reload : Signal used to trigger a reload in child components. Methods - reloadList() : Sets to briefly so bound children can react. Properties - breadcrumbs : Computed breadcrumb trail from the current . Usage Use with the Breadcrumb component in your template."
+  },
+  {
+    "id": "resources/page-base#installation",
+    "title": "Installation",
+    "category": "Resources",
+    "route": "resources/page-base",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "resources/page-base#typescript",
+    "title": "TypeScript",
+    "category": "Resources",
+    "route": "resources/page-base",
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "resources/page-base#overview",
+    "title": "Overview",
+    "category": "Resources",
+    "route": "resources/page-base",
+    "fragment": "overview",
+    "content": "PageBase is an abstraction resource for page components. It provides breadcrumb navigation and a reload signal to refresh child lists or tables."
+  },
+  {
+    "id": "resources/page-base#api",
+    "title": "API",
+    "category": "Resources",
+    "route": "resources/page-base",
+    "fragment": "api",
+    "content": ""
+  },
+  {
+    "id": "resources/page-base#signals",
+    "title": "Signals",
+    "category": "Resources",
+    "route": "resources/page-base",
+    "fragment": "signals",
+    "content": "- reload : Signal used to trigger a reload in child components."
+  },
+  {
+    "id": "resources/page-base#methods",
+    "title": "Methods",
+    "category": "Resources",
+    "route": "resources/page-base",
+    "fragment": "methods",
+    "content": "- reloadList() : Sets to briefly so bound children can react."
+  },
+  {
+    "id": "resources/page-base#properties",
+    "title": "Properties",
+    "category": "Resources",
+    "route": "resources/page-base",
+    "fragment": "properties",
+    "content": "- breadcrumbs : Computed breadcrumb trail from the current ."
+  },
+  {
+    "id": "resources/page-base#usage",
+    "title": "Usage",
+    "category": "Resources",
+    "route": "resources/page-base",
+    "fragment": "usage",
+    "content": "Use with the Breadcrumb component in your template."
+  },
+  {
+    "id": "resources/global-errors",
+    "title": "Global Errors",
+    "category": "Resources",
+    "route": "resources/global-errors",
+    "content": "Global Errors Installation TypeScript After install, customize in to skip URLs or status codes your app handles locally. Overview Global Errors provides automatic HTTP error feedback via toast notifications. A global interceptor captures failed requests and displays user-friendly messages. Components FeedbackRequestInterceptor Angular HTTP interceptor that delegates errors to . HttpErrorFeedbackAlert Injectable service that shows toasts based on status code: - 4xx : warning toast - 5xx : error toast - other : info toast HttpErrorMiddleware - handleError(response) : Returns a sanitized message. - ignoreError(response) : Skips feedback for specific errors (e.g. 401). Customize after install. sanitizeErrorMessage Utility that extracts or maps error messages from . Setup Requires the Toast component and registration in (added automatically by )."
+  },
+  {
+    "id": "resources/global-errors#installation",
+    "title": "Installation",
+    "category": "Resources",
+    "route": "resources/global-errors",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "resources/global-errors#typescript",
+    "title": "TypeScript",
+    "category": "Resources",
+    "route": "resources/global-errors",
+    "fragment": "typescript",
+    "content": "After install, customize in to skip URLs or status codes your app handles locally."
+  },
+  {
+    "id": "resources/global-errors#overview",
+    "title": "Overview",
+    "category": "Resources",
+    "route": "resources/global-errors",
+    "fragment": "overview",
+    "content": "Global Errors provides automatic HTTP error feedback via toast notifications. A global interceptor captures failed requests and displays user-friendly messages."
+  },
+  {
+    "id": "resources/global-errors#components",
+    "title": "Components",
+    "category": "Resources",
+    "route": "resources/global-errors",
+    "fragment": "components",
+    "content": ""
+  },
+  {
+    "id": "resources/global-errors#feedbackrequestinterceptor",
+    "title": "FeedbackRequestInterceptor",
+    "category": "Resources",
+    "route": "resources/global-errors",
+    "fragment": "feedbackrequestinterceptor",
+    "content": "Angular HTTP interceptor that delegates errors to ."
+  },
+  {
+    "id": "resources/global-errors#httperrorfeedbackalert",
+    "title": "HttpErrorFeedbackAlert",
+    "category": "Resources",
+    "route": "resources/global-errors",
+    "fragment": "httperrorfeedbackalert",
+    "content": "Injectable service that shows toasts based on status code: - 4xx : warning toast - 5xx : error toast - other : info toast"
+  },
+  {
+    "id": "resources/global-errors#httperrormiddleware",
+    "title": "HttpErrorMiddleware",
+    "category": "Resources",
+    "route": "resources/global-errors",
+    "fragment": "httperrormiddleware",
+    "content": "- handleError(response) : Returns a sanitized message. - ignoreError(response) : Skips feedback for specific errors (e.g. 401). Customize after install."
+  },
+  {
+    "id": "resources/global-errors#sanitizeerrormessage",
+    "title": "sanitizeErrorMessage",
+    "category": "Resources",
+    "route": "resources/global-errors",
+    "fragment": "sanitizeerrormessage",
+    "content": "Utility that extracts or maps error messages from ."
+  },
+  {
+    "id": "resources/global-errors#setup",
+    "title": "Setup",
+    "category": "Resources",
+    "route": "resources/global-errors",
+    "fragment": "setup",
+    "content": "Requires the Toast component and registration in (added automatically by )."
+  },
+  {
+    "id": "resources/rules",
+    "title": "Rules",
+    "category": "Resources",
+    "route": "resources/rules",
+    "content": "Rules Installation Rules (route permissions) is installed together with Auth. It includes , , and . TypeScript The guard reads from route data and calls . Overview Rules provides route-level permission control. Routes registered with a are protected by , which checks the logged user's permissions. Installation Installed with Auth: API Types - RouteRule : Permission identifier. Redefine in (e.g. ). - RouteConfig : Route definition with optional , , and . - RouteData : Data attached to protected routes ( , , , ). Function - routesRegistre(routes) : Registers routes, applies when is set, and populates . Guard - RouteAccessGuard : Redirects to login when there is no token; otherwise waits for authentication and checks . Model - LoggedUser.hasPermission(rule) : Returns when the user has the required rule(s). Undefined rule allows access. Usage See the Auth resource and Login Block for a full authentication flow."
+  },
+  {
+    "id": "resources/rules#installation",
+    "title": "Installation",
+    "category": "Resources",
+    "route": "resources/rules",
+    "fragment": "installation",
+    "content": "Rules (route permissions) is installed together with Auth. It includes , , and ."
+  },
+  {
+    "id": "resources/rules#typescript",
+    "title": "TypeScript",
+    "category": "Resources",
+    "route": "resources/rules",
+    "fragment": "typescript",
+    "content": "The guard reads from route data and calls ."
+  },
+  {
+    "id": "resources/rules#overview",
+    "title": "Overview",
+    "category": "Resources",
+    "route": "resources/rules",
+    "fragment": "overview",
+    "content": "Rules provides route-level permission control. Routes registered with a are protected by , which checks the logged user's permissions."
+  },
+  {
+    "id": "resources/rules#installation",
+    "title": "Installation",
+    "category": "Resources",
+    "route": "resources/rules",
+    "fragment": "installation",
+    "content": "Installed with Auth:"
+  },
+  {
+    "id": "resources/rules#api",
+    "title": "API",
+    "category": "Resources",
+    "route": "resources/rules",
+    "fragment": "api",
+    "content": ""
+  },
+  {
+    "id": "resources/rules#types",
+    "title": "Types",
+    "category": "Resources",
+    "route": "resources/rules",
+    "fragment": "types",
+    "content": "- RouteRule : Permission identifier. Redefine in (e.g. ). - RouteConfig : Route definition with optional , , and . - RouteData : Data attached to protected routes ( , , , )."
+  },
+  {
+    "id": "resources/rules#function",
+    "title": "Function",
+    "category": "Resources",
+    "route": "resources/rules",
+    "fragment": "function",
+    "content": "- routesRegistre(routes) : Registers routes, applies when is set, and populates ."
+  },
+  {
+    "id": "resources/rules#guard",
+    "title": "Guard",
+    "category": "Resources",
+    "route": "resources/rules",
+    "fragment": "guard",
+    "content": "- RouteAccessGuard : Redirects to login when there is no token; otherwise waits for authentication and checks ."
+  },
+  {
+    "id": "resources/rules#model",
+    "title": "Model",
+    "category": "Resources",
+    "route": "resources/rules",
+    "fragment": "model",
+    "content": "- LoggedUser.hasPermission(rule) : Returns when the user has the required rule(s). Undefined rule allows access."
+  },
+  {
+    "id": "resources/rules#usage",
+    "title": "Usage",
+    "category": "Resources",
+    "route": "resources/rules",
+    "fragment": "usage",
+    "content": "See the Auth resource and Login Block for a full authentication flow."
+  },
+  {
+    "id": "resources/auth",
+    "title": "Auth",
+    "category": "Resources",
+    "route": "resources/auth",
+    "content": "Auth Installation Md This resource provides interceptor, guard and service for authentication in your application. It can be used to protect routes, manage user sessions, and handle authentication-related tasks. API Signals and Properties - loggedUser : Signal holding the currently authenticated user (or undefined). - event : Signal that emits authentication events (login, failure, loading, etc). - hasToken : Computed signal indicating if an access token is present. - accessToken : Getter for the current access token. - refreshToken : Getter for the current refresh token. - isAuthenticated : Computed signal indicating if a user is authenticated. Methods - auth(credentials: Credentials) : Performs login with the provided credentials. - logout() : Logs out, clearing tokens and user state. - updateToken() : Updates the access token using the refresh token. - isExpired() : Returns true if the access token is expired. Usage See usage examples in the Login Block."
+  },
+  {
+    "id": "resources/auth#installation",
+    "title": "Installation",
+    "category": "Resources",
+    "route": "resources/auth",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "resources/auth#md",
+    "title": "Md",
+    "category": "Resources",
+    "route": "resources/auth",
+    "fragment": "md",
+    "content": "This resource provides interceptor, guard and service for authentication in your application. It can be used to protect routes, manage user sessions, and handle authentication-related tasks."
+  },
+  {
+    "id": "resources/auth#api",
+    "title": "API",
+    "category": "Resources",
+    "route": "resources/auth",
+    "fragment": "api",
+    "content": ""
+  },
+  {
+    "id": "resources/auth#signals-and-properties",
+    "title": "Signals and Properties",
+    "category": "Resources",
+    "route": "resources/auth",
+    "fragment": "signals-and-properties",
+    "content": "- loggedUser : Signal holding the currently authenticated user (or undefined). - event : Signal that emits authentication events (login, failure, loading, etc). - hasToken : Computed signal indicating if an access token is present. - accessToken : Getter for the current access token. - refreshToken : Getter for the current refresh token. - isAuthenticated : Computed signal indicating if a user is authenticated."
+  },
+  {
+    "id": "resources/auth#methods",
+    "title": "Methods",
+    "category": "Resources",
+    "route": "resources/auth",
+    "fragment": "methods",
+    "content": "- auth(credentials: Credentials) : Performs login with the provided credentials. - logout() : Logs out, clearing tokens and user state. - updateToken() : Updates the access token using the refresh token. - isExpired() : Returns true if the access token is expired."
+  },
+  {
+    "id": "resources/auth#usage",
+    "title": "Usage",
+    "category": "Resources",
+    "route": "resources/auth",
+    "fragment": "usage",
+    "content": "See usage examples in the Login Block."
+  }
+]

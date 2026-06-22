@@ -45,6 +45,9 @@ export const InstallComponentFlagsList = [
   'combobox',
   'inline-filter',
   'list-base',
+  'http-base',
+  'page-base',
+  'global-errors',
   'auth',
   'bottom-sheet',
 ] as const;
@@ -163,6 +166,23 @@ export function installComponent(projectName: string, component: InstallComponen
     case 'list-base':
       baseDeps.push('list');
       componentDeps.push('table');
+      break;
+    case 'http-base':
+      baseDeps.push('http');
+      utilDeps.push('download-buffer-file', 'mime-type-by-extension');
+      break;
+    case 'page-base':
+      baseDeps.push('page');
+      utilDeps.push('make-breadcrumb');
+      break;
+    case 'global-errors':
+      coreResourceDeps.push(
+        'interceptors/feedback-request-interceptor',
+        'middlewares/http-errors.midleware',
+        'utils/http-error-feedback-alert',
+        'utils/sanitize-error-message',
+      );
+      componentDeps.push('toast');
       break;
     case 'auth':
       libDeps.push('jwt-decode');

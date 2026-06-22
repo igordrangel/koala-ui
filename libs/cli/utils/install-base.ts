@@ -4,7 +4,7 @@ import { getProjectPath } from './project-path';
 
 const originPath = path.join(__dirname, '../../');
 
-export const InstallBaseFlagsList = ['list'] as const;
+export const InstallBaseFlagsList = ['list', 'http', 'page'] as const;
 export type InstallBaseFlags = (typeof InstallBaseFlagsList)[number];
 
 export function installBase(projectName: string, base: InstallBaseFlags) {

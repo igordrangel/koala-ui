@@ -6,6 +6,7 @@
  *   libs/ui/public/llms.txt         – index following the llms.txt spec
  *   libs/ui/public/llms-full.txt    – all docs concatenated (for context-window ingestion)
  *   libs/ui/public/docs/<name>.md   – one file per component / page
+ *   libs/ui/public/search-index.json – full-text search index for the docs site
  */
 
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -106,6 +107,10 @@ const COMPONENTS = [
 
   // resources
   { name: 'list-base', label: 'List Base' },
+  { name: 'http-base', label: 'Http Base' },
+  { name: 'page-base', label: 'Page Base' },
+  { name: 'global-errors', label: 'Global Errors' },
+  { name: 'rules', label: 'Rules' },
   { name: 'auth', label: 'Auth' },
 ];
 
@@ -301,5 +306,149 @@ const llmsFullTxt = `# Koala UI – Full Documentation\n\n` + allDocs.join('\n\n
 
 writeFileSync(join(UI_ROOT, 'public', 'llms-full.txt'), llmsFullTxt, 'utf8');
 console.log('  ✓ llms-full.txt');
+
+// ---------------------------------------------------------------------------
+// search-index.json  (docs site full-text search)
+// ---------------------------------------------------------------------------
+
+function slugify(title) {
+  return title
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-');
+}
+
+function stripMarkdown(text) {
+  return text
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/`[^`]+`/g, ' ')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/[#*_~>|]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function getCategoryForDoc(name) {
+  const resources = ['list-base', 'http-base', 'page-base', 'global-errors', 'rules', 'auth'];
+  const blocks = ['datatable', 'login'];
+  if (resources.includes(name)) return 'Resources';
+  if (blocks.includes(name)) return 'Blocks';
+  return 'Components';
+}
+
+function getRouteForDoc(name) {
+  const resources = ['list-base', 'http-base', 'page-base', 'global-errors', 'rules', 'auth'];
+  const blocks = ['datatable', 'login'];
+  if (resources.includes(name)) return `resources/${name}`;
+  if (blocks.includes(name)) return `blocks/${name}`;
+  return `components/${name}`;
+}
+
+function extractSections(markdown) {
+  const sections = [];
+  const lines = markdown.split('\n');
+  let currentHeading = null;
+  let currentContent = [];
+
+  for (const line of lines) {
+    const headingMatch = line.match(/^#{2,3}\s+(.+)$/);
+    if (headingMatch) {
+      if (currentHeading) {
+        sections.push({ title: currentHeading, content: currentContent.join('\n') });
+      }
+      currentHeading = headingMatch[1].trim();
+      currentContent = [];
+    } else if (currentHeading) {
+      currentContent.push(line);
+    }
+  }
+
+  if (currentHeading) {
+    sections.push({ title: currentHeading, content: currentContent.join('\n') });
+  }
+
+  return sections;
+}
+
+function buildSearchEntriesForDoc(component, markdown) {
+  const { name, label } = component;
+  const route = getRouteForDoc(name);
+  const category = getCategoryForDoc(name);
+  const entries = [];
+
+  entries.push({
+    id: route,
+    title: label,
+    category,
+    route,
+    content: stripMarkdown(markdown),
+  });
+
+  for (const section of extractSections(markdown)) {
+    const fragment = slugify(section.title);
+    entries.push({
+      id: `${route}#${fragment}`,
+      title: section.title,
+      category,
+      route,
+      fragment,
+      content: stripMarkdown(section.content),
+    });
+  }
+
+  return entries;
+}
+
+const INTRODUCTION_CONTENT = `
+Welcome to the Koala UI documentation. Component library for Angular projects.
+Beautiful practical components, community first, full source code control via CLI.
+shadcn style copy components into your project kl new kl install.
+`.trim();
+
+const searchEntries = [
+  {
+    id: 'getting-started/introduction',
+    title: 'Introduction',
+    category: 'Getting Started',
+    route: 'getting-started/introduction',
+    content: INTRODUCTION_CONTENT,
+  },
+];
+
+const getStartedMarkdown = readFileSync(join(DOCS_OUT_DIR, 'get-started.md'), 'utf8').trim();
+
+searchEntries.push({
+  id: 'getting-started/installation',
+  title: 'Installation',
+  category: 'Getting Started',
+  route: 'getting-started/installation',
+  content: stripMarkdown(getStartedMarkdown),
+});
+
+for (const section of extractSections(getStartedMarkdown)) {
+  const fragment = slugify(section.title);
+  searchEntries.push({
+    id: `getting-started/installation#${fragment}`,
+    title: section.title,
+    category: 'Getting Started',
+    route: 'getting-started/installation',
+    fragment,
+    content: stripMarkdown(section.content),
+  });
+}
+
+for (const component of COMPONENTS) {
+  if (component.isPage) continue;
+
+  const markdown = readFileSync(join(DOCS_OUT_DIR, `${component.name}.md`), 'utf8').trim();
+  searchEntries.push(...buildSearchEntriesForDoc(component, markdown));
+}
+
+writeFileSync(
+  join(UI_ROOT, 'public', 'search-index.json'),
+  JSON.stringify(searchEntries, null, 2) + '\n',
+  'utf8',
+);
+console.log(`  ✓ search-index.json (${searchEntries.length} entries)`);
 
 console.log('\nDone! Generated', generated.length, 'component docs.');

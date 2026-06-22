@@ -4,13 +4,14 @@ import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { APP_VERSION } from '../../constants/app-version';
+import { DocSearch } from '../doc-search';
 import { GithubStars } from '../github-starts/github-stars';
 import { NavMenu } from '../nav-menu';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.html',
-  imports: [CommonModule, GithubStars, Button, RouterLink, RouterLinkActive, Tooltip, NavMenu],
+  imports: [CommonModule, DocSearch, GithubStars, Button, RouterLink, RouterLinkActive, Tooltip, NavMenu],
 })
 export class Header {
   readonly copied = signal(false);
