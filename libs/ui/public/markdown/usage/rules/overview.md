@@ -1,13 +1,5 @@
 Rules provides route-level permission control. Routes registered with a `rule` are protected by `RouteAccessGuard`, which checks the logged user's permissions.
 
-## Installation
-
-Installed with Auth:
-
-```bash
-kl install auth
-```
-
 ## API
 
 ### Types

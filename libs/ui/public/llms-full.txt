@@ -4464,14 +4464,6 @@ The guard reads `rule` from route data and calls `loggedUser.hasPermission(rule)
 
 Rules provides route-level permission control. Routes registered with a `rule` are protected by `RouteAccessGuard`, which checks the logged user's permissions.
 
-## Installation
-
-Installed with Auth:
-
-```bash
-kl install auth
-```
-
 ## API
 
 ### Types

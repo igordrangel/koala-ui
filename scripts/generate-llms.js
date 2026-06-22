@@ -370,7 +370,23 @@ function extractSections(markdown) {
   return sections;
 }
 
-function buildSearchEntriesForDoc(component, markdown) {
+function uniqueSectionId(route, title, usedIds) {
+  const baseFragment = slugify(title);
+  let fragment = baseFragment;
+  let id = `${route}#${fragment}`;
+  let counter = 2;
+
+  while (usedIds.has(id)) {
+    fragment = `${baseFragment}-${counter}`;
+    id = `${route}#${fragment}`;
+    counter++;
+  }
+
+  usedIds.add(id);
+  return { id, fragment };
+}
+
+function buildSearchEntriesForDoc(component, markdown, usedIds) {
   const { name, label } = component;
   const route = getRouteForDoc(name);
   const category = getCategoryForDoc(name);
@@ -383,11 +399,12 @@ function buildSearchEntriesForDoc(component, markdown) {
     route,
     content: stripMarkdown(markdown),
   });
+  usedIds.add(route);
 
   for (const section of extractSections(markdown)) {
-    const fragment = slugify(section.title);
+    const { id, fragment } = uniqueSectionId(route, section.title, usedIds);
     entries.push({
-      id: `${route}#${fragment}`,
+      id,
       title: section.title,
       category,
       route,
@@ -414,6 +431,7 @@ const searchEntries = [
     content: INTRODUCTION_CONTENT,
   },
 ];
+const usedSearchIds = new Set(['getting-started/introduction']);
 
 const getStartedMarkdown = readFileSync(join(DOCS_OUT_DIR, 'get-started.md'), 'utf8').trim();
 
@@ -424,11 +442,12 @@ searchEntries.push({
   route: 'getting-started/installation',
   content: stripMarkdown(getStartedMarkdown),
 });
+usedSearchIds.add('getting-started/installation');
 
 for (const section of extractSections(getStartedMarkdown)) {
-  const fragment = slugify(section.title);
+  const { id, fragment } = uniqueSectionId('getting-started/installation', section.title, usedSearchIds);
   searchEntries.push({
-    id: `getting-started/installation#${fragment}`,
+    id,
     title: section.title,
     category: 'Getting Started',
     route: 'getting-started/installation',
@@ -441,7 +460,7 @@ for (const component of COMPONENTS) {
   if (component.isPage) continue;
 
   const markdown = readFileSync(join(DOCS_OUT_DIR, `${component.name}.md`), 'utf8').trim();
-  searchEntries.push(...buildSearchEntriesForDoc(component, markdown));
+  searchEntries.push(...buildSearchEntriesForDoc(component, markdown, usedSearchIds));
 }
 
 writeFileSync(
