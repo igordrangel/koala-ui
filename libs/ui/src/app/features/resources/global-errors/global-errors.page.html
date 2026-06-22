@@ -1,0 +1,66 @@
+<app-section-container>
+  <ng-container title>Global Errors</ng-container>
+  <ng-container description>
+    Global Errors provides automatic HTTP error feedback via toast notifications. A global
+    interceptor captures failed requests and displays user-friendly messages.
+  </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description>
+      Use the Koala CLI to add Global Errors to your project (includes Toast and app.config setup).
+    </ng-container>
+    <app-code-viewer language="bash" name="kl" src="markdown/install/global-errors-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>API</ng-container>
+
+    <h3 class="mt-4 mb-2 text-xl font-semibold">Interceptor</h3>
+    <ul>
+      <li class="list-disc ml-5">
+        <strong>FeedbackRequestInterceptor</strong>: Captures HTTP errors and delegates to
+        HttpErrorFeedbackAlert.
+      </li>
+    </ul>
+
+    <h3 class="mt-4 mb-2 text-xl font-semibold">Service</h3>
+    <ul>
+      <li class="list-disc ml-5">
+        <strong>HttpErrorFeedbackAlert.tapError()</strong>: Shows warning (4xx), error (5xx), or info
+        toasts.
+      </li>
+    </ul>
+
+    <h3 class="mt-4 mb-2 text-xl font-semibold">Middleware</h3>
+    <ul>
+      <li class="list-disc ml-5">
+        <strong>HttpErrorMiddleware.handleError()</strong>: Returns a sanitized message.
+      </li>
+      <li class="list-disc ml-5">
+        <strong>HttpErrorMiddleware.ignoreError()</strong>: Skips feedback for specific errors
+        (customize after install).
+      </li>
+    </ul>
+
+    <h3 class="mt-4 mb-2 text-xl font-semibold">Utility</h3>
+    <ul>
+      <li class="list-disc ml-5">
+        <strong>sanitizeErrorMessage()</strong>: Extracts or maps messages from HttpErrorResponse.
+      </li>
+    </ul>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Usage</ng-container>
+    <ng-container description>
+      Requires the
+      <a routerLink="/components/toast" class="underline text-blue-400">Toast</a> component.
+    </ng-container>
+    <app-code-viewer
+      language="typescript"
+      name="app.config.ts"
+      src="markdown/usage/global-errors/global-errors.ts.md"
+    />
+  </app-section-content>
+</app-section-container>

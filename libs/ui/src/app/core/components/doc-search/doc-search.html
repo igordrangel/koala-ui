@@ -1,0 +1,114 @@
+<button
+  type="button"
+  appButton
+  btnSize="sm"
+  btnVariant="ghost"
+  class="hidden sm:inline-flex items-center gap-2 border border-base-300 bg-base-100/50 hover:bg-base-200 text-base-content/70 min-w-44 justify-between"
+  (click)="toggle()"
+  aria-label="Search documentation"
+>
+  <span class="flex items-center gap-2">
+    <i class="fa-solid fa-magnifying-glass text-xs opacity-60"></i>
+    <span class="text-xs">Search docs…</span>
+  </span>
+  <kbd class="kbd kbd-xs hidden lg:inline-flex opacity-60">Ctrl+K</kbd>
+</button>
+
+<button
+  type="button"
+  appButton
+  btnSize="sm"
+  btnVariant="ghost"
+  class="sm:hidden"
+  (click)="toggle()"
+  aria-label="Search documentation"
+>
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+
+@if (open()) {
+  <div
+    class="fixed inset-0 z-50 flex items-start justify-center bg-black/50 p-4 pt-[12vh] sm:pt-[15vh]"
+    (click)="close()"
+  >
+    <div
+      class="w-full max-w-xl rounded-2xl border border-base-300 bg-base-100 shadow-2xl overflow-hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Search documentation"
+      (click)="$event.stopPropagation()"
+    >
+      <div class="flex items-center gap-3 border-b border-base-300 px-4 py-3">
+        <i class="fa-solid fa-magnifying-glass opacity-50"></i>
+        <input
+          #searchInput
+          type="search"
+          class="flex-1 bg-transparent outline-none text-sm placeholder:opacity-50"
+          placeholder="Search components, guides, and examples…"
+          [value]="query()"
+          (input)="onInput($event)"
+          (keydown)="onKeydown($event)"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <kbd class="kbd kbd-xs hidden sm:inline-flex opacity-50">esc</kbd>
+      </div>
+
+      <div class="max-h-[min(50vh,24rem)] overflow-y-auto p-2">
+        @if (query().trim() && flatResults().length === 0) {
+          <p class="px-3 py-6 text-center text-sm opacity-60">No results for "{{ query() }}"</p>
+        } @else if (!query().trim()) {
+          <p class="px-3 py-6 text-center text-sm opacity-60">
+            Type to search documentation pages and sections
+          </p>
+        } @else {
+          @for (group of groupedResults(); track group[0]) {
+            <div class="mb-2">
+              <p class="px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-wide opacity-50">
+                {{ group[0] }}
+              </p>
+
+              <ul>
+                @for (result of group[1]; track result.id) {
+                  <li>
+                    <button
+                      type="button"
+                      class="w-full rounded-lg px-3 py-2 text-left transition-colors"
+                      [class.bg-base-200]="isActive(result)"
+                      (click)="navigateTo(result)"
+                      (mouseenter)="activeIndex.set(getGlobalIndex(result))"
+                    >
+                      <div class="flex items-center justify-between gap-2">
+                        <span class="text-sm font-medium">{{ result.title }}</span>
+                        @if (result.fragment) {
+                          <span class="text-[0.65rem] opacity-50 truncate">#{{ result.fragment }}</span>
+                        }
+                      </div>
+                      @if (result.snippet) {
+                        <p class="mt-0.5 text-xs opacity-60 line-clamp-1">{{ result.snippet }}</p>
+                      }
+                    </button>
+                  </li>
+                }
+              </ul>
+            </div>
+          }
+        }
+      </div>
+
+      <div
+        class="flex items-center justify-between gap-4 border-t border-base-300 px-4 py-2 text-[0.65rem] opacity-50"
+      >
+        <span class="flex items-center gap-2">
+          <kbd class="kbd kbd-xs">↑</kbd>
+          <kbd class="kbd kbd-xs">↓</kbd>
+          navigate
+        </span>
+        <span class="flex items-center gap-2">
+          <kbd class="kbd kbd-xs">↵</kbd>
+          open
+        </span>
+      </div>
+    </div>
+  </div>
+}

@@ -34,4 +34,26 @@ describe('installBase', () => {
     const call = vi.mocked(fs.cpSync).mock.calls[0];
     expect(call[1]).toBe('/home/user/my-app/src/app/shared/base/list.base.ts');
   });
+
+  it('should copy http base file to project', () => {
+    vi.mocked(fs.cpSync).mockImplementation(() => {});
+
+    installBase('my-app', 'http');
+
+    expect(fs.cpSync).toHaveBeenCalledWith(
+      expect.stringContaining('ui/base/http.base.ts'),
+      '/home/user/my-app/src/app/shared/base/http.base.ts',
+    );
+  });
+
+  it('should copy page base file to project', () => {
+    vi.mocked(fs.cpSync).mockImplementation(() => {});
+
+    installBase('my-app', 'page');
+
+    expect(fs.cpSync).toHaveBeenCalledWith(
+      expect.stringContaining('ui/base/page.base.ts'),
+      '/home/user/my-app/src/app/shared/base/page.base.ts',
+    );
+  });
 });

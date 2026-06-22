@@ -73,6 +73,10 @@ kl install modal --project my-angular-app
 - **Tooltip** – `kl install -n tooltip`
 - **Validator** – `kl install -n validator`
 - **List Base** – `kl install -n list-base`
+- **Http Base** – `kl install -n http-base`
+- **Page Base** – `kl install -n page-base`
+- **Global Errors** – `kl install -n global-errors`
+- **Rules** – `kl install -n rules`
 - **Auth** – `kl install -n auth`
 
 ---
@@ -4243,6 +4247,254 @@ Define filters in the constructor of the class that extends ListBase.
 ## Usage
 
 See usage examples in the [Database Block](./database.md).
+
+---
+
+# Http Base
+
+## Installation
+
+```bash
+kl install http-base
+```
+
+### TypeScript
+
+```typescript
+import { Injectable } from '@angular/core';
+import { HttpBase } from '@/shared/base/http.base';
+import { environment } from '@/environments/environment';
+
+interface User {
+  id: string;
+  name: string;
+}
+
+@Injectable({ providedIn: 'root' })
+export class UsersService extends HttpBase {
+  constructor() {
+    super(environment.apiUrl, 'users');
+  }
+
+  readonly users = this.resource<User[]>({
+    defaultValue: [],
+  });
+
+  create(user: Omit<User, 'id'>) {
+    return this.post(user);
+  }
+}
+```
+
+### Overview
+
+HttpBase is an abstraction resource for HTTP services. It provides a default structure for REST calls, file downloads, and reactive data loading via `rxResource`.
+
+## API
+
+### Constructor
+
+- **baseUrl**: API base URL (e.g. `environment.apiUrl`).
+- **endpoint**: Resource endpoint segment (e.g. `'users'`).
+
+### Protected methods
+
+- **url(resourcePath?)**: Builds the full request URL.
+- **get(queryParams?, resourcePath?)**: HTTP GET.
+- **post(data, resourcePath?)**: HTTP POST.
+- **put(data, resourcePath?)**: HTTP PUT.
+- **patch(data, resourcePath?)**: HTTP PATCH.
+- **delete(resourcePath?)**: HTTP DELETE.
+- **getFile(queryParams?, resourcePath?)**: GET with `arraybuffer` response.
+- **downloadFile(filename, resourcePath?, queryParams?)**: Triggers a browser file download.
+- **resource(options?, resourcePath?)**: Returns an `rxResource` for reactive GET with optional `mapFn`.
+
+## Usage
+
+Pair with [Global Errors](./global-errors.md) for automatic HTTP error feedback.
+
+---
+
+# Page Base
+
+## Installation
+
+```bash
+kl install page-base
+```
+
+### TypeScript
+
+```typescript
+import { Component } from '@angular/core';
+import { PageBase } from '@/shared/base/page.base';
+import { Breadcrumb } from '@/shared/components/breadcrumb';
+
+@Component({
+  selector: 'app-users-page',
+  template: `
+    <app-breadcrumb [items]="breadcrumbs()" />
+    <app-users-list [reload]="reload()" />
+  `,
+  imports: [Breadcrumb, UsersList],
+})
+export class UsersPage extends PageBase {
+  onSaved() {
+    this.reloadList();
+  }
+}
+```
+
+### Overview
+
+PageBase is an abstraction resource for page components. It provides breadcrumb navigation and a reload signal to refresh child lists or tables.
+
+## API
+
+### Signals
+
+- **reload**: Signal used to trigger a reload in child components.
+
+### Methods
+
+- **reloadList()**: Sets `reload` to `true` briefly so bound children can react.
+
+### Properties
+
+- **breadcrumbs**: Computed breadcrumb trail from the current `ActivatedRoute`.
+
+## Usage
+
+Use with the [Breadcrumb](./breadcrumb.md) component in your template.
+
+---
+
+# Global Errors
+
+## Installation
+
+```bash
+kl install global-errors
+```
+
+### TypeScript
+
+```typescript
+import { ApplicationConfig } from '@angular/core';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { FeedbackRequestInterceptor } from './core/interceptors/feedback-request-interceptor';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideHttpClient(withInterceptorsFromDi()),
+    { provide: HTTP_INTERCEPTORS, useClass: FeedbackRequestInterceptor, multi: true },
+  ],
+};
+```
+
+After install, customize `ignoreError` in `http-errors.midleware.ts` to skip URLs or status codes your app handles locally.
+
+### Overview
+
+Global Errors provides automatic HTTP error feedback via toast notifications. A global interceptor captures failed requests and displays user-friendly messages.
+
+## Components
+
+### FeedbackRequestInterceptor
+
+Angular HTTP interceptor that delegates errors to `HttpErrorFeedbackAlert`.
+
+### HttpErrorFeedbackAlert
+
+Injectable service that shows toasts based on status code:
+
+- **4xx**: warning toast
+- **5xx**: error toast
+- **other**: info toast
+
+### HttpErrorMiddleware
+
+- **handleError(response)**: Returns a sanitized message.
+- **ignoreError(response)**: Skips feedback for specific errors (e.g. 401). Customize after install.
+
+### sanitizeErrorMessage
+
+Utility that extracts or maps error messages from `HttpErrorResponse`.
+
+## Setup
+
+Requires the [Toast](./toast.md) component and registration in `app.config.ts` (added automatically by `kl install global-errors`).
+
+---
+
+# Rules
+
+## Installation
+
+```bash
+kl install auth
+```
+
+Rules (route permissions) is installed together with Auth. It includes `RouteAccessGuard`, `routesRegistre`, and `LoggedUser`.
+
+### TypeScript
+
+```typescript
+// logged-user.ts — redefine RouteRule for your app
+export type RouteRule = 'admin' | 'user' | 'reports';
+
+// app.routes.ts
+import { routesRegistre } from './core/utils/routes-registre';
+import { UsersPage } from './features/users/users.page';
+
+export const routes = routesRegistre([
+  {
+    path: 'users',
+    name: 'Users',
+    iconClass: 'fa-users',
+    rule: 'admin',
+    component: UsersPage,
+  },
+]);
+```
+
+The guard reads `rule` from route data and calls `loggedUser.hasPermission(rule)`.
+
+### Overview
+
+Rules provides route-level permission control. Routes registered with a `rule` are protected by `RouteAccessGuard`, which checks the logged user's permissions.
+
+## Installation
+
+Installed with Auth:
+
+```bash
+kl install auth
+```
+
+## API
+
+### Types
+
+- **RouteRule**: Permission identifier. Redefine in `logged-user.ts` (e.g. `'admin' | 'user'`).
+- **RouteConfig**: Route definition with optional `rule`, `name`, and `iconClass`.
+- **RouteData**: Data attached to protected routes (`name`, `rule`, `iconClass`, `parent`).
+
+### Function
+
+- **routesRegistre(routes)**: Registers routes, applies `RouteAccessGuard` when `rule` is set, and populates `ROUTES_CONFIG`.
+
+### Guard
+
+- **RouteAccessGuard**: Redirects to login when there is no token; otherwise waits for authentication and checks `LoggedUser.hasPermission(rule)`.
+
+### Model
+
+- **LoggedUser.hasPermission(rule)**: Returns `true` when the user has the required rule(s). Undefined rule allows access.
+
+## Usage
+
+See the [Auth](./auth.md) resource and [Login Block](./login.md) for a full authentication flow.
 
 ---
 

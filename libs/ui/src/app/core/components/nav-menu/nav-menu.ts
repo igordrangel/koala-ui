@@ -119,22 +119,22 @@ export class NavMenu {
     {
       name: 'Abstractions',
       items: new KlArray<MenuOption>([
-        { name: 'HttpBase', routerLink: 'resources/http-base', commingSoon: true },
+        { name: 'HttpBase', routerLink: 'resources/http-base' },
         { name: 'ListBase', routerLink: 'resources/list-base' },
-        { name: 'PageBase', routerLink: 'resources/page-base', commingSoon: true },
+        { name: 'PageBase', routerLink: 'resources/page-base' },
       ]).orderBy('name'),
     },
     {
       name: 'Others',
       items: new KlArray<MenuOption>([
-        { name: 'Global Errors', routerLink: 'resources/global-errors', commingSoon: true },
+        { name: 'Global Errors', routerLink: 'resources/global-errors' },
       ]).orderBy('name'),
     },
     {
       name: 'Security & Policies',
       items: new KlArray<MenuOption>([
         { name: 'Auth', routerLink: 'resources/auth' },
-        { name: 'Rules', routerLink: 'resources/rules', commingSoon: true },
+        { name: 'Rules', routerLink: 'resources/rules' },
       ]).orderBy('name'),
     },
   ]).orderBy('name');

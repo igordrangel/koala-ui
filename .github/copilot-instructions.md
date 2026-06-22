@@ -41,10 +41,6 @@
 - [Tooltip](https://ui.koalarx.com/docs/tooltip.md): Tooltip component
 - [Validator](https://ui.koalarx.com/docs/validator.md): Validator component
 - [List Base](https://ui.koalarx.com/docs/list-base.md): List Base component
-- [Http Base](https://ui.koalarx.com/docs/http-base.md): Http Base component
-- [Page Base](https://ui.koalarx.com/docs/page-base.md): Page Base component
-- [Global Errors](https://ui.koalarx.com/docs/global-errors.md): Global Errors component
-- [Rules](https://ui.koalarx.com/docs/rules.md): Rules component
 - [Auth](https://ui.koalarx.com/docs/auth.md): Auth component
 
 ## CLI
