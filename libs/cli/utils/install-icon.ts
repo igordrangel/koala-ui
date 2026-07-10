@@ -34,6 +34,7 @@ export async function installIconSet(
   const installed: string[] = [];
 
   mkdirSync(targetFolder, { recursive: true });
+  mkdirSync(`${projectFolder}/src/theme`, { recursive: true });
 
   const icons =
     iconSet === 'text-editor-icons' ? TEXT_EDITOR_ICON_FILES : ([] as readonly string[]);
@@ -48,9 +49,18 @@ export async function installIconSet(
     }
   }
 
-  const generateIconsPath = `${projectFolder}/generate-icons.js`;
+  if (installed.length === 0) {
+    return installed;
+  }
 
-  if (installed.length > 0 && existsSync(generateIconsPath)) {
+  const generateIconsPath = `${projectFolder}/generate-icons.js`;
+  const originGenerateIconsPath = `${originPath}/ui/generate-icons.js`;
+
+  if (!existsSync(generateIconsPath) && existsSync(originGenerateIconsPath)) {
+    cpSync(originGenerateIconsPath, generateIconsPath);
+  }
+
+  if (existsSync(generateIconsPath)) {
     await runCommand('node generate-icons.js', {
       cwd: projectFolder,
       verbose: false,
@@ -59,7 +69,7 @@ export async function installIconSet(
   }
 
   // Toolbar utilities live in icons.css; wire the import like installCss does for theme sheets.
-  if (installed.length > 0 && existsSync(`${projectFolder}/src/theme/icons.css`)) {
+  if (existsSync(`${projectFolder}/src/theme/icons.css`)) {
     ensureStylesImport(projectFolder, 'icons');
   }
 

@@ -48,14 +48,46 @@ describe('installIconSet', () => {
     expect(ensureStylesImport).toHaveBeenCalledWith('/home/user/my-app', 'icons');
   });
 
-  it('should not wire styles import when icons.css was not generated', async () => {
+  it('should copy generate-icons.js when missing and then regenerate', async () => {
+    let projectHasGenerateScript = false;
+
     vi.mocked(fs.existsSync).mockImplementation((path: fs.PathLike) => {
       const p = String(path);
-      return p.includes('/ui/assets/icons/');
+      if (p === '/home/user/my-app/generate-icons.js') {
+        return projectHasGenerateScript;
+      }
+      return (
+        p.includes('/ui/assets/icons/') ||
+        p.endsWith('ui/generate-icons.js') ||
+        p.endsWith('src/theme/icons.css')
+      );
+    });
+    vi.mocked(fs.cpSync).mockImplementation((_src, dest) => {
+      if (String(dest) === '/home/user/my-app/generate-icons.js') {
+        projectHasGenerateScript = true;
+      }
     });
 
     await installIconSet('my-app', 'text-editor-icons');
 
+    expect(fs.cpSync).toHaveBeenCalledWith(
+      expect.stringContaining('ui/generate-icons.js'),
+      '/home/user/my-app/generate-icons.js',
+    );
+    expect(runCommand).toHaveBeenCalledWith('node generate-icons.js', {
+      cwd: '/home/user/my-app',
+      verbose: false,
+      loaderText: 'Generating icon classes',
+    });
+    expect(ensureStylesImport).toHaveBeenCalledWith('/home/user/my-app', 'icons');
+  });
+
+  it('should not wire styles import when no icons were installed', async () => {
+    vi.mocked(fs.existsSync).mockReturnValue(false);
+
+    const installed = await installIconSet('my-app', 'text-editor-icons');
+
+    expect(installed).toEqual([]);
     expect(runCommand).not.toHaveBeenCalled();
     expect(ensureStylesImport).not.toHaveBeenCalled();
   });

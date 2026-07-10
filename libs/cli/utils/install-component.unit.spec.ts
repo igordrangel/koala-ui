@@ -64,6 +64,7 @@ describe('installComponent', () => {
       'ngx-tiptap',
     ]);
     expect(deps.componentDeps).toEqual(['dropdown', 'tooltip', 'input-color']);
+    expect(deps.utilDeps).toEqual(['control-changes']);
     expect(deps.cssDeps).toEqual(['editor']);
     expect(deps.iconSetDeps).toEqual(['text-editor-icons']);
   });

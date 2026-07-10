@@ -230,6 +230,7 @@ export function installComponent(projectName: string, component: InstallComponen
         'ngx-tiptap',
       );
       componentDeps.push('dropdown', 'tooltip', 'input-color');
+      utilDeps.push('control-changes');
       cssDeps.push('editor');
       iconSetDeps.push('text-editor-icons');
       break;
