@@ -1,5 +1,5 @@
 import { effect, ElementRef } from '@angular/core';
-import { KlDate } from '@koalarx/utils/light/KlDate';
+import { KlDate } from '@koalarx/utils/KlDate';
 import type { CalendarType } from '..';
 
 interface SetupCalendarChangeEffectParams {

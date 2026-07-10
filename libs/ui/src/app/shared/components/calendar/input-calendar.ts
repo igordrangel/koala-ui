@@ -10,7 +10,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { KlDate } from '@koalarx/utils/light/KlDate';
+import { KlDate } from '@koalarx/utils/KlDate';
 import 'cally';
 import { Calendar } from '.';
 import { Mask } from '../../directives/mask.directive';

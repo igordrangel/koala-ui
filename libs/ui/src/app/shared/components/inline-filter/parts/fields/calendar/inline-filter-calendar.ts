@@ -1,7 +1,7 @@
 import { InputCalendar } from '@/shared/components/calendar';
 import { Component, effect, OnInit, viewChild } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { KlDate } from '@koalarx/utils/light/KlDate';
+import { KlDate } from '@koalarx/utils/KlDate';
 import { FieldBase } from '../field.base';
 
 @Component({

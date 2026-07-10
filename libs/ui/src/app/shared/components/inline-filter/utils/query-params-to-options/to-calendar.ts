@@ -1,4 +1,4 @@
-import { KlDate } from '@koalarx/utils/light/KlDate';
+import { KlDate } from '@koalarx/utils/KlDate';
 import { InlineFilterField } from '../../config';
 
 export function toCalendar(option: InlineFilterField, value: string) {

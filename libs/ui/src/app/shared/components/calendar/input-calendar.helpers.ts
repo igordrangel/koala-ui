@@ -1,4 +1,4 @@
-import { KlDate } from '@koalarx/utils/light/KlDate';
+import { KlDate } from '@koalarx/utils/KlDate';
 import { InputCalendarFormat, InputCalendarType } from '.';
 
 export interface CalendarMonthValue {
