@@ -10,6 +10,7 @@ export const InstallCssFlagsList = [
   'side-window',
   'bottom-sheet',
   'modal',
+  'editor',
 ] as const;
 export type InstallCssFlags = (typeof InstallCssFlagsList)[number];
 

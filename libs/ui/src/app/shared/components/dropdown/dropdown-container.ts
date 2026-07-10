@@ -176,6 +176,15 @@ export class DropdownContainer implements OnInit, OnDestroy {
     }
   }
 
+  close() {
+    const contentElement = this.dropdownContentElement()?.nativeElement as
+      | (HTMLElement & { hidePopover?: () => void })
+      | undefined;
+
+    contentElement?.hidePopover();
+    this.isOpen.emit(false);
+  }
+
   ajustPosition() {
     const triggerElement = this.dropdownTriggerElement()?.nativeElement;
     const contentElement = this.dropdownContentElement()?.nativeElement;

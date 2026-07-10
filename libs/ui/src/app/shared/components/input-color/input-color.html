@@ -1,0 +1,85 @@
+<app-dropdown
+  class="relative"
+  [class.w-full]="!inline()"
+  [class.w-fit]="inline()"
+  insideClick
+  [disabled]="isDisabled()"
+  (isOpen)="toggleDropdown($event)"
+>
+  <button
+    type="button"
+    class="relative flex items-center bg-transparent outline-none overflow-hidden"
+    [class.w-full]="!inline()"
+    [class.size-9]="inline()"
+    [class.rounded-lg]="inline()"
+    [class.input]="!inline()"
+    [class.validator]="!inline()"
+    [class.input-xs]="!inline() && size() === 'xs'"
+    [class.input-sm]="!inline() && size() === 'sm'"
+    [class.input-md]="!inline() && size() === 'md'"
+    [class.input-lg]="!inline() && size() === 'lg'"
+    [class.input-xl]="!inline() && size() === 'xl'"
+    [disabled]="isDisabled()"
+    trigger
+  >
+    @if (selectedColor(); as color) {
+      @if (inline()) {
+        <span class="block size-full rounded-[inherit]" [class]="color.bgClass"></span>
+      } @else {
+        <span
+          class="relative z-10 block w-full min-h-6 text-base font-normal rounded px-2 py-0.5"
+          [class]="color.textClass + ' ' + color.bgClass"
+        >
+          {{ label() || ' ' }}
+        </span>
+      }
+    } @else {
+      <span
+        class="relative z-10 inline-flex items-center justify-center rounded border border-base-300 bg-transparent w-full"
+        [class.min-h-6]="!inline()"
+        [class.size-full]="inline()"
+        [attr.title]="!transparentSelected() ? placeholder() : null"
+      ></span>
+    }
+  </button>
+
+  <div class="overflow-x-hidden max-h-55" options>
+    <table class="table table-xs table-pin-rows border-spacing-0">
+      <tbody>
+        @if (clearable()) {
+          <tr class="bg-base-100">
+            <td class="p-0! border-0" colspan="11">
+              <span
+                class="inline-flex items-center justify-center cursor-pointer size-10 border border-base-300 bg-transparent"
+                [class.ring-2]="transparentSelected()"
+                [class.ring-primary]="transparentSelected()"
+                title="Borda transparente"
+                (click)="clearColor($event)"
+              >
+                <i class="fa-solid fa-ban text-red-500 text-base"></i>
+              </span>
+            </td>
+          </tr>
+        }
+
+        @for (colorRow of colors; track $index) {
+          <tr>
+            @for (color of colorRow; track color.colorName) {
+              <td class="p-0! border-0">
+                <span
+                  class="block cursor-pointer size-10 hover:shadow-md hover:scale-150 shadow-neutral-600/80 z-10 transition-all duration-75"
+                  [class]="color.bgClass"
+                  [class.ring-2]="selectedColor()?.colorName === color.colorName"
+                  [class.ring-primary]="selectedColor()?.colorName === color.colorName"
+                  [class.shadow-md]="selectedColor()?.colorName === color.colorName"
+                  [class.scale-110]="selectedColor()?.colorName === color.colorName"
+                  (click)="pickColor(color)"
+                ></span>
+              </td>
+            }
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</app-dropdown>

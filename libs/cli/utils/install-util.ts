@@ -15,6 +15,7 @@ export const InstallUtilFlagsList = [
   'control-changes',
   'form-is-valid',
   'accessibility-select-options-on-keydown',
+  'get-value-on-first-change',
 ] as const;
 export type InstallUtilFlags = (typeof InstallUtilFlagsList)[number];
 

@@ -70,17 +70,3 @@ export class CalendarSample {
   readonly inputDateRangeValue = signal<string>('2026-01-10/2026-01-20');
 }
 ```
-
-### TypeScript
-
-```typescript
-import { Component } from '@angular/core';
-import { Calendar } from '@/shared/components/calendar';
-
-@Component({
-  selector: 'app-calendar-sample',
-  templateUrl: './calendar-sample.html',
-  imports: [Calendar],
-})
-export class CalendarSample {}
-```

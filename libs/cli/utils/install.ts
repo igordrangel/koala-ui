@@ -9,6 +9,7 @@ import { installUtil, InstallUtilFlags } from './install-util';
 import { installValidator, InstallValidatorFlags } from './install-validator';
 import { installCoreResource, InstallCoreResourceFlags } from './install-core-resource';
 import { installCss, InstallCssFlags } from './install-css';
+import { installIconSet, InstallIconSetFlags } from './install-icon';
 
 export async function install(
   projectName: string,
@@ -24,6 +25,7 @@ export async function install(
   const installedBaseDeps: InstallBaseFlags[] = [];
   const installedCoreResourceDeps: InstallCoreResourceFlags[] = [];
   const installedCssDeps: InstallCssFlags[] = [];
+  const installedIconDeps: string[] = [];
 
   const deps = installComponent(projectName, component);
 
@@ -67,6 +69,11 @@ export async function install(
     installedCssDeps.push(dep);
   }
 
+  for (const iconSet of deps.iconSetDeps as InstallIconSetFlags[]) {
+    const icons = await installIconSet(projectName, iconSet);
+    installedIconDeps.push(...icons);
+  }
+
   for (const component of getNotInstalled(projectName, 'component', deps.componentDeps)) {
     const result = await install(projectName, component, verbose);
     installedComponentDeps.push(...result.components, component);
@@ -76,6 +83,7 @@ export async function install(
     installedDirectiveDeps.push(...result.directives);
     installedBaseDeps.push(...result.base);
     installedCoreResourceDeps.push(...result.coreResources);
+    installedIconDeps.push(...result.icons);
     missingLibDeps.push(...result.missingLibs);
   }
 
@@ -90,6 +98,7 @@ export async function install(
     base: [...new Set(installedBaseDeps)],
     coreResources: [...new Set(installedCoreResourceDeps)],
     css: [...new Set(installedCssDeps)],
+    icons: [...new Set(installedIconDeps)],
     missingLibs: [...new Set(missingLibDeps)],
   };
 }

@@ -1,0 +1,79 @@
+@if (showDropPreview()) {
+  <div
+    class="absolute z-30 border-2 border-primary border-dashed pointer-events-none box-border"
+    [style.top.px]="dropPreview().top"
+    [style.left.px]="dropPreview().left"
+    [style.width.px]="dropPreview().width"
+    [style.height.px]="dropPreview().height"
+  ></div>
+}
+
+@if (visible()) {
+  <div
+    class="absolute pointer-events-none"
+    [style.top.px]="position().top"
+    [style.left.px]="position().left"
+    [style.width.px]="position().width"
+  >
+    <div
+      class="absolute inset-x-0 -translate-y-full pointer-events-auto"
+      (mouseenter)="onMenuMouseEnter()"
+      (mouseleave)="onMenuMouseLeave($event)"
+    >
+      <app-dropdown
+        #columnMenu
+        class="w-full"
+        insideClick
+        (opened)="onDropdownOpened()"
+        (closed)="onDropdownClosed()"
+      >
+        <button
+          type="button"
+          trigger
+          class="bg-primary/20 hover:bg-primary p-1 rounded-t text-[0.5rem] text-center cursor-grab active:cursor-grabbing w-full border-0 select-none touch-none"
+          (pointerdown)="onTriggerPointerDown($event)"
+        >
+          <i class="fa-solid fa-ellipsis"></i>
+        </button>
+
+        <div class="p-1" options>
+          <app-dropdown-option (click)="moveColumnLeft()">
+            Mover coluna para esquerda
+          </app-dropdown-option>
+          <app-dropdown-option (click)="moveColumnRight()">
+            Mover coluna para direita
+          </app-dropdown-option>
+
+          <span class="m-1 divider"></span>
+
+          <app-dropdown-option (click)="addColumnBefore()">
+            Adicionar coluna à esquerda
+          </app-dropdown-option>
+          <app-dropdown-option (click)="addColumnAfter()">
+            Adicionar coluna à direita
+          </app-dropdown-option>
+
+          <span class="m-1 divider"></span>
+
+          <div class="px-1 py-1">
+            <app-input-color
+              placeholder="Cor da borda"
+              clearable
+              [formControl]="borderColorControl"
+              [syncColorName]="tableBorderColorSync()"
+              (colorPicked)="onBorderColorPicked($event)"
+            />
+          </div>
+
+          <span class="m-1 divider"></span>
+
+          <app-dropdown-option (click)="deleteColumn()"> Remover coluna </app-dropdown-option>
+
+          <span class="m-1 divider"></span>
+
+          <app-dropdown-option (click)="deleteTable()"> Excluir tabela </app-dropdown-option>
+        </div>
+      </app-dropdown>
+    </div>
+  </div>
+}

@@ -50,4 +50,28 @@ describe('installComponent', () => {
       'utils/sanitize-error-message',
     ]);
   });
+
+  it('should resolve text-editor dependencies', () => {
+    const deps = installComponent('my-app', 'text-editor');
+
+    expect(deps.libDeps).toEqual([
+      '@tiptap/starter-kit',
+      '@tiptap/extension-table',
+      '@tiptap/extension-highlight',
+      '@tiptap/extension-image',
+      '@tiptap/extension-text-align',
+      '@tiptap/extension-file-handler',
+      'ngx-tiptap',
+    ]);
+    expect(deps.componentDeps).toEqual(['dropdown', 'tooltip', 'input-color']);
+    expect(deps.cssDeps).toEqual(['editor']);
+    expect(deps.iconSetDeps).toEqual(['text-editor-icons']);
+  });
+
+  it('should resolve input-color dependencies', () => {
+    const deps = installComponent('my-app', 'input-color');
+
+    expect(deps.componentDeps).toEqual(['dropdown']);
+    expect(deps.libDeps).toEqual([]);
+  });
 });

@@ -20,6 +20,7 @@ cpSync('libs/ui/src/app/shared/directives', 'dist/ui/directives', { recursive: t
 cpSync('libs/ui/src/app/shared/utils', 'dist/ui/utils', { recursive: true });
 cpSync('libs/ui/src/app/shared/base', 'dist/ui/base', { recursive: true });
 cpSync('libs/ui/src/theme', 'dist/ui/theme', { recursive: true });
+cpSync('libs/ui/public/assets/icons', 'dist/ui/assets/icons', { recursive: true });
 cpSync('libs/ui/src/app/app.ts', 'dist/ui/app.ts');
 cpSync('libs/ui/src/index.html', 'dist/ui/index.html');
 

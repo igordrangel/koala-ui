@@ -1,0 +1,17 @@
+<button
+  class="btn btn-xs size-9! rounded-xl hover:dark:bg-neutral-900! hover:bg-neutral-100!"
+  type="button"
+  [id]="activeName()"
+  [class.btn-primary]="isActive()"
+  [class.btn-ghost]="!isActive()"
+  [class.btn-soft]="isActive()"
+  [appTooltip]="tooltip()"
+  [disabled]="!canToggle()"
+  (click)="action.emit()"
+>
+  <i
+    [class]="iconClass()"
+    [class.opacity-80!]="!isActive()"
+    [class.dark:opacity-70!]="!isActive()"
+  ></i>
+</button>

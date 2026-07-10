@@ -37,21 +37,6 @@ export class RangeSample {
 <input type="range" appRange size="xl" [formControl]="rangeControl" />
 ```
 
-```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Range } from '@/shared/components/range';
-
-@Component({
-  selector: 'app-range-sample',
-  templateUrl: './range-sample.html',
-  imports: [ReactiveFormsModule, Range],
-})
-export class RangeSample {
-  rangeControl = new FormControl<number>(50);
-}
-```
-
 ### Variants
 
 ```html
@@ -63,36 +48,4 @@ export class RangeSample {
 <input type="range" appRange variant="success" [formControl]="rangeControl" />
 <input type="range" appRange variant="warning" [formControl]="rangeControl" />
 <input type="range" appRange variant="error" [formControl]="rangeControl" />
-```
-
-```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Range } from '@/shared/components/range';
-
-@Component({
-  selector: 'app-range-sample',
-  templateUrl: './range-sample.html',
-  imports: [ReactiveFormsModule, Range],
-})
-export class RangeSample {
-  rangeControl = new FormControl<number>(50);
-}
-```
-
-### TypeScript
-
-```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Range } from '@/shared/components/range';
-
-@Component({
-  selector: 'app-range-sample',
-  templateUrl: './range-sample.html',
-  imports: [ReactiveFormsModule, Range],
-})
-export class RangeSample {
-  rangeControl = new FormControl<number>(50);
-}
 ```

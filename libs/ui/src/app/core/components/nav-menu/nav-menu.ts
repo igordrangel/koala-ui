@@ -103,9 +103,11 @@ export class NavMenu {
         { name: 'Toggle', routerLink: 'components/toggle' },
         { name: 'Textarea', routerLink: 'components/textarea' },
         { name: 'Inline Filter', routerLink: 'components/inline-filter' },
+        { name: 'Input Color', routerLink: 'components/input-color' },
         { name: 'Input Field', routerLink: 'components/input-field' },
         { name: 'Validator', routerLink: 'components/validator' },
         { name: 'Fieldset', routerLink: 'components/fieldset' },
+        { name: 'Text Editor', routerLink: 'components/text-editor' },
       ]).orderBy('name'),
     },
   ]).orderBy('name');

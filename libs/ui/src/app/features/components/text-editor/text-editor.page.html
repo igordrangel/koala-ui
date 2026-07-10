@@ -1,0 +1,265 @@
+<app-section-container>
+  <ng-container title>Text Editor</ng-container>
+  <ng-container description>
+    A rich text editor built with Tiptap. It supports headings, lists, tables, colors, images, and
+    more through a customizable toolbar.
+  </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description
+      >Use the Koala CLI to generate a new text editor component.</ng-container
+    >
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/text-editor-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Usage</ng-container>
+    <ng-container description>
+      Bind the editor to a reactive form control to read and persist the generated HTML. Use
+      <code>extractTextEditorImageIds()</code> on the control value to collect attached file ids.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div
+          class="grid gap-6 border border-t-0 border-base-300 rounded-b-lg p-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)]"
+        >
+          <div class="rounded-2xl border border-base-300 bg-base-100 p-4 shadow-sm">
+            <app-text-editor class="w-full" [formControl]="editorControl" />
+          </div>
+
+          <div class="flex flex-col gap-4">
+            <div class="rounded-2xl border border-base-300 bg-base-100 p-4 shadow-sm">
+              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-base-content/60">
+                Form value
+              </p>
+              <pre
+                class="mt-3 max-h-40 overflow-auto rounded-lg border border-base-300 bg-base-200 px-3 py-2 text-sm whitespace-pre-wrap"
+                >{{ editorValue() }}</pre
+              >
+              <p class="mt-3 text-sm leading-6 text-base-content/70">
+                HTML emitted by the form control. When images go through an API, temporary
+                <code>blob:</code> URLs are stripped and only <code>data-id</code> is kept.
+              </p>
+            </div>
+
+            <div class="rounded-2xl border border-base-300 bg-base-100 p-4 shadow-sm">
+              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-base-content/60">
+                Attached image IDs
+              </p>
+              <pre
+                class="mt-3 rounded-lg border border-base-300 bg-base-200 px-3 py-2 text-sm whitespace-pre-wrap"
+                >{{ editorImageIds() | json }}</pre
+              >
+              <p class="mt-3 text-sm leading-6 text-base-content/70">
+                IDs extracted with <code>extractTextEditorImageIds()</code> from the form value. Use
+                this list as <code>assetsIds</code> when saving to your backend.
+              </p>
+            </div>
+
+            <div class="rounded-2xl border border-dashed border-base-300 bg-base-200/40 p-4">
+              <p class="text-sm font-medium">Try it</p>
+              <p class="mt-2 text-sm leading-6 text-base-content/70">
+                Add an image from the toolbar, drag &amp; drop, or paste. By default the file is
+                embedded as base64. With a custom <code>TextEditorFileService</code>, the preview
+                uses blob URLs while the persisted value keeps only the file id in
+                <code>data-id</code>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="text-editor-sample.html"
+            src="markdown/usage/text-editor/text-editor.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="text-editor-sample.ts"
+            src="markdown/usage/text-editor/text-editor.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Images</ng-container>
+    <ng-container description>
+      Image handling is internal to the editor. Implement <code>TextEditorFileService</code> with
+      <code>upload()</code> and <code>download()</code> — typically extending
+      <code>HttpBase</code> (<code>kl install http-base</code>) — and provide it on the page that
+      uses the editor.
+    </ng-container>
+
+    <div class="mb-8 space-y-6 text-sm leading-6 text-base-content/70">
+      <div>
+        <p class="mb-2 font-medium text-base-content">1. Upload a new image</p>
+        <p>
+          When the user adds an image, the editor calls <code>upload(folder, [file])</code> on your
+          <code>TextEditorFileService</code>, receives the persisted <code>id</code>, then calls
+          <code>download(id)</code> for preview.
+        </p>
+        <pre
+          class="mt-3 overflow-x-auto rounded-lg border border-base-300 bg-base-200/50 p-4 text-xs leading-6"
+        >// inserted in the editor (preview only)
+&lt;img src="blob:..." data-id="file-id-from-api" class="editor-image" /&gt;</pre>
+      </div>
+
+      <div>
+        <p class="mb-2 font-medium text-base-content">2. Resolve on load</p>
+        <p>
+          When the form control receives saved HTML, the editor calls <code>download(id)</code> for
+          each <code>data-id</code> before rendering and sets <code>src</code> with the blob URL.
+        </p>
+        <pre
+          class="mt-3 overflow-x-auto rounded-lg border border-base-300 bg-base-200/50 p-4 text-xs leading-6"
+        >// persisted in your database
+&lt;img data-id="file-id-from-api" class="editor-image" /&gt;
+
+// rendered in the editor after resolve()
+&lt;img src="blob:..." data-id="file-id-from-api" class="editor-image" /&gt;</pre>
+      </div>
+
+      <div>
+        <p class="mb-2 font-medium text-base-content">3. Register the service</p>
+        <p>
+          Provide your <code>FileService</code> on the page that uses the editor. When
+          <code>FileService</code> is <code>providedIn: 'root'</code>, use
+          <code>useExisting</code>:
+        </p>
+        <pre
+          class="mt-3 overflow-x-auto rounded-lg border border-base-300 bg-base-200/50 p-4 text-xs leading-6"
+        >providers: [
+  {{ '{' }} provide: TextEditorFileService, useExisting: FileService {{ '}' }},
+]</pre>
+        <p class="mt-3">
+          Pass the folder to the editor with <code>[imageFolder]</code>.
+        </p>
+      </div>
+
+      <div>
+        <p class="mb-2 font-medium text-base-content">4. Extract image IDs</p>
+        <p>
+          Each image is persisted in the HTML as a <code>data-id</code> attribute on
+          <code>&lt;img&gt;</code>. On save, read the form control value and call
+          <code>extractTextEditorImageIds(html)</code> to collect every id into an array.
+        </p>
+        <pre
+          class="mt-3 overflow-x-auto rounded-lg border border-base-300 bg-base-200/50 p-4 text-xs leading-6"
+        >const content = this.contentControl.value;
+// '&lt;p&gt;Hello&lt;/p&gt;&lt;img data-id="file-id-from-api" class="editor-image" /&gt;'
+
+const assetsIds = extractTextEditorImageIds(content);
+// ['file-id-from-api']</pre>
+        <p class="mt-3">
+          Alternatively, use <code>viewChild(TextEditor)</code> and read
+          <code>attachedImageIds()</code> — a signal updated whenever the editor content changes.
+        </p>
+      </div>
+
+      <div>
+        <p class="mb-2 font-medium text-base-content">5. Save the form</p>
+        <p>
+          Send the normalized HTML and the extracted ids to your API. Temporary
+          <code>blob:</code> URLs are already removed from the form value by the editor.
+        </p>
+      </div>
+    </div>
+
+    <p class="mb-2 text-sm font-medium">FileService</p>
+    <p class="mb-4 text-sm leading-6 text-base-content/70">
+      Extend <code>HttpBase</code> and implement <code>TextEditorFileService</code> with
+      <code>upload()</code> and <code>download()</code>. Private helpers come first. The editor
+      handles preview and HTML resolution internally.
+    </p>
+
+    <div appTabGroup align="start" class="mb-8 flex items-center">
+      <div appTab label="TS" checked>
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="file.service.ts"
+            src="markdown/usage/text-editor/text-editor-file-service.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+
+    <p class="mb-2 text-sm font-medium">Using the service in a form</p>
+    <p class="mb-4 text-sm leading-6 text-base-content/70">
+      Register <code>TextEditorFileService</code> on the component, pass <code>imageFolder</code> to
+      the editor and use <code>extractTextEditorImageIds()</code> on the form value to build
+      <code>assetsIds</code> before saving.
+    </p>
+
+    <div appTabGroup align="start" class="mb-8 flex items-center">
+      <div appTab label="HTML" checked>
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="text-editor-image-upload-sample.html"
+            src="markdown/usage/text-editor/text-editor-image-upload.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="article-form.ts"
+            src="markdown/usage/text-editor/text-editor-image-upload.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+
+    <p class="mb-2 text-sm font-medium">Reading image IDs with viewChild</p>
+    <p class="mb-4 text-sm leading-6 text-base-content/70">
+      Instead of parsing the HTML, read <code>attachedImageIds()</code> from a
+      <code>viewChild(TextEditor)</code> reference. Both approaches return the same ids stored in
+      <code>data-id</code>.
+    </p>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="HTML" checked>
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="text-editor-image-output-sample.html"
+            src="markdown/usage/text-editor/text-editor-image-output.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="text-editor-image-output-sample.ts"
+            src="markdown/usage/text-editor/text-editor-image-output.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

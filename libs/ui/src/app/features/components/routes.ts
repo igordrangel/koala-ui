@@ -109,6 +109,11 @@ export const ROUTES: Routes = [
     title: generateTitle('Input Currency'),
   },
   {
+    path: 'input-color',
+    loadComponent: () => import('./input-color/input-color.page').then((m) => m.InputColorPage),
+    title: generateTitle('Input Color'),
+  },
+  {
     path: 'checkbox',
     loadComponent: () => import('./checkbox/checkbox.page').then((m) => m.CheckboxPage),
     title: generateTitle('Checkbox'),
@@ -163,5 +168,10 @@ export const ROUTES: Routes = [
     path: 'bottom-sheet',
     loadComponent: () => import('./bottom-sheet/bottom-sheet.page').then((m) => m.BottomSheetPage),
     title: generateTitle('Bottom Sheet'),
+  },
+  {
+    path: 'text-editor',
+    loadComponent: () => import('./text-editor/text-editor.page').then((m) => m.TextEditorPage),
+    title: generateTitle('Text Editor'),
   },
 ];

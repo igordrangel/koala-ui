@@ -37,21 +37,6 @@ export class CheckboxSample {
 <input type="checkbox" appCheckbox size="xl" />
 ```
 
-```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Checkbox } from '@/shared/components/checkbox';
-
-@Component({
-  selector: 'app-checkbox-sample',
-  templateUrl: './checkbox-sample.html',
-  imports: [ReactiveFormsModule, Checkbox],
-})
-export class CheckboxSample {
-  checkboxControl = new FormControl<boolean>(true);
-}
-```
-
 ### Variants
 
 ```html
@@ -63,36 +48,4 @@ export class CheckboxSample {
 <input type="checkbox" appCheckbox variant="success" />
 <input type="checkbox" appCheckbox variant="warning" />
 <input type="checkbox" appCheckbox variant="error" />
-```
-
-```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Checkbox } from '@/shared/components/checkbox';
-
-@Component({
-  selector: 'app-checkbox-sample',
-  templateUrl: './checkbox-sample.html',
-  imports: [ReactiveFormsModule, Checkbox],
-})
-export class CheckboxSample {
-  checkboxControl = new FormControl<boolean>(true);
-}
-```
-
-### TypeScript
-
-```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Checkbox } from '@/shared/components/checkbox';
-
-@Component({
-  selector: 'app-checkbox-sample',
-  templateUrl: './checkbox-sample.html',
-  imports: [ReactiveFormsModule, Checkbox],
-})
-export class CheckboxSample {
-  checkboxControl = new FormControl<boolean>(true);
-}
 ```

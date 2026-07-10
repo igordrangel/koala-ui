@@ -27,17 +27,3 @@ import { Component, inject } from '@angular/core';
 })
 export class PaginationSample {}
 ```
-
-### TypeScript
-
-```typescript
-import { Pagination } from '@/shared/components/pagination';
-import { Component, inject } from '@angular/core';
-
-@Component({
-  selector: 'app-pagination-sample',
-  templateUrl: './pagination-sample.html',
-  imports: [Pagination],
-})
-export class PaginationSample {}
-```

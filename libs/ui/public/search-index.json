@@ -11,7 +11,7 @@
     "title": "Installation",
     "category": "Getting Started",
     "route": "getting-started/installation",
-    "content": "Koala UI – Get Started Koala UI is an Angular component library inspired by shadcn/ui. Components are installed directly into your project via the Koala CLI , giving you full control over the source code. 1. Install the CLI 2. Create a new project 3. Add components 4. Add resources (optional) Available components - Alert – - Bottom Sheet – - Breadcrumb – - Button – - Calendar – - Checkbox – - Collapse – - Combobox – - Confirm – - DataTable – - Dropdown – - Fieldset – - Inline Filter – - Input CNPJ – - Input CPF – - Input Currency – - Input Field – - Loading – - Login – - Modal – - Pagination – - Radio – - Range – - Select – - Side Window – - Skeleton – - Stepper – - Table – - Tabs – - Textarea – - Toast – - Toggle – - Tooltip – - Validator – - List Base – - Http Base – - Page Base – - Global Errors – - Rules – - Auth –"
+    "content": "Koala UI – Get Started Koala UI is an Angular component library inspired by shadcn/ui. Components are installed directly into your project via the Koala CLI , giving you full control over the source code. 1. Install the CLI 2. Create a new project 3. Add components 4. Add resources (optional) Available components - Alert – - Bottom Sheet – - Breadcrumb – - Button – - Calendar – - Checkbox – - Collapse – - Combobox – - Confirm – - DataTable – - Dropdown – - Fieldset – - Inline Filter – - Input CNPJ – - Input CPF – - Input Color – - Input Currency – - Input Field – - Loading – - Login – - Modal – - Pagination – - Radio – - Range – - Select – - Side Window – - Skeleton – - Stepper – - Table – - Tabs – - Textarea – - Text Editor – - Toast – - Toggle – - Tooltip – - Validator – - List Base – - Http Base – - Page Base – - Global Errors – - Rules – - Auth –"
   },
   {
     "id": "getting-started/installation#1-install-the-cli",
@@ -51,14 +51,14 @@
     "category": "Getting Started",
     "route": "getting-started/installation",
     "fragment": "available-components",
-    "content": "- Alert – - Bottom Sheet – - Breadcrumb – - Button – - Calendar – - Checkbox – - Collapse – - Combobox – - Confirm – - DataTable – - Dropdown – - Fieldset – - Inline Filter – - Input CNPJ – - Input CPF – - Input Currency – - Input Field – - Loading – - Login – - Modal – - Pagination – - Radio – - Range – - Select – - Side Window – - Skeleton – - Stepper – - Table – - Tabs – - Textarea – - Toast – - Toggle – - Tooltip – - Validator – - List Base – - Http Base – - Page Base – - Global Errors – - Rules – - Auth –"
+    "content": "- Alert – - Bottom Sheet – - Breadcrumb – - Button – - Calendar – - Checkbox – - Collapse – - Combobox – - Confirm – - DataTable – - Dropdown – - Fieldset – - Inline Filter – - Input CNPJ – - Input CPF – - Input Color – - Input Currency – - Input Field – - Loading – - Login – - Modal – - Pagination – - Radio – - Range – - Select – - Side Window – - Skeleton – - Stepper – - Table – - Tabs – - Textarea – - Text Editor – - Toast – - Toggle – - Tooltip – - Validator – - List Base – - Http Base – - Page Base – - Global Errors – - Rules – - Auth –"
   },
   {
     "id": "components/alert",
     "title": "Alert",
     "category": "Components",
     "route": "components/alert",
-    "content": "Alert Installation HTML TypeScript"
+    "content": "Alert Installation HTML"
   },
   {
     "id": "components/alert#installation",
@@ -74,14 +74,6 @@
     "category": "Components",
     "route": "components/alert",
     "fragment": "html",
-    "content": ""
-  },
-  {
-    "id": "components/alert#typescript",
-    "title": "TypeScript",
-    "category": "Components",
-    "route": "components/alert",
-    "fragment": "typescript",
     "content": ""
   },
   {
@@ -136,7 +128,7 @@
     "title": "Breadcrumb",
     "category": "Components",
     "route": "components/breadcrumb",
-    "content": "Breadcrumb Installation HTML TypeScript"
+    "content": "Breadcrumb Installation HTML"
   },
   {
     "id": "components/breadcrumb#installation",
@@ -155,19 +147,11 @@
     "content": ""
   },
   {
-    "id": "components/breadcrumb#typescript",
-    "title": "TypeScript",
-    "category": "Components",
-    "route": "components/breadcrumb",
-    "fragment": "typescript",
-    "content": ""
-  },
-  {
     "id": "components/button",
     "title": "Button",
     "category": "Components",
     "route": "components/button",
-    "content": "Button Installation Circle Dash Disabled Outline Sizes Soft Variants TypeScript"
+    "content": "Button Installation Circle Dash Disabled Outline Sizes Soft Variants"
   },
   {
     "id": "components/button#installation",
@@ -234,19 +218,11 @@
     "content": ""
   },
   {
-    "id": "components/button#typescript",
-    "title": "TypeScript",
-    "category": "Components",
-    "route": "components/button",
-    "fragment": "typescript",
-    "content": ""
-  },
-  {
     "id": "components/calendar",
     "title": "Calendar",
     "category": "Components",
     "route": "components/calendar",
-    "content": "Calendar Installation HTML Input Calendar TypeScript"
+    "content": "Calendar Installation HTML Input Calendar"
   },
   {
     "id": "components/calendar#installation",
@@ -273,19 +249,11 @@
     "content": ""
   },
   {
-    "id": "components/calendar#typescript",
-    "title": "TypeScript",
-    "category": "Components",
-    "route": "components/calendar",
-    "fragment": "typescript",
-    "content": ""
-  },
-  {
     "id": "components/checkbox",
     "title": "Checkbox",
     "category": "Components",
     "route": "components/checkbox",
-    "content": "Checkbox Installation Disabled Sizes Variants TypeScript"
+    "content": "Checkbox Installation Disabled Sizes Variants"
   },
   {
     "id": "components/checkbox#installation",
@@ -320,19 +288,11 @@
     "content": ""
   },
   {
-    "id": "components/checkbox#typescript",
-    "title": "TypeScript",
-    "category": "Components",
-    "route": "components/checkbox",
-    "fragment": "typescript",
-    "content": ""
-  },
-  {
     "id": "components/collapse",
     "title": "Collapse",
     "category": "Components",
     "route": "components/collapse",
-    "content": "Collapse Installation Accordion HTML TypeScript"
+    "content": "Collapse Installation HTML Accordion"
   },
   {
     "id": "components/collapse#installation",
@@ -340,14 +300,6 @@
     "category": "Components",
     "route": "components/collapse",
     "fragment": "installation",
-    "content": ""
-  },
-  {
-    "id": "components/collapse#accordion",
-    "title": "Accordion",
-    "category": "Components",
-    "route": "components/collapse",
-    "fragment": "accordion",
     "content": ""
   },
   {
@@ -359,11 +311,11 @@
     "content": ""
   },
   {
-    "id": "components/collapse#typescript",
-    "title": "TypeScript",
+    "id": "components/collapse#accordion",
+    "title": "Accordion",
     "category": "Components",
     "route": "components/collapse",
-    "fragment": "typescript",
+    "fragment": "accordion",
     "content": ""
   },
   {
@@ -402,7 +354,7 @@
     "title": "Confirm",
     "category": "Components",
     "route": "components/confirm",
-    "content": "Confirm Installation HTML TypeScript"
+    "content": "Confirm Installation HTML"
   },
   {
     "id": "components/confirm#installation",
@@ -421,19 +373,11 @@
     "content": ""
   },
   {
-    "id": "components/confirm#typescript",
-    "title": "TypeScript",
-    "category": "Components",
-    "route": "components/confirm",
-    "fragment": "typescript",
-    "content": ""
-  },
-  {
     "id": "blocks/datatable",
     "title": "DataTable",
     "category": "Blocks",
     "route": "blocks/datatable",
-    "content": "DataTable Installation HTML TypeScript"
+    "content": "DataTable Installation HTML"
   },
   {
     "id": "blocks/datatable#installation",
@@ -452,19 +396,11 @@
     "content": ""
   },
   {
-    "id": "blocks/datatable#typescript",
-    "title": "TypeScript",
-    "category": "Blocks",
-    "route": "blocks/datatable",
-    "fragment": "typescript",
-    "content": ""
-  },
-  {
     "id": "components/dropdown",
     "title": "Dropdown",
     "category": "Components",
     "route": "components/dropdown",
-    "content": "Dropdown Installation Notifications Options Popover TypeScript"
+    "content": "Dropdown Installation Notifications Options Popover"
   },
   {
     "id": "components/dropdown#installation",
@@ -499,19 +435,11 @@
     "content": ""
   },
   {
-    "id": "components/dropdown#typescript",
-    "title": "TypeScript",
-    "category": "Components",
-    "route": "components/dropdown",
-    "fragment": "typescript",
-    "content": ""
-  },
-  {
     "id": "components/fieldset",
     "title": "Fieldset",
     "category": "Components",
     "route": "components/fieldset",
-    "content": "Fieldset Installation HTML Login Sample TypeScript"
+    "content": "Fieldset Installation HTML Login Sample"
   },
   {
     "id": "components/fieldset#installation",
@@ -538,19 +466,11 @@
     "content": ""
   },
   {
-    "id": "components/fieldset#typescript",
-    "title": "TypeScript",
-    "category": "Components",
-    "route": "components/fieldset",
-    "fragment": "typescript",
-    "content": ""
-  },
-  {
     "id": "components/inline-filter",
     "title": "Inline Filter",
     "category": "Components",
     "route": "components/inline-filter",
-    "content": "Inline Filter Installation HTML TypeScript"
+    "content": "Inline Filter Installation HTML"
   },
   {
     "id": "components/inline-filter#installation",
@@ -569,19 +489,11 @@
     "content": ""
   },
   {
-    "id": "components/inline-filter#typescript",
-    "title": "TypeScript",
-    "category": "Components",
-    "route": "components/inline-filter",
-    "fragment": "typescript",
-    "content": ""
-  },
-  {
     "id": "components/input-cnpj",
     "title": "Input CNPJ",
     "category": "Components",
     "route": "components/input-cnpj",
-    "content": "Input CNPJ Installation HTML TypeScript"
+    "content": "Input CNPJ Installation HTML"
   },
   {
     "id": "components/input-cnpj#installation",
@@ -600,19 +512,11 @@
     "content": ""
   },
   {
-    "id": "components/input-cnpj#typescript",
-    "title": "TypeScript",
-    "category": "Components",
-    "route": "components/input-cnpj",
-    "fragment": "typescript",
-    "content": ""
-  },
-  {
     "id": "components/input-cpf",
     "title": "Input CPF",
     "category": "Components",
     "route": "components/input-cpf",
-    "content": "Input CPF Installation HTML TypeScript"
+    "content": "Input CPF Installation HTML"
   },
   {
     "id": "components/input-cpf#installation",
@@ -631,11 +535,34 @@
     "content": ""
   },
   {
-    "id": "components/input-cpf#typescript",
-    "title": "TypeScript",
+    "id": "components/input-color",
+    "title": "Input Color",
     "category": "Components",
-    "route": "components/input-cpf",
-    "fragment": "typescript",
+    "route": "components/input-color",
+    "content": "Input Color Installation HTML Inline"
+  },
+  {
+    "id": "components/input-color#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/input-color",
+    "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/input-color#html",
+    "title": "HTML",
+    "category": "Components",
+    "route": "components/input-color",
+    "fragment": "html",
+    "content": ""
+  },
+  {
+    "id": "components/input-color#inline",
+    "title": "Inline",
+    "category": "Components",
+    "route": "components/input-color",
+    "fragment": "inline",
     "content": ""
   },
   {
@@ -643,7 +570,7 @@
     "title": "Input Currency",
     "category": "Components",
     "route": "components/input-currency",
-    "content": "Input Currency Installation HTML TypeScript"
+    "content": "Input Currency Installation HTML"
   },
   {
     "id": "components/input-currency#installation",
@@ -662,19 +589,11 @@
     "content": ""
   },
   {
-    "id": "components/input-currency#typescript",
-    "title": "TypeScript",
-    "category": "Components",
-    "route": "components/input-currency",
-    "fragment": "typescript",
-    "content": ""
-  },
-  {
     "id": "components/input-field",
     "title": "Input Field",
     "category": "Components",
     "route": "components/input-field",
-    "content": "Input Field Installation Sizes TypeScript"
+    "content": "Input Field Installation Sizes"
   },
   {
     "id": "components/input-field#installation",
@@ -693,19 +612,11 @@
     "content": ""
   },
   {
-    "id": "components/input-field#typescript",
-    "title": "TypeScript",
-    "category": "Components",
-    "route": "components/input-field",
-    "fragment": "typescript",
-    "content": ""
-  },
-  {
     "id": "components/loading",
     "title": "Loading",
     "category": "Components",
     "route": "components/loading",
-    "content": "Loading Installation Ball Bars Dots Infinity Ring Spinner TypeScript"
+    "content": "Loading Installation Ball Bars Dots Infinity Ring Spinner"
   },
   {
     "id": "components/loading#installation",
@@ -761,14 +672,6 @@
     "category": "Components",
     "route": "components/loading",
     "fragment": "spinner",
-    "content": ""
-  },
-  {
-    "id": "components/loading#typescript",
-    "title": "TypeScript",
-    "category": "Components",
-    "route": "components/loading",
-    "fragment": "typescript",
     "content": ""
   },
   {
@@ -894,7 +797,7 @@
     "title": "Pagination",
     "category": "Components",
     "route": "components/pagination",
-    "content": "Pagination Installation HTML TypeScript"
+    "content": "Pagination Installation HTML"
   },
   {
     "id": "components/pagination#installation",
@@ -913,19 +816,11 @@
     "content": ""
   },
   {
-    "id": "components/pagination#typescript",
-    "title": "TypeScript",
-    "category": "Components",
-    "route": "components/pagination",
-    "fragment": "typescript",
-    "content": ""
-  },
-  {
     "id": "components/radio",
     "title": "Radio",
     "category": "Components",
     "route": "components/radio",
-    "content": "Radio Installation Disabled Sizes Variants TypeScript"
+    "content": "Radio Installation Disabled Sizes Variants"
   },
   {
     "id": "components/radio#installation",
@@ -960,19 +855,11 @@
     "content": ""
   },
   {
-    "id": "components/radio#typescript",
-    "title": "TypeScript",
-    "category": "Components",
-    "route": "components/radio",
-    "fragment": "typescript",
-    "content": ""
-  },
-  {
     "id": "components/range",
     "title": "Range",
     "category": "Components",
     "route": "components/range",
-    "content": "Range Installation Disabled Sizes Variants TypeScript"
+    "content": "Range Installation Disabled Sizes Variants"
   },
   {
     "id": "components/range#installation",
@@ -1007,19 +894,11 @@
     "content": ""
   },
   {
-    "id": "components/range#typescript",
-    "title": "TypeScript",
-    "category": "Components",
-    "route": "components/range",
-    "fragment": "typescript",
-    "content": ""
-  },
-  {
     "id": "components/select",
     "title": "Select",
     "category": "Components",
     "route": "components/select",
-    "content": "Select Installation Disabled Multiple Single Sizes TypeScript"
+    "content": "Select Installation Disabled Multiple Single Sizes"
   },
   {
     "id": "components/select#installation",
@@ -1059,14 +938,6 @@
     "category": "Components",
     "route": "components/select",
     "fragment": "sizes",
-    "content": ""
-  },
-  {
-    "id": "components/select#typescript",
-    "title": "TypeScript",
-    "category": "Components",
-    "route": "components/select",
-    "fragment": "typescript",
     "content": ""
   },
   {
@@ -1121,7 +992,7 @@
     "title": "Skeleton",
     "category": "Components",
     "route": "components/skeleton",
-    "content": "Skeleton Installation Circle Composition Rect Text TypeScript"
+    "content": "Skeleton Installation Circle Composition Rect Text"
   },
   {
     "id": "components/skeleton#installation",
@@ -1164,19 +1035,11 @@
     "content": ""
   },
   {
-    "id": "components/skeleton#typescript",
-    "title": "TypeScript",
-    "category": "Components",
-    "route": "components/skeleton",
-    "fragment": "typescript",
-    "content": ""
-  },
-  {
     "id": "components/stepper",
     "title": "Stepper",
     "category": "Components",
     "route": "components/stepper",
-    "content": "Stepper Installation HTML TypeScript"
+    "content": "Stepper Installation HTML"
   },
   {
     "id": "components/stepper#installation",
@@ -1195,19 +1058,11 @@
     "content": ""
   },
   {
-    "id": "components/stepper#typescript",
-    "title": "TypeScript",
-    "category": "Components",
-    "route": "components/stepper",
-    "fragment": "typescript",
-    "content": ""
-  },
-  {
     "id": "components/table",
     "title": "Table",
     "category": "Components",
     "route": "components/table",
-    "content": "Table Installation Ordered Pin Header Zebra HTML TypeScript"
+    "content": "Table Installation HTML Ordered Pin Header Zebra"
   },
   {
     "id": "components/table#installation",
@@ -1215,6 +1070,14 @@
     "category": "Components",
     "route": "components/table",
     "fragment": "installation",
+    "content": ""
+  },
+  {
+    "id": "components/table#html",
+    "title": "HTML",
+    "category": "Components",
+    "route": "components/table",
+    "fragment": "html",
     "content": ""
   },
   {
@@ -1242,27 +1105,11 @@
     "content": ""
   },
   {
-    "id": "components/table#html",
-    "title": "HTML",
-    "category": "Components",
-    "route": "components/table",
-    "fragment": "html",
-    "content": ""
-  },
-  {
-    "id": "components/table#typescript",
-    "title": "TypeScript",
-    "category": "Components",
-    "route": "components/table",
-    "fragment": "typescript",
-    "content": ""
-  },
-  {
     "id": "components/tabs",
     "title": "Tabs",
     "category": "Components",
     "route": "components/tabs",
-    "content": "Tabs Installation HTML TypeScript"
+    "content": "Tabs Installation HTML"
   },
   {
     "id": "components/tabs#installation",
@@ -1281,19 +1128,11 @@
     "content": ""
   },
   {
-    "id": "components/tabs#typescript",
-    "title": "TypeScript",
-    "category": "Components",
-    "route": "components/tabs",
-    "fragment": "typescript",
-    "content": ""
-  },
-  {
     "id": "components/textarea",
     "title": "Textarea",
     "category": "Components",
     "route": "components/textarea",
-    "content": "Textarea Installation Sizes TypeScript"
+    "content": "Textarea Installation Sizes"
   },
   {
     "id": "components/textarea#installation",
@@ -1312,19 +1151,122 @@
     "content": ""
   },
   {
-    "id": "components/textarea#typescript",
-    "title": "TypeScript",
+    "id": "components/text-editor",
+    "title": "Text Editor",
     "category": "Components",
-    "route": "components/textarea",
-    "fragment": "typescript",
+    "route": "components/text-editor",
+    "content": "Text Editor Installation For API image upload, also install HttpBase: HTML Image Output Image Upload File Service Overview Image insertion (toolbar button, drag & drop, and paste) is handled internally by the text editor. Your app only implements with and . By default, the editor uses , which embeds images as base64 URLs. Building a custom FileService Install HttpBase and implement (see Http Base): 1. upload(folder, files) Send with and , return the persisted from your API. Private helpers (such as ) come before the public methods. 2. download(fileId) the file with , build with and return it. The editor calls when the user adds an image, then for preview. On load, it calls for every in the HTML. Inserted in the editor (preview only): Persisted in your database: 3. Register the service Provide your on the page that uses the editor: Pass the folder to the editor: 4. Extract image IDs Each image is stored in the HTML as on the tag. Read the form control value and collect the ids: Alternatively, use and read — a signal updated on every editor change. 5. Save the form Send the normalized HTML and the extracted ids to your API: The editor removes temporary URLs from the form value via . API Export Description --- --- Contract with and . returned by . Parses the HTML and returns every from tags. Removes temporary URLs from HTML (applied automatically on output). Signal on with the current attached ids (same values as above). Input on passed to ."
+  },
+  {
+    "id": "components/text-editor#installation",
+    "title": "Installation",
+    "category": "Components",
+    "route": "components/text-editor",
+    "fragment": "installation",
+    "content": "For API image upload, also install HttpBase:"
+  },
+  {
+    "id": "components/text-editor#html",
+    "title": "HTML",
+    "category": "Components",
+    "route": "components/text-editor",
+    "fragment": "html",
     "content": ""
+  },
+  {
+    "id": "components/text-editor#image-output",
+    "title": "Image Output",
+    "category": "Components",
+    "route": "components/text-editor",
+    "fragment": "image-output",
+    "content": ""
+  },
+  {
+    "id": "components/text-editor#image-upload",
+    "title": "Image Upload",
+    "category": "Components",
+    "route": "components/text-editor",
+    "fragment": "image-upload",
+    "content": ""
+  },
+  {
+    "id": "components/text-editor#file-service",
+    "title": "File Service",
+    "category": "Components",
+    "route": "components/text-editor",
+    "fragment": "file-service",
+    "content": ""
+  },
+  {
+    "id": "components/text-editor#overview",
+    "title": "Overview",
+    "category": "Components",
+    "route": "components/text-editor",
+    "fragment": "overview",
+    "content": "Image insertion (toolbar button, drag & drop, and paste) is handled internally by the text editor. Your app only implements with and . By default, the editor uses , which embeds images as base64 URLs."
+  },
+  {
+    "id": "components/text-editor#building-a-custom-fileservice",
+    "title": "Building a custom FileService",
+    "category": "Components",
+    "route": "components/text-editor",
+    "fragment": "building-a-custom-fileservice",
+    "content": "Install HttpBase and implement (see Http Base):"
+  },
+  {
+    "id": "components/text-editor#1-uploadfolder-files",
+    "title": "1. upload(folder, files)",
+    "category": "Components",
+    "route": "components/text-editor",
+    "fragment": "1-uploadfolder-files",
+    "content": "Send with and , return the persisted from your API. Private helpers (such as ) come before the public methods."
+  },
+  {
+    "id": "components/text-editor#2-downloadfileid",
+    "title": "2. download(fileId)",
+    "category": "Components",
+    "route": "components/text-editor",
+    "fragment": "2-downloadfileid",
+    "content": "the file with , build with and return it. The editor calls when the user adds an image, then for preview. On load, it calls for every in the HTML. Inserted in the editor (preview only): Persisted in your database:"
+  },
+  {
+    "id": "components/text-editor#3-register-the-service",
+    "title": "3. Register the service",
+    "category": "Components",
+    "route": "components/text-editor",
+    "fragment": "3-register-the-service",
+    "content": "Provide your on the page that uses the editor: Pass the folder to the editor:"
+  },
+  {
+    "id": "components/text-editor#4-extract-image-ids",
+    "title": "4. Extract image IDs",
+    "category": "Components",
+    "route": "components/text-editor",
+    "fragment": "4-extract-image-ids",
+    "content": "Each image is stored in the HTML as on the tag. Read the form control value and collect the ids: Alternatively, use and read — a signal updated on every editor change."
+  },
+  {
+    "id": "components/text-editor#5-save-the-form",
+    "title": "5. Save the form",
+    "category": "Components",
+    "route": "components/text-editor",
+    "fragment": "5-save-the-form",
+    "content": "Send the normalized HTML and the extracted ids to your API: The editor removes temporary URLs from the form value via ."
+  },
+  {
+    "id": "components/text-editor#api",
+    "title": "API",
+    "category": "Components",
+    "route": "components/text-editor",
+    "fragment": "api",
+    "content": "Export Description --- --- Contract with and . returned by . Parses the HTML and returns every from tags. Removes temporary URLs from HTML (applied automatically on output). Signal on with the current attached ids (same values as above). Input on passed to ."
   },
   {
     "id": "components/toast",
     "title": "Toast",
     "category": "Components",
     "route": "components/toast",
-    "content": "Toast Installation HTML TypeScript"
+    "content": "Toast Installation HTML"
   },
   {
     "id": "components/toast#installation",
@@ -1343,19 +1285,11 @@
     "content": ""
   },
   {
-    "id": "components/toast#typescript",
-    "title": "TypeScript",
-    "category": "Components",
-    "route": "components/toast",
-    "fragment": "typescript",
-    "content": ""
-  },
-  {
     "id": "components/toggle",
     "title": "Toggle",
     "category": "Components",
     "route": "components/toggle",
-    "content": "Toggle Installation Disabled Sizes Variants TypeScript"
+    "content": "Toggle Installation Disabled Sizes Variants"
   },
   {
     "id": "components/toggle#installation",
@@ -1390,19 +1324,11 @@
     "content": ""
   },
   {
-    "id": "components/toggle#typescript",
-    "title": "TypeScript",
-    "category": "Components",
-    "route": "components/toggle",
-    "fragment": "typescript",
-    "content": ""
-  },
-  {
     "id": "components/tooltip",
     "title": "Tooltip",
     "category": "Components",
     "route": "components/tooltip",
-    "content": "Tooltip Installation Positions Variants TypeScript"
+    "content": "Tooltip Installation Positions Variants"
   },
   {
     "id": "components/tooltip#installation",
@@ -1429,19 +1355,11 @@
     "content": ""
   },
   {
-    "id": "components/tooltip#typescript",
-    "title": "TypeScript",
-    "category": "Components",
-    "route": "components/tooltip",
-    "fragment": "typescript",
-    "content": ""
-  },
-  {
     "id": "components/validator",
     "title": "Validator",
     "category": "Components",
     "route": "components/validator",
-    "content": "Validator Installation HTML TypeScript"
+    "content": "Validator Installation HTML"
   },
   {
     "id": "components/validator#installation",
@@ -1457,14 +1375,6 @@
     "category": "Components",
     "route": "components/validator",
     "fragment": "html",
-    "content": ""
-  },
-  {
-    "id": "components/validator#typescript",
-    "title": "TypeScript",
-    "category": "Components",
-    "route": "components/validator",
-    "fragment": "typescript",
     "content": ""
   },
   {

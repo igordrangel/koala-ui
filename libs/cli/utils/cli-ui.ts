@@ -48,6 +48,7 @@ const SECTION_ICONS: Record<string, string> = {
   components: '🧩',
   css: '🎨',
   coreResources: '🔑',
+  icons: '🖼️ ',
 };
 
 export function logInstallSummary(log: Logger, component: string, result: InstallResult) {
@@ -59,6 +60,7 @@ export function logInstallSummary(log: Logger, component: string, result: Instal
     { key: 'base', label: 'base' },
     { key: 'components', label: 'components' },
     { key: 'css', label: 'css' },
+    { key: 'icons', label: 'icons' },
     { key: 'coreResources', label: 'core resources' },
   ];
 

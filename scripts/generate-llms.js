@@ -85,6 +85,7 @@ const COMPONENTS = [
   { name: 'inline-filter', label: 'Inline Filter' },
   { name: 'input-cnpj', label: 'Input CNPJ' },
   { name: 'input-cpf', label: 'Input CPF' },
+  { name: 'input-color', label: 'Input Color' },
   { name: 'input-currency', label: 'Input Currency' },
   { name: 'input-field', label: 'Input Field' },
   { name: 'loading', label: 'Loading' },
@@ -100,6 +101,7 @@ const COMPONENTS = [
   { name: 'table', label: 'Table' },
   { name: 'tabs', label: 'Tabs' },
   { name: 'textarea', label: 'Textarea' },
+  { name: 'text-editor', label: 'Text Editor' },
   { name: 'toast', label: 'Toast' },
   { name: 'toggle', label: 'Toggle' },
   { name: 'tooltip', label: 'Tooltip' },
@@ -192,8 +194,21 @@ function buildComponentDoc(component) {
 
     // Group: TS files after HTML files for each section prefix
     const tsFiles = files.filter((f) => f.endsWith('.ts.md'));
-    const htmlFiles = files.filter((f) => f.endsWith('.html.md'));
-    const otherFiles = files.filter((f) => !f.endsWith('.ts.md') && !f.endsWith('.html.md'));
+    const htmlFiles = files
+      .filter((f) => f.endsWith('.html.md'))
+      .sort((a, b) => {
+        const defaultHtml = `${name}.html.md`;
+        if (a === defaultHtml) return -1;
+        if (b === defaultHtml) return 1;
+        return a.localeCompare(b);
+      });
+    const otherFiles = files
+      .filter((f) => !f.endsWith('.ts.md') && !f.endsWith('.html.md'))
+      .sort((a, b) => {
+        if (a === 'overview.md') return 1;
+        if (b === 'overview.md') return -1;
+        return a.localeCompare(b);
+      });
 
     // Build sections by grouping .html.md + its matching .ts.md
     const usedTs = new Set();
@@ -210,7 +225,7 @@ function buildComponentDoc(component) {
 
       if (matchingTs && !usedTs.has(matchingTs)) {
         block += `\n\n${read(join(usagePath, matchingTs))}`;
-        if (matchingTs !== `${name}.ts.md`) usedTs.add(matchingTs);
+        usedTs.add(matchingTs);
       }
 
       sections.push(block);

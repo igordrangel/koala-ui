@@ -1,0 +1,15 @@
+<div class="flex flex-col border border-base-300 rounded-lg h-full">
+  <app-text-editor-toolbar
+    [editor]="editor"
+    [files]="files()"
+    (filesUploaded)="clearFiles()"
+  />
+  <div class="relative overflow-auto h-full flex-1 min-h-0">
+    <tiptap-editor class="overflow-auto h-full" [editor]="editor" />
+    <app-text-editor-table-controls [editor]="editor" />
+    <app-text-editor-table-selection-overlay
+      [editor]="editor"
+      [clickTriggered]="clickTriggered()"
+    />
+  </div>
+</div>

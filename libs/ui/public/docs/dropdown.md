@@ -65,19 +65,6 @@ export class DropdownSample {}
 </app-dropdown>
 ```
 
-```typescript
-import { Component } from '@angular/core';
-import { Button } from '@/shared/components/button';
-import { Dropdown } from '@/shared/components/dropdown';
-
-@Component({
-  selector: 'app-dropdown-sample',
-  templateUrl: './dropdown.sample.html',
-  imports: [Button, Dropdown],
-})
-export class DropdownSample {}
-```
-
 ### Popover
 
 ```html
@@ -87,32 +74,4 @@ export class DropdownSample {}
     <p class="p-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, voluptate.</p>
   </div>
 </app-dropdown>
-```
-
-```typescript
-import { Component } from '@angular/core';
-import { Button } from '@/shared/components/button';
-import { Dropdown } from '@/shared/components/dropdown';
-
-@Component({
-  selector: 'app-dropdown-sample',
-  templateUrl: './dropdown.sample.html',
-  imports: [Button, Dropdown],
-})
-export class DropdownSample {}
-```
-
-### TypeScript
-
-```typescript
-import { Component } from '@angular/core';
-import { Button } from '@/shared/components/button';
-import { Dropdown } from '@/shared/components/dropdown';
-
-@Component({
-  selector: 'app-dropdown-sample',
-  templateUrl: './dropdown.sample.html',
-  imports: [Button, Dropdown],
-})
-export class DropdownSample {}
 ```

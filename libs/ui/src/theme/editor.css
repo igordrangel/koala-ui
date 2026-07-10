@@ -1,0 +1,171 @@
+tiptap-editor h1,
+.editor-text-content h1 {
+  font-size: var(--text-3xl);
+  font-weight: 600;
+}
+
+tiptap-editor h2,
+.editor-text-content h2 {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+}
+
+tiptap-editor h3,
+.editor-text-content h3 {
+  font-size: var(--text-xl);
+  font-weight: 600;
+}
+
+tiptap-editor h4,
+.editor-text-content h4 {
+  font-size: var(--text-lg);
+  font-weight: 600;
+}
+
+tiptap-editor ul,
+.editor-text-content ul {
+  list-style: disc;
+  margin-left: 1.5rem;
+}
+
+tiptap-editor ol,
+.editor-text-content ol {
+  list-style: decimal;
+  margin-left: 1.5rem;
+}
+
+tiptap-editor blockquote,
+.editor-text-content blockquote {
+  border-left: 4px solid var(--color-base-content);
+  padding-left: 1rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+tiptap-editor pre,
+.editor-text-content pre {
+  border: 1px solid var(--color-base-300);
+  background-color: var(--color-base-100);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+tiptap-editor code,
+.editor-text-content code {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: var(--color-base-100);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+}
+
+tiptap-editor a,
+.editor-text-content a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+tiptap-editor table,
+.editor-text-content table {
+  border-collapse: collapse;
+  margin-block: 2rem;
+  table-layout: fixed;
+  width: 100%;
+}
+
+tiptap-editor .resize-cursor {
+  cursor: col-resize;
+}
+
+tiptap-editor table td,
+tiptap-editor table th {
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--color-base-300);
+  box-sizing: border-box;
+  min-width: 1rem;
+  padding: 0.5rem 0.625rem;
+  position: relative;
+  vertical-align: top;
+
+  > * {
+    margin-bottom: 0;
+  }
+}
+
+tiptap-editor table[data-border-color] td,
+tiptap-editor table[data-border-color] th {
+  border-color: var(--table-border-color);
+}
+
+tiptap-editor table .column-resize-handle {
+  background-color: var(--color-primary);
+  bottom: -2px;
+  pointer-events: none;
+  position: absolute;
+  right: -2px;
+  top: 0;
+  width: 4px;
+}
+
+.editor-text-content p {
+  margin-block: 0.5rem;
+}
+
+tiptap-editor img.editor-image,
+.editor-text-content img.editor-image {
+  display: block;
+  max-width: 100%;
+}
+
+tiptap-editor [data-node='image'],
+.editor-text-content [data-node='image'] {
+  display: inline-flex !important;
+  width: fit-content;
+  max-width: 100%;
+  vertical-align: bottom;
+}
+
+tiptap-editor .ProseMirror-selectednode[data-node='image'],
+.editor-text-content .ProseMirror-selectednode[data-node='image'] {
+  cursor: grab;
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+tiptap-editor .ProseMirror-selectednode[data-node='image']:active,
+.editor-text-content .ProseMirror-selectednode[data-node='image']:active {
+  cursor: grabbing;
+}
+
+tiptap-editor [data-resize-handle],
+.editor-text-content [data-resize-handle] {
+  background-color: var(--color-primary);
+  border: 2px solid white;
+  border-radius: 2px;
+  height: 10px;
+  opacity: 0;
+  transition: opacity 0.15s;
+  width: 10px;
+  z-index: 1;
+}
+
+tiptap-editor .ProseMirror-selectednode [data-resize-handle],
+.editor-text-content .ProseMirror-selectednode [data-resize-handle] {
+  opacity: 1;
+}
+
+tiptap-editor [data-resize-handle='top-left'],
+tiptap-editor [data-resize-handle='bottom-right'],
+.editor-text-content [data-resize-handle='top-left'],
+.editor-text-content [data-resize-handle='bottom-right'] {
+  cursor: nwse-resize;
+}
+
+tiptap-editor [data-resize-handle='top-right'],
+tiptap-editor [data-resize-handle='bottom-left'],
+.editor-text-content [data-resize-handle='top-right'],
+.editor-text-content [data-resize-handle='bottom-left'] {
+  cursor: nesw-resize;
+}

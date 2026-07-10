@@ -51,6 +51,7 @@ kl install modal --project my-angular-app
 - **Inline Filter** – `kl install -n inline-filter`
 - **Input CNPJ** – `kl install -n input-cnpj`
 - **Input CPF** – `kl install -n input-cpf`
+- **Input Color** – `kl install -n input-color`
 - **Input Currency** – `kl install -n input-currency`
 - **Input Field** – `kl install -n input-field`
 - **Loading** – `kl install -n loading`
@@ -66,6 +67,7 @@ kl install modal --project my-angular-app
 - **Table** – `kl install -n table`
 - **Tabs** – `kl install -n tabs`
 - **Textarea** – `kl install -n textarea`
+- **Text Editor** – `kl install -n text-editor`
 - **Toast** – `kl install -n toast`
 - **Toggle** – `kl install -n toggle`
 - **Tooltip** – `kl install -n tooltip`

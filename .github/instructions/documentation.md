@@ -26,7 +26,7 @@ Para resources, use `overview.md` (não `<name>.md`) para evitar o heading `### 
 ## Checklist — novo component
 
 1. Implementar em `libs/ui/src/app/shared/components/<name>/`
-2. Adicionar flag em `libs/cli/utils/install-component.ts` (`InstallComponentFlagsList` + deps no `switch`)
+2. Adicionar flag em `libs/cli/utils/install-component.ts` (`InstallComponentFlagsList` + deps no `switch`). Se usar ícones SVG customizados, registrar em `install-icon.ts` e copiar os arquivos em `build.js` (`dist/ui/assets/icons`)
 3. Criar `libs/ui/public/markdown/install/<name>-install.md`
 4. Criar snippets em `libs/ui/public/markdown/usage/<name>/`
 5. Criar página em `libs/ui/src/app/features/components/<name>/`
@@ -65,7 +65,21 @@ coreResourceDeps.push('interceptors/feedback-request-interceptor');
 
 // Componente dependente
 componentDeps.push('toast');
+
+// Tema CSS
+cssDeps.push('editor');
+
+// Ícones SVG (copia para public/assets/icons e roda generate-icons.js)
+iconSetDeps.push('text-editor-icons');
 ```
+
+For API image upload, also install HttpBase:
+
+```bash
+kl install http-base
+```
+
+Pair with [Http Base](./http-base.md) when implementing `TextEditorFileService`.
 
 ## Cross-links
 
