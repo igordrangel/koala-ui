@@ -38,18 +38,6 @@ export class LoadingSample {}
 <app-loading variant="bars" size="xl">Extra Large</app-loading>
 ```
 
-```typescript
-import { Component } from '@angular/core';
-import { Loading } from '@/shared/components/loading';
-
-@Component({
-  selector: 'app-loading-sample',
-  templateUrl: './loading.sample.html',
-  imports: [Loading],
-})
-export class LoadingSample {}
-```
-
 ### Dots
 
 ```html
@@ -58,18 +46,6 @@ export class LoadingSample {}
 <app-loading variant="dots" size="md">Medium</app-loading>
 <app-loading variant="dots" size="lg">Large</app-loading>
 <app-loading variant="dots" size="xl">Extra Large</app-loading>
-```
-
-```typescript
-import { Component } from '@angular/core';
-import { Loading } from '@/shared/components/loading';
-
-@Component({
-  selector: 'app-loading-sample',
-  templateUrl: './loading.sample.html',
-  imports: [Loading],
-})
-export class LoadingSample {}
 ```
 
 ### Infinity
@@ -82,18 +58,6 @@ export class LoadingSample {}
 <app-loading variant="infinity" size="xl">Extra Large</app-loading>
 ```
 
-```typescript
-import { Component } from '@angular/core';
-import { Loading } from '@/shared/components/loading';
-
-@Component({
-  selector: 'app-loading-sample',
-  templateUrl: './loading.sample.html',
-  imports: [Loading],
-})
-export class LoadingSample {}
-```
-
 ### Ring
 
 ```html
@@ -104,18 +68,6 @@ export class LoadingSample {}
 <app-loading variant="ring" size="xl">Extra Large</app-loading>
 ```
 
-```typescript
-import { Component } from '@angular/core';
-import { Loading } from '@/shared/components/loading';
-
-@Component({
-  selector: 'app-loading-sample',
-  templateUrl: './loading.sample.html',
-  imports: [Loading],
-})
-export class LoadingSample {}
-```
-
 ### Spinner
 
 ```html
@@ -124,30 +76,4 @@ export class LoadingSample {}
 <app-loading variant="spinner" size="md">Medium</app-loading>
 <app-loading variant="spinner" size="lg">Large</app-loading>
 <app-loading variant="spinner" size="xl">Extra Large</app-loading>
-```
-
-```typescript
-import { Component } from '@angular/core';
-import { Loading } from '@/shared/components/loading';
-
-@Component({
-  selector: 'app-loading-sample',
-  templateUrl: './loading.sample.html',
-  imports: [Loading],
-})
-export class LoadingSample {}
-```
-
-### TypeScript
-
-```typescript
-import { Component } from '@angular/core';
-import { Loading } from '@/shared/components/loading';
-
-@Component({
-  selector: 'app-loading-sample',
-  templateUrl: './loading.sample.html',
-  imports: [Loading],
-})
-export class LoadingSample {}
 ```

@@ -6,6 +6,28 @@
 kl install collapse
 ```
 
+### HTML
+
+```html
+<app-collapse class="w-full" type="collapse">
+  <ng-container title>How do I create an account?</ng-container>
+
+  Click the "Sign Up" button in the top right corner and follow the registration process.
+</app-collapse>
+```
+
+```typescript
+import { Component } from '@angular/core';
+import { Collapse } from '@/shared/components/collapse';
+
+@Component({
+  selector: 'app-collapse-sample',
+  templateUrl: './collapse.sample.html',
+  imports: [Collapse],
+})
+export class CollapseSample {}
+```
+
 ### Accordion
 
 ```html
@@ -38,40 +60,4 @@ import { Collapse } from '@/shared/components/collapse';
   imports: [Collapse],
 })
 export class AccordionSample {}
-```
-
-### HTML
-
-```html
-<app-collapse class="w-full" type="collapse">
-  <ng-container title>How do I create an account?</ng-container>
-
-  Click the "Sign Up" button in the top right corner and follow the registration process.
-</app-collapse>
-```
-
-```typescript
-import { Component } from '@angular/core';
-import { Collapse } from '@/shared/components/collapse';
-
-@Component({
-  selector: 'app-collapse-sample',
-  templateUrl: './collapse.sample.html',
-  imports: [Collapse],
-})
-export class CollapseSample {}
-```
-
-### TypeScript
-
-```typescript
-import { Component } from '@angular/core';
-import { Collapse } from '@/shared/components/collapse';
-
-@Component({
-  selector: 'app-collapse-sample',
-  templateUrl: './collapse.sample.html',
-  imports: [Collapse],
-})
-export class CollapseSample {}
 ```

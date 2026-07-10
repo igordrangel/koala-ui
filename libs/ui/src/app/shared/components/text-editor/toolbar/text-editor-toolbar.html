@@ -1,0 +1,39 @@
+<nav class="flex flex-wrap items-center border-b border-base-300 p-2">
+  <app-text-editor-tool-undo [editor]="editor()" />
+  <app-text-editor-tool-redo [editor]="editor()" />
+
+  <app-text-editor-tool-divider />
+
+  <app-text-editor-tool-heading [editor]="editor()" />
+  <app-text-editor-tool-list [editor]="editor()" />
+  <app-text-editor-tool-blockquote [editor]="editor()" />
+  <app-text-editor-tool-code-block [editor]="editor()" />
+  <app-text-editor-tool-table [editor]="editor()" />
+
+  <app-text-editor-tool-divider />
+
+  <app-text-editor-tool-bold [editor]="editor()" />
+  <app-text-editor-tool-italic [editor]="editor()" />
+  <app-text-editor-tool-strike [editor]="editor()" />
+  <app-text-editor-tool-code [editor]="editor()" />
+  <app-text-editor-tool-underline [editor]="editor()" />
+  <app-text-editor-tool-font-color [editor]="editor()" />
+  <app-text-editor-tool-background-color [editor]="editor()" />
+  <app-text-editor-tool-highlight [editor]="editor()" />
+  <app-text-editor-tool-link [editor]="editor()" />
+
+  <app-text-editor-tool-divider />
+
+  <app-text-editor-tool-align-left [editor]="editor()" />
+  <app-text-editor-tool-align-center [editor]="editor()" />
+  <app-text-editor-tool-align-right [editor]="editor()" />
+  <app-text-editor-tool-align-justify [editor]="editor()" />
+
+  <app-text-editor-tool-divider />
+
+  <app-text-editor-tool-image
+    [editor]="editor()"
+    [files]="files()"
+    (filesUploaded)="filesUploaded.emit()"
+  />
+</nav>

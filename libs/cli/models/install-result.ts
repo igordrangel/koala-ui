@@ -14,5 +14,6 @@ export interface InstallResult {
   coreResources: InstallCoreResourceFlags[];
   libs: string[];
   css: string[];
+  icons: string[];
   missingLibs: string[];
 }

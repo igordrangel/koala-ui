@@ -21,6 +21,7 @@
 - [Inline Filter](https://ui.koalarx.com/docs/inline-filter.md): Inline Filter component
 - [Input CNPJ](https://ui.koalarx.com/docs/input-cnpj.md): Input CNPJ component
 - [Input CPF](https://ui.koalarx.com/docs/input-cpf.md): Input CPF component
+- [Input Color](https://ui.koalarx.com/docs/input-color.md): Input Color component
 - [Input Currency](https://ui.koalarx.com/docs/input-currency.md): Input Currency component
 - [Input Field](https://ui.koalarx.com/docs/input-field.md): Input Field component
 - [Loading](https://ui.koalarx.com/docs/loading.md): Loading component
@@ -36,6 +37,7 @@
 - [Table](https://ui.koalarx.com/docs/table.md): Table component
 - [Tabs](https://ui.koalarx.com/docs/tabs.md): Tabs component
 - [Textarea](https://ui.koalarx.com/docs/textarea.md): Textarea component
+- [Text Editor](https://ui.koalarx.com/docs/text-editor.md): Text Editor component
 - [Toast](https://ui.koalarx.com/docs/toast.md): Toast component
 - [Toggle](https://ui.koalarx.com/docs/toggle.md): Toggle component
 - [Tooltip](https://ui.koalarx.com/docs/tooltip.md): Tooltip component

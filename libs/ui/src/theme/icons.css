@@ -1,9 +1,100 @@
 /* Generated Automatically - Do not edit manually */
 
+@utility add-image {
+  &::after {
+    -webkit-mask-image: url('/assets/icons/add-image.svg');
+    mask-image: url('/assets/icons/add-image.svg');
+  }
+}
+
+@utility add {
+  &::after {
+    -webkit-mask-image: url('/assets/icons/add.svg');
+    mask-image: url('/assets/icons/add.svg');
+  }
+}
+
+@utility blockquote {
+  &::after {
+    -webkit-mask-image: url('/assets/icons/blockquote.svg');
+    mask-image: url('/assets/icons/blockquote.svg');
+  }
+}
+
+@utility code-block {
+  &::after {
+    -webkit-mask-image: url('/assets/icons/code-block.svg');
+    mask-image: url('/assets/icons/code-block.svg');
+  }
+}
+
+@utility enter {
+  &::after {
+    -webkit-mask-image: url('/assets/icons/enter.svg');
+    mask-image: url('/assets/icons/enter.svg');
+  }
+}
+
+@utility grid-col {
+  &::after {
+    -webkit-mask-image: url('/assets/icons/grid-col.svg');
+    mask-image: url('/assets/icons/grid-col.svg');
+  }
+}
+
+@utility grid-row {
+  &::after {
+    -webkit-mask-image: url('/assets/icons/grid-row.svg');
+    mask-image: url('/assets/icons/grid-row.svg');
+  }
+}
+
+@utility heading-h1 {
+  &::after {
+    -webkit-mask-image: url('/assets/icons/heading-h1.svg');
+    mask-image: url('/assets/icons/heading-h1.svg');
+  }
+}
+
+@utility heading-h2 {
+  &::after {
+    -webkit-mask-image: url('/assets/icons/heading-h2.svg');
+    mask-image: url('/assets/icons/heading-h2.svg');
+  }
+}
+
+@utility heading-h3 {
+  &::after {
+    -webkit-mask-image: url('/assets/icons/heading-h3.svg');
+    mask-image: url('/assets/icons/heading-h3.svg');
+  }
+}
+
+@utility heading-h4 {
+  &::after {
+    -webkit-mask-image: url('/assets/icons/heading-h4.svg');
+    mask-image: url('/assets/icons/heading-h4.svg');
+  }
+}
+
+@utility highlight {
+  &::after {
+    -webkit-mask-image: url('/assets/icons/highlight.svg');
+    mask-image: url('/assets/icons/highlight.svg');
+  }
+}
+
 @utility kl-logotype {
   &::after {
     -webkit-mask-image: url('/assets/icons/kl-logotype.svg');
     mask-image: url('/assets/icons/kl-logotype.svg');
+  }
+}
+
+@utility trash {
+  &::after {
+    -webkit-mask-image: url('/assets/icons/trash.svg');
+    mask-image: url('/assets/icons/trash.svg');
   }
 }
 

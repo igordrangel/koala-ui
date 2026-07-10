@@ -9,11 +9,11 @@
   scrollbar-color: var(--color-zinc-400) var(--color-base-200);
 }
 
-table :where(.table-pin-rows thead tr) {
+app-table table :where(.table-pin-rows thead tr) {
   background-color: var(--color-base-200);
 }
 
-.table-container {
+app-table .table-container {
   scroll-timeline: --check-table-scroll y;
   --border-scroll-color: transparent;
 
@@ -21,7 +21,7 @@ table :where(.table-pin-rows thead tr) {
   animation-timeline: --check-table-scroll;
 }
 
-table th:last-child,
-table td:last-child {
+app-table table th:last-child,
+app-table table td:last-child {
   border-right: 1px solid var(--border-scroll-color);
 }

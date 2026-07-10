@@ -9,6 +9,7 @@
 @import './theme/modal.css';
 @import './theme/side-window.css';
 @import './theme/bottom-sheet.css';
+@import './theme/editor.css';
 
 @import 'prism-themes/themes/prism-atom-dark.min.css';
 @import 'prismjs/plugins/line-numbers/prism-line-numbers.min.css';
@@ -89,10 +90,6 @@
   --border: 1px;
   --depth: 1;
   --noise: 0;
-}
-
-[data-theme='koala'] *:disabled {
-  opacity: 80%;
 }
 
 :root {

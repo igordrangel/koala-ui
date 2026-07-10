@@ -8,6 +8,7 @@ import { InstallUtilFlags } from './install-util';
 import { InstallBaseFlags } from './install-base';
 import { InstallCoreResourceFlags } from './install-core-resource';
 import { InstallCssFlags } from './install-css';
+import { InstallIconSetFlags } from './install-icon';
 
 const originPath = path.join(__dirname, '../../');
 
@@ -50,6 +51,8 @@ export const InstallComponentFlagsList = [
   'global-errors',
   'auth',
   'bottom-sheet',
+  'input-color',
+  'text-editor',
 ] as const;
 export type InstallComponentFlags = (typeof InstallComponentFlagsList)[number];
 
@@ -95,6 +98,7 @@ export function installComponent(projectName: string, component: InstallComponen
   const baseDeps: InstallBaseFlags[] = [];
   const coreResourceDeps: InstallCoreResourceFlags[] = [];
   const cssDeps: InstallCssFlags[] = [];
+  const iconSetDeps: InstallIconSetFlags[] = [];
 
   switch (component) {
     case 'confirm':
@@ -212,6 +216,24 @@ export function installComponent(projectName: string, component: InstallComponen
     case 'modal':
       cssDeps.push('modal');
       break;
+    case 'input-color':
+      componentDeps.push('dropdown');
+      break;
+    case 'text-editor':
+      libDeps.push(
+        '@tiptap/starter-kit',
+        '@tiptap/extension-table',
+        '@tiptap/extension-highlight',
+        '@tiptap/extension-image',
+        '@tiptap/extension-text-align',
+        '@tiptap/extension-file-handler',
+        'ngx-tiptap',
+      );
+      componentDeps.push('dropdown', 'tooltip', 'input-color');
+      utilDeps.push('control-changes');
+      cssDeps.push('editor');
+      iconSetDeps.push('text-editor-icons');
+      break;
   }
 
   if (existsSync(componentOriginPath)) {
@@ -233,5 +255,6 @@ export function installComponent(projectName: string, component: InstallComponen
     baseDeps,
     coreResourceDeps,
     cssDeps,
+    iconSetDeps,
   };
 }

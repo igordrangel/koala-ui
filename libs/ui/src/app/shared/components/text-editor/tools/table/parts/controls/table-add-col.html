@@ -1,0 +1,14 @@
+@if (visible()) {
+  <button
+    type="button"
+    class="absolute pointer-events-auto flex items-center justify-center bg-primary/20 hover:bg-primary text-[0.5rem] cursor-pointer rounded-r transition-colors border-0 p-1"
+    [style.top.px]="position().top"
+    [style.left.px]="position().left"
+    [style.height.px]="position().height"
+    (mouseenter)="onButtonMouseEnter()"
+    (mouseleave)="onButtonMouseLeave()"
+    (click)="add()"
+  >
+    <i class="fa-solid fa-plus"></i>
+  </button>
+}

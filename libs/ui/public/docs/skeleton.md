@@ -46,64 +46,14 @@ export class SkeletonSample {}
 </div>
 ```
 
-```typescript
-import { Component } from '@angular/core';
-import { Skeleton } from '@/shared/components/skeleton';
-
-@Component({
-  selector: 'app-tabs-sample',
-  templateUrl: './tabs.sample.html',
-  imports: [Skeleton],
-})
-export class SkeletonSample {}
-```
-
 ### Rect
 
 ```html
 <app-skeleton class="w-32 h-32" variant="rect" />
 ```
 
-```typescript
-import { Component } from '@angular/core';
-import { Skeleton } from '@/shared/components/skeleton';
-
-@Component({
-  selector: 'app-tabs-sample',
-  templateUrl: './tabs.sample.html',
-  imports: [Skeleton],
-})
-export class SkeletonSample {}
-```
-
 ### Text
 
 ```html
 <app-skeleton variant="text">AI is thinking harder...</app-skeleton>
-```
-
-```typescript
-import { Component } from '@angular/core';
-import { Skeleton } from '@/shared/components/skeleton';
-
-@Component({
-  selector: 'app-tabs-sample',
-  templateUrl: './tabs.sample.html',
-  imports: [Skeleton],
-})
-export class SkeletonSample {}
-```
-
-### TypeScript
-
-```typescript
-import { Component } from '@angular/core';
-import { Skeleton } from '@/shared/components/skeleton';
-
-@Component({
-  selector: 'app-tabs-sample',
-  templateUrl: './tabs.sample.html',
-  imports: [Skeleton],
-})
-export class SkeletonSample {}
 ```

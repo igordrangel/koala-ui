@@ -1,0 +1,104 @@
+<app-section-container>
+  <ng-container title>Input Color</ng-container>
+  <ng-container description>
+    A color picker built on top of the dropdown component. It supports reactive forms, inline mode
+    for toolbars, and an optional transparent option.
+  </ng-container>
+
+  <app-section-content>
+    <ng-container title>Installation</ng-container>
+    <ng-container description
+      >Use the Koala CLI to generate a new input color component.</ng-container
+    >
+
+    <app-code-viewer language="bash" name="kl" src="markdown/install/input-color-install.md" />
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Default</ng-container>
+    <ng-container description>
+      The default picker renders as an input-sized trigger and emits the selected palette color name.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div class="flex flex-col gap-4 p-6 border border-t-0 border-base-300 rounded-b-lg">
+          <app-input-color class="w-full max-w-sm" [formControl]="colorControl" />
+
+          <div class="rounded-lg border border-dashed border-base-300 bg-base-200/50 p-4">
+            <p class="mb-2 text-sm font-medium">Value</p>
+            <pre class="text-sm whitespace-pre-wrap">{{ colorValue() | json }}</pre>
+          </div>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="input-color-sample.html"
+            src="markdown/usage/input-color/input-color.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="input-color-sample.ts"
+            src="markdown/usage/input-color/input-color.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>Inline</ng-container>
+    <ng-container description>
+      Use inline mode inside compact toolbars. Combine with clearable to allow a transparent border
+      selection.
+    </ng-container>
+
+    <div appTabGroup align="start" class="flex items-center">
+      <div appTab label="Preview" checked>
+        <div class="flex flex-col gap-4 p-6 border border-t-0 border-base-300 rounded-b-lg">
+          <div class="flex items-center gap-3">
+            <app-input-color inline clearable [formControl]="inlineColorControl" />
+            <span class="text-sm opacity-60">Compact trigger for toolbars</span>
+          </div>
+
+          <div class="rounded-lg border border-dashed border-base-300 bg-base-200/50 p-4">
+            <p class="mb-2 text-sm font-medium">Value</p>
+            <pre class="text-sm whitespace-pre-wrap">{{ inlineColorValue() | json }}</pre>
+          </div>
+        </div>
+      </div>
+
+      <div appTab label="HTML">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="html"
+            name="input-color-inline.html"
+            src="markdown/usage/input-color/input-color-inline.html.md"
+          />
+        </div>
+      </div>
+
+      <div appTab label="TS">
+        <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
+          <app-code-viewer
+            class="w-full"
+            language="typescript"
+            name="input-color-sample.ts"
+            src="markdown/usage/input-color/input-color.ts.md"
+          />
+        </div>
+      </div>
+    </div>
+  </app-section-content>
+</app-section-container>

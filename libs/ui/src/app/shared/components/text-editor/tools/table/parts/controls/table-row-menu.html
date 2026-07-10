@@ -1,0 +1,72 @@
+@if (showDropPreview()) {
+  <div
+    class="absolute z-30 border-2 border-primary border-dashed pointer-events-none box-border"
+    [style.top.px]="dropPreview().top"
+    [style.left.px]="dropPreview().left"
+    [style.width.px]="dropPreview().width"
+    [style.height.px]="dropPreview().height"
+  ></div>
+}
+
+@if (visible()) {
+  <div
+    class="absolute pointer-events-none"
+    [style.top.px]="position().top"
+    [style.left.px]="position().left"
+    [style.height.px]="position().height"
+  >
+    <div
+      class="absolute inset-y-0 right-full pointer-events-auto"
+      (mouseenter)="onMenuMouseEnter()"
+      (mouseleave)="onMenuMouseLeave($event)"
+    >
+      <app-dropdown
+        #rowMenu
+        class="h-full [&>button]:h-full"
+        insideClick
+        (opened)="onDropdownOpened()"
+        (closed)="onDropdownClosed()"
+      >
+        <button
+          type="button"
+          trigger
+          class="bg-primary/20 hover:bg-primary h-full flex items-center justify-center rounded-l text-[0.5rem] px-2 cursor-grab active:cursor-grabbing border-0 select-none touch-none"
+          [style.height.px]="position().height"
+          (pointerdown)="onTriggerPointerDown($event)"
+        >
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+        </button>
+
+        <div class="p-1" options>
+          <app-dropdown-option (click)="moveRowUp()"> Mover linha para cima </app-dropdown-option>
+          <app-dropdown-option (click)="moveRowDown()"> Mover linha para baixo </app-dropdown-option>
+
+          <span class="m-1 divider"></span>
+
+          <app-dropdown-option (click)="addRowBefore()"> Adicionar linha acima </app-dropdown-option>
+          <app-dropdown-option (click)="addRowAfter()"> Adicionar linha abaixo </app-dropdown-option>
+
+          <span class="m-1 divider"></span>
+
+          <div class="px-1 py-1">
+            <app-input-color
+              placeholder="Cor da borda"
+              clearable
+              [formControl]="borderColorControl"
+              [syncColorName]="tableBorderColorSync()"
+              (colorPicked)="onBorderColorPicked($event)"
+            />
+          </div>
+
+          <span class="m-1 divider"></span>
+
+          <app-dropdown-option (click)="deleteRow()"> Remover linha </app-dropdown-option>
+
+          <span class="m-1 divider"></span>
+
+          <app-dropdown-option (click)="deleteTable()"> Excluir tabela </app-dropdown-option>
+        </div>
+      </app-dropdown>
+    </div>
+  </div>
+}

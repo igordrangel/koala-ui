@@ -37,34 +37,10 @@ export class ButtonSample {}
 <button appButton dash variant="ghost">Ghost</button>
 ```
 
-```typescript
-import { Component } from '@angular/core';
-import { Button } from '@/shared/components/button';
-
-@Component({
-  selector: 'app-button-sample',
-  templateUrl: './button.sample.html',
-  imports: [Button],
-})
-export class ButtonSample {}
-```
-
 ### Disabled
 
 ```html
 <button appButton disabled variant="primary">Disabled</button>
-```
-
-```typescript
-import { Component } from '@angular/core';
-import { Button } from '@/shared/components/button';
-
-@Component({
-  selector: 'app-button-sample',
-  templateUrl: './button.sample.html',
-  imports: [Button],
-})
-export class ButtonSample {}
 ```
 
 ### Outline
@@ -80,18 +56,6 @@ export class ButtonSample {}
 <button appButton outline variant="ghost">Ghost</button>
 ```
 
-```typescript
-import { Component } from '@angular/core';
-import { Button } from '@/shared/components/button';
-
-@Component({
-  selector: 'app-button-sample',
-  templateUrl: './button.sample.html',
-  imports: [Button],
-})
-export class ButtonSample {}
-```
-
 ### Sizes
 
 ```html
@@ -100,18 +64,6 @@ export class ButtonSample {}
 <button appButton size="md">Medium</button>
 <button appButton size="lg">Large</button>
 <button appButton size="xl">Extra Large</button>
-```
-
-```typescript
-import { Component } from '@angular/core';
-import { Button } from '@/shared/components/button';
-
-@Component({
-  selector: 'app-button-sample',
-  templateUrl: './button.sample.html',
-  imports: [Button],
-})
-export class ButtonSample {}
 ```
 
 ### Soft
@@ -127,18 +79,6 @@ export class ButtonSample {}
 <button appButton soft variant="ghost">Ghost</button>
 ```
 
-```typescript
-import { Component } from '@angular/core';
-import { Button } from '@/shared/components/button';
-
-@Component({
-  selector: 'app-button-sample',
-  templateUrl: './button.sample.html',
-  imports: [Button],
-})
-export class ButtonSample {}
-```
-
 ### Variants
 
 ```html
@@ -150,30 +90,4 @@ export class ButtonSample {}
 <button appButton variant="info">Info</button>
 <button appButton variant="neutral">Neutral</button>
 <button appButton variant="ghost">Ghost</button>
-```
-
-```typescript
-import { Component } from '@angular/core';
-import { Button } from '@/shared/components/button';
-
-@Component({
-  selector: 'app-button-sample',
-  templateUrl: './button.sample.html',
-  imports: [Button],
-})
-export class ButtonSample {}
-```
-
-### TypeScript
-
-```typescript
-import { Component } from '@angular/core';
-import { Button } from '@/shared/components/button';
-
-@Component({
-  selector: 'app-button-sample',
-  templateUrl: './button.sample.html',
-  imports: [Button],
-})
-export class ButtonSample {}
 ```

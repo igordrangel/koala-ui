@@ -1,0 +1,28 @@
+<app-dropdown>
+  <button
+    trigger
+    class="btn btn-xs size-9! px-6! rounded-xl hover:dark:bg-neutral-900! hover:bg-neutral-100!"
+    type="button"
+    [class.btn-primary]="isActive()"
+    [class.btn-ghost]="!isActive()"
+    [class.btn-soft]="isActive()"
+    appTooltip="Cabeçalho"
+    [disabled]="!canToggle()"
+  >
+    <i [class]="iconClass()" [class.opacity-70!]="!isActive()"></i>
+    <i class="fa-solid fa-angle-down text-[0.6rem]" [class.opacity-70!]="!isActive()"></i>
+  </button>
+
+  <div class="p-1 w-51" options>
+    @for (item of options(); track $index) {
+      <app-dropdown-option
+        [class.text-primary]="item.isActive"
+        [class]="item.className"
+        (click)="action.emit(item)"
+      >
+        <i [class]="item.icon" [class.after:bg-primary!]="item.isActive"></i>
+        {{ item.name }}
+      </app-dropdown-option>
+    }
+  </div>
+</app-dropdown>
