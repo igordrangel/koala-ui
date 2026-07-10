@@ -142,6 +142,9 @@ function buildGetStartedDoc() {
 Koala UI is an Angular component library inspired by shadcn/ui.
 Components are installed directly into your project via the **Koala CLI**, giving you full control over the source code.
 
+Base dependencies installed by \`kl new\` / \`kl init\`: **[@koalarx/utils](https://utils.koalarx.com/) ≥ 5** and \`clsx\`.
+Full utils API for LLMs: [https://utils.koalarx.com/llms.txt](https://utils.koalarx.com/llms.txt).
+
 ## 1. Install the CLI
 
 ${installCli}
