@@ -82,11 +82,13 @@ export class ComboboxPage {
           ]).split(30)[0],
         ).orderBy('firstName', 'asc');
 
-        return users.map((user) => ({
-          value: user.id,
-          label: `${user.firstName} ${user.lastName}`,
-          data: user,
-        }));
+        return [
+          ...users.map((user) => ({
+            value: user.id,
+            label: `${user.firstName} ${user.lastName}`,
+            data: user,
+          })),
+        ];
       },
     });
 }

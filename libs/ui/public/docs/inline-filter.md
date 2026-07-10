@@ -65,11 +65,13 @@ export class InlineFilterSample {
             .orderBy('firstName', 'asc')
             .split(30)[0] ?? [];
 
-        return users.map((user) => ({
-          value: user.id,
-          label: `${user.firstName} ${user.lastName}`,
-          data: user,
-        }));
+        return [
+          ...users.map((user) => ({
+            value: user.id,
+            label: `${user.firstName} ${user.lastName}`,
+            data: user,
+          })),
+        ];
       },
     });
 

@@ -8,7 +8,7 @@ import {
   output,
   viewChild,
 } from '@angular/core';
-import { KlDate } from '@koalarx/utils/light/KlDate';
+import { KlDate } from '@koalarx/utils/KlDate';
 import 'cally';
 import { setupCalendarChangeEffect } from './effects/setup-calendar-change.effect';
 

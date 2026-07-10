@@ -12,7 +12,7 @@ import {
   signal,
 } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { delay } from '@koalarx/utils/light';
+import { delay } from '@koalarx/utils/KlDelay';
 
 @Component({
   selector: 'app-section-container',
