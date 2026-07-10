@@ -1,5 +1,6 @@
 import { cpSync, existsSync, mkdirSync } from 'node:fs';
 import path from 'node:path';
+import { ensureStylesImport } from './ensure-styles-import';
 import { getProjectPath } from './project-path';
 import { runCommand } from './run-command';
 
@@ -55,6 +56,11 @@ export async function installIconSet(
       verbose: false,
       loaderText: 'Generating icon classes',
     });
+  }
+
+  // Toolbar utilities live in icons.css; wire the import like installCss does for theme sheets.
+  if (installed.length > 0 && existsSync(`${projectFolder}/src/theme/icons.css`)) {
+    ensureStylesImport(projectFolder, 'icons');
   }
 
   return installed;
