@@ -31,7 +31,7 @@ async function createAngularProject(
     verbose,
     loaderText: `Creating project ${name}`,
   });
-  await runCommand(`${pm.install} @koalarx/utils clsx`, {
+  await runCommand(`${pm.install} @koalarx/utils@^5.0.0 clsx`, {
     cwd: name,
     verbose,
     loaderText: 'Installing base dependencies',

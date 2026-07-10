@@ -164,9 +164,12 @@ export async function setupExistingProject(projectName: string, verbose = false)
   const missingDeps = requiredDeps.filter((dep) => !allDeps[dep]);
 
   if (missingDeps.length > 0) {
-    logStep(logger, `Installing base dependencies: ${missingDeps.join(', ')}...`);
+    const packagesToInstall = missingDeps.map((dep) =>
+      dep === '@koalarx/utils' ? '@koalarx/utils@^5.0.0' : dep,
+    );
+    logStep(logger, `Installing base dependencies: ${packagesToInstall.join(', ')}...`);
     const pm = getPmCommands(detectPackageManager(projectName));
-    await runCommand(`${pm.install} ${missingDeps.join(' ')}`, {
+    await runCommand(`${pm.install} ${packagesToInstall.join(' ')}`, {
       cwd: projectPath,
       verbose,
       loaderText: 'Installing base dependencies',
