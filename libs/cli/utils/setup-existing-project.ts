@@ -10,6 +10,21 @@ import { validateAngularProject } from './validate-project';
 import { installUtil } from './install-util';
 
 const originPath = path.join(__dirname, '../../');
+const KOALARX_UTILS_MIN_MAJOR = 5;
+
+/** True when utils is missing or its declared major is below the required major. */
+function needsKoalarxUtilsV5(versionRange: string | undefined): boolean {
+  if (!versionRange) {
+    return true;
+  }
+
+  const majorMatch = versionRange.match(/(\d+)/);
+  if (!majorMatch) {
+    return true;
+  }
+
+  return Number(majorMatch[1]) < KOALARX_UTILS_MIN_MAJOR;
+}
 
 /**
  * Performs adaptive setup of a pre-existing Angular project
@@ -160,13 +175,17 @@ export async function setupExistingProject(projectName: string, verbose = false)
     ...packageJson.devDependencies,
   };
 
-  const requiredDeps = ['@koalarx/utils', 'clsx'];
-  const missingDeps = requiredDeps.filter((dep) => !allDeps[dep]);
+  const packagesToInstall: string[] = [];
 
-  if (missingDeps.length > 0) {
-    const packagesToInstall = missingDeps.map((dep) =>
-      dep === '@koalarx/utils' ? '@koalarx/utils@^5.0.0' : dep,
-    );
+  if (!allDeps.clsx) {
+    packagesToInstall.push('clsx');
+  }
+
+  if (needsKoalarxUtilsV5(allDeps['@koalarx/utils'])) {
+    packagesToInstall.push('@koalarx/utils@^5.0.0');
+  }
+
+  if (packagesToInstall.length > 0) {
     logStep(logger, `Installing base dependencies: ${packagesToInstall.join(', ')}...`);
     const pm = getPmCommands(detectPackageManager(projectName));
     await runCommand(`${pm.install} ${packagesToInstall.join(' ')}`, {

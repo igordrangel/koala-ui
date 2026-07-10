@@ -55,7 +55,7 @@ describe('setupExistingProject', () => {
     vi.mocked(fs.mkdirSync).mockReturnValue('');
     vi.mocked(fs.readFileSync).mockReturnValue(
       JSON.stringify({
-        dependencies: { '@koalarx/utils': '1.0.0', clsx: '1.0.0' },
+        dependencies: { '@koalarx/utils': '^5.0.0', clsx: '1.0.0' },
         devDependencies: {},
       }),
     );
@@ -93,7 +93,7 @@ describe('setupExistingProject', () => {
     vi.mocked(fs.mkdirSync).mockReturnValue('');
     vi.mocked(fs.readFileSync).mockReturnValue(
       JSON.stringify({
-        dependencies: { '@koalarx/utils': '1.0.0', clsx: '1.0.0' },
+        dependencies: { '@koalarx/utils': '^5.0.0', clsx: '1.0.0' },
         devDependencies: {},
       }),
     );
@@ -150,7 +150,7 @@ describe('setupExistingProject', () => {
     );
   });
 
-  it('should not install dependencies if already present', async () => {
+  it('should not install dependencies if already present at utils ≥ 5', async () => {
     const { validateAngularProject } = await import('./validate-project');
     const { detectTestFramework } = await import('./detect-test-framework');
     const { runCommand } = await import('./run-command');
@@ -175,7 +175,7 @@ describe('setupExistingProject', () => {
     vi.mocked(fs.readFileSync).mockReturnValue(
       JSON.stringify({
         dependencies: {
-          '@koalarx/utils': '1.0.0',
+          '@koalarx/utils': '^5.0.0',
           clsx: '1.0.0',
         },
         devDependencies: {},
@@ -190,6 +190,54 @@ describe('setupExistingProject', () => {
       call[0]?.toString().includes('@koalarx/utils'),
     );
     expect(dependencyInstallCalls).toHaveLength(0);
+  });
+
+  it('should upgrade @koalarx/utils when major is below 5', async () => {
+    const { validateAngularProject } = await import('./validate-project');
+    const { detectTestFramework } = await import('./detect-test-framework');
+    const { detectPackageManager, getPmCommands } = await import('./package-manager');
+    const { runCommand } = await import('./run-command');
+
+    vi.mocked(validateAngularProject).mockReturnValue({
+      isValid: true,
+      isAngular: true,
+      isStandalone: true,
+      hasPackageJson: true,
+      hasTsConfig: true,
+      errors: [],
+    });
+
+    vi.mocked(detectTestFramework).mockReturnValue({
+      unit: 'vitest',
+      e2e: 'none',
+      hasTestScripts: true,
+    });
+
+    vi.mocked(detectPackageManager).mockReturnValue('bun');
+    vi.mocked(getPmCommands).mockReturnValue({
+      install: 'bun add',
+      installDev: 'bun add -d',
+      exec: 'bun run',
+    } as any);
+
+    vi.mocked(fs.existsSync).mockReturnValue(false);
+    vi.mocked(fs.mkdirSync).mockReturnValue('');
+    vi.mocked(fs.readFileSync).mockReturnValue(
+      JSON.stringify({
+        dependencies: {
+          '@koalarx/utils': '^4.2.5',
+          clsx: '1.0.0',
+        },
+        devDependencies: {},
+      }),
+    );
+
+    await setupExistingProject('test-project');
+
+    expect(vi.mocked(runCommand)).toHaveBeenCalledWith(
+      expect.stringContaining('@koalarx/utils@^5.0.0'),
+      expect.any(Object),
+    );
   });
 
   it('should setup tests if none configured', async () => {
@@ -216,7 +264,7 @@ describe('setupExistingProject', () => {
     vi.mocked(fs.mkdirSync).mockReturnValue('');
     vi.mocked(fs.readFileSync).mockReturnValue(
       JSON.stringify({
-        dependencies: { '@koalarx/utils': '1.0.0', clsx: '1.0.0' },
+        dependencies: { '@koalarx/utils': '^5.0.0', clsx: '1.0.0' },
         devDependencies: {},
       }),
     );
@@ -254,7 +302,7 @@ describe('setupExistingProject', () => {
     vi.mocked(fs.mkdirSync).mockReturnValue('');
     vi.mocked(fs.readFileSync).mockReturnValue(
       JSON.stringify({
-        dependencies: { '@koalarx/utils': '1.0.0', clsx: '1.0.0' },
+        dependencies: { '@koalarx/utils': '^5.0.0', clsx: '1.0.0' },
         devDependencies: {},
       }),
     );
@@ -299,7 +347,7 @@ describe('setupExistingProject', () => {
     vi.mocked(fs.readFileSync).mockReturnValue(
       JSON.stringify({
         scripts: {},
-        dependencies: { '@koalarx/utils': '1.0.0', clsx: '1.0.0' },
+        dependencies: { '@koalarx/utils': '^5.0.0', clsx: '1.0.0' },
         devDependencies: {},
       }),
     );
@@ -344,7 +392,7 @@ describe('setupExistingProject', () => {
     vi.mocked(fs.mkdirSync).mockReturnValue('');
     vi.mocked(fs.readFileSync).mockReturnValue(
       JSON.stringify({
-        dependencies: { '@koalarx/utils': '1.0.0', clsx: '1.0.0' },
+        dependencies: { '@koalarx/utils': '^5.0.0', clsx: '1.0.0' },
         devDependencies: {},
       }),
     );
