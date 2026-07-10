@@ -37,6 +37,18 @@ describe('ensureStylesImport', () => {
     );
   });
 
+  it('should prepend import when styles.css has no existing imports', () => {
+    vi.mocked(fs.readFileSync).mockReturnValue('@plugin "daisyui";\n' as never);
+    vi.mocked(fs.writeFileSync).mockImplementation(() => {});
+
+    ensureStylesImport('/tmp/project', 'icons');
+
+    expect(fs.writeFileSync).toHaveBeenCalledWith(
+      '/tmp/project/src/styles.css',
+      "@import './theme/icons.css';\n@plugin \"daisyui\";\n",
+    );
+  });
+
   it('should be idempotent when import already exists', () => {
     vi.mocked(fs.readFileSync).mockReturnValue(
       "@import 'tailwindcss';\n@import './theme/icons.css';\n" as never,
