@@ -1,26 +1,20 @@
 <app-section-container>
-  <ng-container title>Collapse</ng-container>
-  <ng-container description>
-    Collapse components can be used to show and hide content in a collapsible format.
-  </ng-container>
+  <ng-container title>{{ copy().title }}</ng-container>
+  <ng-container description>{{ copy().description }}</ng-container>
 
   <app-section-content>
-    <ng-container title>Installation</ng-container>
-    <ng-container description>Use the Koala CLI to generate a new collapse component.</ng-container>
+    <ng-container title>{{ common().installation }}</ng-container>
+    <ng-container description>{{ copy().sections.installation.description }}</ng-container>
 
     <app-code-viewer language="bash" name="kl" src="markdown/install/collapse-install.md" />
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Expansive panel</ng-container>
-    <ng-container description>
-      The expansive panel is a collapsible component that can be used to show and hide content. It
-      is a simple and effective way to manage space on a page while still providing access to
-      additional information when needed.
-    </ng-container>
+    <ng-container title>{{ copy().sections.expansivePanel.title }}</ng-container>
+    <ng-container description>{{ copy().sections.expansivePanel.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -32,7 +26,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -43,7 +37,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -57,14 +51,11 @@
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Accordion</ng-container>
-    <ng-container description>
-      The accordion is a collapsible component that can be used to show and hide content. It is
-      similar to the expansive panel, but it allows for multiple panels to be open at the same time.
-    </ng-container>
+    <ng-container title>{{ copy().sections.accordion.title }}</ng-container>
+    <ng-container description>{{ copy().sections.accordion.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex flex-col items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -89,7 +80,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -100,7 +91,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"

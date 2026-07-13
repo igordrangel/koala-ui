@@ -1,29 +1,20 @@
 <app-section-container>
-  <ng-container title>Bottom Sheet</ng-container>
-  <ng-container description>
-    The bottom sheet is a modal that slides in from the bottom of the screen. It is commonly used to
-    display additional information or options without navigating away from the current page.
-  </ng-container>
+  <ng-container title>{{ copy().title }}</ng-container>
+  <ng-container description>{{ copy().description }}</ng-container>
 
   <app-section-content>
-    <ng-container title>Installation</ng-container>
-    <ng-container description
-      >Use the Koala CLI to generate a new bottom sheet component.</ng-container
-    >
+    <ng-container title>{{ common().installation }}</ng-container>
+    <ng-container description>{{ copy().sections.installation.description }}</ng-container>
 
     <app-code-viewer language="bash" name="kl" src="markdown/install/bottom-sheet-install.md" />
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Bottom Sheet</ng-container>
-    <ng-container description>
-      The bottom sheet is a modal component that slides in from the bottom of the screen. It is
-      commonly used to display additional information or options without navigating away from the
-      current page.
-    </ng-container>
+    <ng-container title>{{ copy().sections.bottomSheet.title }}</ng-container>
+    <ng-container description>{{ copy().sections.bottomSheet.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -33,7 +24,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML Trigger">
+      <div appTab [label]="common().htmlTrigger">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -44,7 +35,7 @@
         </div>
       </div>
 
-      <div appTab label="TS Trigger">
+      <div appTab [label]="common().tsTrigger">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -55,7 +46,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML Window">
+      <div appTab [label]="common().htmlWindow">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -66,7 +57,7 @@
         </div>
       </div>
 
-      <div appTab label="TS Window">
+      <div appTab [label]="common().tsWindow">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -80,15 +71,11 @@
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Bottom Sheet with a close button at corner</ng-container>
-    <ng-container description>
-      The bottom sheet can be configured to have a close button at the corner. This is a common
-      design pattern for bottom sheets that are used to display critical information or that require
-      user interaction.
-    </ng-container>
+    <ng-container title>{{ copy().sections.bottomSheetCloseButton.title }}</ng-container>
+    <ng-container description>{{ copy().sections.bottomSheetCloseButton.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -98,7 +85,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML Trigger">
+      <div appTab [label]="common().htmlTrigger">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -109,7 +96,7 @@
         </div>
       </div>
 
-      <div appTab label="TS Trigger">
+      <div appTab [label]="common().tsTrigger">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -120,7 +107,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML Dialog">
+      <div appTab [label]="common().htmlDialog">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -131,7 +118,7 @@
         </div>
       </div>
 
-      <div appTab label="TS Dialog">
+      <div appTab [label]="common().tsDialog">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"

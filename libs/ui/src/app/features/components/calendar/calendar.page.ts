@@ -1,4 +1,5 @@
 import { Section } from '@/core/components/section';
+import { useDocsCopy } from '@/core/i18n/docs';
 import { Calendar, InputCalendar } from '@/shared/components/calendar';
 import { Tabs } from '@/shared/components/tabs';
 import { controlChanges } from '@/shared/utils/control-changes';
@@ -11,6 +12,10 @@ import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
   imports: [ReactiveFormsModule, Section, Tabs, Calendar, InputCalendar],
 })
 export class CalendarPage {
+  private readonly docs = useDocsCopy('calendar');
+  readonly copy = this.docs.copy;
+  readonly common = this.docs.common;
+
   formDate = inject(FormBuilder).group({
     date: new FormControl<string>('2026-01-01'),
     datetime: new FormControl<string>('2026-01-01T14:30'),

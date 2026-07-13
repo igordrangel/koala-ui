@@ -1,23 +1,19 @@
 <app-section-container>
-  <ng-container title>Login</ng-container>
-  <ng-container description>
-    The login block provides a user interface for users to enter their credentials and access the
-    application. It typically includes fields for username/email and password, along with a submit
-    button to initiate the login process.
-  </ng-container>
+  <ng-container title>{{ copy().title }}</ng-container>
+  <ng-container description>{{ copy().description }}</ng-container>
 
   <app-section-content>
-    <ng-container title>Installation</ng-container>
-    <ng-container description> Use the Koala CLI to generate a new login block. </ng-container>
+    <ng-container title>{{ common().installation }}</ng-container>
+    <ng-container description>{{ copy().sections.installation.description }}</ng-container>
 
     <app-code-viewer language="bash" name="kl" src="markdown/install/login-install.md" />
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Sample</ng-container>
+    <ng-container title>{{ copy().sections.sample.title }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex flex-col items-center justify-center gap-2 border border-t-0 p-4 border-base-300 rounded-b-lg"
         >
@@ -25,7 +21,7 @@
         </div>
       </div>
 
-      <div appTab label="Form HTML Page">
+      <div appTab [label]="common().formHtmlPage">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -36,7 +32,7 @@
         </div>
       </div>
 
-      <div appTab label="Form TS Page">
+      <div appTab [label]="common().formTsPage">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -47,7 +43,7 @@
         </div>
       </div>
 
-      <div appTab label="Logged HTML Page">
+      <div appTab [label]="common().loggedHtmlPage">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -58,7 +54,7 @@
         </div>
       </div>
 
-      <div appTab label="Logged TS Page">
+      <div appTab [label]="common().loggedTsPage">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"

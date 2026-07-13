@@ -1,24 +1,20 @@
 <app-section-container>
-  <ng-container title>Calendar</ng-container>
-  <ng-container description> Calendars can be used to select dates in a form. </ng-container>
+  <ng-container title>{{ copy().title }}</ng-container>
+  <ng-container description>{{ copy().description }}</ng-container>
 
   <app-section-content>
-    <ng-container title>Installation</ng-container>
-    <ng-container description>Use the Koala CLI to generate a new calendar component.</ng-container>
+    <ng-container title>{{ common().installation }}</ng-container>
+    <ng-container description>{{ copy().sections.installation.description }}</ng-container>
 
     <app-code-viewer language="bash" name="kl" src="markdown/install/calendar-install.md" />
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Date picker</ng-container>
-    <ng-container description>
-      The calendar component can also be used as a date picker. To do this, you can use the popover
-      directive to display the calendar when the user clicks on an input field. The input-calendar
-      demo below includes the date, datetime, month and daterange modes.
-    </ng-container>
+    <ng-container title>{{ copy().sections.datePicker.title }}</ng-container>
+    <ng-container description>{{ copy().sections.datePicker.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="grid w-full gap-4 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg md:grid-cols-2"
         >
@@ -60,7 +56,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -71,7 +67,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -85,15 +81,11 @@
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Calendar</ng-container>
-    <ng-container description>
-      The calendar component is a date picker that can be used to select dates in a form. It is
-      built using the Cally library, which provides a simple and customizable API for creating date
-      pickers.
-    </ng-container>
+    <ng-container title>{{ copy().sections.calendar.title }}</ng-container>
+    <ng-container description>{{ copy().sections.calendar.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex flex-col items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -101,7 +93,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -112,7 +104,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"

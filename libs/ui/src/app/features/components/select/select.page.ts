@@ -1,4 +1,5 @@
 import { Section } from '@/core/components/section';
+import { useDocsCopy } from '@/core/i18n/docs';
 import { Select, SelectOption } from '@/shared/components/select';
 import { Tabs } from '@/shared/components/tabs';
 import { controlChanges } from '@/shared/utils/control-changes';
@@ -12,6 +13,10 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   imports: [ReactiveFormsModule, JsonPipe, Section, Tabs, Select],
 })
 export class SelectPage {
+  private readonly docs = useDocsCopy('select');
+  readonly copy = this.docs.copy;
+  readonly common = this.docs.common;
+
   readonly singleControl = new FormControl<string | null>(null);
   readonly multipleControl = new FormControl<string[]>([], { nonNullable: true });
 

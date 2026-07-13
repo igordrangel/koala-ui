@@ -7,12 +7,12 @@
     <div>
       <h4 class="mb-2 text-sm font-semibold opacity-90">Koala UI</h4>
       <p class="text-sm opacity-70">
-        Angular components focused on productivity, consistency, and a modern developer experience.
+        {{ copy().description }}
       </p>
     </div>
 
     <div>
-      <h4 class="mb-2 text-sm font-semibold opacity-90">Creator</h4>
+      <h4 class="mb-2 text-sm font-semibold opacity-90">{{ copy().creator }}</h4>
       <a
         href="https://igordrangel.com.br/"
         target="_blank"
@@ -22,11 +22,11 @@
         igordrangel.com.br
         <i class="fa-solid fa-arrow-up-long rotate-45 text-[0.6rem]"></i>
       </a>
-      <p class="mt-2 text-xs opacity-60">Design, front-end, and product strategy.</p>
+      <p class="mt-2 text-xs opacity-60">{{ copy().creatorRole }}</p>
     </div>
 
     <div>
-      <h4 class="mb-2 text-sm font-semibold opacity-90">Koala Packages</h4>
+      <h4 class="mb-2 text-sm font-semibold opacity-90">{{ copy().packages }}</h4>
       <ul class="space-y-1 text-sm opacity-80">
         <li>
           <a
@@ -65,7 +65,7 @@
     </div>
 
     <div>
-      <h4 class="mb-2 text-sm font-semibold opacity-90">Docs & AI</h4>
+      <h4 class="mb-2 text-sm font-semibold opacity-90">{{ copy().docsAi }}</h4>
       <ul class="space-y-1 text-sm opacity-80">
         <li>
           <a href="/llms.txt" target="_blank" rel="noopener noreferrer">llms.txt (index)</a>
@@ -80,7 +80,7 @@
     </div>
 
     <div>
-      <h4 class="mb-2 text-sm font-semibold opacity-90">Quick Commands</h4>
+      <h4 class="mb-2 text-sm font-semibold opacity-90">{{ copy().quickCommands }}</h4>
       <ul class="space-y-1 text-sm opacity-80 font-mono">
         <li>kl new my-app --pm pnpm</li>
         <li>kl init --project my-app</li>
@@ -94,6 +94,6 @@
     class="flex flex-col gap-2 border-t border-base-300 px-6 py-3 text-xs opacity-60 md:flex-row md:items-center md:justify-between"
   >
     <span>© 2026 Koala UI</span>
-    <span>Built for Angular developers and AI-assisted workflows.</span>
+    <span>{{ copy().tagline }}</span>
   </div>
 </footer>

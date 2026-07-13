@@ -8,6 +8,19 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      // Migrate legacy hash routes (#/path) to localized path URLs.
+      (function () {
+        var hash = location.hash;
+        if (hash.indexOf('#/') === 0) {
+          var path = hash.slice(1);
+          if (!/^\/(pt|en)(\/|$)/.test(path)) {
+            path = path === '/' ? '/pt' : '/pt' + path;
+          }
+          history.replaceState(null, '', path + location.search);
+        }
+      })();
+    </script>
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

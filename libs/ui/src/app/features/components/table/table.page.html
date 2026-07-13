@@ -1,25 +1,20 @@
 <app-section-container>
-  <ng-container title>Table</ng-container>
-  <ng-container description>
-    Tables can be used to display data in a structured format.
-  </ng-container>
+  <ng-container title>{{ copy().title }}</ng-container>
+  <ng-container description>{{ copy().description }}</ng-container>
 
   <app-section-content>
-    <ng-container title>Installation</ng-container>
-    <ng-container description>Use the Koala CLI to generate a new table component.</ng-container>
+    <ng-container title>{{ common().installation }}</ng-container>
+    <ng-container description>{{ copy().sections.installation.description }}</ng-container>
 
     <app-code-viewer language="bash" name="kl" src="markdown/install/table-install.md" />
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Tables</ng-container>
-    <ng-container description>
-      Tables are a classic UI component that can be used to display data in a structured format.
-      They are commonly used to organize information and improve navigation within an application.
-    </ng-container>
+    <ng-container title>{{ copy().sections.tables.title }}</ng-container>
+    <ng-container description>{{ copy().sections.tables.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex flex-col items-center justify-center gap-10 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -87,7 +82,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -98,7 +93,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -112,15 +107,11 @@
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Ordenable Table</ng-container>
-    <ng-container description>
-      Ordenable tables are a variation of the classic table component that allows users to sort
-      columns by clicking on the column header. They are commonly used to improve the usability and
-      interactivity of tables, allowing users to easily find and organize data.
-    </ng-container>
+    <ng-container title>{{ copy().sections.ordenableTable.title }}</ng-container>
+    <ng-container description>{{ copy().sections.ordenableTable.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex flex-col items-center justify-center gap-10 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -151,7 +142,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -162,7 +153,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -176,15 +167,11 @@
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Tables zebra</ng-container>
-    <ng-container description>
-      Zebra tables are a variation of the classic table component that alternates row colors for
-      better readability. They are commonly used to improve the visual distinction between rows and
-      enhance the overall user experience.
-    </ng-container>
+    <ng-container title>{{ copy().sections.tablesZebra.title }}</ng-container>
+    <ng-container description>{{ copy().sections.tablesZebra.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -221,7 +208,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -232,7 +219,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -246,15 +233,11 @@
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Tables pin header</ng-container>
-    <ng-container description>
-      Pin header tables are a variation of the classic table component where the header remains
-      fixed while scrolling through the table rows. They are commonly used to improve the visibility
-      of column headers and enhance the overall user experience.
-    </ng-container>
+    <ng-container title>{{ copy().sections.tablesPinHeader.title }}</ng-container>
+    <ng-container description>{{ copy().sections.tablesPinHeader.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -445,7 +428,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -456,7 +439,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"

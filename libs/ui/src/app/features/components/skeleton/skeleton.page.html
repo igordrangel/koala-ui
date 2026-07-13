@@ -1,24 +1,20 @@
 <app-section-container>
-  <ng-container title>Skeleton</ng-container>
-  <ng-container description>A simple skeleton component.</ng-container>
+  <ng-container title>{{ copy().title }}</ng-container>
+  <ng-container description>{{ copy().description }}</ng-container>
 
   <app-section-content>
-    <ng-container title>Installation</ng-container>
-    <ng-container description>Use the Koala CLI to generate a new skeleton component.</ng-container>
+    <ng-container title>{{ common().installation }}</ng-container>
+    <ng-container description>{{ copy().sections.installation.description }}</ng-container>
 
     <app-code-viewer language="bash" name="kl" src="markdown/install/skeleton-install.md" />
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Skeleton</ng-container>
-    <ng-container description>
-      The skeleton component is a placeholder that can be used to indicate that content is loading.
-      It is commonly used to improve the user experience by providing a visual indication that data
-      is being fetched or processed.
-    </ng-container>
+    <ng-container title>{{ copy().sections.skeleton.title }}</ng-container>
+    <ng-container description>{{ copy().sections.skeleton.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -26,7 +22,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -37,7 +33,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -51,14 +47,11 @@
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Skeleton circle</ng-container>
-    <ng-container description>
-      The skeleton component also supports a circular variant, which can be used to indicate loading
-      states for circular elements such as avatars or profile pictures.
-    </ng-container>
+    <ng-container title>{{ copy().sections.skeletonCircle.title }}</ng-container>
+    <ng-container description>{{ copy().sections.skeletonCircle.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -66,7 +59,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -77,7 +70,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -91,14 +84,11 @@
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Skeleton text</ng-container>
-    <ng-container description>
-      The skeleton component also supports a text variant, which can be used to indicate loading
-      states for textual content such as paragraphs or headings.
-    </ng-container>
+    <ng-container title>{{ copy().sections.skeletonText.title }}</ng-container>
+    <ng-container description>{{ copy().sections.skeletonText.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -106,7 +96,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -117,7 +107,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -131,14 +121,11 @@
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Skeleton Composition</ng-container>
-    <ng-container description>
-      The skeleton component allows for composition, enabling the creation of complex loading
-      placeholders by combining multiple skeleton elements.
-    </ng-container>
+    <ng-container title>{{ copy().sections.skeletonComposition.title }}</ng-container>
+    <ng-container description>{{ copy().sections.skeletonComposition.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -155,7 +142,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -166,7 +153,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"

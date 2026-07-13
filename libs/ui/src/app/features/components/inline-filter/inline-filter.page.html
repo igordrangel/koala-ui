@@ -1,26 +1,20 @@
 <app-section-container>
-  <ng-container title>Inline Filter</ng-container>
-  <ng-container description>
-    A flexible filter builder for creating dynamic query rules. Choose a filter type and fill each
-    rule with text, select, selectMultiple, currency, date, or combobox inputs.
-  </ng-container>
+  <ng-container title>{{ copy().title }}</ng-container>
+  <ng-container description>{{ copy().description }}</ng-container>
 
   <app-section-content>
-    <ng-container title>Installation</ng-container>
-    <ng-container description>Use the Koala CLI to generate a new filter component.</ng-container>
+    <ng-container title>{{ common().installation }}</ng-container>
+    <ng-container description>{{ copy().sections.installation.description }}</ng-container>
 
     <app-code-viewer language="bash" name="kl" src="markdown/install/inline-filter-install.md" />
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Builder</ng-container>
-    <ng-container description>
-      This component focuses on filtering workflows. Applied rules sync to query params and are
-      automatically rehydrated when you return to this screen.
-    </ng-container>
+    <ng-container title>{{ copy().sections.builder.title }}</ng-container>
+    <ng-container description>{{ copy().sections.builder.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div class="border border-t-0 border-base-300 rounded-b-lg p-5">
           <app-inline-filter [config]="inlineFilterConfig" (payload)="appliedFilters.set($event)" />
 
@@ -36,7 +30,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -47,7 +41,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"

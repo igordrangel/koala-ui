@@ -1,4 +1,5 @@
 import { Section } from '@/core/components/section';
+import { useDocsCopy } from '@/core/i18n/docs';
 import { InlineFilter, InlineFilterBuilder } from '@/shared/components/inline-filter';
 import { Tabs } from '@/shared/components/tabs';
 import { JsonPipe } from '@angular/common';
@@ -23,6 +24,10 @@ interface User {
   providers: [InlineFilterBuilder],
 })
 export class InlineFilterPage {
+  private readonly docs = useDocsCopy('inline-filter');
+  readonly copy = this.docs.copy;
+  readonly common = this.docs.common;
+
   private readonly usersResourceFactory = (
     filter: Signal<string>,
     values: Signal<number[]>,

@@ -1,4 +1,5 @@
 import { Section } from '@/core/components/section';
+import { useDocsCopy } from '@/core/i18n/docs';
 import { OrderBy, Table } from '@/shared/components/table';
 import { Tabs } from '@/shared/components/tabs';
 import { Component, effect, signal } from '@angular/core';
@@ -16,6 +17,10 @@ interface OrderedTableData {
   imports: [Section, Tabs, Table],
 })
 export class TablePage {
+  private readonly docs = useDocsCopy('table');
+  readonly copy = this.docs.copy;
+  readonly common = this.docs.common;
+
   readonly orderedBy = signal<OrderBy | null>(null);
   readonly orderedTableData = signal<KlArray<OrderedTableData>>(
     new KlArray<OrderedTableData>([
