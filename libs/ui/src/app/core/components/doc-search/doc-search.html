@@ -5,11 +5,11 @@
   btnVariant="ghost"
   class="hidden sm:inline-flex items-center gap-2 border border-base-300 bg-base-100/50 hover:bg-base-200 text-base-content/70 min-w-44 justify-between"
   (click)="toggle()"
-  aria-label="Search documentation"
+  [attr.aria-label]="copy().searchAria"
 >
   <span class="flex items-center gap-2">
     <i class="fa-solid fa-magnifying-glass text-xs opacity-60"></i>
-    <span class="text-xs">Search docs…</span>
+    <span class="text-xs">{{ copy().searchDocs }}</span>
   </span>
   <kbd class="kbd kbd-xs hidden lg:inline-flex opacity-60">Ctrl+K</kbd>
 </button>
@@ -21,7 +21,7 @@
   btnVariant="ghost"
   class="sm:hidden"
   (click)="toggle()"
-  aria-label="Search documentation"
+  [attr.aria-label]="copy().searchAria"
 >
   <i class="fa-solid fa-magnifying-glass"></i>
 </button>
@@ -35,7 +35,7 @@
       class="w-full max-w-xl rounded-2xl border border-base-300 bg-base-100 shadow-2xl overflow-hidden"
       role="dialog"
       aria-modal="true"
-      aria-label="Search documentation"
+      [attr.aria-label]="copy().searchAria"
       (click)="$event.stopPropagation()"
     >
       <div class="flex items-center gap-3 border-b border-base-300 px-4 py-3">
@@ -44,7 +44,7 @@
           #searchInput
           type="search"
           class="flex-1 bg-transparent outline-none text-sm placeholder:opacity-50"
-          placeholder="Search components, guides, and examples…"
+          [placeholder]="copy().searchPlaceholder"
           [value]="query()"
           (input)="onInput($event)"
           (keydown)="onKeydown($event)"
@@ -56,10 +56,12 @@
 
       <div class="max-h-[min(50vh,24rem)] overflow-y-auto p-2">
         @if (query().trim() && flatResults().length === 0) {
-          <p class="px-3 py-6 text-center text-sm opacity-60">No results for "{{ query() }}"</p>
+          <p class="px-3 py-6 text-center text-sm opacity-60">
+            {{ copy().searchNoResultsFor }} "{{ query() }}"
+          </p>
         } @else if (!query().trim()) {
           <p class="px-3 py-6 text-center text-sm opacity-60">
-            Type to search documentation pages and sections
+            {{ copy().searchHint }}
           </p>
         } @else {
           @for (group of groupedResults(); track group[0]) {

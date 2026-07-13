@@ -1,5 +1,5 @@
 <ng-template #logotype>
-  <a [routerLink]="localeService.homeRoute()">
+  <a [routerLink]="homeLink()">
     <span class="flex items-center gap-3 mr-6">
       <i class="app-icon kl-logotype size-6!"></i>
       <span class="badge badge-sm badge-soft bg-neutral-800 font-semibold sm:inline-flex">
@@ -7,6 +7,31 @@
       </span>
     </span>
   </a>
+</ng-template>
+
+<ng-template #localeSwitcher>
+  <div class="flex items-center gap-0.5 rounded-lg border border-base-300 p-0.5">
+    <button
+      type="button"
+      class="px-2 py-1 text-xs rounded-md transition-colors"
+      [class.bg-base-200]="locale() === 'pt'"
+      [class.opacity-100]="locale() === 'pt'"
+      [class.opacity-50]="locale() !== 'pt'"
+      (click)="switchLocale('pt')"
+    >
+      PT
+    </button>
+    <button
+      type="button"
+      class="px-2 py-1 text-xs rounded-md transition-colors"
+      [class.bg-base-200]="locale() === 'en'"
+      [class.opacity-100]="locale() === 'en'"
+      [class.opacity-50]="locale() !== 'en'"
+      (click)="switchLocale('en')"
+    >
+      EN
+    </button>
+  </div>
 </ng-template>
 
 <ng-template #navButtons>
@@ -18,7 +43,7 @@
     [routerLink]="'getting-started' | localePath"
     routerLinkActive="opacity-100"
   >
-    Getting Started
+    {{ copy().gettingStarted }}
   </a>
 
   <a
@@ -29,7 +54,7 @@
     [routerLink]="'components' | localePath"
     routerLinkActive="opacity-100"
   >
-    Components
+    {{ copy().components }}
   </a>
 
   <a
@@ -40,7 +65,7 @@
     [routerLink]="'blocks' | localePath"
     routerLinkActive="opacity-100"
   >
-    Blocks
+    {{ copy().blocks }}
   </a>
 
   <a
@@ -51,7 +76,7 @@
     [routerLink]="'resources' | localePath"
     routerLinkActive="opacity-100"
   >
-    Resources
+    {{ copy().resources }}
   </a>
 </ng-template>
 
@@ -81,6 +106,10 @@
     <div class="grid grid-cols-1 gap-2">
       <ng-container *ngTemplateOutlet="navButtons" />
     </div>
+    <div class="flex items-center justify-between gap-2 mt-3 pt-3 border-t border-base-300">
+      <span class="text-xs opacity-60">{{ copy().language }}</span>
+      <ng-container *ngTemplateOutlet="localeSwitcher" />
+    </div>
   </div>
 </aside>
 
@@ -92,7 +121,7 @@
     type="button"
   >
     <i class="fa-solid fa-bars"></i>
-    Menu
+    {{ copy().menu }}
   </button>
 
   <div class="hidden lg:flex items-center shrink-0">
@@ -103,31 +132,8 @@
   <div class="flex items-center min-w-0 gap-1 ml-auto shrink-0">
     <app-doc-search class="mr-1" />
 
-    <div class="flex items-center gap-0.5 mr-1" role="group" aria-label="Language">
-      <button
-        type="button"
-        appButton
-        btnSize="sm"
-        btnVariant="ghost"
-        class="min-w-9!"
-        [class.opacity-100]="localeService.locale() === 'pt'"
-        [class.opacity-50]="localeService.locale() !== 'pt'"
-        (click)="switchLocale('pt')"
-      >
-        PT
-      </button>
-      <button
-        type="button"
-        appButton
-        btnSize="sm"
-        btnVariant="ghost"
-        class="min-w-9!"
-        [class.opacity-100]="localeService.locale() === 'en'"
-        [class.opacity-50]="localeService.locale() !== 'en'"
-        (click)="switchLocale('en')"
-      >
-        EN
-      </button>
+    <div class="hidden md:flex items-center ml-1 mr-1">
+      <ng-container *ngTemplateOutlet="localeSwitcher" />
     </div>
 
     <button
@@ -135,17 +141,17 @@
       btnSize="sm"
       btnVariant="ghost"
       (click)="copyLlmsUrl()"
-      appTooltip="Copy docs index URL (llms.txt) to use with AI"
+      [appTooltip]="copy().copyAiTooltip"
       tooltipPosition="bottom"
       class="relative transition-colors whitespace-nowrap"
     >
       @if (copied()) {
         <i class="fa-solid fa-check text-success"></i>
-        <span class="text-success">Copied!</span>
+        <span class="text-success">{{ copy().copied }}</span>
       } @else {
         <i class="fa-regular fa-clipboard"></i>
-        <span class="sm:hidden">Copy AI</span>
-        <span class="hidden sm:inline">Copy AI docs index</span>
+        <span class="sm:hidden">{{ copy().copyAiShort }}</span>
+        <span class="hidden sm:inline">{{ copy().copyAiIndex }}</span>
       }
     </button>
 

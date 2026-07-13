@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocaleService } from '../../i18n/locale.service';
+import { UI_COPY } from '../../i18n/ui-copy';
 import { DocSearchService } from './doc-search.service';
 import { DocSearchResult } from './doc-search.types';
 
@@ -29,6 +30,7 @@ export class DocSearch implements OnInit {
   readonly open = signal(false);
   readonly query = signal('');
   readonly activeIndex = signal(0);
+  readonly copy = computed(() => UI_COPY[this.localeService.locale()]);
 
   readonly results = computed(() => this.docSearch.search(this.query()));
 

@@ -6,15 +6,14 @@
   </span>
 
   <h1 class="text-5xl font-semibold">
-    The Next Level for Your
+    {{ copy().heroLead }}
     <span class="bg-linear-to-r from-red-600 to-purple-600 bg-clip-text text-transparent">
-      Angular
+      {{ copy().heroGradient }}
     </span>
-    Projects.
+    {{ copy().heroTrail }}
   </h1>
   <h2 class="max-w-2xl text-lg opacity-80">
-    The shadcn/ui experience, built natively for Angular. Powered by Signals and TailwindCSS v4. SSR
-    compatible, zoneless ready. No hassle, just results.
+    {{ copy().heroSubtitle }}
   </h2>
 
   <nav>
@@ -25,10 +24,10 @@
       btnSize="sm"
       class="bg-neutral-300 hover:bg-neutral-400 text-neutral-900"
     >
-      Getting Started
+      {{ copy().gettingStarted }}
     </a>
     <a [routerLink]="'components' | localePath" appButton btnVariant="ghost" btnSize="sm">
-      View Components
+      {{ copy().viewComponents }}
     </a>
   </nav>
 </section>
