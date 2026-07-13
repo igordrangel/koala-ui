@@ -1,3 +1,4 @@
+import { LocalePathPipe } from '@/core/i18n/locale-path.pipe';
 import { Button } from '@/shared/components/button';
 import { Tabs } from '@/shared/components/tabs';
 import { Component } from '@angular/core';
@@ -10,6 +11,14 @@ import { ExamplesShowcase } from './showcase/examples-showcase';
   selector: 'app-home',
   templateUrl: './home.page.html',
   host: { class: 'block w-full min-w-0' },
-  imports: [Button, RouterLink, Tabs, ExamplesShowcase, DashboardShowcase, AuthenticationShowcase],
+  imports: [
+    Button,
+    RouterLink,
+    Tabs,
+    ExamplesShowcase,
+    DashboardShowcase,
+    AuthenticationShowcase,
+    LocalePathPipe,
+  ],
 })
 export class HomePage {}

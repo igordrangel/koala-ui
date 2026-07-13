@@ -40,7 +40,7 @@
     <ng-container title>Usage</ng-container>
     <ng-container description>
       Use with the
-      <a routerLink="/components/breadcrumb" class="underline text-blue-400">Breadcrumb</a>
+      <a [routerLink]="'components/breadcrumb' | localePath" class="underline text-blue-400">Breadcrumb</a>
       component.
     </ng-container>
     <app-code-viewer

@@ -11,6 +11,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { LocaleService } from '../../i18n/locale.service';
 import { DocSearchService } from './doc-search.service';
 import { DocSearchResult } from './doc-search.types';
 
@@ -22,6 +23,7 @@ import { DocSearchResult } from './doc-search.types';
 export class DocSearch implements OnInit {
   private readonly docSearch = inject(DocSearchService);
   private readonly router = inject(Router);
+  private readonly localeService = inject(LocaleService);
   private readonly searchInput = viewChild<ElementRef<HTMLInputElement>>('searchInput');
 
   readonly open = signal(false);
@@ -119,11 +121,11 @@ export class DocSearch implements OnInit {
   }
 
   navigateTo(result: DocSearchResult) {
-    const commands = result.route.split('/');
+    const commands = result.route.split('/').filter(Boolean);
     const fragment = result.fragment;
 
     this.close();
-    void this.router.navigate(commands, { fragment });
+    void this.router.navigate(['/', this.localeService.locale(), ...commands], { fragment });
   }
 
   isActive(result: DocSearchResult): boolean {

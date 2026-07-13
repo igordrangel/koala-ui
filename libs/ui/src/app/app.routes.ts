@@ -1,8 +1,11 @@
 import { Routes } from '@angular/router';
-import { HomePage } from './features/home/home.page';
+import { localeGuard } from './core/i18n/locale.guard';
+import { localeMatcher } from './core/i18n/locale.matcher';
+import { DEFAULT_LOCALE } from './core/i18n/locale.types';
 import { generateTitle } from './core/utils/generate-title';
+import { HomePage } from './features/home/home.page';
 
-export const routes: Routes = [
+const localeChildren: Routes = [
   {
     path: '',
     component: HomePage,
@@ -43,5 +46,25 @@ export const routes: Routes = [
   {
     path: 'resources',
     loadChildren: () => import('./features/resources/routes').then((m) => m.ROUTES),
+  },
+];
+
+export const routes: Routes = [
+  {
+    path: '',
+    redirectTo: DEFAULT_LOCALE,
+    pathMatch: 'full',
+  },
+  {
+    matcher: localeMatcher,
+    canActivate: [localeGuard],
+    children: localeChildren,
+  },
+  {
+    path: '**',
+    redirectTo: ({ url }) => {
+      const parts = url.map((segment) => segment.path).filter(Boolean);
+      return parts.length ? `/${DEFAULT_LOCALE}/${parts.join('/')}` : `/${DEFAULT_LOCALE}`;
+    },
   },
 ];

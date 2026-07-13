@@ -19,7 +19,7 @@
 
   <nav>
     <a
-      routerLink="/getting-started"
+      [routerLink]="'getting-started' | localePath"
       appButton
       btnVariant="neutral"
       btnSize="sm"
@@ -27,7 +27,9 @@
     >
       Getting Started
     </a>
-    <a routerLink="/components" appButton btnVariant="ghost" btnSize="sm">View Components</a>
+    <a [routerLink]="'components' | localePath" appButton btnVariant="ghost" btnSize="sm">
+      View Components
+    </a>
   </nav>
 </section>
 

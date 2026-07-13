@@ -8,7 +8,11 @@
           <ul>
             @for (item of gettingStarted; track $index) {
               <li>
-                <a class="opacity-60" [routerLink]="item.routerLink" routerLinkActive="opacity-100">
+                <a
+                  class="opacity-60"
+                  [routerLink]="item.routerLink | localePath"
+                  routerLinkActive="opacity-100"
+                >
                   <span class="flex items-center gap-2">
                     {{ item.name }}
 
@@ -31,7 +35,7 @@
                 <li>
                   <a
                     class="opacity-60"
-                    [routerLink]="subItem.routerLink"
+                    [routerLink]="subItem.routerLink | localePath"
                     routerLinkActive="opacity-100"
                   >
                     <span class="flex items-center gap-2">
@@ -53,7 +57,11 @@
           <ul>
             @for (item of blocks; track $index) {
               <li>
-                <a class="opacity-60" [routerLink]="item.routerLink" routerLinkActive="opacity-100">
+                <a
+                  class="opacity-60"
+                  [routerLink]="item.routerLink | localePath"
+                  routerLinkActive="opacity-100"
+                >
                   <span class="flex items-center gap-2">
                     {{ item.name }}
 
@@ -76,7 +84,7 @@
                 <li>
                   <a
                     class="opacity-60"
-                    [routerLink]="subItem.routerLink"
+                    [routerLink]="subItem.routerLink | localePath"
                     routerLinkActive="opacity-100"
                   >
                     <span class="flex items-center gap-2">

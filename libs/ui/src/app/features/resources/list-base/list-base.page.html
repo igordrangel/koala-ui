@@ -77,7 +77,7 @@
     <ng-container title>Usage</ng-container>
     <ng-container description>
       You can see the usage in the
-      <a routerLink="/blocks/datatable" class="underline text-blue-400">datatable block</a>
+      <a [routerLink]="'blocks/datatable' | localePath" class="underline text-blue-400">datatable block</a>
     </ng-container>
   </app-section-content>
 </app-section-container>

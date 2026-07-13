@@ -3,6 +3,7 @@ import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { tap } from 'rxjs/internal/operators/tap';
+import { LocaleService } from '../i18n/locale.service';
 import { Credentials } from '../models/credentials';
 import { LoggedUser } from '../models/logged-user';
 import { Authentication } from '../utils/authentication';
@@ -12,9 +13,8 @@ export type AuthEventType =
   | 'loadingUserInfo'
   | 'authenticated'
   | 'authenticationFailed';
-export const HOME_ROUTE = '/';
-export const LOGIN_ROUTE = '/blocks/login';
-export const PUBLIC_ROUTES = [HOME_ROUTE, LOGIN_ROUTE];
+export const LOGIN_ROUTE = 'blocks/login';
+export const PUBLIC_ROUTES = ['/', '/blocks/login'];
 
 export interface AuthEvent {
   type: AuthEventType;
@@ -25,6 +25,7 @@ export interface AuthEvent {
 export class AuthorizationService {
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
+  private readonly localeService = inject(LocaleService);
   private readonly hostApi = 'https://dummyjson.com';
   private readonly _loggedUser = signal<LoggedUser | undefined>(undefined);
   private readonly _event = signal<AuthEvent | undefined>(undefined);
@@ -36,7 +37,7 @@ export class AuthorizationService {
       if (accessToken && !this._loggedUser()) {
         this._event.set({ type: 'loadingUserInfo', data: accessToken });
       } else if (!accessToken && !this.isAuthOptionalRoute()) {
-        this.router.navigate([LOGIN_ROUTE]);
+        void this.router.navigateByUrl(this.localeService.path(LOGIN_ROUTE));
       }
     });
 
@@ -54,12 +55,20 @@ export class AuthorizationService {
           }
           break;
         case 'authenticated':
-          if (location.hash.includes(LOGIN_ROUTE)) {
-            this.router.navigate([HOME_ROUTE]);
+          if (this.routeWithoutLocale() === `/${LOGIN_ROUTE}`) {
+            void this.router.navigateByUrl(this.localeService.homeRoute());
           }
           break;
       }
     });
+  }
+
+  private routeWithoutLocale() {
+    const parts = this.router.url.split(/[?#]/)[0].split('/').filter(Boolean);
+    if (parts[0] === 'pt' || parts[0] === 'en') {
+      parts.shift();
+    }
+    return parts.length ? `/${parts.join('/')}` : '/';
   }
 
   private getUserInfo() {
@@ -87,8 +96,7 @@ export class AuthorizationService {
   }
 
   private isAuthOptionalRoute() {
-    const url = this.router.url.split('?')[0];
-    return PUBLIC_ROUTES.includes(url);
+    return PUBLIC_ROUTES.includes(this.routeWithoutLocale());
   }
 
   get loggedUser() {
@@ -161,7 +169,7 @@ export class AuthorizationService {
     this._event.set(undefined);
 
     if (!this.isAuthOptionalRoute()) {
-      this.router.navigate([LOGIN_ROUTE]);
+      void this.router.navigateByUrl(this.localeService.path(LOGIN_ROUTE));
     }
   }
 }

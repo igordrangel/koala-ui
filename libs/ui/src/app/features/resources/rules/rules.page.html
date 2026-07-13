@@ -55,9 +55,9 @@
     <ng-container title>Usage</ng-container>
     <ng-container description>
       See also
-      <a routerLink="/resources/auth" class="underline text-blue-400">Auth</a>
+      <a [routerLink]="'resources/auth' | localePath" class="underline text-blue-400">Auth</a>
       and the
-      <a routerLink="/blocks/login" class="underline text-blue-400">Login block</a>.
+      <a [routerLink]="'blocks/login' | localePath" class="underline text-blue-400">Login block</a>.
     </ng-container>
     <app-code-viewer
       language="typescript"

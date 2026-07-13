@@ -1,5 +1,5 @@
 <ng-template #logotype>
-  <a routerLink="/">
+  <a [routerLink]="localeService.homeRoute()">
     <span class="flex items-center gap-3 mr-6">
       <i class="app-icon kl-logotype size-6!"></i>
       <span class="badge badge-sm badge-soft bg-neutral-800 font-semibold sm:inline-flex">
@@ -15,7 +15,7 @@
     appButton
     btnSize="sm"
     btnVariant="ghost"
-    routerLink="getting-started"
+    [routerLink]="'getting-started' | localePath"
     routerLinkActive="opacity-100"
   >
     Getting Started
@@ -26,7 +26,7 @@
     appButton
     btnSize="sm"
     btnVariant="ghost"
-    routerLink="components"
+    [routerLink]="'components' | localePath"
     routerLinkActive="opacity-100"
   >
     Components
@@ -37,7 +37,7 @@
     appButton
     btnSize="sm"
     btnVariant="ghost"
-    routerLink="blocks"
+    [routerLink]="'blocks' | localePath"
     routerLinkActive="opacity-100"
   >
     Blocks
@@ -48,7 +48,7 @@
     appButton
     btnSize="sm"
     btnVariant="ghost"
-    routerLink="resources"
+    [routerLink]="'resources' | localePath"
     routerLinkActive="opacity-100"
   >
     Resources
@@ -102,6 +102,33 @@
 
   <div class="flex items-center min-w-0 gap-1 ml-auto shrink-0">
     <app-doc-search class="mr-1" />
+
+    <div class="flex items-center gap-0.5 mr-1" role="group" aria-label="Language">
+      <button
+        type="button"
+        appButton
+        btnSize="sm"
+        btnVariant="ghost"
+        class="min-w-9!"
+        [class.opacity-100]="localeService.locale() === 'pt'"
+        [class.opacity-50]="localeService.locale() !== 'pt'"
+        (click)="switchLocale('pt')"
+      >
+        PT
+      </button>
+      <button
+        type="button"
+        appButton
+        btnSize="sm"
+        btnVariant="ghost"
+        class="min-w-9!"
+        [class.opacity-100]="localeService.locale() === 'en'"
+        [class.opacity-50]="localeService.locale() !== 'en'"
+        (click)="switchLocale('en')"
+      >
+        EN
+      </button>
+    </div>
 
     <button
       appButton

@@ -55,7 +55,7 @@
     <ng-container title>Usage</ng-container>
     <ng-container description>
       Requires the
-      <a routerLink="/components/toast" class="underline text-blue-400">Toast</a> component.
+      <a [routerLink]="'components/toast' | localePath" class="underline text-blue-400">Toast</a> component.
     </ng-container>
     <app-code-viewer
       language="typescript"

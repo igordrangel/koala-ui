@@ -36,7 +36,7 @@
     <ng-container title>Usage</ng-container>
     <ng-container description>
       Pair with
-      <a routerLink="/resources/global-errors" class="underline text-blue-400">Global Errors</a>
+      <a [routerLink]="'resources/global-errors' | localePath" class="underline text-blue-400">Global Errors</a>
       for automatic HTTP error feedback.
     </ng-container>
     <app-code-viewer

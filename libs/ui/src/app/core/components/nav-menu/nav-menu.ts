@@ -3,6 +3,8 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { KlArray } from '@koalarx/utils/KlArray';
 import { filter, map, startWith } from 'rxjs';
+import { LocalePathPipe } from '../../i18n/locale-path.pipe';
+import { LocaleService } from '../../i18n/locale.service';
 
 interface MenuOption {
   name: string;
@@ -20,20 +22,22 @@ type ModulePage = 'getting-started' | 'components' | 'blocks' | 'resources';
 @Component({
   selector: 'app-nav-menu',
   templateUrl: './nav-menu.html',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, LocalePathPipe],
 })
 export class NavMenu {
   private readonly router = inject(Router);
+  private readonly localeService = inject(LocaleService);
 
   private readonly currentPage = toSignal(
     this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),
-      map(() => location.hash.split('/').slice(1)),
-      startWith(this.router.url.split('/').filter(Boolean)),
+      map((event) => event.urlAfterRedirects.split(/[?#]/)[0].split('/').filter(Boolean)),
+      startWith(this.router.url.split(/[?#]/)[0].split('/').filter(Boolean)),
     ),
   );
   readonly currentModulePage = computed<ModulePage | null>(() => {
-    const url = this.currentPage()?.[0];
+    const segments = this.currentPage() ?? [];
+    const url = segments[0] === this.localeService.locale() ? segments[1] : segments[0];
     if (
       url === 'getting-started' ||
       url === 'components' ||
