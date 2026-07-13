@@ -1,24 +1,20 @@
 <app-section-container>
-  <ng-container title>Modal</ng-container>
-  <ng-container description>A simple modal component.</ng-container>
+  <ng-container title>{{ copy().title }}</ng-container>
+  <ng-container description>{{ copy().description }}</ng-container>
 
   <app-section-content>
-    <ng-container title>Installation</ng-container>
-    <ng-container description>Use the Koala CLI to generate a new modal component.</ng-container>
+    <ng-container title>{{ common().installation }}</ng-container>
+    <ng-container description>{{ copy().sections.installation.description }}</ng-container>
 
     <app-code-viewer language="bash" name="kl" src="markdown/install/modal-install.md" />
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Dialog modal</ng-container>
-    <ng-container description>
-      The dialog modal is a classic modal component that can be used to display content in a
-      centered overlay. It is commonly used to display important information or prompt the user for
-      a decision.
-    </ng-container>
+    <ng-container title>{{ copy().sections.dialogModal.title }}</ng-container>
+    <ng-container description>{{ copy().sections.dialogModal.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -26,7 +22,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML Trigger">
+      <div appTab [label]="common().htmlTrigger">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -37,7 +33,7 @@
         </div>
       </div>
 
-      <div appTab label="TS Trigger">
+      <div appTab [label]="common().tsTrigger">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -48,7 +44,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML Dialog">
+      <div appTab [label]="common().htmlDialog">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -59,7 +55,7 @@
         </div>
       </div>
 
-      <div appTab label="TS Dialog">
+      <div appTab [label]="common().tsDialog">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -73,15 +69,11 @@
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Dialog modal, closes when clicked outside</ng-container>
-    <ng-container description>
-      The dialog modal can be configured to close when the user clicks outside of it. This is a
-      common behavior for modals that are used to display non-critical information or that do not
-      require user interaction.
-    </ng-container>
+    <ng-container title>{{ copy().sections.dialogModalClosesOutside.title }}</ng-container>
+    <ng-container description>{{ copy().sections.dialogModalClosesOutside.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -91,7 +83,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML Trigger">
+      <div appTab [label]="common().htmlTrigger">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -102,7 +94,7 @@
         </div>
       </div>
 
-      <div appTab label="TS Trigger">
+      <div appTab [label]="common().tsTrigger">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -113,7 +105,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML Dialog">
+      <div appTab [label]="common().htmlDialog">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -124,7 +116,7 @@
         </div>
       </div>
 
-      <div appTab label="TS Dialog">
+      <div appTab [label]="common().tsDialog">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -138,15 +130,11 @@
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Dialog modal with a close button at corner</ng-container>
-    <ng-container description>
-      The dialog modal can be configured to have a close button at the corner. This is a common
-      design pattern for modals that are used to display critical information or that require user
-      interaction.
-    </ng-container>
+    <ng-container title>{{ copy().sections.dialogModalCloseButton.title }}</ng-container>
+    <ng-container description>{{ copy().sections.dialogModalCloseButton.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -156,7 +144,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML Trigger">
+      <div appTab [label]="common().htmlTrigger">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -167,7 +155,7 @@
         </div>
       </div>
 
-      <div appTab label="TS Trigger">
+      <div appTab [label]="common().tsTrigger">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -178,7 +166,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML Dialog">
+      <div appTab [label]="common().htmlDialog">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -189,7 +177,7 @@
         </div>
       </div>
 
-      <div appTab label="TS Dialog">
+      <div appTab [label]="common().tsDialog">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -203,14 +191,11 @@
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Dialog modal with custom width</ng-container>
-    <ng-container description>
-      The dialog modal can be configured to have a custom width. This is useful for modals that need
-      to display more content or require a specific layout.
-    </ng-container>
+    <ng-container title>{{ copy().sections.dialogModalCustomWidth.title }}</ng-container>
+    <ng-container description>{{ copy().sections.dialogModalCustomWidth.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -223,7 +208,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML Trigger">
+      <div appTab [label]="common().htmlTrigger">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -234,7 +219,7 @@
         </div>
       </div>
 
-      <div appTab label="TS Trigger">
+      <div appTab [label]="common().tsTrigger">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -245,7 +230,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML Dialog">
+      <div appTab [label]="common().htmlDialog">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -256,7 +241,7 @@
         </div>
       </div>
 
-      <div appTab label="TS Dialog">
+      <div appTab [label]="common().tsDialog">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"

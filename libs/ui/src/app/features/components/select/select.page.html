@@ -1,24 +1,20 @@
 <app-section-container>
-  <ng-container title>Select</ng-container>
-  <ng-container description>
-    A select component that supports both single and multiple selection via a popover.
-  </ng-container>
+  <ng-container title>{{ copy().title }}</ng-container>
+  <ng-container description>{{ copy().description }}</ng-container>
 
   <app-section-content>
-    <ng-container title>Installation</ng-container>
-    <ng-container description>Use the Koala CLI to generate a new select component.</ng-container>
+    <ng-container title>{{ common().installation }}</ng-container>
+    <ng-container description>{{ copy().sections.installation.description }}</ng-container>
 
     <app-code-viewer language="bash" name="kl" src="markdown/install/select-install.md" />
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Single selection</ng-container>
-    <ng-container description>
-      Default mode. Selecting an option closes the popover and emits a single value.
-    </ng-container>
+    <ng-container title>{{ copy().sections.singleSelection.title }}</ng-container>
+    <ng-container description>{{ copy().sections.singleSelection.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div class="flex flex-col gap-4 p-6 border border-t-0 border-base-300 rounded-b-lg">
           <app-select
             class="w-full max-w-sm"
@@ -33,7 +29,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -44,7 +40,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -58,14 +54,11 @@
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Multiple selection</ng-container>
-    <ng-container description>
-      Add <span class="kbd">multiple</span> to allow selecting more than one option. The value is
-      reported as an array.
-    </ng-container>
+    <ng-container title>{{ copy().sections.multipleSelection.title }}</ng-container>
+    <ng-container description>{{ copy().sections.multipleSelection.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div class="flex flex-col gap-4 p-6 border border-t-0 border-base-300 rounded-b-lg">
           <app-select
             multiple
@@ -81,7 +74,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -92,7 +85,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -106,13 +99,11 @@
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Sizes</ng-container>
-    <ng-container description>
-      The select component supports different sizes to accommodate various design needs.
-    </ng-container>
+    <ng-container title>{{ copy().sections.sizes.title }}</ng-container>
+    <ng-container description>{{ copy().sections.sizes.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex flex-col items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -124,7 +115,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -135,7 +126,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -149,14 +140,11 @@
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Disabled</ng-container>
-    <ng-container description>
-      The disabled state indicates that the select component is not interactive and cannot be
-      changed.
-    </ng-container>
+    <ng-container title>{{ copy().sections.disabled.title }}</ng-container>
+    <ng-container description>{{ copy().sections.disabled.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -164,7 +152,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -175,7 +163,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"

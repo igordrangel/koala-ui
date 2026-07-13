@@ -1,43 +1,34 @@
 <app-section-container>
-  <ng-container title>HttpBase</ng-container>
-  <ng-container description>
-    HttpBase is an abstraction resource for HTTP services, providing REST helpers, file downloads,
-    and reactive data loading via rxResource.
-  </ng-container>
+  <ng-container title>{{ copy().title }}</ng-container>
+  <ng-container description>{{ copy().description }}</ng-container>
 
   <app-section-content>
-    <ng-container title>Installation</ng-container>
-    <ng-container description>Use the Koala CLI to add HttpBase to your project.</ng-container>
+    <ng-container title>{{ common().installation }}</ng-container>
+    <ng-container description>{{ copy().sections.installation.description }}</ng-container>
     <app-code-viewer language="bash" name="kl" src="markdown/install/http-base-install.md" />
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>API</ng-container>
+    <ng-container title>{{ copy().sections.api.title }}</ng-container>
 
-    <h3 class="mt-4 mb-2 text-xl font-semibold">Constructor</h3>
-    <ul>
-      <li class="list-disc ml-5"><strong>baseUrl</strong>: API base URL.</li>
-      <li class="list-disc ml-5"><strong>endpoint</strong>: Resource endpoint segment.</li>
-    </ul>
-
-    <h3 class="mt-4 mb-2 text-xl font-semibold">Protected methods</h3>
-    <ul>
-      <li class="list-disc ml-5"><strong>url(resourcePath?)</strong>: Builds the full request URL.</li>
-      <li class="list-disc ml-5"><strong>get / post / put / patch / delete</strong>: HTTP verbs.</li>
-      <li class="list-disc ml-5"><strong>getFile</strong>: GET with arraybuffer response.</li>
-      <li class="list-disc ml-5"><strong>downloadFile</strong>: Triggers a browser file download.</li>
-      <li class="list-disc ml-5">
-        <strong>resource(options?, resourcePath?)</strong>: Returns an rxResource for reactive GET.
-      </li>
-    </ul>
+    @for (group of apiGroups(); track group.title) {
+      <h3 class="mt-4 mb-2 text-xl font-semibold">{{ group.title }}</h3>
+      <ul>
+        @for (item of group.items; track item.name) {
+          <li class="list-disc ml-5">
+            <strong>{{ item.name }}</strong>: {{ item.description }}
+          </li>
+        }
+      </ul>
+    }
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Usage</ng-container>
+    <ng-container title>{{ copy().sections.usage.title }}</ng-container>
     <ng-container description>
-      Pair with
-      <a [routerLink]="'resources/global-errors' | localePath" class="underline text-blue-400">Global Errors</a>
-      for automatic HTTP error feedback.
+      <a [routerLink]="'resources/global-errors' | localePath" class="underline text-blue-400">{{
+        copy().sections.usage.description
+      }}</a>
     </ng-container>
     <app-code-viewer
       language="typescript"

@@ -1,24 +1,20 @@
 <app-section-container>
-  <ng-container title>Dropdown</ng-container>
-  <ng-container description>A simple dropdown component.</ng-container>
+  <ng-container title>{{ copy().title }}</ng-container>
+  <ng-container description>{{ copy().description }}</ng-container>
 
   <app-section-content>
-    <ng-container title>Installation</ng-container>
-    <ng-container description>Use the Koala CLI to generate a new dropdown component.</ng-container>
+    <ng-container title>{{ common().installation }}</ng-container>
+    <ng-container description>{{ copy().sections.installation.description }}</ng-container>
 
     <app-code-viewer language="bash" name="kl" src="markdown/install/dropdown-install.md" />
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Menu Options</ng-container>
-    <ng-container description>
-      The dropdown component has several options that can be used to customize its behavior. For
-      example, you can use the <span class="kbd">closeOnClick</span> option to close the dropdown
-      when an option is clicked.
-    </ng-container>
+    <ng-container title>{{ copy().sections.menuOptions.title }}</ng-container>
+    <ng-container description>{{ copy().sections.menuOptions.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -33,7 +29,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -44,7 +40,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -58,15 +54,11 @@
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Notifications</ng-container>
-    <ng-container description>
-      The dropdown component can be used to display notifications. For example, you can use the
-      <span class="kbd">closeOnClick</span> option to close the dropdown when a notification is
-      clicked.
-    </ng-container>
+    <ng-container title>{{ copy().sections.notifications.title }}</ng-container>
+    <ng-container description>{{ copy().sections.notifications.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -101,7 +93,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -112,7 +104,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -126,14 +118,11 @@
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Popover</ng-container>
-    <ng-container description>
-      The dropdown component can also be used as a popover. This allows you to display custom
-      content inside the dropdown.
-    </ng-container>
+    <ng-container title>{{ copy().sections.popover.title }}</ng-container>
+    <ng-container description>{{ copy().sections.popover.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -148,7 +137,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -159,7 +148,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"

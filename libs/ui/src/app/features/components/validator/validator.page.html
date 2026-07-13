@@ -1,27 +1,20 @@
 <app-section-container>
-  <ng-container title>Validator</ng-container>
-  <ng-container description>
-    Validators can be used to ensure that user input meets specific criteria.
-  </ng-container>
+  <ng-container title>{{ copy().title }}</ng-container>
+  <ng-container description>{{ copy().description }}</ng-container>
 
   <app-section-content>
-    <ng-container title>Installation</ng-container>
-    <ng-container description
-      >Use the Koala CLI to generate a new validator component.</ng-container
-    >
+    <ng-container title>{{ common().installation }}</ng-container>
+    <ng-container description>{{ copy().sections.installation.description }}</ng-container>
 
     <app-code-viewer language="bash" name="kl" src="markdown/install/validator-install.md" />
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Usage</ng-container>
-    <ng-container description>
-      Validators are used to ensure that user input meets specific criteria. They can be applied to
-      input fields to provide real-time feedback and enforce rules.
-    </ng-container>
+    <ng-container title>{{ copy().sections.usage.title }}</ng-container>
+    <ng-container description>{{ copy().sections.usage.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex flex-col items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -43,7 +36,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -54,7 +47,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"

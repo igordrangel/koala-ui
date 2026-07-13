@@ -1,23 +1,20 @@
 <app-section-container>
-  <ng-container title>Loading</ng-container>
-  <ng-container description>A simple loading component.</ng-container>
+  <ng-container title>{{ copy().title }}</ng-container>
+  <ng-container description>{{ copy().description }}</ng-container>
 
   <app-section-content>
-    <ng-container title>Installation</ng-container>
-    <ng-container description>Use the Koala CLI to generate a new loading component.</ng-container>
+    <ng-container title>{{ common().installation }}</ng-container>
+    <ng-container description>{{ copy().sections.installation.description }}</ng-container>
 
     <app-code-viewer language="bash" name="kl" src="markdown/install/loading-install.md" />
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Spinner</ng-container>
-    <ng-container description>
-      The spinner variant is a classic loading indicator that consists of a rotating element. It is
-      commonly used to indicate that a process is ongoing and the user needs to wait.
-    </ng-container>
+    <ng-container title>{{ copy().sections.spinner.title }}</ng-container>
+    <ng-container description>{{ copy().sections.spinner.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -29,7 +26,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -40,7 +37,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -54,15 +51,11 @@
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Dots</ng-container>
-    <ng-container description>
-      The dots variant is a simple loading indicator that consists of multiple dots that animate in
-      a sequence. It is commonly used to indicate that a process is ongoing and the user needs to
-      wait.
-    </ng-container>
+    <ng-container title>{{ copy().sections.dots.title }}</ng-container>
+    <ng-container description>{{ copy().sections.dots.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -74,7 +67,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -85,7 +78,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -99,14 +92,11 @@
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Ring</ng-container>
-    <ng-container description>
-      The ring variant is a circular loading indicator that animates in a ring shape. It is commonly
-      used to indicate that a process is ongoing and the user needs to wait.
-    </ng-container>
+    <ng-container title>{{ copy().sections.ring.title }}</ng-container>
+    <ng-container description>{{ copy().sections.ring.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -118,7 +108,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -129,7 +119,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -143,15 +133,11 @@
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Ball</ng-container>
-    <ng-container description>
-      The ball variant is a simple loading indicator that consists of multiple balls that animate in
-      a sequence. It is commonly used to indicate that a process is ongoing and the user needs to
-      wait.
-    </ng-container>
+    <ng-container title>{{ copy().sections.ball.title }}</ng-container>
+    <ng-container description>{{ copy().sections.ball.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -163,7 +149,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -174,7 +160,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -188,15 +174,11 @@
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Bars</ng-container>
-    <ng-container description>
-      The bars variant is a simple loading indicator that consists of multiple bars that animate in
-      a sequence. It is commonly used to indicate that a process is ongoing and the user needs to
-      wait.
-    </ng-container>
+    <ng-container title>{{ copy().sections.bars.title }}</ng-container>
+    <ng-container description>{{ copy().sections.bars.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -208,7 +190,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -219,7 +201,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -233,15 +215,11 @@
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Infinity</ng-container>
-    <ng-container description>
-      The infinity variant is a simple loading indicator that consists of multiple dots that animate
-      in a sequence. It is commonly used to indicate that a process is ongoing and the user needs to
-      wait.
-    </ng-container>
+    <ng-container title>{{ copy().sections.infinity.title }}</ng-container>
+    <ng-container description>{{ copy().sections.infinity.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -253,7 +231,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -264,7 +242,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"

@@ -1,4 +1,5 @@
 import { Section } from '@/core/components/section';
+import { useDocsCopy } from '@/core/i18n/docs';
 import { Loading } from '@/shared/components/loading';
 import { Tabs } from '@/shared/components/tabs';
 import { Component } from '@angular/core';
@@ -8,4 +9,8 @@ import { Component } from '@angular/core';
   templateUrl: './loading.page.html',
   imports: [Section, Tabs, Loading],
 })
-export class LoadingPage {}
+export class LoadingPage {
+  private readonly docs = useDocsCopy('loading');
+  readonly copy = this.docs.copy;
+  readonly common = this.docs.common;
+}

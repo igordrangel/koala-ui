@@ -1,27 +1,20 @@
 <app-section-container>
-  <ng-container title>Input Field</ng-container>
-  <ng-container description>
-    Input fields can be used to capture user input in a form.
-  </ng-container>
+  <ng-container title>{{ copy().title }}</ng-container>
+  <ng-container description>{{ copy().description }}</ng-container>
 
   <app-section-content>
-    <ng-container title>Installation</ng-container>
-    <ng-container description
-      >Use the Koala CLI to generate a new input field component.</ng-container
-    >
+    <ng-container title>{{ common().installation }}</ng-container>
+    <ng-container description>{{ copy().sections.installation.description }}</ng-container>
 
     <app-code-viewer language="bash" name="kl" src="markdown/install/input-field-install.md" />
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Sizes</ng-container>
-    <ng-container description>
-      Input fields are available in 5 different sizes: xs, sm, md, lg, and xl. The default size is
-      md.
-    </ng-container>
+    <ng-container title>{{ copy().sections.sizes.title }}</ng-container>
+    <ng-container description>{{ copy().sections.sizes.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="flex flex-col items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
         >
@@ -33,7 +26,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -44,7 +37,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"

@@ -1,4 +1,5 @@
 import { Section } from '@/core/components/section';
+import { useDocsCopy } from '@/core/i18n/docs';
 import { AsyncComboboxOptions, Combobox, ComboboxOption } from '@/shared/components/combobox';
 import { Tabs } from '@/shared/components/tabs';
 import { Component, Injector, resource, Signal } from '@angular/core';
@@ -23,6 +24,10 @@ interface User {
   imports: [ReactiveFormsModule, Section, Tabs, Combobox],
 })
 export class ComboboxPage {
+  private readonly docs = useDocsCopy('combobox');
+  readonly copy = this.docs.copy;
+  readonly common = this.docs.common;
+
   readonly localComboboxControl = new FormControl<string | null>('');
   readonly localMultipleComboboxControl = new FormControl<string[]>([], { nonNullable: true });
   readonly remoteComboboxControl = new FormControl<number | null>(15);

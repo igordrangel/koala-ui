@@ -1,47 +1,34 @@
 <app-section-container>
-  <ng-container title>PageBase</ng-container>
-  <ng-container description>
-    PageBase is an abstraction resource for page components, providing breadcrumb navigation and a
-    reload signal for child lists or tables.
-  </ng-container>
+  <ng-container title>{{ copy().title }}</ng-container>
+  <ng-container description>{{ copy().description }}</ng-container>
 
   <app-section-content>
-    <ng-container title>Installation</ng-container>
-    <ng-container description>Use the Koala CLI to add PageBase to your project.</ng-container>
+    <ng-container title>{{ common().installation }}</ng-container>
+    <ng-container description>{{ copy().sections.installation.description }}</ng-container>
     <app-code-viewer language="bash" name="kl" src="markdown/install/page-base-install.md" />
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>API</ng-container>
+    <ng-container title>{{ copy().sections.api.title }}</ng-container>
 
-    <h3 class="mt-4 mb-2 text-xl font-semibold">Signals</h3>
-    <ul>
-      <li class="list-disc ml-5">
-        <strong>reload</strong>: Signal used to trigger a reload in child components.
-      </li>
-    </ul>
-
-    <h3 class="mt-4 mb-2 text-xl font-semibold">Methods</h3>
-    <ul>
-      <li class="list-disc ml-5">
-        <strong>reloadList()</strong>: Sets reload briefly so bound children can react.
-      </li>
-    </ul>
-
-    <h3 class="mt-4 mb-2 text-xl font-semibold">Properties</h3>
-    <ul>
-      <li class="list-disc ml-5">
-        <strong>breadcrumbs</strong>: Computed breadcrumb trail from the current ActivatedRoute.
-      </li>
-    </ul>
+    @for (group of apiGroups(); track group.title) {
+      <h3 class="mt-4 mb-2 text-xl font-semibold">{{ group.title }}</h3>
+      <ul>
+        @for (item of group.items; track item.name) {
+          <li class="list-disc ml-5">
+            <strong>{{ item.name }}</strong>: {{ item.description }}
+          </li>
+        }
+      </ul>
+    }
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Usage</ng-container>
+    <ng-container title>{{ copy().sections.usage.title }}</ng-container>
     <ng-container description>
-      Use with the
-      <a [routerLink]="'components/breadcrumb' | localePath" class="underline text-blue-400">Breadcrumb</a>
-      component.
+      <a [routerLink]="'components/breadcrumb' | localePath" class="underline text-blue-400">{{
+        copy().sections.usage.description
+      }}</a>
     </ng-container>
     <app-code-viewer
       language="typescript"

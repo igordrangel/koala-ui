@@ -1,26 +1,20 @@
 <app-section-container>
-  <ng-container title>Combobox</ng-container>
-  <ng-container description>
-    A searchable select built with Angular Aria, supporting local or remote filtering through a
-    resource and dedicated loading and empty states.
-  </ng-container>
+  <ng-container title>{{ copy().title }}</ng-container>
+  <ng-container description>{{ copy().description }}</ng-container>
 
   <app-section-content>
-    <ng-container title>Installation</ng-container>
-    <ng-container description>Use the Koala CLI to generate a new combobox component.</ng-container>
+    <ng-container title>{{ common().installation }}</ng-container>
+    <ng-container description>{{ copy().sections.installation.description }}</ng-container>
 
     <app-code-viewer language="bash" name="kl" src="markdown/install/combobox-install.md" />
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Local Filtering</ng-container>
-    <ng-container description>
-      When you pass a static option list, the component filters it internally and behaves like a
-      searchable select. You can also enable multiple selection.
-    </ng-container>
+    <ng-container title>{{ copy().sections.localFiltering.title }}</ng-container>
+    <ng-container description>{{ copy().sections.localFiltering.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="grid gap-6 border border-t-0 border-base-300 rounded-b-lg p-6 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)]"
         >
@@ -73,7 +67,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -84,7 +78,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -98,14 +92,11 @@
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Remote Filtering With Resource</ng-container>
-    <ng-container description>
-      The component accepts a factory that receives the filter signal and creates a resource,
-      httpResource, or rxResource internally to fetch matching results.
-    </ng-container>
+    <ng-container title>{{ copy().sections.remoteFilteringWithResource.title }}</ng-container>
+    <ng-container description>{{ copy().sections.remoteFilteringWithResource.description }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
-      <div appTab label="Preview" checked>
+      <div appTab [label]="common().preview" checked>
         <div
           class="grid gap-6 border border-t-0 border-base-300 rounded-b-lg p-6 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)]"
         >
@@ -135,7 +126,7 @@
         </div>
       </div>
 
-      <div appTab label="HTML">
+      <div appTab [label]="common().html">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"
@@ -146,7 +137,7 @@
         </div>
       </div>
 
-      <div appTab label="TS">
+      <div appTab [label]="common().ts">
         <div class="flex p-2 border border-t-0 border-base-300 rounded-b-lg">
           <app-code-viewer
             class="w-full"

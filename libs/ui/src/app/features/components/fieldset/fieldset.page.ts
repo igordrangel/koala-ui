@@ -1,4 +1,5 @@
 import { Section } from '@/core/components/section';
+import { useDocsCopy } from '@/core/i18n/docs';
 import { Button } from '@/shared/components/button';
 import { Fieldset } from '@/shared/components/fieldset';
 import { Input } from '@/shared/components/input-field';
@@ -13,6 +14,10 @@ import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angu
   imports: [Section, Tabs, ReactiveFormsModule, Fieldset, Input, ValidatorHint, Button],
 })
 export class FieldsetPage {
+  private readonly docs = useDocsCopy('fieldset');
+  readonly copy = this.docs.copy;
+  readonly common = this.docs.common;
+
   readonly emailControl = new FormControl<string>('', [Validators.required, Validators.email]);
 
   readonly loginForm = inject(FormBuilder).group({

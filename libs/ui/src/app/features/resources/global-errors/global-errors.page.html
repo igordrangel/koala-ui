@@ -1,61 +1,34 @@
 <app-section-container>
-  <ng-container title>Global Errors</ng-container>
-  <ng-container description>
-    Global Errors provides automatic HTTP error feedback via toast notifications. A global
-    interceptor captures failed requests and displays user-friendly messages.
-  </ng-container>
+  <ng-container title>{{ copy().title }}</ng-container>
+  <ng-container description>{{ copy().description }}</ng-container>
 
   <app-section-content>
-    <ng-container title>Installation</ng-container>
-    <ng-container description>
-      Use the Koala CLI to add Global Errors to your project (includes Toast and app.config setup).
-    </ng-container>
+    <ng-container title>{{ common().installation }}</ng-container>
+    <ng-container description>{{ copy().sections.installation.description }}</ng-container>
     <app-code-viewer language="bash" name="kl" src="markdown/install/global-errors-install.md" />
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>API</ng-container>
+    <ng-container title>{{ copy().sections.api.title }}</ng-container>
 
-    <h3 class="mt-4 mb-2 text-xl font-semibold">Interceptor</h3>
-    <ul>
-      <li class="list-disc ml-5">
-        <strong>FeedbackRequestInterceptor</strong>: Captures HTTP errors and delegates to
-        HttpErrorFeedbackAlert.
-      </li>
-    </ul>
-
-    <h3 class="mt-4 mb-2 text-xl font-semibold">Service</h3>
-    <ul>
-      <li class="list-disc ml-5">
-        <strong>HttpErrorFeedbackAlert.tapError()</strong>: Shows warning (4xx), error (5xx), or info
-        toasts.
-      </li>
-    </ul>
-
-    <h3 class="mt-4 mb-2 text-xl font-semibold">Middleware</h3>
-    <ul>
-      <li class="list-disc ml-5">
-        <strong>HttpErrorMiddleware.handleError()</strong>: Returns a sanitized message.
-      </li>
-      <li class="list-disc ml-5">
-        <strong>HttpErrorMiddleware.ignoreError()</strong>: Skips feedback for specific errors
-        (customize after install).
-      </li>
-    </ul>
-
-    <h3 class="mt-4 mb-2 text-xl font-semibold">Utility</h3>
-    <ul>
-      <li class="list-disc ml-5">
-        <strong>sanitizeErrorMessage()</strong>: Extracts or maps messages from HttpErrorResponse.
-      </li>
-    </ul>
+    @for (group of apiGroups(); track group.title) {
+      <h3 class="mt-4 mb-2 text-xl font-semibold">{{ group.title }}</h3>
+      <ul>
+        @for (item of group.items; track item.name) {
+          <li class="list-disc ml-5">
+            <strong>{{ item.name }}</strong>: {{ item.description }}
+          </li>
+        }
+      </ul>
+    }
   </app-section-content>
 
   <app-section-content>
-    <ng-container title>Usage</ng-container>
+    <ng-container title>{{ copy().sections.usage.title }}</ng-container>
     <ng-container description>
-      Requires the
-      <a [routerLink]="'components/toast' | localePath" class="underline text-blue-400">Toast</a> component.
+      <a [routerLink]="'components/toast' | localePath" class="underline text-blue-400">{{
+        copy().sections.usage.description
+      }}</a>
     </ng-container>
     <app-code-viewer
       language="typescript"

@@ -37,6 +37,7 @@ export const UI_COPY = {
         'A experiência do shadcn/ui, nativa para Angular. Com Signals e TailwindCSS v4. Compatível com SSR, pronto para zoneless. Sem complicação, só resultado.',
       gettingStarted: 'Começar agora',
       viewComponents: 'Ver componentes',
+      pageTitle: 'O próximo nível para seus projetos Angular',
     },
     footer: {
       description:
@@ -85,6 +86,7 @@ export const UI_COPY = {
         'The shadcn/ui experience, built natively for Angular. Powered by Signals and TailwindCSS v4. SSR compatible, zoneless ready. No hassle, just results.',
       gettingStarted: 'Getting Started',
       viewComponents: 'View Components',
+      pageTitle: 'The Next Level for Your Angular Projects',
     },
     footer: {
       description:

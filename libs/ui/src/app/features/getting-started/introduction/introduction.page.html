@@ -1,123 +1,52 @@
 <app-section-container ignoreAIDoc>
-  <ng-container title>Introduction</ng-container>
-  <ng-container description>
-    Welcome to the Koala UI documentation! This guide will help you get started with our component
-    library and show you how to integrate it into your projects.
-  </ng-container>
+  <ng-container title>{{ copy().title }}</ng-container>
+  <ng-container description>{{ copy().description }}</ng-container>
 
   <app-section-content>
-    <ng-container title>What is Koala UI?</ng-container>
-    <ng-container description>
-      Finally, a component library that doesn't force you to choose between beauty and
-      functionality.
-    </ng-container>
+    <ng-container title>{{ copy().sections.whatIs.title }}</ng-container>
+    <ng-container description>{{ copy().sections.whatIs.description }}</ng-container>
 
     <div class="flex flex-wrap gap-8 mt-5">
-      <div
-        class="border border-neutral-800 bg-neutral-900 rounded-2xl w-full lg:w-[calc(50%-2rem)] p-4"
-      >
-        <h4 class="font-bold text-lg">Beautiful & Practical</h4>
-        <p class="font-light text-sm">
-          Meticulously crafted components that look stunning out of the box while remaining highly
-          functional and accessible.
-        </p>
-      </div>
-
-      <div
-        class="border border-neutral-800 bg-neutral-900 rounded-2xl w-full lg:w-[calc(50%-2rem)] p-4"
-      >
-        <h4 class="font-bold text-lg">Community First</h4>
-        <p class="font-light text-sm">
-          Built by Angular developers who understand your needs. Real-world solutions to real
-          problems.
-        </p>
-      </div>
-
-      <div
-        class="border border-neutral-800 bg-neutral-900 rounded-2xl w-full lg:w-[calc(50%-2rem)] p-4"
-      >
-        <h4 class="font-bold text-lg">Modern Angular</h4>
-        <p class="font-light text-sm">
-          Leveraging the latest Angular features including standalone components, signals, and best
-          practices.
-        </p>
-      </div>
-
-      <div
-        class="border border-neutral-800 bg-neutral-900 rounded-2xl w-full lg:w-[calc(50%-2rem)] p-4"
-      >
-        <h4 class="font-bold text-lg">Infinitely Customizable</h4>
-        <p class="font-light text-sm">
-          Built with TailwindCSS for seamless customization. Make every component truly yours.
-        </p>
-      </div>
+      @for (card of copy().sections.whatIs.cards; track card.title) {
+        <div
+          class="border border-neutral-800 bg-neutral-900 rounded-2xl w-full lg:w-[calc(50%-2rem)] p-4"
+        >
+          <h4 class="font-bold text-lg">{{ card.title }}</h4>
+          <p class="font-light text-sm">{{ card.description }}</p>
+        </div>
+      }
     </div>
   </app-section-content>
 
   <app-section-content class="block mt-10">
-    <ng-container title>Powerful CLI</ng-container>
-    <ng-container description>
-      Our command-line interface makes adding components and resources to your project effortless.
-      No more copy-pasting code or hunting through documentation.
-    </ng-container>
+    <ng-container title>{{ copy().sections.powerfulCli.title }}</ng-container>
+    <ng-container description>{{ copy().sections.powerfulCli.description }}</ng-container>
 
     <app-code-viewer language="bash" name="kl" src="markdown/install/button-install.md" />
 
     <div class="flex flex-wrap mt-5">
-      <div class="w-full lg:w-1/3 p-4">
-        <h4 class="font-bold text-lg">Smart Installation</h4>
-        <p class="font-light text-sm">
-          Automatically handles dependencies, imports, and configuration. Just specify what you
-          need, and we'll handle the rest.
-        </p>
-      </div>
-
-      <div class="w-full lg:w-1/3 p-4">
-        <h4 class="font-bold text-lg">Project Integration</h4>
-        <p class="font-light text-sm">
-          Seamlessly integrates with your existing Angular project structure. Respects your
-          conventions and coding style.
-        </p>
-      </div>
-
-      <div class="w-full lg:w-1/3 p-4">
-        <h4 class="font-bold text-lg">Developer Friendly</h4>
-        <p class="font-light text-sm">
-          Clear feedback, helpful error messages, and intuitive commands. Designed to enhance your
-          development workflow, not complicate it.
-        </p>
-      </div>
+      @for (card of copy().sections.powerfulCli.cards; track card.title) {
+        <div class="w-full lg:w-1/3 p-4">
+          <h4 class="font-bold text-lg">{{ card.title }}</h4>
+          <p class="font-light text-sm">{{ card.description }}</p>
+        </div>
+      }
     </div>
   </app-section-content>
 
   <app-section-content class="block mt-10">
-    <ng-container title>AI Ready</ng-container>
-    <ng-container description>
-      Koala UI is ready for AI-assisted development. You can copy the full docs index URL (llms.txt)
-      from the header, or copy the current page Markdown URL with the Copy for AI button in each
-      section.
-    </ng-container>
+    <ng-container title>{{ copy().sections.aiReady.title }}</ng-container>
+    <ng-container description>{{ copy().sections.aiReady.description }}</ng-container>
 
     <div class="flex flex-wrap gap-8 mt-5">
-      <div
-        class="border border-neutral-800 bg-neutral-900 rounded-2xl w-full lg:w-[calc(50%-2rem)] p-4"
-      >
-        <h4 class="font-bold text-lg">Direct Links for LLMs</h4>
-        <p class="font-light text-sm">
-          Use Copy AI docs index in the header to share llms.txt with your assistant so it can
-          discover the full documentation map.
-        </p>
-      </div>
-
-      <div
-        class="border border-neutral-800 bg-neutral-900 rounded-2xl w-full lg:w-[calc(50%-2rem)] p-4"
-      >
-        <h4 class="font-bold text-lg">Page-Level Context</h4>
-        <p class="font-light text-sm">
-          Use Copy for AI on each page to send a focused docs URL (docs/slug.md), giving your LLM
-          precise context for the component you are working on.
-        </p>
-      </div>
+      @for (card of copy().sections.aiReady.cards; track card.title) {
+        <div
+          class="border border-neutral-800 bg-neutral-900 rounded-2xl w-full lg:w-[calc(50%-2rem)] p-4"
+        >
+          <h4 class="font-bold text-lg">{{ card.title }}</h4>
+          <p class="font-light text-sm">{{ card.description }}</p>
+        </div>
+      }
     </div>
   </app-section-content>
 </app-section-container>

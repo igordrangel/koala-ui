@@ -1,4 +1,5 @@
 import { Section } from '@/core/components/section';
+import { useDocsCopy } from '@/core/i18n/docs';
 import { Button } from '@/shared/components/button';
 import { Confirm } from '@/shared/components/confirm';
 import { Tabs } from '@/shared/components/tabs';
@@ -10,6 +11,10 @@ import { Component, inject } from '@angular/core';
   imports: [Section, Tabs, Button],
 })
 export class ConfirmPage {
+  private readonly docs = useDocsCopy('confirm');
+  readonly copy = this.docs.copy;
+  readonly common = this.docs.common;
+
   private readonly confirm = inject(Confirm);
 
   ask() {

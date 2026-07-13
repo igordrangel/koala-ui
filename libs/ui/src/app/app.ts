@@ -9,6 +9,7 @@ import { Footer } from './core/components/footer';
 import { Header } from './core/components/header';
 import { NavMenu } from './core/components/nav-menu';
 import { LocaleService } from './core/i18n/locale.service';
+import { LocaleTitleService } from './core/i18n/locale-title.service';
 import { isLocale } from './core/i18n/locale.types';
 
 @Component({
@@ -20,6 +21,7 @@ export class App {
   private router = inject(Router);
   private viewportScroller = inject(ViewportScroller);
   private localeService = inject(LocaleService);
+  private readonly _localeTitle = inject(LocaleTitleService);
 
   readonly isHomePage = toSignal(
     this.router.events.pipe(
