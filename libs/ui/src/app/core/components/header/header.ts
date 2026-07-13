@@ -73,7 +73,7 @@ export class Header {
     const isVisible = this.mobileMenuVisible();
     if (!isVisible) {
       this.mobileMenuVisible.set(true);
-      this.mobileMenuOpen.set(true);
+      setTimeout(() => this.mobileMenuOpen.set(true), 10);
       return;
     }
     this.closeMobileMenu();

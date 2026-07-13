@@ -35,12 +35,19 @@ export class LocaleService {
   }
 
   switchLocalePath(target: Locale): string {
-    const parts = this.router.url.split(/[?#]/)[0].split('/').filter(Boolean);
+    const [pathWithQuery = '', hash = ''] = this.router.url.split('#');
+    const [pathname = '', query = ''] = pathWithQuery.split('?');
+    const parts = pathname.split('/').filter(Boolean);
+
     if (parts.length && isLocale(parts[0])) {
       parts[0] = target;
     } else {
       parts.unshift(target);
     }
-    return `/${parts.join('/')}`;
+
+    const path = `/${parts.join('/')}`;
+    const search = query ? `?${query}` : '';
+    const fragment = hash ? `#${hash}` : '';
+    return `${path}${search}${fragment}`;
   }
 }

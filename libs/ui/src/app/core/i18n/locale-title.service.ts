@@ -40,7 +40,10 @@ export class LocaleTitleService {
       const slug = parts[parts.length - 1];
       if (slug in DOCS_PAGES) {
         this.title.setTitle(generateTitle(DOCS_PAGES[slug as DocsPageSlug][locale].title));
+        return;
       }
+
+      this.title.setTitle(generateTitle(UI_COPY[locale].landing.pageTitle));
     });
   }
 }
