@@ -1,31 +1,51 @@
 name: NPM PUBLISH
+
 on:
   push:
-    branches: [main]
+    branches: [main, previous-release]
     paths:
       - 'package.json'
+
 jobs:
   build:
-    name: 'npm publish library'
+    name: npm publish library
     runs-on: ubuntu-latest
     steps:
-      - name: 🚚 Get latest code
-        uses: actions/checkout@v2.3.2
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: 🔨 Install Bun
+      - name: Setup Bun
         uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
 
-      - name: 🔨 Install Dependencies
+      - name: Install dependencies
         run: bun ci
 
-      - name: 🔨 Build Project
+      - name: Build package
         run: bun run build
 
-      - name: Publish npm package
-        uses: actions/setup-node@v2-beta
+      - name: Resolve npm dist-tag
+        id: tag
+        run: |
+          BRANCH="${GITHUB_REF_NAME}"
+          if [ "$BRANCH" = "main" ]; then
+            echo "dist_tag=latest" >> "$GITHUB_OUTPUT"
+          else
+            DIST_TAG=$(node -p "require('./.github/release-lines.json').previousDistTag")
+            echo "dist_tag=$DIST_TAG" >> "$GITHUB_OUTPUT"
+          fi
+          echo "Branch=$BRANCH dist-tag=$(tail -n1 "$GITHUB_OUTPUT" | cut -d= -f2)"
+
+      - name: Setup Node for npm publish
+        uses: actions/setup-node@v4
         with:
-          node-version: 14
+          node-version: '22'
           registry-url: https://registry.npmjs.org/
-      - run: cd ./dist && npm publish --access public --ignore-scripts
+
+      - name: Publish npm package
+        working-directory: dist
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          DIST_TAG: ${{ steps.tag.outputs.dist_tag }}
+        run: npm publish --access public --ignore-scripts --tag "$DIST_TAG"

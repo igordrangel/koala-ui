@@ -95,8 +95,17 @@ kl version
 
 ---
 
+## Support lines (`main` + `previous-release`)
+
+| Line | Branch | Docs | npm dist-tag |
+|------|--------|------|--------------|
+| Latest | `main` | [ui.koalarx.com](https://ui.koalarx.com/) | `latest` |
+| Previous | `previous-release` | [ui.koalarx.com/v{major}/](https://ui.koalarx.com/v22/) | configured in [`.github/release-lines.json`](.github/release-lines.json) (`previousDistTag`, e.g. `angular-21`) |
+
+Archive branches (e.g. `22.3.0`) keep frozen majors without CI. On a major bump: create the archive from `previous-release`, move current `main` into `previous-release`, then develop the new major on `main`. See `.agents/documentation.md`.
+
 ## Documentation
 
 For detailed installation guides, usage instructions, patch notes, and examples for each component, visit the official documentation:
 
-**[ui.koalarx.com](https://ui.koalarx.com)** · [Patch notes](https://ui.koalarx.com/#/getting-started/patch-notes) · [CHANGELOG.md](./CHANGELOG.md)
+**[ui.koalarx.com](https://ui.koalarx.com)** · previous line under `/v{major}/` · [Patch notes](https://ui.koalarx.com/pt/getting-started/patch-notes) · [CHANGELOG.md](./CHANGELOG.md)

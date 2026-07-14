@@ -2,11 +2,25 @@
   <a [routerLink]="homeLink()">
     <span class="flex items-center gap-3 mr-6">
       <i class="app-icon kl-logotype size-6!"></i>
-      <span class="badge badge-sm badge-soft bg-neutral-800 font-semibold sm:inline-flex">
-        {{ version }}
-      </span>
     </span>
   </a>
+</ng-template>
+
+<ng-template #docsVersionSwitcher>
+  <div class="flex items-center gap-0.5 rounded-lg border border-base-300 p-0.5">
+    @for (entry of docsVersions; track entry.basePath) {
+      <button
+        type="button"
+        class="px-2 py-1 text-xs rounded-md transition-colors font-semibold"
+        [class.bg-base-200]="isDocsVersionCurrent(entry)"
+        [class.opacity-100]="isDocsVersionCurrent(entry)"
+        [class.opacity-50]="!isDocsVersionCurrent(entry)"
+        (click)="switchDocsVersion(entry)"
+      >
+        {{ entry.label }}
+      </button>
+    }
+  </div>
 </ng-template>
 
 <ng-template #localeSwitcher>
@@ -107,6 +121,10 @@
       <ng-container *ngTemplateOutlet="navButtons" />
     </div>
     <div class="flex items-center justify-between gap-2 mt-3 pt-3 border-t border-base-300">
+      <span class="text-xs opacity-60">{{ copy().version }}</span>
+      <ng-container *ngTemplateOutlet="docsVersionSwitcher" />
+    </div>
+    <div class="flex items-center justify-between gap-2 mt-3 pt-3 border-t border-base-300">
       <span class="text-xs opacity-60">{{ copy().language }}</span>
       <ng-container *ngTemplateOutlet="localeSwitcher" />
     </div>
@@ -126,11 +144,18 @@
 
   <div class="hidden lg:flex items-center shrink-0">
     <ng-container *ngTemplateOutlet="logotype" />
+    <div class="mr-4">
+      <ng-container *ngTemplateOutlet="docsVersionSwitcher" />
+    </div>
     <ng-container *ngTemplateOutlet="navButtons" />
   </div>
 
   <div class="flex items-center min-w-0 gap-1 ml-auto shrink-0">
     <app-doc-search class="mr-1" />
+
+    <div class="flex lg:hidden items-center mr-1">
+      <ng-container *ngTemplateOutlet="docsVersionSwitcher" />
+    </div>
 
     <div class="hidden md:flex items-center ml-1 mr-1">
       <ng-container *ngTemplateOutlet="localeSwitcher" />

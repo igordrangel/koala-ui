@@ -9,16 +9,20 @@
     <meta http-equiv="Expires" content="0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script>
-      // Migrate legacy hash routes (#/path) to localized path URLs.
+      // Migrate legacy hash routes (#/path) to localized path URLs (respects <base href>).
       (function () {
         var hash = location.hash;
-        if (hash.indexOf('#/') === 0) {
-          var path = hash.slice(1);
-          if (!/^\/(pt|en)(\/|$)/.test(path)) {
-            path = path === '/' ? '/pt' : '/pt' + path;
-          }
-          history.replaceState(null, '', path + location.search);
+        if (hash.indexOf('#/') !== 0) return;
+
+        var baseEl = document.querySelector('base');
+        var base = (baseEl && baseEl.getAttribute('href')) || '/';
+        if (base.charAt(base.length - 1) === '/') base = base.slice(0, -1);
+
+        var path = hash.slice(1);
+        if (!/^\/(pt|en)(\/|$)/.test(path)) {
+          path = path === '/' ? '/pt' : '/pt' + path;
         }
+        history.replaceState(null, '', base + path + location.search);
       })();
     </script>
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
