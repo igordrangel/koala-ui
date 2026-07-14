@@ -6,6 +6,7 @@
 ## Docs
 
 - [Get Started](https://ui.koalarx.com/docs/get-started.md): Installation and setup
+- [Patch notes](https://ui.koalarx.com/docs/patch-notes.md): CLI and scaffolding changelog
 - [Alert](https://ui.koalarx.com/docs/alert.md): Alert component
 - [Bottom Sheet](https://ui.koalarx.com/docs/bottom-sheet.md): Bottom Sheet component
 - [Breadcrumb](https://ui.koalarx.com/docs/breadcrumb.md): Breadcrumb component
@@ -60,4 +61,7 @@ kl new my-app
 
 # Add components
 kl install button,modal,dropdown
+
+# Add AI context
+kl add ai-context cursor
 ```

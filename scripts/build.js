@@ -38,6 +38,7 @@ cpSync('LICENSE', 'dist/LICENSE');
 cpSync('package.json', 'dist/package.json');
 
 cpSync('bin', 'dist/bin', { recursive: true });
+cpSync('libs/cli/assets', 'dist/cli/assets', { recursive: true });
 
 const packageJson = JSON.parse(readFileSync('dist/package.json', 'utf-8'));
 

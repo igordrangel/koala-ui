@@ -48,15 +48,23 @@ export const INTRODUCTION_PAGE = {
       },
       aiReady: {
         title: 'Pronto para IA',
-        description: 'O Koala UI está pronto para desenvolvimento assistido por IA. Você pode copiar a URL do índice completo (llms.txt) no header, ou a URL Markdown da página atual com o botão Copy for AI em cada seção.',
+        description:
+          'O Koala UI está pronto para desenvolvimento assistido por IA. Você pode copiar a URL do índice completo (llms.txt) no header, a URL Markdown da página atual com Copy for AI, ou gerar contexto no projeto com a CLI.',
         cards: [
           {
             title: 'Links diretos para LLMs',
-            description: 'Use Copy AI docs index no header para compartilhar o llms.txt com seu assistente e ele descobrir o mapa completo da documentação.',
+            description:
+              'Use Copy AI docs index no header para compartilhar o llms.txt com seu assistente e ele descobrir o mapa completo da documentação.',
           },
           {
             title: 'Contexto por página',
-            description: 'Use Copy for AI em cada página para enviar uma URL focada (docs/slug.md), dando ao LLM contexto preciso do componente em que você está trabalhando.',
+            description:
+              'Use Copy for AI em cada página para enviar uma URL focada (docs/slug.md), dando ao LLM contexto preciso do componente em que você está trabalhando.',
+          },
+          {
+            title: 'Contexto no projeto (CLI)',
+            description:
+              'No kl new / kl init escolha Cursor e/ou GitHub Copilot, ou rode kl add ai-context cursor|github em projetos existentes. Gera AGENTS.md e regras do editor sem sobrescrever customizações.',
           },
         ],
       },
@@ -108,15 +116,23 @@ export const INTRODUCTION_PAGE = {
       },
       aiReady: {
         title: 'AI Ready',
-        description: 'Koala UI is ready for AI-assisted development. You can copy the full docs index URL (llms.txt) from the header, or copy the current page Markdown URL with the Copy for AI button in each section.',
+        description:
+          'Koala UI is ready for AI-assisted development. You can copy the full docs index URL (llms.txt) from the header, copy the current page Markdown URL with Copy for AI, or scaffold project context via the CLI.',
         cards: [
           {
             title: 'Direct Links for LLMs',
-            description: 'Use Copy AI docs index in the header to share llms.txt with your assistant so it can discover the full documentation map.',
+            description:
+              'Use Copy AI docs index in the header to share llms.txt with your assistant so it can discover the full documentation map.',
           },
           {
             title: 'Page-Level Context',
-            description: 'Use Copy for AI on each page to send a focused docs URL (docs/slug.md), giving your LLM precise context for the component you are working on.',
+            description:
+              'Use Copy for AI on each page to send a focused docs URL (docs/slug.md), giving your LLM precise context for the component you are working on.',
+          },
+          {
+            title: 'Project context (CLI)',
+            description:
+              'In kl new / kl init pick Cursor and/or GitHub Copilot, or run kl add ai-context cursor|github on existing projects. Scaffolds AGENTS.md and editor rules without overwriting customizations.',
           },
         ],
       },

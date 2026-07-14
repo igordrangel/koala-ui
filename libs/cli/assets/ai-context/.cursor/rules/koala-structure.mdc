@@ -1,0 +1,14 @@
+---
+description: Estrutura Koala UI — componentes copiados pela CLI
+globs: src/app/**/*.ts,src/app/**/*.html
+alwaysApply: false
+---
+
+# Estrutura
+
+- UI instalada por `kl` vive em `src/app/shared/` (components, directives, validators, utils, base).
+- Não invente imports de componentes a partir de `@koalarx/ui` — o código já está (ou deve ser instalado) no projeto.
+- Path alias: `@/*` → `src/app/*`.
+- Resources/core (auth, interceptors, bases) seguem o que `kl install` já colocou; espelhe arquivos locais.
+
+Docs: https://ui.koalarx.com/llms.txt

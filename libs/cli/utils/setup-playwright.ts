@@ -1,4 +1,5 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { withVersion } from './dependency-versions';
 import { detectPackageManager, getPmCommands } from './package-manager';
 import { getProjectPath } from './project-path';
 import { runCommand } from './run-command';
@@ -48,7 +49,7 @@ async function ensurePlaywrightDependency(projectName: string, verbose = false) 
   }
 
   const pm = getPmCommands(detectPackageManager(projectName));
-  await runCommand(`${pm.installDev} @playwright/test`, {
+  await runCommand(`${pm.installDev} ${withVersion('@playwright/test')}`, {
     cwd: projectPath,
     loaderText: 'Installing Playwright',
     verbose,

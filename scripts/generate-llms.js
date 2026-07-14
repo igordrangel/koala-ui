@@ -68,6 +68,7 @@ function capitalize(str) {
 const COMPONENTS = [
   // get-started pseudo-pages
   { name: 'get-started', label: 'Get Started', installFile: null, usageDir: null, isPage: true },
+  { name: 'patch-notes', label: 'Patch notes', installFile: null, usageDir: null, isPage: true },
 
   // components
   { name: 'alert', label: 'Alert' },
@@ -137,6 +138,10 @@ function buildGetStartedDoc() {
     ? read(join(INSTALL_DIR, 'add-resources.md'))
     : '';
 
+  const addAiContext = existsSync(join(INSTALL_DIR, 'add-ai-context.md'))
+    ? read(join(INSTALL_DIR, 'add-ai-context.md'))
+    : '`kl add ai-context cursor`';
+
   let doc = `# Koala UI – Get Started
 
 Koala UI is an Angular component library inspired by shadcn/ui.
@@ -153,11 +158,17 @@ ${installCli}
 
 ${createProject}
 
+During setup you can scaffold AI context (Cursor / GitHub Copilot). Use \`--ai-context none|cursor|github|both\` to skip the prompt.
+
 ## 3. Add components
 
 ${addComponents}
 
-## 4. Add resources (optional)
+## 4. Add AI context (optional)
+
+${addAiContext}
+
+## 5. Add resources (optional)
 
 ${addResources}
 
@@ -169,6 +180,29 @@ ${COMPONENTS.filter((c) => !c.isPage)
 `;
 
   return doc.trim();
+}
+
+function buildPatchNotesDoc() {
+  return `# Koala UI – Patch notes
+
+Changelog for anyone using or upgrading projects scaffolded with the Koala UI CLI.
+Site page: https://ui.koalarx.com/#/getting-started/patch-notes
+Root CHANGELOG.md mirrors these notes.
+
+## 22.3.0 — AI context
+
+### What changed
+
+- AI context prompt in \`kl new\` and \`kl init\` (Cursor, GitHub Copilot, both, or none).
+- \`--ai-context none|cursor|github|both\` flag to skip the interactive prompt.
+- New command \`kl add ai-context cursor|github\` — scaffolds \`AGENTS.md\` plus Cursor rules / Copilot instructions. Does not overwrite existing files.
+- Assets under \`libs/cli/assets/ai-context/\` focused on docs-first, \`kl install\`, and Angular (Signals/standalone).
+- Patch notes documentation on the site and \`CHANGELOG.md\` at the repo root.
+
+### Upgrade
+
+On existing projects: \`kl add ai-context cursor\`, \`github\`, or both. On new projects, choose in the prompt or use \`--ai-context\`.
+`.trim();
 }
 
 // ---------------------------------------------------------------------------
@@ -265,7 +299,7 @@ for (const component of COMPONENTS) {
   let content;
 
   if (component.isPage) {
-    content = buildGetStartedDoc();
+    content = component.name === 'patch-notes' ? buildPatchNotesDoc() : buildGetStartedDoc();
   } else {
     content = buildComponentDoc(component);
   }
@@ -290,8 +324,9 @@ const llmsTxt = `# Koala UI
 ## Docs
 
 - [Get Started](${BASE_URL}/docs/get-started.md): Installation and setup
+- [Patch notes](${BASE_URL}/docs/patch-notes.md): CLI and scaffolding changelog
 ${generated
-  .filter((c) => c.name !== 'get-started')
+  .filter((c) => c.name !== 'get-started' && c.name !== 'patch-notes')
   .map((c) => `- [${c.label}](${BASE_URL}/docs/${c.name}.md): ${c.label} component`)
   .join('\n')}
 
@@ -306,6 +341,9 @@ kl new my-app
 
 # Add components
 kl install button,modal,dropdown
+
+# Add AI context
+kl add ai-context cursor
 \`\`\`
 `;
 
@@ -469,6 +507,28 @@ for (const section of extractSections(getStartedMarkdown)) {
     title: section.title,
     category: 'Getting Started',
     route: 'getting-started/installation',
+    fragment,
+    content: stripMarkdown(section.content),
+  });
+}
+
+const patchNotesMarkdown = readFileSync(join(DOCS_OUT_DIR, 'patch-notes.md'), 'utf8').trim();
+searchEntries.push({
+  id: 'getting-started/patch-notes',
+  title: 'Patch notes',
+  category: 'Getting Started',
+  route: 'getting-started/patch-notes',
+  content: stripMarkdown(patchNotesMarkdown),
+});
+usedSearchIds.add('getting-started/patch-notes');
+
+for (const section of extractSections(patchNotesMarkdown)) {
+  const { id, fragment } = uniqueSectionId('getting-started/patch-notes', section.title, usedSearchIds);
+  searchEntries.push({
+    id,
+    title: section.title,
+    category: 'Getting Started',
+    route: 'getting-started/patch-notes',
     fragment,
     content: stripMarkdown(section.content),
   });

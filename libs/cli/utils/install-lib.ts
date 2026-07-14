@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import prompts from 'prompts';
+import { withVersion } from './dependency-versions';
 import { detectPackageManager, getPmCommands } from './package-manager';
 import { getProjectPath } from './project-path';
 import { runCommand } from './run-command';
@@ -32,8 +33,9 @@ export async function installLib(
 
   const pm = detectPackageManager(projectName);
   const pmCmd = getPmCommands(pm);
+  const libSpec = withVersion(lib);
 
-  await runCommand(`${pmCmd.add} ${lib}`, {
+  await runCommand(`${pmCmd.add} ${libSpec}`, {
     cwd: getProjectPath(projectName),
     loaderText: `Installing ${lib}`,
     verbose,

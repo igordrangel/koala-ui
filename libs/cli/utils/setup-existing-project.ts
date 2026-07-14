@@ -2,12 +2,14 @@ import { cpSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node
 import path from 'node:path';
 import { logStep, logSuccess, logWarning } from './cli-ui';
 import { detectTestFramework } from './detect-test-framework';
+import { withVersion } from './dependency-versions';
 import { detectPackageManager, getPmCommands, getProjectExecCommand } from './package-manager';
 import { getProjectPath } from './project-path';
 import { runCommand } from './run-command';
 import { setupGlobalTests } from './setup-global-tests';
 import { validateAngularProject } from './validate-project';
 import { installUtil } from './install-util';
+import { applyAiContext, resolveAiContextTargets } from './apply-ai-context';
 
 const originPath = path.join(__dirname, '../../');
 const KOALARX_UTILS_MIN_MAJOR = 5;
@@ -29,7 +31,11 @@ function needsKoalarxUtilsV5(versionRange: string | undefined): boolean {
 /**
  * Performs adaptive setup of a pre-existing Angular project
  */
-export async function setupExistingProject(projectName: string, verbose = false): Promise<void> {
+export async function setupExistingProject(
+  projectName: string,
+  verbose = false,
+  aiContextFlag?: string,
+): Promise<void> {
   const logger = console.log;
   const projectPath = getProjectPath(projectName);
 
@@ -178,11 +184,11 @@ export async function setupExistingProject(projectName: string, verbose = false)
   const packagesToInstall: string[] = [];
 
   if (!allDeps.clsx) {
-    packagesToInstall.push('clsx');
+    packagesToInstall.push(withVersion('clsx'));
   }
 
   if (needsKoalarxUtilsV5(allDeps['@koalarx/utils'])) {
-    packagesToInstall.push('@koalarx/utils@^5.0.0');
+    packagesToInstall.push(withVersion('@koalarx/utils'));
   }
 
   if (packagesToInstall.length > 0) {
@@ -248,6 +254,9 @@ export async function setupExistingProject(projectName: string, verbose = false)
     verbose,
     loaderText: 'Formatting project',
   });
+
+  const aiContextTargets = await resolveAiContextTargets(aiContextFlag);
+  applyAiContext(projectName, aiContextTargets, logger);
 
   logSuccess(logger, 'Setup completed successfully!');
 }

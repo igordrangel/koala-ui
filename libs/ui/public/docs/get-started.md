@@ -22,7 +22,15 @@ kl new example
 
 # with custom package manager
 kl new example --pm pnpm
+
+# skip AI context prompt
+kl new example --ai-context none
+
+# scaffold Cursor + Copilot context without prompting
+kl new example --ai-context both
 ```
+
+During setup you can scaffold AI context (Cursor / GitHub Copilot). Use `--ai-context none|cursor|github|both` to skip the prompt.
 
 ## 3. Add components
 
@@ -33,7 +41,20 @@ kl install button,dropdown,modal
 kl install modal --project my-angular-app
 ```
 
-## 4. Add resources (optional)
+## 4. Add AI context (optional)
+
+```bash
+# Cursor (.cursor/rules + AGENTS.md)
+kl add ai-context cursor
+
+# GitHub Copilot (.github/copilot-instructions.md + AGENTS.md)
+kl add ai-context github
+
+# both
+kl add ai-context cursor github
+```
+
+## 5. Add resources (optional)
 
 
 

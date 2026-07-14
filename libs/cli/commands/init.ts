@@ -4,6 +4,7 @@ import { setupExistingProject } from '../utils/setup-existing-project';
 export interface InitArgs {
   project?: string;
   verbose?: boolean;
+  aiContext?: string;
 }
 
 export async function runInitCommand(args: InitArgs): Promise<void> {
@@ -13,5 +14,5 @@ export async function runInitCommand(args: InitArgs): Promise<void> {
 
   logHeader(logger, 'KOALA PROJECT INITIALIZER', `Project: ${projectName}`);
 
-  await setupExistingProject(projectName, verbose);
+  await setupExistingProject(projectName, verbose, args.aiContext);
 }

@@ -9,9 +9,11 @@ import {
   PackageManager,
   PmCommands,
 } from '../utils/package-manager';
+import { withVersions } from '../utils/dependency-versions';
 import { runCommand } from '../utils/run-command';
 import { setupGlobalTests } from '../utils/setup-global-tests';
 import { installUtil } from '../utils/install-util';
+import { applyAiContext, resolveAiContextTargets } from '../utils/apply-ai-context';
 
 const originPath = path.join(__dirname, '../../');
 
@@ -19,6 +21,7 @@ export interface NewArgs {
   name: string;
   pm?: PackageManager;
   verbose?: boolean;
+  aiContext?: string;
 }
 
 async function createAngularProject(
@@ -31,13 +34,20 @@ async function createAngularProject(
     verbose,
     loaderText: `Creating project ${name}`,
   });
-  await runCommand(`${pm.install} @koalarx/utils@^5.0.0 clsx`, {
+  await runCommand(`${pm.install} ${withVersions(['@koalarx/utils', 'clsx']).join(' ')}`, {
     cwd: name,
     verbose,
     loaderText: 'Installing base dependencies',
   });
   await runCommand(
-    `${pm.installDev} angular-eslint @vitest/eslint-plugin eslint-plugin-prettier typescript-eslint daisyui @types/node`,
+    `${pm.installDev} ${withVersions([
+      'angular-eslint',
+      '@vitest/eslint-plugin',
+      'eslint-plugin-prettier',
+      'typescript-eslint',
+      'daisyui',
+      '@types/node',
+    ]).join(' ')}`,
     {
       cwd: name,
       verbose,
@@ -161,6 +171,9 @@ export async function runNewCommand(args: NewArgs): Promise<void> {
 
   installUtil(name, 'control-changes');
   installUtil(name, 'form-is-valid');
+
+  const aiContextTargets = await resolveAiContextTargets(args.aiContext);
+  applyAiContext(name, aiContextTargets);
 
   logSuccess(console.log, 'Project ready');
 }

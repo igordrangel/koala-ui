@@ -12,6 +12,13 @@ vi.mock('./package-manager');
 vi.mock('./run-command');
 vi.mock('./cli-ui');
 vi.mock('./setup-global-tests');
+vi.mock('./install-util', () => ({
+  installUtil: vi.fn(),
+}));
+vi.mock('./apply-ai-context', () => ({
+  resolveAiContextTargets: vi.fn(async () => []),
+  applyAiContext: vi.fn(),
+}));
 
 describe('setupExistingProject', () => {
   beforeEach(() => {
