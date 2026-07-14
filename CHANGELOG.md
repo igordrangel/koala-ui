@@ -11,28 +11,26 @@ Formato inspirado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/)
 
 ## Política de versão
 
-A partir de **22.4.0**, o major de `@koalarx/ui` acompanha o major do Angular. As releases `22.0.0`–`22.3.0` foram publicadas ainda com Angular 21; use `21.2.x` para Angular 21 ou `>=22.4.0` para Angular 22.
+A partir de **23.x**, o major de `@koalarx/ui` = major do Angular + 1 (`23` → Angular 22). A linha `22.x` permanece para Angular 21 (`previous-release` / dist-tag `angular-21`).
 
-## [22.4.0] — Angular 22 + Signal Forms
+## [23.0.0] — Angular 22 + Signal Forms
 
 ### Changed
 
 - Upgrade da docs app e pins da CLI para **Angular 22** / TypeScript 6.
 - Controles de formulário migrados de `ControlValueAccessor` para `FormValueControl` / `FormCheckboxControl` (Signal Forms + compat Reactive/Template).
+- `inline-filter` migrado para Signal Forms; validators no builder usam `FieldValidator` (`({ value }) => …`), não `ValidatorFn`.
+- Removidos utils `control-changes`, `form-is-valid` e `get-value-on-first-change`; CLI não os instala mais.
 - Interceptors HTTP funcionais; remoção de padrões zoneless legados (`NgZone` em mask/currency).
-
-### Fixed
-
-- Realinhamento de versionamento: `22.4+` = Angular 22; linha `21.x` permanece para Angular 21.
+- Política de versão: `22.x` = Angular 21; `23.x` = Angular 22.
 
 ### Release (npm)
 
-Após publicar `22.4.0`:
+Após publicar `23.0.0`:
 
 ```bash
-npm dist-tag add @koalarx/ui@22.4.0 latest
-npm dist-tag add @koalarx/ui@21.2.4 angular-21
-npm deprecate "@koalarx/ui@>=22.0.0 <22.4.0" "Publicada com Angular 21 por engano. Use 21.2.x (Angular 21) ou >=22.4.0 (Angular 22)."
+npm dist-tag add @koalarx/ui@23.0.0 latest
+npm dist-tag add @koalarx/ui@22.3.0 angular-21
 ```
 
 Detalhes: patch notes no site após o release.
