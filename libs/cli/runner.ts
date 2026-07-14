@@ -1,5 +1,6 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
+import { runAddCommand } from './commands/add';
 import { runInstallCommand } from './commands/install';
 import { runInitCommand } from './commands/init';
 import { runNewCommand } from './commands/new';
@@ -18,15 +19,21 @@ function getCliVersion(): string {
   }
 }
 
-function getFlagValue(args: string[], longName: string, shortName: string): string | undefined {
+function getFlagValue(
+  args: string[],
+  longName: string,
+  shortName?: string,
+): string | undefined {
   const longIndex = args.indexOf(`--${longName}`);
   if (longIndex >= 0 && args[longIndex + 1]) {
     return args[longIndex + 1];
   }
 
-  const shortIndex = args.indexOf(`-${shortName}`);
-  if (shortIndex >= 0 && args[shortIndex + 1]) {
-    return args[shortIndex + 1];
+  if (shortName) {
+    const shortIndex = args.indexOf(`-${shortName}`);
+    if (shortIndex >= 0 && args[shortIndex + 1]) {
+      return args[shortIndex + 1];
+    }
   }
 
   return undefined;
@@ -36,11 +43,14 @@ function hasFlag(args: string[], longName: string, shortName?: string): boolean 
   return args.includes(`--${longName}`) || (shortName ? args.includes(`-${shortName}`) : false);
 }
 
-function getFirstPositionalArg(args: string[]): string | undefined {
+function getPositionalArgs(args: string[]): string[] {
+  const positionals: string[] = [];
+
   for (let i = 0; i < args.length; i++) {
     const current = args[i];
     if (!current.startsWith('-')) {
-      return current;
+      positionals.push(current);
+      continue;
     }
 
     // Skip flag value when format is "--flag value" or "-f value"
@@ -53,7 +63,11 @@ function getFirstPositionalArg(args: string[]): string | undefined {
     }
   }
 
-  return undefined;
+  return positionals;
+}
+
+function getFirstPositionalArg(args: string[]): string | undefined {
+  return getPositionalArgs(args)[0];
 }
 
 function printBanner() {
@@ -68,15 +82,21 @@ function printBanner() {
 function printHelp() {
   printBanner();
   console.log('Usage:');
-  console.log('  kl new <project> [--pm bun|npm|yarn|pnpm] [--verbose]');
-  console.log('  kl init [--project <name>] [--verbose]');
+  console.log(
+    '  kl new <project> [--pm bun|npm|yarn|pnpm] [--ai-context none|cursor|github|both] [--verbose]',
+  );
+  console.log(
+    '  kl init [--project <name>] [--ai-context none|cursor|github|both] [--verbose]',
+  );
   console.log('  kl install <component[,component]> [--project <name>] [--verbose]');
+  console.log('  kl add ai-context cursor|github [--project <name>]');
   console.log('  kl version');
   console.log('');
   console.log('Commands:');
   console.log('  new      Create a new UI project');
   console.log('  init     Initialize an existing Angular project with Koala');
   console.log('  install  Add one or more components to the project');
+  console.log('  add      Add project features (ai-context)');
   console.log('  version  Show the CLI version');
 }
 
@@ -100,10 +120,13 @@ function printInitHelp() {
   console.log('');
   console.log('USAGE');
   console.log('  $ kl init');
-  console.log('  $ kl init [-p <value>] [--verbose]');
+  console.log('  $ kl init [-p <value>] [--ai-context <value>] [--verbose]');
   console.log('');
   console.log('FLAGS');
   console.log('  -p, --project=<value>  name of the project (defaults to current directory)');
+  console.log(
+    '      --ai-context=<value>  none|cursor|github|both (skips interactive prompt)',
+  );
   console.log('  -v, --verbose          show detailed logs');
   console.log('');
   console.log('This command will:');
@@ -113,6 +136,32 @@ function printInitHelp() {
   console.log('  • Configure Vitest and Playwright if no tests are found');
   console.log('  • Install required dependencies');
   console.log('  • Set up ESLint and VS Code configuration');
+  console.log('  • Optionally scaffold AI context (Cursor / GitHub Copilot)');
+}
+
+function printAddHelp() {
+  console.log('add a feature to the project');
+  console.log('');
+  console.log('USAGE');
+  console.log('  $ kl add ai-context cursor|github [cursor|github] [-p <value>]');
+  console.log('');
+  console.log('FEATURES');
+  console.log('  ai-context  Contexto AI (AGENTS.md + regras do editor)');
+  console.log('');
+  console.log('FLAGS');
+  console.log('  -p, --project=<value>  name of the project (defaults to current directory)');
+  console.log('');
+  console.log('EXAMPLES');
+  console.log('  kl add ai-context cursor');
+  console.log('  kl add ai-context github');
+  console.log('  kl add ai-context cursor github');
+}
+
+function printNewHelp() {
+  console.log('Usage: kl new <project> [--pm bun|npm|yarn|pnpm] [--ai-context none|cursor|github|both] [--verbose]');
+  console.log(
+    '       kl new --name <project> [--pm bun|npm|yarn|pnpm] [--ai-context none|cursor|github|both] [--verbose]',
+  );
 }
 
 export async function runCli(argv: string[]): Promise<number> {
@@ -131,15 +180,15 @@ export async function runCli(argv: string[]): Promise<number> {
   try {
     if (command === 'new') {
       if (hasFlag(args, 'help', 'h')) {
-        console.log('Usage: kl new <project> [--pm bun|npm|yarn|pnpm] [--verbose]');
-        console.log('       kl new --name <project> [--pm bun|npm|yarn|pnpm] [--verbose]');
+        printNewHelp();
         return 0;
       }
 
       const name = getFirstPositionalArg(args) ?? getFlagValue(args, 'name', 'n');
       const pm = getFlagValue(args, 'pm', 'm') as PackageManager | undefined;
       const verbose = hasFlag(args, 'verbose', 'v');
-      await runNewCommand({ name: name ?? '', pm, verbose });
+      const aiContext = getFlagValue(args, 'ai-context');
+      await runNewCommand({ name: name ?? '', pm, verbose, aiContext });
       return 0;
     }
 
@@ -151,7 +200,8 @@ export async function runCli(argv: string[]): Promise<number> {
 
       const project = getFlagValue(args, 'project', 'p');
       const verbose = hasFlag(args, 'verbose', 'v');
-      await runInitCommand({ project, verbose });
+      const aiContext = getFlagValue(args, 'ai-context');
+      await runInitCommand({ project, verbose, aiContext });
       return 0;
     }
 
@@ -165,6 +215,21 @@ export async function runCli(argv: string[]): Promise<number> {
       const project = getFlagValue(args, 'project', 'p');
       const verbose = hasFlag(args, 'verbose', 'v');
       await runInstallCommand({ name: name ?? '', project, verbose });
+      return 0;
+    }
+
+    if (command === 'add') {
+      if (hasFlag(args, 'help', 'h')) {
+        printAddHelp();
+        return 0;
+      }
+
+      const positionals = getPositionalArgs(args);
+      const feature = positionals[0];
+      const targets = positionals.slice(1);
+      const project = getFlagValue(args, 'project', 'p');
+      const verbose = hasFlag(args, 'verbose', 'v');
+      await runAddCommand({ feature, targets, project, verbose });
       return 0;
     }
 

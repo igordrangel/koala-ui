@@ -56,6 +56,7 @@ export class NavMenu {
     return new KlArray<MenuOption>([
       { name: copy.introduction, routerLink: 'getting-started/introduction' },
       { name: copy.installation, routerLink: 'getting-started/installation' },
+      { name: copy.patchNotes, routerLink: 'getting-started/patch-notes' },
     ]).orderBy('name');
   });
 

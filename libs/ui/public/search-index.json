@@ -11,7 +11,7 @@
     "title": "Installation",
     "category": "Getting Started",
     "route": "getting-started/installation",
-    "content": "Koala UI – Get Started Koala UI is an Angular component library inspired by shadcn/ui. Components are installed directly into your project via the Koala CLI , giving you full control over the source code. Base dependencies installed by / : @koalarx/utils ≥ 5 and . Full utils API for LLMs: https://utils.koalarx.com/llms.txt. 1. Install the CLI 2. Create a new project 3. Add components 4. Add resources (optional) Available components - Alert – - Bottom Sheet – - Breadcrumb – - Button – - Calendar – - Checkbox – - Collapse – - Combobox – - Confirm – - DataTable – - Dropdown – - Fieldset – - Inline Filter – - Input CNPJ – - Input CPF – - Input Color – - Input Currency – - Input Field – - Loading – - Login – - Modal – - Pagination – - Radio – - Range – - Select – - Side Window – - Skeleton – - Stepper – - Table – - Tabs – - Textarea – - Text Editor – - Toast – - Toggle – - Tooltip – - Validator – - List Base – - Http Base – - Page Base – - Global Errors – - Rules – - Auth –"
+    "content": "Koala UI – Get Started Koala UI is an Angular component library inspired by shadcn/ui. Components are installed directly into your project via the Koala CLI , giving you full control over the source code. Base dependencies installed by / : @koalarx/utils ≥ 5 and . Full utils API for LLMs: https://utils.koalarx.com/llms.txt. 1. Install the CLI 2. Create a new project During setup you can scaffold AI context (Cursor / GitHub Copilot). Use to skip the prompt. 3. Add components 4. Add AI context (optional) 5. Add resources (optional) Available components - Alert – - Bottom Sheet – - Breadcrumb – - Button – - Calendar – - Checkbox – - Collapse – - Combobox – - Confirm – - DataTable – - Dropdown – - Fieldset – - Inline Filter – - Input CNPJ – - Input CPF – - Input Color – - Input Currency – - Input Field – - Loading – - Login – - Modal – - Pagination – - Radio – - Range – - Select – - Side Window – - Skeleton – - Stepper – - Table – - Tabs – - Textarea – - Text Editor – - Toast – - Toggle – - Tooltip – - Validator – - List Base – - Http Base – - Page Base – - Global Errors – - Rules – - Auth –"
   },
   {
     "id": "getting-started/installation#1-install-the-cli",
@@ -27,7 +27,7 @@
     "category": "Getting Started",
     "route": "getting-started/installation",
     "fragment": "2-create-a-new-project",
-    "content": ""
+    "content": "During setup you can scaffold AI context (Cursor / GitHub Copilot). Use to skip the prompt."
   },
   {
     "id": "getting-started/installation#3-add-components",
@@ -38,11 +38,19 @@
     "content": ""
   },
   {
-    "id": "getting-started/installation#4-add-resources-optional",
-    "title": "4. Add resources (optional)",
+    "id": "getting-started/installation#4-add-ai-context-optional",
+    "title": "4. Add AI context (optional)",
     "category": "Getting Started",
     "route": "getting-started/installation",
-    "fragment": "4-add-resources-optional",
+    "fragment": "4-add-ai-context-optional",
+    "content": ""
+  },
+  {
+    "id": "getting-started/installation#5-add-resources-optional",
+    "title": "5. Add resources (optional)",
+    "category": "Getting Started",
+    "route": "getting-started/installation",
+    "fragment": "5-add-resources-optional",
     "content": ""
   },
   {
@@ -52,6 +60,37 @@
     "route": "getting-started/installation",
     "fragment": "available-components",
     "content": "- Alert – - Bottom Sheet – - Breadcrumb – - Button – - Calendar – - Checkbox – - Collapse – - Combobox – - Confirm – - DataTable – - Dropdown – - Fieldset – - Inline Filter – - Input CNPJ – - Input CPF – - Input Color – - Input Currency – - Input Field – - Loading – - Login – - Modal – - Pagination – - Radio – - Range – - Select – - Side Window – - Skeleton – - Stepper – - Table – - Tabs – - Textarea – - Text Editor – - Toast – - Toggle – - Tooltip – - Validator – - List Base – - Http Base – - Page Base – - Global Errors – - Rules – - Auth –"
+  },
+  {
+    "id": "getting-started/patch-notes",
+    "title": "Patch notes",
+    "category": "Getting Started",
+    "route": "getting-started/patch-notes",
+    "content": "Koala UI – Patch notes Changelog for anyone using or upgrading projects scaffolded with the Koala UI CLI. Site page: https://ui.koalarx.com/ /getting-started/patch-notes Root CHANGELOG.md mirrors these notes. 22.3.0 — AI context What changed - AI context prompt in and (Cursor, GitHub Copilot, both, or none). - flag to skip the interactive prompt. - New command — scaffolds plus Cursor rules / Copilot instructions. Does not overwrite existing files. - Assets under focused on docs-first, , and Angular (Signals/standalone). - Patch notes documentation on the site and at the repo root. Upgrade On existing projects: , , or both. On new projects, choose in the prompt or use ."
+  },
+  {
+    "id": "getting-started/patch-notes#2230-ai-context",
+    "title": "22.3.0 — AI context",
+    "category": "Getting Started",
+    "route": "getting-started/patch-notes",
+    "fragment": "2230-ai-context",
+    "content": ""
+  },
+  {
+    "id": "getting-started/patch-notes#what-changed",
+    "title": "What changed",
+    "category": "Getting Started",
+    "route": "getting-started/patch-notes",
+    "fragment": "what-changed",
+    "content": "- AI context prompt in and (Cursor, GitHub Copilot, both, or none). - flag to skip the interactive prompt. - New command — scaffolds plus Cursor rules / Copilot instructions. Does not overwrite existing files. - Assets under focused on docs-first, , and Angular (Signals/standalone). - Patch notes documentation on the site and at the repo root."
+  },
+  {
+    "id": "getting-started/patch-notes#upgrade",
+    "title": "Upgrade",
+    "category": "Getting Started",
+    "route": "getting-started/patch-notes",
+    "fragment": "upgrade",
+    "content": "On existing projects: , , or both. On new projects, choose in the prompt or use ."
   },
   {
     "id": "components/alert",

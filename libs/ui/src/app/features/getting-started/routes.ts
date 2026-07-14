@@ -12,4 +12,9 @@ export const ROUTES: Routes = [
     loadComponent: () => import('./installation/installation.page').then((m) => m.InstallationPage),
     title: generateTitle('Installation'),
   },
+  {
+    path: 'patch-notes',
+    loadComponent: () => import('./patch-notes/patch-notes.page').then((m) => m.PatchNotesPage),
+    title: generateTitle('Patch notes'),
+  },
 ];

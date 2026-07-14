@@ -1,4 +1,5 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { withVersions } from './dependency-versions';
 import { detectPackageManager, getPmCommands } from './package-manager';
 import { getProjectPath } from './project-path';
 import { runCommand } from './run-command';
@@ -41,7 +42,7 @@ async function ensureUnitTestDependencies(projectName: string, verbose = false) 
   }
 
   const pm = getPmCommands(detectPackageManager(projectName));
-  await runCommand(`${pm.installDev} ${missingDeps.join(' ')}`, {
+  await runCommand(`${pm.installDev} ${withVersions(missingDeps).join(' ')}`, {
     cwd: projectPath,
     loaderText: 'Installing unit test dependencies',
     verbose,

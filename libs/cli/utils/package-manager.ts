@@ -1,6 +1,7 @@
 import { existsSync } from 'node:fs';
 import chalk from 'chalk';
 import prompts from 'prompts';
+import { DEPENDENCY_VERSIONS } from './dependency-versions';
 import { getProjectPath } from './project-path';
 
 export type PackageManager = 'bun' | 'npm' | 'yarn' | 'pnpm';
@@ -58,7 +59,8 @@ export function getPmCommands(pm: PackageManager): PmCommands {
 
 export function getAngularCreateCommand(projectName: string, pm: PackageManager) {
   const commands = getPmCommands(pm);
-  return `${commands.dlx} @angular/cli new ${projectName} --defaults --style=tailwind --package-manager ${pm}`;
+  const cliVersion = DEPENDENCY_VERSIONS['@angular/cli'];
+  return `${commands.dlx} @angular/cli@${cliVersion} new ${projectName} --defaults --style=tailwind --package-manager ${pm}`;
 }
 
 export function getProjectExecCommand(pm: PackageManager, command: string) {

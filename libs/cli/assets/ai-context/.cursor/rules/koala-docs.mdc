@@ -1,0 +1,16 @@
+---
+description: Docs first — llms.txt e MCP antes de inventar API
+globs: src/app/**/*.{ts,html}
+alwaysApply: false
+---
+
+# Documentação
+
+Antes de inventar APIs ou padrões Koala UI:
+
+1. Índice LLM: https://ui.koalarx.com/llms.txt
+2. Doc focada: https://ui.koalarx.com/docs/<slug>.md
+3. MCP `koala-ui-docs` quando disponível (`read_koala_ui_doc`, `search_koala_ui_docs`)
+4. Utils: https://utils.koalarx.com/llms.txt
+
+Não invente diretivas, inputs ou fluxos não documentados.

@@ -20,7 +20,7 @@ describe('Init Command', () => {
     try {
       await runInitCommand({});
 
-      expect(vi.mocked(setupExistingProject)).toHaveBeenCalledWith('my-project', false);
+      expect(vi.mocked(setupExistingProject)).toHaveBeenCalledWith('my-project', false, undefined);
     } finally {
       process.cwd = originalCwd;
     }
@@ -31,7 +31,11 @@ describe('Init Command', () => {
 
     await runInitCommand({ project: 'custom-project' });
 
-    expect(vi.mocked(setupExistingProject)).toHaveBeenCalledWith('custom-project', false);
+    expect(vi.mocked(setupExistingProject)).toHaveBeenCalledWith(
+      'custom-project',
+      false,
+      undefined,
+    );
   });
 
   it('should pass verbose flag to setupExistingProject', async () => {
@@ -39,7 +43,7 @@ describe('Init Command', () => {
 
     await runInitCommand({ project: 'test-project', verbose: true });
 
-    expect(vi.mocked(setupExistingProject)).toHaveBeenCalledWith('test-project', true);
+    expect(vi.mocked(setupExistingProject)).toHaveBeenCalledWith('test-project', true, undefined);
   });
 
   it('should not set verbose flag to true by default', async () => {
@@ -47,7 +51,19 @@ describe('Init Command', () => {
 
     await runInitCommand({ project: 'test-project' });
 
-    expect(vi.mocked(setupExistingProject)).toHaveBeenCalledWith('test-project', false);
+    expect(vi.mocked(setupExistingProject)).toHaveBeenCalledWith('test-project', false, undefined);
+  });
+
+  it('should pass aiContext flag to setupExistingProject', async () => {
+    const { setupExistingProject } = await import('../utils/setup-existing-project');
+
+    await runInitCommand({ project: 'test-project', aiContext: 'cursor' });
+
+    expect(vi.mocked(setupExistingProject)).toHaveBeenCalledWith(
+      'test-project',
+      false,
+      'cursor',
+    );
   });
 
   it('should call logHeader with correct parameters', async () => {
@@ -81,7 +97,7 @@ describe('Init Command', () => {
       await runInitCommand({ verbose: false });
 
       // Should extract 'my-app' from the path
-      expect(vi.mocked(setupExistingProject)).toHaveBeenCalledWith('my-app', false);
+      expect(vi.mocked(setupExistingProject)).toHaveBeenCalledWith('my-app', false, undefined);
     } finally {
       process.cwd = originalCwd;
     }
@@ -112,7 +128,7 @@ describe('Init Command', () => {
       await runInitCommand({ verbose: false });
 
       // Should extract the last directory name
-      expect(vi.mocked(setupExistingProject)).toHaveBeenCalledWith('my-ui-lib', false);
+      expect(vi.mocked(setupExistingProject)).toHaveBeenCalledWith('my-ui-lib', false, undefined);
     } finally {
       process.cwd = originalCwd;
     }

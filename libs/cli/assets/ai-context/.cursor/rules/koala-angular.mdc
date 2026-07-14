@@ -1,0 +1,12 @@
+---
+description: Angular moderno — Signals, standalone e aliases
+globs: src/app/**/*.{ts,html}
+alwaysApply: false
+---
+
+# Angular
+
+- Prefira Signals (`signal`, `computed`, `input`/`output` modernos) em vez de padrões legados quando o projeto já os usa.
+- Componentes standalone; declare dependências no array `imports`.
+- Use o alias `@/*` para imports sob `src/app/`.
+- Mantenha consistência com o scaffolding de `kl new` / `kl init` (tema, ESLint, testes).

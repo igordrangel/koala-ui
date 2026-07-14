@@ -43,9 +43,11 @@ import { HTTP_BASE_PAGE } from './http-base';
 import { LIST_BASE_PAGE } from './list-base';
 import { PAGE_BASE_PAGE } from './page-base';
 import { RULES_PAGE } from './rules';
+import { PATCH_NOTES_PAGE } from './patch-notes';
 
 export { INSTALLATION_PAGE, type InstallationPageCopy } from './installation';
 export { INTRODUCTION_PAGE, type IntroductionPageCopy } from './introduction';
+export { PATCH_NOTES_PAGE, type PatchNotesPageCopy } from './patch-notes';
 export { ALERT_PAGE, type AlertPageCopy } from './alert';
 export { BOTTOM_SHEET_PAGE, type BottomSheetPageCopy } from './bottom-sheet';
 export { BREADCRUMB_PAGE, type BreadcrumbPageCopy } from './breadcrumb';
@@ -92,6 +94,7 @@ export { RULES_PAGE, type RulesPageCopy } from './rules';
 export const DOCS_PAGES = {
   installation: INSTALLATION_PAGE,
   introduction: INTRODUCTION_PAGE,
+  'patch-notes': PATCH_NOTES_PAGE,
   alert: ALERT_PAGE,
   'bottom-sheet': BOTTOM_SHEET_PAGE,
   breadcrumb: BREADCRUMB_PAGE,

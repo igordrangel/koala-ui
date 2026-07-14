@@ -19,6 +19,7 @@ export const UI_COPY = {
     searchAria: 'Buscar documentação',
     introduction: 'Introdução',
     installation: 'Instalação',
+    patchNotes: 'Patch notes',
     navGroups: {
       actions: 'Ações',
       dataDisplay: 'Exibição de dados',
@@ -68,6 +69,7 @@ export const UI_COPY = {
     searchAria: 'Search documentation',
     introduction: 'Introduction',
     installation: 'Installation',
+    patchNotes: 'Patch notes',
     navGroups: {
       actions: 'Actions',
       dataDisplay: 'Data Display',

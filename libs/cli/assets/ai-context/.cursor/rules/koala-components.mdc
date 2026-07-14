@@ -1,0 +1,13 @@
+---
+description: Componentes Koala UI — install CLI e imports
+globs: src/app/shared/components/**/*.{ts,html}
+alwaysApply: false
+---
+
+# Componentes
+
+- Instale o que faltar: `kl install button,modal,dropdown` (vírgulas; a CLI resolve dependências).
+- Destino padrão: `src/app/shared/components/<name>/`.
+- Importe em standalone `imports` a partir de `@/shared/components/...` (ou o caminho já usado no repo).
+- Não invente inputs/outputs/diretivas — leia a doc do componente (`https://ui.koalarx.com/docs/<slug>.md`) ou o MCP `koala-ui-docs`.
+- Ao editar um componente instalado, trate-o como código do app (você possui a fonte).

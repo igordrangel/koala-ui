@@ -15,11 +15,22 @@
       <i class="fa-solid fa-circle-info"></i>
       <span>{{ copy().sections.creatingNewProject.otherProse[0] }}</span>
     </div>
+
+    <div role="alert" class="alert alert-info alert-dash mt-2">
+      <i class="fa-solid fa-circle-info"></i>
+      <span>{{ copy().sections.creatingNewProject.otherProse[1] }}</span>
+    </div>
   </app-section-content>
 
   <app-section-content class="block mt-10">
     <ng-container title>{{ copy().sections.addingComponents.title }}</ng-container>
     <app-code-viewer language="bash" name="kl" src="markdown/install/add-components.md" />
+  </app-section-content>
+
+  <app-section-content class="block mt-10">
+    <ng-container title>{{ copy().sections.addingAiContext.title }}</ng-container>
+    <ng-container description>{{ copy().sections.addingAiContext.description }}</ng-container>
+    <app-code-viewer language="bash" name="kl" src="markdown/install/add-ai-context.md" />
   </app-section-content>
 
   <app-section-content class="block mt-10">
