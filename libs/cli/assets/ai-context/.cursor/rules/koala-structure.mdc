@@ -11,4 +11,4 @@ alwaysApply: false
 - Path alias: `@/*` → `src/app/*`.
 - Resources/core (auth, interceptors, bases) seguem o que `kl install` já colocou; espelhe arquivos locais.
 
-Docs: https://ui.koalarx.com/llms.txt
+Docs (latest): https://ui.koalarx.com/llms.txt — previous line: `/v{major}/llms.txt`

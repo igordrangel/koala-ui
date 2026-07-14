@@ -2,12 +2,13 @@ name: Deploy Documentation
 
 on:
   push:
-    branches: [main]
+    branches: [main, previous-release]
     paths:
       - 'libs/ui/**'
       - 'package.json'
       - 'scripts/generate-llms.js'
       - '.github/workflows/deploy-docs.yml'
+      - '.github/release-lines.json'
 
 permissions:
   contents: read
@@ -22,10 +23,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout latest (main)
         uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
+          path: latest
+
+      - name: Checkout previous-release
+        uses: actions/checkout@v4
+        with:
+          ref: previous-release
+          fetch-depth: 0
+          path: previous
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
@@ -35,19 +45,57 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      - name: Install root dependencies
-        run: bun install
+      - name: Resolve previous docs major
+        id: previous
+        working-directory: previous
+        run: |
+          MAJOR=$(node -p "require('./package.json').version.split('.')[0]")
+          echo "major=$MAJOR" >> "$GITHUB_OUTPUT"
+          echo "base_href=/v${MAJOR}/" >> "$GITHUB_OUTPUT"
 
-      - name: Install UI site dependencies
-        run: cd libs/ui && bun install --frozen-lockfile
+      - name: Install + build previous-release docs
+        working-directory: previous
+        env:
+          DOCS_BASE_HREF: ${{ steps.previous.outputs.base_href }}
+        run: |
+          bun install
+          cd libs/ui && bun install --frozen-lockfile
+          cd ../..
+          bun run build:docs
 
-      - name: Build documentation
-        run: bun run build:docs
+      - name: Install + build latest docs
+        working-directory: latest
+        env:
+          DOCS_BASE_HREF: /
+        run: |
+          bun install
+          cd libs/ui && bun install --frozen-lockfile
+          cd ../..
+          bun run build:docs
+
+      - name: Compose site
+        env:
+          PREV_MAJOR: ${{ steps.previous.outputs.major }}
+        run: |
+          set -euo pipefail
+          SITE="$GITHUB_WORKSPACE/site"
+          mkdir -p "$SITE"
+
+          # Latest (main) at site root
+          cp -a "$GITHUB_WORKSPACE/latest/dist/browser/." "$SITE/"
+
+          # Previous line under /v{major}/
+          PREV_DIR="$SITE/v${PREV_MAJOR}"
+          mkdir -p "$PREV_DIR"
+          cp -a "$GITHUB_WORKSPACE/previous/dist/browser/." "$PREV_DIR/"
+
+          echo "Composed docs site:"
+          find "$SITE" -maxdepth 2 -type d | sort
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/browser
+          path: site
 
   deploy:
     environment:
