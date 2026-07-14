@@ -1,3 +1,5 @@
+# Composes latest (main → /) + previous-release (/v{major}/).
+# github-pages environment must allow both branches in deployment branch policies.
 name: Deploy Documentation
 
 on:

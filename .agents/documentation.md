@@ -106,6 +106,7 @@ Duas majors ativas (como Angular current + previous):
 - O seletor de versão no header navega entre as bases compostas na CI (`/` ↔ `/v{major}/`), não troca markdown dentro do mesmo build.
 - Lista do seletor: [`libs/ui/src/app/core/constants/docs-versions.ts`](../libs/ui/src/app/core/constants/docs-versions.ts) — manter **igual** em `main` e `previous-release`.
 - Publish/deploy: push em `main` ou `previous-release` monta as duas linhas de docs; npm usa `latest` ou `previousDistTag`.
+- Environment GitHub Pages deve permitir deploy de **ambas** as branches (`main` e `previous-release`) nas deployment branch policies.
 
 ### Major bump (ex.: lançar 24)
 
