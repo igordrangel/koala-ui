@@ -95,22 +95,19 @@ kl version
 
 ---
 
-## Versioning (aligned with Angular)
+## Support lines (`main` + `previous-release`)
 
-The **major** version of `@koalarx/ui` matches the **major** Angular version that line targets:
+| Line | Branch | Docs | npm dist-tag |
+|------|--------|------|--------------|
+| Latest | `main` | [ui.koalarx.com](https://ui.koalarx.com/) | `latest` |
+| Previous | `previous-release` | [ui.koalarx.com/v{major}/](https://ui.koalarx.com/v22/) | configured in [`.github/release-lines.json`](.github/release-lines.json) (`previousDistTag`, e.g. `angular-21`) |
 
-| `@koalarx/ui` | Angular | Notes |
-|---------------|---------|--------|
-| `21.x` | 21 | Canonical Angular 21 line (`maintenance/angular-21`) |
-| `22.0.0`–`22.3.0` | 21 (mistaken) | Published while still on Angular 21 — prefer `21.2.x` or `>=22.4.0` |
-| `22.4.0+` | 22 | First correct Angular 22 line |
+Archive branches (e.g. `22.3.0`) keep frozen majors without CI. On a major bump: create the archive from `previous-release`, move current `main` into `previous-release`, then develop the new major on `main`. See `.agents/documentation.md`.
 
-npm dist-tags (after the Angular 22 release): `latest` → `22.4+`, `angular-21` → latest `21.x`.
-
----
+Library major tracks Angular major (`22.x` → Angular 21, `23.x` → Angular 22).
 
 ## Documentation
 
 For detailed installation guides, usage instructions, patch notes, and examples for each component, visit the official documentation:
 
-**[ui.koalarx.com](https://ui.koalarx.com)** · [Patch notes](https://ui.koalarx.com/#/getting-started/patch-notes) · [CHANGELOG.md](./CHANGELOG.md)
+**[ui.koalarx.com](https://ui.koalarx.com)** · previous line under `/v{major}/` · [Patch notes](https://ui.koalarx.com/pt/getting-started/patch-notes) · [CHANGELOG.md](./CHANGELOG.md)

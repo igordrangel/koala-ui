@@ -3,6 +3,7 @@ import type { Locale } from './locale.types';
 export const UI_COPY = {
   pt: {
     language: 'Idioma',
+    version: 'Versão',
     menu: 'Menu',
     gettingStarted: 'Começando',
     components: 'Componentes',
@@ -53,6 +54,7 @@ export const UI_COPY = {
   },
   en: {
     language: 'Language',
+    version: 'Version',
     menu: 'Menu',
     gettingStarted: 'Getting Started',
     components: 'Components',

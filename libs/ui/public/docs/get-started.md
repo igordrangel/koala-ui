@@ -6,6 +6,17 @@ Components are installed directly into your project via the **Koala CLI**, givin
 Base dependencies installed by `kl new` / `kl init`: **[@koalarx/utils](https://utils.koalarx.com/) ≥ 5** and `clsx`.
 Full utils API for LLMs: [https://utils.koalarx.com/llms.txt](https://utils.koalarx.com/llms.txt).
 
+## Version compatibility
+
+Two support lines (like Angular current + previous):
+
+| Line | Git branch | Docs | npm dist-tag |
+|------|------------|------|--------------|
+| Latest | `main` | https://ui.koalarx.com/ | `latest` |
+| Previous | `previous-release` | https://ui.koalarx.com/v{major}/ | see release (e.g. `angular-21` for the 22.x line on Angular 21) |
+
+Older majors are frozen on archive branches named by version (e.g. `22.3.0`) with no publish/deploy.
+
 ## 1. Install the CLI
 
 ```bash

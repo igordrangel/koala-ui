@@ -87,7 +87,35 @@ Documente relações entre resources na seção Usage das páginas web e nos arq
 
 ## Validação
 
-- [ ] Página web abre em `#/resources/<slug>` ou `#/components/<name>`
-- [ ] "Copy for AI" aponta para `/docs/<slug>.md`
-- [ ] `llms.txt` lista o novo item
+- [ ] Página web abre em `/pt/resources/<slug>` ou `/pt/components/<name>` (e sob `/v{major}/…` na linha previous)
+- [ ] "Copy for AI" aponta para o `docs/<slug>.md` da linha atual (root ou `/v{major}/docs/…`)
+- [ ] `llms.txt` da linha lista o novo item
 - [ ] `bun run test:cli` passa
+
+## Suporte dual — branches `main` + `previous-release`
+
+Duas majors ativas (como Angular current + previous):
+
+| Branch | Papel | npm dist-tag | Docs Pages |
+|--------|--------|--------------|------------|
+| `main` | latest | `latest` | `https://ui.koalarx.com/` |
+| `previous-release` | major anterior | ver `.github/release-lines.json` → `previousDistTag` | `https://ui.koalarx.com/v{major}/` |
+| `{version}` (ex. `22.3.0`) | arquivo morto | nenhum | nenhum |
+
+- Em **cada** branch, `public/markdown/` e `public/docs/` são planos e referem **só** a lib daquela linha. Não criar `markdown/22`, `docs/23`, etc.
+- O seletor de versão no header navega entre as bases compostas na CI (`/` ↔ `/v{major}/`), não troca markdown dentro do mesmo build.
+- Lista do seletor: [`libs/ui/src/app/core/constants/docs-versions.ts`](../libs/ui/src/app/core/constants/docs-versions.ts) — manter **igual** em `main` e `previous-release`.
+- Publish/deploy: push em `main` ou `previous-release` monta as duas linhas de docs; npm usa `latest` ou `previousDistTag`.
+- Environment GitHub Pages deve permitir deploy de **ambas** as branches (`main` e `previous-release`) nas deployment branch policies.
+
+### Major bump (ex.: lançar 24)
+
+1. Anotar a versão em `previous-release` (`package.json`).
+2. Criar branch de arquivo com esse nome: `git branch 22.3.0 previous-release` (sem CI).
+3. Atualizar `previous-release` para o tip de `main`.
+4. Em `main`, subir a major nova e desenvolver.
+5. Atualizar em **ambos** os branches ativos: `docs-versions.ts`, `.github/release-lines.json` (`previousDistTag`), ai-context / README se as URLs da linha previous mudarem.
+
+### Docs nesta branch
+
+Edite markdown/páginas **nesta** linha e rode `bun run generate:llms` aqui. Hotfix da linha previous = commit em `previous-release`.

@@ -6,10 +6,11 @@ This project was scaffolded with `kl` (Koala UI). UI components and resources ar
 
 Before inventing APIs or patterns, read the relevant topic from the indexes:
 
-- UI: https://ui.koalarx.com/llms.txt
+- UI (latest): https://ui.koalarx.com/llms.txt
+- UI (previous support line): https://ui.koalarx.com/v{major}/llms.txt (e.g. `/v22/llms.txt`)
 - Utils: https://utils.koalarx.com/llms.txt
 
-Useful entry points: [Get Started](https://ui.koalarx.com/docs/get-started.md), component pages under https://ui.koalarx.com/docs/<slug>.md. Prefer the MCP server `koala-ui-docs` when available (`read_koala_ui_doc`, `search_koala_ui_docs`, `list_koala_ui_docs`).
+Useful entry points: [Get Started](https://ui.koalarx.com/docs/get-started.md), component pages under https://ui.koalarx.com/docs/<slug>.md (previous line: `/v{major}/docs/<slug>.md`). Prefer the MCP server `koala-ui-docs` when available (`read_koala_ui_doc`, `search_koala_ui_docs`, `list_koala_ui_docs`).
 
 ## Hard constraints
 

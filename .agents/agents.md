@@ -16,6 +16,7 @@ Useful entry points: [Get Started](https://ui.koalarx.com/docs/get-started.md), 
 | Task | Open (repo path) |
 |------|------------------|
 | New component / block / resource docs | `.agents/documentation.md` |
+| Major bump / `main` + `previous-release` support lines | `.agents/documentation.md` → “Suporte dual” |
 | User-facing CLI or generated-project change (patch notes) | `.agents/patch-notes.md` |
 | Consumer AI context (`kl new` / `init` / `add ai-context`) | `libs/cli/assets/ai-context/` — keep in sync after docs/pattern changes (see below) |
 | CLI install / deps / copy paths | `libs/cli/utils/install-component.ts` + related install helpers |
@@ -29,7 +30,8 @@ Useful entry points: [Get Started](https://ui.koalarx.com/docs/get-started.md), 
 - Base deps: `@koalarx/utils` ≥ 5 and `clsx`. Prefer Utils prototypes where documented.
 - Do not invent undocumented directives, inputs, or APIs — follow published docs and local installed sources.
 - Prefer Bun for this monorepo’s tooling.
-- Library major tracks Angular major (`21.x` → Angular 21, `22.4+` → Angular 22).
+- Library major tracks Angular major (`22.x` → Angular 21, `23.x` → Angular 22).
+- Active support lines: `main` (latest) + `previous-release` (previous major). On major change, freeze previous into an archive branch named by version, promote `main` → `previous-release`, and develop the new major on `main` — do not overwrite the previous line’s docs/code in place. Markdown/docs stay flat per branch (no `markdown/{major}/` folders).
 
 ## Maintaining agent context
 
