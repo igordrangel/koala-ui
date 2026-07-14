@@ -17,7 +17,7 @@
         [class.opacity-50]="!isDocsVersionCurrent(entry)"
         (click)="switchDocsVersion(entry)"
       >
-        {{ entry.label }}
+        {{ docsVersionLabel(entry) }}
       </button>
     }
   </div>

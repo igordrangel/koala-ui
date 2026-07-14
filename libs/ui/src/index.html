@@ -18,6 +18,22 @@
         var base = (baseEl && baseEl.getAttribute('href')) || '/';
         if (base.charAt(base.length - 1) === '/') base = base.slice(0, -1);
 
+        // Latest SPA (base `/`) wrongly serving `/v{major}/#/…` (local ng serve):
+        // do not strip the version prefix back into `/pt/…` on this host.
+        var versionMatch = location.pathname.match(/^\/(v\d+)(?=\/|$)/);
+        if (versionMatch && !base) {
+          if (location.hostname !== 'ui.koalarx.com') {
+            location.replace(
+              'https://ui.koalarx.com/' +
+                versionMatch[1] +
+                '/' +
+                location.search +
+                hash,
+            );
+          }
+          return;
+        }
+
         var path = hash.slice(1);
         if (!/^\/(pt|en)(\/|$)/.test(path)) {
           path = path === '/' ? '/pt' : '/pt' + path;
