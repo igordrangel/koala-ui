@@ -22,4 +22,4 @@ Ao introduzir mudanças **visíveis** na CLI, nos templates/assets instalados no
 
 ## Após editar docs
 
-Rode `bun run generate:llms` (ou o fluxo de build de docs do repo) para regenerar `public/docs/*.md`, `llms.txt` e o search index.
+Rode `bun run generate:llms` **na branch da linha afetada** (`main` ou `previous-release`) para regenerar `public/docs/*.md`, `llms.txt` e o search index. O deploy de docs compõe latest na raiz e previous em `/v{major}/`.

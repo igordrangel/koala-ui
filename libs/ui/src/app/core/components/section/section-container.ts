@@ -13,6 +13,7 @@ import {
 } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { delay } from '@koalarx/utils/KlDelay';
+import { DocsVersionService } from '../../docs-version/docs-version.service';
 
 @Component({
   selector: 'app-section-container',
@@ -22,6 +23,7 @@ import { delay } from '@koalarx/utils/KlDelay';
 export class SectionContainer implements OnDestroy {
   private readonly elementRef = inject(ElementRef);
   private readonly router = inject(Router);
+  private readonly docsVersion = inject(DocsVersionService);
   private observer!: IntersectionObserver;
 
   readonly ignoreAIDoc = input(false, { transform: booleanAttribute });
@@ -29,10 +31,12 @@ export class SectionContainer implements OnDestroy {
   readonly copied = signal(false);
 
   readonly aiDocUrl = computed(() => {
-    const url = this.router.url;
-    const segments = url.split('/').filter(Boolean);
-    const slug = segments.length >= 2 ? segments[1] : (segments[0] ?? '');
-    return `${window.location.origin}/docs/${slug}.md`;
+    const segments = this.router.url
+      .split(/[?#]/)[0]
+      .split('/')
+      .filter(Boolean);
+    const slug = segments.at(-1) ?? '';
+    return this.docsVersion.assetUrl(`docs/${slug}.md`);
   });
 
   readonly activeSectionId = signal<string>('');
