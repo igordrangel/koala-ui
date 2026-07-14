@@ -12,31 +12,34 @@ kl install combobox
 <app-combobox
   placeholder="Select a state"
   [options]="localOptions"
-  [formControl]="localComboboxControl"
+  [formField]="comboboxForm.local"
 />
 
 <app-combobox
   multiple
   placeholder="Select multiple states"
   [options]="localOptions"
-  [formControl]="localMultipleComboboxControl"
+  [formField]="comboboxForm.localMultiple"
 />
 ```
 
 ```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { Combobox, ComboboxOption } from '@/shared/components/combobox';
 import { KlArray } from '@koalarx/utils/KlArray';
 
 @Component({
   selector: 'app-combobox-local-sample',
   templateUrl: './combobox-local-sample.html',
-  imports: [ReactiveFormsModule, Combobox],
+  imports: [FormField, Combobox],
 })
 export class ComboboxLocalSample {
-  readonly localComboboxControl = new FormControl<string | null>(null);
-  readonly localMultipleComboboxControl = new FormControl<string[]>([], { nonNullable: true });
+  private readonly comboboxModel = signal<{ local: string | null; localMultiple: string[] }>({
+    local: null,
+    localMultiple: [],
+  });
+  readonly comboboxForm = form(this.comboboxModel);
 
   readonly localOptions: ComboboxOption<string>[] = new KlArray([
     { value: 'sp', label: 'Sao Paulo' },
@@ -51,29 +54,38 @@ export class ComboboxLocalSample {
 }
 ```
 
+Reactive Forms still work via Angular 22 FormValueControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.
+
 ### Remote
 
 ```html
 <app-combobox
   placeholder="Search for a user"
   [options]="asyncOptions"
-  [formControl]="remoteComboboxControl"
+  [formField]="comboboxForm.remote"
 />
 ```
 
 ```typescript
-import { Component, Injector, resource, Signal } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Combobox, ComboboxOption, ComboboxResourceFactory } from '@/shared/components/combobox';
+import { Component, Injector, resource, signal, Signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
+import { AsyncComboboxOptions, Combobox } from '@/shared/components/combobox';
 import { KlArray } from '@koalarx/utils/KlArray';
+
+interface User {
+  id: number;
+  firstName: string;
+  lastName: string;
+}
 
 @Component({
   selector: 'app-combobox-remote-sample',
   templateUrl: './combobox-remote-sample.html',
-  imports: [ReactiveFormsModule, Combobox],
+  imports: [FormField, Combobox],
 })
 export class ComboboxRemoteSample {
-  readonly remoteComboboxControl = new FormControl<number | null>(15);
+  private readonly comboboxModel = signal<{ remote: number | null }>({ remote: 15 });
+  readonly comboboxForm = form(this.comboboxModel);
 
   readonly asyncOptions: AsyncComboboxOptions<number, User> = (
     filter: Signal<string>,
@@ -120,3 +132,5 @@ export class ComboboxRemoteSample {
     });
 }
 ```
+
+Reactive Forms still work via Angular 22 FormValueControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.

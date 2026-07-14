@@ -4,11 +4,13 @@ import type { DocPageCopy } from '../types';
 export const GLOBAL_ERRORS_PAGE = {
   pt: {
     title: 'Global Errors',
-    description: 'Global Errors dá feedback automático de erros HTTP via toast. Um interceptor global captura requests com falha e mostra mensagens amigáveis.',
+    description:
+      'Global Errors dá feedback automático de erros HTTP via toast. Um interceptor global captura requests com falha e mostra mensagens amigáveis.',
     sections: {
       installation: {
         title: 'Instalação',
-        description: 'Use o Koala CLI para adicionar Global Errors ao seu projeto (inclui Toast e setup do app.config).',
+        description:
+          'Use o Koala CLI para adicionar Global Errors ao seu projeto (inclui Toast e setup do app.config).',
       },
       api: {
         title: 'API',
@@ -40,7 +42,8 @@ export const GLOBAL_ERRORS_PAGE = {
               },
               {
                 name: 'HttpErrorMiddleware.ignoreError()',
-                description: 'Ignora feedback para erros específicos (customizável após a instalação).',
+                description:
+                  'Ignora feedback para erros específicos (customizável após a instalação).',
               },
             ],
           },
@@ -63,11 +66,13 @@ export const GLOBAL_ERRORS_PAGE = {
   },
   en: {
     title: 'Global Errors',
-    description: 'Global Errors provides automatic HTTP error feedback via toast notifications. A global interceptor captures failed requests and displays user-friendly messages.',
+    description:
+      'Global Errors provides automatic HTTP error feedback via toast notifications. A global interceptor captures failed requests and displays user-friendly messages.',
     sections: {
       installation: {
         title: 'Installation',
-        description: 'Use the Koala CLI to add Global Errors to your project (includes Toast and app.config setup).',
+        description:
+          'Use the Koala CLI to add Global Errors to your project (includes Toast and app.config setup).',
       },
       api: {
         title: 'API',

@@ -2,84 +2,61 @@ import {
   Directive,
   effect,
   ElementRef,
-  forwardRef,
   inject,
   input,
-  NgZone,
+  model,
   OnDestroy,
+  output,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormValueControl } from '@angular/forms/signals';
 import { stringMask } from '../utils/string-mask';
 
 @Directive({
   selector: 'input[appMask],textarea[appMask]',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => Mask),
-      multi: true,
-    },
-  ],
+  host: {
+    '(blur)': 'touch.emit()',
+  },
 })
-export class Mask implements ControlValueAccessor, OnDestroy {
+export class Mask implements FormValueControl<string>, OnDestroy {
   private readonly elementRef =
     inject<ElementRef<HTMLInputElement | HTMLTextAreaElement>>(ElementRef);
-  private readonly ngZone = inject(NgZone);
   private suppressEmit = false;
-  private onChange: (value: string) => void = () => {};
-  private onTouched: () => void = () => {};
+
+  readonly value = model('');
+  readonly appMask = input.required<string>();
+  readonly disabled = input(false);
+  readonly touch = output<void>();
 
   private readonly onInput = () => {
-    const input = this.elementRef.nativeElement;
-    const value = input.value;
-    const maskedValue = value ? stringMask(value, this.appMask()) : '';
-
-    input.value = maskedValue;
+    const el = this.elementRef.nativeElement;
+    const maskedValue = el.value ? stringMask(el.value, this.appMask()) : '';
+    el.value = maskedValue;
 
     if (!this.suppressEmit) {
-      this.ngZone.run(() => this.onChange(maskedValue));
+      this.value.set(maskedValue);
     }
   };
-  private readonly onBlur = () => {
-    this.ngZone.run(() => this.onTouched());
-  };
-
-  readonly appMask = input.required<string>();
 
   constructor() {
-    const input = this.elementRef.nativeElement;
-    input.addEventListener('input', this.onInput);
-    input.addEventListener('blur', this.onBlur);
+    const el = this.elementRef.nativeElement;
+    el.addEventListener('input', this.onInput);
 
     effect(() => {
+      const masked = this.value() ? stringMask(this.value(), this.appMask()) : '';
+      if (el.value === masked) {
+        return;
+      }
       this.suppressEmit = true;
-      input.value = input.value ? stringMask(input.value, this.appMask()) : '';
+      el.value = masked;
       this.suppressEmit = false;
+    });
+
+    effect(() => {
+      el.disabled = this.disabled();
     });
   }
 
-  writeValue(value: string | null | undefined): void {
-    const input = this.elementRef.nativeElement;
-    this.suppressEmit = true;
-    input.value = value ? stringMask(value, this.appMask()) : '';
-    this.suppressEmit = false;
-  }
-
-  registerOnChange(fn: (value: string) => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.elementRef.nativeElement.disabled = isDisabled;
-  }
-
   ngOnDestroy(): void {
-    const input = this.elementRef.nativeElement;
-    input.removeEventListener('input', this.onInput);
-    input.removeEventListener('blur', this.onBlur);
+    this.elementRef.nativeElement.removeEventListener('input', this.onInput);
   }
 }

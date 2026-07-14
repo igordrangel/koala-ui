@@ -13,19 +13,22 @@ kl install checkbox
 ```
 
 ```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { Checkbox } from '@/shared/components/checkbox';
 
 @Component({
   selector: 'app-checkbox-sample',
   templateUrl: './checkbox-sample.html',
-  imports: [ReactiveFormsModule, Checkbox],
+  imports: [FormField, Checkbox],
 })
 export class CheckboxSample {
-  checkboxControl = new FormControl<boolean>(true);
+  private readonly checkboxModel = signal({ checked: true });
+  readonly checkboxForm = form(this.checkboxModel);
 }
 ```
+
+Reactive Forms still work via Angular 22 FormCheckboxControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.
 
 ### Sizes
 
@@ -40,12 +43,12 @@ export class CheckboxSample {
 ### Variants
 
 ```html
-<input type="checkbox" appCheckbox variant="neutral" />
-<input type="checkbox" appCheckbox variant="primary" />
-<input type="checkbox" appCheckbox variant="secondary" />
-<input type="checkbox" appCheckbox variant="accent" />
-<input type="checkbox" appCheckbox variant="info" />
-<input type="checkbox" appCheckbox variant="success" />
-<input type="checkbox" appCheckbox variant="warning" />
-<input type="checkbox" appCheckbox variant="error" />
+<input type="checkbox" appCheckbox variant="neutral" [formField]="checkboxForm.checked" />
+<input type="checkbox" appCheckbox variant="primary" [formField]="checkboxForm.checked" />
+<input type="checkbox" appCheckbox variant="secondary" [formField]="checkboxForm.checked" />
+<input type="checkbox" appCheckbox variant="accent" [formField]="checkboxForm.checked" />
+<input type="checkbox" appCheckbox variant="info" [formField]="checkboxForm.checked" />
+<input type="checkbox" appCheckbox variant="success" [formField]="checkboxForm.checked" />
+<input type="checkbox" appCheckbox variant="warning" [formField]="checkboxForm.checked" />
+<input type="checkbox" appCheckbox variant="error" [formField]="checkboxForm.checked" />
 ```

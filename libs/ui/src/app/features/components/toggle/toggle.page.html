@@ -18,14 +18,14 @@
         <div
           class="flex items-center justify-center gap-2 py-10 border border-t-0 border-base-300 rounded-b-lg"
         >
-          <input type="checkbox" appToggle variant="neutral" [formControl]="toggleControl" />
-          <input type="checkbox" appToggle variant="primary" [formControl]="toggleControl" />
-          <input type="checkbox" appToggle variant="secondary" [formControl]="toggleControl" />
-          <input type="checkbox" appToggle variant="accent" [formControl]="toggleControl" />
-          <input type="checkbox" appToggle variant="info" [formControl]="toggleControl" />
-          <input type="checkbox" appToggle variant="success" [formControl]="toggleControl" />
-          <input type="checkbox" appToggle variant="warning" [formControl]="toggleControl" />
-          <input type="checkbox" appToggle variant="error" [formControl]="toggleControl" />
+          <input type="checkbox" appToggle variant="neutral" [formField]="toggleForm.checked" />
+          <input type="checkbox" appToggle variant="primary" [formField]="toggleForm.checked" />
+          <input type="checkbox" appToggle variant="secondary" [formField]="toggleForm.checked" />
+          <input type="checkbox" appToggle variant="accent" [formField]="toggleForm.checked" />
+          <input type="checkbox" appToggle variant="info" [formField]="toggleForm.checked" />
+          <input type="checkbox" appToggle variant="success" [formField]="toggleForm.checked" />
+          <input type="checkbox" appToggle variant="warning" [formField]="toggleForm.checked" />
+          <input type="checkbox" appToggle variant="error" [formField]="toggleForm.checked" />
         </div>
       </div>
 

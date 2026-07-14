@@ -77,7 +77,7 @@ describe('Package Manager Utils', () => {
       const cmd = getAngularCreateCommand('my-app', 'npm');
 
       expect(cmd).toBe(
-        'npx --yes @angular/cli@^21.2.7 new my-app --defaults --style=tailwind --package-manager npm',
+        'npx --yes @angular/cli@^22.0.6 new my-app --defaults --style=tailwind --package-manager npm',
       );
     });
 
@@ -85,7 +85,7 @@ describe('Package Manager Utils', () => {
       const cmd = getAngularCreateCommand('my-app', 'yarn');
 
       expect(cmd).toBe(
-        'yarn dlx @angular/cli@^21.2.7 new my-app --defaults --style=tailwind --package-manager yarn',
+        'yarn dlx @angular/cli@^22.0.6 new my-app --defaults --style=tailwind --package-manager yarn',
       );
     });
 
@@ -93,7 +93,7 @@ describe('Package Manager Utils', () => {
       const cmd = getAngularCreateCommand('my-app', 'bun');
 
       expect(cmd).toBe(
-        'bunx @angular/cli@^21.2.7 new my-app --defaults --style=tailwind --package-manager bun',
+        'bunx @angular/cli@^22.0.6 new my-app --defaults --style=tailwind --package-manager bun',
       );
     });
   });

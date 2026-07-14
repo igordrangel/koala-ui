@@ -91,18 +91,6 @@ export async function setupExistingProject(
     }
   }
 
-  const animationsPath = `${projectPath}/src/theme/animations.css`;
-  if (!existsSync(animationsPath)) {
-    const originAnimationsPath = `${originPath}/ui/theme/animations.css`;
-    if (existsSync(originAnimationsPath)) {
-      try {
-        cpSync(originAnimationsPath, animationsPath);
-      } catch {
-        logWarning(logger, 'Failed to copy animations.css');
-      }
-    }
-  }
-
   const tablePath = `${projectPath}/src/theme/table.css`;
   if (!existsSync(tablePath)) {
     const originTablePath = `${originPath}/ui/theme/table.css`;

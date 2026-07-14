@@ -124,6 +124,21 @@ Changelog for anyone using or upgrading projects scaffolded with the Koala UI CL
 Site page: https://ui.koalarx.com/#/getting-started/patch-notes
 Root CHANGELOG.md mirrors these notes.
 
+## 23.0.0 — Angular 22 + Signal Forms
+
+### What changed
+
+- Docs app and CLI pins on Angular 22 / TypeScript 6.
+- Form controls migrated from ControlValueAccessor to FormValueControl / FormCheckboxControl (Signal Forms; Reactive Forms and ngModel remain compatible on Angular 22).
+- inline-filter migrated to Signal Forms; builder validators now use FieldValidator (({ value }) => …), not ValidatorFn.
+- Removed control-changes, form-is-valid, and get-value-on-first-change utils (Reactive Forms bridges); CLI no longer scaffolds or installs them as component deps.
+- Functional HTTP interceptors (withInterceptors); NgZone removed from mask/currency.
+- Versioning policy: 22.x = Angular 21; 23.x = Angular 22.
+
+### Upgrade
+
+Upgrade consumer apps to Angular 22. Re-run `kl install` for form components (and inline-filter) to pick up FormValueControl/Signal Forms. If you pass validators to InlineFilterBuilder, replace ValidatorFn with Signal Forms FieldValidator. Delete control-changes.ts / form-is-valid.ts / get-value-on-first-change.ts if present and replace usages with field().value() / field().valid(). For Angular 21, stay on the 22.x line (angular-21 dist-tag after release).
+
 ## 22.3.0 — AI context
 
 ### What changed
@@ -473,46 +488,52 @@ export class CalendarSample {}
 <div class="grid gap-4 md:grid-cols-2">
   <div class="flex flex-col gap-2">
     <span class="text-sm font-semibold">date</span>
-    <app-input-calendar class="w-full" [(value)]="inputDateValue" />
-    <span class="px-2 opacity-60">value: {{ inputDateValue() }}</span>
+    <app-input-calendar class="w-full" [formField]="calendarForm.date" />
+    <span class="px-2 opacity-60">value: {{ calendarForm.date().value() }}</span>
   </div>
 
   <div class="flex flex-col gap-2">
     <span class="text-sm font-semibold">datetime</span>
-    <app-input-calendar class="w-full" type="datetime" [(value)]="inputDateTimeValue" />
-    <span class="px-2 opacity-60">value: {{ inputDateTimeValue() }}</span>
+    <app-input-calendar class="w-full" type="datetime" [formField]="calendarForm.datetime" />
+    <span class="px-2 opacity-60">value: {{ calendarForm.datetime().value() }}</span>
   </div>
 
   <div class="flex flex-col gap-2">
     <span class="text-sm font-semibold">month</span>
-    <app-input-calendar class="w-full" type="month" [(value)]="inputMonthValue" />
-    <span class="px-2 opacity-60">value: {{ inputMonthValue() }}</span>
+    <app-input-calendar class="w-full" type="month" [formField]="calendarForm.month" />
+    <span class="px-2 opacity-60">value: {{ calendarForm.month().value() }}</span>
   </div>
 
   <div class="flex flex-col gap-2">
     <span class="text-sm font-semibold">daterange</span>
-    <app-input-calendar class="w-full" type="daterange" [(value)]="inputDateRangeValue" />
-    <span class="px-2 opacity-60">value: {{ inputDateRangeValue() }}</span>
+    <app-input-calendar class="w-full" type="daterange" [formField]="calendarForm.daterange" />
+    <span class="px-2 opacity-60">value: {{ calendarForm.daterange().value() }}</span>
   </div>
 </div>
 ```
 
 ```typescript
 import { Component, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { InputCalendar } from '@/shared/components/calendar';
 
 @Component({
   selector: 'app-input-calendar-sample',
   templateUrl: './input-calendar-sample.html',
-  imports: [InputCalendar],
+  imports: [FormField, InputCalendar],
 })
 export class CalendarSample {
-  readonly inputDateValue = signal<string>('2026-01-01');
-  readonly inputDateTimeValue = signal<string>('2026-01-01T14:30');
-  readonly inputMonthValue = signal<string>('2026-01');
-  readonly inputDateRangeValue = signal<string>('2026-01-10/2026-01-20');
+  private readonly calendarModel = signal({
+    date: '2026-01-01',
+    datetime: '2026-01-01T14:30',
+    month: '2026-01',
+    daterange: '2026-01-10/2026-01-20',
+  });
+  readonly calendarForm = form(this.calendarModel);
 }
 ```
+
+Reactive Forms still work via Angular 22 FormValueControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.
 
 ---
 
@@ -531,19 +552,22 @@ kl install checkbox
 ```
 
 ```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { Checkbox } from '@/shared/components/checkbox';
 
 @Component({
   selector: 'app-checkbox-sample',
   templateUrl: './checkbox-sample.html',
-  imports: [ReactiveFormsModule, Checkbox],
+  imports: [FormField, Checkbox],
 })
 export class CheckboxSample {
-  checkboxControl = new FormControl<boolean>(true);
+  private readonly checkboxModel = signal({ checked: true });
+  readonly checkboxForm = form(this.checkboxModel);
 }
 ```
+
+Reactive Forms still work via Angular 22 FormCheckboxControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.
 
 ### Sizes
 
@@ -558,14 +582,14 @@ export class CheckboxSample {
 ### Variants
 
 ```html
-<input type="checkbox" appCheckbox variant="neutral" />
-<input type="checkbox" appCheckbox variant="primary" />
-<input type="checkbox" appCheckbox variant="secondary" />
-<input type="checkbox" appCheckbox variant="accent" />
-<input type="checkbox" appCheckbox variant="info" />
-<input type="checkbox" appCheckbox variant="success" />
-<input type="checkbox" appCheckbox variant="warning" />
-<input type="checkbox" appCheckbox variant="error" />
+<input type="checkbox" appCheckbox variant="neutral" [formField]="checkboxForm.checked" />
+<input type="checkbox" appCheckbox variant="primary" [formField]="checkboxForm.checked" />
+<input type="checkbox" appCheckbox variant="secondary" [formField]="checkboxForm.checked" />
+<input type="checkbox" appCheckbox variant="accent" [formField]="checkboxForm.checked" />
+<input type="checkbox" appCheckbox variant="info" [formField]="checkboxForm.checked" />
+<input type="checkbox" appCheckbox variant="success" [formField]="checkboxForm.checked" />
+<input type="checkbox" appCheckbox variant="warning" [formField]="checkboxForm.checked" />
+<input type="checkbox" appCheckbox variant="error" [formField]="checkboxForm.checked" />
 ```
 
 ---
@@ -650,31 +674,34 @@ kl install combobox
 <app-combobox
   placeholder="Select a state"
   [options]="localOptions"
-  [formControl]="localComboboxControl"
+  [formField]="comboboxForm.local"
 />
 
 <app-combobox
   multiple
   placeholder="Select multiple states"
   [options]="localOptions"
-  [formControl]="localMultipleComboboxControl"
+  [formField]="comboboxForm.localMultiple"
 />
 ```
 
 ```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { Combobox, ComboboxOption } from '@/shared/components/combobox';
 import { KlArray } from '@koalarx/utils/KlArray';
 
 @Component({
   selector: 'app-combobox-local-sample',
   templateUrl: './combobox-local-sample.html',
-  imports: [ReactiveFormsModule, Combobox],
+  imports: [FormField, Combobox],
 })
 export class ComboboxLocalSample {
-  readonly localComboboxControl = new FormControl<string | null>(null);
-  readonly localMultipleComboboxControl = new FormControl<string[]>([], { nonNullable: true });
+  private readonly comboboxModel = signal<{ local: string | null; localMultiple: string[] }>({
+    local: null,
+    localMultiple: [],
+  });
+  readonly comboboxForm = form(this.comboboxModel);
 
   readonly localOptions: ComboboxOption<string>[] = new KlArray([
     { value: 'sp', label: 'Sao Paulo' },
@@ -689,29 +716,38 @@ export class ComboboxLocalSample {
 }
 ```
 
+Reactive Forms still work via Angular 22 FormValueControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.
+
 ### Remote
 
 ```html
 <app-combobox
   placeholder="Search for a user"
   [options]="asyncOptions"
-  [formControl]="remoteComboboxControl"
+  [formField]="comboboxForm.remote"
 />
 ```
 
 ```typescript
-import { Component, Injector, resource, Signal } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Combobox, ComboboxOption, ComboboxResourceFactory } from '@/shared/components/combobox';
+import { Component, Injector, resource, signal, Signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
+import { AsyncComboboxOptions, Combobox } from '@/shared/components/combobox';
 import { KlArray } from '@koalarx/utils/KlArray';
+
+interface User {
+  id: number;
+  firstName: string;
+  lastName: string;
+}
 
 @Component({
   selector: 'app-combobox-remote-sample',
   templateUrl: './combobox-remote-sample.html',
-  imports: [ReactiveFormsModule, Combobox],
+  imports: [FormField, Combobox],
 })
 export class ComboboxRemoteSample {
-  readonly remoteComboboxControl = new FormControl<number | null>(15);
+  private readonly comboboxModel = signal<{ remote: number | null }>({ remote: 15 });
+  readonly comboboxForm = form(this.comboboxModel);
 
   readonly asyncOptions: AsyncComboboxOptions<number, User> = (
     filter: Signal<string>,
@@ -758,6 +794,8 @@ export class ComboboxRemoteSample {
     });
 }
 ```
+
+Reactive Forms still work via Angular 22 FormValueControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.
 
 ---
 
@@ -1101,20 +1139,20 @@ kl install fieldset
 ```html
 <app-fieldset>
   <ng-container label>What is your email?</ng-container>
-  <input field appInput type="text" placeholder="Type here" [formControl]="emailControl" />
+  <input field appInput type="text" placeholder="Type here" [formField]="emailForm.email" />
   <ng-container hint>Inform a valid email address</ng-container>
 
-  @if (emailControl.hasError('required')) {
+  @if (emailForm.email().getError('required')) {
     <span appValidatorHint>Email is required</span>
-  } @else if (emailControl.hasError('email')) {
+  } @else if (emailForm.email().getError('email')) {
     <span appValidatorHint>Invalid email</span>
   }
 </app-fieldset>
 ```
 
 ```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { email, form, FormField, required } from '@angular/forms/signals';
 import { Fieldset } from '@/shared/components/fieldset';
 import { Input } from '@/shared/components/input-field';
 import { ValidatorHint } from '@/shared/components/validator/validator-hint';
@@ -1122,17 +1160,22 @@ import { ValidatorHint } from '@/shared/components/validator/validator-hint';
 @Component({
   selector: 'app-fieldset-sample',
   templateUrl: './fieldset-sample.html',
-  imports: [ReactiveFormsModule, Fieldset, Input, ValidatorHint],
+  imports: [FormField, Fieldset, Input, ValidatorHint],
 })
 export class FieldsetSample {
-  readonly emailControl = new FormControl<string>('', [Validators.required, Validators.email]);
+  readonly emailForm = form(signal({ email: '' }), (schema) => {
+    required(schema.email);
+    email(schema.email);
+  });
 }
 ```
+
+Reactive Forms still work via Angular 22 interop (`[formControl]` / `formControlName` + `Validators`). Prefer Signal Forms (`form()` + `[formField]`) for new code.
 
 ### Login Sample
 
 ```html
-<form class="flex flex-col items-center justify-center gap-2" [formGroup]="loginForm">
+<form class="flex flex-col items-center justify-center gap-2">
   <app-fieldset class="w-full max-w-xs">
     <ng-container label>E-mail</ng-container>
     <input
@@ -1141,12 +1184,12 @@ export class FieldsetSample {
       size="md"
       type="email"
       placeholder="example@example.com"
-      [formControl]="loginForm.controls.email"
+      [formField]="loginForm.email"
     />
 
-    @if (loginForm.controls.email.hasError('required')) {
+    @if (loginForm.email().getError('required')) {
       <span appValidatorHint>Email is required</span>
-    } @else if (loginForm.controls.email.hasError('email')) {
+    } @else if (loginForm.email().getError('email')) {
       <span appValidatorHint>Invalid email</span>
     }
   </app-fieldset>
@@ -1159,7 +1202,7 @@ export class FieldsetSample {
       appInput
       size="md"
       type="password"
-      [formControl]="loginForm.controls.password"
+      [formField]="loginForm.password"
     />
 
     <ng-container action>
@@ -1186,9 +1229,9 @@ export class FieldsetSample {
       }
     </ng-container>
 
-    @if (loginForm.controls.password.hasError('required')) {
+    @if (loginForm.password().getError('required')) {
       <span appValidatorHint>Password is required</span>
-    } @else if (loginForm.controls.password.hasError('minlength')) {
+    } @else if (loginForm.password().getError('minLength')) {
       <span appValidatorHint>Password must be at least 8 characters</span>
     }
   </app-fieldset>
@@ -1200,8 +1243,8 @@ export class FieldsetSample {
 ```
 
 ```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { email, form, FormField, minLength, required } from '@angular/forms/signals';
 import { Button } from '@/shared/components/button';
 import { Fieldset } from '@/shared/components/fieldset';
 import { Input } from '@/shared/components/input-field';
@@ -1210,15 +1253,19 @@ import { ValidatorHint } from '@/shared/components/validator/validator-hint';
 @Component({
   selector: 'app-login-sample',
   templateUrl: './login-sample.html',
-  imports: [ReactiveFormsModule, Fieldset, Input, ValidatorHint, Button],
+  imports: [FormField, Fieldset, Input, ValidatorHint, Button],
 })
 export class LoginSample {
-  readonly loginForm = inject(FormBuilder).group({
-    email: new FormControl<string>('', [Validators.required, Validators.email]),
-    password: new FormControl<string>('', [Validators.required, Validators.minLength(8)]),
+  readonly loginForm = form(signal({ email: '', password: '' }), (schema) => {
+    required(schema.email);
+    email(schema.email);
+    required(schema.password);
+    minLength(schema.password, 8);
   });
 }
 ```
+
+Reactive Forms still work via Angular 22 interop (`[formControl]` / `formControlName` + `Validators`). Prefer Signal Forms (`form()` + `[formField]`) for new code.
 
 ---
 
@@ -1361,37 +1408,49 @@ kl install input-cnpj
     appInput
     type="text"
     placeholder="Type here"
-    [formControl]="cnpjControl"
+    [formField]="cnpjForm.cnpj"
     appMask="SS.SSS.SSS/SSSS-SS"
   />
   <ng-container hint>Inform a valid CNPJ</ng-container>
 
-  @if (cnpjControl.hasError('required')) {
+  @if (cnpjForm.cnpj().getError('required')) {
     <span appValidatorHint>CNPJ is required</span>
-  } @else if (cnpjControl.hasError('cnpjInvalid')) {
+  } @else if (cnpjForm.cnpj().getError('cnpjInvalid')) {
     <span appValidatorHint>Invalid CNPJ</span>
   }
 </app-fieldset>
 ```
 
 ```typescript
-import { CnpjValidator } from '@/shared/validators/cnpj.validator';
 import { Fieldset } from '@/shared/components/fieldset';
 import { Input } from '@/shared/components/input-field';
 import { ValidatorHint } from '@/shared/components/validator/validator-hint';
 import { Mask } from '@/shared/directives/mask.directive';
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { form, FormField, required, validate } from '@angular/forms/signals';
+import { validateCnpj } from '@koalarx/utils/KlString';
 
 @Component({
   selector: 'app-input-cnpj-sample',
   templateUrl: './input-cnpj-sample.html',
-  imports: [ReactiveFormsModule, Fieldset, Input, Mask, ValidatorHint],
+  imports: [FormField, Fieldset, Input, Mask, ValidatorHint],
 })
 export class InputCnpjSample {
-  readonly cnpjControl = new FormControl<string>('', [Validators.required, CnpjValidator]);
+  readonly cnpjForm = form(signal({ cnpj: '' }), (schema) => {
+    required(schema.cnpj);
+    validate(schema.cnpj, ({ value }) => {
+      const current = value();
+      if (!current) {
+        return undefined;
+      }
+
+      return validateCnpj(current) ? undefined : { kind: 'cnpjInvalid' };
+    });
+  });
 }
 ```
+
+Reactive Forms still work via Angular 22 interop (`[formControl]` / `formControlName` + `CnpjValidator`). Prefer Signal Forms (`form()` + `[formField]`) for new code.
 
 ---
 
@@ -1413,37 +1472,49 @@ kl install input-cpf
     appInput
     type="text"
     placeholder="Type here"
-    [formControl]="cpfControl"
+    [formField]="cpfForm.cpf"
     appMask="000.000.000-00"
   />
   <ng-container hint>Inform a valid CPF</ng-container>
 
-  @if (cpfControl.hasError('required')) {
+  @if (cpfForm.cpf().getError('required')) {
     <span appValidatorHint>CPF is required</span>
-  } @else if (cpfControl.hasError('cpfInvalid')) {
+  } @else if (cpfForm.cpf().getError('cpfInvalid')) {
     <span appValidatorHint>Invalid CPF</span>
   }
 </app-fieldset>
 ```
 
 ```typescript
-import { CpfValidator } from '@/shared/validators/cpf.validator';
 import { Fieldset } from '@/shared/components/fieldset';
 import { Input } from '@/shared/components/input-field';
 import { ValidatorHint } from '@/shared/components/validator/validator-hint';
 import { Mask } from '@/shared/directives/mask.directive';
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { form, FormField, required, validate } from '@angular/forms/signals';
+import { validateCpf } from '@koalarx/utils/KlString';
 
 @Component({
   selector: 'app-input-cpf-sample',
   templateUrl: './input-cpf-sample.html',
-  imports: [ReactiveFormsModule, Fieldset, Input, Mask, ValidatorHint],
+  imports: [FormField, Fieldset, Input, Mask, ValidatorHint],
 })
 export class InputCpfSample {
-  readonly cpfControl = new FormControl<string>('', [Validators.required, CpfValidator]);
+  readonly cpfForm = form(signal({ cpf: '' }), (schema) => {
+    required(schema.cpf);
+    validate(schema.cpf, ({ value }) => {
+      const current = value();
+      if (!current) {
+        return undefined;
+      }
+
+      return validateCpf(current) ? undefined : { kind: 'cpfInvalid' };
+    });
+  });
 }
 ```
+
+Reactive Forms still work via Angular 22 interop (`[formControl]` / `formControlName` + `CpfValidator`). Prefer Signal Forms (`form()` + `[formField]`) for new code.
 
 ---
 
@@ -1458,28 +1529,31 @@ kl install input-color
 ### HTML
 
 ```html
-<app-input-color class="w-full max-w-sm" [formControl]="colorControl" />
+<app-input-color class="w-full max-w-sm" [formField]="colorForm.color" />
 ```
 
 ```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { InputColor } from '@/shared/components/input-color';
 
 @Component({
   selector: 'app-input-color-sample',
   templateUrl: './input-color-sample.html',
-  imports: [ReactiveFormsModule, InputColor],
+  imports: [FormField, InputColor],
 })
 export class InputColorSample {
-  colorControl = new FormControl<string | null>(null);
+  private readonly colorModel = signal<{ color: string | null }>({ color: null });
+  readonly colorForm = form(this.colorModel);
 }
 ```
+
+Reactive Forms still work via Angular 22 FormValueControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.
 
 ### Inline
 
 ```html
-<app-input-color inline clearable [formControl]="colorControl" />
+<app-input-color inline clearable [formField]="colorForm.color" />
 ```
 
 ---
@@ -1502,10 +1576,10 @@ kl install currency
     appInput
     type="text"
     placeholder="Type here"
-    [formControl]="currencyControl"
+    [formField]="currencyForm.currency"
     appCurrency
   />
-  @if (currencyControl.hasError('required')) {
+  @if (currencyForm.currency().getError('required')) {
     <span appValidatorHint>Currency is required</span>
   }
 </app-fieldset>
@@ -1516,18 +1590,22 @@ import { Fieldset } from '@/shared/components/fieldset';
 import { Input } from '@/shared/components/input-field';
 import { ValidatorHint } from '@/shared/components/validator/validator-hint';
 import { CurrencyMask } from '@/shared/directives/currency.directive';
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { form, FormField, required } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-input-currency-sample',
   templateUrl: './input-currency-sample.html',
-  imports: [ReactiveFormsModule, Fieldset, Input, CurrencyMask, ValidatorHint],
+  imports: [FormField, Fieldset, Input, CurrencyMask, ValidatorHint],
 })
 export class InputCurrencySample {
-  readonly currencyControl = new FormControl<number>(0, Validators.required);
+  readonly currencyForm = form(signal({ currency: 0 as number | null }), (schema) => {
+    required(schema.currency);
+  });
 }
 ```
+
+Reactive Forms still work via Angular 22 FormValueControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.
 
 ---
 
@@ -1704,8 +1782,7 @@ export class LoggedSample {
 ```html
 <form
   class="flex flex-col items-center justify-center py-20 gap-2"
-  [formGroup]="formCredentials"
-  (submit)="authenticate()"
+  (submit)="$event.preventDefault(); authenticate()"
 >
   <app-fieldset class="w-full max-w-xs">
     <ng-container label>Username</ng-container>
@@ -1715,10 +1792,10 @@ export class LoggedSample {
       size="md"
       type="text"
       placeholder="Enter your username"
-      [formControl]="formCredentials.controls.username"
+      [formField]="credentialsForm.username"
     />
 
-    @if (formCredentials.controls.username.hasError('required')) {
+    @if (credentialsForm.username().getError('required')) {
       <span appValidatorHint>Username is required</span>
     }
   </app-fieldset>
@@ -1731,7 +1808,7 @@ export class LoggedSample {
       appInput
       size="md"
       type="password"
-      [formControl]="formCredentials.controls.password"
+      [formField]="credentialsForm.password"
     />
 
     <ng-container action>
@@ -1758,9 +1835,9 @@ export class LoggedSample {
       }
     </ng-container>
 
-    @if (formCredentials.controls.password.hasError('required')) {
+    @if (credentialsForm.password().getError('required')) {
       <span appValidatorHint>Password is required</span>
-    } @else if (formCredentials.controls.password.hasError('minlength')) {
+    } @else if (credentialsForm.password().getError('minLength')) {
       <span appValidatorHint>Password must be at least 8 characters</span>
     }
   </app-fieldset>
@@ -1773,7 +1850,7 @@ export class LoggedSample {
       appButton
       btnVariant="primary"
       class="w-full"
-      [disabled]="logingIn || formCredentials.invalid"
+      [disabled]="logingIn || credentialsForm().invalid()"
     >
       @if (logingIn) {
         <app-loading size="sm"></app-loading>
@@ -1786,34 +1863,40 @@ export class LoggedSample {
 ```
 
 ```typescript
-import { Component, inject } from '@angular/core';
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Credentials } from '@/core/models/credentials';
 import { AuthorizationService } from '@/core/security/authorization.service';
 import { Button } from '@/shared/components/button';
 import { Fieldset } from '@/shared/components/fieldset';
 import { Input } from '@/shared/components/input-field';
-import { ValidatorHint } from '@/shared/components/validator/validator-hint';
 import { Loading } from '@/shared/components/loading';
+import { ValidatorHint } from '@/shared/components/validator/validator-hint';
+import { Component, inject, signal } from '@angular/core';
+import { form, FormField, minLength, required } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-login-form-sample',
   templateUrl: './login-form.sample.html',
-  imports: [ReactiveFormsModule, Fieldset, Input, ValidatorHint, Button, Loading],
+  imports: [FormField, Fieldset, Input, ValidatorHint, Button, Loading],
 })
 export class LoginFormSample {
   readonly authorization = inject(AuthorizationService);
 
-  readonly formCredentials = inject(FormBuilder).group({
-    username: new FormControl('emilys', Validators.required),
-    password: new FormControl('emilyspass', [Validators.required, Validators.minLength(8)]),
-  });
+  readonly credentialsForm = form(
+    signal({ username: 'emilys', password: 'emilyspass' }),
+    (schema) => {
+      required(schema.username);
+      required(schema.password);
+      minLength(schema.password, 8);
+    },
+  );
 
   authenticate() {
-    this.authorization.auth(this.formCredentials.value as Credentials);
+    this.authorization.auth(this.credentialsForm().value() as Credentials);
   }
 }
 ```
+
+Reactive Forms still work via Angular 22 interop. Prefer Signal Forms (`form()` + `[formField]`) for new code.
 
 ---
 
@@ -2093,28 +2176,31 @@ kl install radio
 ```
 
 ```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { Radio } from '@/shared/components/radio';
 
 @Component({
   selector: 'app-radio-sample',
   templateUrl: './radio-sample.html',
-  imports: [ReactiveFormsModule, Radio],
+  imports: [FormField, Radio],
 })
 export class RadioSample {
-  radioControl = new FormControl<string>('');
+  private readonly radioModel = signal({ value: '' });
+  readonly radioForm = form(this.radioModel);
 }
 ```
+
+Reactive Forms still work via Angular 22 interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.
 
 ### Sizes
 
 ```html
-<input type="radio" appRadio="sample" size="xs" value="xs" [formControl]="radioControl" />
-<input type="radio" appRadio="sample" size="sm" value="sm" [formControl]="radioControl" />
-<input type="radio" appRadio="sample" size="md" value="md" [formControl]="radioControl" />
-<input type="radio" appRadio="sample" size="lg" value="lg" [formControl]="radioControl" />
-<input type="radio" appRadio="sample" size="xl" value="xl" [formControl]="radioControl" />
+<input type="radio" appRadio="sample" size="xs" value="xs" [formField]="radioForm.value" />
+<input type="radio" appRadio="sample" size="sm" value="sm" [formField]="radioForm.value" />
+<input type="radio" appRadio="sample" size="md" value="md" [formField]="radioForm.value" />
+<input type="radio" appRadio="sample" size="lg" value="lg" [formField]="radioForm.value" />
+<input type="radio" appRadio="sample" size="xl" value="xl" [formField]="radioForm.value" />
 ```
 
 ### Variants
@@ -2125,45 +2211,45 @@ export class RadioSample {
   appRadio="sample"
   variant="neutral"
   value="neutral"
-  [formControl]="radioControl"
+  [formField]="radioForm.value"
 />
 <input
   type="radio"
   appRadio="sample"
   variant="primary"
   value="primary"
-  [formControl]="radioControl"
+  [formField]="radioForm.value"
 />
 <input
   type="radio"
   appRadio="sample"
   variant="secondary"
   value="secondary"
-  [formControl]="radioControl"
+  [formField]="radioForm.value"
 />
 <input
   type="radio"
   appRadio="sample"
   variant="accent"
   value="accent"
-  [formControl]="radioControl"
+  [formField]="radioForm.value"
 />
-<input type="radio" appRadio="sample" variant="info" value="info" [formControl]="radioControl" />
+<input type="radio" appRadio="sample" variant="info" value="info" [formField]="radioForm.value" />
 <input
   type="radio"
   appRadio="sample"
   variant="success"
   value="success"
-  [formControl]="radioControl"
+  [formField]="radioForm.value"
 />
 <input
   type="radio"
   appRadio="sample"
   variant="warning"
   value="warning"
-  [formControl]="radioControl"
+  [formField]="radioForm.value"
 />
-<input type="radio" appRadio="sample" variant="error" value="error" [formControl]="radioControl" />
+<input type="radio" appRadio="sample" variant="error" value="error" [formField]="radioForm.value" />
 ```
 
 ---
@@ -2183,41 +2269,44 @@ kl install range
 ```
 
 ```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { Range } from '@/shared/components/range';
 
 @Component({
   selector: 'app-range-sample',
   templateUrl: './range-sample.html',
-  imports: [ReactiveFormsModule, Range],
+  imports: [FormField, Range],
 })
 export class RangeSample {
-  rangeControl = new FormControl<number>(50);
+  private readonly rangeModel = signal({ value: 50 });
+  readonly rangeForm = form(this.rangeModel);
 }
 ```
+
+Reactive Forms still work via Angular 22 FormValueControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.
 
 ### Sizes
 
 ```html
-<input type="range" appRange size="xs" [formControl]="rangeControl" />
-<input type="range" appRange size="sm" [formControl]="rangeControl" />
-<input type="range" appRange size="md" [formControl]="rangeControl" />
-<input type="range" appRange size="lg" [formControl]="rangeControl" />
-<input type="range" appRange size="xl" [formControl]="rangeControl" />
+<input type="range" appRange size="xs" [formField]="rangeForm.value" />
+<input type="range" appRange size="sm" [formField]="rangeForm.value" />
+<input type="range" appRange size="md" [formField]="rangeForm.value" />
+<input type="range" appRange size="lg" [formField]="rangeForm.value" />
+<input type="range" appRange size="xl" [formField]="rangeForm.value" />
 ```
 
 ### Variants
 
 ```html
-<input type="range" appRange variant="neutral" [formControl]="rangeControl" />
-<input type="range" appRange variant="primary" [formControl]="rangeControl" />
-<input type="range" appRange variant="secondary" [formControl]="rangeControl" />
-<input type="range" appRange variant="accent" [formControl]="rangeControl" />
-<input type="range" appRange variant="info" [formControl]="rangeControl" />
-<input type="range" appRange variant="success" [formControl]="rangeControl" />
-<input type="range" appRange variant="warning" [formControl]="rangeControl" />
-<input type="range" appRange variant="error" [formControl]="rangeControl" />
+<input type="range" appRange variant="neutral" [formField]="rangeForm.value" />
+<input type="range" appRange variant="primary" [formField]="rangeForm.value" />
+<input type="range" appRange variant="secondary" [formField]="rangeForm.value" />
+<input type="range" appRange variant="accent" [formField]="rangeForm.value" />
+<input type="range" appRange variant="info" [formField]="rangeForm.value" />
+<input type="range" appRange variant="success" [formField]="rangeForm.value" />
+<input type="range" appRange variant="warning" [formField]="rangeForm.value" />
+<input type="range" appRange variant="error" [formField]="rangeForm.value" />
 ```
 
 ---
@@ -2237,18 +2326,21 @@ kl install select
 ```
 
 ```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { Select, SelectOption } from '@/shared/components/select';
 
 @Component({
   selector: 'app-select-sample',
   templateUrl: './select-sample.html',
-  imports: [ReactiveFormsModule, Select],
+  imports: [FormField, Select],
 })
 export class SelectSample {
-  singleControl = new FormControl<string | null>(null);
-  multipleControl = new FormControl<string[]>([], { nonNullable: true });
+  private readonly selectModel = signal<{ single: string | null; multiple: string[] }>({
+    single: null,
+    multiple: [],
+  });
+  readonly selectForm = form(this.selectModel);
 
   options: SelectOption[] = [
     { value: 'option1', label: 'Option 1' },
@@ -2259,6 +2351,8 @@ export class SelectSample {
 }
 ```
 
+Reactive Forms still work via Angular 22 FormValueControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.
+
 ### Multiple
 
 ```html
@@ -2267,7 +2361,7 @@ export class SelectSample {
   placeholder="Select options"
   class="w-full max-w-sm"
   [options]="options"
-  [formControl]="multipleControl"
+  [formField]="selectForm.multiple"
 />
 ```
 
@@ -2278,7 +2372,7 @@ export class SelectSample {
   class="w-full max-w-sm"
   placeholder="Select an option"
   [options]="options"
-  [formControl]="singleControl"
+  [formField]="selectForm.single"
 />
 ```
 
@@ -3024,30 +3118,31 @@ kl install http-base
 ### HTML
 
 ```html
-<app-text-editor class="w-full" [formControl]="editorControl" />
+<app-text-editor class="w-full" [formField]="editorForm.content" />
 
-<pre>{{ editorValue() }}</pre>
+<pre>{{ editorForm.content().value() }}</pre>
 <pre>{{ editorImageIds() | json }}</pre>
 ```
 
 ```typescript
-import { Component, computed } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, computed, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { extractTextEditorImageIds, TextEditor } from '@/shared/components/text-editor';
-import { controlChanges } from '@/shared/utils/control-changes';
 
 @Component({
   selector: 'app-text-editor-sample',
   templateUrl: './text-editor-sample.html',
-  imports: [ReactiveFormsModule, TextEditor],
+  imports: [FormField, TextEditor],
 })
 export class TextEditorSample {
-  readonly editorControl = new FormControl<string>('<p>Hello world</p>', { nonNullable: true });
-  readonly editorValue = controlChanges(this.editorControl);
-  readonly editorImageIds = computed(() => extractTextEditorImageIds(this.editorValue()));
+  private readonly editorModel = signal({ content: '<p>Hello world</p>' });
+  readonly editorForm = form(this.editorModel);
+  readonly editorImageIds = computed(() =>
+    extractTextEditorImageIds(this.editorForm.content().value()),
+  );
 
   save() {
-    const content = this.editorControl.value;
+    const content = this.editorForm.content().value();
 
     // Each image is stored as data-id on the <img> tag in the HTML.
     // Example: '<p>Hello</p><img data-id="file-id-from-api" class="editor-image" />'
@@ -3059,15 +3154,17 @@ export class TextEditorSample {
 }
 ```
 
+Reactive Forms still work via Angular 22 FormValueControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.
+
 ### Image Output
 
 ```html
-<app-text-editor #editor class="w-full" [formControl]="contentControl" />
+<app-text-editor #editor class="w-full" [formField]="editorForm.content" />
 ```
 
 ```typescript
-import { Component, viewChild } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, signal, viewChild } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import {
   extractTextEditorImageIds,
   TextEditor,
@@ -3076,18 +3173,19 @@ import {
 @Component({
   selector: 'app-article-form',
   template: `
-    <app-text-editor #editor class="w-full" [formControl]="contentControl" />
+    <app-text-editor #editor class="w-full" [formField]="editorForm.content" />
 
     <p>Attached image IDs: {{ editor().attachedImageIds() | json }}</p>
   `,
-  imports: [ReactiveFormsModule, TextEditor],
+  imports: [FormField, TextEditor],
 })
 export class ArticleForm {
   readonly editor = viewChild.required(TextEditor);
-  readonly contentControl = new FormControl<string>('', { nonNullable: true });
+  private readonly editorModel = signal({ content: '' });
+  readonly editorForm = form(this.editorModel);
 
   save() {
-    const content = this.contentControl.value;
+    const content = this.editorForm.content().value();
 
     // Option 1: parse data-id attributes from the HTML string
     const assetsIds = extractTextEditorImageIds(content);
@@ -3100,15 +3198,17 @@ export class ArticleForm {
 }
 ```
 
+Reactive Forms still work via Angular 22 FormValueControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.
+
 ### Image Upload
 
 ```html
-<app-text-editor class="w-full" [formControl]="contentControl" [imageFolder]="imageFolder" />
+<app-text-editor class="w-full" [formField]="editorForm.content" [imageFolder]="imageFolder" />
 ```
 
 ```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import {
   extractTextEditorImageIds,
   TextEditor,
@@ -3119,15 +3219,16 @@ import { FileService, FolderEnum } from './file.service';
 @Component({
   selector: 'app-article-form',
   templateUrl: './article-form.html',
-  imports: [ReactiveFormsModule, TextEditor],
+  imports: [FormField, TextEditor],
   providers: [{ provide: TextEditorFileService, useExisting: FileService }],
 })
 export class ArticleForm {
-  readonly contentControl = new FormControl<string>('', { nonNullable: true });
+  private readonly editorModel = signal({ content: '' });
+  readonly editorForm = form(this.editorModel);
   readonly imageFolder = FolderEnum.article;
 
   save() {
-    const content = this.contentControl.value;
+    const content = this.editorForm.content().value();
 
     // Each uploaded image is stored in the HTML as data-id on the <img> tag.
     // Temporary blob: preview URLs are already removed from the form value.
@@ -3141,6 +3242,8 @@ export class ArticleForm {
   }
 }
 ```
+
+Reactive Forms still work via Angular 22 FormValueControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.
 
 ### File Service
 
@@ -3355,19 +3458,22 @@ kl install toggle
 ```
 
 ```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { Toggle } from '@/shared/components/toggle';
 
 @Component({
   selector: 'app-toggle-sample',
   templateUrl: './toggle-sample.html',
-  imports: [ReactiveFormsModule, Toggle],
+  imports: [FormField, Toggle],
 })
 export class ToggleSample {
-  toggleControl = new FormControl<boolean>(true);
+  private readonly toggleModel = signal({ checked: true });
+  readonly toggleForm = form(this.toggleModel);
 }
 ```
+
+Reactive Forms still work via Angular 22 FormCheckboxControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.
 
 ### Sizes
 
@@ -3382,14 +3488,14 @@ export class ToggleSample {
 ### Variants
 
 ```html
-<input type="checkbox" appToggle variant="neutral" />
-<input type="checkbox" appToggle variant="primary" />
-<input type="checkbox" appToggle variant="secondary" />
-<input type="checkbox" appToggle variant="accent" />
-<input type="checkbox" appToggle variant="info" />
-<input type="checkbox" appToggle variant="success" />
-<input type="checkbox" appToggle variant="warning" />
-<input type="checkbox" appToggle variant="error" />
+<input type="checkbox" appToggle variant="neutral" [formField]="toggleForm.checked" />
+<input type="checkbox" appToggle variant="primary" [formField]="toggleForm.checked" />
+<input type="checkbox" appToggle variant="secondary" [formField]="toggleForm.checked" />
+<input type="checkbox" appToggle variant="accent" [formField]="toggleForm.checked" />
+<input type="checkbox" appToggle variant="info" [formField]="toggleForm.checked" />
+<input type="checkbox" appToggle variant="success" [formField]="toggleForm.checked" />
+<input type="checkbox" appToggle variant="warning" [formField]="toggleForm.checked" />
+<input type="checkbox" appToggle variant="error" [formField]="toggleForm.checked" />
 ```
 
 ---
@@ -3459,30 +3565,35 @@ kl install validator
 ### HTML
 
 ```html
-<input field appInput type="text" placeholder="Type here" [formControl]="emailControl" />
+<input field appInput type="text" placeholder="Type here" [formField]="emailForm.email" />
 
-@if (emailControl.hasError('required')) {
+@if (emailForm.email().getError('required')) {
   <span appValidatorHint>Email is required</span>
-} @else if (emailControl.hasError('email')) {
+} @else if (emailForm.email().getError('email')) {
   <span appValidatorHint>Invalid email</span>
 }
 ```
 
 ```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { InputField } from '@/shared/components/input-field';
+import { Component, signal } from '@angular/core';
+import { email, form, FormField, required } from '@angular/forms/signals';
+import { Input } from '@/shared/components/input-field';
 import { ValidatorHint } from '@/shared/components/validator/validator-hint';
 
 @Component({
   selector: 'app-validator-sample',
   templateUrl: './validator-sample.html',
-  imports: [ReactiveFormsModule, InputField, ValidatorHint],
+  imports: [FormField, Input, ValidatorHint],
 })
 export class ValidatorSample {
-  readonly emailControl = new FormControl<string>('', [Validators.required, Validators.email]);
+  readonly emailForm = form(signal({ email: '' }), (schema) => {
+    required(schema.email);
+    email(schema.email);
+  });
 }
 ```
+
+Reactive Forms still work via Angular 22 interop (`[formControl]` / `formControlName` + `Validators`). Prefer Signal Forms (`form()` + `[formField]`) for new code.
 
 ---
 
@@ -3659,13 +3770,12 @@ kl install global-errors
 
 ```typescript
 import { ApplicationConfig } from '@angular/core';
-import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { FeedbackRequestInterceptor } from './core/interceptors/feedback-request-interceptor';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { feedbackRequestInterceptor } from './core/interceptors/feedback-request-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(withInterceptorsFromDi()),
-    { provide: HTTP_INTERCEPTORS, useClass: FeedbackRequestInterceptor, multi: true },
+    provideHttpClient(withInterceptors([feedbackRequestInterceptor])),
   ],
 };
 ```

@@ -4,7 +4,8 @@ import type { DocPageCopy } from '../types';
 export const HTTP_BASE_PAGE = {
   pt: {
     title: 'HttpBase',
-    description: 'HttpBase é uma abstração para services HTTP, com helpers REST, download de arquivos e carga reativa via rxResource.',
+    description:
+      'HttpBase é uma abstração para services HTTP, com helpers REST, download de arquivos e carga reativa via rxResource.',
     sections: {
       installation: {
         title: 'Instalação',
@@ -61,7 +62,8 @@ export const HTTP_BASE_PAGE = {
   },
   en: {
     title: 'HttpBase',
-    description: 'HttpBase is an abstraction resource for HTTP services, providing REST helpers, file downloads, and reactive data loading via rxResource.',
+    description:
+      'HttpBase is an abstraction resource for HTTP services, providing REST helpers, file downloads, and reactive data loading via rxResource.',
     sections: {
       installation: {
         title: 'Installation',

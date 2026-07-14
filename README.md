@@ -104,6 +104,8 @@ kl version
 
 Archive branches (e.g. `22.3.0`) keep frozen majors without CI. On a major bump: create the archive from `previous-release`, move current `main` into `previous-release`, then develop the new major on `main`. See `.agents/documentation.md`.
 
+Library major tracks Angular major (`22.x` → Angular 21, `23.x` → Angular 22).
+
 ## Documentation
 
 For detailed installation guides, usage instructions, patch notes, and examples for each component, visit the official documentation:

@@ -1,10 +1,7 @@
 import { Component, DestroyRef, effect, inject, input, linkedSignal, output } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { forkJoin } from 'rxjs';
-import {
-  ImageToUpload,
-  isImageFile,
-} from '../common/image-upload.service';
+import { ImageToUpload, isImageFile } from '../common/image-upload.service';
 import { TextEditorImageUploadService } from '../common/image-upload.bridge';
 import { ToolButton } from '../common/tool-button';
 import { ToolBase } from '../common/tool.base';

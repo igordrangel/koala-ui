@@ -27,10 +27,7 @@ export class LocaleTitleService {
   constructor() {
     effect(() => {
       const locale = this.localeService.locale();
-      const parts = this.url()
-        .split(/[?#]/)[0]
-        .split('/')
-        .filter(Boolean);
+      const parts = this.url().split(/[?#]/)[0].split('/').filter(Boolean);
 
       if (!parts.length || (parts.length === 1 && isLocale(parts[0]))) {
         this.title.setTitle(generateTitle(UI_COPY[locale].landing.pageTitle));

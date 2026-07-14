@@ -1,6 +1,6 @@
 {
   "name": "@koalarx/ui",
-  "version": "22.3.0",
+  "version": "23.0.0",
   "scripts": {
     "build": "bun scripts/build",
     "build:doc": "bun run build:docs",
@@ -57,11 +57,11 @@
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-prettier": "5.5.5",
     "prettier": "3.7.4",
-    "typescript": "5.9.2",
+    "typescript": "6.0.3",
     "typescript-eslint": "8.53.1"
   },
   "peerDependencies": {
-    "typescript": "^5"
+    "typescript": "^6"
   },
   "bin": {
     "kl": "./bin/run.js"

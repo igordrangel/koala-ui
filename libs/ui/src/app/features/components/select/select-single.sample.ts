@@ -1,6 +1,6 @@
 import { Select, SelectOption } from '@/shared/components/select';
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-select-single-sample',
@@ -9,13 +9,14 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
       class="w-full"
       placeholder="Select an option"
       [options]="options"
-      [formControl]="singleControl"
+      [formField]="selectForm.single"
     />
   `,
-  imports: [ReactiveFormsModule, Select],
+  imports: [FormField, Select],
 })
 export class SelectSingleSample {
-  readonly singleControl = new FormControl<string | null>(null);
+  private readonly selectModel = signal<{ single: string | null }>({ single: null });
+  readonly selectForm = form(this.selectModel);
 
   readonly options: SelectOption[] = [
     { value: 'option1', label: 'Option 1' },

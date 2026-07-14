@@ -5,18 +5,18 @@ import {
   DestroyRef,
   effect,
   ElementRef,
-  forwardRef,
   inject,
   Injector,
   input,
   linkedSignal,
+  model,
   OnInit,
   output,
   ResourceRef,
   signal,
   viewChild,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormValueControl } from '@angular/forms/signals';
 import { Dropdown } from '../dropdown';
 import { InputSize } from '../input-field';
 import { Loading } from '../loading';
@@ -28,30 +28,23 @@ import { handleResourceOptions } from './utils/handle-resource-options';
   selector: 'app-select',
   templateUrl: './select-field.html',
   imports: [Dropdown, Loading],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => SelectField),
-      multi: true,
-    },
-  ],
 })
-export class SelectField implements OnInit, ControlValueAccessor {
+export class SelectField implements OnInit, FormValueControl<any> {
   private readonly destroyRef = inject(DestroyRef);
 
   private readonly filterOptionsElement = viewChild<ElementRef<HTMLDivElement>>('filterOptions');
 
   private readonly injector = inject(Injector);
-  private onChanged: (value: any) => void = () => {};
-  private onTouched: () => void = () => {};
-
   private firstLoad = true;
+  private syncingFromValue = false;
 
   protected readonly listElementId = `select-list-${Math.random().toString(16).slice(2)}`;
   protected isDisabled = signal(false);
 
   readonly triggerOptionsElement = viewChild<ElementRef<HTMLButtonElement>>('triggerOptions');
 
+  readonly value = model<any>(null);
+  readonly touch = output<void>();
   readonly placeholder = input('Select an option');
   readonly inline = input(false, { transform: booleanAttribute });
   readonly options = input.required<SelectOptions<any, any>>();
@@ -80,6 +73,13 @@ export class SelectField implements OnInit, ControlValueAccessor {
     });
 
     effect(() => {
+      const next = this.value();
+      this.syncingFromValue = true;
+      this.selectedValues.set(Array.isArray(next) ? next : next == null ? [] : [next]);
+      this.syncingFromValue = false;
+    });
+
+    effect(() => {
       const selectedOptions = this.selectedOptions();
       const multiple = this.multiple();
 
@@ -88,18 +88,22 @@ export class SelectField implements OnInit, ControlValueAccessor {
         return;
       }
 
+      if (this.syncingFromValue) {
+        return;
+      }
+
       queueMicrotask(() => {
         this.selected.emit(selectedOptions);
 
-        let value: any | any[] | null = null;
+        let nextValue: any | any[] | null = null;
 
         if (multiple) {
-          value = selectedOptions.map((option) => option.value);
+          nextValue = selectedOptions.map((option) => option.value);
         } else {
-          value = selectedOptions[0]?.value ?? null;
+          nextValue = selectedOptions[0]?.value ?? null;
         }
 
-        this.onChanged(value);
+        this.value.set(nextValue);
       });
     });
 
@@ -142,7 +146,7 @@ export class SelectField implements OnInit, ControlValueAccessor {
         }
       }
 
-      this.onTouched();
+      this.touch.emit();
     });
   }
 
@@ -173,22 +177,6 @@ export class SelectField implements OnInit, ControlValueAccessor {
     const resourceOptions = handleResourceOptions(this.injector, listConfig);
 
     this.filteredOptions.set(resourceOptions);
-  }
-
-  writeValue(value: any | any[]): void {
-    setTimeout(() => this.selectedValues.set(Array.isArray(value) ? value : [value]));
-  }
-
-  registerOnChange(fn: any): void {
-    this.onChanged = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    setTimeout(() => this.isDisabled.set(isDisabled));
   }
 
   toggleDropdown(opened: boolean) {

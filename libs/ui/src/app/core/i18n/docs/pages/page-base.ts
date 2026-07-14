@@ -4,7 +4,8 @@ import type { DocPageCopy } from '../types';
 export const PAGE_BASE_PAGE = {
   pt: {
     title: 'PageBase',
-    description: 'PageBase é uma abstração para páginas, com navegação por breadcrumb e signal de reload para listas ou tables filhas.',
+    description:
+      'PageBase é uma abstração para páginas, com navegação por breadcrumb e signal de reload para listas ou tables filhas.',
     sections: {
       installation: {
         title: 'Instalação',
@@ -50,7 +51,8 @@ export const PAGE_BASE_PAGE = {
   },
   en: {
     title: 'PageBase',
-    description: 'PageBase is an abstraction resource for page components, providing breadcrumb navigation and a reload signal for child lists or tables.',
+    description:
+      'PageBase is an abstraction resource for page components, providing breadcrumb navigation and a reload signal for child lists or tables.',
     sections: {
       installation: {
         title: 'Installation',

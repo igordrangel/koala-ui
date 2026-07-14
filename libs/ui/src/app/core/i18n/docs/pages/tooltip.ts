@@ -12,11 +12,13 @@ export const TOOLTIP_PAGE = {
       },
       variants: {
         title: 'Variantes',
-        description: 'O componente tooltip oferece várias variantes para diferentes casos de uso e requisitos de design.',
+        description:
+          'O componente tooltip oferece várias variantes para diferentes casos de uso e requisitos de design.',
       },
       positions: {
         title: 'Posições',
-        description: 'O componente tooltip oferece posições diferentes para várias necessidades de design.',
+        description:
+          'O componente tooltip oferece posições diferentes para várias necessidades de design.',
       },
     },
   },
@@ -30,11 +32,13 @@ export const TOOLTIP_PAGE = {
       },
       variants: {
         title: 'Variants',
-        description: 'The tooltip component supports several variants to fit different use cases and design requirements.',
+        description:
+          'The tooltip component supports several variants to fit different use cases and design requirements.',
       },
       positions: {
         title: 'Positions',
-        description: 'The tooltip component supports different positions to accommodate various design needs.',
+        description:
+          'The tooltip component supports different positions to accommodate various design needs.',
       },
     },
   },

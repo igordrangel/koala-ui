@@ -1,6 +1,6 @@
 ```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import {
   extractTextEditorImageIds,
   TextEditor,
@@ -11,15 +11,16 @@ import { FileService, FolderEnum } from './file.service';
 @Component({
   selector: 'app-article-form',
   templateUrl: './article-form.html',
-  imports: [ReactiveFormsModule, TextEditor],
+  imports: [FormField, TextEditor],
   providers: [{ provide: TextEditorFileService, useExisting: FileService }],
 })
 export class ArticleForm {
-  readonly contentControl = new FormControl<string>('', { nonNullable: true });
+  private readonly editorModel = signal({ content: '' });
+  readonly editorForm = form(this.editorModel);
   readonly imageFolder = FolderEnum.article;
 
   save() {
-    const content = this.contentControl.value;
+    const content = this.editorForm.content().value();
 
     // Each uploaded image is stored in the HTML as data-id on the <img> tag.
     // Temporary blob: preview URLs are already removed from the form value.
@@ -33,3 +34,5 @@ export class ArticleForm {
   }
 }
 ```
+
+Reactive Forms still work via Angular 22 FormValueControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.

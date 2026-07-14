@@ -12,7 +12,8 @@ export const FIELDSET_PAGE = {
       },
       usage: {
         title: 'Uso',
-        description: 'Fieldset é um container para campos como input, select, textarea etc. Também tem label, error e hint para dar mais contexto ao campo.',
+        description:
+          'Fieldset é um container para campos como input, select, textarea etc. Também tem label, error e hint para dar mais contexto ao campo.',
       },
       loginSample: {
         title: 'Exemplo de login',
@@ -30,11 +31,13 @@ export const FIELDSET_PAGE = {
       },
       usage: {
         title: 'Usage',
-        description: 'Fieldsets is a container for fields like input, select, textarea, etc. It also has a label, error and a hint to provide more information about the field.',
+        description:
+          'Fieldsets is a container for fields like input, select, textarea, etc. It also has a label, error and a hint to provide more information about the field.',
       },
       loginSample: {
         title: 'Login sample',
-        description: 'A fieldset can be used to create a login form with email and password fields.',
+        description:
+          'A fieldset can be used to create a login form with email and password fields.',
       },
     },
   },

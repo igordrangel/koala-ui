@@ -11,20 +11,20 @@ kl install fieldset
 ```html
 <app-fieldset>
   <ng-container label>What is your email?</ng-container>
-  <input field appInput type="text" placeholder="Type here" [formControl]="emailControl" />
+  <input field appInput type="text" placeholder="Type here" [formField]="emailForm.email" />
   <ng-container hint>Inform a valid email address</ng-container>
 
-  @if (emailControl.hasError('required')) {
+  @if (emailForm.email().getError('required')) {
     <span appValidatorHint>Email is required</span>
-  } @else if (emailControl.hasError('email')) {
+  } @else if (emailForm.email().getError('email')) {
     <span appValidatorHint>Invalid email</span>
   }
 </app-fieldset>
 ```
 
 ```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { email, form, FormField, required } from '@angular/forms/signals';
 import { Fieldset } from '@/shared/components/fieldset';
 import { Input } from '@/shared/components/input-field';
 import { ValidatorHint } from '@/shared/components/validator/validator-hint';
@@ -32,17 +32,22 @@ import { ValidatorHint } from '@/shared/components/validator/validator-hint';
 @Component({
   selector: 'app-fieldset-sample',
   templateUrl: './fieldset-sample.html',
-  imports: [ReactiveFormsModule, Fieldset, Input, ValidatorHint],
+  imports: [FormField, Fieldset, Input, ValidatorHint],
 })
 export class FieldsetSample {
-  readonly emailControl = new FormControl<string>('', [Validators.required, Validators.email]);
+  readonly emailForm = form(signal({ email: '' }), (schema) => {
+    required(schema.email);
+    email(schema.email);
+  });
 }
 ```
+
+Reactive Forms still work via Angular 22 interop (`[formControl]` / `formControlName` + `Validators`). Prefer Signal Forms (`form()` + `[formField]`) for new code.
 
 ### Login Sample
 
 ```html
-<form class="flex flex-col items-center justify-center gap-2" [formGroup]="loginForm">
+<form class="flex flex-col items-center justify-center gap-2">
   <app-fieldset class="w-full max-w-xs">
     <ng-container label>E-mail</ng-container>
     <input
@@ -51,12 +56,12 @@ export class FieldsetSample {
       size="md"
       type="email"
       placeholder="example@example.com"
-      [formControl]="loginForm.controls.email"
+      [formField]="loginForm.email"
     />
 
-    @if (loginForm.controls.email.hasError('required')) {
+    @if (loginForm.email().getError('required')) {
       <span appValidatorHint>Email is required</span>
-    } @else if (loginForm.controls.email.hasError('email')) {
+    } @else if (loginForm.email().getError('email')) {
       <span appValidatorHint>Invalid email</span>
     }
   </app-fieldset>
@@ -69,7 +74,7 @@ export class FieldsetSample {
       appInput
       size="md"
       type="password"
-      [formControl]="loginForm.controls.password"
+      [formField]="loginForm.password"
     />
 
     <ng-container action>
@@ -96,9 +101,9 @@ export class FieldsetSample {
       }
     </ng-container>
 
-    @if (loginForm.controls.password.hasError('required')) {
+    @if (loginForm.password().getError('required')) {
       <span appValidatorHint>Password is required</span>
-    } @else if (loginForm.controls.password.hasError('minlength')) {
+    } @else if (loginForm.password().getError('minLength')) {
       <span appValidatorHint>Password must be at least 8 characters</span>
     }
   </app-fieldset>
@@ -110,8 +115,8 @@ export class FieldsetSample {
 ```
 
 ```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { email, form, FormField, minLength, required } from '@angular/forms/signals';
 import { Button } from '@/shared/components/button';
 import { Fieldset } from '@/shared/components/fieldset';
 import { Input } from '@/shared/components/input-field';
@@ -120,12 +125,16 @@ import { ValidatorHint } from '@/shared/components/validator/validator-hint';
 @Component({
   selector: 'app-login-sample',
   templateUrl: './login-sample.html',
-  imports: [ReactiveFormsModule, Fieldset, Input, ValidatorHint, Button],
+  imports: [FormField, Fieldset, Input, ValidatorHint, Button],
 })
 export class LoginSample {
-  readonly loginForm = inject(FormBuilder).group({
-    email: new FormControl<string>('', [Validators.required, Validators.email]),
-    password: new FormControl<string>('', [Validators.required, Validators.minLength(8)]),
+  readonly loginForm = form(signal({ email: '', password: '' }), (schema) => {
+    required(schema.email);
+    email(schema.email);
+    required(schema.password);
+    minLength(schema.password, 8);
   });
 }
 ```
+
+Reactive Forms still work via Angular 22 interop (`[formControl]` / `formControlName` + `Validators`). Prefer Signal Forms (`form()` + `[formField]`) for new code.

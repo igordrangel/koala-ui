@@ -1,6 +1,6 @@
 ```html
-<app-text-editor class="w-full" [formControl]="editorControl" />
+<app-text-editor class="w-full" [formField]="editorForm.content" />
 
-<pre>{{ editorValue() }}</pre>
+<pre>{{ editorForm.content().value() }}</pre>
 <pre>{{ editorImageIds() | json }}</pre>
 ```

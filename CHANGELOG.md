@@ -9,6 +9,32 @@ O conteúdo principal da página web vive em `libs/ui/src/app/core/i18n/docs/pag
 
 Formato inspirado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 
+## Política de versão
+
+A partir de **23.x**, o major de `@koalarx/ui` = major do Angular + 1 (`23` → Angular 22). A linha `22.x` permanece para Angular 21 (`previous-release` / dist-tag `angular-21`).
+
+## [23.0.0] — Angular 22 + Signal Forms
+
+### Changed
+
+- Upgrade da docs app e pins da CLI para **Angular 22** / TypeScript 6.
+- Controles de formulário migrados de `ControlValueAccessor` para `FormValueControl` / `FormCheckboxControl` (Signal Forms + compat Reactive/Template).
+- `inline-filter` migrado para Signal Forms; validators no builder usam `FieldValidator` (`({ value }) => …`), não `ValidatorFn`.
+- Removidos utils `control-changes`, `form-is-valid` e `get-value-on-first-change`; CLI não os instala mais.
+- Interceptors HTTP funcionais; remoção de padrões zoneless legados (`NgZone` em mask/currency).
+- Política de versão: `22.x` = Angular 21; `23.x` = Angular 22.
+
+### Release (npm)
+
+Após publicar `23.0.0`:
+
+```bash
+npm dist-tag add @koalarx/ui@23.0.0 latest
+npm dist-tag add @koalarx/ui@22.3.0 angular-21
+```
+
+Detalhes: patch notes no site após o release.
+
 ## [22.3.0] — Contexto AI
 
 ### Added

@@ -20,59 +20,79 @@ export const InstallCoreResourceFlagsList = [
 ] as const;
 export type InstallCoreResourceFlags = (typeof InstallCoreResourceFlagsList)[number];
 
-function includeOnAppConfig(projectName: string, resource: InstallCoreResourceFlags) {
+const INTERCEPTOR_META = {
+  'interceptors/authorization-interceptor': {
+    symbol: 'authorizationInterceptor',
+    importPath: './core/interceptors/authorization-interceptor',
+  },
+  'interceptors/feedback-request-interceptor': {
+    symbol: 'feedbackRequestInterceptor',
+    importPath: './core/interceptors/feedback-request-interceptor',
+  },
+} as const;
+
+function ensureHttpClientImport(content: string): string {
+  if (!content.includes("from '@angular/common/http'")) {
+    return `import { provideHttpClient, withInterceptors } from '@angular/common/http';\n${content}`;
+  }
+
+  return content.replace(
+    /import\s*\{([^}]*)\}\s*from\s*'@angular\/common\/http';/,
+    (_match, inner: string) => {
+      const parts = inner
+        .split(',')
+        .map((part) => part.trim())
+        .filter(Boolean);
+      if (!parts.includes('provideHttpClient')) parts.push('provideHttpClient');
+      if (!parts.includes('withInterceptors')) parts.push('withInterceptors');
+      return `import { ${parts.join(', ')} } from '@angular/common/http';`;
+    },
+  );
+}
+
+function ensureInterceptorImport(content: string, symbol: string, importPath: string): string {
+  if (content.includes(symbol) && content.includes(importPath)) {
+    return content;
+  }
+  return `import { ${symbol} } from '${importPath}';\n${content}`;
+}
+
+function includeOnAppConfig(
+  projectName: string,
+  resource: keyof typeof INTERCEPTOR_META,
+) {
   const projectFolder = getProjectPath(projectName);
   const appConfigPath = path.join(projectFolder, 'src/app/app.config.ts');
+  let content = readFileSync(appConfigPath, 'utf-8');
+  const { symbol, importPath } = INTERCEPTOR_META[resource];
 
-  let appConfigContent = readFileSync(appConfigPath, 'utf-8');
-  const providers: string[] = [];
-  const imports: string[] = [];
+  content = ensureHttpClientImport(content);
+  content = ensureInterceptorImport(content, symbol, importPath);
+  content = content.replace(
+    /\{\s*provide:\s*HTTP_INTERCEPTORS,\s*useClass:\s*\w+,\s*multi:\s*true\s*\},?\s*/g,
+    '',
+  );
 
-  switch (resource) {
-    case 'interceptors/authorization-interceptor':
-      providers.push(
-        '{ provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptor, multi: true }',
-      );
-      imports.push(
-        `import { HTTP_INTERCEPTORS } from '@angular/common/http';`,
-        `import { AuthorizationInterceptor } from './core/interceptors/authorization-interceptor';`,
-      );
-      break;
-    case 'interceptors/feedback-request-interceptor':
-      providers.push(
-        '{ provide: HTTP_INTERCEPTORS, useClass: FeedbackRequestInterceptor, multi: true }',
-      );
-      imports.push(
-        `import { HTTP_INTERCEPTORS } from '@angular/common/http';`,
-        `import { FeedbackRequestInterceptor } from './core/interceptors/feedback-request-interceptor';`,
-      );
-      break;
-  }
-
-  imports.forEach((importLine) => {
-    if (!appConfigContent.includes(importLine)) {
-      appConfigContent = importLine + '\n' + appConfigContent;
+  if (/withInterceptors\s*\(\s*\[/.test(content)) {
+    if (!new RegExp(`\\b${symbol}\\b`).test(content.match(/withInterceptors\s*\(\s*\[[^\]]*\]/)?.[0] ?? '')) {
+      content = content.replace(/withInterceptors\s*\(\s*\[([^\]]*)\]/, (_m, inner: string) => {
+        const trimmed = inner.trim().replace(/,$/, '');
+        return `withInterceptors([${trimmed ? `${trimmed}, ${symbol}` : symbol}]`;
+      });
     }
-  });
-
-  const providersArrayRegex = /(providers\s*:\s*\[)([\s\S]*?)(\])/m;
-  const match = appConfigContent.match(providersArrayRegex);
-  if (match) {
-    let currentProviders = match[2];
-    providers.forEach((provider) => {
-      if (!currentProviders.includes(provider)) {
-        // Adiciona antes do fechamento do array
-        currentProviders = currentProviders.trim();
-        if (currentProviders.length > 0 && !currentProviders.endsWith(',')) {
-          currentProviders += ',';
-        }
-        currentProviders += `\n    ${provider}`;
+  } else if (/provideHttpClient\s*\(/.test(content)) {
+    content = content.replace(/provideHttpClient\s*\(([^)]*)\)/, (_m, inner: string) => {
+      const args = inner.trim();
+      if (!args) {
+        return `provideHttpClient(withInterceptors([${symbol}]))`;
       }
+      return `provideHttpClient(${args}, withInterceptors([${symbol}]))`;
     });
-    appConfigContent = appConfigContent.replace(providersArrayRegex, `$1${currentProviders}$3`);
+  } else {
+    content = content.replace(/(providers\s*:\s*\[)/, `$1\n    provideHttpClient(withInterceptors([${symbol}])),`);
   }
 
-  writeFileSync(appConfigPath, appConfigContent, 'utf-8');
+  writeFileSync(appConfigPath, content, 'utf-8');
 }
 
 export function installCoreResource(projectName: string, resource: InstallCoreResourceFlags) {
@@ -83,7 +103,7 @@ export function installCoreResource(projectName: string, resource: InstallCoreRe
   cpSync(`${coreResourceOriginPath}.ts`, `${coreResourceFolderPath}.ts`);
 
   switch (resource) {
-    case 'constants/security-storage-keys':
+    case 'constants/security-storage-keys': {
       const fileContent = readFileSync(`${coreResourceOriginPath}.ts`, 'utf-8');
       writeFileSync(
         `${coreResourceFolderPath}.ts`,
@@ -91,6 +111,7 @@ export function installCoreResource(projectName: string, resource: InstallCoreRe
         'utf-8',
       );
       break;
+    }
     case 'interceptors/authorization-interceptor':
     case 'interceptors/feedback-request-interceptor':
       includeOnAppConfig(projectName, resource);

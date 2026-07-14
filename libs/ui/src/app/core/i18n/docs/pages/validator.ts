@@ -12,7 +12,8 @@ export const VALIDATOR_PAGE = {
       },
       usage: {
         title: 'Uso',
-        description: 'Validators garantem critérios de entrada. Podem ser aplicados a campos para feedback em tempo real e regras.',
+        description:
+          'Validators garantem critérios de entrada. Podem ser aplicados a campos para feedback em tempo real e regras.',
       },
     },
   },
@@ -26,7 +27,8 @@ export const VALIDATOR_PAGE = {
       },
       usage: {
         title: 'Usage',
-        description: 'Validators are used to ensure that user input meets specific criteria. They can be applied to input fields to provide real-time feedback and enforce rules.',
+        description:
+          'Validators are used to ensure that user input meets specific criteria. They can be applied to input fields to provide real-time feedback and enforce rules.',
       },
     },
   },

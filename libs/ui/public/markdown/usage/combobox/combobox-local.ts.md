@@ -1,17 +1,20 @@
 ```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { Combobox, ComboboxOption } from '@/shared/components/combobox';
 import { KlArray } from '@koalarx/utils/KlArray';
 
 @Component({
   selector: 'app-combobox-local-sample',
   templateUrl: './combobox-local-sample.html',
-  imports: [ReactiveFormsModule, Combobox],
+  imports: [FormField, Combobox],
 })
 export class ComboboxLocalSample {
-  readonly localComboboxControl = new FormControl<string | null>(null);
-  readonly localMultipleComboboxControl = new FormControl<string[]>([], { nonNullable: true });
+  private readonly comboboxModel = signal<{ local: string | null; localMultiple: string[] }>({
+    local: null,
+    localMultiple: [],
+  });
+  readonly comboboxForm = form(this.comboboxModel);
 
   readonly localOptions: ComboboxOption<string>[] = new KlArray([
     { value: 'sp', label: 'Sao Paulo' },
@@ -25,3 +28,5 @@ export class ComboboxLocalSample {
   ]).orderBy('label', 'asc');
 }
 ```
+
+Reactive Forms still work via Angular 22 FormValueControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.

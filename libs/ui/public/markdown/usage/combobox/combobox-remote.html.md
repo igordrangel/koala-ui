@@ -2,6 +2,6 @@
 <app-combobox
   placeholder="Search for a user"
   [options]="asyncOptions"
-  [formControl]="remoteComboboxControl"
+  [formField]="comboboxForm.remote"
 />
 ```

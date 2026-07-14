@@ -49,6 +49,10 @@ export class DocsVersionService {
 
   /**
    * Full URL to switch to another support line, keeping locale + rest of path.
+   *
+   * Versioned lines (`/v22/…`) are bootstrapped via `/v22/#/…` so GitHub Pages
+   * serves the subdirectory index; `index.html` then rewrites the hash into a
+   * path under that base. Local/dev (single-line host) opens production.
    */
   switchVersionHref(target: DocsVersionEntry): string {
     if (this.isCurrent(target)) {
@@ -66,8 +70,26 @@ export class DocsVersionService {
     }
 
     const targetBase = normalizeBasePath(target.basePath).replace(/\/$/, '');
-    const nextPath = targetBase ? `${targetBase}${pathname}` : pathname;
+    const search = window.location.search;
+    const origin = this.originForSwitch(target);
 
-    return `${nextPath}${window.location.search}${window.location.hash}`;
+    // Latest at site root: PathLocation works with root `404.html` SPA fallback.
+    if (!targetBase) {
+      return `${origin}${pathname}${search}`;
+    }
+
+    // Previous (or any `/v{major}/` line): hash bootstrap → subdirectory index.
+    return `${origin}${targetBase}/#${pathname}${search}`;
+  }
+
+  /**
+   * This build only serves `basePath()`. Sibling lines under `/v{major}/` exist
+   * on the composed Pages host — open production whenever we are not there.
+   */
+  private originForSwitch(target: DocsVersionEntry): string {
+    const targetBase = normalizeBasePath(target.basePath);
+    if (targetBase === '/' || targetBase === this.basePath()) return '';
+    if (window.location.hostname === 'ui.koalarx.com') return '';
+    return 'https://ui.koalarx.com';
   }
 }

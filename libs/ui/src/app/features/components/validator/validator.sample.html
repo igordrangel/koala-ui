@@ -1,9 +1,9 @@
 <div class="flex flex-col">
-  <input field appInput type="text" placeholder="Type here" [formControl]="emailControl" />
+  <input field appInput type="text" placeholder="Type here" [formField]="emailForm.email" />
 
-  @if (emailControl.hasError('required')) {
+  @if (emailForm.email().getError('required')) {
     <span appValidatorHint>Email is required</span>
-  } @else if (emailControl.hasError('email')) {
+  } @else if (emailForm.email().getError('email')) {
     <span appValidatorHint>Invalid email</span>
   }
 </div>

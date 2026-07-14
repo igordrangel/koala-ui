@@ -1,6 +1,6 @@
 import { Combobox, ComboboxOption } from '@/shared/components/combobox';
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { KlArray } from '@koalarx/utils/KlArray';
 
 @Component({
@@ -10,13 +10,14 @@ import { KlArray } from '@koalarx/utils/KlArray';
       class="w-full"
       placeholder="Select a state"
       [options]="localOptions"
-      [formControl]="localComboboxControl"
+      [formField]="comboboxForm.local"
     />
   `,
-  imports: [ReactiveFormsModule, Combobox],
+  imports: [FormField, Combobox],
 })
 export class ComboboxLocalSample {
-  readonly localComboboxControl = new FormControl<string | null>('');
+  private readonly comboboxModel = signal<{ local: string | null }>({ local: '' });
+  readonly comboboxForm = form(this.comboboxModel);
 
   readonly localOptions = new KlArray<ComboboxOption<string>>([
     { value: 'sp', label: 'Sao Paulo' },

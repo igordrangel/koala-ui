@@ -5,19 +5,29 @@ import { Input } from '@/shared/components/input-field';
 import { Tabs } from '@/shared/components/tabs';
 import { ValidatorHint } from '@/shared/components/validator/validator-hint';
 import { Mask } from '@/shared/directives/mask.directive';
-import { CpfValidator } from '@/shared/validators/cpf.validator';
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { form, FormField, required, validate } from '@angular/forms/signals';
+import { validateCpf } from '@koalarx/utils/KlString';
 
 @Component({
   selector: 'app-input-cpf-page',
   templateUrl: './input-cpf.page.html',
-  imports: [Section, Tabs, ReactiveFormsModule, Fieldset, Input, Mask, ValidatorHint],
+  imports: [Section, Tabs, FormField, Fieldset, Input, Mask, ValidatorHint],
 })
 export class InputCpfPage {
   private readonly docs = useDocsCopy('input-cpf');
   readonly copy = this.docs.copy;
   readonly common = this.docs.common;
 
-  readonly cpfControl = new FormControl<string>('', [Validators.required, CpfValidator]);
+  readonly cpfForm = form(signal({ cpf: '' }), (schema) => {
+    required(schema.cpf);
+    validate(schema.cpf, ({ value }) => {
+      const current = value();
+      if (!current) {
+        return undefined;
+      }
+
+      return validateCpf(current) ? undefined : { kind: 'cpfInvalid' };
+    });
+  });
 }

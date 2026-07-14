@@ -42,7 +42,9 @@ export class MobilePicker implements OnInit {
   private readonly router = inject(Router);
   private readonly activatedRoute = inject(ActivatedRoute);
 
-  private readonly queryParams = toSignal(this.activatedRoute.queryParams);
+  private readonly queryParams = toSignal(this.activatedRoute.queryParams, {
+    initialValue: this.activatedRoute.snapshot.queryParams,
+  });
 
   readonly bottomSheetRef = inject(BottomSheetRef);
   readonly config = inject<InlineFilterConfig>(BOTTOM_SHEET_DATA);

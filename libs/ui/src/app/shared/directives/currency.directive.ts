@@ -2,46 +2,37 @@ import {
   Directive,
   effect,
   ElementRef,
-  forwardRef,
   inject,
   input,
-  NgZone,
+  model,
   OnDestroy,
+  output,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormValueControl } from '@angular/forms/signals';
 import { currencyMask } from '../utils/currency-mask';
 
 @Directive({
   selector: 'input[appCurrency]',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => CurrencyMask),
-      multi: true,
-    },
-  ],
+  host: {
+    '(blur)': 'onBlur()',
+  },
 })
-export class CurrencyMask implements ControlValueAccessor, OnDestroy {
+export class CurrencyMask implements FormValueControl<number | null>, OnDestroy {
   private readonly elementRef = inject<ElementRef<HTMLInputElement>>(ElementRef);
-  private readonly ngZone = inject(NgZone);
   private isEditingDecimal = false;
   private rawDecimalDigits = '';
   private suppressEmit = false;
-  private onChange: (value: number | null) => void = () => {};
-  private onTouched: () => void = () => {};
 
+  readonly value = model<number | null>(null);
   readonly prefix = input<string>();
   readonly decimalDigits = input<string>();
   readonly thousandSeparator = input<string>();
   readonly decimalSeparator = input<string>();
+  readonly disabled = input(false);
+  readonly touch = output<void>();
 
   private readonly onKeyDown = (event: KeyboardEvent) => this.handleKeyDown(event);
   private readonly onClick = () => this.syncEditingModeFromCaret();
-  private readonly onBlur = () => {
-    this.isEditingDecimal = false;
-    this.rawDecimalDigits = '';
-    this.onTouched();
-  };
   private readonly onPaste = (event: ClipboardEvent) => {
     event.preventDefault();
     const pasteData = event.clipboardData?.getData('text') || '';
@@ -49,7 +40,7 @@ export class CurrencyMask implements ControlValueAccessor, OnDestroy {
     const normalized = pasteData.replace(sep, '.').replace(/[^0-9.]/g, '');
     const num = parseFloat(normalized);
     if (!isNaN(num)) {
-      this.writeValue(num);
+      this.applyExternalValue(num);
       this.emitNumericValue(num.toString());
     }
   };
@@ -58,15 +49,28 @@ export class CurrencyMask implements ControlValueAccessor, OnDestroy {
     const el = this.elementRef.nativeElement;
     el.addEventListener('keydown', this.onKeyDown);
     el.addEventListener('click', this.onClick);
-    el.addEventListener('blur', this.onBlur);
     el.addEventListener('paste', this.onPaste);
 
     effect(() => {
       this.render(this.elementRef.nativeElement.value);
     });
+
+    effect(() => {
+      this.applyExternalValue(this.value());
+    });
+
+    effect(() => {
+      el.disabled = this.disabled();
+    });
   }
 
-  writeValue(value: number | null | undefined): void {
+  protected onBlur() {
+    this.isEditingDecimal = false;
+    this.rawDecimalDigits = '';
+    this.touch.emit();
+  }
+
+  private applyExternalValue(value: number | null | undefined): void {
     const sep = this.getSep();
     this.suppressEmit = true;
     if (value == null || isNaN(value)) {
@@ -78,23 +82,11 @@ export class CurrencyMask implements ControlValueAccessor, OnDestroy {
     this.suppressEmit = false;
   }
 
-  registerOnChange(fn: (value: number | null) => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.elementRef.nativeElement.disabled = isDisabled;
-  }
-
   private emitNumericValue(rawValue: string): void {
     const sep = this.getSep();
     const normalized = rawValue.replace(sep, '.');
     const num = parseFloat(normalized);
-    this.ngZone.run(() => this.onChange(isNaN(num) ? null : num));
+    this.value.set(isNaN(num) ? null : num);
   }
 
   private getSep(): string {
@@ -228,7 +220,6 @@ export class CurrencyMask implements ControlValueAccessor, OnDestroy {
     const el = this.elementRef.nativeElement;
     el.removeEventListener('keydown', this.onKeyDown);
     el.removeEventListener('click', this.onClick);
-    el.removeEventListener('blur', this.onBlur);
     el.removeEventListener('paste', this.onPaste);
   }
 }

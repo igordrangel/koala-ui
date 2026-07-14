@@ -8,7 +8,8 @@
       hideClear
       [size]="size()"
       [options]="pageSizeOptions"
-      [(ngModel)]="currentPageSize"
+      [value]="currentPageSize()"
+      (valueChange)="currentPageSize.set($event)"
     />
     <span class="font-light" [class]="textSizeClass()">|</span>
     <span class="whitespace-nowrap font-light" [class]="textSizeClass()">

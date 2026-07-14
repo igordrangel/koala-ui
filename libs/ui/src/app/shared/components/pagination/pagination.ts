@@ -1,6 +1,5 @@
 import { Component, computed, effect, inject, input, linkedSignal, output } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/internal/operators/map';
 import { Select, SelectOption } from '../select';
@@ -10,7 +9,7 @@ export type PaginationSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.html',
-  imports: [FormsModule, Select],
+  imports: [Select],
 })
 export class Pagination {
   private firstLoad = true;

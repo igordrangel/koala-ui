@@ -1,16 +1,19 @@
 import {
+  afterNextRender,
   booleanAttribute,
   Component,
   DestroyRef,
   effect,
-  forwardRef,
   inject,
+  Injector,
   input,
+  model,
   numberAttribute,
+  output,
   signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormValueControl } from '@angular/forms/signals';
 import { Editor } from '@tiptap/core';
 import { TiptapEditorDirective } from 'ngx-tiptap';
 import { Subscription } from 'rxjs';
@@ -37,11 +40,6 @@ import { TableSelectionOverlay } from './tools/table/parts/selection-overlay/tab
   templateUrl: './text-editor.html',
   imports: [TextEditorToolbar, TiptapEditorDirective, TableSelectionOverlay, TableControls],
   providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => TextEditor),
-      multi: true,
-    },
     TextEditorImageFolder,
     TextEditorImageUploadBridge,
     Base64TextEditorFileService,
@@ -57,18 +55,20 @@ import { TableSelectionOverlay } from './tools/table/parts/selection-overlay/tab
     },
   ],
 })
-export class TextEditor implements ControlValueAccessor {
+export class TextEditor implements FormValueControl<string> {
   private readonly destroyRef = inject(DestroyRef);
+  private readonly injector = inject(Injector);
   private readonly imageUploadService = inject(TextEditorImageUploadService);
   private readonly imageFolderHolder = inject(TextEditorImageFolder);
 
-  private onChanged: (value: string) => void = () => {};
-  private onTouched: () => void = () => {};
-  private formDisabled = false;
   private isWritingValue = false;
   private writeValueSubscription?: Subscription;
   private lastWrittenValue: string | null = null;
+  /** Avoid TipTap empty updates overwriting the form before the first write from value/formField. */
+  private seededFromValue = false;
 
+  readonly value = model('');
+  readonly touch = output<void>();
   readonly clickTriggered = signal(false);
   readonly disabled = input(false, { transform: booleanAttribute });
   readonly imageFolder = input(1, { transform: numberAttribute });
@@ -88,16 +88,22 @@ export class TextEditor implements ControlValueAccessor {
       },
     },
     onUpdate: ({ editor }) => {
-      if (this.isWritingValue) {
+      if (this.isWritingValue || !this.seededFromValue) {
         return;
       }
 
       const html = normalizeTextEditorHtml(editor.getHTML());
+
+      if (html === (this.value() ?? '')) {
+        return;
+      }
+
+      this.lastWrittenValue = html;
       this.attachedImageIds.set(extractTextEditorImageIds(html));
-      this.onChanged(html);
+      this.value.set(html);
     },
     onBlur: () => {
-      this.onTouched();
+      this.touch.emit();
     },
   });
 
@@ -109,14 +115,46 @@ export class TextEditor implements ControlValueAccessor {
     });
 
     effect(() => {
-      this.editor.setEditable(!this.disabled() && !this.formDisabled);
+      this.editor.setEditable(!this.disabled());
     });
+
+    effect(() => {
+      this.applyHtmlToEditor(this.value() ?? '');
+    });
+
+    afterNextRender(
+      () => {
+        // ngx-tiptap mounts the editor into the DOM after first render; re-apply so initial form value shows.
+        this.lastWrittenValue = null;
+        this.applyHtmlToEditor(this.value() ?? '', true);
+      },
+      { injector: this.injector },
+    );
 
     this.destroyRef.onDestroy(() => {
       this.writeValueSubscription?.unsubscribe();
       setImageFilesHandler(null);
       this.editor.destroy();
     });
+  }
+
+  private applyHtmlToEditor(html: string, force = false) {
+    if (!force && this.lastWrittenValue === html) {
+      return;
+    }
+
+    this.lastWrittenValue = html;
+    this.writeValueSubscription?.unsubscribe();
+    this.writeValueSubscription = this.imageUploadService
+      .resolveHtml(html)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((resolvedHtml) => {
+        this.attachedImageIds.set(extractTextEditorImageIds(html));
+        this.isWritingValue = true;
+        this.editor.commands.setContent(resolvedHtml, { emitUpdate: false });
+        this.isWritingValue = false;
+        this.seededFromValue = true;
+      });
   }
 
   uploadFiles(files: File[], position?: number) {
@@ -135,38 +173,5 @@ export class TextEditor implements ControlValueAccessor {
 
   clearFiles() {
     this.files.set([]);
-  }
-
-  writeValue(value: string | null): void {
-    const html = value ?? '';
-
-    if (this.lastWrittenValue === html) {
-      return;
-    }
-
-    this.lastWrittenValue = html;
-    this.writeValueSubscription?.unsubscribe();
-    this.writeValueSubscription = this.imageUploadService
-      .resolveHtml(html)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((resolvedHtml) => {
-        this.attachedImageIds.set(extractTextEditorImageIds(html));
-        this.isWritingValue = true;
-        this.editor.commands.setContent(resolvedHtml, { emitUpdate: false });
-        this.isWritingValue = false;
-      });
-  }
-
-  registerOnChange(fn: (value: string) => void): void {
-    this.onChanged = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.formDisabled = isDisabled;
-    this.editor.setEditable(!this.disabled() && !this.formDisabled);
   }
 }

@@ -1,6 +1,6 @@
 ```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { email, form, FormField, required } from '@angular/forms/signals';
 import { Fieldset } from '@/shared/components/fieldset';
 import { Input } from '@/shared/components/input-field';
 import { ValidatorHint } from '@/shared/components/validator/validator-hint';
@@ -8,9 +8,14 @@ import { ValidatorHint } from '@/shared/components/validator/validator-hint';
 @Component({
   selector: 'app-fieldset-sample',
   templateUrl: './fieldset-sample.html',
-  imports: [ReactiveFormsModule, Fieldset, Input, ValidatorHint],
+  imports: [FormField, Fieldset, Input, ValidatorHint],
 })
 export class FieldsetSample {
-  readonly emailControl = new FormControl<string>('', [Validators.required, Validators.email]);
+  readonly emailForm = form(signal({ email: '' }), (schema) => {
+    required(schema.email);
+    email(schema.email);
+  });
 }
 ```
+
+Reactive Forms still work via Angular 22 interop (`[formControl]` / `formControlName` + `Validators`). Prefer Signal Forms (`form()` + `[formField]`) for new code.

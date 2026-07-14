@@ -29,9 +29,7 @@ export const INSTALLATION_PAGE = {
         title: 'Adicionar estrutura inicial',
         description:
           'O Koala UI aplica uma estrutura inicial a um projeto existente, com pastas e arquivos predefinidos, para organizar o projeto com eficiência.',
-        otherProse: [
-          'Para este comando você precisa ter um projeto Angular existente.',
-        ],
+        otherProse: ['Para este comando você precisa ter um projeto Angular existente.'],
       },
     },
   },
@@ -62,9 +60,7 @@ export const INSTALLATION_PAGE = {
         title: 'Adding initial structure',
         description:
           'Koala UI applies an initial structure to an existing project, with predefined folders and files, to help organize the project efficiently.',
-        otherProse: [
-          'For this command you need to have an existing angular project.',
-        ],
+        otherProse: ['For this command you need to have an existing angular project.'],
       },
     },
   },

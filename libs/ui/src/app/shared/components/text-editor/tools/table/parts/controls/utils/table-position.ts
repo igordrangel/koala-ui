@@ -17,10 +17,7 @@ export function toContainerCoords(
   };
 }
 
-export function getTablePositionInContainer(
-  table: HTMLTableElement,
-  scrollContainer: HTMLElement,
-) {
+export function getTablePositionInContainer(table: HTMLTableElement, scrollContainer: HTMLElement) {
   const tableRect = table.getBoundingClientRect();
   const coords = toContainerCoords(tableRect, scrollContainer);
 

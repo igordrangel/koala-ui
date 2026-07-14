@@ -5,6 +5,7 @@ import { Component, computed, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { filter } from 'rxjs';
+import { APP_VERSION } from '../../constants/app-version';
 import type { DocsVersionEntry } from '../../constants/docs-versions';
 import { DocsVersionService } from '../../docs-version/docs-version.service';
 import { LocalePathPipe } from '../../i18n/locale-path.pipe';
@@ -42,6 +43,7 @@ export class Header {
 
   readonly copied = signal(false);
   readonly docsVersions = this.docsVersion.versions;
+  readonly appVersion = APP_VERSION;
   readonly mobileMenuVisible = signal(false);
   readonly mobileMenuOpen = signal(false);
 
@@ -60,6 +62,11 @@ export class Header {
 
   isDocsVersionCurrent(entry: DocsVersionEntry) {
     return this.docsVersion.isCurrent(entry);
+  }
+
+  /** Active line shows full semver; other lines keep the short major label. */
+  docsVersionLabel(entry: DocsVersionEntry) {
+    return this.isDocsVersionCurrent(entry) ? this.appVersion : entry.label;
   }
 
   copyLlmsUrl() {

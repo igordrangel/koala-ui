@@ -1,14 +1,17 @@
 ```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { InputColor } from '@/shared/components/input-color';
 
 @Component({
   selector: 'app-input-color-sample',
   templateUrl: './input-color-sample.html',
-  imports: [ReactiveFormsModule, InputColor],
+  imports: [FormField, InputColor],
 })
 export class InputColorSample {
-  colorControl = new FormControl<string | null>(null);
+  private readonly colorModel = signal<{ color: string | null }>({ color: null });
+  readonly colorForm = form(this.colorModel);
 }
 ```
+
+Reactive Forms still work via Angular 22 FormValueControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.

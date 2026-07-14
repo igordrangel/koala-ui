@@ -6,14 +6,14 @@
     appInput
     type="text"
     placeholder="Type here"
-    [formControl]="cpfControl"
+    [formField]="cpfForm.cpf"
     appMask="000.000.000-00"
   />
   <ng-container hint>Inform a valid CPF</ng-container>
 
-  @if (cpfControl.hasError('required')) {
+  @if (cpfForm.cpf().getError('required')) {
     <span appValidatorHint>CPF is required</span>
-  } @else if (cpfControl.hasError('cpfInvalid')) {
+  } @else if (cpfForm.cpf().getError('cpfInvalid')) {
     <span appValidatorHint>Invalid CPF</span>
   }
 </app-fieldset>

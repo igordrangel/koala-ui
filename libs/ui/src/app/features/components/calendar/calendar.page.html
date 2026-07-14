@@ -20,8 +20,8 @@
         >
           <div class="flex flex-col gap-2">
             <span class="text-sm font-semibold">date</span>
-            <app-input-calendar class="w-full" [formControl]="formDate.controls.date" />
-            <span class="px-2 opacity-60">value: {{ dateValue() }}</span>
+            <app-input-calendar class="w-full" [formField]="calendarForm.date" />
+            <span class="px-2 opacity-60">value: {{ calendarForm.date().value() }}</span>
           </div>
 
           <div class="flex flex-col gap-2">
@@ -29,9 +29,9 @@
             <app-input-calendar
               class="w-full"
               type="datetime"
-              [formControl]="formDate.controls.datetime"
+              [formField]="calendarForm.datetime"
             />
-            <span class="px-2 opacity-60">value: {{ datetimeValue() }}</span>
+            <span class="px-2 opacity-60">value: {{ calendarForm.datetime().value() }}</span>
           </div>
 
           <div class="flex flex-col gap-2">
@@ -39,9 +39,9 @@
             <app-input-calendar
               class="w-full"
               type="month"
-              [formControl]="formDate.controls.month"
+              [formField]="calendarForm.month"
             />
-            <span class="px-2 opacity-60">value: {{ monthValue() }}</span>
+            <span class="px-2 opacity-60">value: {{ calendarForm.month().value() }}</span>
           </div>
 
           <div class="flex flex-col gap-2">
@@ -49,9 +49,9 @@
             <app-input-calendar
               class="w-full"
               type="daterange"
-              [formControl]="formDate.controls.daterange"
+              [formField]="calendarForm.daterange"
             />
-            <span class="px-2 opacity-60">value: {{ daterangeValue() }}</span>
+            <span class="px-2 opacity-60">value: {{ calendarForm.daterange().value() }}</span>
           </div>
         </div>
       </div>

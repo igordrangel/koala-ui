@@ -72,7 +72,9 @@
 
   <app-section-content>
     <ng-container title>{{ copy().sections.bottomSheetCloseButton.title }}</ng-container>
-    <ng-container description>{{ copy().sections.bottomSheetCloseButton.description }}</ng-container>
+    <ng-container description>{{
+      copy().sections.bottomSheetCloseButton.description
+    }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
       <div appTab [label]="common().preview" checked>

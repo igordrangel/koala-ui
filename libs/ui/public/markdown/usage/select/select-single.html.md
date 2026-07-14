@@ -3,6 +3,6 @@
   class="w-full max-w-sm"
   placeholder="Select an option"
   [options]="options"
-  [formControl]="singleControl"
+  [formField]="selectForm.single"
 />
 ```

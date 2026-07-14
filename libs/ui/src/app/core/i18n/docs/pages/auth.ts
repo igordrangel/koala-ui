@@ -4,7 +4,8 @@ import type { DocPageCopy } from '../types';
 export const AUTH_PAGE = {
   pt: {
     title: 'Auth',
-    description: 'Este resource oferece interceptor, guard e service para autenticação. Protege rotas, gerencia sessões e tarefas relacionadas a auth.',
+    description:
+      'Este resource oferece interceptor, guard e service para autenticação. Protege rotas, gerencia sessões e tarefas relacionadas a auth.',
     sections: {
       installation: {
         title: 'Instalação',
@@ -22,7 +23,8 @@ export const AUTH_PAGE = {
               },
               {
                 name: 'event',
-                description: 'Signal que emite eventos de autenticação (login, falha, loading etc.).',
+                description:
+                  'Signal que emite eventos de autenticação (login, falha, loading etc.).',
               },
               {
                 name: 'hasToken',
@@ -73,7 +75,8 @@ export const AUTH_PAGE = {
   },
   en: {
     title: 'Auth',
-    description: 'This resource provides interceptor, guard and service to handle authentication in your application. It can be used to protect routes, manage user sessions, and handle authentication-related tasks.',
+    description:
+      'This resource provides interceptor, guard and service to handle authentication in your application. It can be used to protect routes, manage user sessions, and handle authentication-related tasks.',
     sections: {
       installation: {
         title: 'Installation',
@@ -91,7 +94,8 @@ export const AUTH_PAGE = {
               },
               {
                 name: 'event',
-                description: 'Signal that emits authentication events (login, failure, loading, etc).',
+                description:
+                  'Signal that emits authentication events (login, failure, loading, etc).',
               },
               {
                 name: 'hasToken',

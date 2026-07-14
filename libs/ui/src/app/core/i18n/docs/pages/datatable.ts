@@ -4,7 +4,8 @@ import type { DocPageCopy } from '../types';
 export const DATATABLE_PAGE = {
   pt: {
     title: 'Datatable',
-    description: 'O datatable exibe dados tabulares com ordenação, filtro, paginação e estilo customizável — essencial para grandes conjuntos de dados.',
+    description:
+      'O datatable exibe dados tabulares com ordenação, filtro, paginação e estilo customizável — essencial para grandes conjuntos de dados.',
     sections: {
       installation: {
         title: 'Instalação',
@@ -17,7 +18,8 @@ export const DATATABLE_PAGE = {
   },
   en: {
     title: 'Datatable',
-    description: 'The datatable component is a powerful and flexible tool for displaying tabular data in a structured format. It provides features such as sorting, filtering, pagination, and customizable styling, making it an essential component for any application that requires the presentation of large datasets.',
+    description:
+      'The datatable component is a powerful and flexible tool for displaying tabular data in a structured format. It provides features such as sorting, filtering, pagination, and customizable styling, making it an essential component for any application that requires the presentation of large datasets.',
     sections: {
       installation: {
         title: 'Installation',

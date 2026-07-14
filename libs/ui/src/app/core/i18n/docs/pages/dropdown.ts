@@ -12,15 +12,18 @@ export const DROPDOWN_PAGE = {
       },
       menuOptions: {
         title: 'Opções de menu',
-        description: 'O dropdown tem várias opções de comportamento. Por exemplo, use closeOnClick para fechar ao clicar em uma opção.',
+        description:
+          'O dropdown tem várias opções de comportamento. Por exemplo, use closeOnClick para fechar ao clicar em uma opção.',
       },
       notifications: {
         title: 'Notificações',
-        description: 'O dropdown também serve para exibir notificações. Por exemplo, use closeOnClick para fechar ao clicar em uma notificação.',
+        description:
+          'O dropdown também serve para exibir notificações. Por exemplo, use closeOnClick para fechar ao clicar em uma notificação.',
       },
       popover: {
         title: 'Popover',
-        description: 'O dropdown também pode ser usado como popover, para exibir conteúdo customizado.',
+        description:
+          'O dropdown também pode ser usado como popover, para exibir conteúdo customizado.',
       },
     },
   },
@@ -34,15 +37,18 @@ export const DROPDOWN_PAGE = {
       },
       menuOptions: {
         title: 'Menu Options',
-        description: 'The dropdown component has several options that can be used to customize its behavior. For example, you can use the closeOnClick option to close the dropdown when an option is clicked.',
+        description:
+          'The dropdown component has several options that can be used to customize its behavior. For example, you can use the closeOnClick option to close the dropdown when an option is clicked.',
       },
       notifications: {
         title: 'Notifications',
-        description: 'The dropdown component can be used to display notifications. For example, you can use the closeOnClick option to close the dropdown when a notification is clicked.',
+        description:
+          'The dropdown component can be used to display notifications. For example, you can use the closeOnClick option to close the dropdown when a notification is clicked.',
       },
       popover: {
         title: 'Popover',
-        description: 'The dropdown component can also be used as a popover. This allows you to display custom content inside the dropdown.',
+        description:
+          'The dropdown component can also be used as a popover. This allows you to display custom content inside the dropdown.',
       },
     },
   },

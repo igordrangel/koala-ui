@@ -1,8 +1,7 @@
 ```html
 <form
   class="flex flex-col items-center justify-center py-20 gap-2"
-  [formGroup]="formCredentials"
-  (submit)="authenticate()"
+  (submit)="$event.preventDefault(); authenticate()"
 >
   <app-fieldset class="w-full max-w-xs">
     <ng-container label>Username</ng-container>
@@ -12,10 +11,10 @@
       size="md"
       type="text"
       placeholder="Enter your username"
-      [formControl]="formCredentials.controls.username"
+      [formField]="credentialsForm.username"
     />
 
-    @if (formCredentials.controls.username.hasError('required')) {
+    @if (credentialsForm.username().getError('required')) {
       <span appValidatorHint>Username is required</span>
     }
   </app-fieldset>
@@ -28,7 +27,7 @@
       appInput
       size="md"
       type="password"
-      [formControl]="formCredentials.controls.password"
+      [formField]="credentialsForm.password"
     />
 
     <ng-container action>
@@ -55,9 +54,9 @@
       }
     </ng-container>
 
-    @if (formCredentials.controls.password.hasError('required')) {
+    @if (credentialsForm.password().getError('required')) {
       <span appValidatorHint>Password is required</span>
-    } @else if (formCredentials.controls.password.hasError('minlength')) {
+    } @else if (credentialsForm.password().getError('minLength')) {
       <span appValidatorHint>Password must be at least 8 characters</span>
     }
   </app-fieldset>
@@ -70,7 +69,7 @@
       appButton
       btnVariant="primary"
       class="w-full"
-      [disabled]="logingIn || formCredentials.invalid"
+      [disabled]="logingIn || credentialsForm().invalid()"
     >
       @if (logingIn) {
         <app-loading size="sm"></app-loading>

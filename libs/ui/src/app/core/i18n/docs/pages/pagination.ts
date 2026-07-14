@@ -12,7 +12,8 @@ export const PAGINATION_PAGE = {
       },
       sizes: {
         title: 'Tamanhos',
-        description: 'O componente pagination oferece tamanhos diferentes para várias necessidades de design.',
+        description:
+          'O componente pagination oferece tamanhos diferentes para várias necessidades de design.',
       },
     },
   },
@@ -26,7 +27,8 @@ export const PAGINATION_PAGE = {
       },
       sizes: {
         title: 'Sizes',
-        description: 'The pagination component supports different sizes to accommodate various design needs.',
+        description:
+          'The pagination component supports different sizes to accommodate various design needs.',
       },
     },
   },

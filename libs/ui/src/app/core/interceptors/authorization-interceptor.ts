@@ -1,46 +1,37 @@
-import {
-  HttpInterceptor as AngularHttpInterceptor,
-  HttpEvent,
-  HttpHandler,
-  HttpRequest,
-} from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
+import { HttpInterceptorFn, HttpRequest } from '@angular/common/http';
+import { inject } from '@angular/core';
 import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { AuthorizationService } from '../security/authorization.service';
 
-@Injectable()
-export class AuthorizationInterceptor implements AngularHttpInterceptor {
-  private readonly authorization = inject(AuthorizationService);
-
-  private setAuthorization(request: HttpRequest<any>) {
-    if (this.authorization.hasToken()) {
-      return request.clone({
-        headers: request.headers.set(
-          'Authorization',
-          `Bearer ${
-            request.url.includes('/token/refresh')
-              ? this.authorization.refreshToken
-              : this.authorization.accessToken
-          }`,
-        ),
-      });
-    }
-
-    return request.clone();
+function setAuthorization(request: HttpRequest<unknown>, authorization: AuthorizationService) {
+  if (authorization.hasToken()) {
+    return request.clone({
+      headers: request.headers.set(
+        'Authorization',
+        `Bearer ${
+          request.url.includes('/token/refresh')
+            ? authorization.refreshToken
+            : authorization.accessToken
+        }`,
+      ),
+    });
   }
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (
-      this.authorization.hasToken() &&
-      this.authorization.isExpired() &&
-      !request.url.includes('/token/refresh')
-    ) {
-      return this.authorization
-        .updateToken()
-        .pipe(switchMap(() => next.handle(this.setAuthorization(request))));
-    }
-
-    return next.handle(this.setAuthorization(request));
-  }
+  return request.clone();
 }
+
+export const authorizationInterceptor: HttpInterceptorFn = (request, next) => {
+  const authorization = inject(AuthorizationService);
+
+  if (
+    authorization.hasToken() &&
+    authorization.isExpired() &&
+    !request.url.includes('/token/refresh')
+  ) {
+    return authorization
+      .updateToken()
+      .pipe(switchMap(() => next(setAuthorization(request, authorization))));
+  }
+
+  return next(setAuthorization(request, authorization));
+};

@@ -2,13 +2,13 @@
 <app-combobox
   placeholder="Select a state"
   [options]="localOptions"
-  [formControl]="localComboboxControl"
+  [formField]="comboboxForm.local"
 />
 
 <app-combobox
   multiple
   placeholder="Select multiple states"
   [options]="localOptions"
-  [formControl]="localMultipleComboboxControl"
+  [formField]="comboboxForm.localMultiple"
 />
 ```

@@ -2,9 +2,8 @@ import { Section } from '@/core/components/section';
 import { useDocsCopy } from '@/core/i18n/docs';
 import { AsyncComboboxOptions, Combobox, ComboboxOption } from '@/shared/components/combobox';
 import { Tabs } from '@/shared/components/tabs';
-import { Component, Injector, resource, Signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, Injector, resource, signal, Signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { KlArray } from '@koalarx/utils/KlArray';
 
 interface User {
@@ -21,26 +20,23 @@ interface User {
 @Component({
   selector: 'app-combobox-page',
   templateUrl: './combobox.page.html',
-  imports: [ReactiveFormsModule, Section, Tabs, Combobox],
+  imports: [FormField, Section, Tabs, Combobox],
 })
 export class ComboboxPage {
   private readonly docs = useDocsCopy('combobox');
   readonly copy = this.docs.copy;
   readonly common = this.docs.common;
 
-  readonly localComboboxControl = new FormControl<string | null>('');
-  readonly localMultipleComboboxControl = new FormControl<string[]>([], { nonNullable: true });
-  readonly remoteComboboxControl = new FormControl<number | null>(15);
-
-  readonly localComboboxChanges = toSignal(this.localComboboxControl.valueChanges, {
-    initialValue: this.localComboboxControl.value,
+  private readonly comboboxModel = signal<{
+    local: string | null;
+    localMultiple: string[];
+    remote: number | null;
+  }>({
+    local: '',
+    localMultiple: [],
+    remote: 15,
   });
-  readonly localMultipleComboboxChanges = toSignal(this.localMultipleComboboxControl.valueChanges, {
-    initialValue: this.localMultipleComboboxControl.value,
-  });
-  readonly remoteComboboxChanges = toSignal(this.remoteComboboxControl.valueChanges, {
-    initialValue: this.remoteComboboxControl.value,
-  });
+  readonly comboboxForm = form(this.comboboxModel);
 
   readonly localOptions = new KlArray<ComboboxOption<string>>([
     { value: 'sp', label: 'Sao Paulo' },
