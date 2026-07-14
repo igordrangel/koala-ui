@@ -8,6 +8,22 @@
   </app-section-content>
 
   <app-section-content class="block mt-10">
+    <ng-container title>{{ copy().sections.v2240.title }}</ng-container>
+    <ng-container description>{{ copy().sections.v2240.description }}</ng-container>
+
+    <ul class="list-disc pl-5 mt-4 space-y-2 text-sm font-light">
+      @for (item of copy().sections.v2240.items; track item) {
+        <li>{{ item }}</li>
+      }
+    </ul>
+
+    <div role="alert" class="alert alert-info alert-dash mt-4">
+      <i class="fa-solid fa-circle-info"></i>
+      <span>{{ copy().sections.v2240.upgrade }}</span>
+    </div>
+  </app-section-content>
+
+  <app-section-content class="block mt-10">
     <ng-container title>{{ copy().sections.v2230.title }}</ng-container>
     <ng-container description>{{ copy().sections.v2230.description }}</ng-container>
 

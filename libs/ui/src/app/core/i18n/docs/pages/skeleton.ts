@@ -12,11 +12,13 @@ export const SKELETON_PAGE = {
       },
       skeleton: {
         title: 'Skeleton',
-        description: 'O skeleton é um placeholder de conteúdo carregando. Melhora a UX ao mostrar visualmente que dados estão sendo buscados ou processados.',
+        description:
+          'O skeleton é um placeholder de conteúdo carregando. Melhora a UX ao mostrar visualmente que dados estão sendo buscados ou processados.',
       },
       skeletonCircle: {
         title: 'Skeleton circular',
-        description: 'Também há a variante circular, útil para avatares ou fotos de perfil em loading.',
+        description:
+          'Também há a variante circular, útil para avatares ou fotos de perfil em loading.',
       },
       skeletonText: {
         title: 'Skeleton de texto',
@@ -24,7 +26,8 @@ export const SKELETON_PAGE = {
       },
       skeletonComposition: {
         title: 'Composição de skeleton',
-        description: 'O skeleton permite composição: combine vários elementos para placeholders de loading mais complexos.',
+        description:
+          'O skeleton permite composição: combine vários elementos para placeholders de loading mais complexos.',
       },
     },
   },
@@ -38,19 +41,23 @@ export const SKELETON_PAGE = {
       },
       skeleton: {
         title: 'Skeleton',
-        description: 'The skeleton component is a placeholder that can be used to indicate that content is loading. It is commonly used to improve the user experience by providing a visual indication that data is being fetched or processed.',
+        description:
+          'The skeleton component is a placeholder that can be used to indicate that content is loading. It is commonly used to improve the user experience by providing a visual indication that data is being fetched or processed.',
       },
       skeletonCircle: {
         title: 'Skeleton circle',
-        description: 'The skeleton component also supports a circular variant, which can be used to indicate loading states for circular elements such as avatars or profile pictures.',
+        description:
+          'The skeleton component also supports a circular variant, which can be used to indicate loading states for circular elements such as avatars or profile pictures.',
       },
       skeletonText: {
         title: 'Skeleton text',
-        description: 'The skeleton component also supports a text variant, which can be used to indicate loading states for textual content such as paragraphs or headings.',
+        description:
+          'The skeleton component also supports a text variant, which can be used to indicate loading states for textual content such as paragraphs or headings.',
       },
       skeletonComposition: {
         title: 'Skeleton Composition',
-        description: 'The skeleton component allows for composition, enabling the creation of complex loading placeholders by combining multiple skeleton elements.',
+        description:
+          'The skeleton component allows for composition, enabling the creation of complex loading placeholders by combining multiple skeleton elements.',
       },
     },
   },

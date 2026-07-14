@@ -20,11 +20,11 @@
             class="w-full max-w-sm"
             placeholder="Select an option"
             [options]="options"
-            [formControl]="singleControl"
+            [formField]="selectForm.single"
           />
           <div class="rounded-lg border border-dashed border-base-300 bg-base-200/50 p-4">
             <p class="mb-2 text-sm font-medium">Value</p>
-            <pre class="text-sm whitespace-pre-wrap">{{ singleValueChanges() | json }}</pre>
+            <pre class="text-sm whitespace-pre-wrap">{{ selectForm.single().value() | json }}</pre>
           </div>
         </div>
       </div>
@@ -65,11 +65,11 @@
             placeholder="Select options"
             class="w-full max-w-sm"
             [options]="options"
-            [formControl]="multipleControl"
+            [formField]="selectForm.multiple"
           />
           <div class="rounded-lg border border-dashed border-base-300 bg-base-200/50 p-4">
             <p class="mb-2 text-sm font-medium">Value</p>
-            <pre class="text-sm whitespace-pre-wrap">{{ multipleValueChanges() | json }}</pre>
+            <pre class="text-sm whitespace-pre-wrap">{{ selectForm.multiple().value() | json }}</pre>
           </div>
         </div>
       </div>

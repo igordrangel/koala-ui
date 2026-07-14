@@ -4,9 +4,9 @@ import {
   computed,
   effect,
   ElementRef,
-  forwardRef,
   input,
   model,
+  output,
   signal,
   viewChild,
 } from '@angular/core';
@@ -31,7 +31,7 @@ import { InputCalendarFormat, InputCalendarType } from './input-calendar.types';
 import { InputCalendarMonthPickerComponent } from './parts/input-calendar-month-picker.component';
 import { InputCalendarTimeRowComponent } from './parts/input-calendar-time-row.component';
 import { Dropdown, DropdownContainer } from '../dropdown';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormValueControl } from '@angular/forms/signals';
 
 const RANGE_SEPARATOR = ' - ';
 
@@ -47,18 +47,8 @@ const RANGE_SEPARATOR = ' - ';
     Input,
     Mask,
   ],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputCalendar),
-      multi: true,
-    },
-  ],
 })
-export class InputCalendar implements ControlValueAccessor {
-  private onChanged: (value: any) => void = () => {};
-  private onTouched: () => void = () => {};
-
+export class InputCalendar implements FormValueControl<string> {
   private readonly textInput = viewChild<ElementRef<HTMLInputElement>>('textInput');
   private readonly dropdown = viewChild(DropdownContainer);
   private readonly rangeEditTarget = signal<'from' | 'to'>('from');
@@ -72,6 +62,7 @@ export class InputCalendar implements ControlValueAccessor {
   readonly disabled = input(false, { transform: booleanAttribute });
 
   readonly value = model<string>('');
+  readonly touch = output<void>();
   readonly placeholder = input<string>('Pick a date');
   readonly inputValue = signal<string>('');
   readonly inputMask = computed(() => {
@@ -89,11 +80,7 @@ export class InputCalendar implements ControlValueAccessor {
 
   constructor() {
     effect(() => {
-      if (this.disabled()) {
-        this.isDisabled.set(true);
-      } else {
-        this.isDisabled.set(false);
-      }
+      this.isDisabled.set(this.disabled());
     });
 
     effect(() => {
@@ -154,10 +141,6 @@ export class InputCalendar implements ControlValueAccessor {
     input.value = value;
   }
 
-  private notifyValueChange() {
-    this.onChanged(this.value());
-  }
-
   private applyParsedValue(rawValue: string) {
     const parsedValue = parseInputValue(rawValue, this.type(), this.format());
 
@@ -166,7 +149,6 @@ export class InputCalendar implements ControlValueAccessor {
     }
 
     this.value.set(parsedValue);
-    this.notifyValueChange();
   }
 
   private syncRangeEditTarget(rawValue: string) {
@@ -184,22 +166,6 @@ export class InputCalendar implements ControlValueAccessor {
     if (fromValue.replace(/\D/g, '').length > 0) {
       this.rangeEditTarget.set('from');
     }
-  }
-
-  writeValue(value: string): void {
-    this.value.set(value);
-  }
-
-  registerOnChange(fn: any): void {
-    this.onChanged = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState?(isDisabled: boolean): void {
-    this.isDisabled.set(isDisabled);
   }
 
   onInputChange(event: Event) {
@@ -308,17 +274,15 @@ export class InputCalendar implements ControlValueAccessor {
   openPopover() {
     this.dropdown()?.open();
     this.textInput()?.nativeElement.focus();
-    this.onTouched();
+    this.touch.emit();
   }
 
   setDateValue(value: KlDate) {
     this.value.set(toSelectedDateValue(value, this.type(), this.value()));
-    this.notifyValueChange();
   }
 
   setRangeValue(value: string) {
     this.value.set(value);
-    this.notifyValueChange();
   }
 
   changeDisplayedYear(step: number) {
@@ -328,7 +292,6 @@ export class InputCalendar implements ControlValueAccessor {
   setMonthValue(month: number) {
     const parsedMonth = String(month + 1).padStart(2, '0');
     this.value.set(`${this.displayedYear()}-${parsedMonth}`);
-    this.notifyValueChange();
   }
 
   setTimeValue(value: string) {
@@ -339,7 +302,6 @@ export class InputCalendar implements ControlValueAccessor {
     const dateValue = getDatePart(this.value()) || new KlDate(new Date()).format('yyyy-MM-dd');
 
     this.value.set(`${dateValue}T${value}`);
-    this.notifyValueChange();
   }
 
   clear(event: Event) {
@@ -347,7 +309,6 @@ export class InputCalendar implements ControlValueAccessor {
     event.stopPropagation();
     this.value.set('');
     this.inputValue.set('');
-    this.notifyValueChange();
     this.textInput()?.nativeElement.focus();
   }
 }

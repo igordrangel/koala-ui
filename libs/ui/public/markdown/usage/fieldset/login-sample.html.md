@@ -1,5 +1,5 @@
 ```html
-<form class="flex flex-col items-center justify-center gap-2" [formGroup]="loginForm">
+<form class="flex flex-col items-center justify-center gap-2">
   <app-fieldset class="w-full max-w-xs">
     <ng-container label>E-mail</ng-container>
     <input
@@ -8,12 +8,12 @@
       size="md"
       type="email"
       placeholder="example@example.com"
-      [formControl]="loginForm.controls.email"
+      [formField]="loginForm.email"
     />
 
-    @if (loginForm.controls.email.hasError('required')) {
+    @if (loginForm.email().getError('required')) {
       <span appValidatorHint>Email is required</span>
-    } @else if (loginForm.controls.email.hasError('email')) {
+    } @else if (loginForm.email().getError('email')) {
       <span appValidatorHint>Invalid email</span>
     }
   </app-fieldset>
@@ -26,7 +26,7 @@
       appInput
       size="md"
       type="password"
-      [formControl]="loginForm.controls.password"
+      [formField]="loginForm.password"
     />
 
     <ng-container action>
@@ -53,9 +53,9 @@
       }
     </ng-container>
 
-    @if (loginForm.controls.password.hasError('required')) {
+    @if (loginForm.password().getError('required')) {
       <span appValidatorHint>Password is required</span>
-    } @else if (loginForm.controls.password.hasError('minlength')) {
+    } @else if (loginForm.password().getError('minLength')) {
       <span appValidatorHint>Password must be at least 8 characters</span>
     }
   </app-fieldset>

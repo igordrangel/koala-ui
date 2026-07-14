@@ -261,7 +261,7 @@
     "title": "Calendar",
     "category": "Components",
     "route": "components/calendar",
-    "content": "Calendar Installation HTML Input Calendar"
+    "content": "Calendar Installation HTML Input Calendar Reactive Forms still work via Angular 22 FormValueControl interop ( / ). Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "components/calendar#installation",
@@ -285,14 +285,14 @@
     "category": "Components",
     "route": "components/calendar",
     "fragment": "input-calendar",
-    "content": ""
+    "content": "Reactive Forms still work via Angular 22 FormValueControl interop ( / ). Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "components/checkbox",
     "title": "Checkbox",
     "category": "Components",
     "route": "components/checkbox",
-    "content": "Checkbox Installation Disabled Sizes Variants"
+    "content": "Checkbox Installation Disabled Reactive Forms still work via Angular 22 FormCheckboxControl interop ( / ). Prefer Signal Forms ( + ) for new code. Sizes Variants"
   },
   {
     "id": "components/checkbox#installation",
@@ -308,7 +308,7 @@
     "category": "Components",
     "route": "components/checkbox",
     "fragment": "disabled",
-    "content": ""
+    "content": "Reactive Forms still work via Angular 22 FormCheckboxControl interop ( / ). Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "components/checkbox#sizes",
@@ -362,7 +362,7 @@
     "title": "Combobox",
     "category": "Components",
     "route": "components/combobox",
-    "content": "Combobox Installation Local Remote"
+    "content": "Combobox Installation Local Reactive Forms still work via Angular 22 FormValueControl interop ( / ). Prefer Signal Forms ( + ) for new code. Remote Reactive Forms still work via Angular 22 FormValueControl interop ( / ). Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "components/combobox#installation",
@@ -378,7 +378,7 @@
     "category": "Components",
     "route": "components/combobox",
     "fragment": "local",
-    "content": ""
+    "content": "Reactive Forms still work via Angular 22 FormValueControl interop ( / ). Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "components/combobox#remote",
@@ -386,7 +386,7 @@
     "category": "Components",
     "route": "components/combobox",
     "fragment": "remote",
-    "content": ""
+    "content": "Reactive Forms still work via Angular 22 FormValueControl interop ( / ). Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "components/confirm",
@@ -478,7 +478,7 @@
     "title": "Fieldset",
     "category": "Components",
     "route": "components/fieldset",
-    "content": "Fieldset Installation HTML Login Sample"
+    "content": "Fieldset Installation HTML Reactive Forms still work via Angular 22 interop ( / + ). Prefer Signal Forms ( + ) for new code. Login Sample Reactive Forms still work via Angular 22 interop ( / + ). Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "components/fieldset#installation",
@@ -494,7 +494,7 @@
     "category": "Components",
     "route": "components/fieldset",
     "fragment": "html",
-    "content": ""
+    "content": "Reactive Forms still work via Angular 22 interop ( / + ). Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "components/fieldset#login-sample",
@@ -502,7 +502,7 @@
     "category": "Components",
     "route": "components/fieldset",
     "fragment": "login-sample",
-    "content": ""
+    "content": "Reactive Forms still work via Angular 22 interop ( / + ). Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "components/inline-filter",
@@ -532,7 +532,7 @@
     "title": "Input CNPJ",
     "category": "Components",
     "route": "components/input-cnpj",
-    "content": "Input CNPJ Installation HTML"
+    "content": "Input CNPJ Installation HTML Reactive Forms still work via Angular 22 interop ( / + ). Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "components/input-cnpj#installation",
@@ -548,14 +548,14 @@
     "category": "Components",
     "route": "components/input-cnpj",
     "fragment": "html",
-    "content": ""
+    "content": "Reactive Forms still work via Angular 22 interop ( / + ). Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "components/input-cpf",
     "title": "Input CPF",
     "category": "Components",
     "route": "components/input-cpf",
-    "content": "Input CPF Installation HTML"
+    "content": "Input CPF Installation HTML Reactive Forms still work via Angular 22 interop ( / + ). Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "components/input-cpf#installation",
@@ -571,14 +571,14 @@
     "category": "Components",
     "route": "components/input-cpf",
     "fragment": "html",
-    "content": ""
+    "content": "Reactive Forms still work via Angular 22 interop ( / + ). Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "components/input-color",
     "title": "Input Color",
     "category": "Components",
     "route": "components/input-color",
-    "content": "Input Color Installation HTML Inline"
+    "content": "Input Color Installation HTML Reactive Forms still work via Angular 22 FormValueControl interop ( / ). Prefer Signal Forms ( + ) for new code. Inline"
   },
   {
     "id": "components/input-color#installation",
@@ -594,7 +594,7 @@
     "category": "Components",
     "route": "components/input-color",
     "fragment": "html",
-    "content": ""
+    "content": "Reactive Forms still work via Angular 22 FormValueControl interop ( / ). Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "components/input-color#inline",
@@ -609,7 +609,7 @@
     "title": "Input Currency",
     "category": "Components",
     "route": "components/input-currency",
-    "content": "Input Currency Installation HTML"
+    "content": "Input Currency Installation HTML Reactive Forms still work via Angular 22 FormValueControl interop ( / ). Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "components/input-currency#installation",
@@ -625,7 +625,7 @@
     "category": "Components",
     "route": "components/input-currency",
     "fragment": "html",
-    "content": ""
+    "content": "Reactive Forms still work via Angular 22 FormValueControl interop ( / ). Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "components/input-field",
@@ -718,7 +718,7 @@
     "title": "Login",
     "category": "Blocks",
     "route": "blocks/login",
-    "content": "Login Installation Logged Sample Form"
+    "content": "Login Installation Logged Sample Form Reactive Forms still work via Angular 22 interop. Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "blocks/login#installation",
@@ -742,7 +742,7 @@
     "category": "Blocks",
     "route": "blocks/login",
     "fragment": "form",
-    "content": ""
+    "content": "Reactive Forms still work via Angular 22 interop. Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "components/modal",
@@ -859,7 +859,7 @@
     "title": "Radio",
     "category": "Components",
     "route": "components/radio",
-    "content": "Radio Installation Disabled Sizes Variants"
+    "content": "Radio Installation Disabled Reactive Forms still work via Angular 22 interop ( / ). Prefer Signal Forms ( + ) for new code. Sizes Variants"
   },
   {
     "id": "components/radio#installation",
@@ -875,7 +875,7 @@
     "category": "Components",
     "route": "components/radio",
     "fragment": "disabled",
-    "content": ""
+    "content": "Reactive Forms still work via Angular 22 interop ( / ). Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "components/radio#sizes",
@@ -898,7 +898,7 @@
     "title": "Range",
     "category": "Components",
     "route": "components/range",
-    "content": "Range Installation Disabled Sizes Variants"
+    "content": "Range Installation Disabled Reactive Forms still work via Angular 22 FormValueControl interop ( / ). Prefer Signal Forms ( + ) for new code. Sizes Variants"
   },
   {
     "id": "components/range#installation",
@@ -914,7 +914,7 @@
     "category": "Components",
     "route": "components/range",
     "fragment": "disabled",
-    "content": ""
+    "content": "Reactive Forms still work via Angular 22 FormValueControl interop ( / ). Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "components/range#sizes",
@@ -937,7 +937,7 @@
     "title": "Select",
     "category": "Components",
     "route": "components/select",
-    "content": "Select Installation Disabled Multiple Single Sizes"
+    "content": "Select Installation Disabled Reactive Forms still work via Angular 22 FormValueControl interop ( / ). Prefer Signal Forms ( + ) for new code. Multiple Single Sizes"
   },
   {
     "id": "components/select#installation",
@@ -953,7 +953,7 @@
     "category": "Components",
     "route": "components/select",
     "fragment": "disabled",
-    "content": ""
+    "content": "Reactive Forms still work via Angular 22 FormValueControl interop ( / ). Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "components/select#multiple",
@@ -1194,7 +1194,7 @@
     "title": "Text Editor",
     "category": "Components",
     "route": "components/text-editor",
-    "content": "Text Editor Installation For API image upload, also install HttpBase: HTML Image Output Image Upload File Service Overview Image insertion (toolbar button, drag & drop, and paste) is handled internally by the text editor. Your app only implements with and . By default, the editor uses , which embeds images as base64 URLs. Building a custom FileService Install HttpBase and implement (see Http Base): 1. upload(folder, files) Send with and , return the persisted from your API. Private helpers (such as ) come before the public methods. 2. download(fileId) the file with , build with and return it. The editor calls when the user adds an image, then for preview. On load, it calls for every in the HTML. Inserted in the editor (preview only): Persisted in your database: 3. Register the service Provide your on the page that uses the editor: Pass the folder to the editor: 4. Extract image IDs Each image is stored in the HTML as on the tag. Read the form control value and collect the ids: Alternatively, use and read — a signal updated on every editor change. 5. Save the form Send the normalized HTML and the extracted ids to your API: The editor removes temporary URLs from the form value via . API Export Description --- --- Contract with and . returned by . Parses the HTML and returns every from tags. Removes temporary URLs from HTML (applied automatically on output). Signal on with the current attached ids (same values as above). Input on passed to ."
+    "content": "Text Editor Installation For API image upload, also install HttpBase: HTML Reactive Forms still work via Angular 22 FormValueControl interop ( / ). Prefer Signal Forms ( + ) for new code. Image Output Reactive Forms still work via Angular 22 FormValueControl interop ( / ). Prefer Signal Forms ( + ) for new code. Image Upload Reactive Forms still work via Angular 22 FormValueControl interop ( / ). Prefer Signal Forms ( + ) for new code. File Service Overview Image insertion (toolbar button, drag & drop, and paste) is handled internally by the text editor. Your app only implements with and . By default, the editor uses , which embeds images as base64 URLs. Building a custom FileService Install HttpBase and implement (see Http Base): 1. upload(folder, files) Send with and , return the persisted from your API. Private helpers (such as ) come before the public methods. 2. download(fileId) the file with , build with and return it. The editor calls when the user adds an image, then for preview. On load, it calls for every in the HTML. Inserted in the editor (preview only): Persisted in your database: 3. Register the service Provide your on the page that uses the editor: Pass the folder to the editor: 4. Extract image IDs Each image is stored in the HTML as on the tag. Read the form control value and collect the ids: Alternatively, use and read — a signal updated on every editor change. 5. Save the form Send the normalized HTML and the extracted ids to your API: The editor removes temporary URLs from the form value via . API Export Description --- --- Contract with and . returned by . Parses the HTML and returns every from tags. Removes temporary URLs from HTML (applied automatically on output). Signal on with the current attached ids (same values as above). Input on passed to ."
   },
   {
     "id": "components/text-editor#installation",
@@ -1210,7 +1210,7 @@
     "category": "Components",
     "route": "components/text-editor",
     "fragment": "html",
-    "content": ""
+    "content": "Reactive Forms still work via Angular 22 FormValueControl interop ( / ). Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "components/text-editor#image-output",
@@ -1218,7 +1218,7 @@
     "category": "Components",
     "route": "components/text-editor",
     "fragment": "image-output",
-    "content": ""
+    "content": "Reactive Forms still work via Angular 22 FormValueControl interop ( / ). Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "components/text-editor#image-upload",
@@ -1226,7 +1226,7 @@
     "category": "Components",
     "route": "components/text-editor",
     "fragment": "image-upload",
-    "content": ""
+    "content": "Reactive Forms still work via Angular 22 FormValueControl interop ( / ). Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "components/text-editor#file-service",
@@ -1328,7 +1328,7 @@
     "title": "Toggle",
     "category": "Components",
     "route": "components/toggle",
-    "content": "Toggle Installation Disabled Sizes Variants"
+    "content": "Toggle Installation Disabled Reactive Forms still work via Angular 22 FormCheckboxControl interop ( / ). Prefer Signal Forms ( + ) for new code. Sizes Variants"
   },
   {
     "id": "components/toggle#installation",
@@ -1344,7 +1344,7 @@
     "category": "Components",
     "route": "components/toggle",
     "fragment": "disabled",
-    "content": ""
+    "content": "Reactive Forms still work via Angular 22 FormCheckboxControl interop ( / ). Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "components/toggle#sizes",
@@ -1398,7 +1398,7 @@
     "title": "Validator",
     "category": "Components",
     "route": "components/validator",
-    "content": "Validator Installation HTML"
+    "content": "Validator Installation HTML Reactive Forms still work via Angular 22 interop ( / + ). Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "components/validator#installation",
@@ -1414,7 +1414,7 @@
     "category": "Components",
     "route": "components/validator",
     "fragment": "html",
-    "content": ""
+    "content": "Reactive Forms still work via Angular 22 interop ( / + ). Prefer Signal Forms ( + ) for new code."
   },
   {
     "id": "resources/list-base",

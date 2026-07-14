@@ -15,30 +15,31 @@ kl install http-base
 ### HTML
 
 ```html
-<app-text-editor class="w-full" [formControl]="editorControl" />
+<app-text-editor class="w-full" [formField]="editorForm.content" />
 
-<pre>{{ editorValue() }}</pre>
+<pre>{{ editorForm.content().value() }}</pre>
 <pre>{{ editorImageIds() | json }}</pre>
 ```
 
 ```typescript
-import { Component, computed } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, computed, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { extractTextEditorImageIds, TextEditor } from '@/shared/components/text-editor';
-import { controlChanges } from '@/shared/utils/control-changes';
 
 @Component({
   selector: 'app-text-editor-sample',
   templateUrl: './text-editor-sample.html',
-  imports: [ReactiveFormsModule, TextEditor],
+  imports: [FormField, TextEditor],
 })
 export class TextEditorSample {
-  readonly editorControl = new FormControl<string>('<p>Hello world</p>', { nonNullable: true });
-  readonly editorValue = controlChanges(this.editorControl);
-  readonly editorImageIds = computed(() => extractTextEditorImageIds(this.editorValue()));
+  private readonly editorModel = signal({ content: '<p>Hello world</p>' });
+  readonly editorForm = form(this.editorModel);
+  readonly editorImageIds = computed(() =>
+    extractTextEditorImageIds(this.editorForm.content().value()),
+  );
 
   save() {
-    const content = this.editorControl.value;
+    const content = this.editorForm.content().value();
 
     // Each image is stored as data-id on the <img> tag in the HTML.
     // Example: '<p>Hello</p><img data-id="file-id-from-api" class="editor-image" />'
@@ -50,15 +51,17 @@ export class TextEditorSample {
 }
 ```
 
+Reactive Forms still work via Angular 22 FormValueControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.
+
 ### Image Output
 
 ```html
-<app-text-editor #editor class="w-full" [formControl]="contentControl" />
+<app-text-editor #editor class="w-full" [formField]="editorForm.content" />
 ```
 
 ```typescript
-import { Component, viewChild } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, signal, viewChild } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import {
   extractTextEditorImageIds,
   TextEditor,
@@ -67,18 +70,19 @@ import {
 @Component({
   selector: 'app-article-form',
   template: `
-    <app-text-editor #editor class="w-full" [formControl]="contentControl" />
+    <app-text-editor #editor class="w-full" [formField]="editorForm.content" />
 
     <p>Attached image IDs: {{ editor().attachedImageIds() | json }}</p>
   `,
-  imports: [ReactiveFormsModule, TextEditor],
+  imports: [FormField, TextEditor],
 })
 export class ArticleForm {
   readonly editor = viewChild.required(TextEditor);
-  readonly contentControl = new FormControl<string>('', { nonNullable: true });
+  private readonly editorModel = signal({ content: '' });
+  readonly editorForm = form(this.editorModel);
 
   save() {
-    const content = this.contentControl.value;
+    const content = this.editorForm.content().value();
 
     // Option 1: parse data-id attributes from the HTML string
     const assetsIds = extractTextEditorImageIds(content);
@@ -91,15 +95,17 @@ export class ArticleForm {
 }
 ```
 
+Reactive Forms still work via Angular 22 FormValueControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.
+
 ### Image Upload
 
 ```html
-<app-text-editor class="w-full" [formControl]="contentControl" [imageFolder]="imageFolder" />
+<app-text-editor class="w-full" [formField]="editorForm.content" [imageFolder]="imageFolder" />
 ```
 
 ```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import {
   extractTextEditorImageIds,
   TextEditor,
@@ -110,15 +116,16 @@ import { FileService, FolderEnum } from './file.service';
 @Component({
   selector: 'app-article-form',
   templateUrl: './article-form.html',
-  imports: [ReactiveFormsModule, TextEditor],
+  imports: [FormField, TextEditor],
   providers: [{ provide: TextEditorFileService, useExisting: FileService }],
 })
 export class ArticleForm {
-  readonly contentControl = new FormControl<string>('', { nonNullable: true });
+  private readonly editorModel = signal({ content: '' });
+  readonly editorForm = form(this.editorModel);
   readonly imageFolder = FolderEnum.article;
 
   save() {
-    const content = this.contentControl.value;
+    const content = this.editorForm.content().value();
 
     // Each uploaded image is stored in the HTML as data-id on the <img> tag.
     // Temporary blob: preview URLs are already removed from the form value.
@@ -132,6 +139,8 @@ export class ArticleForm {
   }
 }
 ```
+
+Reactive Forms still work via Angular 22 FormValueControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.
 
 ### File Service
 

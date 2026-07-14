@@ -67,7 +67,8 @@ export class TableColMenu extends TableAxisMenuBase {
   protected updateDropPreviewPosition(index: number): void {
     const table = this.hoveredTable;
     const scrollContainer = getScrollContainer(this.editor());
-    const layout = table && scrollContainer ? getColumnControlLayout(table, index, scrollContainer) : null;
+    const layout =
+      table && scrollContainer ? getColumnControlLayout(table, index, scrollContainer) : null;
 
     if (layout) {
       this.dropPreview.set(layout.preview);
@@ -122,7 +123,10 @@ export class TableColMenu extends TableAxisMenuBase {
   }
 
   addColumnBefore(): void {
-    this.mutateAxis((chain) => chain.addColumnBefore(), () => this.hoveredIndex++);
+    this.mutateAxis(
+      (chain) => chain.addColumnBefore(),
+      () => this.hoveredIndex++,
+    );
   }
 
   addColumnAfter(): void {

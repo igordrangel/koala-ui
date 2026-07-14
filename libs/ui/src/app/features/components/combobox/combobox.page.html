@@ -23,14 +23,14 @@
               <app-combobox
                 placeholder="Select a state"
                 [options]="localOptions"
-                [formControl]="localComboboxControl"
+                [formField]="comboboxForm.local"
               />
 
               <app-combobox
                 multiple
                 placeholder="Select multiple states"
                 [options]="localOptions"
-                [formControl]="localMultipleComboboxControl"
+                [formField]="comboboxForm.localMultiple"
               />
             </div>
           </div>
@@ -42,13 +42,13 @@
             <div
               class="mt-3 inline-flex rounded-full border border-base-300 bg-base-200 px-3 py-1 text-sm text-base-content"
             >
-              {{ localComboboxChanges() || 'No item selected' }}
+              {{ comboboxForm.local().value() || 'No item selected' }}
             </div>
             <p class="mt-4 text-xs font-semibold uppercase tracking-[0.18em] text-base-content/60">
               Multiple values
             </p>
 
-            @let localMultipleComboboxValue = localMultipleComboboxChanges() || [];
+            @let localMultipleComboboxValue = comboboxForm.localMultiple().value() || [];
             @let localMultipleComboboxHasValue = localMultipleComboboxValue.length > 0;
             @let localMultipleComboboxValues =
               localMultipleComboboxHasValue
@@ -93,7 +93,9 @@
 
   <app-section-content>
     <ng-container title>{{ copy().sections.remoteFilteringWithResource.title }}</ng-container>
-    <ng-container description>{{ copy().sections.remoteFilteringWithResource.description }}</ng-container>
+    <ng-container description>{{
+      copy().sections.remoteFilteringWithResource.description
+    }}</ng-container>
 
     <div appTabGroup align="start" class="flex items-center">
       <div appTab [label]="common().preview" checked>
@@ -104,7 +106,7 @@
             <app-combobox
               placeholder="Search for a user"
               [options]="asyncOptions"
-              [formControl]="remoteComboboxControl"
+              [formField]="comboboxForm.remote"
             />
           </div>
 
@@ -115,7 +117,7 @@
             <div
               class="mt-3 inline-flex rounded-full border border-base-300 bg-base-200 px-3 py-1 text-sm text-base-content"
             >
-              {{ remoteComboboxChanges() || 'No item selected' }}
+              {{ comboboxForm.remote().value() || 'No item selected' }}
             </div>
             <p class="mt-4 text-sm leading-6 text-base-content/70">
               Typing updates the filter signal and triggers the resource. While results are loading,

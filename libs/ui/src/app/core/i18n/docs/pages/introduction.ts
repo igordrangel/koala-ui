@@ -4,45 +4,55 @@ import type { DocPageCopy } from '../types';
 export const INTRODUCTION_PAGE = {
   pt: {
     title: 'Introdução',
-    description: 'Bem-vindo à documentação do Koala UI! Este guia ajuda você a começar com a biblioteca de componentes e a integrá-la aos seus projetos.',
+    description:
+      'Bem-vindo à documentação do Koala UI! Este guia ajuda você a começar com a biblioteca de componentes e a integrá-la aos seus projetos.',
     sections: {
       whatIs: {
         title: 'O que é o Koala UI?',
-        description: 'Finalmente, uma biblioteca de componentes que não te obriga a escolher entre beleza e funcionalidade.',
+        description:
+          'Finalmente, uma biblioteca de componentes que não te obriga a escolher entre beleza e funcionalidade.',
         cards: [
           {
             title: 'Bonito e prático',
-            description: 'Componentes cuidadosamente feitos que já nascem bonitos, sem abrir mão de funcionalidade e acessibilidade.',
+            description:
+              'Componentes cuidadosamente feitos que já nascem bonitos, sem abrir mão de funcionalidade e acessibilidade.',
           },
           {
             title: 'Comunidade em primeiro lugar',
-            description: 'Feito por desenvolvedores Angular que entendem suas necessidades. Soluções reais para problemas reais.',
+            description:
+              'Feito por desenvolvedores Angular que entendem suas necessidades. Soluções reais para problemas reais.',
           },
           {
             title: 'Angular moderno',
-            description: 'Aproveitando os recursos mais recentes do Angular, incluindo standalone components, signals e boas práticas.',
+            description:
+              'Aproveitando os recursos mais recentes do Angular, incluindo standalone components, signals e boas práticas.',
           },
           {
             title: 'Infinitamente customizável',
-            description: 'Feito com TailwindCSS para customização sem atrito. Deixe cada componente com a sua cara.',
+            description:
+              'Feito com TailwindCSS para customização sem atrito. Deixe cada componente com a sua cara.',
           },
         ],
       },
       powerfulCli: {
         title: 'CLI poderoso',
-        description: 'Nossa interface de linha de comando torna trivial adicionar componentes e resources ao projeto. Sem copiar e colar código ou caçar documentação.',
+        description:
+          'Nossa interface de linha de comando torna trivial adicionar componentes e resources ao projeto. Sem copiar e colar código ou caçar documentação.',
         cards: [
           {
             title: 'Instalação inteligente',
-            description: 'Cuida automaticamente de dependências, imports e configuração. Basta dizer o que precisa — o resto a gente resolve.',
+            description:
+              'Cuida automaticamente de dependências, imports e configuração. Basta dizer o que precisa — o resto a gente resolve.',
           },
           {
             title: 'Integração com o projeto',
-            description: 'Integra-se à estrutura do seu projeto Angular existente. Respeita suas convenções e estilo de código.',
+            description:
+              'Integra-se à estrutura do seu projeto Angular existente. Respeita suas convenções e estilo de código.',
           },
           {
             title: 'Amigável para desenvolvedores',
-            description: 'Feedback claro, mensagens de erro úteis e comandos intuitivos. Feito para melhorar o fluxo de desenvolvimento, não complicá-lo.',
+            description:
+              'Feedback claro, mensagens de erro úteis e comandos intuitivos. Feito para melhorar o fluxo de desenvolvimento, não complicá-lo.',
           },
         ],
       },
@@ -72,45 +82,55 @@ export const INTRODUCTION_PAGE = {
   },
   en: {
     title: 'Introduction',
-    description: 'Welcome to the Koala UI documentation! This guide will help you get started with our component library and show you how to integrate it into your projects.',
+    description:
+      'Welcome to the Koala UI documentation! This guide will help you get started with our component library and show you how to integrate it into your projects.',
     sections: {
       whatIs: {
         title: 'What is Koala UI?',
-        description: "Finally, a component library that doesn't force you to choose between beauty and functionality.",
+        description:
+          "Finally, a component library that doesn't force you to choose between beauty and functionality.",
         cards: [
           {
             title: 'Beautiful & Practical',
-            description: 'Meticulously crafted components that look stunning out of the box while remaining highly functional and accessible.',
+            description:
+              'Meticulously crafted components that look stunning out of the box while remaining highly functional and accessible.',
           },
           {
             title: 'Community First',
-            description: 'Built by Angular developers who understand your needs. Real-world solutions to real problems.',
+            description:
+              'Built by Angular developers who understand your needs. Real-world solutions to real problems.',
           },
           {
             title: 'Modern Angular',
-            description: 'Leveraging the latest Angular features including standalone components, signals, and best practices.',
+            description:
+              'Leveraging the latest Angular features including standalone components, signals, and best practices.',
           },
           {
             title: 'Infinitely Customizable',
-            description: 'Built with TailwindCSS for seamless customization. Make every component truly yours.',
+            description:
+              'Built with TailwindCSS for seamless customization. Make every component truly yours.',
           },
         ],
       },
       powerfulCli: {
         title: 'Powerful CLI',
-        description: 'Our command-line interface makes adding components and resources to your project effortless. No more copy-pasting code or hunting through documentation.',
+        description:
+          'Our command-line interface makes adding components and resources to your project effortless. No more copy-pasting code or hunting through documentation.',
         cards: [
           {
             title: 'Smart Installation',
-            description: "Automatically handles dependencies, imports, and configuration. Just specify what you need, and we'll handle the rest.",
+            description:
+              "Automatically handles dependencies, imports, and configuration. Just specify what you need, and we'll handle the rest.",
           },
           {
             title: 'Project Integration',
-            description: 'Seamlessly integrates with your existing Angular project structure. Respects your conventions and coding style.',
+            description:
+              'Seamlessly integrates with your existing Angular project structure. Respects your conventions and coding style.',
           },
           {
             title: 'Developer Friendly',
-            description: 'Clear feedback, helpful error messages, and intuitive commands. Designed to enhance your development workflow, not complicate it.',
+            description:
+              'Clear feedback, helpful error messages, and intuitive commands. Designed to enhance your development workflow, not complicate it.',
           },
         ],
       },

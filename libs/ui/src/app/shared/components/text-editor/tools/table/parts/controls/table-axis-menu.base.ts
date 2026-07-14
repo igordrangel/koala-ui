@@ -59,7 +59,10 @@ export abstract class TableAxisMenuBase implements OnInit, OnDestroy {
   private removeListeners?: () => void;
 
   protected abstract getMenu(): DropdownContainer | undefined;
-  protected abstract getCellAtIndex(table: HTMLTableElement, index: number): HTMLTableCellElement | null;
+  protected abstract getCellAtIndex(
+    table: HTMLTableElement,
+    index: number,
+  ): HTMLTableCellElement | null;
   protected abstract getIndexFromCell(cell: HTMLTableCellElement): number;
   protected abstract getIndexFromPoint(clientX: number, clientY: number): number;
   protected abstract resolveTableAt(
@@ -160,7 +163,10 @@ export abstract class TableAxisMenuBase implements OnInit, OnDestroy {
   }
 
   deleteTable(): void {
-    this.mutateAxis((chain) => chain.deleteTable(), () => this.hide());
+    this.mutateAxis(
+      (chain) => chain.deleteTable(),
+      () => this.hide(),
+    );
   }
 
   protected runAxisCommand(command: () => boolean): void {
@@ -201,7 +207,10 @@ export abstract class TableAxisMenuBase implements OnInit, OnDestroy {
       return;
     }
 
-    if (!this.isDragging && Math.abs(this.getDragCoordinate(event) - this.dragStartCoord) > DRAG_THRESHOLD) {
+    if (
+      !this.isDragging &&
+      Math.abs(this.getDragCoordinate(event) - this.dragStartCoord) > DRAG_THRESHOLD
+    ) {
       this.isDragging = true;
       this.getMenu()?.close();
     }

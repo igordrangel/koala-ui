@@ -4,7 +4,8 @@ import type { DocPageCopy } from '../types';
 export const INPUT_CPF_PAGE = {
   pt: {
     title: 'Input CPF',
-    description: 'O Input CPF é um campo especializado para CPF (Cadastro de Pessoas Físicas). Inclui validação de formato e regras do CPF, guiando o usuário e dando feedback imediato em caso de erro.',
+    description:
+      'O Input CPF é um campo especializado para CPF (Cadastro de Pessoas Físicas). Inclui validação de formato e regras do CPF, guiando o usuário e dando feedback imediato em caso de erro.',
     sections: {
       installation: {
         title: 'Instalação',
@@ -17,7 +18,8 @@ export const INPUT_CPF_PAGE = {
   },
   en: {
     title: 'Input CPF',
-    description: 'The Input CPF component is a specialized input field designed for entering Brazilian CPF (Cadastro de Pessoas Físicas) numbers. It provides built-in validation to ensure that the entered CPF number is in the correct format and is valid according to the CPF rules. This component enhances user experience by guiding users to input their CPF correctly and providing immediate feedback on any errors.',
+    description:
+      'The Input CPF component is a specialized input field designed for entering Brazilian CPF (Cadastro de Pessoas Físicas) numbers. It provides built-in validation to ensure that the entered CPF number is in the correct format and is valid according to the CPF rules. This component enhances user experience by guiding users to input their CPF correctly and providing immediate feedback on any errors.',
     sections: {
       installation: {
         title: 'Installation',

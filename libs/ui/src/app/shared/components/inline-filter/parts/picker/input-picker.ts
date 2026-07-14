@@ -16,7 +16,6 @@ import {
   viewChild,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InlineFilterField } from '../../config';
 import { optionsToQueryParams } from '../../utils/options-to-query-params';
@@ -30,7 +29,6 @@ import { KeyboardShortcuts } from './keyboard-shortcuts';
   selector: 'app-input-picker',
   templateUrl: './input-picker.html',
   imports: [
-    FormsModule,
     Dropdown,
     Combobox,
     InputFilterEdit,
@@ -45,7 +43,9 @@ export class InputPicker implements OnInit {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly injector = inject(Injector);
 
-  private readonly queryParams = toSignal(this.activatedRoute.queryParams);
+  private readonly queryParams = toSignal(this.activatedRoute.queryParams, {
+    initialValue: this.activatedRoute.snapshot.queryParams,
+  });
 
   private readonly inputFilterElement = viewChild<ElementRef<HTMLInputElement>>('inputFilter');
   private readonly triggerOptionsElement =

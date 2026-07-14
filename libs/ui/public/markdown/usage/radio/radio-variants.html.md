@@ -4,43 +4,43 @@
   appRadio="sample"
   variant="neutral"
   value="neutral"
-  [formControl]="radioControl"
+  [formField]="radioForm.value"
 />
 <input
   type="radio"
   appRadio="sample"
   variant="primary"
   value="primary"
-  [formControl]="radioControl"
+  [formField]="radioForm.value"
 />
 <input
   type="radio"
   appRadio="sample"
   variant="secondary"
   value="secondary"
-  [formControl]="radioControl"
+  [formField]="radioForm.value"
 />
 <input
   type="radio"
   appRadio="sample"
   variant="accent"
   value="accent"
-  [formControl]="radioControl"
+  [formField]="radioForm.value"
 />
-<input type="radio" appRadio="sample" variant="info" value="info" [formControl]="radioControl" />
+<input type="radio" appRadio="sample" variant="info" value="info" [formField]="radioForm.value" />
 <input
   type="radio"
   appRadio="sample"
   variant="success"
   value="success"
-  [formControl]="radioControl"
+  [formField]="radioForm.value"
 />
 <input
   type="radio"
   appRadio="sample"
   variant="warning"
   value="warning"
-  [formControl]="radioControl"
+  [formField]="radioForm.value"
 />
-<input type="radio" appRadio="sample" variant="error" value="error" [formControl]="radioControl" />
+<input type="radio" appRadio="sample" variant="error" value="error" [formField]="radioForm.value" />
 ```

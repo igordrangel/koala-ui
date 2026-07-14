@@ -17,7 +17,8 @@
                     @case ('number')
                     @case ('tel')
                     @case ('url') {
-                      <input class="w-full bg-transparent"
+                      <input
+                        class="w-full bg-transparent"
                         appInput
                         size="md"
                         [attr.type]="field.inputType"
@@ -27,9 +28,11 @@
                     }
                     @case ('cpf')
                     @case ('cnpj') {
-                      @let mask = field.inputType === 'cpf' ? '000.000.000-00' : 'SS.SSS.SSS/SSSS-SS';
+                      @let mask =
+                        field.inputType === 'cpf' ? '000.000.000-00' : 'SS.SSS.SSS/SSSS-SS';
 
-                      <input class="w-full bg-transparent"
+                      <input
+                        class="w-full bg-transparent"
                         appInput
                         size="md"
                         type="text"
@@ -39,7 +42,8 @@
                       />
                     }
                     @case ('currency') {
-                      <input class="w-full bg-transparent"
+                      <input
+                        class="w-full bg-transparent"
                         appInput
                         appCurrency
                         size="md"
@@ -108,16 +112,12 @@
         btnVariant="error"
         btnSoft
         class="w-1/2"
-        (click)="bottomSheetRef.dismiss()">
+        (click)="bottomSheetRef.dismiss()"
+      >
         Cancel
       </button>
 
-      <button
-        appButton
-        btnVariant="primary"
-        class="w-1/2">
-        Apply
-      </button>
+      <button appButton btnVariant="primary" class="w-1/2">Apply</button>
     </div>
   </app-bottom-sheet>
 </form>

@@ -35,7 +35,9 @@
 
   <app-section-content class="block mt-10">
     <ng-container title>{{ copy().sections.addingInitialStructure.title }}</ng-container>
-    <ng-container description>{{ copy().sections.addingInitialStructure.description }}</ng-container>
+    <ng-container description>{{
+      copy().sections.addingInitialStructure.description
+    }}</ng-container>
 
     <app-code-viewer language="bash" name="kl" src="markdown/install/init.md" />
 

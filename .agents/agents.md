@@ -25,9 +25,11 @@ Useful entry points: [Get Started](https://ui.koalarx.com/docs/get-started.md), 
 
 - Components live under `libs/ui/src/app/shared/components/` and are installed into consumer apps via `kl install` (destination typically `src/app/shared/components/`).
 - Prefer Signals, standalone components, and path aliases (`@/*` → `src/app/*`) from `kl new` / `kl init`.
+- Prefer Signal Forms (`form()`, `[formField]`); installed controls use `FormValueControl` / `FormCheckboxControl`.
 - Base deps: `@koalarx/utils` ≥ 5 and `clsx`. Prefer Utils prototypes where documented.
 - Do not invent undocumented directives, inputs, or APIs — follow published docs and local installed sources.
 - Prefer Bun for this monorepo’s tooling.
+- Library major tracks Angular major (`21.x` → Angular 21, `22.4+` → Angular 22).
 
 ## Maintaining agent context
 

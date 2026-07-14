@@ -1,18 +1,14 @@
 import {
   booleanAttribute,
-  DestroyRef,
   Directive,
   effect,
   ElementRef,
-  forwardRef,
-  HostListener,
-  Injector,
   inject,
   input,
-  OnInit,
+  model,
+  output,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
+import { FormValueControl } from '@angular/forms/signals';
 import type { ClassValue } from 'clsx';
 
 export type RangeVariant =
@@ -29,26 +25,21 @@ export type RangeSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 @Directive({
   selector: 'input[type="range"][appRange]',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => Range),
-      multi: true,
-    },
-  ],
+  host: {
+    '(input)': 'handleInput($event)',
+    '(change)': 'handleInput($event)',
+    '(blur)': 'touch.emit()',
+  },
 })
-export class Range implements ControlValueAccessor, OnInit {
+export class Range implements FormValueControl<number> {
   private readonly elementRef = inject<ElementRef<HTMLInputElement>>(ElementRef<HTMLInputElement>);
-  private readonly destroyRef = inject(DestroyRef);
-  private readonly injector = inject(Injector);
-  private onChange: (value: number) => void = () => {};
-  private onTouched: () => void = () => {};
-  private formDisabled = false;
 
+  readonly value = model(0);
   readonly class = input<ClassValue>('');
   readonly variant = input<RangeVariant>('neutral');
   readonly size = input<RangeSize>('md');
   readonly disabled = input(false, { transform: booleanAttribute });
+  readonly touch = output<void>();
 
   private get variantClass() {
     switch (this.variant()) {
@@ -101,62 +92,20 @@ export class Range implements ControlValueAccessor, OnInit {
     });
 
     effect(() => {
-      const range = this.elementRef.nativeElement;
-      range.disabled = this.disabled() || this.formDisabled;
+      this.elementRef.nativeElement.disabled = this.disabled();
+    });
+
+    effect(() => {
+      const nextValue = this.value();
+      if (Number.isNaN(nextValue)) {
+        return;
+      }
+      this.elementRef.nativeElement.value = String(nextValue);
     });
   }
 
-  ngOnInit(): void {
-    const ngControl = this.injector.get(NgControl, null, { self: true, optional: true });
-    const control = ngControl?.control;
-
-    if (!control) {
-      return;
-    }
-
-    control.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((value) => {
-      this.writeValue(value);
-    });
-  }
-
-  @HostListener('input', ['$event'])
   protected handleInput(event: Event) {
-    const value = (event.target as HTMLInputElement | null)?.valueAsNumber;
-    this.onChange(Number.isNaN(value) ? 0 : (value ?? 0));
-  }
-
-  @HostListener('change', ['$event'])
-  protected handleChange(event: Event) {
-    const value = (event.target as HTMLInputElement | null)?.valueAsNumber;
-    this.onChange(Number.isNaN(value) ? 0 : (value ?? 0));
-  }
-
-  @HostListener('blur')
-  protected handleBlur() {
-    this.onTouched();
-  }
-
-  writeValue(value: unknown): void {
-    const range = this.elementRef.nativeElement;
-    const nextValue = Number(value);
-
-    if (Number.isNaN(nextValue)) {
-      return;
-    }
-
-    range.value = String(nextValue);
-  }
-
-  registerOnChange(fn: (value: number) => void): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.formDisabled = isDisabled;
-    this.elementRef.nativeElement.disabled = this.disabled() || this.formDisabled;
+    const raw = (event.target as HTMLInputElement | null)?.valueAsNumber;
+    this.value.set(Number.isNaN(raw) ? 0 : (raw ?? 0));
   }
 }

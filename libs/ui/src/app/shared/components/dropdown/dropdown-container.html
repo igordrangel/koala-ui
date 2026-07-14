@@ -32,9 +32,7 @@
   [class.max-h-55]="isOptions"
   [class.max-h-85]="isMenu || isMenuOptions"
   [style.min-width.px]="isOptions ? triggerWidth.value() : null"
-  [style.max-width]="
-    isOptions ? 'min(' + triggerWidth.value() + 'px, calc(100vw - 1rem))' : null
-  "
+  [style.max-width]="isOptions ? 'min(' + triggerWidth.value() + 'px, calc(100vw - 1rem))' : null"
 >
   <ng-content select="[options]" />
 </div>

@@ -15,9 +15,11 @@ Useful entry points: [Get Started](https://ui.koalarx.com/docs/get-started.md), 
 
 - Install missing pieces with `kl install <component[,component]>`. Components land under `src/app/shared/components/`.
 - Prefer Signals, standalone components, and path aliases (`@/*` → `src/app/*`) from `kl new` / `kl init`.
+- Prefer **Signal Forms** (`form()`, `[formField]`) for new forms. Installed controls implement `FormValueControl` / `FormCheckboxControl` and remain compatible with Reactive Forms on Angular 22.
 - Base deps: `@koalarx/utils` ≥ 5 and `clsx`. Prefer documented Utils prototypes (e.g. `.orderBy()`).
 - Import installed UI from `@/shared/components/...` (or the local path already used in this repo). Follow existing `imports` arrays on standalone components.
 - Do not invent undocumented directives, inputs, or APIs — match docs and the sources already in this tree.
+- Library major tracks Angular major (`21.x` → Angular 21, `22.4+` → Angular 22).
 
 ## New UI recipe
 

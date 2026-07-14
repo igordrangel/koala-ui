@@ -26,7 +26,8 @@ export const TABS_PAGE = {
       },
       tabs: {
         title: 'Tabs',
-        description: 'Tabs are a classic UI component that can be used to display content in a tabbed format. They are commonly used to organize information and improve navigation within an application.',
+        description:
+          'Tabs are a classic UI component that can be used to display content in a tabbed format. They are commonly used to organize information and improve navigation within an application.',
       },
     },
   },

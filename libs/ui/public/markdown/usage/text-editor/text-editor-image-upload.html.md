@@ -1,3 +1,3 @@
 ```html
-<app-text-editor class="w-full" [formControl]="contentControl" [imageFolder]="imageFolder" />
+<app-text-editor class="w-full" [formField]="editorForm.content" [imageFolder]="imageFolder" />
 ```

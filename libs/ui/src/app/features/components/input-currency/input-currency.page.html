@@ -24,10 +24,10 @@
               appInput
               type="text"
               placeholder="Type here"
-              [formControl]="currencyControl"
+              [formField]="currencyForm.currency"
               appCurrency
             />
-            @if (currencyControl.hasError('required')) {
+            @if (currencyForm.currency().getError('required')) {
               <span appValidatorHint>Currency is required</span>
             }
           </app-fieldset>

@@ -13,28 +13,31 @@ kl install radio
 ```
 
 ```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { Radio } from '@/shared/components/radio';
 
 @Component({
   selector: 'app-radio-sample',
   templateUrl: './radio-sample.html',
-  imports: [ReactiveFormsModule, Radio],
+  imports: [FormField, Radio],
 })
 export class RadioSample {
-  radioControl = new FormControl<string>('');
+  private readonly radioModel = signal({ value: '' });
+  readonly radioForm = form(this.radioModel);
 }
 ```
+
+Reactive Forms still work via Angular 22 interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.
 
 ### Sizes
 
 ```html
-<input type="radio" appRadio="sample" size="xs" value="xs" [formControl]="radioControl" />
-<input type="radio" appRadio="sample" size="sm" value="sm" [formControl]="radioControl" />
-<input type="radio" appRadio="sample" size="md" value="md" [formControl]="radioControl" />
-<input type="radio" appRadio="sample" size="lg" value="lg" [formControl]="radioControl" />
-<input type="radio" appRadio="sample" size="xl" value="xl" [formControl]="radioControl" />
+<input type="radio" appRadio="sample" size="xs" value="xs" [formField]="radioForm.value" />
+<input type="radio" appRadio="sample" size="sm" value="sm" [formField]="radioForm.value" />
+<input type="radio" appRadio="sample" size="md" value="md" [formField]="radioForm.value" />
+<input type="radio" appRadio="sample" size="lg" value="lg" [formField]="radioForm.value" />
+<input type="radio" appRadio="sample" size="xl" value="xl" [formField]="radioForm.value" />
 ```
 
 ### Variants
@@ -45,43 +48,43 @@ export class RadioSample {
   appRadio="sample"
   variant="neutral"
   value="neutral"
-  [formControl]="radioControl"
+  [formField]="radioForm.value"
 />
 <input
   type="radio"
   appRadio="sample"
   variant="primary"
   value="primary"
-  [formControl]="radioControl"
+  [formField]="radioForm.value"
 />
 <input
   type="radio"
   appRadio="sample"
   variant="secondary"
   value="secondary"
-  [formControl]="radioControl"
+  [formField]="radioForm.value"
 />
 <input
   type="radio"
   appRadio="sample"
   variant="accent"
   value="accent"
-  [formControl]="radioControl"
+  [formField]="radioForm.value"
 />
-<input type="radio" appRadio="sample" variant="info" value="info" [formControl]="radioControl" />
+<input type="radio" appRadio="sample" variant="info" value="info" [formField]="radioForm.value" />
 <input
   type="radio"
   appRadio="sample"
   variant="success"
   value="success"
-  [formControl]="radioControl"
+  [formField]="radioForm.value"
 />
 <input
   type="radio"
   appRadio="sample"
   variant="warning"
   value="warning"
-  [formControl]="radioControl"
+  [formField]="radioForm.value"
 />
-<input type="radio" appRadio="sample" variant="error" value="error" [formControl]="radioControl" />
+<input type="radio" appRadio="sample" variant="error" value="error" [formField]="radioForm.value" />
 ```

@@ -54,8 +54,15 @@ export function resolveCellFromDom(editor: Editor, cell: HTMLTableCellElement) {
   return cellAround(editor.state.doc.resolve(domPos));
 }
 
-export function focusCell(editor: Editor, $cell: NonNullable<ReturnType<typeof resolveCellFromDom>>): boolean {
-  return editor.chain().focus().setTextSelection($cell.pos + 1).run();
+export function focusCell(
+  editor: Editor,
+  $cell: NonNullable<ReturnType<typeof resolveCellFromDom>>,
+): boolean {
+  return editor
+    .chain()
+    .focus()
+    .setTextSelection($cell.pos + 1)
+    .run();
 }
 
 export function getRowPosition(tableNode: Node, tableStart: number, rowIndex: number): number {
@@ -154,10 +161,7 @@ export function suppressNextTriggerClick(): void {
   document.addEventListener('click', suppress, true);
 }
 
-export function getTableBorderColor(
-  editor: Editor,
-  table: HTMLTableElement,
-): string | null {
+export function getTableBorderColor(editor: Editor, table: HTMLTableElement): string | null {
   const cell =
     getCellAtColumn(table, 0) ?? (table.querySelector('td, th') as HTMLTableCellElement | null);
 

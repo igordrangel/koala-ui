@@ -1,21 +1,22 @@
 ```typescript
-import { Component, computed } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, computed, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { extractTextEditorImageIds, TextEditor } from '@/shared/components/text-editor';
-import { controlChanges } from '@/shared/utils/control-changes';
 
 @Component({
   selector: 'app-text-editor-sample',
   templateUrl: './text-editor-sample.html',
-  imports: [ReactiveFormsModule, TextEditor],
+  imports: [FormField, TextEditor],
 })
 export class TextEditorSample {
-  readonly editorControl = new FormControl<string>('<p>Hello world</p>', { nonNullable: true });
-  readonly editorValue = controlChanges(this.editorControl);
-  readonly editorImageIds = computed(() => extractTextEditorImageIds(this.editorValue()));
+  private readonly editorModel = signal({ content: '<p>Hello world</p>' });
+  readonly editorForm = form(this.editorModel);
+  readonly editorImageIds = computed(() =>
+    extractTextEditorImageIds(this.editorForm.content().value()),
+  );
 
   save() {
-    const content = this.editorControl.value;
+    const content = this.editorForm.content().value();
 
     // Each image is stored as data-id on the <img> tag in the HTML.
     // Example: '<p>Hello</p><img data-id="file-id-from-api" class="editor-image" />'
@@ -26,3 +27,5 @@ export class TextEditorSample {
   }
 }
 ```
+
+Reactive Forms still work via Angular 22 FormValueControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.

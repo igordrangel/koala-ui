@@ -30,43 +30,49 @@ export class CalendarSample {}
 <div class="grid gap-4 md:grid-cols-2">
   <div class="flex flex-col gap-2">
     <span class="text-sm font-semibold">date</span>
-    <app-input-calendar class="w-full" [(value)]="inputDateValue" />
-    <span class="px-2 opacity-60">value: {{ inputDateValue() }}</span>
+    <app-input-calendar class="w-full" [formField]="calendarForm.date" />
+    <span class="px-2 opacity-60">value: {{ calendarForm.date().value() }}</span>
   </div>
 
   <div class="flex flex-col gap-2">
     <span class="text-sm font-semibold">datetime</span>
-    <app-input-calendar class="w-full" type="datetime" [(value)]="inputDateTimeValue" />
-    <span class="px-2 opacity-60">value: {{ inputDateTimeValue() }}</span>
+    <app-input-calendar class="w-full" type="datetime" [formField]="calendarForm.datetime" />
+    <span class="px-2 opacity-60">value: {{ calendarForm.datetime().value() }}</span>
   </div>
 
   <div class="flex flex-col gap-2">
     <span class="text-sm font-semibold">month</span>
-    <app-input-calendar class="w-full" type="month" [(value)]="inputMonthValue" />
-    <span class="px-2 opacity-60">value: {{ inputMonthValue() }}</span>
+    <app-input-calendar class="w-full" type="month" [formField]="calendarForm.month" />
+    <span class="px-2 opacity-60">value: {{ calendarForm.month().value() }}</span>
   </div>
 
   <div class="flex flex-col gap-2">
     <span class="text-sm font-semibold">daterange</span>
-    <app-input-calendar class="w-full" type="daterange" [(value)]="inputDateRangeValue" />
-    <span class="px-2 opacity-60">value: {{ inputDateRangeValue() }}</span>
+    <app-input-calendar class="w-full" type="daterange" [formField]="calendarForm.daterange" />
+    <span class="px-2 opacity-60">value: {{ calendarForm.daterange().value() }}</span>
   </div>
 </div>
 ```
 
 ```typescript
 import { Component, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { InputCalendar } from '@/shared/components/calendar';
 
 @Component({
   selector: 'app-input-calendar-sample',
   templateUrl: './input-calendar-sample.html',
-  imports: [InputCalendar],
+  imports: [FormField, InputCalendar],
 })
 export class CalendarSample {
-  readonly inputDateValue = signal<string>('2026-01-01');
-  readonly inputDateTimeValue = signal<string>('2026-01-01T14:30');
-  readonly inputMonthValue = signal<string>('2026-01');
-  readonly inputDateRangeValue = signal<string>('2026-01-10/2026-01-20');
+  private readonly calendarModel = signal({
+    date: '2026-01-01',
+    datetime: '2026-01-01T14:30',
+    month: '2026-01',
+    daterange: '2026-01-10/2026-01-20',
+  });
+  readonly calendarForm = form(this.calendarModel);
 }
 ```
+
+Reactive Forms still work via Angular 22 FormValueControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.

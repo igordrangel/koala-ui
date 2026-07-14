@@ -95,6 +95,20 @@ kl version
 
 ---
 
+## Versioning (aligned with Angular)
+
+The **major** version of `@koalarx/ui` matches the **major** Angular version that line targets:
+
+| `@koalarx/ui` | Angular | Notes |
+|---------------|---------|--------|
+| `21.x` | 21 | Canonical Angular 21 line (`maintenance/angular-21`) |
+| `22.0.0`–`22.3.0` | 21 (mistaken) | Published while still on Angular 21 — prefer `21.2.x` or `>=22.4.0` |
+| `22.4.0+` | 22 | First correct Angular 22 line |
+
+npm dist-tags (after the Angular 22 release): `latest` → `22.4+`, `angular-21` → latest `21.x`.
+
+---
+
 ## Documentation
 
 For detailed installation guides, usage instructions, patch notes, and examples for each component, visit the official documentation:

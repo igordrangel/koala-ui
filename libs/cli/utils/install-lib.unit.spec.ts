@@ -32,7 +32,7 @@ describe('installLib', () => {
     const result = await installLib('my-app', '@angular/aria');
 
     expect(result).toBe(true);
-    expect(runCommand).toHaveBeenCalledWith('bun add @angular/aria@^21.2.10', {
+    expect(runCommand).toHaveBeenCalledWith('bun add @angular/aria@^22.0.4', {
       cwd: '/tmp/project',
       loaderText: 'Installing @angular/aria',
       verbose: false,

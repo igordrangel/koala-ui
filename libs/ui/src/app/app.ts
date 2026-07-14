@@ -31,6 +31,12 @@ export class App {
         return parts.length === 1 && isLocale(parts[0]);
       }),
     ),
+    {
+      initialValue: (() => {
+        const parts = this.router.url.split(/[?#]/)[0].split('/').filter(Boolean);
+        return parts.length === 1 && isLocale(parts[0]);
+      })(),
+    },
   );
 
   constructor() {

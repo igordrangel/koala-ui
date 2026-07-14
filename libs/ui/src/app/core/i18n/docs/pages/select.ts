@@ -12,25 +12,30 @@ export const SELECT_PAGE = {
       },
       singleSelection: {
         title: 'Seleção simples',
-        description: 'Modo padrão. Ao selecionar uma opção, o popover fecha e emite um único valor.',
+        description:
+          'Modo padrão. Ao selecionar uma opção, o popover fecha e emite um único valor.',
       },
       multipleSelection: {
         title: 'Seleção múltipla',
-        description: 'Use multiple para permitir mais de uma opção. O valor é reportado como array.',
+        description:
+          'Use multiple para permitir mais de uma opção. O valor é reportado como array.',
       },
       sizes: {
         title: 'Tamanhos',
-        description: 'O componente select oferece tamanhos diferentes para várias necessidades de design.',
+        description:
+          'O componente select oferece tamanhos diferentes para várias necessidades de design.',
       },
       disabled: {
         title: 'Desabilitado',
-        description: 'O estado disabled indica que o select não é interativo e não pode ser alterado.',
+        description:
+          'O estado disabled indica que o select não é interativo e não pode ser alterado.',
       },
     },
   },
   en: {
     title: 'Select',
-    description: 'A select component that supports both single and multiple selection via a popover.',
+    description:
+      'A select component that supports both single and multiple selection via a popover.',
     sections: {
       installation: {
         title: 'Installation',
@@ -38,19 +43,23 @@ export const SELECT_PAGE = {
       },
       singleSelection: {
         title: 'Single selection',
-        description: 'Default mode. Selecting an option closes the popover and emits a single value.',
+        description:
+          'Default mode. Selecting an option closes the popover and emits a single value.',
       },
       multipleSelection: {
         title: 'Multiple selection',
-        description: 'Add multiple to allow selecting more than one option. The value is reported as an array.',
+        description:
+          'Add multiple to allow selecting more than one option. The value is reported as an array.',
       },
       sizes: {
         title: 'Sizes',
-        description: 'The select component supports different sizes to accommodate various design needs.',
+        description:
+          'The select component supports different sizes to accommodate various design needs.',
       },
       disabled: {
         title: 'Disabled',
-        description: 'The disabled state indicates that the select component is not interactive and cannot be changed.',
+        description:
+          'The disabled state indicates that the select component is not interactive and cannot be changed.',
       },
     },
   },

@@ -30,7 +30,12 @@ describe('installCoreResource', () => {
     );
     expect(fs.writeFileSync).toHaveBeenCalledWith(
       '/home/user/my-app/src/app/app.config.ts',
-      expect.stringContaining('FeedbackRequestInterceptor'),
+      expect.stringContaining('feedbackRequestInterceptor'),
+      'utf-8',
+    );
+    expect(fs.writeFileSync).toHaveBeenCalledWith(
+      '/home/user/my-app/src/app/app.config.ts',
+      expect.stringContaining('withInterceptors'),
       'utf-8',
     );
   });

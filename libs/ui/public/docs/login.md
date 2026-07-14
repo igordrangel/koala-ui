@@ -57,8 +57,7 @@ export class LoggedSample {
 ```html
 <form
   class="flex flex-col items-center justify-center py-20 gap-2"
-  [formGroup]="formCredentials"
-  (submit)="authenticate()"
+  (submit)="$event.preventDefault(); authenticate()"
 >
   <app-fieldset class="w-full max-w-xs">
     <ng-container label>Username</ng-container>
@@ -68,10 +67,10 @@ export class LoggedSample {
       size="md"
       type="text"
       placeholder="Enter your username"
-      [formControl]="formCredentials.controls.username"
+      [formField]="credentialsForm.username"
     />
 
-    @if (formCredentials.controls.username.hasError('required')) {
+    @if (credentialsForm.username().getError('required')) {
       <span appValidatorHint>Username is required</span>
     }
   </app-fieldset>
@@ -84,7 +83,7 @@ export class LoggedSample {
       appInput
       size="md"
       type="password"
-      [formControl]="formCredentials.controls.password"
+      [formField]="credentialsForm.password"
     />
 
     <ng-container action>
@@ -111,9 +110,9 @@ export class LoggedSample {
       }
     </ng-container>
 
-    @if (formCredentials.controls.password.hasError('required')) {
+    @if (credentialsForm.password().getError('required')) {
       <span appValidatorHint>Password is required</span>
-    } @else if (formCredentials.controls.password.hasError('minlength')) {
+    } @else if (credentialsForm.password().getError('minLength')) {
       <span appValidatorHint>Password must be at least 8 characters</span>
     }
   </app-fieldset>
@@ -126,7 +125,7 @@ export class LoggedSample {
       appButton
       btnVariant="primary"
       class="w-full"
-      [disabled]="logingIn || formCredentials.invalid"
+      [disabled]="logingIn || credentialsForm().invalid()"
     >
       @if (logingIn) {
         <app-loading size="sm"></app-loading>
@@ -139,31 +138,37 @@ export class LoggedSample {
 ```
 
 ```typescript
-import { Component, inject } from '@angular/core';
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Credentials } from '@/core/models/credentials';
 import { AuthorizationService } from '@/core/security/authorization.service';
 import { Button } from '@/shared/components/button';
 import { Fieldset } from '@/shared/components/fieldset';
 import { Input } from '@/shared/components/input-field';
-import { ValidatorHint } from '@/shared/components/validator/validator-hint';
 import { Loading } from '@/shared/components/loading';
+import { ValidatorHint } from '@/shared/components/validator/validator-hint';
+import { Component, inject, signal } from '@angular/core';
+import { form, FormField, minLength, required } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-login-form-sample',
   templateUrl: './login-form.sample.html',
-  imports: [ReactiveFormsModule, Fieldset, Input, ValidatorHint, Button, Loading],
+  imports: [FormField, Fieldset, Input, ValidatorHint, Button, Loading],
 })
 export class LoginFormSample {
   readonly authorization = inject(AuthorizationService);
 
-  readonly formCredentials = inject(FormBuilder).group({
-    username: new FormControl('emilys', Validators.required),
-    password: new FormControl('emilyspass', [Validators.required, Validators.minLength(8)]),
-  });
+  readonly credentialsForm = form(
+    signal({ username: 'emilys', password: 'emilyspass' }),
+    (schema) => {
+      required(schema.username);
+      required(schema.password);
+      minLength(schema.password, 8);
+    },
+  );
 
   authenticate() {
-    this.authorization.auth(this.formCredentials.value as Credentials);
+    this.authorization.auth(this.credentialsForm().value() as Credentials);
   }
 }
 ```
+
+Reactive Forms still work via Angular 22 interop. Prefer Signal Forms (`form()` + `[formField]`) for new code.

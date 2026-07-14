@@ -1,16 +1,19 @@
 ```typescript
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { Select, SelectOption } from '@/shared/components/select';
 
 @Component({
   selector: 'app-select-sample',
   templateUrl: './select-sample.html',
-  imports: [ReactiveFormsModule, Select],
+  imports: [FormField, Select],
 })
 export class SelectSample {
-  singleControl = new FormControl<string | null>(null);
-  multipleControl = new FormControl<string[]>([], { nonNullable: true });
+  private readonly selectModel = signal<{ single: string | null; multiple: string[] }>({
+    single: null,
+    multiple: [],
+  });
+  readonly selectForm = form(this.selectModel);
 
   options: SelectOption[] = [
     { value: 'option1', label: 'Option 1' },
@@ -20,3 +23,5 @@ export class SelectSample {
   ];
 }
 ```
+
+Reactive Forms still work via Angular 22 FormValueControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.

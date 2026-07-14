@@ -6,14 +6,14 @@
     appInput
     type="text"
     placeholder="Type here"
-    [formControl]="cnpjControl"
+    [formField]="cnpjForm.cnpj"
     appMask="SS.SSS.SSS/SSSS-SS"
   />
   <ng-container hint>Inform a valid CNPJ</ng-container>
 
-  @if (cnpjControl.hasError('required')) {
+  @if (cnpjForm.cnpj().getError('required')) {
     <span appValidatorHint>CNPJ is required</span>
-  } @else if (cnpjControl.hasError('cnpjInvalid')) {
+  } @else if (cnpjForm.cnpj().getError('cnpjInvalid')) {
     <span appValidatorHint>Invalid CNPJ</span>
   }
 </app-fieldset>

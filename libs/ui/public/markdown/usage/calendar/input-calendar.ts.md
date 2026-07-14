@@ -1,16 +1,22 @@
 ```typescript
 import { Component, signal } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import { InputCalendar } from '@/shared/components/calendar';
 
 @Component({
   selector: 'app-input-calendar-sample',
   templateUrl: './input-calendar-sample.html',
-  imports: [InputCalendar],
+  imports: [FormField, InputCalendar],
 })
 export class CalendarSample {
-  readonly inputDateValue = signal<string>('2026-01-01');
-  readonly inputDateTimeValue = signal<string>('2026-01-01T14:30');
-  readonly inputMonthValue = signal<string>('2026-01');
-  readonly inputDateRangeValue = signal<string>('2026-01-10/2026-01-20');
+  private readonly calendarModel = signal({
+    date: '2026-01-01',
+    datetime: '2026-01-01T14:30',
+    month: '2026-01',
+    daterange: '2026-01-10/2026-01-20',
+  });
+  readonly calendarForm = form(this.calendarModel);
 }
 ```
+
+Reactive Forms still work via Angular 22 FormValueControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.

@@ -1,13 +1,16 @@
 import { Input } from '@/shared/components/input-field';
 import { ValidatorHint } from '@/shared/components/validator/validator-hint';
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { email, form, FormField, required } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-validator-sample',
   templateUrl: './validator.sample.html',
-  imports: [ReactiveFormsModule, Input, ValidatorHint],
+  imports: [FormField, Input, ValidatorHint],
 })
 export class ValidatorSample {
-  readonly emailControl = new FormControl<string>('', [Validators.required, Validators.email]);
+  readonly emailForm = form(signal({ email: '' }), (schema) => {
+    required(schema.email);
+    email(schema.email);
+  });
 }

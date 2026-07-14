@@ -12,7 +12,8 @@ export const INPUT_FIELD_PAGE = {
       },
       sizes: {
         title: 'Tamanhos',
-        description: 'Input fields estão disponíveis em 5 tamanhos: xs, sm, md, lg e xl. O tamanho padrão é md.',
+        description:
+          'Input fields estão disponíveis em 5 tamanhos: xs, sm, md, lg e xl. O tamanho padrão é md.',
       },
     },
   },
@@ -26,7 +27,8 @@ export const INPUT_FIELD_PAGE = {
       },
       sizes: {
         title: 'Sizes',
-        description: 'Input fields are available in 5 different sizes: xs, sm, md, lg, and xl. The default size is md.',
+        description:
+          'Input fields are available in 5 different sizes: xs, sm, md, lg, and xl. The default size is md.',
       },
     },
   },

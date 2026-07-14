@@ -4,11 +4,13 @@ import type { DocPageCopy } from '../types';
 export const RULES_PAGE = {
   pt: {
     title: 'Rules',
-    description: 'Rules controla permissão em nível de rota. Rotas com rule são protegidas pelo RouteAccessGuard, que checa as permissões do usuário logado.',
+    description:
+      'Rules controla permissão em nível de rota. Rotas com rule são protegidas pelo RouteAccessGuard, que checa as permissões do usuário logado.',
     sections: {
       installation: {
         title: 'Instalação',
-        description: 'Rules é instalado junto com Auth. Use o Koala CLI para adicionar autenticação e permissões de rota.',
+        description:
+          'Rules é instalado junto com Auth. Use o Koala CLI para adicionar autenticação e permissões de rota.',
       },
       api: {
         title: 'API',
@@ -62,11 +64,13 @@ export const RULES_PAGE = {
   },
   en: {
     title: 'Rules',
-    description: "Rules provides route-level permission control. Routes registered with a rule are protected by RouteAccessGuard, which checks the logged user's permissions.",
+    description:
+      "Rules provides route-level permission control. Routes registered with a rule are protected by RouteAccessGuard, which checks the logged user's permissions.",
     sections: {
       installation: {
         title: 'Installation',
-        description: 'Rules is installed together with Auth. Use the Koala CLI to add authentication and route permissions.',
+        description:
+          'Rules is installed together with Auth. Use the Koala CLI to add authentication and route permissions.',
       },
       api: {
         title: 'API',

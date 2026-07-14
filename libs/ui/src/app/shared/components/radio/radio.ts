@@ -32,7 +32,6 @@ export type RadioSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 export class Radio {
   private readonly elementRef = inject<ElementRef<HTMLInputElement>>(ElementRef<HTMLInputElement>);
   private readonly injector = inject(Injector);
-  private formDisabled = false;
 
   readonly appRadio = input<string>('');
   readonly class = input<ClassValue>('');
@@ -96,44 +95,30 @@ export class Radio {
     });
 
     effect(() => {
-      const radio = this.elementRef.nativeElement;
-      radio.disabled = this.disabled() || this.formDisabled;
-    });
-
-    effect(() => {
-      const control = this.injector.get(NgControl, null, { self: true, optional: true })?.control;
-      this.formDisabled = control?.disabled ?? false;
-      this.elementRef.nativeElement.disabled = this.disabled() || this.formDisabled;
+      this.elementRef.nativeElement.disabled = this.disabled();
     });
   }
 
   protected handleClick(event: MouseEvent) {
-    const radio = this.elementRef.nativeElement;
-    const control = this.injector.get(NgControl, null, { self: true, optional: true })?.control;
-    const currentValue = control?.value;
-
-    if (String(currentValue ?? '') !== radio.value) {
-      return;
-    }
-
-    event.preventDefault();
-    queueMicrotask(() => {
-      control?.setValue(null);
-      control?.markAsTouched();
-      this.clearGroupSelection(radio);
-
-      requestAnimationFrame(() => {
-        this.clearGroupSelection(radio);
-      });
-    });
+    this.tryClearSelection(event);
   }
 
   protected handleSpace(event: Event) {
+    this.tryClearSelection(event);
+  }
+
+  private tryClearSelection(event: Event) {
     const radio = this.elementRef.nativeElement;
     const control = this.injector.get(NgControl, null, { self: true, optional: true })?.control;
     const currentValue = control?.value;
 
-    if (String(currentValue ?? '') !== radio.value) {
+    // Native / signal forms: compare against the group's checked radio value when no NgControl.
+    const selectedInGroup =
+      currentValue !== undefined && currentValue !== null
+        ? String(currentValue) === radio.value
+        : radio.checked;
+
+    if (!selectedInGroup) {
       return;
     }
 

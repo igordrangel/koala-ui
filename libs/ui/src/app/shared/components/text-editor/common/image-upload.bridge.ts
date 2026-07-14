@@ -79,8 +79,9 @@ export class TextEditorImageUploadBridge extends TextEditorImageUploadService {
       map((entries) => {
         const resolvedById = new Map(
           entries
-            .filter((entry): entry is { id: string; fileData: NonNullable<typeof entry.fileData> } =>
-              entry.fileData !== null,
+            .filter(
+              (entry): entry is { id: string; fileData: NonNullable<typeof entry.fileData> } =>
+                entry.fileData !== null,
             )
             .map((entry) => [entry.id, entry.fileData]),
         );

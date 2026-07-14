@@ -17,7 +17,9 @@ export class Wrapper implements OnInit {
   private readonly bottomSheet = inject(BottomSheet);
   private readonly activatedRoute = inject(ActivatedRoute);
 
-  private readonly queryParams = toSignal(this.activatedRoute.queryParams);
+  private readonly queryParams = toSignal(this.activatedRoute.queryParams, {
+    initialValue: this.activatedRoute.snapshot.queryParams,
+  });
 
   protected readonly isMobile = isMobile();
 

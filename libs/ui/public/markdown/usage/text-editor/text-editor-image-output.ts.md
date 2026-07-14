@@ -1,6 +1,6 @@
 ```typescript
-import { Component, viewChild } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, signal, viewChild } from '@angular/core';
+import { form, FormField } from '@angular/forms/signals';
 import {
   extractTextEditorImageIds,
   TextEditor,
@@ -9,18 +9,19 @@ import {
 @Component({
   selector: 'app-article-form',
   template: `
-    <app-text-editor #editor class="w-full" [formControl]="contentControl" />
+    <app-text-editor #editor class="w-full" [formField]="editorForm.content" />
 
     <p>Attached image IDs: {{ editor().attachedImageIds() | json }}</p>
   `,
-  imports: [ReactiveFormsModule, TextEditor],
+  imports: [FormField, TextEditor],
 })
 export class ArticleForm {
   readonly editor = viewChild.required(TextEditor);
-  readonly contentControl = new FormControl<string>('', { nonNullable: true });
+  private readonly editorModel = signal({ content: '' });
+  readonly editorForm = form(this.editorModel);
 
   save() {
-    const content = this.contentControl.value;
+    const content = this.editorForm.content().value();
 
     // Option 1: parse data-id attributes from the HTML string
     const assetsIds = extractTextEditorImageIds(content);
@@ -32,3 +33,5 @@ export class ArticleForm {
   }
 }
 ```
+
+Reactive Forms still work via Angular 22 FormValueControl interop (`[formControl]` / `formControlName`). Prefer Signal Forms (`form()` + `[formField]`) for new code.

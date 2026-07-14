@@ -19,7 +19,8 @@ export const ROUTES: Routes = [
   },
   {
     path: 'global-errors',
-    loadComponent: () => import('./global-errors/global-errors.page').then((m) => m.GlobalErrorsPage),
+    loadComponent: () =>
+      import('./global-errors/global-errors.page').then((m) => m.GlobalErrorsPage),
     title: generateTitle('Global Errors'),
   },
   {

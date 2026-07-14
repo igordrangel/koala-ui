@@ -12,7 +12,8 @@ export const TEXTAREA_PAGE = {
       },
       sizes: {
         title: 'Tamanhos',
-        description: 'Textareas estão disponíveis em 5 tamanhos: xs, sm, md, lg e xl. O tamanho padrão é md.',
+        description:
+          'Textareas estão disponíveis em 5 tamanhos: xs, sm, md, lg e xl. O tamanho padrão é md.',
       },
     },
   },
@@ -26,7 +27,8 @@ export const TEXTAREA_PAGE = {
       },
       sizes: {
         title: 'Sizes',
-        description: 'Textareas are available in 5 different sizes: xs, sm, md, lg, and xl. The default size is md.',
+        description:
+          'Textareas are available in 5 different sizes: xs, sm, md, lg, and xl. The default size is md.',
       },
     },
   },

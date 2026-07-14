@@ -12,15 +12,18 @@ export const RADIO_PAGE = {
       },
       variants: {
         title: 'Variantes',
-        description: 'O componente radio oferece várias variantes para diferentes casos de uso e requisitos de design.',
+        description:
+          'O componente radio oferece várias variantes para diferentes casos de uso e requisitos de design.',
       },
       sizes: {
         title: 'Tamanhos',
-        description: 'O componente radio oferece tamanhos diferentes para várias necessidades de design.',
+        description:
+          'O componente radio oferece tamanhos diferentes para várias necessidades de design.',
       },
       disabled: {
         title: 'Desabilitado',
-        description: 'O estado disabled indica que o radio não é interativo e não pode ser selecionado.',
+        description:
+          'O estado disabled indica que o radio não é interativo e não pode ser selecionado.',
       },
     },
   },
@@ -34,15 +37,18 @@ export const RADIO_PAGE = {
       },
       variants: {
         title: 'Variants',
-        description: 'The radio component supports several variants to fit different use cases and design requirements.',
+        description:
+          'The radio component supports several variants to fit different use cases and design requirements.',
       },
       sizes: {
         title: 'Sizes',
-        description: 'The radio component supports different sizes to accommodate various design needs.',
+        description:
+          'The radio component supports different sizes to accommodate various design needs.',
       },
       disabled: {
         title: 'Disabled',
-        description: 'The disabled state indicates that the radio button is not interactive and cannot be selected.',
+        description:
+          'The disabled state indicates that the radio button is not interactive and cannot be selected.',
       },
     },
   },

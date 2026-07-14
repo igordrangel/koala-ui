@@ -38,7 +38,8 @@
       type="search"
       [attr.list]="inlineFilterElementId"
       [placeholder]="placeholder()"
-      [(ngModel)]="filter"
+      [value]="filter()"
+      (input)="filter.set($any($event.target).value)"
       (click)="toggleOptions()"
     />
 

@@ -2,15 +2,25 @@ import { Fieldset } from '@/shared/components/fieldset';
 import { Input } from '@/shared/components/input-field';
 import { ValidatorHint } from '@/shared/components/validator/validator-hint';
 import { Mask } from '@/shared/directives/mask.directive';
-import { CpfValidator } from '@/shared/validators/cpf.validator';
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, signal } from '@angular/core';
+import { form, FormField, required, validate } from '@angular/forms/signals';
+import { validateCpf } from '@koalarx/utils/KlString';
 
 @Component({
   selector: 'app-input-cpf-sample',
   templateUrl: './input-cpf.sample.html',
-  imports: [ReactiveFormsModule, Fieldset, Input, Mask, ValidatorHint],
+  imports: [FormField, Fieldset, Input, Mask, ValidatorHint],
 })
 export class InputCpfSample {
-  readonly cpfControl = new FormControl<string>('', [Validators.required, CpfValidator]);
+  readonly cpfForm = form(signal({ cpf: '' }), (schema) => {
+    required(schema.cpf);
+    validate(schema.cpf, ({ value }) => {
+      const current = value();
+      if (!current) {
+        return undefined;
+      }
+
+      return validateCpf(current) ? undefined : { kind: 'cpfInvalid' };
+    });
+  });
 }

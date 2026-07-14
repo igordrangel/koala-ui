@@ -1,37 +1,20 @@
 import { Dropdown } from '@/shared/components/dropdown';
 import type { InputSize } from '@/shared/components/input-field';
-import {
-  booleanAttribute,
-  Component,
-  effect,
-  forwardRef,
-  input,
-  output,
-  signal,
-} from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { booleanAttribute, Component, effect, input, model, output, signal } from '@angular/core';
+import { FormValueControl } from '@angular/forms/signals';
 import { Color, COLORS, getColorByName } from './colors';
 
 @Component({
   selector: 'app-input-color',
   templateUrl: './input-color.html',
   imports: [Dropdown],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputColor),
-      multi: true,
-    },
-  ],
 })
-export class InputColor implements ControlValueAccessor {
-  private onChanged: (value: string | null) => void = () => {};
-  private onTouched: () => void = () => {};
-  private formDisabled = false;
-
+export class InputColor implements FormValueControl<string | null> {
   protected readonly isDisabled = signal(false);
   protected readonly dropdownOpened = signal(false);
 
+  readonly value = model<string | null>(null);
+  readonly touch = output<void>();
   readonly placeholder = input('Select a color');
   readonly label = input<string>();
   readonly inline = input(false, { transform: booleanAttribute });
@@ -48,11 +31,9 @@ export class InputColor implements ControlValueAccessor {
 
   readonly colors = COLORS;
 
-  private readonly value = signal<string | null>(null);
-
   constructor() {
     effect(() => {
-      this.isDisabled.set(this.disabled() || this.formDisabled);
+      this.isDisabled.set(this.disabled());
     });
 
     effect(() => {
@@ -67,37 +48,19 @@ export class InputColor implements ControlValueAccessor {
     });
   }
 
-  writeValue(value: string | null): void {
-    this.value.set(value);
-  }
-
-  registerOnChange(fn: (value: string | null) => void): void {
-    this.onChanged = fn;
-  }
-
-  registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    this.formDisabled = isDisabled;
-    this.isDisabled.set(this.disabled() || this.formDisabled);
-  }
-
   toggleDropdown(opened: boolean): void {
     if (this.isDisabled()) {
       return;
     }
 
     this.dropdownOpened.set(opened);
-    this.onTouched();
+    this.touch.emit();
   }
 
   pickColor(color: Color): void {
     this.transparentSelected.set(false);
     this.selectedColor.set(color);
     this.value.set(color.colorName);
-    this.onChanged(color.colorName);
     this.colorPicked.emit(color.colorName);
   }
 
@@ -107,7 +70,6 @@ export class InputColor implements ControlValueAccessor {
     this.transparentSelected.set(true);
     this.selectedColor.set(null);
     this.value.set(null);
-    this.onChanged(null);
     this.colorPicked.emit(null);
   }
 
