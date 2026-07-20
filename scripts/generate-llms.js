@@ -170,10 +170,13 @@ ${installCli}
 ${createProject}
 
 During setup you can scaffold AI context (Cursor / GitHub Copilot). Use \`--ai-context none|cursor|github|both\` to skip the prompt.
+For AI agents or CI, prefer \`--silent\` (non-interactive: bun + AI context none unless overridden).
 
 ## 3. Add components
 
 ${addComponents}
+
+Use \`kl install … --silent\` to accept all external dependency installs without prompting (recommended for AI agents).
 
 ## 4. Add AI context (optional)
 
@@ -199,6 +202,16 @@ function buildPatchNotesDoc() {
 Changelog for anyone using or upgrading projects scaffolded with the Koala UI CLI.
 Site page: https://ui.koalarx.com/#/getting-started/patch-notes
 Root CHANGELOG.md mirrors these notes.
+
+## 22.3.1 — CLI --silent
+
+### What changed
+
+- \`--silent\` flag on \`kl new\`, \`kl init\`, and \`kl install\`: non-interactive mode (accepts external libs and skips prompts; on new/init defaults to bun + AI context none).
+
+### Upgrade
+
+For AI agents or CI, prefer \`kl install … --silent\` and \`kl new … --silent\`. Interactive use without the flag is unchanged.
 
 ## 22.3.0 — AI context
 

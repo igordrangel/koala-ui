@@ -9,12 +9,14 @@ export interface InstallArgs {
   name: string;
   project?: string;
   verbose?: boolean;
+  silent?: boolean;
 }
 
 export async function runInstallCommand(args: InstallArgs): Promise<void> {
   const logger = console.log;
   const projectName = args.project || (process.cwd().split('/').pop() as string);
   const verbose = args.verbose ?? false;
+  const silent = args.silent ?? false;
 
   if (!args.name) {
     throw new Error('Please provide components (e.g. "kl install button") or use --name/-n');
@@ -34,7 +36,7 @@ export async function runInstallCommand(args: InstallArgs): Promise<void> {
   );
 
   for (const componentName of flagOptions) {
-    const result = await install(projectName, componentName, verbose);
+    const result = await install(projectName, componentName, verbose, silent);
 
     if (result.missingLibs.length > 0) {
       logWarning(

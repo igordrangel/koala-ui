@@ -15,10 +15,14 @@ export const INSTALLATION_PAGE = {
         otherProse: [
           'kl new e kl init instalam @koalarx/utils ≥ 5 e clsx como dependências base. Veja a documentação do utils e o llms.txt para a API completa.',
           'Durante o setup, a CLI pergunta o contexto AI (Cursor / GitHub Copilot). Use --ai-context none|cursor|github|both para pular o prompt, ou kl add ai-context depois.',
+          'Em agentes de IA ou CI, use --silent: no new/init pula prompts (bun + AI context none por padrão); no install aceita todas as libs externas sem perguntar.',
         ],
       },
       addingComponents: {
         title: 'Adicionar componentes',
+        otherProse: [
+          'Use kl install <componentes> --silent para instalar dependências externas sem prompts interativos.',
+        ],
       },
       addingAiContext: {
         title: 'Adicionar contexto AI',
@@ -48,10 +52,14 @@ export const INSTALLATION_PAGE = {
         otherProse: [
           'kl new and kl init install @koalarx/utils ≥ 5 and clsx as base dependencies. See the utils docs and llms.txt for the full API.',
           'During setup, the CLI prompts for AI context (Cursor / GitHub Copilot). Use --ai-context none|cursor|github|both to skip the prompt, or kl add ai-context later.',
+          'For AI agents or CI, use --silent: on new/init it skips prompts (bun + AI context none by default); on install it accepts all external libs without asking.',
         ],
       },
       addingComponents: {
         title: 'Adding components',
+        otherProse: [
+          'Use kl install <components> --silent to install external dependencies without interactive prompts.',
+        ],
       },
       addingAiContext: {
         title: 'Add AI context',

@@ -9,6 +9,14 @@ O conteúdo principal da página web vive em `libs/ui/src/app/core/i18n/docs/pag
 
 Formato inspirado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 
+## [22.3.1] — CLI `--silent`
+
+### Added
+
+- Flag `--silent` em `kl new`, `kl init` e `kl install` para modo não interativo (aceita libs externas sem prompt; no `new`/`init` defaults `bun` + AI context `none`).
+
+Detalhes: [Patch notes — 22.3.1](https://ui.koalarx.com/#/getting-started/patch-notes).
+
 ## [22.3.0] — Contexto AI
 
 ### Added

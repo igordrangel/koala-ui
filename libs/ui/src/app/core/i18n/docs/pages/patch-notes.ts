@@ -12,6 +12,15 @@ export const PATCH_NOTES_PAGE = {
         description:
           'A versão publicada do pacote @koalarx/ui aparece no package.json do repositório. O arquivo CHANGELOG.md na raiz espelha estas notas.',
       },
+      v2231: {
+        title: '22.3.1 — CLI --silent',
+        description: 'Modo não interativo na CLI para agentes de IA e CI.',
+        items: [
+          'Flag --silent no kl new, kl init e kl install: aceita libs externas e pula prompts (no new/init defaults bun + AI context none).',
+        ],
+        upgrade:
+          'Em agentes de IA ou CI, prefira kl install … --silent e kl new … --silent. Em uso interativo, o comportamento sem a flag permanece igual.',
+      },
       v2230: {
         title: '22.3.0 — Contexto AI',
         description: 'Scaffolding de contexto para Cursor e GitHub Copilot nos projetos gerados.',
@@ -36,6 +45,15 @@ export const PATCH_NOTES_PAGE = {
         title: 'How to use these notes',
         description:
           'The published @koalarx/ui package version is in the repository package.json. The root CHANGELOG.md mirrors these notes.',
+      },
+      v2231: {
+        title: '22.3.1 — CLI --silent',
+        description: 'Non-interactive CLI mode for AI agents and CI.',
+        items: [
+          '--silent flag on kl new, kl init, and kl install: accepts external libs and skips prompts (on new/init defaults to bun + AI context none).',
+        ],
+        upgrade:
+          'For AI agents or CI, prefer kl install … --silent and kl new … --silent. Interactive use without the flag is unchanged.',
       },
       v2230: {
         title: '22.3.0 — AI context',

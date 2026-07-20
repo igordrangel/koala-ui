@@ -83,12 +83,12 @@ function printHelp() {
   printBanner();
   console.log('Usage:');
   console.log(
-    '  kl new <project> [--pm bun|npm|yarn|pnpm] [--ai-context none|cursor|github|both] [--verbose]',
+    '  kl new <project> [--pm bun|npm|yarn|pnpm] [--ai-context none|cursor|github|both] [--silent] [--verbose]',
   );
   console.log(
-    '  kl init [--project <name>] [--ai-context none|cursor|github|both] [--verbose]',
+    '  kl init [--project <name>] [--ai-context none|cursor|github|both] [--silent] [--verbose]',
   );
-  console.log('  kl install <component[,component]> [--project <name>] [--verbose]');
+  console.log('  kl install <component[,component]> [--project <name>] [--silent] [--verbose]');
   console.log('  kl add ai-context cursor|github [--project <name>]');
   console.log('  kl version');
   console.log('');
@@ -104,14 +104,17 @@ function printInstallHelp() {
   console.log('add a component to the project');
   console.log('');
   console.log('USAGE');
-  console.log('  $ kl install <value> [-p <value>] [--verbose]');
-  console.log('  $ kl install -n <value> [-p <value>] [--verbose]');
+  console.log('  $ kl install <value> [-p <value>] [--silent] [--verbose]');
+  console.log('  $ kl install -n <value> [-p <value>] [--silent] [--verbose]');
   console.log('');
   console.log('FLAGS');
   console.log(
     '  -n, --name=<value>     list of components to install. Separate multiple components with a comma',
   );
   console.log('  -p, --project=<value>  name of the project');
+  console.log(
+    '      --silent           accept all external dependency installs without prompting',
+  );
   console.log('  -v, --verbose          show detailed install logs');
 }
 
@@ -120,12 +123,15 @@ function printInitHelp() {
   console.log('');
   console.log('USAGE');
   console.log('  $ kl init');
-  console.log('  $ kl init [-p <value>] [--ai-context <value>] [--verbose]');
+  console.log('  $ kl init [-p <value>] [--ai-context <value>] [--silent] [--verbose]');
   console.log('');
   console.log('FLAGS');
   console.log('  -p, --project=<value>  name of the project (defaults to current directory)');
   console.log(
     '      --ai-context=<value>  none|cursor|github|both (skips interactive prompt)',
+  );
+  console.log(
+    '      --silent           non-interactive: skip prompts (AI context defaults to none)',
   );
   console.log('  -v, --verbose          show detailed logs');
   console.log('');
@@ -158,10 +164,22 @@ function printAddHelp() {
 }
 
 function printNewHelp() {
-  console.log('Usage: kl new <project> [--pm bun|npm|yarn|pnpm] [--ai-context none|cursor|github|both] [--verbose]');
   console.log(
-    '       kl new --name <project> [--pm bun|npm|yarn|pnpm] [--ai-context none|cursor|github|both] [--verbose]',
+    'Usage: kl new <project> [--pm bun|npm|yarn|pnpm] [--ai-context none|cursor|github|both] [--silent] [--verbose]',
   );
+  console.log(
+    '       kl new --name <project> [--pm bun|npm|yarn|pnpm] [--ai-context none|cursor|github|both] [--silent] [--verbose]',
+  );
+  console.log('');
+  console.log('FLAGS');
+  console.log('  -m, --pm=<value>         package manager: bun|npm|yarn|pnpm');
+  console.log(
+    '      --ai-context=<value>  none|cursor|github|both (skips interactive prompt)',
+  );
+  console.log(
+    '      --silent              non-interactive: bun + AI context none unless overridden',
+  );
+  console.log('  -v, --verbose            show detailed logs');
 }
 
 export async function runCli(argv: string[]): Promise<number> {
@@ -187,8 +205,9 @@ export async function runCli(argv: string[]): Promise<number> {
       const name = getFirstPositionalArg(args) ?? getFlagValue(args, 'name', 'n');
       const pm = getFlagValue(args, 'pm', 'm') as PackageManager | undefined;
       const verbose = hasFlag(args, 'verbose', 'v');
+      const silent = hasFlag(args, 'silent');
       const aiContext = getFlagValue(args, 'ai-context');
-      await runNewCommand({ name: name ?? '', pm, verbose, aiContext });
+      await runNewCommand({ name: name ?? '', pm, verbose, aiContext, silent });
       return 0;
     }
 
@@ -200,8 +219,9 @@ export async function runCli(argv: string[]): Promise<number> {
 
       const project = getFlagValue(args, 'project', 'p');
       const verbose = hasFlag(args, 'verbose', 'v');
+      const silent = hasFlag(args, 'silent');
       const aiContext = getFlagValue(args, 'ai-context');
-      await runInitCommand({ project, verbose, aiContext });
+      await runInitCommand({ project, verbose, aiContext, silent });
       return 0;
     }
 
@@ -214,7 +234,8 @@ export async function runCli(argv: string[]): Promise<number> {
       const name = getFirstPositionalArg(args) ?? getFlagValue(args, 'name', 'n');
       const project = getFlagValue(args, 'project', 'p');
       const verbose = hasFlag(args, 'verbose', 'v');
-      await runInstallCommand({ name: name ?? '', project, verbose });
+      const silent = hasFlag(args, 'silent');
+      await runInstallCommand({ name: name ?? '', project, verbose, silent });
       return 0;
     }
 
