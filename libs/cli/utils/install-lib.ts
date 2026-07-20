@@ -9,26 +9,29 @@ export async function installLib(
   projectName: string,
   lib: string,
   verbose = false,
+  silent = false,
 ): Promise<boolean> {
-  const response = await prompts(
-    {
-      type: 'toggle',
-      name: 'confirm',
-      message: `${chalk.cyan('KoalaUI')} Install dependency ${chalk.yellow(lib)} now?`,
-      hint: 'Required by selected component',
-      initial: true,
-      active: 'Yes',
-      inactive: 'No',
-    },
-    {
-      onCancel: () => {
-        throw new Error('KoalaUI: dependency installation prompt was cancelled.');
+  if (!silent) {
+    const response = await prompts(
+      {
+        type: 'toggle',
+        name: 'confirm',
+        message: `${chalk.cyan('KoalaUI')} Install dependency ${chalk.yellow(lib)} now?`,
+        hint: 'Required by selected component',
+        initial: true,
+        active: 'Yes',
+        inactive: 'No',
       },
-    },
-  );
+      {
+        onCancel: () => {
+          throw new Error('KoalaUI: dependency installation prompt was cancelled.');
+        },
+      },
+    );
 
-  if (!response.confirm) {
-    return false;
+    if (!response.confirm) {
+      return false;
+    }
   }
 
   const pm = detectPackageManager(projectName);

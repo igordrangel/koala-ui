@@ -20,11 +20,21 @@
       <i class="fa-solid fa-circle-info"></i>
       <span>{{ copy().sections.creatingNewProject.otherProse[1] }}</span>
     </div>
+
+    <div role="alert" class="alert alert-info alert-dash mt-2">
+      <i class="fa-solid fa-circle-info"></i>
+      <span>{{ copy().sections.creatingNewProject.otherProse[2] }}</span>
+    </div>
   </app-section-content>
 
   <app-section-content class="block mt-10">
     <ng-container title>{{ copy().sections.addingComponents.title }}</ng-container>
     <app-code-viewer language="bash" name="kl" src="markdown/install/add-components.md" />
+
+    <div role="alert" class="alert alert-info alert-dash mt-2">
+      <i class="fa-solid fa-circle-info"></i>
+      <span>{{ copy().sections.addingComponents.otherProse[0] }}</span>
+    </div>
   </app-section-content>
 
   <app-section-content class="block mt-10">

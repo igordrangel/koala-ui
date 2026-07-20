@@ -15,6 +15,10 @@ A partir de **23.x**, o major de `@koalarx/ui` = major do Angular + 1 (`23` → 
 
 ## [23.0.0] — Angular 22 + Signal Forms
 
+### Added
+
+- Flag `--silent` em `kl new`, `kl init` e `kl install` para modo não interativo (aceita libs externas sem prompt; no `new`/`init` defaults `bun` + AI context `none`).
+
 ### Changed
 
 - Upgrade da docs app e pins da CLI para **Angular 22** / TypeScript 6.
