@@ -39,9 +39,16 @@ kl new example --ai-context none
 
 # scaffold Cursor + Copilot context without prompting
 kl new example --ai-context both
+
+# non-interactive (AI agents / CI): bun + AI context none
+kl new example --silent
+
+# non-interactive with overrides
+kl new example --silent --pm pnpm --ai-context both
 ```
 
 During setup you can scaffold AI context (Cursor / GitHub Copilot). Use `--ai-context none|cursor|github|both` to skip the prompt.
+For AI agents or CI, prefer `--silent` (non-interactive: bun + AI context none unless overridden).
 
 ## 3. Add components
 
@@ -50,7 +57,12 @@ kl install button,dropdown,modal
 
 # target a specific project
 kl install modal --project my-angular-app
+
+# accept all external dependency installs without prompting (AI agents / CI)
+kl install button,modal --silent
 ```
+
+Use `kl install … --silent` to accept all external dependency installs without prompting (recommended for AI agents).
 
 ## 4. Add AI context (optional)
 

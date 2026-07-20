@@ -22,6 +22,8 @@ export interface NewArgs {
   pm?: PackageManager;
   verbose?: boolean;
   aiContext?: string;
+  /** Accept defaults without prompts (package manager + AI context). */
+  silent?: boolean;
 }
 
 async function createAngularProject(
@@ -134,12 +136,13 @@ function createFolderStructure(name: string) {
 export async function runNewCommand(args: NewArgs): Promise<void> {
   const name = args.name;
   const verbose = args.verbose ?? false;
+  const silent = args.silent ?? false;
 
   if (!name) {
     throw new Error('Please provide a project name (e.g. "kl new example") or use --name/-n');
   }
 
-  const pmName = args.pm ?? (await askPackageManager());
+  const pmName = args.pm ?? (silent ? 'bun' : await askPackageManager());
   const pm = getPmCommands(pmName);
 
   logHeader(console.log, 'KOALA UI PROJECT SETUP', `Project: ${name}`);
@@ -172,7 +175,8 @@ export async function runNewCommand(args: NewArgs): Promise<void> {
   installUtil(name, 'control-changes');
   installUtil(name, 'form-is-valid');
 
-  const aiContextTargets = await resolveAiContextTargets(args.aiContext);
+  const aiContextFlag = args.aiContext ?? (silent ? 'none' : undefined);
+  const aiContextTargets = await resolveAiContextTargets(aiContextFlag);
   applyAiContext(name, aiContextTargets);
 
   logSuccess(console.log, 'Project ready');

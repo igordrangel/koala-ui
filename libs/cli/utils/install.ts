@@ -15,6 +15,7 @@ export async function install(
   projectName: string,
   component: InstallComponentFlags,
   verbose = false,
+  silent = false,
 ): Promise<InstallResult> {
   const installedComponentDeps: InstallComponentFlags[] = [];
   const installedLibDeps: string[] = [];
@@ -30,7 +31,7 @@ export async function install(
   const deps = installComponent(projectName, component);
 
   for (const dep of getNotInstalled(projectName, 'lib', deps.libDeps)) {
-    const installed = await installLib(projectName, dep, verbose);
+    const installed = await installLib(projectName, dep, verbose, silent);
 
     if (installed) {
       installedLibDeps.push(dep);
@@ -75,7 +76,7 @@ export async function install(
   }
 
   for (const component of getNotInstalled(projectName, 'component', deps.componentDeps)) {
-    const result = await install(projectName, component, verbose);
+    const result = await install(projectName, component, verbose, silent);
     installedComponentDeps.push(...result.components, component);
     installedLibDeps.push(...result.libs);
     installedUtilDeps.push(...result.utils);

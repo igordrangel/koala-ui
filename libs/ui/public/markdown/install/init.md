@@ -6,4 +6,7 @@ kl init
 
 # skip AI context prompt
 kl init --ai-context none
+
+# non-interactive (AI agents / CI): AI context defaults to none
+kl init --silent
 ```

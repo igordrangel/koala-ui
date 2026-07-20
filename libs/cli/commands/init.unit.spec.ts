@@ -66,6 +66,22 @@ describe('Init Command', () => {
     );
   });
 
+  it('should default aiContext to none when silent is set without aiContext', async () => {
+    const { setupExistingProject } = await import('../utils/setup-existing-project');
+
+    await runInitCommand({ project: 'test-project', silent: true });
+
+    expect(vi.mocked(setupExistingProject)).toHaveBeenCalledWith('test-project', false, 'none');
+  });
+
+  it('should keep explicit aiContext when silent is set', async () => {
+    const { setupExistingProject } = await import('../utils/setup-existing-project');
+
+    await runInitCommand({ project: 'test-project', silent: true, aiContext: 'both' });
+
+    expect(vi.mocked(setupExistingProject)).toHaveBeenCalledWith('test-project', false, 'both');
+  });
+
   it('should call logHeader with correct parameters', async () => {
     const { logHeader } = await import('../utils/cli-ui');
 

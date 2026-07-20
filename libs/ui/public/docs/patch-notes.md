@@ -4,6 +4,16 @@ Changelog for anyone using or upgrading projects scaffolded with the Koala UI CL
 Site page: https://ui.koalarx.com/#/getting-started/patch-notes
 Root CHANGELOG.md mirrors these notes.
 
+## 22.3.1 — CLI --silent
+
+### What changed
+
+- `--silent` flag on `kl new`, `kl init`, and `kl install`: non-interactive mode (accepts external libs and skips prompts; on new/init defaults to bun + AI context none).
+
+### Upgrade
+
+For AI agents or CI, prefer `kl install … --silent` and `kl new … --silent`. Interactive use without the flag is unchanged.
+
 ## 22.3.0 — AI context
 
 ### What changed
