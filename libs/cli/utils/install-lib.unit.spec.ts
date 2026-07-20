@@ -47,4 +47,16 @@ describe('installLib', () => {
     expect(result).toBe(false);
     expect(runCommand).not.toHaveBeenCalled();
   });
+
+  it('should install lib without prompting when silent is true', async () => {
+    const result = await installLib('my-app', '@angular/aria', false, true);
+
+    expect(result).toBe(true);
+    expect(prompts).not.toHaveBeenCalled();
+    expect(runCommand).toHaveBeenCalledWith('bun add @angular/aria@^22.0.4', {
+      cwd: '/tmp/project',
+      loaderText: 'Installing @angular/aria',
+      verbose: false,
+    });
+  });
 });

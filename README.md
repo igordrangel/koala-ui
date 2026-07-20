@@ -38,12 +38,13 @@ During project creation, the CLI asks which package manager you want to use and 
 - `yarn`
 - `pnpm`
 
-You can also skip the interactive prompts with `--pm` and `--ai-context`.
+You can also skip the interactive prompts with `--pm`, `--ai-context`, and `--silent` (non-interactive defaults: bun + AI context none).
 
 ```bash
 kl new --name meu-projeto
 kl new --name my-project --pm npm
 kl new my-app --ai-context both
+kl new my-app --silent
 ```
 
 ---
@@ -52,10 +53,13 @@ kl new my-app --ai-context both
 
 Adds one or more UI components to the project.
 
+Use `--silent` to accept all external dependency installs without prompting (recommended for AI agents and CI).
+
 ```bash
 kl install button
 kl install button,loading,dropdown
 kl install modal --project meu-projeto
+kl install button,modal --silent
 ```
 
 ---
@@ -81,6 +85,7 @@ kl init
 kl init --project meu-projeto
 kl init --project meu-projeto --verbose
 kl init --ai-context none
+kl init --silent
 ```
 
 ---

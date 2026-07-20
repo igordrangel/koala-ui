@@ -19,6 +19,7 @@ import { runCli } from './runner';
 import { runAddCommand } from './commands/add';
 import { runNewCommand } from './commands/new';
 import { runInitCommand } from './commands/init';
+import { runInstallCommand } from './commands/install';
 
 describe('CLI Runner', () => {
   beforeEach(() => {
@@ -66,6 +67,20 @@ describe('CLI Runner', () => {
       pm: undefined,
       verbose: false,
       aiContext: 'none',
+      silent: false,
+    });
+  });
+
+  it('should pass --silent to new', async () => {
+    const result = await runCli(['new', 'demo', '--silent']);
+
+    expect(result).toBe(0);
+    expect(runNewCommand).toHaveBeenCalledWith({
+      name: 'demo',
+      pm: undefined,
+      verbose: false,
+      aiContext: undefined,
+      silent: true,
     });
   });
 
@@ -77,6 +92,19 @@ describe('CLI Runner', () => {
       project: undefined,
       verbose: false,
       aiContext: 'cursor',
+      silent: false,
+    });
+  });
+
+  it('should pass --silent to install', async () => {
+    const result = await runCli(['install', 'button', '--silent']);
+
+    expect(result).toBe(0);
+    expect(runInstallCommand).toHaveBeenCalledWith({
+      name: 'button',
+      project: undefined,
+      verbose: false,
+      silent: true,
     });
   });
 });
