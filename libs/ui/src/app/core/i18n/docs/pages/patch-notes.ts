@@ -12,6 +12,15 @@ export const PATCH_NOTES_PAGE = {
         description:
           'A versão publicada do pacote @koalarx/ui aparece no package.json do repositório. O arquivo CHANGELOG.md na raiz espelha estas notas. A partir de 23.x, o major da lib = major do Angular + 1 (23 → Angular 22). Para Angular 21 use a linha 22.x; para Angular 22 use 23.x.',
       },
+      v2301: {
+        title: '23.0.1 — CLI --silent',
+        description: 'Modo não interativo na CLI para agentes de IA e CI.',
+        items: [
+          'Flag --silent no kl new, kl init e kl install: aceita libs externas e pula prompts (no new/init defaults bun + AI context none).',
+        ],
+        upgrade:
+          'Em agentes de IA ou CI, prefira kl install … --silent e kl new … --silent. Em uso interativo, o comportamento sem a flag permanece igual.',
+      },
       v2300: {
         title: '23.0.0 — Angular 22 + Signal Forms',
         description:
@@ -23,10 +32,9 @@ export const PATCH_NOTES_PAGE = {
           'Removidos utils control-changes, form-is-valid e get-value-on-first-change (ponte Reactive Forms); CLI não os instala mais no scaffold nem como dep de componentes.',
           'Interceptors HTTP funcionais (withInterceptors); remoção de NgZone em mask/currency.',
           'Política de versão: 22.x = Angular 21; 23.x = Angular 22.',
-          'Flag --silent no kl new, kl init e kl install: modo não interativo (aceita libs externas e pula prompts; no new/init defaults bun + AI context none).',
         ],
         upgrade:
-          'Atualize o projeto consumidor para Angular 22. Reinstale componentes de formulário (e inline-filter) com kl install quando quiser o novo código FormValueControl/Signal Forms. Se passar validators no InlineFilterBuilder, troque ValidatorFn por FieldValidator de Signal Forms. Apague control-changes.ts / form-is-valid.ts / get-value-on-first-change.ts se existirem e troque usos por field().value() / field().valid(). Para Angular 21, use a linha 22.x (dist-tag angular-21 após o release). Em agentes de IA, prefira kl install … --silent e kl new … --silent.',
+          'Atualize o projeto consumidor para Angular 22. Reinstale componentes de formulário (e inline-filter) com kl install quando quiser o novo código FormValueControl/Signal Forms. Se passar validators no InlineFilterBuilder, troque ValidatorFn por FieldValidator de Signal Forms. Apague control-changes.ts / form-is-valid.ts / get-value-on-first-change.ts se existirem e troque usos por field().value() / field().valid(). Para Angular 21, use a linha 22.x (dist-tag angular-21 após o release).',
       },
       v2230: {
         title: '22.3.0 — Contexto AI',
@@ -53,6 +61,15 @@ export const PATCH_NOTES_PAGE = {
         description:
           'The published @koalarx/ui package version is in the repository package.json. The root CHANGELOG.md mirrors these notes. From 23.x onward, library major = Angular major + 1 (23 → Angular 22). For Angular 21 use the 22.x line; for Angular 22 use 23.x.',
       },
+      v2301: {
+        title: '23.0.1 — CLI --silent',
+        description: 'Non-interactive CLI mode for AI agents and CI.',
+        items: [
+          '--silent flag on kl new, kl init, and kl install: accepts external libs and skips prompts (on new/init defaults to bun + AI context none).',
+        ],
+        upgrade:
+          'For AI agents or CI, prefer kl install … --silent and kl new … --silent. Interactive use without the flag is unchanged.',
+      },
       v2300: {
         title: '23.0.0 — Angular 22 + Signal Forms',
         description:
@@ -64,10 +81,9 @@ export const PATCH_NOTES_PAGE = {
           'Removed control-changes, form-is-valid, and get-value-on-first-change utils (Reactive Forms bridges); CLI no longer scaffolds or installs them as component deps.',
           'Functional HTTP interceptors (withInterceptors); NgZone removed from mask/currency.',
           'Versioning policy: 22.x = Angular 21; 23.x = Angular 22.',
-          '--silent flag on kl new, kl init, and kl install: non-interactive mode (accepts external libs and skips prompts; on new/init defaults to bun + AI context none).',
         ],
         upgrade:
-          'Upgrade consumer apps to Angular 22. Re-run kl install for form components (and inline-filter) to pick up FormValueControl/Signal Forms. If you pass validators to InlineFilterBuilder, replace ValidatorFn with Signal Forms FieldValidator. Delete control-changes.ts / form-is-valid.ts / get-value-on-first-change.ts if present and replace usages with field().value() / field().valid(). For Angular 21, stay on the 22.x line (angular-21 dist-tag after release). For AI agents, prefer kl install … --silent and kl new … --silent.',
+          'Upgrade consumer apps to Angular 22. Re-run kl install for form components (and inline-filter) to pick up FormValueControl/Signal Forms. If you pass validators to InlineFilterBuilder, replace ValidatorFn with Signal Forms FieldValidator. Delete control-changes.ts / form-is-valid.ts / get-value-on-first-change.ts if present and replace usages with field().value() / field().valid(). For Angular 21, stay on the 22.x line (angular-21 dist-tag after release).',
       },
       v2230: {
         title: '22.3.0 — AI context',

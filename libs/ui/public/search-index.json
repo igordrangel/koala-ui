@@ -74,7 +74,31 @@
     "title": "Patch notes",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "content": "Koala UI – Patch notes Changelog for anyone using or upgrading projects scaffolded with the Koala UI CLI. Site page: https://ui.koalarx.com/ /getting-started/patch-notes Root CHANGELOG.md mirrors these notes. 23.0.0 — Angular 22 + Signal Forms What changed - Docs app and CLI pins on Angular 22 / TypeScript 6. - Form controls migrated from ControlValueAccessor to FormValueControl / FormCheckboxControl (Signal Forms; Reactive Forms and ngModel remain compatible on Angular 22). - inline-filter migrated to Signal Forms; builder validators now use FieldValidator (({ value }) = …), not ValidatorFn. - Removed control-changes, form-is-valid, and get-value-on-first-change utils (Reactive Forms bridges); CLI no longer scaffolds or installs them as component deps. - Functional HTTP interceptors (withInterceptors); NgZone removed from mask/currency. - Versioning policy: 22.x = Angular 21; 23.x = Angular 22. - flag on , , and : non-interactive mode (accepts external libs and skips prompts; on new/init defaults to bun + AI context none). Upgrade Upgrade consumer apps to Angular 22. Re-run for form components (and inline-filter) to pick up FormValueControl/Signal Forms. If you pass validators to InlineFilterBuilder, replace ValidatorFn with Signal Forms FieldValidator. Delete control-changes.ts / form-is-valid.ts / get-value-on-first-change.ts if present and replace usages with field().value() / field().valid(). For Angular 21, stay on the 22.x line (angular-21 dist-tag after release). For AI agents, prefer and . 22.3.0 — AI context What changed - AI context prompt in and (Cursor, GitHub Copilot, both, or none). - flag to skip the interactive prompt. - New command — scaffolds plus Cursor rules / Copilot instructions. Does not overwrite existing files. - Assets under focused on docs-first, , and Angular (Signals/standalone). - Patch notes documentation on the site and at the repo root. Upgrade On existing projects: , , or both. On new projects, choose in the prompt or use ."
+    "content": "Koala UI – Patch notes Changelog for anyone using or upgrading projects scaffolded with the Koala UI CLI. Site page: https://ui.koalarx.com/ /getting-started/patch-notes Root CHANGELOG.md mirrors these notes. 23.0.1 — CLI --silent What changed - flag on , , and : non-interactive mode (accepts external libs and skips prompts; on new/init defaults to bun + AI context none). Upgrade For AI agents or CI, prefer and . Interactive use without the flag is unchanged. 23.0.0 — Angular 22 + Signal Forms What changed - Docs app and CLI pins on Angular 22 / TypeScript 6. - Form controls migrated from ControlValueAccessor to FormValueControl / FormCheckboxControl (Signal Forms; Reactive Forms and ngModel remain compatible on Angular 22). - inline-filter migrated to Signal Forms; builder validators now use FieldValidator (({ value }) = …), not ValidatorFn. - Removed control-changes, form-is-valid, and get-value-on-first-change utils (Reactive Forms bridges); CLI no longer scaffolds or installs them as component deps. - Functional HTTP interceptors (withInterceptors); NgZone removed from mask/currency. - Versioning policy: 22.x = Angular 21; 23.x = Angular 22. Upgrade Upgrade consumer apps to Angular 22. Re-run for form components (and inline-filter) to pick up FormValueControl/Signal Forms. If you pass validators to InlineFilterBuilder, replace ValidatorFn with Signal Forms FieldValidator. Delete control-changes.ts / form-is-valid.ts / get-value-on-first-change.ts if present and replace usages with field().value() / field().valid(). For Angular 21, stay on the 22.x line (angular-21 dist-tag after release). 22.3.0 — AI context What changed - AI context prompt in and (Cursor, GitHub Copilot, both, or none). - flag to skip the interactive prompt. - New command — scaffolds plus Cursor rules / Copilot instructions. Does not overwrite existing files. - Assets under focused on docs-first, , and Angular (Signals/standalone). - Patch notes documentation on the site and at the repo root. Upgrade On existing projects: , , or both. On new projects, choose in the prompt or use ."
+  },
+  {
+    "id": "getting-started/patch-notes#2301-cli---silent",
+    "title": "23.0.1 — CLI --silent",
+    "category": "Getting Started",
+    "route": "getting-started/patch-notes",
+    "fragment": "2301-cli---silent",
+    "content": ""
+  },
+  {
+    "id": "getting-started/patch-notes#what-changed",
+    "title": "What changed",
+    "category": "Getting Started",
+    "route": "getting-started/patch-notes",
+    "fragment": "what-changed",
+    "content": "- flag on , , and : non-interactive mode (accepts external libs and skips prompts; on new/init defaults to bun + AI context none)."
+  },
+  {
+    "id": "getting-started/patch-notes#upgrade",
+    "title": "Upgrade",
+    "category": "Getting Started",
+    "route": "getting-started/patch-notes",
+    "fragment": "upgrade",
+    "content": "For AI agents or CI, prefer and . Interactive use without the flag is unchanged."
   },
   {
     "id": "getting-started/patch-notes#2300-angular-22-signal-forms",
@@ -85,20 +109,20 @@
     "content": ""
   },
   {
-    "id": "getting-started/patch-notes#what-changed",
+    "id": "getting-started/patch-notes#what-changed-2",
     "title": "What changed",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "fragment": "what-changed",
-    "content": "- Docs app and CLI pins on Angular 22 / TypeScript 6. - Form controls migrated from ControlValueAccessor to FormValueControl / FormCheckboxControl (Signal Forms; Reactive Forms and ngModel remain compatible on Angular 22). - inline-filter migrated to Signal Forms; builder validators now use FieldValidator (({ value }) = …), not ValidatorFn. - Removed control-changes, form-is-valid, and get-value-on-first-change utils (Reactive Forms bridges); CLI no longer scaffolds or installs them as component deps. - Functional HTTP interceptors (withInterceptors); NgZone removed from mask/currency. - Versioning policy: 22.x = Angular 21; 23.x = Angular 22. - flag on , , and : non-interactive mode (accepts external libs and skips prompts; on new/init defaults to bun + AI context none)."
+    "fragment": "what-changed-2",
+    "content": "- Docs app and CLI pins on Angular 22 / TypeScript 6. - Form controls migrated from ControlValueAccessor to FormValueControl / FormCheckboxControl (Signal Forms; Reactive Forms and ngModel remain compatible on Angular 22). - inline-filter migrated to Signal Forms; builder validators now use FieldValidator (({ value }) = …), not ValidatorFn. - Removed control-changes, form-is-valid, and get-value-on-first-change utils (Reactive Forms bridges); CLI no longer scaffolds or installs them as component deps. - Functional HTTP interceptors (withInterceptors); NgZone removed from mask/currency. - Versioning policy: 22.x = Angular 21; 23.x = Angular 22."
   },
   {
-    "id": "getting-started/patch-notes#upgrade",
+    "id": "getting-started/patch-notes#upgrade-2",
     "title": "Upgrade",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "fragment": "upgrade",
-    "content": "Upgrade consumer apps to Angular 22. Re-run for form components (and inline-filter) to pick up FormValueControl/Signal Forms. If you pass validators to InlineFilterBuilder, replace ValidatorFn with Signal Forms FieldValidator. Delete control-changes.ts / form-is-valid.ts / get-value-on-first-change.ts if present and replace usages with field().value() / field().valid(). For Angular 21, stay on the 22.x line (angular-21 dist-tag after release). For AI agents, prefer and ."
+    "fragment": "upgrade-2",
+    "content": "Upgrade consumer apps to Angular 22. Re-run for form components (and inline-filter) to pick up FormValueControl/Signal Forms. If you pass validators to InlineFilterBuilder, replace ValidatorFn with Signal Forms FieldValidator. Delete control-changes.ts / form-is-valid.ts / get-value-on-first-change.ts if present and replace usages with field().value() / field().valid(). For Angular 21, stay on the 22.x line (angular-21 dist-tag after release)."
   },
   {
     "id": "getting-started/patch-notes#2230-ai-context",
@@ -109,19 +133,19 @@
     "content": ""
   },
   {
-    "id": "getting-started/patch-notes#what-changed-2",
+    "id": "getting-started/patch-notes#what-changed-3",
     "title": "What changed",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "fragment": "what-changed-2",
+    "fragment": "what-changed-3",
     "content": "- AI context prompt in and (Cursor, GitHub Copilot, both, or none). - flag to skip the interactive prompt. - New command — scaffolds plus Cursor rules / Copilot instructions. Does not overwrite existing files. - Assets under focused on docs-first, , and Angular (Signals/standalone). - Patch notes documentation on the site and at the repo root."
   },
   {
-    "id": "getting-started/patch-notes#upgrade-2",
+    "id": "getting-started/patch-notes#upgrade-3",
     "title": "Upgrade",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "fragment": "upgrade-2",
+    "fragment": "upgrade-3",
     "content": "On existing projects: , , or both. On new projects, choose in the prompt or use ."
   },
   {
