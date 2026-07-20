@@ -13,11 +13,13 @@ Formato inspirado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/)
 
 A partir de **23.x**, o major de `@koalarx/ui` = major do Angular + 1 (`23` → Angular 22). A linha `22.x` permanece para Angular 21 (`previous-release` / dist-tag `angular-21`).
 
-## [23.0.0] — Angular 22 + Signal Forms
+## [23.0.1] — CLI `--silent`
 
 ### Added
 
 - Flag `--silent` em `kl new`, `kl init` e `kl install` para modo não interativo (aceita libs externas sem prompt; no `new`/`init` defaults `bun` + AI context `none`).
+
+## [23.0.0] — Angular 22 + Signal Forms
 
 ### Changed
 
