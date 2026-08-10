@@ -1,3 +1,4 @@
+import { isMobile } from '@/shared/utils/is-mobile';
 import { Component, computed, effect, inject, input, linkedSignal, output } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
@@ -30,6 +31,8 @@ export class Pagination {
     ),
     { initialValue: { page: 1, pageSize: 10 } },
   );
+
+  readonly isMobile = isMobile();
 
   readonly pageSizeOptions: SelectOption<number>[] = [
     { label: '10', value: 10, data: undefined },

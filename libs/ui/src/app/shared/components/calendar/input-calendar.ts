@@ -10,10 +10,12 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { KlDate } from '@koalarx/utils/KlDate';
 import 'cally';
 import { Calendar } from '.';
 import { Mask } from '../../directives/mask.directive';
+import { Dropdown, DropdownContainer } from '../dropdown';
 import type { InputSize } from '../input-field';
 import { Input } from '../input-field';
 import { setupMonthDisplayYearEffect } from './effects/setup-input-calendar-effects';
@@ -30,8 +32,6 @@ import {
 import { InputCalendarFormat, InputCalendarType } from './input-calendar.types';
 import { InputCalendarMonthPickerComponent } from './parts/input-calendar-month-picker.component';
 import { InputCalendarTimeRowComponent } from './parts/input-calendar-time-row.component';
-import { Dropdown, DropdownContainer } from '../dropdown';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 const RANGE_SEPARATOR = ' - ';
 
@@ -88,13 +88,7 @@ export class InputCalendar implements ControlValueAccessor {
   readonly monthOptions = createMonthOptions('pt-BR');
 
   constructor() {
-    effect(() => {
-      if (this.disabled()) {
-        this.isDisabled.set(true);
-      } else {
-        this.isDisabled.set(false);
-      }
-    });
+    effect(() => this.isDisabled.set(this.disabled()));
 
     effect(() => {
       if (this.type() === 'daterange') {
