@@ -3,7 +3,7 @@
   class="flex flex-col items-center justify-center py-20 gap-2"
   (submit)="$event.preventDefault(); authenticate()"
 >
-  <app-fieldset class="w-full max-w-xs">
+  <app-fieldset [field]="credentialsForm.username()" class="w-full max-w-xs">
     <ng-container label>Username</ng-container>
     <input
       field
@@ -13,13 +13,9 @@
       placeholder="Enter your username"
       [formField]="credentialsForm.username"
     />
-
-    @if (credentialsForm.username().getError('required')) {
-      <span appValidatorHint>Username is required</span>
-    }
   </app-fieldset>
 
-  <app-fieldset class="w-full max-w-xs">
+  <app-fieldset [field]="credentialsForm.password()" class="w-full max-w-xs">
     <ng-container label>Password</ng-container>
     <input
       #inputPassword
@@ -53,12 +49,6 @@
         </button>
       }
     </ng-container>
-
-    @if (credentialsForm.password().getError('required')) {
-      <span appValidatorHint>Password is required</span>
-    } @else if (credentialsForm.password().getError('minLength')) {
-      <span appValidatorHint>Password must be at least 8 characters</span>
-    }
   </app-fieldset>
 
   <div class="flex w-full max-w-xs">

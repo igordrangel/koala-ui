@@ -1,5 +1,5 @@
 ```html
-<app-fieldset>
+<app-fieldset [field]="cnpjForm.cnpj()">
   <ng-container label>CNPJ</ng-container>
   <input
     field
@@ -10,11 +10,5 @@
     appMask="SS.SSS.SSS/SSSS-SS"
   />
   <ng-container hint>Inform a valid CNPJ</ng-container>
-
-  @if (cnpjForm.cnpj().getError('required')) {
-    <span appValidatorHint>CNPJ is required</span>
-  } @else if (cnpjForm.cnpj().getError('cnpjInvalid')) {
-    <span appValidatorHint>Invalid CNPJ</span>
-  }
 </app-fieldset>
 ```

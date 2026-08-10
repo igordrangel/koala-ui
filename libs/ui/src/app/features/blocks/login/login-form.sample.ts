@@ -4,14 +4,13 @@ import { Button } from '@/shared/components/button';
 import { Fieldset } from '@/shared/components/fieldset';
 import { Input } from '@/shared/components/input-field';
 import { Loading } from '@/shared/components/loading';
-import { ValidatorHint } from '@/shared/components/validator/validator-hint';
 import { Component, inject, signal } from '@angular/core';
 import { form, FormField, minLength, required } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-login-form-sample',
   templateUrl: './login-form.sample.html',
-  imports: [FormField, Fieldset, Input, ValidatorHint, Button, Loading],
+  imports: [FormField, Fieldset, Input, Button, Loading],
 })
 export class LoginFormSample {
   readonly authorization = inject(AuthorizationService);
@@ -19,9 +18,9 @@ export class LoginFormSample {
   readonly credentialsForm = form(
     signal({ username: 'emilys', password: 'emilyspass' }),
     (schema) => {
-      required(schema.username);
-      required(schema.password);
-      minLength(schema.password, 8);
+      required(schema.username, { message: 'Username is required' });
+      required(schema.password, { message: 'Password is required' });
+      minLength(schema.password, 8, { message: 'Password must be at least 8 characters' });
     },
   );
 

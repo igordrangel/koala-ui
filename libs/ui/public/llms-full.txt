@@ -136,6 +136,18 @@ Changelog for anyone using or upgrading projects scaffolded with the Koala UI CL
 Site page: https://ui.koalarx.com/#/getting-started/patch-notes
 Root CHANGELOG.md mirrors these notes.
 
+## 23.0.2 — ListBase with service + getMany
+
+### What changed
+
+- Built-in `datalist` calls `service.getMany` and syncs `totalItems` from `count`.
+- Second generic is `TListService`; constructor takes `Type<TListService>` (`super(MyService)`).
+- `kl install list-base` also installs `http` (HttpBase), `is-mobile`, and `from-observable-with-signal`.
+
+### Upgrade
+
+Service must extend HttpBase and implement `getMany`. Replace `ListBase<T, TFilter>` with `ListBase<T, MyService>`, call `super(MyService)`, remove `override datalist` if using the default loader, and reinstall with `kl install list-base`.
+
 ## 23.0.1 — CLI --silent
 
 ### What changed
@@ -980,10 +992,13 @@ kl install inline-filter,table,pagination,skeleton,button,loading,list
 ```
 
 ```typescript
-import { Component, resource } from '@angular/core';
-import { Validators } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
+import { map } from 'rxjs/internal/operators/map';
 import { KlArray } from '@koalarx/utils/KlArray';
-import { ListBase } from '@/shared/base/list.base';
+import { DatalistResponse, ListBase } from '@/shared/base/list.base';
+import { HttpBase } from '@/shared/base/http.base';
 import { Button } from '@/shared/components/button';
 import { InlineFilter, InlineFilterBuilder } from '@/shared/components/inline-filter';
 import { Loading } from '@/shared/components/loading';
@@ -1002,9 +1017,49 @@ interface User {
   eyeColor: string;
 }
 
-interface UserFilter {
-  name?: string;
-  email?: string;
+@Injectable({ providedIn: 'root' })
+export class UsersService extends HttpBase {
+  constructor() {
+    super('https://dummyjson.com', 'users');
+  }
+
+  getMany(queryParams: {
+    page?: number | null;
+    limit?: number | null;
+    orderBy?: string;
+    direction?: string;
+    name?: string;
+    email?: string;
+  }): Observable<DatalistResponse<User>> {
+    const page = queryParams.page ?? 1;
+    const pageSize = queryParams.limit ?? 30;
+    const sortBy = queryParams.orderBy ?? 'firstName';
+    const order = queryParams.direction ?? 'asc';
+
+    return this.get({ limit: 300, sortBy, order }).pipe(
+      map((data) => {
+        const { users: rawUsers } = data as { users: User[] };
+        const users = new KlArray<User>(
+          rawUsers.filter((item) => {
+            const nameFilter = queryParams.name;
+            const emailFilter = queryParams.email;
+
+            return (
+              (!nameFilter ||
+                item.firstName.toLowerCase().includes(nameFilter.toLowerCase()) ||
+                item.lastName.toLowerCase().includes(nameFilter.toLowerCase())) &&
+              (!emailFilter || item.email.toLowerCase() === emailFilter.toLowerCase())
+            );
+          }),
+        );
+
+        const count = users.length;
+        const items = users.split(pageSize)[page - 1] ?? [];
+
+        return { items: [...items], count };
+      }),
+    );
+  }
 }
 
 @Component({
@@ -1013,53 +1068,14 @@ interface UserFilter {
   imports: [InlineFilter, Table, Pagination, Skeleton, Button, Loading],
   providers: [InlineFilterBuilder],
 })
-export class DatatableSample extends ListBase<User, UserFilter> {
-  protected override datalist = resource({
-    params: () => this.filterParams,
-    defaultValue: this.defaultList,
-    loader: async ({ params, abortSignal }) => {
-      const page = params.page ?? 1;
-      const sortBy = params.sortBy ?? 'firstName';
-      const order = params.order ?? 'asc';
-
-      const endpoint = `https://dummyjson.com/users?limit=300&sortBy=${sortBy}&order=${order}`;
-
-      const response = await fetch(endpoint, { signal: abortSignal });
-      const data: { users: User[]; total: number } = await response.json();
-
-      const users = new KlArray<User>(
-        data.users.filter((item) => {
-          const nameFilter = params.filter.name;
-          const emailFilter = params.filter.email;
-
-          return (
-            (!nameFilter ||
-              item.firstName.toLowerCase().includes(nameFilter.toLowerCase()) ||
-              item.lastName.toLowerCase().includes(nameFilter.toLowerCase())) &&
-            (!emailFilter || item.email.toLowerCase() === emailFilter.toLowerCase())
-          );
-        }),
-      );
-
-      const totalItems = users.length;
-      const limitedItems = users.split(params.pageSize)[page - 1] ?? [];
-
-      this.totalItems.set(totalItems);
-
-      return {
-        items: [...limitedItems],
-        count: limitedItems.length,
-      };
-    },
-  });
-
+export class DatatableSample extends ListBase<User, UsersService> {
   readonly filterConfig = inject(InlineFilterBuilder)
     .input('Name', 'name')
     .input('Email', 'email', 'email')
     .build();
 
   constructor() {
-    super();
+    super(UsersService);
 
     this.orderedBy.set({ field: 'firstName', direction: 'asc' });
   }
@@ -1159,16 +1175,10 @@ kl install fieldset
 ### HTML
 
 ```html
-<app-fieldset>
+<app-fieldset [field]="emailForm.email()">
   <ng-container label>What is your email?</ng-container>
   <input field appInput type="text" placeholder="Type here" [formField]="emailForm.email" />
   <ng-container hint>Inform a valid email address</ng-container>
-
-  @if (emailForm.email().getError('required')) {
-    <span appValidatorHint>Email is required</span>
-  } @else if (emailForm.email().getError('email')) {
-    <span appValidatorHint>Invalid email</span>
-  }
 </app-fieldset>
 ```
 
@@ -1177,17 +1187,16 @@ import { Component, signal } from '@angular/core';
 import { email, form, FormField, required } from '@angular/forms/signals';
 import { Fieldset } from '@/shared/components/fieldset';
 import { Input } from '@/shared/components/input-field';
-import { ValidatorHint } from '@/shared/components/validator/validator-hint';
 
 @Component({
   selector: 'app-fieldset-sample',
   templateUrl: './fieldset-sample.html',
-  imports: [FormField, Fieldset, Input, ValidatorHint],
+  imports: [FormField, Fieldset, Input],
 })
 export class FieldsetSample {
   readonly emailForm = form(signal({ email: '' }), (schema) => {
-    required(schema.email);
-    email(schema.email);
+    required(schema.email, { message: 'Email is required' });
+    email(schema.email, { message: 'Invalid email' });
   });
 }
 ```
@@ -1198,7 +1207,7 @@ Reactive Forms still work via Angular 22 interop (`[formControl]` / `formControl
 
 ```html
 <form class="flex flex-col items-center justify-center gap-2">
-  <app-fieldset class="w-full max-w-xs">
+  <app-fieldset [field]="loginForm.email()" class="w-full max-w-xs">
     <ng-container label>E-mail</ng-container>
     <input
       field
@@ -1208,15 +1217,9 @@ Reactive Forms still work via Angular 22 interop (`[formControl]` / `formControl
       placeholder="example@example.com"
       [formField]="loginForm.email"
     />
-
-    @if (loginForm.email().getError('required')) {
-      <span appValidatorHint>Email is required</span>
-    } @else if (loginForm.email().getError('email')) {
-      <span appValidatorHint>Invalid email</span>
-    }
   </app-fieldset>
 
-  <app-fieldset class="w-full max-w-xs">
+  <app-fieldset [field]="loginForm.password()" class="w-full max-w-xs">
     <ng-container label>Password</ng-container>
     <input
       #inputPassword
@@ -1250,12 +1253,6 @@ Reactive Forms still work via Angular 22 interop (`[formControl]` / `formControl
         </button>
       }
     </ng-container>
-
-    @if (loginForm.password().getError('required')) {
-      <span appValidatorHint>Password is required</span>
-    } @else if (loginForm.password().getError('minLength')) {
-      <span appValidatorHint>Password must be at least 8 characters</span>
-    }
   </app-fieldset>
 
   <div class="flex w-full max-w-xs">
@@ -1270,19 +1267,18 @@ import { email, form, FormField, minLength, required } from '@angular/forms/sign
 import { Button } from '@/shared/components/button';
 import { Fieldset } from '@/shared/components/fieldset';
 import { Input } from '@/shared/components/input-field';
-import { ValidatorHint } from '@/shared/components/validator/validator-hint';
 
 @Component({
   selector: 'app-login-sample',
   templateUrl: './login-sample.html',
-  imports: [FormField, Fieldset, Input, ValidatorHint, Button],
+  imports: [FormField, Fieldset, Input, Button],
 })
 export class LoginSample {
   readonly loginForm = form(signal({ email: '', password: '' }), (schema) => {
-    required(schema.email);
-    email(schema.email);
-    required(schema.password);
-    minLength(schema.password, 8);
+    required(schema.email, { message: 'Email is required' });
+    email(schema.email, { message: 'Invalid email' });
+    required(schema.password, { message: 'Password is required' });
+    minLength(schema.password, 8, { message: 'Password must be at least 8 characters' });
   });
 }
 ```
@@ -1423,7 +1419,7 @@ kl install input-cnpj
 ### HTML
 
 ```html
-<app-fieldset>
+<app-fieldset [field]="cnpjForm.cnpj()">
   <ng-container label>CNPJ</ng-container>
   <input
     field
@@ -1434,19 +1430,12 @@ kl install input-cnpj
     appMask="SS.SSS.SSS/SSSS-SS"
   />
   <ng-container hint>Inform a valid CNPJ</ng-container>
-
-  @if (cnpjForm.cnpj().getError('required')) {
-    <span appValidatorHint>CNPJ is required</span>
-  } @else if (cnpjForm.cnpj().getError('cnpjInvalid')) {
-    <span appValidatorHint>Invalid CNPJ</span>
-  }
 </app-fieldset>
 ```
 
 ```typescript
 import { Fieldset } from '@/shared/components/fieldset';
 import { Input } from '@/shared/components/input-field';
-import { ValidatorHint } from '@/shared/components/validator/validator-hint';
 import { Mask } from '@/shared/directives/mask.directive';
 import { Component, signal } from '@angular/core';
 import { form, FormField, required, validate } from '@angular/forms/signals';
@@ -1455,18 +1444,20 @@ import { validateCnpj } from '@koalarx/utils/KlString';
 @Component({
   selector: 'app-input-cnpj-sample',
   templateUrl: './input-cnpj-sample.html',
-  imports: [FormField, Fieldset, Input, Mask, ValidatorHint],
+  imports: [FormField, Fieldset, Input, Mask],
 })
 export class InputCnpjSample {
   readonly cnpjForm = form(signal({ cnpj: '' }), (schema) => {
-    required(schema.cnpj);
+    required(schema.cnpj, { message: 'CNPJ is required' });
     validate(schema.cnpj, ({ value }) => {
       const current = value();
       if (!current) {
         return undefined;
       }
 
-      return validateCnpj(current) ? undefined : { kind: 'cnpjInvalid' };
+      return validateCnpj(current)
+        ? undefined
+        : { kind: 'cnpjInvalid', message: 'Invalid CNPJ' };
     });
   });
 }
@@ -1487,7 +1478,7 @@ kl install input-cpf
 ### HTML
 
 ```html
-<app-fieldset>
+<app-fieldset [field]="cpfForm.cpf()">
   <ng-container label>CPF</ng-container>
   <input
     field
@@ -1498,19 +1489,12 @@ kl install input-cpf
     appMask="000.000.000-00"
   />
   <ng-container hint>Inform a valid CPF</ng-container>
-
-  @if (cpfForm.cpf().getError('required')) {
-    <span appValidatorHint>CPF is required</span>
-  } @else if (cpfForm.cpf().getError('cpfInvalid')) {
-    <span appValidatorHint>Invalid CPF</span>
-  }
 </app-fieldset>
 ```
 
 ```typescript
 import { Fieldset } from '@/shared/components/fieldset';
 import { Input } from '@/shared/components/input-field';
-import { ValidatorHint } from '@/shared/components/validator/validator-hint';
 import { Mask } from '@/shared/directives/mask.directive';
 import { Component, signal } from '@angular/core';
 import { form, FormField, required, validate } from '@angular/forms/signals';
@@ -1519,18 +1503,20 @@ import { validateCpf } from '@koalarx/utils/KlString';
 @Component({
   selector: 'app-input-cpf-sample',
   templateUrl: './input-cpf-sample.html',
-  imports: [FormField, Fieldset, Input, Mask, ValidatorHint],
+  imports: [FormField, Fieldset, Input, Mask],
 })
 export class InputCpfSample {
   readonly cpfForm = form(signal({ cpf: '' }), (schema) => {
-    required(schema.cpf);
+    required(schema.cpf, { message: 'CPF is required' });
     validate(schema.cpf, ({ value }) => {
       const current = value();
       if (!current) {
         return undefined;
       }
 
-      return validateCpf(current) ? undefined : { kind: 'cpfInvalid' };
+      return validateCpf(current)
+        ? undefined
+        : { kind: 'cpfInvalid', message: 'Invalid CPF' };
     });
   });
 }
@@ -1591,7 +1577,7 @@ kl install currency
 ### HTML
 
 ```html
-<app-fieldset>
+<app-fieldset [field]="currencyForm.currency()">
   <ng-container label>Currency</ng-container>
   <input
     field
@@ -1601,16 +1587,12 @@ kl install currency
     [formField]="currencyForm.currency"
     appCurrency
   />
-  @if (currencyForm.currency().getError('required')) {
-    <span appValidatorHint>Currency is required</span>
-  }
 </app-fieldset>
 ```
 
 ```typescript
 import { Fieldset } from '@/shared/components/fieldset';
 import { Input } from '@/shared/components/input-field';
-import { ValidatorHint } from '@/shared/components/validator/validator-hint';
 import { CurrencyMask } from '@/shared/directives/currency.directive';
 import { Component, signal } from '@angular/core';
 import { form, FormField, required } from '@angular/forms/signals';
@@ -1618,11 +1600,11 @@ import { form, FormField, required } from '@angular/forms/signals';
 @Component({
   selector: 'app-input-currency-sample',
   templateUrl: './input-currency-sample.html',
-  imports: [FormField, Fieldset, Input, CurrencyMask, ValidatorHint],
+  imports: [FormField, Fieldset, Input, CurrencyMask],
 })
 export class InputCurrencySample {
   readonly currencyForm = form(signal({ currency: 0 as number | null }), (schema) => {
-    required(schema.currency);
+    required(schema.currency, { message: 'Currency is required' });
   });
 }
 ```
@@ -1806,7 +1788,7 @@ export class LoggedSample {
   class="flex flex-col items-center justify-center py-20 gap-2"
   (submit)="$event.preventDefault(); authenticate()"
 >
-  <app-fieldset class="w-full max-w-xs">
+  <app-fieldset [field]="credentialsForm.username()" class="w-full max-w-xs">
     <ng-container label>Username</ng-container>
     <input
       field
@@ -1816,13 +1798,9 @@ export class LoggedSample {
       placeholder="Enter your username"
       [formField]="credentialsForm.username"
     />
-
-    @if (credentialsForm.username().getError('required')) {
-      <span appValidatorHint>Username is required</span>
-    }
   </app-fieldset>
 
-  <app-fieldset class="w-full max-w-xs">
+  <app-fieldset [field]="credentialsForm.password()" class="w-full max-w-xs">
     <ng-container label>Password</ng-container>
     <input
       #inputPassword
@@ -1856,12 +1834,6 @@ export class LoggedSample {
         </button>
       }
     </ng-container>
-
-    @if (credentialsForm.password().getError('required')) {
-      <span appValidatorHint>Password is required</span>
-    } @else if (credentialsForm.password().getError('minLength')) {
-      <span appValidatorHint>Password must be at least 8 characters</span>
-    }
   </app-fieldset>
 
   <div class="flex w-full max-w-xs">
@@ -1891,14 +1863,13 @@ import { Button } from '@/shared/components/button';
 import { Fieldset } from '@/shared/components/fieldset';
 import { Input } from '@/shared/components/input-field';
 import { Loading } from '@/shared/components/loading';
-import { ValidatorHint } from '@/shared/components/validator/validator-hint';
 import { Component, inject, signal } from '@angular/core';
 import { form, FormField, minLength, required } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-login-form-sample',
   templateUrl: './login-form.sample.html',
-  imports: [FormField, Fieldset, Input, ValidatorHint, Button, Loading],
+  imports: [FormField, Fieldset, Input, Button, Loading],
 })
 export class LoginFormSample {
   readonly authorization = inject(AuthorizationService);
@@ -1906,9 +1877,9 @@ export class LoginFormSample {
   readonly credentialsForm = form(
     signal({ username: 'emilys', password: 'emilyspass' }),
     (schema) => {
-      required(schema.username);
-      required(schema.password);
-      minLength(schema.password, 8);
+      required(schema.username, { message: 'Username is required' });
+      required(schema.password, { message: 'Password is required' });
+      minLength(schema.password, 8, { message: 'Password must be at least 8 characters' });
     },
   );
 
@@ -3627,37 +3598,100 @@ Reactive Forms still work via Angular 22 interop (`[formControl]` / `formControl
 kl install list-base
 ```
 
-### Md
+### TypeScript
 
-ListBase is an abstraction resource for datatable lists, providing a default structure and functionalities for listing data. It serves as a base component that can be extended to create specific list implementations, such as user lists, product lists, etc.
+```typescript
+import { Component } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
+import { map } from 'rxjs/internal/operators/map';
+import { DatalistResponse, ListBase } from '@/shared/base/list.base';
+import { HttpBase } from '@/shared/base/http.base';
+import { environment } from '@/environments/environment';
+
+interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
+@Injectable({ providedIn: 'root' })
+export class UsersService extends HttpBase {
+  constructor() {
+    super(environment.apiUrl, 'users');
+  }
+
+  getMany(queryParams: Record<string, unknown>): Observable<DatalistResponse<User>> {
+    return this.get(queryParams).pipe(map((response) => response as DatalistResponse<User>));
+  }
+}
+
+@Component({
+  selector: 'app-users-list',
+  template: `
+    <!-- bind currentPage, pageSize, totalItems, orderedBy, filter, datalist -->
+  `,
+})
+export class UsersList extends ListBase<User, UsersService> {
+  constructor() {
+    super(UsersService);
+  }
+}
+```
+
+### Overview
+
+ListBase is an abstraction for datatable lists. It wires pagination, sorting, filters, and a `resource` that loads data through an injected HTTP service with `getMany`.
+
+## Contract
+
+The service passed to `super(MyService)` must extend [HttpBase](./http-base.md) and implement:
+
+```typescript
+getMany(queryParams: any): Observable<DatalistResponse<TDataItem>>;
+```
+
+`ListBase` calls `getMany` with:
+
+- `page`, `limit` (from `pageSize`)
+- `orderBy`, `direction` when sorting is set
+- spread filter fields from the `filter` signal
+
+The response shape is `{ items: TDataItem[]; count: number }`. `count` updates `totalItems` for pagination.
 
 ## API
 
+### Generics
+
+- **TDataItem**: Row/item type.
+- **TListService**: Service type (defaults to a `HttpBase` with `getMany`).
+
+### Constructor
+
+- **service**: `Type<TListService>` — injected and used by the built-in `datalist` loader.
+
 ### Attributes
 
-- **currentPage**: Signal that holds the current page number (pagination).
-- **pageSize**: Signal that holds the number of items per page.
-- **totalItems**: Signal that holds the total number of items.
-- **orderedBy**: Signal that holds the ordering criteria.
-- **filter**: Signal that holds the applied filter.
-- **skeletonItems**: Computed signal for displaying placeholders while loading.
-- **defaultList**: Default response for use in datalist.
-- **filterPayload**: Payload for filters.
-- **filterParams**: Parameters for filters.
-- **datalist**: Abstract reference to the data resource.
-- **reload**: Signal to reload the list.
+- **currentPage**: Signal with the current page number.
+- **pageSize**: Signal with items per page (default `30`).
+- **totalItems**: Signal with the total item count (set from `getMany` `count`).
+- **orderedBy**: Signal with the current sort (`field` / `direction`).
+- **filter**: Signal with the applied filter object.
+- **filterPayload**: Readonly view of `filter`.
+- **filterParams**: Params object used by the `datalist` resource (`filter`, `page`, `pageSize`, `sortBy`, `order`).
+- **skeletonItems**: Computed placeholder list for loading UI.
+- **defaultList**: Empty `{ items: [], count: 0 }` default for the resource.
+- **datalist**: Built-in `resource` that loads via `service.getMany`.
+- **isMobile**: `true` when `window.innerWidth < 768` at construction.
+- **reload**: Input signal; when `true`, triggers `datalist.reload()`.
 
 ### Methods
 
-- **reloadList**: Triggers list reload.
-
-### Filter Definitions
-
-Define filters in the constructor of the class that extends ListBase.
+- **reloadList**: Reloads the datalist resource.
 
 ## Usage
 
-See usage examples in the [Database Block](./database.md).
+See the [Datatable](./datatable.md) block for a full table + filter + pagination example.
 
 ---
 

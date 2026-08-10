@@ -1,5 +1,5 @@
 ```html
-<app-fieldset>
+<app-fieldset [field]="currencyForm.currency()">
   <ng-container label>Currency</ng-container>
   <input
     field
@@ -9,8 +9,5 @@
     [formField]="currencyForm.currency"
     appCurrency
   />
-  @if (currencyForm.currency().getError('required')) {
-    <span appValidatorHint>Currency is required</span>
-  }
 </app-fieldset>
 ```

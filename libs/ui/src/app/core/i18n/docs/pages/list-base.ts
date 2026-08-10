@@ -5,11 +5,12 @@ export const LIST_BASE_PAGE = {
   pt: {
     title: 'ListBase',
     description:
-      'ListBase é uma abstração para listas de datatable, com estrutura e funcionalidades padrão. Estenda para listas específicas (usuários, produtos etc.).',
+      'ListBase é uma abstração para listas de datatable: paginação, ordenação, filtros e um resource que carrega dados via service HTTP com getMany.',
     sections: {
       installation: {
         title: 'Instalação',
-        description: 'Use o Koala CLI para gerar um novo componente list-base.',
+        description:
+          'Use o Koala CLI para instalar list-base (inclui http-base, is-mobile e from-observable-with-signal).',
       },
       api: {
         title: 'API',
@@ -18,25 +19,41 @@ export const LIST_BASE_PAGE = {
             title: 'Atributos',
             items: [
               {
+                name: 'service',
+                description:
+                  'Service injetado no constructor (Type<TListService>). Deve estender HttpBase e implementar getMany.',
+              },
+              {
                 name: 'currentPage',
                 description:
                   'Signal com o número da página atual da lista, para paginação e posição do usuário.',
               },
               {
                 name: 'pageSize',
-                description: 'Signal com a quantidade de itens por página, para paginação.',
+                description:
+                  'Signal com a quantidade de itens por página (padrão 30), enviado como limit no getMany.',
               },
               {
                 name: 'totalItems',
-                description: 'Signal com o total de itens da lista, para paginação e contagem.',
+                description:
+                  'Signal com o total de itens. Atualizado automaticamente com o count retornado por getMany.',
               },
               {
                 name: 'orderedBy',
-                description: 'Signal com a ordenação atual da lista.',
+                description: 'Signal com a ordenação atual da lista (field / direction).',
               },
               {
                 name: 'filter',
-                description: 'Signal com o filtro atual aplicado à lista.',
+                description: 'Signal com o filtro atual aplicado à lista (objeto espalhado no getMany).',
+              },
+              {
+                name: 'filterPayload',
+                description: 'Visão readonly do signal filter.',
+              },
+              {
+                name: 'filterParams',
+                description:
+                  'Parâmetros usados pelo resource datalist (filter, page, pageSize, sortBy, order).',
               },
               {
                 name: 'skeletonItems',
@@ -44,20 +61,20 @@ export const LIST_BASE_PAGE = {
               },
               {
                 name: 'defaultList',
-                description: 'Resposta padrão da lista para usar no resourceRef do datalist.',
-              },
-              {
-                name: 'filterParams',
-                description: 'Parâmetros usados para filtrar a lista.',
+                description: 'Resposta padrão { items: [], count: 0 } do resource datalist.',
               },
               {
                 name: 'datalist',
                 description:
-                  'Referência abstrata do datalist que deve ser implementada no componente que estende. É a fonte de dados da lista e oferece métodos para buscar e manipular os dados.',
+                  'Resource embutido que chama service.getMany com page, limit, orderBy/direction e filtros.',
+              },
+              {
+                name: 'isMobile',
+                description: 'true quando window.innerWidth < 768 no momento da construção.',
               },
               {
                 name: 'reload',
-                description: 'Signal que dispara o reload da lista.',
+                description: 'Input signal que, quando true, dispara datalist.reload().',
               },
             ],
           },
@@ -66,8 +83,7 @@ export const LIST_BASE_PAGE = {
             items: [
               {
                 name: 'reloadList',
-                description:
-                  'Método que seta o signal de reload como true, propagando o evento ao datatable.',
+                description: 'Recarrega o resource datalist.',
               },
             ],
           },
@@ -82,11 +98,12 @@ export const LIST_BASE_PAGE = {
   en: {
     title: 'ListBase',
     description:
-      'The ListBase is a abstraction resource for datatable lists, providing a default structure and functionalities for listing data. It serves as a base component that can be extended to create specific list implementations, such as user lists, product lists, etc.',
+      'ListBase is an abstraction for datatable lists: pagination, sorting, filters, and a resource that loads data through an HTTP service with getMany.',
     sections: {
       installation: {
         title: 'Installation',
-        description: 'Use the Koala CLI to generate a new list-base component.',
+        description:
+          'Use the Koala CLI to install list-base (includes http-base, is-mobile, and from-observable-with-signal).',
       },
       api: {
         title: 'API',
@@ -95,53 +112,65 @@ export const LIST_BASE_PAGE = {
             title: 'Attributes',
             items: [
               {
+                name: 'service',
+                description:
+                  'Service injected via the constructor (Type<TListService>). Must extend HttpBase and implement getMany.',
+              },
+              {
                 name: 'currentPage',
                 description:
-                  "Signal that holds the current page number of the list. It can be used for pagination purposes and to keep track of the user's position within the list.",
+                  'Signal that holds the current page number of the list for pagination.',
               },
               {
                 name: 'pageSize',
                 description:
-                  'Signal that holds the number of items per page in the list. It can be used for pagination purposes and to control the number of items displayed on each page.',
+                  'Signal that holds items per page (default 30), sent as limit to getMany.',
               },
               {
                 name: 'totalItems',
                 description:
-                  'Signal that holds the total number of items in the list. It can be used for pagination purposes and to display the total count of items.',
+                  'Signal that holds the total item count. Updated automatically from the getMany count.',
               },
               {
                 name: 'orderedBy',
                 description:
-                  'Signal that holds the current ordering of the list. It can be used to sort the list based on different criteria.',
+                  'Signal that holds the current list ordering (field / direction).',
               },
               {
                 name: 'filter',
                 description:
-                  'Signal that holds the current filter applied to the list. It can be used to filter the list based on different criteria.',
+                  'Signal that holds the current filter object (spread into getMany).',
               },
               {
-                name: 'skeletonItems',
-                description:
-                  'Computed signal that holds the number of skeleton items to display while the list is loading. It can be used to provide a visual indication of loading state.',
-              },
-              {
-                name: 'defaultList',
-                description: 'Default list response to use in datalist resourceRef.',
+                name: 'filterPayload',
+                description: 'Readonly view of the filter signal.',
               },
               {
                 name: 'filterParams',
                 description:
-                  'Parameters used for filtering the list. It can be used to apply specific filter criteria to the list.',
+                  'Parameters used by the datalist resource (filter, page, pageSize, sortBy, order).',
+              },
+              {
+                name: 'skeletonItems',
+                description:
+                  'Computed signal with skeleton placeholders while the list is loading.',
+              },
+              {
+                name: 'defaultList',
+                description: 'Default { items: [], count: 0 } response for the datalist resource.',
               },
               {
                 name: 'datalist',
                 description:
-                  'Abstract datalist resource reference that should be implemented in the extending component. It serves as a reference to the data source for the list and provides methods for fetching and manipulating the list data.',
+                  'Built-in resource that calls service.getMany with page, limit, orderBy/direction, and filters.',
+              },
+              {
+                name: 'isMobile',
+                description: 'true when window.innerWidth < 768 at construction time.',
               },
               {
                 name: 'reload',
-                description:
-                  'Signal that triggers a reload of the list. It can be used to refresh the list data.',
+                description: 'Input signal that, when true, triggers datalist.reload().',
               },
             ],
           },
@@ -150,8 +179,7 @@ export const LIST_BASE_PAGE = {
             items: [
               {
                 name: 'reloadList',
-                description:
-                  'Method that sets the reload signal to true, propagating the reload event to the datatable component.',
+                description: 'Reloads the datalist resource.',
               },
             ],
           },

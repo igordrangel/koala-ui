@@ -1,107 +1,95 @@
-<form [formGroup]="formFilter" (submit)="applyFilter()">
+<form (submit)="$event.preventDefault(); applyFilter()">
   <app-bottom-sheet>
     <div content class="max-h-[80vh] p-4 overflow-auto">
-      @for (field of config.fields; track $index) {
-        @let control = getControl(field.name);
+      @for (field of config.fields; track field.name) {
+        @let f = fieldOf(field.name);
 
-        @if (control) {
-          <app-fieldset>
-            <ng-container label>{{ field.label }}</ng-container>
+        <app-fieldset [field]="f()">
+          <ng-container label>{{ field.label }}</ng-container>
 
-            <ng-container field>
-              @switch (field.type) {
-                @case ('input') {
-                  @switch (field.inputType) {
-                    @case ('text')
-                    @case ('email')
-                    @case ('number')
-                    @case ('tel')
-                    @case ('url') {
-                      <input
-                        class="w-full bg-transparent"
-                        appInput
-                        size="md"
-                        [attr.type]="field.inputType"
-                        [placeholder]="field.placeholder ?? 'Type a value'"
-                        [formControl]="control"
-                      />
-                    }
-                    @case ('cpf')
-                    @case ('cnpj') {
-                      @let mask =
-                        field.inputType === 'cpf' ? '000.000.000-00' : 'SS.SSS.SSS/SSSS-SS';
+          <ng-container field>
+            @switch (field.type) {
+              @case ('input') {
+                @switch (field.inputType) {
+                  @case ('text')
+                  @case ('email')
+                  @case ('number')
+                  @case ('tel')
+                  @case ('url') {
+                    <input
+                      class="w-full bg-transparent"
+                      appInput
+                      size="md"
+                      [attr.type]="field.inputType"
+                      [placeholder]="field.placeholder ?? 'Type a value'"
+                      [formField]="f"
+                    />
+                  }
+                  @case ('cpf')
+                  @case ('cnpj') {
+                    @let mask =
+                      field.inputType === 'cpf' ? '000.000.000-00' : 'SS.SSS.SSS/SSSS-SS';
 
-                      <input
-                        class="w-full bg-transparent"
-                        appInput
-                        size="md"
-                        type="text"
-                        [appMask]="mask"
-                        [placeholder]="mask"
-                        [formControl]="control"
-                      />
-                    }
-                    @case ('currency') {
-                      <input
-                        class="w-full bg-transparent"
-                        appInput
-                        appCurrency
-                        size="md"
-                        type="text"
-                        placeholder="R$ 0,00"
-                        [formControl]="control"
-                      />
-                    }
+                    <input
+                      class="w-full bg-transparent"
+                      appInput
+                      size="md"
+                      type="text"
+                      [appMask]="mask"
+                      [placeholder]="mask"
+                      [formField]="f"
+                    />
+                  }
+                  @case ('currency') {
+                    <input
+                      class="w-full bg-transparent"
+                      appInput
+                      appCurrency
+                      size="md"
+                      type="text"
+                      placeholder="R$ 0,00"
+                      [formField]="f"
+                    />
                   }
                 }
-                @case ('select') {
-                  @let options = getSelectOptions(field);
-
-                  <app-select
-                    #selectField
-                    size="xs"
-                    [options]="options"
-                    [placeholder]="field.placeholder || 'Select an option'"
-                    [multiple]="field.multiple"
-                    [formControl]="control"
-                  />
-                }
-                @case ('combobox') {
-                  @let options = getComboboxOptions(field);
-
-                  <app-combobox
-                    #comboboxField
-                    size="xs"
-                    [options]="options"
-                    [placeholder]="field.placeholder || 'Select an option'"
-                    [multiple]="field.multiple"
-                    [formControl]="control"
-                  />
-                }
-                @case ('calendar') {
-                  <app-input-calendar
-                    #calendarField
-                    format="dd/MM/yyyy"
-                    [placeholder]="field.placeholder ?? 'Select a date'"
-                    [formControl]="control"
-                  />
-                }
               }
-            </ng-container>
+              @case ('select') {
+                @let options = getSelectOptions(field);
 
-            <ng-container hint>{{ field.hint }}</ng-container>
+                <app-select
+                  #selectField
+                  size="md"
+                  [options]="options"
+                  [placeholder]="field.placeholder || 'Select an option'"
+                  [multiple]="field.multiple"
+                  [formField]="f"
+                />
+              }
+              @case ('combobox') {
+                @let options = getComboboxOptions(field);
 
-            @if (control.hasError('required')) {
-              <span appValidatorHint>{{ field.label }} is required</span>
-            } @else if (control.hasError('email')) {
-              <span appValidatorHint>Invalid email</span>
-            } @else if (control.hasError('cpfInvalid')) {
-              <span appValidatorHint>CPF inválido</span>
-            } @else if (control.hasError('cnpjInvalid')) {
-              <span appValidatorHint>CNPJ inválido</span>
+                <app-combobox
+                  #comboboxField
+                  size="md"
+                  [options]="options"
+                  [placeholder]="field.placeholder || 'Select an option'"
+                  [multiple]="field.multiple"
+                  [formField]="f"
+                />
+              }
+              @case ('calendar') {
+                <app-input-calendar
+                  #calendarField
+                  format="dd/MM/yyyy"
+                  [placeholder]="field.placeholder ?? 'Select a date'"
+                  [formField]="f"
+                />
+              }
             }
-          </app-fieldset>
-        }
+          </ng-container>
+
+          <ng-container hint>{{ field.hint }}</ng-container>
+        </app-fieldset>
       }
     </div>
 

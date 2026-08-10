@@ -1,12 +1,20 @@
 import { Button } from '@/shared/components/button';
 import { isMobile } from '@/shared/utils/is-mobile';
-import { Component, inject, input, OnInit, output, signal } from '@angular/core';
+import { Component, inject, Injector, input, OnInit, output, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BottomSheet } from '../bottom-sheet';
-import { InlineFilterConfig } from './config';
+import { InlineFilterConfig, InlineFilterField } from './config';
 import { InputPicker } from './parts/picker/input-picker';
 import { MobilePicker } from './parts/picker/mobile-picker';
+import { optionsToQueryParams } from './utils/options-to-query-params';
+import { queryParamsToOptions } from './utils/query-params-to-options';
+
+interface QueryParams {
+  [key: string]: any;
+  page?: string;
+  pageSize?: string;
+}
 
 @Component({
   selector: 'app-inline-filter',
@@ -14,8 +22,10 @@ import { MobilePicker } from './parts/picker/mobile-picker';
   imports: [InputPicker, Button],
 })
 export class Wrapper implements OnInit {
+  private readonly injector = inject(Injector);
   private readonly bottomSheet = inject(BottomSheet);
   private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly router = inject(Router);
 
   private readonly queryParams = toSignal(this.activatedRoute.queryParams, {
     initialValue: this.activatedRoute.snapshot.queryParams,
@@ -31,9 +41,27 @@ export class Wrapper implements OnInit {
 
   ngOnInit(): void {
     if (this.isMobile) {
-      const queryParams = this.queryParams() ?? {};
+      let queryParams = { ...(this.queryParams() ?? {}) } as QueryParams;
+
+      delete queryParams.page;
+      delete queryParams.pageSize;
+
+      const selectedOptions = signal<InlineFilterField[]>([]);
+
+      queryParamsToOptions(
+        this.config().fields,
+        selectedOptions,
+        this.queryParams() ?? {},
+        this.injector,
+      );
+
+      queryParams = optionsToQueryParams(selectedOptions());
+
       this.qtyFieldsFiltered.set(Object.keys(queryParams).length);
+
       this.payload.emit(queryParams);
+
+      queueMicrotask(() => this.router.navigate([], { queryParams }));
     }
   }
 

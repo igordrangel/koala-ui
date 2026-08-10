@@ -203,6 +203,18 @@ Changelog for anyone using or upgrading projects scaffolded with the Koala UI CL
 Site page: https://ui.koalarx.com/#/getting-started/patch-notes
 Root CHANGELOG.md mirrors these notes.
 
+## 23.0.2 — ListBase with service + getMany
+
+### What changed
+
+- Built-in \`datalist\` calls \`service.getMany\` and syncs \`totalItems\` from \`count\`.
+- Second generic is \`TListService\`; constructor takes \`Type<TListService>\` (\`super(MyService)\`).
+- \`kl install list-base\` also installs \`http\` (HttpBase), \`is-mobile\`, and \`from-observable-with-signal\`.
+
+### Upgrade
+
+Service must extend HttpBase and implement \`getMany\`. Replace \`ListBase<T, TFilter>\` with \`ListBase<T, MyService>\`, call \`super(MyService)\`, remove \`override datalist\` if using the default loader, and reinstall with \`kl install list-base\`.
+
 ## 23.0.1 — CLI --silent
 
 ### What changed

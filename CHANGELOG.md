@@ -13,6 +13,22 @@ Formato inspirado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/)
 
 A partir de **23.x**, o major de `@koalarx/ui` = major do Angular + 1 (`23` → Angular 22). A linha `22.x` permanece para Angular 21 (`previous-release` / dist-tag `angular-21`).
 
+## [23.0.2] — ListBase com service + `getMany`
+
+### Changed
+
+- `ListBase` deixa de exigir `override datalist`: o resource embutido chama `service.getMany` e sincroniza `totalItems` com `count`.
+- 2º genérico passa a ser o tipo do service (`TListService`); o constructor recebe `Type<TListService>`.
+- `kl install list-base` agora instala também `http` (HttpBase), `is-mobile` e `from-observable-with-signal`.
+
+### Upgrade
+
+1. Service deve estender `HttpBase` e implementar `getMany(...): Observable<DatalistResponse<T>>`.
+2. Troque `extends ListBase<T, TFilter>` por `extends ListBase<T, MyService>`.
+3. `constructor() { super(); }` → `constructor() { super(MyService); }`.
+4. Remova `override datalist` se for usar o loader padrão.
+5. Reinstale: `kl install list-base` (ou `kl install list-base --silent`).
+
 ## [23.0.1] — CLI `--silent`
 
 ### Added

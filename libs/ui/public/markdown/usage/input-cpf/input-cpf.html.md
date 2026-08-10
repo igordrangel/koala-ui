@@ -1,5 +1,5 @@
 ```html
-<app-fieldset>
+<app-fieldset [field]="cpfForm.cpf()">
   <ng-container label>CPF</ng-container>
   <input
     field
@@ -10,11 +10,5 @@
     appMask="000.000.000-00"
   />
   <ng-container hint>Inform a valid CPF</ng-container>
-
-  @if (cpfForm.cpf().getError('required')) {
-    <span appValidatorHint>CPF is required</span>
-  } @else if (cpfForm.cpf().getError('cpfInvalid')) {
-    <span appValidatorHint>Invalid CPF</span>
-  }
 </app-fieldset>
 ```

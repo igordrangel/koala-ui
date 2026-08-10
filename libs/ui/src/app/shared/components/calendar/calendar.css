@@ -4,6 +4,7 @@ calendar-select-year::part(label) {
 
 calendar-select-year::part(select) {
   background-color: var(--color-base-100);
+  color: var(--color-base-content);
   border: none;
   font-weight: 700;
   font-size: 1rem;

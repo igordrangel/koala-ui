@@ -1,13 +1,7 @@
 ```html
-<app-fieldset>
+<app-fieldset [field]="emailForm.email()">
   <ng-container label>What is your email?</ng-container>
   <input field appInput type="text" placeholder="Type here" [formField]="emailForm.email" />
   <ng-container hint>Inform a valid email address</ng-container>
-
-  @if (emailForm.email().getError('required')) {
-    <span appValidatorHint>Email is required</span>
-  } @else if (emailForm.email().getError('email')) {
-    <span appValidatorHint>Invalid email</span>
-  }
 </app-fieldset>
 ```
