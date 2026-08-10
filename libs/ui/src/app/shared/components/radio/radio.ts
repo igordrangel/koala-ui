@@ -107,12 +107,18 @@ export class Radio {
     });
   }
 
-  protected handleClick(event: MouseEvent) {
+  private tryClearSelection(event: Event) {
     const radio = this.elementRef.nativeElement;
     const control = this.injector.get(NgControl, null, { self: true, optional: true })?.control;
     const currentValue = control?.value;
 
-    if (String(currentValue ?? '') !== radio.value) {
+    // Native / signal forms: compare against the group's checked radio value when no NgControl.
+    const selectedInGroup =
+      currentValue !== undefined && currentValue !== null
+        ? String(currentValue) === radio.value
+        : radio.checked;
+
+    if (!selectedInGroup) {
       return;
     }
 
@@ -128,25 +134,12 @@ export class Radio {
     });
   }
 
+  protected handleClick(event: MouseEvent) {
+    this.tryClearSelection(event);
+  }
+
   protected handleSpace(event: Event) {
-    const radio = this.elementRef.nativeElement;
-    const control = this.injector.get(NgControl, null, { self: true, optional: true })?.control;
-    const currentValue = control?.value;
-
-    if (String(currentValue ?? '') !== radio.value) {
-      return;
-    }
-
-    event.preventDefault();
-    queueMicrotask(() => {
-      control?.setValue(null);
-      control?.markAsTouched();
-      this.clearGroupSelection(radio);
-
-      requestAnimationFrame(() => {
-        this.clearGroupSelection(radio);
-      });
-    });
+    this.tryClearSelection(event);
   }
 
   private clearGroupSelection(currentRadio: HTMLInputElement) {
