@@ -59,7 +59,7 @@ export class Wrapper implements OnInit {
 
       this.payload.emit(queryParams);
 
-      queueMicrotask(() => this.router.navigate([], { queryParams, queryParamsHandling: 'merge' }));
+      queueMicrotask(() => this.router.navigate([], { queryParams }));
     }
   }
 
