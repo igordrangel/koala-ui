@@ -17,7 +17,7 @@
         <div
           class="flex flex-col items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
         >
-          <app-fieldset>
+          <app-fieldset [field]="currencyForm.currency()">
             <ng-container label>Currency</ng-container>
             <input
               field
@@ -27,9 +27,6 @@
               [formField]="currencyForm.currency"
               appCurrency
             />
-            @if (currencyForm.currency().getError('required')) {
-              <span appValidatorHint>Currency is required</span>
-            }
           </app-fieldset>
         </div>
       </div>

@@ -39,7 +39,7 @@ export default tseslint.config(
           style: 'kebab-case',
         },
       ],
-      '@angular-eslint/prefer-inject': 'error',
+      '@angular-eslint/prefer-inject': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
     },
   },

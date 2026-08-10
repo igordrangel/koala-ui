@@ -28,6 +28,15 @@ describe('installComponent', () => {
     expect(deps.coreResourceDeps).toEqual([]);
   });
 
+  it('should resolve list-base dependencies', () => {
+    const deps = installComponent('my-app', 'list-base');
+
+    expect(deps.baseDeps).toEqual(['list', 'http']);
+    expect(deps.utilDeps).toEqual(['is-mobile', 'from-observable-with-signal']);
+    expect(deps.componentDeps).toEqual(['table']);
+    expect(deps.coreResourceDeps).toEqual([]);
+  });
+
   it('should resolve page-base dependencies', () => {
     const deps = installComponent('my-app', 'page-base');
 

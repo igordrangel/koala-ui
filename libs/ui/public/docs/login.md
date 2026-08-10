@@ -59,7 +59,7 @@ export class LoggedSample {
   class="flex flex-col items-center justify-center py-20 gap-2"
   (submit)="$event.preventDefault(); authenticate()"
 >
-  <app-fieldset class="w-full max-w-xs">
+  <app-fieldset [field]="credentialsForm.username()" class="w-full max-w-xs">
     <ng-container label>Username</ng-container>
     <input
       field
@@ -69,13 +69,9 @@ export class LoggedSample {
       placeholder="Enter your username"
       [formField]="credentialsForm.username"
     />
-
-    @if (credentialsForm.username().getError('required')) {
-      <span appValidatorHint>Username is required</span>
-    }
   </app-fieldset>
 
-  <app-fieldset class="w-full max-w-xs">
+  <app-fieldset [field]="credentialsForm.password()" class="w-full max-w-xs">
     <ng-container label>Password</ng-container>
     <input
       #inputPassword
@@ -109,12 +105,6 @@ export class LoggedSample {
         </button>
       }
     </ng-container>
-
-    @if (credentialsForm.password().getError('required')) {
-      <span appValidatorHint>Password is required</span>
-    } @else if (credentialsForm.password().getError('minLength')) {
-      <span appValidatorHint>Password must be at least 8 characters</span>
-    }
   </app-fieldset>
 
   <div class="flex w-full max-w-xs">
@@ -144,14 +134,13 @@ import { Button } from '@/shared/components/button';
 import { Fieldset } from '@/shared/components/fieldset';
 import { Input } from '@/shared/components/input-field';
 import { Loading } from '@/shared/components/loading';
-import { ValidatorHint } from '@/shared/components/validator/validator-hint';
 import { Component, inject, signal } from '@angular/core';
 import { form, FormField, minLength, required } from '@angular/forms/signals';
 
 @Component({
   selector: 'app-login-form-sample',
   templateUrl: './login-form.sample.html',
-  imports: [FormField, Fieldset, Input, ValidatorHint, Button, Loading],
+  imports: [FormField, Fieldset, Input, Button, Loading],
 })
 export class LoginFormSample {
   readonly authorization = inject(AuthorizationService);
@@ -159,9 +148,9 @@ export class LoginFormSample {
   readonly credentialsForm = form(
     signal({ username: 'emilys', password: 'emilyspass' }),
     (schema) => {
-      required(schema.username);
-      required(schema.password);
-      minLength(schema.password, 8);
+      required(schema.username, { message: 'Username is required' });
+      required(schema.password, { message: 'Password is required' });
+      minLength(schema.password, 8, { message: 'Password must be at least 8 characters' });
     },
   );
 

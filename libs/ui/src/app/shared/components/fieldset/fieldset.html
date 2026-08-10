@@ -1,6 +1,10 @@
 <fieldset class="fieldset">
   <legend class="fieldset-legend mb-0 pb-[0.1rem]">
     <ng-content select="[label]" />
+
+    @if (field().required()) {
+      <span>*</span>
+    }
   </legend>
 
   <div class="relative">
@@ -9,7 +13,12 @@
       <ng-content select="[action]" />
     </div>
   </div>
-  <ng-content select="[appValidatorHint]" />
+
+  @for (error of field().errors(); track error) {
+    <span appValidatorHint [class.block!]="field().touched()">
+      {{ error.message }}
+    </span>
+  }
 
   <div class="flex w-full opacity-60 empty:hidden">
     <ng-content select="[hint]" />

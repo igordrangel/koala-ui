@@ -9,15 +9,13 @@ import { Combobox, ComboboxOptions } from '@/shared/components/combobox';
 import { Fieldset } from '@/shared/components/fieldset';
 import { Input } from '@/shared/components/input-field';
 import { Select, SelectOption } from '@/shared/components/select';
-import { ValidatorHint } from '@/shared/components/validator/validator-hint';
 import { CurrencyMask } from '@/shared/directives/currency.directive';
 import { Mask } from '@/shared/directives/mask.directive';
-import { CnpjValidator } from '@/shared/validators/cnpj.validator';
-import { CpfValidator } from '@/shared/validators/cpf.validator';
-import { Component, inject, OnInit, ResourceRef } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject, ResourceRef, signal } from '@angular/core';
+import { ValidatorFn, Validators } from '@angular/forms';
+import { email, form, FormField, required, validate } from '@angular/forms/signals';
 import { ActivatedRoute, Router } from '@angular/router';
+import { validateCnpj, validateCpf } from '@koalarx/utils/KlString';
 import { InlineFilterConfig, InlineFilterField } from '../../config';
 import { optionsToQueryParams } from '../../utils/options-to-query-params';
 
@@ -26,7 +24,7 @@ import { optionsToQueryParams } from '../../utils/options-to-query-params';
   templateUrl: './mobile-picker.html',
   imports: [
     BottomSheetContainer,
-    ReactiveFormsModule,
+    FormField,
     Fieldset,
     Input,
     Mask,
@@ -34,52 +32,74 @@ import { optionsToQueryParams } from '../../utils/options-to-query-params';
     Select,
     InputCalendar,
     Combobox,
-    ValidatorHint,
     Button,
   ],
 })
-export class MobilePicker implements OnInit {
+export class MobilePicker {
   private readonly router = inject(Router);
   private readonly activatedRoute = inject(ActivatedRoute);
 
-  private readonly queryParams = toSignal(this.activatedRoute.queryParams, {
-    initialValue: this.activatedRoute.snapshot.queryParams,
-  });
-
   readonly bottomSheetRef = inject(BottomSheetRef);
   readonly config = inject<InlineFilterConfig>(BOTTOM_SHEET_DATA);
-  readonly formFilter = inject(FormBuilder).group({});
 
-  constructor() {
-    this.config.fields.forEach((field) => {
-      const control = new FormControl(field.defaultValue, field.validators);
+  private readonly model = signal(this.createInitialModel());
 
-      if (field.inputType === 'cpf') {
-        control.addValidators(CpfValidator);
+  readonly formFilter = form(this.model, (schema) => {
+    for (const field of this.config.fields) {
+      const path = (schema as any)[field.name];
+
+      if (this.hasRequiredValidator(field.validators)) {
+        required(path, { message: `${field.label} is required` });
+      }
+
+      if (field.inputType === 'email') {
+        email(path, { message: 'Invalid email' });
+      } else if (field.inputType === 'cpf') {
+        validate(path, ({ value }) => {
+          const current = value() as string | null | undefined;
+          if (!current) {
+            return undefined;
+          }
+
+          return validateCpf(current) ? undefined : { kind: 'cpfInvalid', message: 'CPF inválido' };
+        });
       } else if (field.inputType === 'cnpj') {
-        control.addValidators(CnpjValidator);
-      } else if (field.inputType === 'email') {
-        control.addValidators(Validators.email);
-      }
+        validate(path, ({ value }) => {
+          const current = value() as string | null | undefined;
+          if (!current) {
+            return undefined;
+          }
 
-      this.formFilter.addControl(field.name, control);
-    });
+          return validateCnpj(current)
+            ? undefined
+            : { kind: 'cnpjInvalid', message: 'CNPJ inválido' };
+        });
+      }
+    }
+  });
+
+  private createInitialModel(): Record<string, any> {
+    const queryParams = this.activatedRoute.snapshot.queryParams ?? {};
+
+    return Object.fromEntries(
+      this.config.fields.map((field) => [
+        field.name,
+        queryParams[field.name] ?? field.defaultValue ?? null,
+      ]),
+    );
   }
 
-  ngOnInit(): void {
-    const queryParams = this.queryParams() ?? {};
+  private hasRequiredValidator(validators?: ValidatorFn | ValidatorFn[]): boolean {
+    if (!validators) {
+      return false;
+    }
 
-    Object.keys(queryParams).forEach((key) => {
-      const field = this.config.fields.find((f) => f.name === key);
-      if (field) {
-        const value = queryParams[key];
-        this.formFilter.get(key)?.setValue(value);
-      }
-    });
+    const list = Array.isArray(validators) ? validators : [validators];
+    return list.includes(Validators.required);
   }
 
-  getControl(name: string) {
-    return this.formFilter.get(name) as FormControl;
+  fieldOf(name: string): any {
+    return (this.formFilter as any)[name];
   }
 
   getSelectOptions(field: InlineFilterField) {
@@ -95,24 +115,25 @@ export class MobilePicker implements OnInit {
   }
 
   applyFilter() {
-    if (this.formFilter.valid) {
-      const formData = this.formFilter.getRawValue() as any;
-
-      this.config.fields.forEach((field) => {
-        const value = formData[field.name];
-
-        if (Array.isArray(value) && value.length === 0) {
-          formData[field.name] = null;
-          return;
-        }
-
-        field.value = value;
-      });
-
-      const payload = optionsToQueryParams(this.config.fields);
-
-      this.router.navigate([], { queryParams: payload });
-      this.bottomSheetRef.dismiss(payload);
+    if (!this.formFilter().valid()) {
+      return;
     }
+
+    const formData = { ...this.formFilter().value() } as Record<string, any>;
+
+    this.config.fields.forEach((field) => {
+      let value = formData[field.name];
+
+      if (Array.isArray(value) && value.length === 0) {
+        value = null;
+      }
+
+      field.value.set(value);
+    });
+
+    const payload = optionsToQueryParams(this.config.fields);
+
+    this.router.navigate([], { queryParams: payload });
+    this.bottomSheetRef.dismiss(payload);
   }
 }

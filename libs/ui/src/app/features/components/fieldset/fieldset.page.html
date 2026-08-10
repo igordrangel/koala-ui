@@ -18,7 +18,7 @@
         <div
           class="flex flex-col items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
         >
-          <app-fieldset>
+          <app-fieldset [field]="emailForm.email()">
             <ng-container label>What is your email?</ng-container>
             <input
               field
@@ -28,12 +28,6 @@
               [formField]="emailForm.email"
             />
             <ng-container hint>Inform a valid email address</ng-container>
-
-            @if (emailForm.email().getError('required')) {
-              <span appValidatorHint>Email is required</span>
-            } @else if (emailForm.email().getError('email')) {
-              <span appValidatorHint>Invalid email</span>
-            }
           </app-fieldset>
         </div>
       </div>
@@ -72,7 +66,7 @@
           class="flex flex-col items-center justify-center gap-2 p-4 sm:p-10 border border-t-0 border-base-300 rounded-b-lg"
         >
           <form class="flex flex-col items-center justify-center gap-2">
-            <app-fieldset class="w-full max-w-xs">
+            <app-fieldset [field]="loginForm.email()" class="w-full max-w-xs">
               <ng-container label>E-mail</ng-container>
               <input
                 field
@@ -82,15 +76,9 @@
                 placeholder="example@example.com"
                 [formField]="loginForm.email"
               />
-
-              @if (loginForm.email().getError('required')) {
-                <span appValidatorHint>Email is required</span>
-              } @else if (loginForm.email().getError('email')) {
-                <span appValidatorHint>Invalid email</span>
-              }
             </app-fieldset>
 
-            <app-fieldset class="w-full max-w-xs">
+            <app-fieldset [field]="loginForm.password()" class="w-full max-w-xs">
               <ng-container label>Password</ng-container>
               <input
                 #inputPassword
@@ -124,12 +112,6 @@
                   </button>
                 }
               </ng-container>
-
-              @if (loginForm.password().getError('required')) {
-                <span appValidatorHint>Password is required</span>
-              } @else if (loginForm.password().getError('minLength')) {
-                <span appValidatorHint>Password must be at least 8 characters</span>
-              }
             </app-fieldset>
 
             <div class="flex w-full max-w-xs">

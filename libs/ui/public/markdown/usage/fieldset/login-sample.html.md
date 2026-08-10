@@ -1,6 +1,6 @@
 ```html
 <form class="flex flex-col items-center justify-center gap-2">
-  <app-fieldset class="w-full max-w-xs">
+  <app-fieldset [field]="loginForm.email()" class="w-full max-w-xs">
     <ng-container label>E-mail</ng-container>
     <input
       field
@@ -10,15 +10,9 @@
       placeholder="example@example.com"
       [formField]="loginForm.email"
     />
-
-    @if (loginForm.email().getError('required')) {
-      <span appValidatorHint>Email is required</span>
-    } @else if (loginForm.email().getError('email')) {
-      <span appValidatorHint>Invalid email</span>
-    }
   </app-fieldset>
 
-  <app-fieldset class="w-full max-w-xs">
+  <app-fieldset [field]="loginForm.password()" class="w-full max-w-xs">
     <ng-container label>Password</ng-container>
     <input
       #inputPassword
@@ -52,12 +46,6 @@
         </button>
       }
     </ng-container>
-
-    @if (loginForm.password().getError('required')) {
-      <span appValidatorHint>Password is required</span>
-    } @else if (loginForm.password().getError('minLength')) {
-      <span appValidatorHint>Password must be at least 8 characters</span>
-    }
   </app-fieldset>
 
   <div class="flex w-full max-w-xs">

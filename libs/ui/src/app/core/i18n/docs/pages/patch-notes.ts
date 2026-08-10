@@ -12,6 +12,18 @@ export const PATCH_NOTES_PAGE = {
         description:
           'A versão publicada do pacote @koalarx/ui aparece no package.json do repositório. O arquivo CHANGELOG.md na raiz espelha estas notas. A partir de 23.x, o major da lib = major do Angular + 1 (23 → Angular 22). Para Angular 21 use a linha 22.x; para Angular 22 use 23.x.',
       },
+      v2302: {
+        title: '23.0.2 — ListBase com service + getMany',
+        description:
+          'ListBase passa a carregar listas via service HttpBase com getMany; install puxa deps novas.',
+        items: [
+          'datalist embutido chama service.getMany e sincroniza totalItems com count.',
+          '2º genérico é TListService; constructor recebe Type<TListService> (super(MyService)).',
+          'kl install list-base também instala http (HttpBase), is-mobile e from-observable-with-signal.',
+        ],
+        upgrade:
+          'Service deve estender HttpBase e implementar getMany. Troque ListBase<T, TFilter> por ListBase<T, MyService>, chame super(MyService), remova override datalist se usar o loader padrão, e reinstale com kl install list-base.',
+      },
       v2301: {
         title: '23.0.1 — CLI --silent',
         description: 'Modo não interativo na CLI para agentes de IA e CI.',
@@ -60,6 +72,18 @@ export const PATCH_NOTES_PAGE = {
         title: 'How to use these notes',
         description:
           'The published @koalarx/ui package version is in the repository package.json. The root CHANGELOG.md mirrors these notes. From 23.x onward, library major = Angular major + 1 (23 → Angular 22). For Angular 21 use the 22.x line; for Angular 22 use 23.x.',
+      },
+      v2302: {
+        title: '23.0.2 — ListBase with service + getMany',
+        description:
+          'ListBase now loads lists through an HttpBase service with getMany; install pulls new deps.',
+        items: [
+          'Built-in datalist calls service.getMany and syncs totalItems from count.',
+          'Second generic is TListService; constructor takes Type<TListService> (super(MyService)).',
+          'kl install list-base also installs http (HttpBase), is-mobile, and from-observable-with-signal.',
+        ],
+        upgrade:
+          'Service must extend HttpBase and implement getMany. Replace ListBase<T, TFilter> with ListBase<T, MyService>, call super(MyService), remove override datalist if using the default loader, and reinstall with kl install list-base.',
       },
       v2301: {
         title: '23.0.1 — CLI --silent',

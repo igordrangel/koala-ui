@@ -74,7 +74,31 @@
     "title": "Patch notes",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "content": "Koala UI – Patch notes Changelog for anyone using or upgrading projects scaffolded with the Koala UI CLI. Site page: https://ui.koalarx.com/ /getting-started/patch-notes Root CHANGELOG.md mirrors these notes. 23.0.1 — CLI --silent What changed - flag on , , and : non-interactive mode (accepts external libs and skips prompts; on new/init defaults to bun + AI context none). Upgrade For AI agents or CI, prefer and . Interactive use without the flag is unchanged. 23.0.0 — Angular 22 + Signal Forms What changed - Docs app and CLI pins on Angular 22 / TypeScript 6. - Form controls migrated from ControlValueAccessor to FormValueControl / FormCheckboxControl (Signal Forms; Reactive Forms and ngModel remain compatible on Angular 22). - inline-filter migrated to Signal Forms; builder validators now use FieldValidator (({ value }) = …), not ValidatorFn. - Removed control-changes, form-is-valid, and get-value-on-first-change utils (Reactive Forms bridges); CLI no longer scaffolds or installs them as component deps. - Functional HTTP interceptors (withInterceptors); NgZone removed from mask/currency. - Versioning policy: 22.x = Angular 21; 23.x = Angular 22. Upgrade Upgrade consumer apps to Angular 22. Re-run for form components (and inline-filter) to pick up FormValueControl/Signal Forms. If you pass validators to InlineFilterBuilder, replace ValidatorFn with Signal Forms FieldValidator. Delete control-changes.ts / form-is-valid.ts / get-value-on-first-change.ts if present and replace usages with field().value() / field().valid(). For Angular 21, stay on the 22.x line (angular-21 dist-tag after release). 22.3.0 — AI context What changed - AI context prompt in and (Cursor, GitHub Copilot, both, or none). - flag to skip the interactive prompt. - New command — scaffolds plus Cursor rules / Copilot instructions. Does not overwrite existing files. - Assets under focused on docs-first, , and Angular (Signals/standalone). - Patch notes documentation on the site and at the repo root. Upgrade On existing projects: , , or both. On new projects, choose in the prompt or use ."
+    "content": "Koala UI – Patch notes Changelog for anyone using or upgrading projects scaffolded with the Koala UI CLI. Site page: https://ui.koalarx.com/ /getting-started/patch-notes Root CHANGELOG.md mirrors these notes. 23.0.2 — ListBase with service + getMany What changed - Built-in calls and syncs from . - Second generic is ; constructor takes ( ). - also installs (HttpBase), , and . Upgrade Service must extend HttpBase and implement . Replace with , call , remove if using the default loader, and reinstall with . 23.0.1 — CLI --silent What changed - flag on , , and : non-interactive mode (accepts external libs and skips prompts; on new/init defaults to bun + AI context none). Upgrade For AI agents or CI, prefer and . Interactive use without the flag is unchanged. 23.0.0 — Angular 22 + Signal Forms What changed - Docs app and CLI pins on Angular 22 / TypeScript 6. - Form controls migrated from ControlValueAccessor to FormValueControl / FormCheckboxControl (Signal Forms; Reactive Forms and ngModel remain compatible on Angular 22). - inline-filter migrated to Signal Forms; builder validators now use FieldValidator (({ value }) = …), not ValidatorFn. - Removed control-changes, form-is-valid, and get-value-on-first-change utils (Reactive Forms bridges); CLI no longer scaffolds or installs them as component deps. - Functional HTTP interceptors (withInterceptors); NgZone removed from mask/currency. - Versioning policy: 22.x = Angular 21; 23.x = Angular 22. Upgrade Upgrade consumer apps to Angular 22. Re-run for form components (and inline-filter) to pick up FormValueControl/Signal Forms. If you pass validators to InlineFilterBuilder, replace ValidatorFn with Signal Forms FieldValidator. Delete control-changes.ts / form-is-valid.ts / get-value-on-first-change.ts if present and replace usages with field().value() / field().valid(). For Angular 21, stay on the 22.x line (angular-21 dist-tag after release). 22.3.0 — AI context What changed - AI context prompt in and (Cursor, GitHub Copilot, both, or none). - flag to skip the interactive prompt. - New command — scaffolds plus Cursor rules / Copilot instructions. Does not overwrite existing files. - Assets under focused on docs-first, , and Angular (Signals/standalone). - Patch notes documentation on the site and at the repo root. Upgrade On existing projects: , , or both. On new projects, choose in the prompt or use ."
+  },
+  {
+    "id": "getting-started/patch-notes#2302-listbase-with-service-getmany",
+    "title": "23.0.2 — ListBase with service + getMany",
+    "category": "Getting Started",
+    "route": "getting-started/patch-notes",
+    "fragment": "2302-listbase-with-service-getmany",
+    "content": ""
+  },
+  {
+    "id": "getting-started/patch-notes#what-changed",
+    "title": "What changed",
+    "category": "Getting Started",
+    "route": "getting-started/patch-notes",
+    "fragment": "what-changed",
+    "content": "- Built-in calls and syncs from . - Second generic is ; constructor takes ( ). - also installs (HttpBase), , and ."
+  },
+  {
+    "id": "getting-started/patch-notes#upgrade",
+    "title": "Upgrade",
+    "category": "Getting Started",
+    "route": "getting-started/patch-notes",
+    "fragment": "upgrade",
+    "content": "Service must extend HttpBase and implement . Replace with , call , remove if using the default loader, and reinstall with ."
   },
   {
     "id": "getting-started/patch-notes#2301-cli---silent",
@@ -85,19 +109,19 @@
     "content": ""
   },
   {
-    "id": "getting-started/patch-notes#what-changed",
+    "id": "getting-started/patch-notes#what-changed-2",
     "title": "What changed",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "fragment": "what-changed",
+    "fragment": "what-changed-2",
     "content": "- flag on , , and : non-interactive mode (accepts external libs and skips prompts; on new/init defaults to bun + AI context none)."
   },
   {
-    "id": "getting-started/patch-notes#upgrade",
+    "id": "getting-started/patch-notes#upgrade-2",
     "title": "Upgrade",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "fragment": "upgrade",
+    "fragment": "upgrade-2",
     "content": "For AI agents or CI, prefer and . Interactive use without the flag is unchanged."
   },
   {
@@ -109,19 +133,19 @@
     "content": ""
   },
   {
-    "id": "getting-started/patch-notes#what-changed-2",
+    "id": "getting-started/patch-notes#what-changed-3",
     "title": "What changed",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "fragment": "what-changed-2",
+    "fragment": "what-changed-3",
     "content": "- Docs app and CLI pins on Angular 22 / TypeScript 6. - Form controls migrated from ControlValueAccessor to FormValueControl / FormCheckboxControl (Signal Forms; Reactive Forms and ngModel remain compatible on Angular 22). - inline-filter migrated to Signal Forms; builder validators now use FieldValidator (({ value }) = …), not ValidatorFn. - Removed control-changes, form-is-valid, and get-value-on-first-change utils (Reactive Forms bridges); CLI no longer scaffolds or installs them as component deps. - Functional HTTP interceptors (withInterceptors); NgZone removed from mask/currency. - Versioning policy: 22.x = Angular 21; 23.x = Angular 22."
   },
   {
-    "id": "getting-started/patch-notes#upgrade-2",
+    "id": "getting-started/patch-notes#upgrade-3",
     "title": "Upgrade",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "fragment": "upgrade-2",
+    "fragment": "upgrade-3",
     "content": "Upgrade consumer apps to Angular 22. Re-run for form components (and inline-filter) to pick up FormValueControl/Signal Forms. If you pass validators to InlineFilterBuilder, replace ValidatorFn with Signal Forms FieldValidator. Delete control-changes.ts / form-is-valid.ts / get-value-on-first-change.ts if present and replace usages with field().value() / field().valid(). For Angular 21, stay on the 22.x line (angular-21 dist-tag after release)."
   },
   {
@@ -133,19 +157,19 @@
     "content": ""
   },
   {
-    "id": "getting-started/patch-notes#what-changed-3",
+    "id": "getting-started/patch-notes#what-changed-4",
     "title": "What changed",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "fragment": "what-changed-3",
+    "fragment": "what-changed-4",
     "content": "- AI context prompt in and (Cursor, GitHub Copilot, both, or none). - flag to skip the interactive prompt. - New command — scaffolds plus Cursor rules / Copilot instructions. Does not overwrite existing files. - Assets under focused on docs-first, , and Angular (Signals/standalone). - Patch notes documentation on the site and at the repo root."
   },
   {
-    "id": "getting-started/patch-notes#upgrade-3",
+    "id": "getting-started/patch-notes#upgrade-4",
     "title": "Upgrade",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "fragment": "upgrade-3",
+    "fragment": "upgrade-4",
     "content": "On existing projects: , , or both. On new projects, choose in the prompt or use ."
   },
   {
@@ -1477,7 +1501,7 @@
     "title": "List Base",
     "category": "Resources",
     "route": "resources/list-base",
-    "content": "List Base Installation Md ListBase is an abstraction resource for datatable lists, providing a default structure and functionalities for listing data. It serves as a base component that can be extended to create specific list implementations, such as user lists, product lists, etc. API Attributes - currentPage : Signal that holds the current page number (pagination). - pageSize : Signal that holds the number of items per page. - totalItems : Signal that holds the total number of items. - orderedBy : Signal that holds the ordering criteria. - filter : Signal that holds the applied filter. - skeletonItems : Computed signal for displaying placeholders while loading. - defaultList : Default response for use in datalist. - filterPayload : Payload for filters. - filterParams : Parameters for filters. - datalist : Abstract reference to the data resource. - reload : Signal to reload the list. Methods - reloadList : Triggers list reload. Filter Definitions Define filters in the constructor of the class that extends ListBase. Usage See usage examples in the Database Block."
+    "content": "List Base Installation TypeScript Overview ListBase is an abstraction for datatable lists. It wires pagination, sorting, filters, and a that loads data through an injected HTTP service with . Contract The service passed to must extend HttpBase and implement: calls with: - , (from ) - , when sorting is set - spread filter fields from the signal The response shape is . updates for pagination. API Generics - TDataItem : Row/item type. - TListService : Service type (defaults to a with ). Constructor - service : — injected and used by the built-in loader. Attributes - currentPage : Signal with the current page number. - pageSize : Signal with items per page (default ). - totalItems : Signal with the total item count (set from ). - orderedBy : Signal with the current sort ( / ). - filter : Signal with the applied filter object. - filterPayload : Readonly view of . - filterParams : Params object used by the resource ( , , , , ). - skeletonItems : Computed placeholder list for loading UI. - defaultList : Empty default for the resource. - datalist : Built-in that loads via . - isMobile : when at construction. - reload : Input signal; when , triggers . Methods - reloadList : Reloads the datalist resource. Usage See the Datatable block for a full table + filter + pagination example."
   },
   {
     "id": "resources/list-base#installation",
@@ -1488,12 +1512,28 @@
     "content": ""
   },
   {
-    "id": "resources/list-base#md",
-    "title": "Md",
+    "id": "resources/list-base#typescript",
+    "title": "TypeScript",
     "category": "Resources",
     "route": "resources/list-base",
-    "fragment": "md",
-    "content": "ListBase is an abstraction resource for datatable lists, providing a default structure and functionalities for listing data. It serves as a base component that can be extended to create specific list implementations, such as user lists, product lists, etc."
+    "fragment": "typescript",
+    "content": ""
+  },
+  {
+    "id": "resources/list-base#overview",
+    "title": "Overview",
+    "category": "Resources",
+    "route": "resources/list-base",
+    "fragment": "overview",
+    "content": "ListBase is an abstraction for datatable lists. It wires pagination, sorting, filters, and a that loads data through an injected HTTP service with ."
+  },
+  {
+    "id": "resources/list-base#contract",
+    "title": "Contract",
+    "category": "Resources",
+    "route": "resources/list-base",
+    "fragment": "contract",
+    "content": "The service passed to must extend HttpBase and implement: calls with: - , (from ) - , when sorting is set - spread filter fields from the signal The response shape is . updates for pagination."
   },
   {
     "id": "resources/list-base#api",
@@ -1504,12 +1544,28 @@
     "content": ""
   },
   {
+    "id": "resources/list-base#generics",
+    "title": "Generics",
+    "category": "Resources",
+    "route": "resources/list-base",
+    "fragment": "generics",
+    "content": "- TDataItem : Row/item type. - TListService : Service type (defaults to a with )."
+  },
+  {
+    "id": "resources/list-base#constructor",
+    "title": "Constructor",
+    "category": "Resources",
+    "route": "resources/list-base",
+    "fragment": "constructor",
+    "content": "- service : — injected and used by the built-in loader."
+  },
+  {
     "id": "resources/list-base#attributes",
     "title": "Attributes",
     "category": "Resources",
     "route": "resources/list-base",
     "fragment": "attributes",
-    "content": "- currentPage : Signal that holds the current page number (pagination). - pageSize : Signal that holds the number of items per page. - totalItems : Signal that holds the total number of items. - orderedBy : Signal that holds the ordering criteria. - filter : Signal that holds the applied filter. - skeletonItems : Computed signal for displaying placeholders while loading. - defaultList : Default response for use in datalist. - filterPayload : Payload for filters. - filterParams : Parameters for filters. - datalist : Abstract reference to the data resource. - reload : Signal to reload the list."
+    "content": "- currentPage : Signal with the current page number. - pageSize : Signal with items per page (default ). - totalItems : Signal with the total item count (set from ). - orderedBy : Signal with the current sort ( / ). - filter : Signal with the applied filter object. - filterPayload : Readonly view of . - filterParams : Params object used by the resource ( , , , , ). - skeletonItems : Computed placeholder list for loading UI. - defaultList : Empty default for the resource. - datalist : Built-in that loads via . - isMobile : when at construction. - reload : Input signal; when , triggers ."
   },
   {
     "id": "resources/list-base#methods",
@@ -1517,15 +1573,7 @@
     "category": "Resources",
     "route": "resources/list-base",
     "fragment": "methods",
-    "content": "- reloadList : Triggers list reload."
-  },
-  {
-    "id": "resources/list-base#filter-definitions",
-    "title": "Filter Definitions",
-    "category": "Resources",
-    "route": "resources/list-base",
-    "fragment": "filter-definitions",
-    "content": "Define filters in the constructor of the class that extends ListBase."
+    "content": "- reloadList : Reloads the datalist resource."
   },
   {
     "id": "resources/list-base#usage",
@@ -1533,7 +1581,7 @@
     "category": "Resources",
     "route": "resources/list-base",
     "fragment": "usage",
-    "content": "See usage examples in the Database Block."
+    "content": "See the Datatable block for a full table + filter + pagination example."
   },
   {
     "id": "resources/http-base",

@@ -168,7 +168,8 @@ export function installComponent(projectName: string, component: InstallComponen
       componentDeps.push('select');
       break;
     case 'list-base':
-      baseDeps.push('list');
+      baseDeps.push('list', 'http');
+      utilDeps.push('is-mobile', 'from-observable-with-signal');
       componentDeps.push('table');
       break;
     case 'http-base':

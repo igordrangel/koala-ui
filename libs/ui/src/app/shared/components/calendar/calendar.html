@@ -21,8 +21,12 @@
     [class.rounded-t-box]="squareBottom()"
     [value]="value()"
   >
-    <i aria-label="Previous" class="fa-solid fa-chevron-left" slot="previous"></i>
-    <i aria-label="Next" class="fa-solid fa-chevron-right" slot="next"></i>
+    <i
+      aria-label="Previous"
+      class="fa-solid fa-chevron-left text-base-content/50"
+      slot="previous"
+    ></i>
+    <i aria-label="Next" class="fa-solid fa-chevron-right text-base-content/50" slot="next"></i>
     <calendar-select-year slot="heading" max-years="100" />
     <calendar-month />
   </calendar-date>

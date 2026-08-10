@@ -112,10 +112,13 @@ kl install inline-filter,table,pagination,skeleton,button,loading,list
 ```
 
 ```typescript
-import { Component, resource } from '@angular/core';
-import { Validators } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
+import { map } from 'rxjs/internal/operators/map';
 import { KlArray } from '@koalarx/utils/KlArray';
-import { ListBase } from '@/shared/base/list.base';
+import { DatalistResponse, ListBase } from '@/shared/base/list.base';
+import { HttpBase } from '@/shared/base/http.base';
 import { Button } from '@/shared/components/button';
 import { InlineFilter, InlineFilterBuilder } from '@/shared/components/inline-filter';
 import { Loading } from '@/shared/components/loading';
@@ -134,9 +137,49 @@ interface User {
   eyeColor: string;
 }
 
-interface UserFilter {
-  name?: string;
-  email?: string;
+@Injectable({ providedIn: 'root' })
+export class UsersService extends HttpBase {
+  constructor() {
+    super('https://dummyjson.com', 'users');
+  }
+
+  getMany(queryParams: {
+    page?: number | null;
+    limit?: number | null;
+    orderBy?: string;
+    direction?: string;
+    name?: string;
+    email?: string;
+  }): Observable<DatalistResponse<User>> {
+    const page = queryParams.page ?? 1;
+    const pageSize = queryParams.limit ?? 30;
+    const sortBy = queryParams.orderBy ?? 'firstName';
+    const order = queryParams.direction ?? 'asc';
+
+    return this.get({ limit: 300, sortBy, order }).pipe(
+      map((data) => {
+        const { users: rawUsers } = data as { users: User[] };
+        const users = new KlArray<User>(
+          rawUsers.filter((item) => {
+            const nameFilter = queryParams.name;
+            const emailFilter = queryParams.email;
+
+            return (
+              (!nameFilter ||
+                item.firstName.toLowerCase().includes(nameFilter.toLowerCase()) ||
+                item.lastName.toLowerCase().includes(nameFilter.toLowerCase())) &&
+              (!emailFilter || item.email.toLowerCase() === emailFilter.toLowerCase())
+            );
+          }),
+        );
+
+        const count = users.length;
+        const items = users.split(pageSize)[page - 1] ?? [];
+
+        return { items: [...items], count };
+      }),
+    );
+  }
 }
 
 @Component({
@@ -145,53 +188,14 @@ interface UserFilter {
   imports: [InlineFilter, Table, Pagination, Skeleton, Button, Loading],
   providers: [InlineFilterBuilder],
 })
-export class DatatableSample extends ListBase<User, UserFilter> {
-  protected override datalist = resource({
-    params: () => this.filterParams,
-    defaultValue: this.defaultList,
-    loader: async ({ params, abortSignal }) => {
-      const page = params.page ?? 1;
-      const sortBy = params.sortBy ?? 'firstName';
-      const order = params.order ?? 'asc';
-
-      const endpoint = `https://dummyjson.com/users?limit=300&sortBy=${sortBy}&order=${order}`;
-
-      const response = await fetch(endpoint, { signal: abortSignal });
-      const data: { users: User[]; total: number } = await response.json();
-
-      const users = new KlArray<User>(
-        data.users.filter((item) => {
-          const nameFilter = params.filter.name;
-          const emailFilter = params.filter.email;
-
-          return (
-            (!nameFilter ||
-              item.firstName.toLowerCase().includes(nameFilter.toLowerCase()) ||
-              item.lastName.toLowerCase().includes(nameFilter.toLowerCase())) &&
-            (!emailFilter || item.email.toLowerCase() === emailFilter.toLowerCase())
-          );
-        }),
-      );
-
-      const totalItems = users.length;
-      const limitedItems = users.split(params.pageSize)[page - 1] ?? [];
-
-      this.totalItems.set(totalItems);
-
-      return {
-        items: [...limitedItems],
-        count: limitedItems.length,
-      };
-    },
-  });
-
+export class DatatableSample extends ListBase<User, UsersService> {
   readonly filterConfig = inject(InlineFilterBuilder)
     .input('Name', 'name')
     .input('Email', 'email', 'email')
     .build();
 
   constructor() {
-    super();
+    super(UsersService);
 
     this.orderedBy.set({ field: 'firstName', direction: 'asc' });
   }
