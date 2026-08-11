@@ -3,7 +3,6 @@ import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { tap } from 'rxjs/internal/operators/tap';
-import { LocaleService } from '../i18n/locale.service';
 import { Credentials } from '../models/credentials';
 import { LoggedUser } from '../models/logged-user';
 import { Authentication } from '../utils/authentication';
@@ -25,7 +24,6 @@ export interface AuthEvent {
 export class AuthorizationService {
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
-  private readonly localeService = inject(LocaleService);
   private readonly hostApi = 'https://dummyjson.com';
   private readonly _loggedUser = signal<LoggedUser | undefined>(undefined);
   private readonly _event = signal<AuthEvent | undefined>(undefined);
@@ -37,7 +35,7 @@ export class AuthorizationService {
       if (accessToken && !this._loggedUser()) {
         this._event.set({ type: 'loadingUserInfo', data: accessToken });
       } else if (!accessToken && !this.isAuthOptionalRoute()) {
-        void this.router.navigateByUrl(this.localeService.path(LOGIN_ROUTE));
+        this.redirectToLogin();
       }
     });
 
@@ -55,20 +53,39 @@ export class AuthorizationService {
           }
           break;
         case 'authenticated':
-          if (this.routeWithoutLocale() === `/${LOGIN_ROUTE}`) {
-            void this.router.navigateByUrl(this.localeService.homeRoute());
+          if (this.currentPath() === `/${LOGIN_ROUTE}`) {
+            void this.router.navigateByUrl(this.localizedPath());
           }
           break;
       }
     });
   }
 
-  private routeWithoutLocale() {
+  /** Docs may prefix routes with `pt`/`en`; consumer apps usually do not. */
+  private urlLocale(): 'pt' | 'en' | null {
+    const segment = this.router.url.split(/[?#]/)[0].split('/').filter(Boolean)[0];
+    return segment === 'pt' || segment === 'en' ? segment : null;
+  }
+
+  private localizedPath(routePath = ''): string {
+    const locale = this.urlLocale();
+    const clean = routePath.replace(/^\/+/, '').replace(/\/+$/, '');
+    if (!locale) {
+      return clean ? `/${clean}` : '/';
+    }
+    return clean ? `/${locale}/${clean}` : `/${locale}`;
+  }
+
+  private currentPath() {
     const parts = this.router.url.split(/[?#]/)[0].split('/').filter(Boolean);
     if (parts[0] === 'pt' || parts[0] === 'en') {
       parts.shift();
     }
     return parts.length ? `/${parts.join('/')}` : '/';
+  }
+
+  redirectToLogin() {
+    void this.router.navigateByUrl(this.localizedPath(LOGIN_ROUTE));
   }
 
   private getUserInfo() {
@@ -96,7 +113,7 @@ export class AuthorizationService {
   }
 
   private isAuthOptionalRoute() {
-    return PUBLIC_ROUTES.includes(this.routeWithoutLocale());
+    return PUBLIC_ROUTES.includes(this.currentPath());
   }
 
   get loggedUser() {
@@ -169,7 +186,7 @@ export class AuthorizationService {
     this._event.set(undefined);
 
     if (!this.isAuthOptionalRoute()) {
-      void this.router.navigateByUrl(this.localeService.path(LOGIN_ROUTE));
+      this.redirectToLogin();
     }
   }
 }

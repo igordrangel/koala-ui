@@ -12,6 +12,17 @@ export const PATCH_NOTES_PAGE = {
         description:
           'A versão publicada do pacote @koalarx/ui aparece no package.json do repositório. O arquivo CHANGELOG.md na raiz espelha estas notas. A partir de 23.x, o major da lib = major do Angular + 1 (23 → Angular 22). Para Angular 21 use a linha 22.x; para Angular 22 use 23.x.',
       },
+      v2303: {
+        title: '23.0.3 — Sem vazamento de docs na CLI',
+        description:
+          'Templates e resources instaláveis deixam de levar artefatos só da app de documentação.',
+        items: [
+          'kl new usa index.html de consumidor (sem script de versão/locale das docs).',
+          'kl install auth não depende mais de LocaleService / i18n das docs.',
+        ],
+        upgrade:
+          'Em projetos já gerados: remova o <script> de migração de hash/versão do src/index.html. Se usa auth, reinstale com kl install auth (ou remova imports de ../i18n/locale.service nos arquivos de core copiados).',
+      },
       v2302: {
         title: '23.0.2 — ListBase com service + getMany',
         description:
@@ -72,6 +83,17 @@ export const PATCH_NOTES_PAGE = {
         title: 'How to use these notes',
         description:
           'The published @koalarx/ui package version is in the repository package.json. The root CHANGELOG.md mirrors these notes. From 23.x onward, library major = Angular major + 1 (23 → Angular 22). For Angular 21 use the 22.x line; for Angular 22 use 23.x.',
+      },
+      v2303: {
+        title: '23.0.3 — No docs leakage in the CLI',
+        description:
+          'Installable templates and resources no longer ship documentation-app-only artifacts.',
+        items: [
+          'kl new uses a consumer index.html (no docs version/locale migration script).',
+          'kl install auth no longer depends on LocaleService / docs i18n.',
+        ],
+        upgrade:
+          'On existing projects: remove the hash/version migration <script> from src/index.html. If you use auth, reinstall with kl install auth (or drop ../i18n/locale.service imports from the copied core files).',
       },
       v2302: {
         title: '23.0.2 — ListBase with service + getMany',
