@@ -4,6 +4,17 @@ Changelog for anyone using or upgrading projects scaffolded with the Koala UI CL
 Site page: https://ui.koalarx.com/#/getting-started/patch-notes
 Root CHANGELOG.md mirrors these notes.
 
+## 22.3.3 — No docs leakage in the CLI
+
+### What changed
+
+- `kl new` uses a consumer `index.html` (no docs version/locale migration script).
+- `kl install auth` no longer depends on `LocaleService` / docs i18n.
+
+### Upgrade
+
+On existing projects: remove the hash/version migration `<script>` from `src/index.html`. If you use auth, reinstall with `kl install auth` (or drop `../i18n/locale.service` imports from the copied core files).
+
 ## 22.3.1 — CLI --silent
 
 ### What changed

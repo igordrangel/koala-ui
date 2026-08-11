@@ -81,8 +81,8 @@ async function createAngularProject(
 function createFolderStructure(name: string) {
   rmSync(`${name}/src/app/app.css`);
 
-  const indexHtml = readFileSync(`${originPath}/ui/index.html`, 'utf-8');
-  writeFileSync(`${name}/src/index.html`, indexHtml.replace('@koalarx/ui', name));
+  const indexHtml = readFileSync(`${originPath}/cli/assets/templates/index.html`, 'utf-8');
+  writeFileSync(`${name}/src/index.html`, indexHtml.replaceAll('__PROJECT_NAME__', name));
 
   const appTs = readFileSync(`${name}/src/app/app.ts`, 'utf-8');
   writeFileSync(
