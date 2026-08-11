@@ -13,6 +13,18 @@ Formato inspirado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/)
 
 A partir de **23.x**, o major de `@koalarx/ui` = major do Angular + 1 (`23` → Angular 22). A linha `22.x` permanece para Angular 21 (`previous-release` / dist-tag `angular-21`).
 
+## [23.0.3] — Sem vazamento de docs na CLI
+
+### Fixed
+
+- `kl new` deixa de copiar o `index.html` das docs (script de migração hash/locale e redirect `/v{n}/` → `ui.koalarx.com`).
+- `kl install auth` deixa de depender de `LocaleService` / i18n das docs (que não eram publicados no pacote).
+
+### Upgrade
+
+1. Em projetos já gerados: remova o `<script>` de migração de hash/versão do `src/index.html`.
+2. Se usa `auth`: `kl install auth` (ou remova imports de `../i18n/locale.service` nos arquivos de core copiados).
+
 ## [23.0.2] — ListBase com service + `getMany`
 
 ### Changed
