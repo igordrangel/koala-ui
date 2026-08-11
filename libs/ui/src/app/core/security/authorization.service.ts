@@ -35,7 +35,7 @@ export class AuthorizationService {
       if (accessToken && !this._loggedUser()) {
         this._event.set({ type: 'loadingUserInfo', data: accessToken });
       } else if (!accessToken && !this.isAuthOptionalRoute()) {
-        void this.router.navigateByUrl(`/${LOGIN_ROUTE}`);
+        this.redirectToLogin();
       }
     });
 
@@ -54,20 +54,38 @@ export class AuthorizationService {
           break;
         case 'authenticated':
           if (this.currentPath() === `/${LOGIN_ROUTE}`) {
-            void this.router.navigateByUrl('/');
+            void this.router.navigateByUrl(this.localizedPath());
           }
           break;
       }
     });
   }
 
+  /** Docs may prefix routes with `pt`/`en`; consumer apps usually do not. */
+  private urlLocale(): 'pt' | 'en' | null {
+    const segment = this.router.url.split(/[?#]/)[0].split('/').filter(Boolean)[0];
+    return segment === 'pt' || segment === 'en' ? segment : null;
+  }
+
+  private localizedPath(routePath = ''): string {
+    const locale = this.urlLocale();
+    const clean = routePath.replace(/^\/+/, '').replace(/\/+$/, '');
+    if (!locale) {
+      return clean ? `/${clean}` : '/';
+    }
+    return clean ? `/${locale}/${clean}` : `/${locale}`;
+  }
+
   private currentPath() {
     const parts = this.router.url.split(/[?#]/)[0].split('/').filter(Boolean);
-    // Docs site prefixes routes with locale (`/pt`, `/en`); consumers usually do not.
     if (parts[0] === 'pt' || parts[0] === 'en') {
       parts.shift();
     }
     return parts.length ? `/${parts.join('/')}` : '/';
+  }
+
+  redirectToLogin() {
+    void this.router.navigateByUrl(this.localizedPath(LOGIN_ROUTE));
   }
 
   private getUserInfo() {
@@ -168,7 +186,7 @@ export class AuthorizationService {
     this._event.set(undefined);
 
     if (!this.isAuthOptionalRoute()) {
-      void this.router.navigateByUrl(`/${LOGIN_ROUTE}`);
+      this.redirectToLogin();
     }
   }
 }
