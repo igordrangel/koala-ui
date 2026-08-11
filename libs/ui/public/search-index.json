@@ -74,7 +74,31 @@
     "title": "Patch notes",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "content": "Koala UI – Patch notes Changelog for anyone using or upgrading projects scaffolded with the Koala UI CLI. Site page: https://ui.koalarx.com/ /getting-started/patch-notes Root CHANGELOG.md mirrors these notes. 22.3.1 — CLI --silent What changed - flag on , , and : non-interactive mode (accepts external libs and skips prompts; on new/init defaults to bun + AI context none). Upgrade For AI agents or CI, prefer and . Interactive use without the flag is unchanged. 22.3.0 — AI context What changed - AI context prompt in and (Cursor, GitHub Copilot, both, or none). - flag to skip the interactive prompt. - New command — scaffolds plus Cursor rules / Copilot instructions. Does not overwrite existing files. - Assets under focused on docs-first, , and Angular (Signals/standalone). - Patch notes documentation on the site and at the repo root. Upgrade On existing projects: , , or both. On new projects, choose in the prompt or use ."
+    "content": "Koala UI – Patch notes Changelog for anyone using or upgrading projects scaffolded with the Koala UI CLI. Site page: https://ui.koalarx.com/ /getting-started/patch-notes Root CHANGELOG.md mirrors these notes. 22.3.3 — No docs leakage in the CLI What changed - uses a consumer (no docs version/locale migration script). - no longer depends on / docs i18n. Upgrade On existing projects: remove the hash/version migration from . If you use auth, reinstall with (or drop imports from the copied core files). 22.3.1 — CLI --silent What changed - flag on , , and : non-interactive mode (accepts external libs and skips prompts; on new/init defaults to bun + AI context none). Upgrade For AI agents or CI, prefer and . Interactive use without the flag is unchanged. 22.3.0 — AI context What changed - AI context prompt in and (Cursor, GitHub Copilot, both, or none). - flag to skip the interactive prompt. - New command — scaffolds plus Cursor rules / Copilot instructions. Does not overwrite existing files. - Assets under focused on docs-first, , and Angular (Signals/standalone). - Patch notes documentation on the site and at the repo root. Upgrade On existing projects: , , or both. On new projects, choose in the prompt or use ."
+  },
+  {
+    "id": "getting-started/patch-notes#2233-no-docs-leakage-in-the-cli",
+    "title": "22.3.3 — No docs leakage in the CLI",
+    "category": "Getting Started",
+    "route": "getting-started/patch-notes",
+    "fragment": "2233-no-docs-leakage-in-the-cli",
+    "content": ""
+  },
+  {
+    "id": "getting-started/patch-notes#what-changed",
+    "title": "What changed",
+    "category": "Getting Started",
+    "route": "getting-started/patch-notes",
+    "fragment": "what-changed",
+    "content": "- uses a consumer (no docs version/locale migration script). - no longer depends on / docs i18n."
+  },
+  {
+    "id": "getting-started/patch-notes#upgrade",
+    "title": "Upgrade",
+    "category": "Getting Started",
+    "route": "getting-started/patch-notes",
+    "fragment": "upgrade",
+    "content": "On existing projects: remove the hash/version migration from . If you use auth, reinstall with (or drop imports from the copied core files)."
   },
   {
     "id": "getting-started/patch-notes#2231-cli---silent",
@@ -85,19 +109,19 @@
     "content": ""
   },
   {
-    "id": "getting-started/patch-notes#what-changed",
+    "id": "getting-started/patch-notes#what-changed-2",
     "title": "What changed",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "fragment": "what-changed",
+    "fragment": "what-changed-2",
     "content": "- flag on , , and : non-interactive mode (accepts external libs and skips prompts; on new/init defaults to bun + AI context none)."
   },
   {
-    "id": "getting-started/patch-notes#upgrade",
+    "id": "getting-started/patch-notes#upgrade-2",
     "title": "Upgrade",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "fragment": "upgrade",
+    "fragment": "upgrade-2",
     "content": "For AI agents or CI, prefer and . Interactive use without the flag is unchanged."
   },
   {
@@ -109,19 +133,19 @@
     "content": ""
   },
   {
-    "id": "getting-started/patch-notes#what-changed-2",
+    "id": "getting-started/patch-notes#what-changed-3",
     "title": "What changed",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "fragment": "what-changed-2",
+    "fragment": "what-changed-3",
     "content": "- AI context prompt in and (Cursor, GitHub Copilot, both, or none). - flag to skip the interactive prompt. - New command — scaffolds plus Cursor rules / Copilot instructions. Does not overwrite existing files. - Assets under focused on docs-first, , and Angular (Signals/standalone). - Patch notes documentation on the site and at the repo root."
   },
   {
-    "id": "getting-started/patch-notes#upgrade-2",
+    "id": "getting-started/patch-notes#upgrade-3",
     "title": "Upgrade",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "fragment": "upgrade-2",
+    "fragment": "upgrade-3",
     "content": "On existing projects: , , or both. On new projects, choose in the prompt or use ."
   },
   {

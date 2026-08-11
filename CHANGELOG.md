@@ -9,6 +9,18 @@ O conteúdo principal da página web vive em `libs/ui/src/app/core/i18n/docs/pag
 
 Formato inspirado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 
+## [22.3.3] — Sem vazamento de docs na CLI
+
+### Fixed
+
+- `kl new` deixa de copiar o `index.html` das docs (script de migração hash/locale e redirect `/v{n}/` → `ui.koalarx.com`).
+- `kl install auth` deixa de depender de `LocaleService` / i18n das docs (que não eram publicados no pacote).
+
+### Upgrade
+
+1. Em projetos já gerados: remova o `<script>` de migração de hash/versão do `src/index.html`.
+2. Se usa `auth`: `kl install auth` (ou remova imports de `../i18n/locale.service` nos arquivos de core copiados).
+
 ## [22.3.1] — CLI `--silent`
 
 ### Added
