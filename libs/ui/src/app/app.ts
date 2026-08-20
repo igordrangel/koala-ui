@@ -31,11 +31,27 @@ export class App {
     { initialValue: this.computeFullWidth() },
   );
 
-  private computeFullWidth(): boolean {
+  /** Icons page: no sidebar — pad content to match header logo column. */
+  readonly isIconsPage = toSignal(
+    this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd),
+      map(() => this.computeIconsPage()),
+    ),
+    { initialValue: this.computeIconsPage() },
+  );
+
+  private pathWithoutLocale(): string[] {
     const parts = this.router.url.split(/[?#]/)[0].split('/').filter(Boolean);
-    const withoutLocale = parts[0] && isLocale(parts[0]) ? parts.slice(1) : parts;
-    // Home and Icons have no left sidebar.
+    return parts[0] && isLocale(parts[0]) ? parts.slice(1) : parts;
+  }
+
+  private computeFullWidth(): boolean {
+    const withoutLocale = this.pathWithoutLocale();
     return withoutLocale.length === 0 || withoutLocale[0] === 'icons';
+  }
+
+  private computeIconsPage(): boolean {
+    return this.pathWithoutLocale()[0] === 'icons';
   }
 
   readonly isHomePage = toSignal(
