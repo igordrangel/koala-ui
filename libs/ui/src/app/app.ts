@@ -23,6 +23,37 @@ export class App {
   private localeService = inject(LocaleService);
   private readonly _localeTitle = inject(LocaleTitleService);
 
+  readonly isFullWidthPage = toSignal(
+    this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd),
+      map(() => this.computeFullWidth()),
+    ),
+    { initialValue: this.computeFullWidth() },
+  );
+
+  /** Icons page: no sidebar — pad content to match header logo column. */
+  readonly isIconsPage = toSignal(
+    this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd),
+      map(() => this.computeIconsPage()),
+    ),
+    { initialValue: this.computeIconsPage() },
+  );
+
+  private pathWithoutLocale(): string[] {
+    const parts = this.router.url.split(/[?#]/)[0].split('/').filter(Boolean);
+    return parts[0] && isLocale(parts[0]) ? parts.slice(1) : parts;
+  }
+
+  private computeFullWidth(): boolean {
+    const withoutLocale = this.pathWithoutLocale();
+    return withoutLocale.length === 0 || withoutLocale[0] === 'icons';
+  }
+
+  private computeIconsPage(): boolean {
+    return this.pathWithoutLocale()[0] === 'icons';
+  }
+
   readonly isHomePage = toSignal(
     this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),

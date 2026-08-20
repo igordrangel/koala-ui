@@ -7,83 +7,25 @@
     <ng-container description>{{ copy().sections.overview.description }}</ng-container>
   </app-section-content>
 
-  <app-section-content class="block mt-10">
-    <ng-container title>{{ copy().sections.v2303.title }}</ng-container>
-    <ng-container description>{{ copy().sections.v2303.description }}</ng-container>
+  @for (entry of versionSections(); track entry.key) {
+    <app-section-content class="block mt-10">
+      <ng-container title>{{ entry.section.title }}</ng-container>
+      <ng-container description>{{ entry.section.description }}</ng-container>
 
-    <ul class="list-disc pl-5 mt-4 space-y-2 text-sm font-light">
-      @for (item of copy().sections.v2303.items; track item) {
-        <li>{{ item }}</li>
+      @if (entry.section.items?.length) {
+        <ul class="list-disc pl-5 mt-4 space-y-2 text-sm font-light">
+          @for (item of entry.section.items; track item) {
+            <li>{{ item }}</li>
+          }
+        </ul>
       }
-    </ul>
 
-    <div role="alert" class="alert alert-info alert-dash mt-4">
-      <i class="fa-solid fa-circle-info"></i>
-      <span>{{ copy().sections.v2303.upgrade }}</span>
-    </div>
-  </app-section-content>
-
-  <app-section-content class="block mt-10">
-    <ng-container title>{{ copy().sections.v2302.title }}</ng-container>
-    <ng-container description>{{ copy().sections.v2302.description }}</ng-container>
-
-    <ul class="list-disc pl-5 mt-4 space-y-2 text-sm font-light">
-      @for (item of copy().sections.v2302.items; track item) {
-        <li>{{ item }}</li>
+      @if (entry.section.upgrade) {
+        <div role="alert" class="alert alert-info alert-dash mt-4">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>{{ entry.section.upgrade }}</span>
+        </div>
       }
-    </ul>
-
-    <div role="alert" class="alert alert-info alert-dash mt-4">
-      <i class="fa-solid fa-circle-info"></i>
-      <span>{{ copy().sections.v2302.upgrade }}</span>
-    </div>
-  </app-section-content>
-
-  <app-section-content class="block mt-10">
-    <ng-container title>{{ copy().sections.v2301.title }}</ng-container>
-    <ng-container description>{{ copy().sections.v2301.description }}</ng-container>
-
-    <ul class="list-disc pl-5 mt-4 space-y-2 text-sm font-light">
-      @for (item of copy().sections.v2301.items; track item) {
-        <li>{{ item }}</li>
-      }
-    </ul>
-
-    <div role="alert" class="alert alert-info alert-dash mt-4">
-      <i class="fa-solid fa-circle-info"></i>
-      <span>{{ copy().sections.v2301.upgrade }}</span>
-    </div>
-  </app-section-content>
-
-  <app-section-content class="block mt-10">
-    <ng-container title>{{ copy().sections.v2300.title }}</ng-container>
-    <ng-container description>{{ copy().sections.v2300.description }}</ng-container>
-
-    <ul class="list-disc pl-5 mt-4 space-y-2 text-sm font-light">
-      @for (item of copy().sections.v2300.items; track item) {
-        <li>{{ item }}</li>
-      }
-    </ul>
-
-    <div role="alert" class="alert alert-info alert-dash mt-4">
-      <i class="fa-solid fa-circle-info"></i>
-      <span>{{ copy().sections.v2300.upgrade }}</span>
-    </div>
-  </app-section-content>
-
-  <app-section-content class="block mt-10">
-    <ng-container title>{{ copy().sections.v2230.title }}</ng-container>
-    <ng-container description>{{ copy().sections.v2230.description }}</ng-container>
-
-    <ul class="list-disc pl-5 mt-4 space-y-2 text-sm font-light">
-      @for (item of copy().sections.v2230.items; track item) {
-        <li>{{ item }}</li>
-      }
-    </ul>
-
-    <div role="alert" class="alert alert-info alert-dash mt-4">
-      <i class="fa-solid fa-circle-info"></i>
-      <span>{{ copy().sections.v2230.upgrade }}</span>
-    </div>
-  </app-section-content>
+    </app-section-content>
+  }
 </app-section-container>

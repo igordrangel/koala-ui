@@ -23,7 +23,7 @@ export const PATCH_NOTES_PAGE = {
           'Serviços root usam @Service() (Angular 22).',
           'kl new: prompts app|library + SSR; AI context antes do scaffold; flags --type / --ssr.',
           'Build da CLI no formato koala-nest (Bun.Transpiler, bin ./cli/index.js).',
-          'Docs do generate-icons nativo (Resources).',
+          'Docs do generate-icons nativo (header Ícones; salvar SVG em public/assets/icons).',
           'Seletor de versão das docs: labels estáveis (companion na linha 22 sincroniza DOCS_VERSIONS).',
         ],
         upgrade:
@@ -112,7 +112,7 @@ export const PATCH_NOTES_PAGE = {
           'Root services use @Service() (Angular 22).',
           'kl new: app|library + SSR prompts; AI context before scaffold; --type / --ssr flags.',
           'CLI build aligned with koala-nest (Bun.Transpiler, bin ./cli/index.js).',
-          'Native generate-icons documentation (Resources).',
+          'Native generate-icons documentation (Icons header; save SVGs in public/assets/icons).',
           'Docs version switcher: stable labels (companion 22.x line syncs DOCS_VERSIONS).',
         ],
         upgrade:

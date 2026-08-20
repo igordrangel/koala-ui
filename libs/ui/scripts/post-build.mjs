@@ -50,6 +50,7 @@ const DOC_PATHS = [
   'resources/list-base',
   'resources/page-base',
   'resources/rules',
+  'icons',
 ];
 
 const outputDir = path.resolve('../../dist/browser');

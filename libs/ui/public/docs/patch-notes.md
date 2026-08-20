@@ -1,8 +1,25 @@
 # Koala UI – Patch notes
 
 Changelog for anyone using or upgrading projects scaffolded with the Koala UI CLI.
-Site page: https://ui.koalarx.com/#/getting-started/patch-notes
+Site page: https://ui.koalarx.com/pt/getting-started/patch-notes
 Root CHANGELOG.md mirrors these notes.
+
+## 23.1.0 — CLI app/library/SSR, Signal Forms, pagination
+
+### What changed
+
+- Currency mask: `input` listener + value→DOM sync (IME/autofill).
+- Pagination: active page `btn-primary`; queryParams `page`/`limit`; default limit 30.
+- Inline-filter desktop on Signal Forms; mobile-picker hydrates URL filters on init.
+- Root services use `@Service()` (Angular 22).
+- `kl new`: app|library + SSR prompts; AI context before scaffold; `--type` / `--ssr` flags.
+- CLI build aligned with koala-nest (`Bun.Transpiler`, bin `./cli/index.js`).
+- Native generate-icons documentation (Icons header; save SVGs in `public/assets/icons`).
+- Docs version switcher: stable labels (companion 22.x line syncs `DOCS_VERSIONS`).
+
+### Upgrade
+
+Reinstall `currency` and `inline-filter` if you already have older copies (`kl install currency,inline-filter`). Pagination now writes `limit` to the URL (legacy `pageSize` is still read). For agents/CI: `kl new <name> --silent [--type app|library] [--ssr|--no-ssr]`.
 
 ## 23.0.3 — No docs leakage in the CLI
 

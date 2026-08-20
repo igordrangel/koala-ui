@@ -11,7 +11,7 @@
     "title": "Installation",
     "category": "Getting Started",
     "route": "getting-started/installation",
-    "content": "Koala UI – Get Started Koala UI is an Angular component library inspired by shadcn/ui. Components are installed directly into your project via the Koala CLI , giving you full control over the source code. Base dependencies installed by / : @koalarx/utils ≥ 5 and . Full utils API for LLMs: https://utils.koalarx.com/llms.txt. Version compatibility Two support lines (like Angular current + previous): Line Git branch Docs npm dist-tag ------ ------------ ------ -------------- Latest https://ui.koalarx.com/ Previous https://ui.koalarx.com/v{major}/ see release (e.g. for the 22.x line on Angular 21) Older majors are frozen on archive branches named by version (e.g. ) with no publish/deploy. 1. Install the CLI 2. Create a new project Prompts (interactive, before scaffold): package manager → app/library → SSR (app only) → AI context. During setup you can scaffold AI context (Cursor / GitHub Copilot). Use to skip the prompt. For AI agents or CI, prefer (non-interactive: bun + AI context none unless overridden). 3. Add components Use to accept all external dependency installs without prompting (recommended for AI agents). 4. Add AI context (optional) 5. Add resources (optional) Available components - Alert – - Bottom Sheet – - Breadcrumb – - Button – - Calendar – - Checkbox – - Collapse – - Combobox – - Confirm – - DataTable – - Dropdown – - Fieldset – - Inline Filter – - Input CNPJ – - Input CPF – - Input Color – - Input Currency – - Input Field – - Loading – - Login – - Modal – - Pagination – - Radio – - Range – - Select – - Side Window – - Skeleton – - Stepper – - Table – - Tabs – - Textarea – - Text Editor – - Toast – - Toggle – - Tooltip – - Validator – - List Base – - Http Base – - Page Base – - Global Errors – - Rules – - Auth – Native tooling - Generate Icons – ships with / ( ). Docs: Generate Icons."
+    "content": "Koala UI – Get Started Koala UI is an Angular component library inspired by shadcn/ui. Components are installed directly into your project via the Koala CLI , giving you full control over the source code. Base dependencies installed by / : @koalarx/utils ≥ 5 and . Full utils API for LLMs: https://utils.koalarx.com/llms.txt. Version compatibility Two support lines (like Angular current + previous): Line Git branch Docs npm dist-tag ------ ------------ ------ -------------- Latest https://ui.koalarx.com/ Previous https://ui.koalarx.com/v{major}/ see release (e.g. for the 22.x line on Angular 21) Older majors are frozen on archive branches named by version (e.g. ) with no publish/deploy. 1. Install the CLI 2. Create a new project Prompts (interactive, before scaffold): package manager → app/library → SSR (app only) → AI context. During setup you can scaffold AI context (Cursor / GitHub Copilot). Use to skip the prompt. For AI agents or CI, prefer (non-interactive: bun + AI context none unless overridden). 3. Add components Use to accept all external dependency installs without prompting (recommended for AI agents). 4. Add AI context (optional) 5. Add resources (optional) Available components - Alert – - Bottom Sheet – - Breadcrumb – - Button – - Calendar – - Checkbox – - Collapse – - Combobox – - Confirm – - DataTable – - Dropdown – - Fieldset – - Inline Filter – - Input CNPJ – - Input CPF – - Input Color – - Input Currency – - Input Field – - Loading – - Login – - Modal – - Pagination – - Radio – - Range – - Select – - Side Window – - Skeleton – - Stepper – - Table – - Tabs – - Textarea – - Text Editor – - Toast – - Toggle – - Tooltip – - Validator – - List Base – - Http Base – - Page Base – - Global Errors – - Rules – - Auth – Native tooling - Icons – ships with / ( ). Docs: Icons."
   },
   {
     "id": "getting-started/installation#version-compatibility",
@@ -75,14 +75,38 @@
     "category": "Getting Started",
     "route": "getting-started/installation",
     "fragment": "native-tooling",
-    "content": "- Generate Icons – ships with / ( ). Docs: Generate Icons."
+    "content": "- Icons – ships with / ( ). Docs: Icons."
   },
   {
     "id": "getting-started/patch-notes",
     "title": "Patch notes",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "content": "Koala UI – Patch notes Changelog for anyone using or upgrading projects scaffolded with the Koala UI CLI. Site page: https://ui.koalarx.com/ /getting-started/patch-notes Root CHANGELOG.md mirrors these notes. 23.0.3 — No docs leakage in the CLI What changed - uses a consumer (no docs version/locale migration script). - no longer depends on / docs i18n. Upgrade On existing projects: remove the hash/version migration from . If you use auth, reinstall with (or drop imports from the copied core files). 23.0.2 — ListBase with service + getMany What changed - Built-in calls and syncs from . - Second generic is ; constructor takes ( ). - also installs (HttpBase), , and . Upgrade Service must extend HttpBase and implement . Replace with , call , remove if using the default loader, and reinstall with . 23.0.1 — CLI --silent What changed - flag on , , and : non-interactive mode (accepts external libs and skips prompts; on new/init defaults to bun + AI context none). Upgrade For AI agents or CI, prefer and . Interactive use without the flag is unchanged. 23.0.0 — Angular 22 + Signal Forms What changed - Docs app and CLI pins on Angular 22 / TypeScript 6. - Form controls migrated from ControlValueAccessor to FormValueControl / FormCheckboxControl (Signal Forms; Reactive Forms and ngModel remain compatible on Angular 22). - inline-filter migrated to Signal Forms; builder validators now use FieldValidator (({ value }) = …), not ValidatorFn. - Removed control-changes, form-is-valid, and get-value-on-first-change utils (Reactive Forms bridges); CLI no longer scaffolds or installs them as component deps. - Functional HTTP interceptors (withInterceptors); NgZone removed from mask/currency. - Versioning policy: 22.x = Angular 21; 23.x = Angular 22. Upgrade Upgrade consumer apps to Angular 22. Re-run for form components (and inline-filter) to pick up FormValueControl/Signal Forms. If you pass validators to InlineFilterBuilder, replace ValidatorFn with Signal Forms FieldValidator. Delete control-changes.ts / form-is-valid.ts / get-value-on-first-change.ts if present and replace usages with field().value() / field().valid(). For Angular 21, stay on the 22.x line (angular-21 dist-tag after release). 22.3.0 — AI context What changed - AI context prompt in and (Cursor, GitHub Copilot, both, or none). - flag to skip the interactive prompt. - New command — scaffolds plus Cursor rules / Copilot instructions. Does not overwrite existing files. - Assets under focused on docs-first, , and Angular (Signals/standalone). - Patch notes documentation on the site and at the repo root. Upgrade On existing projects: , , or both. On new projects, choose in the prompt or use ."
+    "content": "Koala UI – Patch notes Changelog for anyone using or upgrading projects scaffolded with the Koala UI CLI. Site page: https://ui.koalarx.com/pt/getting-started/patch-notes Root CHANGELOG.md mirrors these notes. 23.1.0 — CLI app/library/SSR, Signal Forms, pagination What changed - Currency mask: listener + value→DOM sync (IME/autofill). - Pagination: active page ; queryParams / ; default limit 30. - Inline-filter desktop on Signal Forms; mobile-picker hydrates URL filters on init. - Root services use (Angular 22). - : app library + SSR prompts; AI context before scaffold; / flags. - CLI build aligned with koala-nest ( , bin ). - Native generate-icons documentation (Icons header; save SVGs in ). - Docs version switcher: stable labels (companion 22.x line syncs ). Upgrade Reinstall and if you already have older copies ( ). Pagination now writes to the URL (legacy is still read). For agents/CI: . 23.0.3 — No docs leakage in the CLI What changed - uses a consumer (no docs version/locale migration script). - no longer depends on / docs i18n. Upgrade On existing projects: remove the hash/version migration from . If you use auth, reinstall with (or drop imports from the copied core files). 23.0.2 — ListBase with service + getMany What changed - Built-in calls and syncs from . - Second generic is ; constructor takes ( ). - also installs (HttpBase), , and . Upgrade Service must extend HttpBase and implement . Replace with , call , remove if using the default loader, and reinstall with . 23.0.1 — CLI --silent What changed - flag on , , and : non-interactive mode (accepts external libs and skips prompts; on new/init defaults to bun + AI context none). Upgrade For AI agents or CI, prefer and . Interactive use without the flag is unchanged. 23.0.0 — Angular 22 + Signal Forms What changed - Docs app and CLI pins on Angular 22 / TypeScript 6. - Form controls migrated from ControlValueAccessor to FormValueControl / FormCheckboxControl (Signal Forms; Reactive Forms and ngModel remain compatible on Angular 22). - inline-filter migrated to Signal Forms; builder validators now use FieldValidator (({ value }) = …), not ValidatorFn. - Removed control-changes, form-is-valid, and get-value-on-first-change utils (Reactive Forms bridges); CLI no longer scaffolds or installs them as component deps. - Functional HTTP interceptors (withInterceptors); NgZone removed from mask/currency. - Versioning policy: 22.x = Angular 21; 23.x = Angular 22. Upgrade Upgrade consumer apps to Angular 22. Re-run for form components (and inline-filter) to pick up FormValueControl/Signal Forms. If you pass validators to InlineFilterBuilder, replace ValidatorFn with Signal Forms FieldValidator. Delete control-changes.ts / form-is-valid.ts / get-value-on-first-change.ts if present and replace usages with field().value() / field().valid(). For Angular 21, stay on the 22.x line (angular-21 dist-tag after release). 22.3.0 — AI context What changed - AI context prompt in and (Cursor, GitHub Copilot, both, or none). - flag to skip the interactive prompt. - New command — scaffolds plus Cursor rules / Copilot instructions. Does not overwrite existing files. - Assets under focused on docs-first, , and Angular (Signals/standalone). - Patch notes documentation on the site and at the repo root. Upgrade On existing projects: , , or both. On new projects, choose in the prompt or use ."
+  },
+  {
+    "id": "getting-started/patch-notes#2310-cli-applibraryssr-signal-forms-pagination",
+    "title": "23.1.0 — CLI app/library/SSR, Signal Forms, pagination",
+    "category": "Getting Started",
+    "route": "getting-started/patch-notes",
+    "fragment": "2310-cli-applibraryssr-signal-forms-pagination",
+    "content": ""
+  },
+  {
+    "id": "getting-started/patch-notes#what-changed",
+    "title": "What changed",
+    "category": "Getting Started",
+    "route": "getting-started/patch-notes",
+    "fragment": "what-changed",
+    "content": "- Currency mask: listener + value→DOM sync (IME/autofill). - Pagination: active page ; queryParams / ; default limit 30. - Inline-filter desktop on Signal Forms; mobile-picker hydrates URL filters on init. - Root services use (Angular 22). - : app library + SSR prompts; AI context before scaffold; / flags. - CLI build aligned with koala-nest ( , bin ). - Native generate-icons documentation (Icons header; save SVGs in ). - Docs version switcher: stable labels (companion 22.x line syncs )."
+  },
+  {
+    "id": "getting-started/patch-notes#upgrade",
+    "title": "Upgrade",
+    "category": "Getting Started",
+    "route": "getting-started/patch-notes",
+    "fragment": "upgrade",
+    "content": "Reinstall and if you already have older copies ( ). Pagination now writes to the URL (legacy is still read). For agents/CI: ."
   },
   {
     "id": "getting-started/patch-notes#2303-no-docs-leakage-in-the-cli",
@@ -93,19 +117,19 @@
     "content": ""
   },
   {
-    "id": "getting-started/patch-notes#what-changed",
+    "id": "getting-started/patch-notes#what-changed-2",
     "title": "What changed",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "fragment": "what-changed",
+    "fragment": "what-changed-2",
     "content": "- uses a consumer (no docs version/locale migration script). - no longer depends on / docs i18n."
   },
   {
-    "id": "getting-started/patch-notes#upgrade",
+    "id": "getting-started/patch-notes#upgrade-2",
     "title": "Upgrade",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "fragment": "upgrade",
+    "fragment": "upgrade-2",
     "content": "On existing projects: remove the hash/version migration from . If you use auth, reinstall with (or drop imports from the copied core files)."
   },
   {
@@ -117,19 +141,19 @@
     "content": ""
   },
   {
-    "id": "getting-started/patch-notes#what-changed-2",
+    "id": "getting-started/patch-notes#what-changed-3",
     "title": "What changed",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "fragment": "what-changed-2",
+    "fragment": "what-changed-3",
     "content": "- Built-in calls and syncs from . - Second generic is ; constructor takes ( ). - also installs (HttpBase), , and ."
   },
   {
-    "id": "getting-started/patch-notes#upgrade-2",
+    "id": "getting-started/patch-notes#upgrade-3",
     "title": "Upgrade",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "fragment": "upgrade-2",
+    "fragment": "upgrade-3",
     "content": "Service must extend HttpBase and implement . Replace with , call , remove if using the default loader, and reinstall with ."
   },
   {
@@ -141,19 +165,19 @@
     "content": ""
   },
   {
-    "id": "getting-started/patch-notes#what-changed-3",
+    "id": "getting-started/patch-notes#what-changed-4",
     "title": "What changed",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "fragment": "what-changed-3",
+    "fragment": "what-changed-4",
     "content": "- flag on , , and : non-interactive mode (accepts external libs and skips prompts; on new/init defaults to bun + AI context none)."
   },
   {
-    "id": "getting-started/patch-notes#upgrade-3",
+    "id": "getting-started/patch-notes#upgrade-4",
     "title": "Upgrade",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "fragment": "upgrade-3",
+    "fragment": "upgrade-4",
     "content": "For AI agents or CI, prefer and . Interactive use without the flag is unchanged."
   },
   {
@@ -165,19 +189,19 @@
     "content": ""
   },
   {
-    "id": "getting-started/patch-notes#what-changed-4",
+    "id": "getting-started/patch-notes#what-changed-5",
     "title": "What changed",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "fragment": "what-changed-4",
+    "fragment": "what-changed-5",
     "content": "- Docs app and CLI pins on Angular 22 / TypeScript 6. - Form controls migrated from ControlValueAccessor to FormValueControl / FormCheckboxControl (Signal Forms; Reactive Forms and ngModel remain compatible on Angular 22). - inline-filter migrated to Signal Forms; builder validators now use FieldValidator (({ value }) = …), not ValidatorFn. - Removed control-changes, form-is-valid, and get-value-on-first-change utils (Reactive Forms bridges); CLI no longer scaffolds or installs them as component deps. - Functional HTTP interceptors (withInterceptors); NgZone removed from mask/currency. - Versioning policy: 22.x = Angular 21; 23.x = Angular 22."
   },
   {
-    "id": "getting-started/patch-notes#upgrade-4",
+    "id": "getting-started/patch-notes#upgrade-5",
     "title": "Upgrade",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "fragment": "upgrade-4",
+    "fragment": "upgrade-5",
     "content": "Upgrade consumer apps to Angular 22. Re-run for form components (and inline-filter) to pick up FormValueControl/Signal Forms. If you pass validators to InlineFilterBuilder, replace ValidatorFn with Signal Forms FieldValidator. Delete control-changes.ts / form-is-valid.ts / get-value-on-first-change.ts if present and replace usages with field().value() / field().valid(). For Angular 21, stay on the 22.x line (angular-21 dist-tag after release)."
   },
   {
@@ -189,19 +213,19 @@
     "content": ""
   },
   {
-    "id": "getting-started/patch-notes#what-changed-5",
+    "id": "getting-started/patch-notes#what-changed-6",
     "title": "What changed",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "fragment": "what-changed-5",
+    "fragment": "what-changed-6",
     "content": "- AI context prompt in and (Cursor, GitHub Copilot, both, or none). - flag to skip the interactive prompt. - New command — scaffolds plus Cursor rules / Copilot instructions. Does not overwrite existing files. - Assets under focused on docs-first, , and Angular (Signals/standalone). - Patch notes documentation on the site and at the repo root."
   },
   {
-    "id": "getting-started/patch-notes#upgrade-5",
+    "id": "getting-started/patch-notes#upgrade-6",
     "title": "Upgrade",
     "category": "Getting Started",
     "route": "getting-started/patch-notes",
-    "fragment": "upgrade-5",
+    "fragment": "upgrade-6",
     "content": "On existing projects: , , or both. On new projects, choose in the prompt or use ."
   },
   {
@@ -1963,66 +1987,66 @@
     "content": "See usage examples in the Login Block."
   },
   {
-    "id": "resources/generate-icons",
-    "title": "Generate Icons",
-    "category": "Resources",
-    "route": "resources/generate-icons",
-    "content": "Generate Icons Installation Regenerates from . Usage Overview Generate Icons The native script (copied to the project root by / ) turns SVG files into Tailwind v4 utilities. How it works 1. Reads every under . 2. Writes with one per icon. Each utility sets / on pointing at . 3. The base in provides size, alignment, and mask sizing. Icons are composed as + the generated utility name. 4. must import (ensured by the CLI). The generated file starts with . When it runs - , , , and ( ) - After of icon sets such as - Manually: at the project root Usage Custom icons 1. Add 2. Run 3. Use"
+    "id": "icons",
+    "title": "Icons",
+    "category": "Icons",
+    "route": "icons",
+    "content": "Icons Usage Overview Icons The native script (copied to the project root by / ) turns SVG files into Tailwind v4 utilities. There is no for this — it already ships with the scaffold. How it works 1. Reads every under . 2. Writes with one per icon. Each utility sets / on pointing at . 3. The base in provides size, alignment, and mask sizing. Icons are composed as + the generated utility name. 4. must import (ensured by the CLI). The generated file starts with . How to add icons 1. Save the SVG at (file name = CSS class). 2. Run at the project root (or / / / ). 3. Use . Example: → . Free SVG sources Suggested free libraries for commercial use (check each icon’s license): - SVG Repo - UXWing When it runs - , , , and ( ) - After of icon sets such as - Manually: at the project root Usage"
   },
   {
-    "id": "resources/generate-icons#installation",
-    "title": "Installation",
-    "category": "Resources",
-    "route": "resources/generate-icons",
-    "fragment": "installation",
-    "content": "Regenerates from ."
-  },
-  {
-    "id": "resources/generate-icons#usage",
+    "id": "icons#usage",
     "title": "Usage",
-    "category": "Resources",
-    "route": "resources/generate-icons",
+    "category": "Icons",
+    "route": "icons",
     "fragment": "usage",
     "content": ""
   },
   {
-    "id": "resources/generate-icons#overview",
+    "id": "icons#overview",
     "title": "Overview",
-    "category": "Resources",
-    "route": "resources/generate-icons",
+    "category": "Icons",
+    "route": "icons",
     "fragment": "overview",
-    "content": "Generate Icons The native script (copied to the project root by / ) turns SVG files into Tailwind v4 utilities."
+    "content": "Icons The native script (copied to the project root by / ) turns SVG files into Tailwind v4 utilities. There is no for this — it already ships with the scaffold."
   },
   {
-    "id": "resources/generate-icons#how-it-works",
+    "id": "icons#how-it-works",
     "title": "How it works",
-    "category": "Resources",
-    "route": "resources/generate-icons",
+    "category": "Icons",
+    "route": "icons",
     "fragment": "how-it-works",
     "content": "1. Reads every under . 2. Writes with one per icon. Each utility sets / on pointing at . 3. The base in provides size, alignment, and mask sizing. Icons are composed as + the generated utility name. 4. must import (ensured by the CLI). The generated file starts with ."
   },
   {
-    "id": "resources/generate-icons#when-it-runs",
+    "id": "icons#how-to-add-icons",
+    "title": "How to add icons",
+    "category": "Icons",
+    "route": "icons",
+    "fragment": "how-to-add-icons",
+    "content": "1. Save the SVG at (file name = CSS class). 2. Run at the project root (or / / / ). 3. Use . Example: → ."
+  },
+  {
+    "id": "icons#free-svg-sources",
+    "title": "Free SVG sources",
+    "category": "Icons",
+    "route": "icons",
+    "fragment": "free-svg-sources",
+    "content": "Suggested free libraries for commercial use (check each icon’s license): - SVG Repo - UXWing"
+  },
+  {
+    "id": "icons#when-it-runs",
     "title": "When it runs",
-    "category": "Resources",
-    "route": "resources/generate-icons",
+    "category": "Icons",
+    "route": "icons",
     "fragment": "when-it-runs",
     "content": "- , , , and ( ) - After of icon sets such as - Manually: at the project root"
   },
   {
-    "id": "resources/generate-icons#usage-2",
+    "id": "icons#usage-2",
     "title": "Usage",
-    "category": "Resources",
-    "route": "resources/generate-icons",
+    "category": "Icons",
+    "route": "icons",
     "fragment": "usage-2",
     "content": ""
-  },
-  {
-    "id": "resources/generate-icons#custom-icons",
-    "title": "Custom icons",
-    "category": "Resources",
-    "route": "resources/generate-icons",
-    "fragment": "custom-icons",
-    "content": "1. Add 2. Run 3. Use"
   }
 ]

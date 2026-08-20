@@ -144,7 +144,6 @@ export class NavMenu {
       {
         name: groups.others,
         items: new KlArray<MenuOption>([
-          { name: 'Generate Icons', routerLink: 'resources/generate-icons' },
           { name: 'Global Errors', routerLink: 'resources/global-errors' },
         ]).orderBy('name'),
       },

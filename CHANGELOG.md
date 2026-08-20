@@ -18,7 +18,7 @@ A partir de **23.x**, o major de `@koalarx/ui` = major do Angular + 1 (`23` → 
 ### Added
 
 - `kl new`: prompts app vs library e SSR; flags `--type`, `--ssr` / `--no-ssr`; AI context perguntado antes do scaffold.
-- Docs do `generate-icons` nativo (Resources).
+- Docs do `generate-icons` nativo (header **Ícones**; SVG em `public/assets/icons`).
 - Build da CLI no formato koala-nest (`Bun.Transpiler`, `bin` → `./cli/index.js`).
 
 ### Changed

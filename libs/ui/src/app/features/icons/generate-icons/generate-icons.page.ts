@@ -10,9 +10,14 @@ import { useDocsCopy, type GenerateIconsPageCopy } from '@/core/i18n/docs';
 export class GenerateIconsPage {
   private readonly docs = useDocsCopy('generate-icons');
   readonly copy = this.docs.copy;
-  readonly common = this.docs.common;
   readonly howItems = computed(
     () => (this.copy() as GenerateIconsPageCopy).sections.howItWorks.items,
+  );
+  readonly addItems = computed(
+    () => (this.copy() as GenerateIconsPageCopy).sections.addIcons.items,
+  );
+  readonly addSources = computed(
+    () => (this.copy() as GenerateIconsPageCopy).sections.addIcons.sources,
   );
   readonly whenItems = computed(
     () => (this.copy() as GenerateIconsPageCopy).sections.whenItRuns.items,

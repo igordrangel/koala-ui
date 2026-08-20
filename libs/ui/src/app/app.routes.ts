@@ -43,9 +43,24 @@ const localeChildren: Routes = [
     path: 'blocks',
     loadChildren: () => import('./features/blocks/routes').then((m) => m.ROUTES),
   },
+  // Legacy paths → /icons
+  {
+    path: 'resources/generate-icons',
+    redirectTo: 'icons',
+    pathMatch: 'full',
+  },
+  {
+    path: 'icons/generate-icons',
+    redirectTo: 'icons',
+    pathMatch: 'full',
+  },
   {
     path: 'resources',
     loadChildren: () => import('./features/resources/routes').then((m) => m.ROUTES),
+  },
+  {
+    path: 'icons',
+    loadChildren: () => import('./features/icons/routes').then((m) => m.ROUTES),
   },
   {
     path: '**',
