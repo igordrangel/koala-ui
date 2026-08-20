@@ -15,11 +15,8 @@ export interface DocsVersionEntry {
   label: string;
 }
 
-/**
- * Bootstrap (both lines still 22.x): latest at `/`, previous-release compose at `/v22/`.
- * When 23 ships on `main`, change the first entry to major/label `23` / `v23`.
- */
+/** Latest (`main` 23.x) at `/`; previous-release (22.x) compose at `/v22/`. */
 export const DOCS_VERSIONS: readonly DocsVersionEntry[] = [
-  { major: '22', basePath: '/', label: 'v22' },
+  { major: '23', basePath: '/', label: 'v23' },
   { major: '22', basePath: '/v22/', label: 'v22' },
 ] as const;
