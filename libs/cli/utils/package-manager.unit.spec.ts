@@ -73,11 +73,19 @@ describe('Package Manager Utils', () => {
   });
 
   describe('getAngularCreateCommand', () => {
-    it('should build npm angular create command', () => {
+    it('should build npm angular create command for app without SSR', () => {
       const cmd = getAngularCreateCommand('my-app', 'npm');
 
       expect(cmd).toBe(
-        'npx --yes @angular/cli@^22.0.6 new my-app --defaults --style=tailwind --package-manager npm',
+        'npx --yes @angular/cli@^22.0.6 new my-app --defaults --style=tailwind --package-manager npm --ssr=false',
+      );
+    });
+
+    it('should build npm angular create command for app with SSR', () => {
+      const cmd = getAngularCreateCommand('my-app', 'npm', { type: 'app', ssr: true });
+
+      expect(cmd).toBe(
+        'npx --yes @angular/cli@^22.0.6 new my-app --defaults --style=tailwind --package-manager npm --ssr',
       );
     });
 
@@ -85,7 +93,7 @@ describe('Package Manager Utils', () => {
       const cmd = getAngularCreateCommand('my-app', 'yarn');
 
       expect(cmd).toBe(
-        'yarn dlx @angular/cli@^22.0.6 new my-app --defaults --style=tailwind --package-manager yarn',
+        'yarn dlx @angular/cli@^22.0.6 new my-app --defaults --style=tailwind --package-manager yarn --ssr=false',
       );
     });
 
@@ -93,7 +101,15 @@ describe('Package Manager Utils', () => {
       const cmd = getAngularCreateCommand('my-app', 'bun');
 
       expect(cmd).toBe(
-        'bunx @angular/cli@^22.0.6 new my-app --defaults --style=tailwind --package-manager bun',
+        'bunx @angular/cli@^22.0.6 new my-app --defaults --style=tailwind --package-manager bun --ssr=false',
+      );
+    });
+
+    it('should build library workspace create command', () => {
+      const cmd = getAngularCreateCommand('my-lib', 'npm', { type: 'library' });
+
+      expect(cmd).toBe(
+        'npx --yes @angular/cli@^22.0.6 new my-lib --create-application=false --defaults --package-manager npm --skip-git',
       );
     });
   });

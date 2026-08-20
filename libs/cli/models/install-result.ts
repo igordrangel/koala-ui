@@ -1,9 +1,9 @@
-import { InstallBaseFlags } from '../utils/install-base';
-import { InstallComponentFlags } from '../utils/install-component';
-import { InstallCoreResourceFlags } from '../utils/install-core-resource';
-import { InstallDirectiveFlags } from '../utils/install-directive';
-import { InstallUtilFlags } from '../utils/install-util';
-import { InstallValidatorFlags } from '../utils/install-validator';
+import type { InstallBaseFlags } from '../utils/install-base';
+import type { InstallComponentFlags } from '../utils/install-component';
+import type { InstallCoreResourceFlags } from '../utils/install-core-resource';
+import type { InstallDirectiveFlags } from '../utils/install-directive';
+import type { InstallUtilFlags } from '../utils/install-util';
+import type { InstallValidatorFlags } from '../utils/install-validator';
 
 export interface InstallResult {
   components: InstallComponentFlags[];

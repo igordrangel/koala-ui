@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { computed, effect, inject, Injectable, signal } from '@angular/core';
+import { computed, effect, inject, Service, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { tap } from 'rxjs/internal/operators/tap';
@@ -20,7 +20,7 @@ export interface AuthEvent {
   data: any;
 }
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class AuthorizationService {
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);

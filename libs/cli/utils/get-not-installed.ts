@@ -1,12 +1,13 @@
 import { existsSync, readFileSync } from 'node:fs';
-import { InstallBaseFlags } from './install-base';
-import { InstallComponentFlags } from './install-component';
-import { InstallCoreResourceFlags } from './install-core-resource';
-import { InstallCssFlags } from './install-css';
-import { InstallDirectiveFlags } from './install-directive';
-import { InstallUtilFlags } from './install-util';
-import { InstallValidatorFlags } from './install-validator';
+import type { InstallBaseFlags } from './install-base';
+import type { InstallComponentFlags } from './install-component';
+import type { InstallCoreResourceFlags } from './install-core-resource';
+import type { InstallCssFlags } from './install-css';
+import type { InstallDirectiveFlags } from './install-directive';
+import type { InstallUtilFlags } from './install-util';
+import type { InstallValidatorFlags } from './install-validator';
 import { getProjectPath } from './project-path';
+import { getProjectLayout, getSharedRoot } from './get-shared-root';
 
 export type PackageType =
   | 'component'
@@ -64,43 +65,37 @@ export function getNotInstalled(projectName: string, type: 'lib', deps: string[]
 
 export function getNotInstalled(projectName: string, type: PackageType, deps: string[]): string[] {
   const notInstalled: string[] = [];
+  const projectFolder = getProjectPath(projectName);
+  const sharedRoot = getSharedRoot(projectFolder);
 
   switch (type) {
     case 'component': {
-      const projectFolder = getProjectPath(projectName);
-
       for (const dep of deps) {
-        if (!existsSync(`${projectFolder}/src/app/shared/components/${dep}`)) {
+        if (!existsSync(`${sharedRoot}/components/${dep}`)) {
           notInstalled.push(dep);
         }
       }
       break;
     }
     case 'directives': {
-      const projectFolder = getProjectPath(projectName);
-
       for (const dep of deps) {
-        if (!existsSync(`${projectFolder}/src/app/shared/directives/${dep}.directive.ts`)) {
+        if (!existsSync(`${sharedRoot}/directives/${dep}.directive.ts`)) {
           notInstalled.push(dep);
         }
       }
       break;
     }
     case 'validator': {
-      const projectFolder = getProjectPath(projectName);
-
       for (const dep of deps) {
-        if (!existsSync(`${projectFolder}/src/app/shared/validators/${dep}.validator.ts`)) {
+        if (!existsSync(`${sharedRoot}/validators/${dep}.validator.ts`)) {
           notInstalled.push(dep);
         }
       }
       break;
     }
     case 'utils': {
-      const projectFolder = getProjectPath(projectName);
-
       for (const dep of deps) {
-        if (!existsSync(`${projectFolder}/src/app/shared/utils/${dep}.ts`)) {
+        if (!existsSync(`${sharedRoot}/utils/${dep}.ts`)) {
           notInstalled.push(dep);
         }
       }
@@ -118,10 +113,8 @@ export function getNotInstalled(projectName: string, type: PackageType, deps: st
       break;
     }
     case 'base': {
-      const projectFolder = getProjectPath(projectName);
-
       for (const dep of deps) {
-        if (!existsSync(`${projectFolder}/src/app/shared/base/${dep}`)) {
+        if (!existsSync(`${sharedRoot}/base/${dep}`)) {
           notInstalled.push(dep);
         }
       }
@@ -129,9 +122,10 @@ export function getNotInstalled(projectName: string, type: PackageType, deps: st
     }
     case 'core-resource': {
       const projectFolder = getProjectPath(projectName);
+      const { coreRoot } = getProjectLayout(projectFolder);
 
       for (const dep of deps) {
-        if (!existsSync(`${projectFolder}/src/app/core/${dep}`)) {
+        if (!existsSync(`${coreRoot}/${dep}`)) {
           notInstalled.push(dep);
         }
       }
@@ -139,9 +133,10 @@ export function getNotInstalled(projectName: string, type: PackageType, deps: st
     }
     case 'css': {
       const projectFolder = getProjectPath(projectName);
+      const { themeRoot } = getProjectLayout(projectFolder);
 
       for (const dep of deps) {
-        if (!existsSync(`${projectFolder}/src/theme/${dep}`)) {
+        if (!existsSync(`${themeRoot}/${dep}`)) {
           notInstalled.push(dep);
         }
       }

@@ -1,13 +1,16 @@
 {
   "name": "@koalarx/ui",
-  "version": "23.0.3",
+  "version": "23.1.0",
+  "type": "module",
   "scripts": {
-    "build": "bun scripts/build",
+    "build": "bun scripts/build.mjs",
+    "build:cli": "bun scripts/build-cli.mjs",
+    "build:ui": "bun scripts/build-ui.mjs",
     "build:doc": "bun run build:docs",
     "build:docs": "bun run generate:llms && cd libs/ui && bun run build:prod",
     "dev:docs": "bun run generate:llms && cd libs/ui && bun start",
     "preview:docs": "bunx serve dist/browser -p 4321",
-    "start": "bun run build && bun ./bin/run",
+    "start": "bun run build && bun dist/cli/index.js",
     "ui:start": "cd libs/ui && bun start",
     "generate:command": "bun scripts/generate-command",
     "generate:llms": "node scripts/generate-llms.js",
@@ -64,7 +67,7 @@
     "typescript": "^6"
   },
   "bin": {
-    "kl": "./bin/run.js"
+    "kl": "./dist/cli/index.js"
   },
   "repository": {
     "type": "git",

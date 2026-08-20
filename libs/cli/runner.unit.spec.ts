@@ -2,6 +2,9 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import * as fs from 'node:fs';
 
 vi.mock('node:fs');
+vi.mock('./utils/get-package-root', () => ({
+  getPackageRoot: vi.fn(() => '/fake/package/root'),
+}));
 vi.mock('./commands/init', () => ({
   runInitCommand: vi.fn(),
 }));
@@ -68,6 +71,8 @@ describe('CLI Runner', () => {
       verbose: false,
       aiContext: 'none',
       silent: false,
+      type: undefined,
+      ssr: undefined,
     });
   });
 
@@ -81,6 +86,38 @@ describe('CLI Runner', () => {
       verbose: false,
       aiContext: undefined,
       silent: true,
+      type: undefined,
+      ssr: undefined,
+    });
+  });
+
+  it('should pass --type and --ssr to new', async () => {
+    const result = await runCli(['new', 'demo', '--type', 'app', '--ssr']);
+
+    expect(result).toBe(0);
+    expect(runNewCommand).toHaveBeenCalledWith({
+      name: 'demo',
+      pm: undefined,
+      verbose: false,
+      aiContext: undefined,
+      silent: false,
+      type: 'app',
+      ssr: true,
+    });
+  });
+
+  it('should pass --no-ssr to new', async () => {
+    const result = await runCli(['new', 'demo', '--no-ssr']);
+
+    expect(result).toBe(0);
+    expect(runNewCommand).toHaveBeenCalledWith({
+      name: 'demo',
+      pm: undefined,
+      verbose: false,
+      aiContext: undefined,
+      silent: false,
+      type: undefined,
+      ssr: false,
     });
   });
 

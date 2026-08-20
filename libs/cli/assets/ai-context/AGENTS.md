@@ -15,8 +15,8 @@ Useful entry points: [Get Started](https://ui.koalarx.com/docs/get-started.md), 
 ## Hard constraints
 
 - Install missing pieces with `kl install <component[,component]> --silent`. Components land under `src/app/shared/components/`. Always pass `--silent` so external dependency prompts do not block the agent.
-- Prefer Signals, standalone components, and path aliases (`@/*` → `src/app/*`) from `kl new` / `kl init`. For non-interactive scaffolding use `kl new <name> --silent` (or `--pm` / `--ai-context`).
-- Prefer **Signal Forms** (`form()`, `[formField]`) for new forms. Installed controls implement `FormValueControl` / `FormCheckboxControl` and remain compatible with Reactive Forms on Angular 22.
+- Prefer Signals, standalone components, and path aliases (`@/*` → `src/app/*`) from `kl new` / `kl init`. For non-interactive scaffolding use `kl new <name> --silent` (or `--pm` / `--type` / `--ssr` / `--ai-context`).
+- Prefer **Signal Forms** (`form()`, `[formField]`) for new forms. Installed controls implement `FormValueControl` / `FormCheckboxControl` and remain compatible with Reactive Forms on Angular 22. Prefer `@Service()` for root services (Angular 22).
 - Base deps: `@koalarx/utils` ≥ 5 and `clsx`. Prefer documented Utils prototypes (e.g. `.orderBy()`).
 - Import installed UI from `@/shared/components/...` (or the local path already used in this repo). Follow existing `imports` arrays on standalone components.
 - Do not invent undocumented directives, inputs, or APIs — match docs and the sources already in this tree.

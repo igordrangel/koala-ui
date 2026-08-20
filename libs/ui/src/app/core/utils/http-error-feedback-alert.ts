@@ -1,9 +1,9 @@
 import { Toast } from '@/shared/components/toast';
 import { HttpErrorResponse } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { HttpErrorMiddleware } from '../middlewares/http-errors.midleware';
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class HttpErrorFeedbackAlert {
   private readonly toast = inject(Toast);
 

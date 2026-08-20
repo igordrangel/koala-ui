@@ -5,6 +5,10 @@ import { installCoreResource } from './install-core-resource';
 
 vi.mock('node:fs');
 vi.mock('node:path');
+vi.mock('./get-package-root', () => ({
+  getOriginPath: () => '/fake/origin',
+  getPackageRoot: () => '/fake/origin',
+}));
 vi.mock('./project-path', () => ({
   getProjectPath: (name: string) => `/home/user/${name}`,
 }));
@@ -21,6 +25,9 @@ describe('installCoreResource', () => {
   it('should copy feedback-request-interceptor and update app.config', () => {
     vi.mocked(fs.cpSync).mockImplementation(() => {});
     vi.mocked(fs.writeFileSync).mockImplementation(() => {});
+    vi.mocked(fs.existsSync).mockImplementation(
+      (path) => String(path).endsWith('src/app/app.config.ts'),
+    );
 
     installCoreResource('my-app', 'interceptors/feedback-request-interceptor');
 

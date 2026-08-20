@@ -3,7 +3,7 @@ import {
   createComponent,
   EnvironmentInjector,
   inject,
-  Injectable,
+  Service,
   InjectionToken,
   Injector,
   Type,
@@ -30,7 +30,7 @@ export interface ModalConfig {
   afterClosed?: (trigger: any) => void;
 }
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class Modal {
   private readonly appRef = inject(ApplicationRef);
   private readonly injector = inject(EnvironmentInjector);

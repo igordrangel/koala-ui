@@ -49,6 +49,7 @@
 - [Global Errors](https://ui.koalarx.com/docs/global-errors.md): Global Errors component
 - [Rules](https://ui.koalarx.com/docs/rules.md): Rules component
 - [Auth](https://ui.koalarx.com/docs/auth.md): Auth component
+- [Generate Icons](https://ui.koalarx.com/docs/generate-icons.md): Generate Icons component
 
 ## CLI
 

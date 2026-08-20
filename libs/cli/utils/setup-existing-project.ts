@@ -5,13 +5,13 @@ import { detectTestFramework } from './detect-test-framework';
 import { withVersion } from './dependency-versions';
 import { detectPackageManager, getPmCommands, getProjectExecCommand } from './package-manager';
 import { getProjectPath } from './project-path';
+import { getSharedRoot } from './get-shared-root';
 import { runCommand } from './run-command';
 import { setupGlobalTests } from './setup-global-tests';
 import { validateAngularProject } from './validate-project';
 import { installUtil } from './install-util';
 import { applyAiContext, resolveAiContextTargets } from './apply-ai-context';
-
-const originPath = path.join(__dirname, '../../');
+import { getOriginPath } from './get-package-root';
 const KOALARX_UTILS_MIN_MAJOR = 5;
 
 /** True when utils is missing or its declared major is below the required major. */
@@ -52,12 +52,12 @@ export async function setupExistingProject(
 
   // Create shared folder structure
   logStep(logger, 'Creating folder structure...');
-  const requiredDirs = ['src/app/shared', 'src/theme/icons'];
+  const sharedRoot = getSharedRoot(projectPath);
+  const requiredDirs = [sharedRoot, `${projectPath}/src/theme/icons`];
 
   for (const dir of requiredDirs) {
-    const fullPath = `${projectPath}/${dir}`;
-    if (!existsSync(fullPath)) {
-      mkdirSync(fullPath, { recursive: true });
+    if (!existsSync(dir)) {
+      mkdirSync(dir, { recursive: true });
     }
   }
 
@@ -66,7 +66,7 @@ export async function setupExistingProject(
   // Copy themes and icons if they do not exist
   logStep(logger, 'Configuring themes...');
   const themeIconsPath = `${projectPath}/src/theme/icons`;
-  const originIconsPath = `${originPath}/ui/theme/icons`;
+  const originIconsPath = `${getOriginPath()}/ui/theme/icons`;
 
   if (!existsSync(`${themeIconsPath}/font-awesome`)) {
     if (existsSync(originIconsPath)) {
@@ -81,7 +81,7 @@ export async function setupExistingProject(
 
   const gridPath = `${projectPath}/src/theme/grid.css`;
   if (!existsSync(gridPath)) {
-    const originGridPath = `${originPath}/ui/theme/grid.css`;
+    const originGridPath = `${getOriginPath()}/ui/theme/grid.css`;
     if (existsSync(originGridPath)) {
       try {
         cpSync(originGridPath, gridPath);
@@ -93,7 +93,7 @@ export async function setupExistingProject(
 
   const tablePath = `${projectPath}/src/theme/table.css`;
   if (!existsSync(tablePath)) {
-    const originTablePath = `${originPath}/ui/theme/table.css`;
+    const originTablePath = `${getOriginPath()}/ui/theme/table.css`;
     if (existsSync(originTablePath)) {
       try {
         cpSync(originTablePath, tablePath);
@@ -107,7 +107,7 @@ export async function setupExistingProject(
 
   const generateIconsPath = `${projectPath}/generate-icons.js`;
   if (!existsSync(generateIconsPath)) {
-    const originGenerateIconsPath = `${originPath}/ui/generate-icons.js`;
+    const originGenerateIconsPath = `${getOriginPath()}/ui/generate-icons.js`;
     if (existsSync(originGenerateIconsPath)) {
       try {
         cpSync(originGenerateIconsPath, generateIconsPath);
@@ -196,7 +196,7 @@ export async function setupExistingProject(
   logStep(logger, 'Checking linting configuration...');
   const eslintConfigPath = `${projectPath}/eslint.config.mts`;
   if (!existsSync(eslintConfigPath)) {
-    const originEslintPath = `${originPath}/ui/eslint.config.mts`;
+    const originEslintPath = `${getOriginPath()}/ui/eslint.config.mts`;
     if (existsSync(originEslintPath)) {
       try {
         cpSync(originEslintPath, eslintConfigPath);
@@ -213,7 +213,7 @@ export async function setupExistingProject(
   logStep(logger, 'Checking VS Code configuration...');
   const vscodeDir = `${projectPath}/.vscode`;
   const vscodeSettingsPath = `${vscodeDir}/settings.json`;
-  const originVscodeSettingsPath = `${originPath}/ui/.vscode/settings.json`;
+  const originVscodeSettingsPath = `${getOriginPath()}/ui/.vscode/settings.json`;
 
   if (!existsSync(vscodeSettingsPath) && existsSync(originVscodeSettingsPath)) {
     try {
@@ -227,8 +227,6 @@ export async function setupExistingProject(
     logSuccess(logger, 'VS Code already configured');
   }
 
-  installUtil(projectName, 'control-changes');
-  installUtil(projectName, 'form-is-valid');
 
   const pm = detectPackageManager(projectName);
 

@@ -1,10 +1,10 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter, map, startWith } from 'rxjs';
 import { DEFAULT_LOCALE, isLocale, type Locale, SUPPORTED_LOCALES } from './locale.types';
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class LocaleService {
   private readonly router = inject(Router);
 

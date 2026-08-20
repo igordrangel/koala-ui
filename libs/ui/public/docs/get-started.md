@@ -34,18 +34,26 @@ kl new example
 # with custom package manager
 kl new example --pm pnpm
 
+# application with SSR
+kl new example --ssr
+
+# Angular library workspace
+kl new example --type library
+
 # skip AI context prompt
 kl new example --ai-context none
 
 # scaffold Cursor + Copilot context without prompting
 kl new example --ai-context both
 
-# non-interactive (AI agents / CI): bun + AI context none
+# non-interactive (AI agents / CI): bun + app + no SSR + AI context none
 kl new example --silent
 
 # non-interactive with overrides
-kl new example --silent --pm pnpm --ai-context both
+kl new example --silent --pm pnpm --type app --ssr --ai-context both
 ```
+
+Prompts (interactive, before scaffold): package manager → app/library → SSR (app only) → AI context.
 
 During setup you can scaffold AI context (Cursor / GitHub Copilot). Use `--ai-context none|cursor|github|both` to skip the prompt.
 For AI agents or CI, prefer `--silent` (non-interactive: bun + AI context none unless overridden).
@@ -125,3 +133,7 @@ kl add ai-context cursor github
 - **Global Errors** – `kl install -n global-errors`
 - **Rules** – `kl install -n rules`
 - **Auth** – `kl install -n auth`
+
+## Native tooling
+
+- **Generate Icons** – ships with `kl new` / `kl init` (`generate-icons.js`). Docs: [Generate Icons](https://ui.koalarx.com/#/resources/generate-icons).

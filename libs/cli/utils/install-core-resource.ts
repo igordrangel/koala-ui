@@ -1,8 +1,8 @@
-import { cpSync, readFileSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
+import { getOriginPath } from './get-package-root';
+import { getProjectLayout } from './get-shared-root';
 import { getProjectPath } from './project-path';
-
-const originPath = path.join(__dirname, '../../');
 
 export const InstallCoreResourceFlagsList = [
   'constants/security-storage-keys',
@@ -62,7 +62,11 @@ function includeOnAppConfig(
   resource: keyof typeof INTERCEPTOR_META,
 ) {
   const projectFolder = getProjectPath(projectName);
-  const appConfigPath = path.join(projectFolder, 'src/app/app.config.ts');
+  const { appConfigPath } = getProjectLayout(projectFolder);
+  if (!appConfigPath || !existsSync(appConfigPath)) {
+    return;
+  }
+
   let content = readFileSync(appConfigPath, 'utf-8');
   const { symbol, importPath } = INTERCEPTOR_META[resource];
 
@@ -97,8 +101,9 @@ function includeOnAppConfig(
 
 export function installCoreResource(projectName: string, resource: InstallCoreResourceFlags) {
   const projectFolder = getProjectPath(projectName);
-  const coreResourceFolderPath = `${projectFolder}/src/app/core/${resource}`;
-  const coreResourceOriginPath = `${originPath}/ui/core/${resource}`;
+  const { coreRoot } = getProjectLayout(projectFolder);
+  const coreResourceFolderPath = path.join(coreRoot, resource);
+  const coreResourceOriginPath = `${getOriginPath()}/ui/core/${resource}`;
 
   cpSync(`${coreResourceOriginPath}.ts`, `${coreResourceFolderPath}.ts`);
 

@@ -12,6 +12,23 @@ export const PATCH_NOTES_PAGE = {
         description:
           'A versão publicada do pacote @koalarx/ui aparece no package.json do repositório. O arquivo CHANGELOG.md na raiz espelha estas notas. A partir de 23.x, o major da lib = major do Angular + 1 (23 → Angular 22). Para Angular 21 use a linha 22.x; para Angular 22 use 23.x.',
       },
+      v2310: {
+        title: '23.1.0 — CLI app/library/SSR, Signal Forms, pagination',
+        description:
+          'Feature: scaffolding da CLI, inline-filter em Signal Forms, pagination e docs do generate-icons.',
+        items: [
+          'Currency mask: listener input + sync value→DOM (IME/autofill).',
+          'Pagination: página ativa btn-primary; queryParams page/limit; default limit 30.',
+          'Inline-filter desktop em Signal Forms; mobile-picker hidrata filtros da URL no init.',
+          'Serviços root usam @Service() (Angular 22).',
+          'kl new: prompts app|library + SSR; AI context antes do scaffold; flags --type / --ssr.',
+          'Build da CLI no formato koala-nest (Bun.Transpiler, bin ./cli/index.js).',
+          'Docs do generate-icons nativo (Resources).',
+          'Seletor de versão das docs: labels estáveis (companion na linha 22 sincroniza DOCS_VERSIONS).',
+        ],
+        upgrade:
+          'Reinstale currency e inline-filter se já tiver cópias antigas (kl install currency,inline-filter). Pagination passa a gravar limit na URL (pageSize legado ainda é lido). Em agentes/CI: kl new <name> --silent [--type app|library] [--ssr|--no-ssr].',
+      },
       v2303: {
         title: '23.0.3 — Sem vazamento de docs na CLI',
         description:
@@ -83,6 +100,23 @@ export const PATCH_NOTES_PAGE = {
         title: 'How to use these notes',
         description:
           'The published @koalarx/ui package version is in the repository package.json. The root CHANGELOG.md mirrors these notes. From 23.x onward, library major = Angular major + 1 (23 → Angular 22). For Angular 21 use the 22.x line; for Angular 22 use 23.x.',
+      },
+      v2310: {
+        title: '23.1.0 — CLI app/library/SSR, Signal Forms, pagination',
+        description:
+          'Feature: CLI scaffolding, inline-filter on Signal Forms, pagination, and generate-icons docs.',
+        items: [
+          'Currency mask: input listener + value→DOM sync (IME/autofill).',
+          'Pagination: active page btn-primary; queryParams page/limit; default limit 30.',
+          'Inline-filter desktop on Signal Forms; mobile-picker hydrates URL filters on init.',
+          'Root services use @Service() (Angular 22).',
+          'kl new: app|library + SSR prompts; AI context before scaffold; --type / --ssr flags.',
+          'CLI build aligned with koala-nest (Bun.Transpiler, bin ./cli/index.js).',
+          'Native generate-icons documentation (Resources).',
+          'Docs version switcher: stable labels (companion 22.x line syncs DOCS_VERSIONS).',
+        ],
+        upgrade:
+          'Reinstall currency and inline-filter if you already have older copies (kl install currency,inline-filter). Pagination now writes limit to the URL (legacy pageSize is still read). For agents/CI: kl new <name> --silent [--type app|library] [--ssr|--no-ssr].',
       },
       v2303: {
         title: '23.0.3 — No docs leakage in the CLI',

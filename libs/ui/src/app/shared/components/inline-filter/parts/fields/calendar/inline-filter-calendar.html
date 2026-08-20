@@ -4,7 +4,7 @@
       <app-input-calendar
         #calendarField
         format="dd/MM/yyyy"
-        [formControl]="valueControl"
+        [formField]="valueForm.value"
         [placeholder]="config.placeholder ?? 'Pick a date'"
         [inline]="!isMobile"
       />

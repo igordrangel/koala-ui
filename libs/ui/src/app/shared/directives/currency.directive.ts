@@ -31,6 +31,34 @@ export class CurrencyMask implements FormValueControl<number | null>, OnDestroy 
   readonly disabled = input(false);
   readonly touch = output<void>();
 
+  private readonly onInput = () => {
+    const el = this.elementRef.nativeElement;
+    const sep = this.getSep();
+    const thousandSep = this.thousandSeparator() || '.';
+    // Match currencyMask default alias when prefix input is unset.
+    const prefix = this.prefix() ?? 'R$';
+
+    let rawValue = el.value;
+    if (prefix) {
+      rawValue = rawValue.replace(prefix, '').trimStart();
+    }
+    rawValue = rawValue.split(thousandSep).join('');
+
+    const maskedValue = currencyMask(rawValue || '0', {
+      currencyAlias: prefix,
+      decimalDigits: this.getSafeDecimalDigits(),
+      thousandSeparator: thousandSep,
+      decimalSeparator: sep,
+      fixedDecimalScale: true,
+    });
+
+    el.value = maskedValue;
+
+    if (!this.suppressEmit) {
+      this.emitNumericValue(rawValue || '0');
+    }
+  };
+
   private readonly onKeyDown = (event: KeyboardEvent) => this.handleKeyDown(event);
   private readonly onClick = () => this.syncEditingModeFromCaret();
   private readonly onPaste = (event: ClipboardEvent) => {
@@ -47,16 +75,32 @@ export class CurrencyMask implements FormValueControl<number | null>, OnDestroy 
 
   constructor() {
     const el = this.elementRef.nativeElement;
+    el.addEventListener('input', this.onInput);
     el.addEventListener('keydown', this.onKeyDown);
     el.addEventListener('click', this.onClick);
     el.addEventListener('paste', this.onPaste);
 
     effect(() => {
-      this.render(this.elementRef.nativeElement.value);
-    });
+      const value = this.value();
+      const sep = this.getSep();
+      const safeDecimalDigits = this.getSafeDecimalDigits();
+      const raw =
+        value == null || isNaN(value) ? '0' : value.toFixed(safeDecimalDigits).replace('.', sep);
+      const masked = currencyMask(raw, {
+        currencyAlias: this.prefix(),
+        decimalDigits: safeDecimalDigits,
+        thousandSeparator: this.thousandSeparator(),
+        decimalSeparator: sep,
+        fixedDecimalScale: true,
+      });
 
-    effect(() => {
-      this.applyExternalValue(this.value());
+      if (el.value === masked) {
+        return;
+      }
+
+      this.suppressEmit = true;
+      el.value = masked;
+      this.suppressEmit = false;
     });
 
     effect(() => {
@@ -218,6 +262,7 @@ export class CurrencyMask implements FormValueControl<number | null>, OnDestroy 
 
   ngOnDestroy(): void {
     const el = this.elementRef.nativeElement;
+    el.removeEventListener('input', this.onInput);
     el.removeEventListener('keydown', this.onKeyDown);
     el.removeEventListener('click', this.onClick);
     el.removeEventListener('paste', this.onPaste);

@@ -1,12 +1,12 @@
 import { Select, SelectField, SelectOption } from '@/shared/components/select';
 import { Component, computed, effect, OnInit, ResourceRef, viewChild } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormField } from '@angular/forms/signals';
 import { FieldBase } from '../field.base';
 
 @Component({
   selector: 'app-inline-filter-select',
   templateUrl: './inline-filter-select.html',
-  imports: [ReactiveFormsModule, Select],
+  imports: [FormField, Select],
 })
 export class InlineFilterSelect extends FieldBase implements OnInit {
   private readonly selectComponentRef = viewChild<SelectField>('selectField');
@@ -24,10 +24,10 @@ export class InlineFilterSelect extends FieldBase implements OnInit {
 
     effect(() => {
       const config = this.config();
-      const value = this.valueChanges();
+      const value = this.valueForm.value().value();
       const options = this.options();
 
-      if (this.valueControl.invalid) {
+      if (!this.valueForm.value().valid()) {
         return;
       }
 

@@ -1,6 +1,6 @@
 ```typescript
 import { HttpResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Service } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
 import { HttpBase } from '@/shared/base/http.base';
 import { TextEditorFileData, TextEditorFileService } from '@/shared/components/text-editor';
@@ -10,7 +10,7 @@ export enum FolderEnum {
   article = 1,
 }
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class FileService extends HttpBase implements TextEditorFileService {
   constructor() {
     super(environment.apiUrl, 'file');

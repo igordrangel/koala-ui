@@ -1,6 +1,6 @@
 import { HttpBase } from '@/shared/base/http.base';
 import { DatalistResponse } from '@/shared/base/list.base';
-import { Injectable } from '@angular/core';
+import { Service } from '@angular/core';
 import { KlArray } from '@koalarx/utils/KlArray';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
@@ -25,7 +25,7 @@ interface UsersQueryParams {
   email?: string;
 }
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class UsersService extends HttpBase {
   constructor() {
     super('https://dummyjson.com', 'users');

@@ -20,15 +20,15 @@ export class Pagination {
     this.activatedRoute.queryParamMap.pipe(
       map((params) => {
         const page = params.get('page');
-        const pageSize = params.get('pageSize');
+        const limit = params.get('limit') ?? params.get('pageSize');
 
         return {
-          page: page ? Number(page) : 1,
-          pageSize: pageSize ? Number(pageSize) : 10,
+          page: page != null ? Number(page) : null,
+          pageSize: limit != null ? Number(limit) : null,
         };
       }),
     ),
-    { initialValue: { page: 1, pageSize: 10 } },
+    { initialValue: { page: null as number | null, pageSize: null as number | null } },
   );
 
   readonly isMobile = isMobile();
@@ -45,7 +45,7 @@ export class Pagination {
 
   readonly size = input<PaginationSize>('md');
   readonly page = input<number>(1);
-  readonly pageSize = input<number>(10);
+  readonly pageSize = input<number>(30);
   readonly total = input<number>(0);
 
   readonly currentPage = linkedSignal<number>(this.page);
@@ -134,7 +134,7 @@ export class Pagination {
 
       this.pageSizeChange.emit(pageSize);
       this.router.navigate([], {
-        queryParams: { pageSize },
+        queryParams: { limit: pageSize, pageSize: null },
         queryParamsHandling: 'merge',
       });
     });
@@ -142,8 +142,8 @@ export class Pagination {
     effect(() => {
       const { page, pageSize } = this.paginationParams();
 
-      this.currentPage.set(page);
-      this.currentPageSize.set(pageSize);
+      this.currentPage.set(page ?? this.page());
+      this.currentPageSize.set(pageSize ?? this.pageSize());
     });
   }
 

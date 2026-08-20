@@ -12,7 +12,7 @@ import { Select, SelectOption } from '@/shared/components/select';
 import { CurrencyMask } from '@/shared/directives/currency.directive';
 import { Mask } from '@/shared/directives/mask.directive';
 import { Component, inject, ResourceRef, signal } from '@angular/core';
-import { ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, ValidatorFn, Validators } from '@angular/forms';
 import { email, form, FormField, required, validate } from '@angular/forms/signals';
 import { ActivatedRoute, Router } from '@angular/router';
 import { validateCnpj, validateCpf } from '@koalarx/utils/KlString';
@@ -61,7 +61,9 @@ export class MobilePicker {
             return undefined;
           }
 
-          return validateCpf(current) ? undefined : { kind: 'cpfInvalid', message: 'CPF inválido' };
+          return validateCpf(String(current))
+            ? undefined
+            : { kind: 'cpfInvalid', message: 'CPF inválido' };
         });
       } else if (field.inputType === 'cnpj') {
         validate(path, ({ value }) => {
@@ -70,11 +72,13 @@ export class MobilePicker {
             return undefined;
           }
 
-          return validateCnpj(current)
+          return validateCnpj(String(current))
             ? undefined
             : { kind: 'cnpjInvalid', message: 'CNPJ inválido' };
         });
       }
+
+      this.applyExtraValidators(path, field);
     }
   });
 
@@ -82,11 +86,53 @@ export class MobilePicker {
     const queryParams = this.activatedRoute.snapshot.queryParams ?? {};
 
     return Object.fromEntries(
-      this.config.fields.map((field) => [
-        field.name,
-        queryParams[field.name] ?? field.defaultValue ?? null,
-      ]),
+      this.config.fields.map((field) => {
+        const fromField = field.value();
+        const fromQuery = queryParams[field.name];
+        const raw = fromField ?? fromQuery ?? field.defaultValue ?? null;
+
+        if (raw == null || raw === '') {
+          return [field.name, null];
+        }
+
+        // Only currency (and similar) should become numbers; CPF/CNPJ/select keys stay strings.
+        if (typeof raw === 'string' && field.inputType === 'currency') {
+          const numeric = Number(raw);
+          return [field.name, Number.isNaN(numeric) ? raw : numeric];
+        }
+
+        return [field.name, raw];
+      }),
     );
+  }
+
+  private applyExtraValidators(path: any, field: InlineFilterField) {
+    if (!field.validators) {
+      return;
+    }
+
+    const list = (Array.isArray(field.validators) ? field.validators : [field.validators]).filter(
+      (validator) => validator !== Validators.required,
+    );
+
+    if (list.length === 0) {
+      return;
+    }
+
+    validate(path, ({ value }) => {
+      const current = value();
+      const control = { value: current } as AbstractControl;
+
+      for (const validator of list) {
+        const errors = validator(control);
+        if (errors) {
+          const kind = Object.keys(errors)[0] ?? 'invalid';
+          return { kind, message: `${field.label} is invalid` };
+        }
+      }
+
+      return undefined;
+    });
   }
 
   private hasRequiredValidator(validators?: ValidatorFn | ValidatorFn[]): boolean {

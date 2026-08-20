@@ -47,7 +47,7 @@
         type="button"
         class="join-item btn"
         [class]="sizeClass()"
-        [class.btn-active]="page === currentPage()"
+        [class.btn-primary]="page === currentPage()"
         [disabled]="page < 0"
         (click)="setPage(page)"
       >

@@ -1,4 +1,5 @@
-import { SpawnOptions, spawn } from 'node:child_process';
+import { spawn } from 'node:child_process';
+import type { SpawnOptions } from 'node:child_process';
 import chalk from 'chalk';
 
 export interface RunCommandOptions extends SpawnOptions {

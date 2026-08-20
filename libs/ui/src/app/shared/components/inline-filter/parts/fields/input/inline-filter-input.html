@@ -18,7 +18,7 @@
         [style.width]="widthField + 'ch'"
         [type]="config.inputType"
         [placeholder]="config.placeholder ?? 'Digite um valor'"
-        [formControl]="valueControl"
+        [formField]="valueForm.value"
       />
     }
     @case ('cpf')
@@ -30,7 +30,7 @@
         type="text"
         [appMask]="mask"
         [placeholder]="mask"
-        [formControl]="valueControl"
+        [formField]="valueForm.value"
       />
     }
     @case ('currency') {
@@ -41,7 +41,7 @@
         type="text"
         appCurrency
         placeholder="R$ 0,00"
-        [formControl]="valueControl"
+        [formField]="valueForm.value"
       />
     }
   }

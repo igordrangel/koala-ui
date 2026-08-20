@@ -29,6 +29,12 @@ export const ROUTES: Routes = [
     title: generateTitle('Rules'),
   },
   {
+    path: 'generate-icons',
+    loadComponent: () =>
+      import('./generate-icons/generate-icons.page').then((m) => m.GenerateIconsPage),
+    title: generateTitle('Generate Icons'),
+  },
+  {
     path: 'auth',
     loadComponent: () => import('./auth/auth.page').then((m) => m.AuthPage),
     title: generateTitle('Auth'),

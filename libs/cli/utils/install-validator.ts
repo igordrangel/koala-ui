@@ -1,17 +1,17 @@
 import { cpSync } from 'node:fs';
 import path from 'node:path';
+import { getOriginPath } from './get-package-root';
 import { getProjectPath } from './project-path';
-
-const originPath = path.join(__dirname, '../../');
-
+import { getSharedRoot } from './get-shared-root';
 export const InstallValidatorFlagsList = ['cpf', 'cnpj'] as const;
 export type InstallValidatorFlags = (typeof InstallValidatorFlagsList)[number];
 
 export function installValidator(projectName: string, validator: InstallValidatorFlags) {
   const projectFolder = getProjectPath(projectName);
+  const sharedRoot = getSharedRoot(projectFolder);
 
   cpSync(
-    `${originPath}/ui/validators/${validator}.validator.ts`,
-    `${projectFolder}/src/app/shared/validators/${validator}.validator.ts`,
+    `${getOriginPath()}/ui/validators/${validator}.validator.ts`,
+    `${sharedRoot}/validators/${validator}.validator.ts`,
   );
 }
