@@ -10,7 +10,7 @@ Root CHANGELOG.md mirrors these notes.
 
 - Site patch notes list every section from `patch-notes.ts` (includes 23.1.0).
 - `docs/patch-notes.md` and `generate:llms` now include 23.1.0+.
-- Sitemap includes `resources/generate-icons`; public links use `/pt/...` instead of hash.
+- Sitemap includes `icons/generate-icons`; public links use `/pt/...` instead of hash.
 
 ### Upgrade
 
@@ -26,7 +26,7 @@ Docs redeploy only; no consumer project changes.
 - Root services use `@Service()` (Angular 22).
 - `kl new`: app|library + SSR prompts; AI context before scaffold; `--type` / `--ssr` flags.
 - CLI build aligned with koala-nest (`Bun.Transpiler`, bin `./cli/index.js`).
-- Native generate-icons documentation (Resources).
+- Native generate-icons documentation (Icons).
 - Docs version switcher: stable labels (companion 22.x line syncs `DOCS_VERSIONS`).
 
 ### Upgrade

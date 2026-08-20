@@ -19,7 +19,8 @@ A partir de **23.x**, o major de `@koalarx/ui` = major do Angular + 1 (`23` → 
 
 - Página Patch notes no site passa a listar todas as seções de `patch-notes.ts` (incluindo 23.1.0).
 - `docs/patch-notes.md` / `generate:llms` incluem 23.1.0+.
-- Sitemap inclui `resources/generate-icons`; links públicos usam `/pt/...` em vez de hash.
+- Sitemap inclui `icons/generate-icons`; links públicos usam `/pt/...` em vez de hash.
+- Generate Icons no header **Ícones** (fora de Resources).
 
 ### Upgrade
 

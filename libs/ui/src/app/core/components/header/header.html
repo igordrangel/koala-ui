@@ -92,6 +92,17 @@
   >
     {{ copy().resources }}
   </a>
+
+  <a
+    class="opacity-60 justify-start lg:justify-center md:inline-flex"
+    appButton
+    btnSize="sm"
+    btnVariant="ghost"
+    [routerLink]="'icons' | localePath"
+    routerLinkActive="opacity-100"
+  >
+    {{ copy().icons }}
+  </a>
 </ng-template>
 
 @if (mobileMenuVisible()) {

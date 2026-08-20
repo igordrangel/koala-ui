@@ -196,7 +196,7 @@ ${COMPONENTS.filter((c) => !c.isPage && !c.noKlInstall)
 
 ## Native tooling
 
-- **Generate Icons** – ships with \`kl new\` / \`kl init\` (\`generate-icons.js\`). Docs: [Generate Icons](https://ui.koalarx.com/pt/resources/generate-icons).
+- **Generate Icons** – ships with \`kl new\` / \`kl init\` (\`generate-icons.js\`). Docs: [Generate Icons](https://ui.koalarx.com/pt/icons/generate-icons).
 `;
 
   return doc.trim();
@@ -215,7 +215,7 @@ Root CHANGELOG.md mirrors these notes.
 
 - Site patch notes list every section from \`patch-notes.ts\` (includes 23.1.0).
 - \`docs/patch-notes.md\` and \`generate:llms\` now include 23.1.0+.
-- Sitemap includes \`resources/generate-icons\`; public links use \`/pt/...\` instead of hash.
+- Sitemap includes \`icons/generate-icons\`; public links use \`/pt/...\` instead of hash.
 
 ### Upgrade
 
@@ -231,7 +231,7 @@ Docs redeploy only; no consumer project changes.
 - Root services use \`@Service()\` (Angular 22).
 - \`kl new\`: app|library + SSR prompts; AI context before scaffold; \`--type\` / \`--ssr\` flags.
 - CLI build aligned with koala-nest (\`Bun.Transpiler\`, bin \`./cli/index.js\`).
-- Native generate-icons documentation (Resources).
+- Native generate-icons documentation (Icons).
 - Docs version switcher: stable labels (companion 22.x line syncs \`DOCS_VERSIONS\`).
 
 ### Upgrade
@@ -484,16 +484,20 @@ function stripMarkdown(text) {
 }
 
 function getCategoryForDoc(name) {
-  const resources = ['list-base', 'http-base', 'page-base', 'global-errors', 'rules', 'auth', 'generate-icons'];
+  const icons = ['generate-icons'];
+  const resources = ['list-base', 'http-base', 'page-base', 'global-errors', 'rules', 'auth'];
   const blocks = ['datatable', 'login'];
+  if (icons.includes(name)) return 'Icons';
   if (resources.includes(name)) return 'Resources';
   if (blocks.includes(name)) return 'Blocks';
   return 'Components';
 }
 
 function getRouteForDoc(name) {
-  const resources = ['list-base', 'http-base', 'page-base', 'global-errors', 'rules', 'auth', 'generate-icons'];
+  const icons = ['generate-icons'];
+  const resources = ['list-base', 'http-base', 'page-base', 'global-errors', 'rules', 'auth'];
   const blocks = ['datatable', 'login'];
+  if (icons.includes(name)) return `icons/${name}`;
   if (resources.includes(name)) return `resources/${name}`;
   if (blocks.includes(name)) return `blocks/${name}`;
   return `components/${name}`;

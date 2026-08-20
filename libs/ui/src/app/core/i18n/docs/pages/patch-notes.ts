@@ -18,7 +18,8 @@ export const PATCH_NOTES_PAGE = {
         items: [
           'Patch notes no site listam todas as seções de patch-notes.ts (inclui 23.1.0).',
           'docs/patch-notes.md e generate:llms passam a incluir 23.1.0+.',
-          'Sitemap inclui resources/generate-icons; links usam /pt/... em vez de hash.',
+          'Sitemap inclui icons/generate-icons; links usam /pt/... em vez de hash.',
+          'Generate Icons no header Ícones (fora de Resources).',
         ],
         upgrade: 'Só redeploy das docs; sem mudanças nos projetos consumidores.',
       },
@@ -33,7 +34,7 @@ export const PATCH_NOTES_PAGE = {
           'Serviços root usam @Service() (Angular 22).',
           'kl new: prompts app|library + SSR; AI context antes do scaffold; flags --type / --ssr.',
           'Build da CLI no formato koala-nest (Bun.Transpiler, bin ./cli/index.js).',
-          'Docs do generate-icons nativo (Resources).',
+          'Docs do generate-icons nativo (Ícones).',
           'Seletor de versão das docs: labels estáveis (companion na linha 22 sincroniza DOCS_VERSIONS).',
         ],
         upgrade:
@@ -117,7 +118,8 @@ export const PATCH_NOTES_PAGE = {
         items: [
           'Site patch notes list every section from patch-notes.ts (includes 23.1.0).',
           'docs/patch-notes.md and generate:llms now include 23.1.0+.',
-          'Sitemap includes resources/generate-icons; links use /pt/... instead of hash.',
+          'Sitemap includes icons/generate-icons; links use /pt/... instead of hash.',
+          'Generate Icons under the Icons header (moved out of Resources).',
         ],
         upgrade: 'Docs redeploy only; no consumer project changes.',
       },
@@ -132,7 +134,7 @@ export const PATCH_NOTES_PAGE = {
           'Root services use @Service() (Angular 22).',
           'kl new: app|library + SSR prompts; AI context before scaffold; --type / --ssr flags.',
           'CLI build aligned with koala-nest (Bun.Transpiler, bin ./cli/index.js).',
-          'Native generate-icons documentation (Resources).',
+          'Native generate-icons documentation (Icons).',
           'Docs version switcher: stable labels (companion 22.x line syncs DOCS_VERSIONS).',
         ],
         upgrade:
