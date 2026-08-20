@@ -9,6 +9,17 @@ O conteúdo principal da página web vive em `libs/ui/src/app/core/i18n/docs/pag
 
 Formato inspirado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 
+## [22.3.5] — Seletor de versão das docs
+
+### Fixed
+
+- `DOCS_VERSIONS` sincronizado com `main` (`v23` + `v22`).
+- Label ativo do seletor só mostra o semver quando o major da build coincide com a entrada.
+
+### Upgrade
+
+Redeploy das docs da linha 22; sem mudanças nos projetos consumidores.
+
 ## [22.3.3] — Sem vazamento de docs na CLI
 
 ### Fixed

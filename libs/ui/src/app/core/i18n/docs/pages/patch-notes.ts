@@ -12,6 +12,15 @@ export const PATCH_NOTES_PAGE = {
         description:
           'A versão publicada do pacote @koalarx/ui aparece no package.json do repositório. O arquivo CHANGELOG.md na raiz espelha estas notas.',
       },
+      v2235: {
+        title: '22.3.5 — Seletor de versão das docs',
+        description: 'Corrige o seletor de major nas docs hospedadas em /v22/.',
+        items: [
+          'DOCS_VERSIONS sincronizado com main (v23 + v22).',
+          'Label ativo só mostra o semver quando o major da build coincide com a entrada.',
+        ],
+        upgrade: 'Redeploy das docs da linha 22; sem mudanças nos projetos consumidores.',
+      },
       v2233: {
         title: '22.3.3 — Sem vazamento de docs na CLI',
         description:
@@ -56,6 +65,15 @@ export const PATCH_NOTES_PAGE = {
         title: 'How to use these notes',
         description:
           'The published @koalarx/ui package version is in the repository package.json. The root CHANGELOG.md mirrors these notes.',
+      },
+      v2235: {
+        title: '22.3.5 — Docs version switcher',
+        description: 'Fixes the major selector on docs hosted at /v22/.',
+        items: [
+          'DOCS_VERSIONS synced with main (v23 + v22).',
+          'Active label shows semver only when the build major matches the entry.',
+        ],
+        upgrade: 'Redeploy the 22.x docs line; no consumer project changes.',
       },
       v2233: {
         title: '22.3.3 — No docs leakage in the CLI',
