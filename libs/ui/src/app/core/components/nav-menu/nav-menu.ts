@@ -18,7 +18,7 @@ interface MenuOptions {
   items: MenuOption[];
 }
 
-type ModulePage = 'getting-started' | 'components' | 'blocks' | 'resources' | 'icons';
+type ModulePage = 'getting-started' | 'components' | 'blocks' | 'resources';
 
 @Component({
   selector: 'app-nav-menu',
@@ -44,8 +44,7 @@ export class NavMenu {
       url === 'getting-started' ||
       url === 'components' ||
       url === 'blocks' ||
-      url === 'resources' ||
-      url === 'icons'
+      url === 'resources'
     ) {
       return url;
     }
@@ -155,13 +154,6 @@ export class NavMenu {
           { name: 'Rules', routerLink: 'resources/rules' },
         ]).orderBy('name'),
       },
-    ]).orderBy('name');
-  });
-
-  readonly icons = computed(() => {
-    const copy = UI_COPY[this.localeService.locale()];
-    return new KlArray<MenuOption>([
-      { name: copy.generateIcons, routerLink: 'icons/generate-icons' },
     ]).orderBy('name');
   });
 }

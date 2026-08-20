@@ -102,29 +102,6 @@
             </ul>
           }
         }
-        @case ('icons') {
-          <ul>
-            @for (item of icons(); track $index) {
-              <li>
-                <a
-                  class="opacity-60"
-                  [routerLink]="item.routerLink | localePath"
-                  routerLinkActive="opacity-100"
-                >
-                  <span class="flex items-center gap-2">
-                    {{ item.name }}
-
-                    @if (item.commingSoon) {
-                      <span class="badge badge-xs badge-soft bg-neutral-700 text-white">
-                        soon
-                      </span>
-                    }
-                  </span>
-                </a>
-              </li>
-            }
-          </ul>
-        }
       }
     </li>
   </ul>

@@ -1,6 +1,6 @@
 {
   "name": "@koalarx/ui",
-  "version": "23.1.1",
+  "version": "23.1.0",
   "type": "module",
   "scripts": {
     "build": "bun scripts/build.mjs",

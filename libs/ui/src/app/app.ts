@@ -23,6 +23,21 @@ export class App {
   private localeService = inject(LocaleService);
   private readonly _localeTitle = inject(LocaleTitleService);
 
+  readonly isFullWidthPage = toSignal(
+    this.router.events.pipe(
+      filter((event) => event instanceof NavigationEnd),
+      map(() => this.computeFullWidth()),
+    ),
+    { initialValue: this.computeFullWidth() },
+  );
+
+  private computeFullWidth(): boolean {
+    const parts = this.router.url.split(/[?#]/)[0].split('/').filter(Boolean);
+    const withoutLocale = parts[0] && isLocale(parts[0]) ? parts.slice(1) : parts;
+    // Home and Icons have no left sidebar.
+    return withoutLocale.length === 0 || withoutLocale[0] === 'icons';
+  }
+
   readonly isHomePage = toSignal(
     this.router.events.pipe(
       filter((event) => event instanceof NavigationEnd),

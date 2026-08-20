@@ -148,18 +148,6 @@ Changelog for anyone using or upgrading projects scaffolded with the Koala UI CL
 Site page: https://ui.koalarx.com/pt/getting-started/patch-notes
 Root CHANGELOG.md mirrors these notes.
 
-## 23.1.1 — Docs: patch notes and generate-icons
-
-### What changed
-
-- Site patch notes list every section from `patch-notes.ts` (includes 23.1.0).
-- `docs/patch-notes.md` and `generate:llms` now include 23.1.0+.
-- Sitemap includes `icons/generate-icons`; public links use `/pt/...` instead of hash.
-
-### Upgrade
-
-Docs redeploy only; no consumer project changes.
-
 ## 23.1.0 — CLI app/library/SSR, Signal Forms, pagination
 
 ### What changed
@@ -170,7 +158,7 @@ Docs redeploy only; no consumer project changes.
 - Root services use `@Service()` (Angular 22).
 - `kl new`: app|library + SSR prompts; AI context before scaffold; `--type` / `--ssr` flags.
 - CLI build aligned with koala-nest (`Bun.Transpiler`, bin `./cli/index.js`).
-- Native generate-icons documentation (Icons).
+- Native generate-icons documentation (Icons header; save SVGs in `public/assets/icons`).
 - Docs version switcher: stable labels (companion 22.x line syncs `DOCS_VERSIONS`).
 
 ### Upgrade

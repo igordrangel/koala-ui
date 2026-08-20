@@ -13,25 +13,12 @@ Formato inspirado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/)
 
 A partir de **23.x**, o major de `@koalarx/ui` = major do Angular + 1 (`23` → Angular 22). A linha `22.x` permanece para Angular 21 (`previous-release` / dist-tag `angular-21`).
 
-## [23.1.1] — Docs: patch notes e generate-icons
-
-### Fixed
-
-- Página Patch notes no site passa a listar todas as seções de `patch-notes.ts` (incluindo 23.1.0).
-- `docs/patch-notes.md` / `generate:llms` incluem 23.1.0+.
-- Sitemap inclui `icons/generate-icons`; links públicos usam `/pt/...` em vez de hash.
-- Generate Icons no header **Ícones** (fora de Resources).
-
-### Upgrade
-
-Só redeploy das docs; sem mudanças nos projetos consumidores.
-
 ## [23.1.0] — CLI app/library/SSR, Signal Forms, pagination
 
 ### Added
 
 - `kl new`: prompts app vs library e SSR; flags `--type`, `--ssr` / `--no-ssr`; AI context perguntado antes do scaffold.
-- Docs do `generate-icons` nativo (Resources).
+- Docs do `generate-icons` nativo (header **Ícones**; SVG em `public/assets/icons`).
 - Build da CLI no formato koala-nest (`Bun.Transpiler`, `bin` → `./cli/index.js`).
 
 ### Changed

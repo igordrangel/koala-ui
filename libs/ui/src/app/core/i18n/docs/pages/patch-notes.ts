@@ -12,17 +12,6 @@ export const PATCH_NOTES_PAGE = {
         description:
           'A versão publicada do pacote @koalarx/ui aparece no package.json do repositório. O arquivo CHANGELOG.md na raiz espelha estas notas. A partir de 23.x, o major da lib = major do Angular + 1 (23 → Angular 22). Para Angular 21 use a linha 22.x; para Angular 22 use 23.x.',
       },
-      v2311: {
-        title: '23.1.1 — Docs: patch notes e generate-icons',
-        description: 'Corrige surfaces da documentação web e LLM após a 23.1.0.',
-        items: [
-          'Patch notes no site listam todas as seções de patch-notes.ts (inclui 23.1.0).',
-          'docs/patch-notes.md e generate:llms passam a incluir 23.1.0+.',
-          'Sitemap inclui icons/generate-icons; links usam /pt/... em vez de hash.',
-          'Generate Icons no header Ícones (fora de Resources).',
-        ],
-        upgrade: 'Só redeploy das docs; sem mudanças nos projetos consumidores.',
-      },
       v2310: {
         title: '23.1.0 — CLI app/library/SSR, Signal Forms, pagination',
         description:
@@ -34,7 +23,7 @@ export const PATCH_NOTES_PAGE = {
           'Serviços root usam @Service() (Angular 22).',
           'kl new: prompts app|library + SSR; AI context antes do scaffold; flags --type / --ssr.',
           'Build da CLI no formato koala-nest (Bun.Transpiler, bin ./cli/index.js).',
-          'Docs do generate-icons nativo (Ícones).',
+          'Docs do generate-icons nativo (header Ícones; salvar SVG em public/assets/icons).',
           'Seletor de versão das docs: labels estáveis (companion na linha 22 sincroniza DOCS_VERSIONS).',
         ],
         upgrade:
@@ -112,17 +101,6 @@ export const PATCH_NOTES_PAGE = {
         description:
           'The published @koalarx/ui package version is in the repository package.json. The root CHANGELOG.md mirrors these notes. From 23.x onward, library major = Angular major + 1 (23 → Angular 22). For Angular 21 use the 22.x line; for Angular 22 use 23.x.',
       },
-      v2311: {
-        title: '23.1.1 — Docs: patch notes and generate-icons',
-        description: 'Fixes web and LLM documentation surfaces after 23.1.0.',
-        items: [
-          'Site patch notes list every section from patch-notes.ts (includes 23.1.0).',
-          'docs/patch-notes.md and generate:llms now include 23.1.0+.',
-          'Sitemap includes icons/generate-icons; links use /pt/... instead of hash.',
-          'Generate Icons under the Icons header (moved out of Resources).',
-        ],
-        upgrade: 'Docs redeploy only; no consumer project changes.',
-      },
       v2310: {
         title: '23.1.0 — CLI app/library/SSR, Signal Forms, pagination',
         description:
@@ -134,7 +112,7 @@ export const PATCH_NOTES_PAGE = {
           'Root services use @Service() (Angular 22).',
           'kl new: app|library + SSR prompts; AI context before scaffold; --type / --ssr flags.',
           'CLI build aligned with koala-nest (Bun.Transpiler, bin ./cli/index.js).',
-          'Native generate-icons documentation (Icons).',
+          'Native generate-icons documentation (Icons header; save SVGs in public/assets/icons).',
           'Docs version switcher: stable labels (companion 22.x line syncs DOCS_VERSIONS).',
         ],
         upgrade:
