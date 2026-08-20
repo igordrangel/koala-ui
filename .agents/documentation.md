@@ -20,7 +20,7 @@ Após alterações, rode `bun run generate:llms` antes do build de docs.
 | Component | `features/components/` | `<name>-install.md` | `usage/<name>/*.html.md` + `*.ts.md` |
 | Block | `features/blocks/` | idem | idem |
 | Resource | `features/resources/` | idem | `usage/<name>/overview.md` + `*.ts.md` |
-| Icons (ex.: generate-icons) | `features/icons/` | docs-only (sem `kl install`) | `usage/<name>/overview.md` |
+| Icons | `features/icons/` | docs-only (sem `kl install`) | `usage/generate-icons/overview.md` | URL do site: `/pt/icons` |
 
 Para resources, use `overview.md` (não `<name>.md`) para evitar o heading `### Md` no gerador.
 

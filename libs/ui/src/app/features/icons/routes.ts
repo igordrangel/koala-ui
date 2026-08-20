@@ -3,9 +3,9 @@ import { Routes } from '@angular/router';
 
 export const ROUTES: Routes = [
   {
-    path: 'generate-icons',
+    path: '',
     loadComponent: () =>
       import('./generate-icons/generate-icons.page').then((m) => m.GenerateIconsPage),
-    title: generateTitle('Generate Icons'),
+    title: generateTitle('Icons'),
   },
 ];

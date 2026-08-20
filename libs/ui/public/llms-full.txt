@@ -138,7 +138,7 @@ kl add ai-context cursor github
 
 ## Native tooling
 
-- **Generate Icons** – ships with `kl new` / `kl init` (`generate-icons.js`). Docs: [Generate Icons](https://ui.koalarx.com/pt/icons/generate-icons).
+- **Icons** – ships with `kl new` / `kl init` (`generate-icons.js`). Docs: [Icons](https://ui.koalarx.com/pt/icons).
 
 ---
 
@@ -4010,7 +4010,7 @@ See usage examples in the [Login Block](./login.md).
 
 ---
 
-# Generate Icons
+# Icons
 
 ### Usage
 
@@ -4020,7 +4020,7 @@ See usage examples in the [Login Block](./login.md).
 
 ### Overview
 
-# Generate Icons
+# Icons
 
 The native `generate-icons.js` script (copied to the project root by `kl new` / `kl init`) turns SVG files into Tailwind v4 utilities. There is no `kl install` for this — it already ships with the scaffold.
 

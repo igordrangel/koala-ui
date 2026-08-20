@@ -32,11 +32,6 @@ const localeChildren: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'icons',
-    redirectTo: 'icons/generate-icons',
-    pathMatch: 'full',
-  },
-  {
     path: 'getting-started',
     loadChildren: () => import('./features/getting-started/routes').then((m) => m.ROUTES),
   },
@@ -48,10 +43,15 @@ const localeChildren: Routes = [
     path: 'blocks',
     loadChildren: () => import('./features/blocks/routes').then((m) => m.ROUTES),
   },
-  // Legacy path from when generate-icons lived under Resources
+  // Legacy paths → /icons
   {
     path: 'resources/generate-icons',
-    redirectTo: 'icons/generate-icons',
+    redirectTo: 'icons',
+    pathMatch: 'full',
+  },
+  {
+    path: 'icons/generate-icons',
+    redirectTo: 'icons',
     pathMatch: 'full',
   },
   {

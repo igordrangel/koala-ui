@@ -1,4 +1,4 @@
-# Generate Icons
+# Icons
 
 ### Usage
 
@@ -8,7 +8,7 @@
 
 ### Overview
 
-# Generate Icons
+# Icons
 
 The native `generate-icons.js` script (copied to the project root by `kl new` / `kl init`) turns SVG files into Tailwind v4 utilities. There is no `kl install` for this — it already ships with the scaffold.
 

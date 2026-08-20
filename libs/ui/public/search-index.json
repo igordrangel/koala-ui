@@ -11,7 +11,7 @@
     "title": "Installation",
     "category": "Getting Started",
     "route": "getting-started/installation",
-    "content": "Koala UI – Get Started Koala UI is an Angular component library inspired by shadcn/ui. Components are installed directly into your project via the Koala CLI , giving you full control over the source code. Base dependencies installed by / : @koalarx/utils ≥ 5 and . Full utils API for LLMs: https://utils.koalarx.com/llms.txt. Version compatibility Two support lines (like Angular current + previous): Line Git branch Docs npm dist-tag ------ ------------ ------ -------------- Latest https://ui.koalarx.com/ Previous https://ui.koalarx.com/v{major}/ see release (e.g. for the 22.x line on Angular 21) Older majors are frozen on archive branches named by version (e.g. ) with no publish/deploy. 1. Install the CLI 2. Create a new project Prompts (interactive, before scaffold): package manager → app/library → SSR (app only) → AI context. During setup you can scaffold AI context (Cursor / GitHub Copilot). Use to skip the prompt. For AI agents or CI, prefer (non-interactive: bun + AI context none unless overridden). 3. Add components Use to accept all external dependency installs without prompting (recommended for AI agents). 4. Add AI context (optional) 5. Add resources (optional) Available components - Alert – - Bottom Sheet – - Breadcrumb – - Button – - Calendar – - Checkbox – - Collapse – - Combobox – - Confirm – - DataTable – - Dropdown – - Fieldset – - Inline Filter – - Input CNPJ – - Input CPF – - Input Color – - Input Currency – - Input Field – - Loading – - Login – - Modal – - Pagination – - Radio – - Range – - Select – - Side Window – - Skeleton – - Stepper – - Table – - Tabs – - Textarea – - Text Editor – - Toast – - Toggle – - Tooltip – - Validator – - List Base – - Http Base – - Page Base – - Global Errors – - Rules – - Auth – Native tooling - Generate Icons – ships with / ( ). Docs: Generate Icons."
+    "content": "Koala UI – Get Started Koala UI is an Angular component library inspired by shadcn/ui. Components are installed directly into your project via the Koala CLI , giving you full control over the source code. Base dependencies installed by / : @koalarx/utils ≥ 5 and . Full utils API for LLMs: https://utils.koalarx.com/llms.txt. Version compatibility Two support lines (like Angular current + previous): Line Git branch Docs npm dist-tag ------ ------------ ------ -------------- Latest https://ui.koalarx.com/ Previous https://ui.koalarx.com/v{major}/ see release (e.g. for the 22.x line on Angular 21) Older majors are frozen on archive branches named by version (e.g. ) with no publish/deploy. 1. Install the CLI 2. Create a new project Prompts (interactive, before scaffold): package manager → app/library → SSR (app only) → AI context. During setup you can scaffold AI context (Cursor / GitHub Copilot). Use to skip the prompt. For AI agents or CI, prefer (non-interactive: bun + AI context none unless overridden). 3. Add components Use to accept all external dependency installs without prompting (recommended for AI agents). 4. Add AI context (optional) 5. Add resources (optional) Available components - Alert – - Bottom Sheet – - Breadcrumb – - Button – - Calendar – - Checkbox – - Collapse – - Combobox – - Confirm – - DataTable – - Dropdown – - Fieldset – - Inline Filter – - Input CNPJ – - Input CPF – - Input Color – - Input Currency – - Input Field – - Loading – - Login – - Modal – - Pagination – - Radio – - Range – - Select – - Side Window – - Skeleton – - Stepper – - Table – - Tabs – - Textarea – - Text Editor – - Toast – - Toggle – - Tooltip – - Validator – - List Base – - Http Base – - Page Base – - Global Errors – - Rules – - Auth – Native tooling - Icons – ships with / ( ). Docs: Icons."
   },
   {
     "id": "getting-started/installation#version-compatibility",
@@ -75,7 +75,7 @@
     "category": "Getting Started",
     "route": "getting-started/installation",
     "fragment": "native-tooling",
-    "content": "- Generate Icons – ships with / ( ). Docs: Generate Icons."
+    "content": "- Icons – ships with / ( ). Docs: Icons."
   },
   {
     "id": "getting-started/patch-notes",
@@ -1987,65 +1987,65 @@
     "content": "See usage examples in the Login Block."
   },
   {
-    "id": "icons/generate-icons",
-    "title": "Generate Icons",
+    "id": "icons",
+    "title": "Icons",
     "category": "Icons",
-    "route": "icons/generate-icons",
-    "content": "Generate Icons Usage Overview Generate Icons The native script (copied to the project root by / ) turns SVG files into Tailwind v4 utilities. There is no for this — it already ships with the scaffold. How it works 1. Reads every under . 2. Writes with one per icon. Each utility sets / on pointing at . 3. The base in provides size, alignment, and mask sizing. Icons are composed as + the generated utility name. 4. must import (ensured by the CLI). The generated file starts with . How to add icons 1. Save the SVG at (file name = CSS class). 2. Run at the project root (or / / / ). 3. Use . Example: → . Free SVG sources Suggested free libraries for commercial use (check each icon’s license): - SVG Repo - UXWing When it runs - , , , and ( ) - After of icon sets such as - Manually: at the project root Usage"
+    "route": "icons",
+    "content": "Icons Usage Overview Icons The native script (copied to the project root by / ) turns SVG files into Tailwind v4 utilities. There is no for this — it already ships with the scaffold. How it works 1. Reads every under . 2. Writes with one per icon. Each utility sets / on pointing at . 3. The base in provides size, alignment, and mask sizing. Icons are composed as + the generated utility name. 4. must import (ensured by the CLI). The generated file starts with . How to add icons 1. Save the SVG at (file name = CSS class). 2. Run at the project root (or / / / ). 3. Use . Example: → . Free SVG sources Suggested free libraries for commercial use (check each icon’s license): - SVG Repo - UXWing When it runs - , , , and ( ) - After of icon sets such as - Manually: at the project root Usage"
   },
   {
-    "id": "icons/generate-icons#usage",
+    "id": "icons#usage",
     "title": "Usage",
     "category": "Icons",
-    "route": "icons/generate-icons",
+    "route": "icons",
     "fragment": "usage",
     "content": ""
   },
   {
-    "id": "icons/generate-icons#overview",
+    "id": "icons#overview",
     "title": "Overview",
     "category": "Icons",
-    "route": "icons/generate-icons",
+    "route": "icons",
     "fragment": "overview",
-    "content": "Generate Icons The native script (copied to the project root by / ) turns SVG files into Tailwind v4 utilities. There is no for this — it already ships with the scaffold."
+    "content": "Icons The native script (copied to the project root by / ) turns SVG files into Tailwind v4 utilities. There is no for this — it already ships with the scaffold."
   },
   {
-    "id": "icons/generate-icons#how-it-works",
+    "id": "icons#how-it-works",
     "title": "How it works",
     "category": "Icons",
-    "route": "icons/generate-icons",
+    "route": "icons",
     "fragment": "how-it-works",
     "content": "1. Reads every under . 2. Writes with one per icon. Each utility sets / on pointing at . 3. The base in provides size, alignment, and mask sizing. Icons are composed as + the generated utility name. 4. must import (ensured by the CLI). The generated file starts with ."
   },
   {
-    "id": "icons/generate-icons#how-to-add-icons",
+    "id": "icons#how-to-add-icons",
     "title": "How to add icons",
     "category": "Icons",
-    "route": "icons/generate-icons",
+    "route": "icons",
     "fragment": "how-to-add-icons",
     "content": "1. Save the SVG at (file name = CSS class). 2. Run at the project root (or / / / ). 3. Use . Example: → ."
   },
   {
-    "id": "icons/generate-icons#free-svg-sources",
+    "id": "icons#free-svg-sources",
     "title": "Free SVG sources",
     "category": "Icons",
-    "route": "icons/generate-icons",
+    "route": "icons",
     "fragment": "free-svg-sources",
     "content": "Suggested free libraries for commercial use (check each icon’s license): - SVG Repo - UXWing"
   },
   {
-    "id": "icons/generate-icons#when-it-runs",
+    "id": "icons#when-it-runs",
     "title": "When it runs",
     "category": "Icons",
-    "route": "icons/generate-icons",
+    "route": "icons",
     "fragment": "when-it-runs",
     "content": "- , , , and ( ) - After of icon sets such as - Manually: at the project root"
   },
   {
-    "id": "icons/generate-icons#usage-2",
+    "id": "icons#usage-2",
     "title": "Usage",
     "category": "Icons",
-    "route": "icons/generate-icons",
+    "route": "icons",
     "fragment": "usage-2",
     "content": ""
   }

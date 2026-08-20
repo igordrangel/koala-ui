@@ -3,7 +3,7 @@ import type { DocPageCopy } from '../types';
 
 export const GENERATE_ICONS_PAGE = {
   pt: {
-    title: 'Generate Icons',
+    title: 'Ícones',
     description:
       'O script nativo generate-icons.js gera classes Tailwind v4 a partir dos SVGs em public/assets/icons, para uso com a utility app-icon. Já vem no projeto com kl new / kl init — não há kl install.',
     sections: {
@@ -51,7 +51,7 @@ export const GENERATE_ICONS_PAGE = {
     },
   },
   en: {
-    title: 'Generate Icons',
+    title: 'Icons',
     description:
       'The native generate-icons.js script builds Tailwind v4 utilities from SVGs in public/assets/icons, for use with the app-icon utility. It ships with kl new / kl init — there is no kl install.',
     sections: {

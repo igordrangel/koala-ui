@@ -116,7 +116,7 @@ const COMPONENTS = [
   { name: 'rules', label: 'Rules' },
   { name: 'auth', label: 'Auth' },
   // Native scaffold script (not `kl install`) — still generates docs/llms entry
-  { name: 'generate-icons', label: 'Generate Icons', noKlInstall: true },
+  { name: 'generate-icons', label: 'Icons', noKlInstall: true },
 ];
 
 // ---------------------------------------------------------------------------
@@ -196,7 +196,7 @@ ${COMPONENTS.filter((c) => !c.isPage && !c.noKlInstall)
 
 ## Native tooling
 
-- **Generate Icons** – ships with \`kl new\` / \`kl init\` (\`generate-icons.js\`). Docs: [Generate Icons](https://ui.koalarx.com/pt/icons/generate-icons).
+- **Icons** – ships with \`kl new\` / \`kl init\` (\`generate-icons.js\`). Docs: [Icons](https://ui.koalarx.com/pt/icons).
 `;
 
   return doc.trim();
@@ -485,7 +485,7 @@ function getRouteForDoc(name) {
   const icons = ['generate-icons'];
   const resources = ['list-base', 'http-base', 'page-base', 'global-errors', 'rules', 'auth'];
   const blocks = ['datatable', 'login'];
-  if (icons.includes(name)) return `icons/${name}`;
+  if (icons.includes(name)) return 'icons';
   if (resources.includes(name)) return `resources/${name}`;
   if (blocks.includes(name)) return `blocks/${name}`;
   return `components/${name}`;
