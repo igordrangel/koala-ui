@@ -311,12 +311,14 @@ function buildComponentDoc(component) {
 
   const sections = [];
 
-  // --- Installation ---------------------------------------------------------
-  const installFile = join(INSTALL_DIR, `${name}-install.md`);
-  if (existsSync(installFile)) {
-    sections.push(`## Installation\n\n${read(installFile)}`);
-  } else {
-    sections.push(`## Installation\n\n\`\`\`bash\nkl install -n ${name}\n\`\`\``);
+  // --- Installation (skip for native scaffold scripts like generate-icons) ---
+  if (!component.noKlInstall) {
+    const installFile = join(INSTALL_DIR, `${name}-install.md`);
+    if (existsSync(installFile)) {
+      sections.push(`## Installation\n\n${read(installFile)}`);
+    } else {
+      sections.push(`## Installation\n\n\`\`\`bash\nkl install -n ${name}\n\`\`\``);
+    }
   }
 
   // --- Usage ----------------------------------------------------------------

@@ -2015,15 +2015,7 @@
     "title": "Generate Icons",
     "category": "Resources",
     "route": "resources/generate-icons",
-    "content": "Generate Icons Installation Regenerates from . Usage Overview Generate Icons The native script (copied to the project root by / ) turns SVG files into Tailwind v4 utilities. How it works 1. Reads every under . 2. Writes with one per icon. Each utility sets / on pointing at . 3. The base in provides size, alignment, and mask sizing. Icons are composed as + the generated utility name. 4. must import (ensured by the CLI). The generated file starts with . When it runs - , , , and ( ) - After of icon sets such as - Manually: at the project root Usage Custom icons 1. Add 2. Run 3. Use"
-  },
-  {
-    "id": "resources/generate-icons#installation",
-    "title": "Installation",
-    "category": "Resources",
-    "route": "resources/generate-icons",
-    "fragment": "installation",
-    "content": "Regenerates from ."
+    "content": "Generate Icons Usage Overview Generate Icons The native script (copied to the project root by / ) turns SVG files into Tailwind v4 utilities. There is no for this — it already ships with the scaffold. How it works 1. Reads every under . 2. Writes with one per icon. Each utility sets / on pointing at . 3. The base in provides size, alignment, and mask sizing. Icons are composed as + the generated utility name. 4. must import (ensured by the CLI). The generated file starts with . How to add icons 1. Save the SVG at (file name = CSS class). 2. Run at the project root (or / / / ). 3. Use . Example: → . Free SVG sources Suggested free libraries for commercial use (check each icon’s license): - SVG Repo - UXWing When it runs - , , , and ( ) - After of icon sets such as - Manually: at the project root Usage"
   },
   {
     "id": "resources/generate-icons#usage",
@@ -2039,7 +2031,7 @@
     "category": "Resources",
     "route": "resources/generate-icons",
     "fragment": "overview",
-    "content": "Generate Icons The native script (copied to the project root by / ) turns SVG files into Tailwind v4 utilities."
+    "content": "Generate Icons The native script (copied to the project root by / ) turns SVG files into Tailwind v4 utilities. There is no for this — it already ships with the scaffold."
   },
   {
     "id": "resources/generate-icons#how-it-works",
@@ -2048,6 +2040,22 @@
     "route": "resources/generate-icons",
     "fragment": "how-it-works",
     "content": "1. Reads every under . 2. Writes with one per icon. Each utility sets / on pointing at . 3. The base in provides size, alignment, and mask sizing. Icons are composed as + the generated utility name. 4. must import (ensured by the CLI). The generated file starts with ."
+  },
+  {
+    "id": "resources/generate-icons#how-to-add-icons",
+    "title": "How to add icons",
+    "category": "Resources",
+    "route": "resources/generate-icons",
+    "fragment": "how-to-add-icons",
+    "content": "1. Save the SVG at (file name = CSS class). 2. Run at the project root (or / / / ). 3. Use . Example: → ."
+  },
+  {
+    "id": "resources/generate-icons#free-svg-sources",
+    "title": "Free SVG sources",
+    "category": "Resources",
+    "route": "resources/generate-icons",
+    "fragment": "free-svg-sources",
+    "content": "Suggested free libraries for commercial use (check each icon’s license): - SVG Repo - UXWing"
   },
   {
     "id": "resources/generate-icons#when-it-runs",
@@ -2064,13 +2072,5 @@
     "route": "resources/generate-icons",
     "fragment": "usage-2",
     "content": ""
-  },
-  {
-    "id": "resources/generate-icons#custom-icons",
-    "title": "Custom icons",
-    "category": "Resources",
-    "route": "resources/generate-icons",
-    "fragment": "custom-icons",
-    "content": "1. Add 2. Run 3. Use"
   }
 ]

@@ -3,16 +3,32 @@
   <ng-container description>{{ copy().description }}</ng-container>
 
   <app-section-content>
-    <ng-container title>{{ common().installation }}</ng-container>
-    <app-code-viewer language="bash" name="kl" src="markdown/install/generate-icons-install.md" />
-  </app-section-content>
-
-  <app-section-content>
     <ng-container title>{{ copy().sections.howItWorks.title }}</ng-container>
     <ng-container description>{{ copy().sections.howItWorks.description }}</ng-container>
     <ul>
       @for (item of howItems(); track $index) {
         <li class="list-disc ml-5">{{ item }}</li>
+      }
+    </ul>
+  </app-section-content>
+
+  <app-section-content>
+    <ng-container title>{{ copy().sections.addIcons.title }}</ng-container>
+    <ng-container description>{{ copy().sections.addIcons.description }}</ng-container>
+    <ul>
+      @for (item of addItems(); track $index) {
+        <li class="list-disc ml-5">{{ item }}</li>
+      }
+    </ul>
+    <p class="mt-4 font-semibold">{{ copy().sections.addIcons.sourcesTitle }}</p>
+    <p class="text-sm opacity-80">{{ copy().sections.addIcons.sourcesDescription }}</p>
+    <ul>
+      @for (source of addSources(); track source.url) {
+        <li class="list-disc ml-5">
+          <a [href]="source.url" target="_blank" rel="noopener noreferrer" class="link">
+            {{ source.label }}
+          </a>
+        </li>
       }
     </ul>
   </app-section-content>
@@ -35,10 +51,5 @@
       name="icon-usage.html"
       src="markdown/usage/generate-icons/usage.html.md"
     />
-  </app-section-content>
-
-  <app-section-content>
-    <ng-container title>{{ copy().sections.custom.title }}</ng-container>
-    <ng-container description>{{ copy().sections.custom.description }}</ng-container>
   </app-section-content>
 </app-section-container>

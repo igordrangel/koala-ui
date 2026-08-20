@@ -1,6 +1,6 @@
 # Generate Icons
 
-The native `generate-icons.js` script (copied to the project root by `kl new` / `kl init`) turns SVG files into Tailwind v4 utilities.
+The native `generate-icons.js` script (copied to the project root by `kl new` / `kl init`) turns SVG files into Tailwind v4 utilities. There is no `kl install` for this — it already ships with the scaffold.
 
 ## How it works
 
@@ -10,6 +10,21 @@ The native `generate-icons.js` script (copied to the project root by `kl new` / 
 4. `styles.css` must import `./theme/icons.css` (ensured by the CLI).
 
 The generated file starts with `/* Generated Automatically - Do not edit manually */`.
+
+## How to add icons
+
+1. Save the SVG at **`public/assets/icons/<name>.svg`** (file name = CSS class).
+2. Run `node generate-icons.js` at the project root (or `prestart` / `prebuild` / `build:dev` / `build:prod`).
+3. Use `<i class="app-icon <name>"></i>`.
+
+Example: `public/assets/icons/my-icon.svg` → `<i class="app-icon my-icon"></i>`.
+
+### Free SVG sources
+
+Suggested free libraries for commercial use (check each icon’s license):
+
+- [SVG Repo](https://www.svgrepo.com/)
+- [UXWing](https://uxwing.com/)
 
 ## When it runs
 
@@ -22,9 +37,3 @@ The generated file starts with `/* Generated Automatically - Do not edit manuall
 ```html
 <i class="app-icon add-image"></i>
 ```
-
-## Custom icons
-
-1. Add `public/assets/icons/my-icon.svg`
-2. Run `node generate-icons.js`
-3. Use `<i class="app-icon my-icon"></i>`
