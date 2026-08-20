@@ -10,7 +10,7 @@ kl install list-base
 
 ```typescript
 import { Component } from '@angular/core';
-import { Injectable } from '@angular/core';
+import { Service } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
 import { DatalistResponse, ListBase } from '@/shared/base/list.base';
@@ -23,7 +23,7 @@ interface User {
   email: string;
 }
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class UsersService extends HttpBase {
   constructor() {
     super(environment.apiUrl, 'users');

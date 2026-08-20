@@ -1,6 +1,6 @@
 ```typescript
 import { Component, inject } from '@angular/core';
-import { Injectable } from '@angular/core';
+import { Service } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
 import { KlArray } from '@koalarx/utils/KlArray';
@@ -24,7 +24,7 @@ interface User {
   eyeColor: string;
 }
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class UsersService extends HttpBase {
   constructor() {
     super('https://dummyjson.com', 'users');

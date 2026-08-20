@@ -82,10 +82,22 @@ export class MobilePicker {
     const queryParams = this.activatedRoute.snapshot.queryParams ?? {};
 
     return Object.fromEntries(
-      this.config.fields.map((field) => [
-        field.name,
-        queryParams[field.name] ?? field.defaultValue ?? null,
-      ]),
+      this.config.fields.map((field) => {
+        const fromField = field.value();
+        const fromQuery = queryParams[field.name];
+        const raw = fromField ?? fromQuery ?? field.defaultValue ?? null;
+
+        if (raw == null || raw === '') {
+          return [field.name, null];
+        }
+
+        if (typeof raw === 'string') {
+          const numeric = Number(raw);
+          return [field.name, Number.isNaN(numeric) ? raw : numeric];
+        }
+
+        return [field.name, raw];
+      }),
     );
   }
 

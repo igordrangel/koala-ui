@@ -1,13 +1,13 @@
 import { InputCalendar } from '@/shared/components/calendar';
 import { Component, effect, OnInit, viewChild } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormField } from '@angular/forms/signals';
 import { KlDate } from '@koalarx/utils/KlDate';
 import { FieldBase } from '../field.base';
 
 @Component({
   selector: 'app-inline-filter-calendar',
   templateUrl: './inline-filter-calendar.html',
-  imports: [ReactiveFormsModule, InputCalendar],
+  imports: [FormField, InputCalendar],
 })
 export class InlineFilterCalendar extends FieldBase implements OnInit {
   private readonly calendarComponentRef = viewChild<InputCalendar>('calendarField');
@@ -17,9 +17,9 @@ export class InlineFilterCalendar extends FieldBase implements OnInit {
 
     effect(() => {
       const config = this.config();
-      const value = this.valueChanges();
+      const value = this.valueForm.value().value();
 
-      if (this.valueControl.invalid) {
+      if (!this.valueForm.value().valid()) {
         return;
       }
 

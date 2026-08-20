@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { AlertModal } from '.';
 import { Modal } from '../modal';
 
@@ -9,7 +9,7 @@ export interface AlertData {
   type: AlertType;
 }
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class Alert {
   private readonly modal = inject(Modal);
 

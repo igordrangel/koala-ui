@@ -1,16 +1,16 @@
 import { cpSync, existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
+import { getOriginPath } from './get-package-root';
 import { getPrefix } from './get-prefix';
 import { getProjectPath } from './project-path';
-import { InstallValidatorFlags } from './install-validator';
-import { InstallDirectiveFlags } from './install-directive';
-import { InstallUtilFlags } from './install-util';
-import { InstallBaseFlags } from './install-base';
-import { InstallCoreResourceFlags } from './install-core-resource';
-import { InstallCssFlags } from './install-css';
-import { InstallIconSetFlags } from './install-icon';
-
-const originPath = path.join(__dirname, '../../');
+import { getSharedRoot } from './get-shared-root';
+import type { InstallValidatorFlags } from './install-validator';
+import type { InstallDirectiveFlags } from './install-directive';
+import type { InstallUtilFlags } from './install-util';
+import type { InstallBaseFlags } from './install-base';
+import type { InstallCoreResourceFlags } from './install-core-resource';
+import type { InstallCssFlags } from './install-css';
+import type { InstallIconSetFlags } from './install-icon';
 
 export const InstallComponentFlagsList = [
   'button',
@@ -87,8 +87,9 @@ function configPrefix(componentFolderPath: string, prefix: string) {
 export function installComponent(projectName: string, component: InstallComponentFlags) {
   const prefix = getPrefix(projectName);
   const projectFolder = getProjectPath(projectName);
-  const componentFolderPath = `${projectFolder}/src/app/shared/components/${component}`;
-  const componentOriginPath = `${originPath}/ui/components/${component}`;
+  const sharedRoot = getSharedRoot(projectFolder);
+  const componentFolderPath = `${sharedRoot}/components/${component}`;
+  const componentOriginPath = `${getOriginPath()}/ui/components/${component}`;
 
   const componentDeps: InstallComponentFlags[] = [];
   const libDeps: string[] = [];
@@ -113,7 +114,6 @@ export function installComponent(projectName: string, component: InstallComponen
       libDeps.push('cally');
       componentDeps.push('input-field', 'dropdown');
       directiveDeps.push('mask');
-      utilDeps.push('control-changes');
       break;
     case 'input-cpf':
     case 'input-cnpj':
@@ -138,14 +138,11 @@ export function installComponent(projectName: string, component: InstallComponen
       utilDeps.push(
         'scroll-into-view',
         'accessibility-select-options-on-keydown',
-        'control-changes',
       );
       componentDeps.push('dropdown', 'input-field', 'loading');
       break;
     case 'inline-filter':
       utilDeps.push(
-        'form-is-valid',
-        'control-changes',
         'is-mobile',
         'scroll-into-view',
         'accessibility-select-options-on-keydown',
@@ -231,7 +228,6 @@ export function installComponent(projectName: string, component: InstallComponen
         'ngx-tiptap',
       );
       componentDeps.push('dropdown', 'tooltip', 'input-color');
-      utilDeps.push('control-changes');
       cssDeps.push('editor');
       iconSetDeps.push('text-editor-icons');
       break;

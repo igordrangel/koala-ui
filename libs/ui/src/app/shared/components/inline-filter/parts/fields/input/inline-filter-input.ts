@@ -1,16 +1,14 @@
 import { CurrencyMask } from '@/shared/directives/currency.directive';
 import { Mask } from '@/shared/directives/mask.directive';
-import { CnpjValidator } from '@/shared/validators/cnpj.validator';
-import { CpfValidator } from '@/shared/validators/cpf.validator';
 import { Component, effect, ElementRef, OnInit, viewChild } from '@angular/core';
-import { ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormField } from '@angular/forms/signals';
 import { maskCoin } from '@koalarx/utils/KlNumber';
 import { FieldBase } from '../field.base';
 
 @Component({
   selector: 'app-inline-filter-input',
   templateUrl: './inline-filter-input.html',
-  imports: [ReactiveFormsModule, Mask, CurrencyMask],
+  imports: [FormField, Mask, CurrencyMask],
 })
 export class InlineFilterInput extends FieldBase implements OnInit {
   private readonly inputElement = viewChild<ElementRef<HTMLInputElement>>('inputField');
@@ -20,9 +18,10 @@ export class InlineFilterInput extends FieldBase implements OnInit {
 
     effect(() => {
       const config = this.config();
-      const value = this.valueChanges();
+      const value = this.valueForm.value().value();
+      const invalid = !this.valueForm.value().valid();
 
-      if (!this.valueControl.invalid) {
+      if (!invalid) {
         config.templateValue.set(config.inputType === 'currency' ? maskCoin(value) : value);
       } else {
         config.templateValue.set('');
@@ -31,16 +30,6 @@ export class InlineFilterInput extends FieldBase implements OnInit {
   }
 
   ngOnInit(): void {
-    const config = this.config();
-
-    if (config.inputType === 'cpf') {
-      this.valueControl.addValidators(CpfValidator);
-    } else if (config.inputType === 'cnpj') {
-      this.valueControl.addValidators(CnpjValidator);
-    } else if (config.inputType === 'email') {
-      this.valueControl.addValidators(Validators.email);
-    }
-
     setTimeout(() => {
       this.inputElement()?.nativeElement.focus();
     });

@@ -1,15 +1,15 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
+import { getPackageRoot } from './utils/get-package-root';
 import { runAddCommand } from './commands/add';
 import { runInstallCommand } from './commands/install';
 import { runInitCommand } from './commands/init';
 import { runNewCommand } from './commands/new';
-import { PackageManager } from './utils/package-manager';
+import type { PackageManager } from './utils/package-manager';
 
 function getCliVersion(): string {
   try {
-    // runner.js lives in `<packageRoot>/cli/` (published) or `<packageRoot>/dist/cli/` (local build)
-    const packageJsonPath = path.resolve(__dirname, '../package.json');
+    const packageJsonPath = path.join(getPackageRoot(import.meta.url), 'package.json');
     const packageJsonContent = fs.readFileSync(packageJsonPath, 'utf8');
     const packageJson = JSON.parse(packageJsonContent) as { version?: string };
 
@@ -83,7 +83,7 @@ function printHelp() {
   printBanner();
   console.log('Usage:');
   console.log(
-    '  kl new <project> [--pm bun|npm|yarn|pnpm] [--ai-context none|cursor|github|both] [--silent] [--verbose]',
+    '  kl new <project> [--pm bun|npm|yarn|pnpm] [--type app|library] [--ssr|--no-ssr] [--ai-context none|cursor|github|both] [--silent] [--verbose]',
   );
   console.log(
     '  kl init [--project <name>] [--ai-context none|cursor|github|both] [--silent] [--verbose]',
@@ -165,19 +165,22 @@ function printAddHelp() {
 
 function printNewHelp() {
   console.log(
-    'Usage: kl new <project> [--pm bun|npm|yarn|pnpm] [--ai-context none|cursor|github|both] [--silent] [--verbose]',
+    'Usage: kl new <project> [--pm bun|npm|yarn|pnpm] [--type app|library] [--ssr|--no-ssr] [--ai-context none|cursor|github|both] [--silent] [--verbose]',
   );
   console.log(
-    '       kl new --name <project> [--pm bun|npm|yarn|pnpm] [--ai-context none|cursor|github|both] [--silent] [--verbose]',
+    '       kl new --name <project> [--pm bun|npm|yarn|pnpm] [--type app|library] [--ssr|--no-ssr] [--ai-context none|cursor|github|both] [--silent] [--verbose]',
   );
   console.log('');
   console.log('FLAGS');
   console.log('  -m, --pm=<value>         package manager: bun|npm|yarn|pnpm');
+  console.log('      --type=<value>       project type: app|library (default: app)');
+  console.log('      --ssr                enable SSR (app only; default: disabled)');
+  console.log('      --no-ssr             disable SSR (app only)');
   console.log(
     '      --ai-context=<value>  none|cursor|github|both (skips interactive prompt)',
   );
   console.log(
-    '      --silent              non-interactive: bun + AI context none unless overridden',
+    '      --silent              non-interactive: bun + app + no SSR + AI context none unless overridden',
   );
   console.log('  -v, --verbose            show detailed logs');
 }
@@ -207,7 +210,14 @@ export async function runCli(argv: string[]): Promise<number> {
       const verbose = hasFlag(args, 'verbose', 'v');
       const silent = hasFlag(args, 'silent');
       const aiContext = getFlagValue(args, 'ai-context');
-      await runNewCommand({ name: name ?? '', pm, verbose, aiContext, silent });
+      const type = getFlagValue(args, 'type') as 'app' | 'library' | undefined;
+      let ssr: boolean | undefined;
+      if (hasFlag(args, 'ssr')) {
+        ssr = true;
+      } else if (hasFlag(args, 'no-ssr')) {
+        ssr = false;
+      }
+      await runNewCommand({ name: name ?? '', pm, verbose, aiContext, silent, type, ssr });
       return 0;
     }
 

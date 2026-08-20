@@ -3,6 +3,10 @@ import { setupExistingProject } from './setup-existing-project';
 import * as fs from 'node:fs';
 
 vi.mock('node:fs');
+vi.mock('./get-package-root', () => ({
+  getOriginPath: () => '/fake/origin',
+  getPackageRoot: () => '/fake/origin',
+}));
 vi.mock('./project-path', () => ({
   getProjectPath: (name: string) => `/test/projects/${name}`,
 }));

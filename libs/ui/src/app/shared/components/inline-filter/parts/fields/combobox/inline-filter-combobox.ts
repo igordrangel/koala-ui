@@ -1,12 +1,12 @@
 import { Combobox, ComboboxField, ComboboxOptions } from '@/shared/components/combobox';
 import { Component, computed, effect, OnInit, viewChild } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormField } from '@angular/forms/signals';
 import { FieldBase } from '../field.base';
 
 @Component({
   selector: 'app-inline-filter-combobox',
   templateUrl: './inline-filter-combobox.html',
-  imports: [ReactiveFormsModule, Combobox],
+  imports: [FormField, Combobox],
 })
 export class InlineFilterCombobox extends FieldBase implements OnInit {
   private readonly comboboxComponentRef = viewChild<ComboboxField>('comboboxField');
@@ -20,7 +20,7 @@ export class InlineFilterCombobox extends FieldBase implements OnInit {
       const config = this.config();
       const selectedOptions = this.comboboxComponentRef()?.selectedOptions();
 
-      if (this.valueControl.invalid) {
+      if (!this.valueForm.value().valid()) {
         return;
       }
 

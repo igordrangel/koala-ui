@@ -1,8 +1,7 @@
 import { cpSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
+import { getOriginPath } from './get-package-root';
 import { getProjectPath } from './project-path';
-
-const originPath = path.join(__dirname, '../../');
 
 export const InstallCoreResourceFlagsList = [
   'constants/security-storage-keys',
@@ -98,7 +97,7 @@ function includeOnAppConfig(
 export function installCoreResource(projectName: string, resource: InstallCoreResourceFlags) {
   const projectFolder = getProjectPath(projectName);
   const coreResourceFolderPath = `${projectFolder}/src/app/core/${resource}`;
-  const coreResourceOriginPath = `${originPath}/ui/core/${resource}`;
+  const coreResourceOriginPath = `${getOriginPath()}/ui/core/${resource}`;
 
   cpSync(`${coreResourceOriginPath}.ts`, `${coreResourceFolderPath}.ts`);
 

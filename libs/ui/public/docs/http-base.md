@@ -9,7 +9,7 @@ kl install http-base
 ### TypeScript
 
 ```typescript
-import { Injectable } from '@angular/core';
+import { Service } from '@angular/core';
 import { HttpBase } from '@/shared/base/http.base';
 import { environment } from '@/environments/environment';
 
@@ -18,7 +18,7 @@ interface User {
   name: string;
 }
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class UsersService extends HttpBase {
   constructor() {
     super(environment.apiUrl, 'users');

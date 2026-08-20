@@ -3,7 +3,7 @@ import {
   createComponent,
   EnvironmentInjector,
   inject,
-  Injectable,
+  Service,
   InjectionToken,
   Injector,
 } from '@angular/core';
@@ -26,7 +26,7 @@ export interface ToastOptions {
   timeout?: number;
 }
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class Toast {
   private readonly appRef = inject(ApplicationRef);
   private readonly injector = inject(EnvironmentInjector);

@@ -43,6 +43,7 @@ import { HTTP_BASE_PAGE } from './http-base';
 import { LIST_BASE_PAGE } from './list-base';
 import { PAGE_BASE_PAGE } from './page-base';
 import { RULES_PAGE } from './rules';
+import { GENERATE_ICONS_PAGE } from './generate-icons';
 import { PATCH_NOTES_PAGE } from './patch-notes';
 
 export { INSTALLATION_PAGE, type InstallationPageCopy } from './installation';
@@ -90,6 +91,7 @@ export { HTTP_BASE_PAGE, type HttpBasePageCopy } from './http-base';
 export { LIST_BASE_PAGE, type ListBasePageCopy } from './list-base';
 export { PAGE_BASE_PAGE, type PageBasePageCopy } from './page-base';
 export { RULES_PAGE, type RulesPageCopy } from './rules';
+export { GENERATE_ICONS_PAGE, type GenerateIconsPageCopy } from './generate-icons';
 
 export const DOCS_PAGES = {
   installation: INSTALLATION_PAGE,
@@ -137,6 +139,7 @@ export const DOCS_PAGES = {
   'list-base': LIST_BASE_PAGE,
   'page-base': PAGE_BASE_PAGE,
   rules: RULES_PAGE,
+  'generate-icons': GENERATE_ICONS_PAGE,
 } as const;
 
 export type DocsPageSlug = keyof typeof DOCS_PAGES;

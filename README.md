@@ -31,18 +31,17 @@ bun add -g @koalarx/ui
 
 Creates a new Angular project with the Koala structure and dependencies already configured.
 
-During project creation, the CLI asks which package manager you want to use and optionally scaffolds AI context (Cursor / GitHub Copilot):
+Interactive prompts (before scaffold): package manager → app/library → SSR (app only) → AI context (Cursor / GitHub Copilot).
 
-- `bun`
-- `npm`
-- `yarn`
-- `pnpm`
+Package managers: `bun`, `npm`, `yarn`, `pnpm`.
 
-You can also skip the interactive prompts with `--pm`, `--ai-context`, and `--silent` (non-interactive defaults: bun + AI context none).
+Skip prompts with `--pm`, `--type app|library`, `--ssr` / `--no-ssr`, `--ai-context`, and `--silent` (non-interactive defaults: bun + app + no SSR + AI context none).
 
 ```bash
 kl new --name meu-projeto
 kl new --name my-project --pm npm
+kl new my-app --ssr
+kl new my-lib --type library
 kl new my-app --ai-context both
 kl new my-app --silent
 ```

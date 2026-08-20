@@ -57,10 +57,26 @@ export function getPmCommands(pm: PackageManager): PmCommands {
   }
 }
 
-export function getAngularCreateCommand(projectName: string, pm: PackageManager) {
+export interface AngularCreateOptions {
+  ssr?: boolean;
+  type?: 'app' | 'library';
+}
+
+export function getAngularCreateCommand(
+  projectName: string,
+  pm: PackageManager,
+  options?: AngularCreateOptions,
+) {
   const commands = getPmCommands(pm);
   const cliVersion = DEPENDENCY_VERSIONS['@angular/cli'];
-  return `${commands.dlx} @angular/cli@${cliVersion} new ${projectName} --defaults --style=tailwind --package-manager ${pm}`;
+  const type = options?.type ?? 'app';
+
+  if (type === 'library') {
+    return `${commands.dlx} @angular/cli@${cliVersion} new ${projectName} --create-application=false --defaults --package-manager ${pm} --skip-git`;
+  }
+
+  const ssrFlag = options?.ssr ? '--ssr' : '--ssr=false';
+  return `${commands.dlx} @angular/cli@${cliVersion} new ${projectName} --defaults --style=tailwind --package-manager ${pm} ${ssrFlag}`;
 }
 
 export function getProjectExecCommand(pm: PackageManager, command: string) {

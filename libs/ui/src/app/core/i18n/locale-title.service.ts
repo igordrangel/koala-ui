@@ -1,5 +1,5 @@
 import { Title } from '@angular/platform-browser';
-import { effect, inject, Injectable } from '@angular/core';
+import { effect, inject, Injectable, Service } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, TitleStrategy } from '@angular/router';
 import { filter, map, startWith } from 'rxjs';
@@ -9,7 +9,7 @@ import { LocaleService } from './locale.service';
 import { isLocale } from './locale.types';
 import { UI_COPY } from './ui-copy';
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class LocaleTitleService {
   private readonly router = inject(Router);
   private readonly title = inject(Title);

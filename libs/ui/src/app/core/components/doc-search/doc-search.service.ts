@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Service, signal } from '@angular/core';
 import MiniSearch from 'minisearch';
 import { firstValueFrom } from 'rxjs';
 import { DocsVersionService } from '../../docs-version/docs-version.service';
 import { DocSearchEntry, DocSearchResult } from './doc-search.types';
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class DocSearchService {
   private readonly http = inject(HttpClient);
   private readonly docsVersion = inject(DocsVersionService);

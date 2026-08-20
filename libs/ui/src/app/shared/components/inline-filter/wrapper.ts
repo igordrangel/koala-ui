@@ -14,6 +14,7 @@ interface QueryParams {
   [key: string]: any;
   page?: string;
   pageSize?: string;
+  limit?: string;
 }
 
 @Component({
@@ -45,6 +46,7 @@ export class Wrapper implements OnInit {
 
       delete queryParams.page;
       delete queryParams.pageSize;
+      delete queryParams.limit;
 
       const selectedOptions = signal<InlineFilterField[]>([]);
 

@@ -1,5 +1,5 @@
 import { APP_BASE_HREF } from '@angular/common';
-import { inject, Injectable } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { DOCS_VERSIONS, type DocsVersionEntry } from '../constants/docs-versions';
 
 function normalizeBasePath(value: string): string {
@@ -15,7 +15,7 @@ function joinBase(basePath: string, relativePath: string): string {
   return `${base}${rel}`;
 }
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class DocsVersionService {
   private readonly injectedBase = inject(APP_BASE_HREF, { optional: true });
 

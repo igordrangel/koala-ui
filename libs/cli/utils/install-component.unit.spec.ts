@@ -5,6 +5,10 @@ import { installComponent } from './install-component';
 
 vi.mock('node:fs');
 vi.mock('node:path');
+vi.mock('./get-package-root', () => ({
+  getOriginPath: () => '/fake/origin',
+  getPackageRoot: () => '/fake/origin',
+}));
 vi.mock('./get-prefix', () => ({
   getPrefix: () => 'app',
 }));
@@ -73,7 +77,7 @@ describe('installComponent', () => {
       'ngx-tiptap',
     ]);
     expect(deps.componentDeps).toEqual(['dropdown', 'tooltip', 'input-color']);
-    expect(deps.utilDeps).toEqual(['control-changes']);
+    expect(deps.utilDeps).toEqual([]);
     expect(deps.cssDeps).toEqual(['editor']);
     expect(deps.iconSetDeps).toEqual(['text-editor-icons']);
   });

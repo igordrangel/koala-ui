@@ -115,6 +115,8 @@ const COMPONENTS = [
   { name: 'global-errors', label: 'Global Errors' },
   { name: 'rules', label: 'Rules' },
   { name: 'auth', label: 'Auth' },
+  // Native scaffold script (not `kl install`) — still generates docs/llms entry
+  { name: 'generate-icons', label: 'Generate Icons', noKlInstall: true },
 ];
 
 // ---------------------------------------------------------------------------
@@ -188,9 +190,13 @@ ${addResources}
 
 ## Available components
 
-${COMPONENTS.filter((c) => !c.isPage)
+${COMPONENTS.filter((c) => !c.isPage && !c.noKlInstall)
   .map((c) => `- **${c.label}** – \`kl install -n ${c.name}\``)
   .join('\n')}
+
+## Native tooling
+
+- **Generate Icons** – ships with \`kl new\` / \`kl init\` (\`generate-icons.js\`). Docs: [Generate Icons](https://ui.koalarx.com/#/resources/generate-icons).
 `;
 
   return doc.trim();
@@ -447,7 +453,7 @@ function stripMarkdown(text) {
 }
 
 function getCategoryForDoc(name) {
-  const resources = ['list-base', 'http-base', 'page-base', 'global-errors', 'rules', 'auth'];
+  const resources = ['list-base', 'http-base', 'page-base', 'global-errors', 'rules', 'auth', 'generate-icons'];
   const blocks = ['datatable', 'login'];
   if (resources.includes(name)) return 'Resources';
   if (blocks.includes(name)) return 'Blocks';
@@ -455,7 +461,7 @@ function getCategoryForDoc(name) {
 }
 
 function getRouteForDoc(name) {
-  const resources = ['list-base', 'http-base', 'page-base', 'global-errors', 'rules', 'auth'];
+  const resources = ['list-base', 'http-base', 'page-base', 'global-errors', 'rules', 'auth', 'generate-icons'];
   const blocks = ['datatable', 'login'];
   if (resources.includes(name)) return `resources/${name}`;
   if (blocks.includes(name)) return `blocks/${name}`;

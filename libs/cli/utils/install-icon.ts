@@ -1,11 +1,9 @@
 import { cpSync, existsSync, mkdirSync } from 'node:fs';
 import path from 'node:path';
+import { getOriginPath } from './get-package-root';
 import { ensureStylesImport } from './ensure-styles-import';
 import { getProjectPath } from './project-path';
 import { runCommand } from './run-command';
-
-const originPath = path.join(__dirname, '../../');
-
 export const TEXT_EDITOR_ICON_FILES = [
   'add-image',
   'add',
@@ -40,7 +38,7 @@ export async function installIconSet(
     iconSet === 'text-editor-icons' ? TEXT_EDITOR_ICON_FILES : ([] as readonly string[]);
 
   for (const icon of icons) {
-    const origin = `${originPath}/ui/assets/icons/${icon}.svg`;
+    const origin = `${getOriginPath()}/ui/assets/icons/${icon}.svg`;
     const target = `${targetFolder}/${icon}.svg`;
 
     if (existsSync(origin)) {
@@ -54,7 +52,7 @@ export async function installIconSet(
   }
 
   const generateIconsPath = `${projectFolder}/generate-icons.js`;
-  const originGenerateIconsPath = `${originPath}/ui/generate-icons.js`;
+  const originGenerateIconsPath = `${getOriginPath()}/ui/generate-icons.js`;
 
   if (!existsSync(generateIconsPath) && existsSync(originGenerateIconsPath)) {
     cpSync(originGenerateIconsPath, generateIconsPath);

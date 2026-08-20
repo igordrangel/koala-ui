@@ -64,9 +64,12 @@ export class Header {
     return this.docsVersion.isCurrent(entry);
   }
 
-  /** Active line shows full semver; other lines keep the short major label. */
+  /** Active line shows full semver when it matches entry major; others keep short label. */
   docsVersionLabel(entry: DocsVersionEntry) {
-    return this.isDocsVersionCurrent(entry) ? this.appVersion : entry.label;
+    if (!this.isDocsVersionCurrent(entry)) {
+      return entry.label;
+    }
+    return this.appVersion.startsWith(`${entry.major}.`) ? this.appVersion : entry.label;
   }
 
   copyLlmsUrl() {

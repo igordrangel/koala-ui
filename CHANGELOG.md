@@ -13,6 +13,33 @@ Formato inspirado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/)
 
 A partir de **23.x**, o major de `@koalarx/ui` = major do Angular + 1 (`23` → Angular 22). A linha `22.x` permanece para Angular 21 (`previous-release` / dist-tag `angular-21`).
 
+## [23.1.0] — CLI app/library/SSR, Signal Forms, pagination
+
+### Added
+
+- `kl new`: prompts app vs library e SSR; flags `--type`, `--ssr` / `--no-ssr`; AI context perguntado antes do scaffold.
+- Docs do `generate-icons` nativo (Resources).
+- Build da CLI no formato koala-nest (`Bun.Transpiler`, `bin` → `./cli/index.js`).
+
+### Changed
+
+- Serviços root: `@Injectable({ providedIn: 'root' })` → `@Service()`.
+- Pagination: default limit `30`; query param canônico `limit` (lê `pageSize` legado).
+- Inline-filter desktop em Signal Forms.
+
+### Fixed
+
+- Currency mask (evento `input` + sync value→DOM).
+- Pagination: página ativa com `btn-primary`.
+- Mobile-picker: filtros da URL no init do model.
+- Seletor de versão das docs (labels estáveis; sync `DOCS_VERSIONS` na linha 22).
+
+### Upgrade
+
+1. Reinstale `currency` e `inline-filter` se já tiver cópias antigas.
+2. Pagination grava `limit` na URL (`pageSize` ainda é lido).
+3. CI/agentes: `kl new <name> --silent [--type app|library] [--ssr|--no-ssr]`.
+
 ## [23.0.3] — Sem vazamento de docs na CLI
 
 ### Fixed

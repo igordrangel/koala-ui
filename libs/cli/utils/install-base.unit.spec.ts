@@ -5,6 +5,10 @@ import { installBase } from './install-base';
 
 vi.mock('node:fs');
 vi.mock('node:path');
+vi.mock('./get-package-root', () => ({
+  getOriginPath: () => '/fake/origin',
+  getPackageRoot: () => '/fake/origin',
+}));
 vi.mock('./project-path', () => ({
   getProjectPath: (name: string) => `/home/user/${name}`,
 }));

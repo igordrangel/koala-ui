@@ -1,15 +1,23 @@
-import { InstallResult } from '../models/install-result';
+import type { InstallResult } from '../models/install-result';
 import { getNotInstalled } from './get-not-installed';
-import { installBase, InstallBaseFlags } from './install-base';
-import { installComponent, InstallComponentFlags } from './install-component';
-import { installDirective, InstallDirectiveFlags } from './install-directive';
+import { installBase } from './install-base';
+import { installComponent } from './install-component';
+import { installDirective } from './install-directive';
 import { installLib } from './install-lib';
 import { setupComponentTests } from './setup-component-tests';
-import { installUtil, InstallUtilFlags } from './install-util';
-import { installValidator, InstallValidatorFlags } from './install-validator';
-import { installCoreResource, InstallCoreResourceFlags } from './install-core-resource';
-import { installCss, InstallCssFlags } from './install-css';
-import { installIconSet, InstallIconSetFlags } from './install-icon';
+import { installUtil } from './install-util';
+import { installValidator } from './install-validator';
+import { installCoreResource } from './install-core-resource';
+import { installCss } from './install-css';
+import { installIconSet } from './install-icon';
+import type { InstallBaseFlags } from './install-base';
+import type { InstallComponentFlags } from './install-component';
+import type { InstallDirectiveFlags } from './install-directive';
+import type { InstallUtilFlags } from './install-util';
+import type { InstallValidatorFlags } from './install-validator';
+import type { InstallCoreResourceFlags } from './install-core-resource';
+import type { InstallCssFlags } from './install-css';
+import type { InstallIconSetFlags } from './install-icon';
 
 export async function install(
   projectName: string,

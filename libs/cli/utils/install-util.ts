@@ -1,8 +1,8 @@
 import { cpSync, existsSync } from 'node:fs';
 import path from 'node:path';
+import { getOriginPath } from './get-package-root';
 import { getProjectPath } from './project-path';
-
-const originPath = path.join(__dirname, '../../');
+import { getSharedRoot } from './get-shared-root';
 
 export const InstallUtilFlagsList = [
   'currency-mask',
@@ -22,9 +22,10 @@ export type InstallUtilFlags = (typeof InstallUtilFlagsList)[number];
 
 export function installUtil(projectName: string, util: InstallUtilFlags) {
   const projectFolder = getProjectPath(projectName);
-  const originUtilPath = `${originPath}/ui/utils/${util}.ts`;
-  const originSpecPath = `${originPath}/ui/utils/${util}.unit.spec.ts`;
-  const targetFolder = `${projectFolder}/src/app/shared/utils`;
+  const sharedRoot = getSharedRoot(projectFolder);
+  const originUtilPath = `${getOriginPath()}/ui/utils/${util}.ts`;
+  const originSpecPath = `${getOriginPath()}/ui/utils/${util}.unit.spec.ts`;
+  const targetFolder = `${sharedRoot}/utils`;
 
   cpSync(originUtilPath, `${targetFolder}/${util}.ts`);
 

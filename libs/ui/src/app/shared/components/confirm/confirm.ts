@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { Modal } from '../modal';
 import { ConfirmModal } from './confirm.modal';
 
@@ -15,7 +15,7 @@ export interface ConfirmResult {
   answer: boolean;
 }
 
-@Injectable({ providedIn: 'root' })
+@Service()
 export class Confirm {
   private readonly modal = inject(Modal);
 

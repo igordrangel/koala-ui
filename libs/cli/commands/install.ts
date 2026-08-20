@@ -1,6 +1,7 @@
 import { logHeader, logInstallSummary, logSuccess, logWarning } from '../utils/cli-ui';
 import { install } from '../utils/install';
-import { InstallComponentFlags, InstallComponentFlagsList } from '../utils/install-component';
+import { InstallComponentFlagsList } from '../utils/install-component';
+import type { InstallComponentFlags } from '../utils/install-component';
 import { detectPackageManager, getProjectExecCommand } from '../utils/package-manager';
 import { getProjectPath } from '../utils/project-path';
 import { runCommand } from '../utils/run-command';
