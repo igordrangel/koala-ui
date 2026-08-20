@@ -25,6 +25,9 @@ describe('installCoreResource', () => {
   it('should copy feedback-request-interceptor and update app.config', () => {
     vi.mocked(fs.cpSync).mockImplementation(() => {});
     vi.mocked(fs.writeFileSync).mockImplementation(() => {});
+    vi.mocked(fs.existsSync).mockImplementation(
+      (path) => String(path).endsWith('src/app/app.config.ts'),
+    );
 
     installCoreResource('my-app', 'interceptors/feedback-request-interceptor');
 

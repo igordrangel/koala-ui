@@ -1,6 +1,6 @@
 import { isMobile } from '@/shared/utils/is-mobile';
 import { Directive, effect, input, output, signal } from '@angular/core';
-import { ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, ValidatorFn } from '@angular/forms';
 import { form, validate } from '@angular/forms/signals';
 import { validateCnpj, validateCpf } from '@koalarx/utils/KlString';
 import { InlineFilterField } from '../../config';
@@ -16,12 +16,6 @@ export abstract class FieldBase {
     validate(schema.value, ({ value }) => {
       const config = this.config();
       const current = value();
-
-      if (this.hasRequiredValidator(config.validators)) {
-        if (current == null || current === '' || (Array.isArray(current) && current.length === 0)) {
-          return { kind: 'required', message: `${config.label} is required` };
-        }
-      }
 
       if (config.inputType === 'email' && current) {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -42,6 +36,11 @@ export abstract class FieldBase {
           : { kind: 'cnpjInvalid', message: 'CNPJ inválido' };
       }
 
+      const validatorError = this.runConfigValidators(config.validators, current, config.label);
+      if (validatorError) {
+        return validatorError;
+      }
+
       return undefined;
     });
   });
@@ -49,12 +48,28 @@ export abstract class FieldBase {
   readonly isInvalid = output<boolean>();
   readonly data = output<any>();
 
-  protected hasRequiredValidator(validators?: ValidatorFn | ValidatorFn[]): boolean {
+  /** Bridge Reactive Forms `ValidatorFn` into Signal Forms `validate`. */
+  protected runConfigValidators(
+    validators: ValidatorFn | ValidatorFn[] | undefined,
+    current: unknown,
+    label: string,
+  ) {
     if (!validators) {
-      return false;
+      return undefined;
     }
+
     const list = Array.isArray(validators) ? validators : [validators];
-    return list.includes(Validators.required);
+    const control = { value: current } as AbstractControl;
+
+    for (const validator of list) {
+      const errors = validator(control);
+      if (errors) {
+        const kind = Object.keys(errors)[0] ?? 'invalid';
+        return { kind, message: `${label} is invalid` };
+      }
+    }
+
+    return undefined;
   }
 
   constructor() {

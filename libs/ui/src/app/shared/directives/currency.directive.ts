@@ -35,7 +35,8 @@ export class CurrencyMask implements FormValueControl<number | null>, OnDestroy 
     const el = this.elementRef.nativeElement;
     const sep = this.getSep();
     const thousandSep = this.thousandSeparator() || '.';
-    const prefix = this.prefix();
+    // Match currencyMask default alias when prefix input is unset.
+    const prefix = this.prefix() ?? 'R$';
 
     let rawValue = el.value;
     if (prefix) {

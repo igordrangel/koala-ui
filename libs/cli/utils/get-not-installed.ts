@@ -7,7 +7,7 @@ import type { InstallDirectiveFlags } from './install-directive';
 import type { InstallUtilFlags } from './install-util';
 import type { InstallValidatorFlags } from './install-validator';
 import { getProjectPath } from './project-path';
-import { getSharedRoot } from './get-shared-root';
+import { getProjectLayout, getSharedRoot } from './get-shared-root';
 
 export type PackageType =
   | 'component'
@@ -122,9 +122,10 @@ export function getNotInstalled(projectName: string, type: PackageType, deps: st
     }
     case 'core-resource': {
       const projectFolder = getProjectPath(projectName);
+      const { coreRoot } = getProjectLayout(projectFolder);
 
       for (const dep of deps) {
-        if (!existsSync(`${projectFolder}/src/app/core/${dep}`)) {
+        if (!existsSync(`${coreRoot}/${dep}`)) {
           notInstalled.push(dep);
         }
       }
@@ -132,9 +133,10 @@ export function getNotInstalled(projectName: string, type: PackageType, deps: st
     }
     case 'css': {
       const projectFolder = getProjectPath(projectName);
+      const { themeRoot } = getProjectLayout(projectFolder);
 
       for (const dep of deps) {
-        if (!existsSync(`${projectFolder}/src/theme/${dep}`)) {
+        if (!existsSync(`${themeRoot}/${dep}`)) {
           notInstalled.push(dep);
         }
       }

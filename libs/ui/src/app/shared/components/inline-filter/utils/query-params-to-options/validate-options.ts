@@ -1,5 +1,5 @@
 import { validateCnpj, validateCpf } from '@koalarx/utils/KlString';
-import { ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, ValidatorFn, Validators } from '@angular/forms';
 import { InlineFilterField } from '../../config';
 import { coerceValue } from './coerce-value';
 
@@ -9,6 +9,29 @@ function hasRequiredValidator(validators?: ValidatorFn | ValidatorFn[]): boolean
   }
   const list = Array.isArray(validators) ? validators : [validators];
   return list.includes(Validators.required);
+}
+
+function runConfigValidators(
+  validators: ValidatorFn | ValidatorFn[] | undefined,
+  value: unknown,
+): boolean {
+  if (!validators) {
+    return true;
+  }
+
+  const list = Array.isArray(validators) ? validators : [validators];
+  const control = { value } as AbstractControl;
+
+  for (const validator of list) {
+    if (validator === Validators.required) {
+      continue;
+    }
+    if (validator(control)) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 export function validateOption(option: InlineFilterField, queryParam: string | string[]): boolean {
@@ -32,5 +55,5 @@ export function validateOption(option: InlineFilterField, queryParam: string | s
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value));
   }
 
-  return true;
+  return runConfigValidators(option.validators, value);
 }

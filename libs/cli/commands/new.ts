@@ -166,13 +166,33 @@ function createAppFolderStructure(name: string) {
 
 function createLibraryFolderStructure(name: string) {
   const sharedRoot = `projects/${name}/src/lib/shared`;
+  const coreRoot = `projects/${name}/src/lib/core`;
+  const stylesPath = `projects/${name}/src/styles.css`;
+  const themeRoot = `projects/${name}/src/theme`;
 
   writeFileSync(
     `${name}/koala.json`,
-    JSON.stringify({ projectType: 'library', sharedRoot }, null, 2),
+    JSON.stringify(
+      {
+        projectType: 'library',
+        sharedRoot,
+        coreRoot,
+        stylesPath,
+        themeRoot,
+        appConfigPath: null,
+      },
+      null,
+      2,
+    ),
   );
 
   mkdirSync(`${name}/${sharedRoot}`, { recursive: true });
+  mkdirSync(`${name}/${coreRoot}`, { recursive: true });
+  mkdirSync(`${name}/${themeRoot}`, { recursive: true });
+
+  const styles = readFileSync(`${getOriginPath()}/ui/styles.css`, 'utf-8');
+  writeFileSync(`${name}/${stylesPath}`, styles);
+
   logSuccess(console.log, `${name}/${sharedRoot} created`);
 
   const tsConfig = JSON.parse(

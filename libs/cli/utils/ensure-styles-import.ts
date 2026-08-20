@@ -1,8 +1,9 @@
 import { readFileSync, writeFileSync } from 'node:fs';
+import { getProjectLayout } from './get-shared-root';
 
-/** Ensures `src/styles.css` imports `./theme/<name>.css` (idempotent). */
+/** Ensures styles.css imports `./theme/<name>.css` (idempotent). */
 export function ensureStylesImport(projectFolder: string, themeCssName: string) {
-  const stylesPath = `${projectFolder}/src/styles.css`;
+  const { stylesPath } = getProjectLayout(projectFolder);
   const stylesContent = readFileSync(stylesPath).toString('utf-8');
   const importStatement = `@import './theme/${themeCssName}.css';\n`;
 
