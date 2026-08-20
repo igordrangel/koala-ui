@@ -33,8 +33,9 @@ Para resources, use `overview.md` (não `<name>.md`) para evitar o heading `### 
 6. Registrar rota em `features/components/routes.ts`
 7. Adicionar item em `nav-menu.ts`
 8. Registrar em `scripts/generate-llms.js` (`COMPONENTS`)
-9. Rodar `bun run generate:llms`
-10. Adicionar testes CLI se houver lógica de deps nova
+9. Incluir o path em **`libs/ui/scripts/post-build.mjs`** → `DOC_PATHS` (sitemap), ex.: `'components/<name>'`
+10. Rodar `bun run generate:llms`
+11. Adicionar testes CLI se houver lógica de deps nova
 
 ## Checklist — novo resource
 
@@ -47,10 +48,13 @@ Para resources, use `overview.md` (não `<name>.md`) para evitar o heading `### 
 4. Criar install + usage snippets (ver tabela acima)
 5. Criar página em `features/resources/<slug>/`
 6. Registrar rota em `features/resources/routes.ts`
-7. Remover `commingSoon: true` do `nav-menu.ts`
+7. Remover `commingSoon: true` do `nav-menu.ts` (ou adicionar o item no grupo certo)
 8. Registrar em `generate-llms.js`
-9. Rodar `bun run generate:llms`
-10. Testes: `install-component.unit.spec.ts` para deps, `install-base.unit.spec.ts` ou `install-core-resource.unit.spec.ts` para cópia
+9. Incluir o path em **`libs/ui/scripts/post-build.mjs`** → `DOC_PATHS` (sitemap), ex.: `'resources/<slug>'`
+10. Rodar `bun run generate:llms`
+11. Testes: `install-component.unit.spec.ts` para deps, `install-base.unit.spec.ts` ou `install-core-resource.unit.spec.ts` para cópia
+
+Links públicos usam path com locale (`https://ui.koalarx.com/pt/resources/<slug>`), não hash `#/...`.
 
 ## CLI — padrões de dependência
 

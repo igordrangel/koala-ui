@@ -45,6 +45,7 @@ const DOC_PATHS = [
   'blocks/datatable',
   'blocks/login',
   'resources/auth',
+  'resources/generate-icons',
   'resources/global-errors',
   'resources/http-base',
   'resources/list-base',

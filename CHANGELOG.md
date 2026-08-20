@@ -13,6 +13,18 @@ Formato inspirado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/)
 
 A partir de **23.x**, o major de `@koalarx/ui` = major do Angular + 1 (`23` → Angular 22). A linha `22.x` permanece para Angular 21 (`previous-release` / dist-tag `angular-21`).
 
+## [23.1.1] — Docs: patch notes e generate-icons
+
+### Fixed
+
+- Página Patch notes no site passa a listar todas as seções de `patch-notes.ts` (incluindo 23.1.0).
+- `docs/patch-notes.md` / `generate:llms` incluem 23.1.0+.
+- Sitemap inclui `resources/generate-icons`; links públicos usam `/pt/...` em vez de hash.
+
+### Upgrade
+
+Só redeploy das docs; sem mudanças nos projetos consumidores.
+
 ## [23.1.0] — CLI app/library/SSR, Signal Forms, pagination
 
 ### Added

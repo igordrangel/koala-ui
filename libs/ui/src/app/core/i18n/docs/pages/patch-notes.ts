@@ -12,6 +12,16 @@ export const PATCH_NOTES_PAGE = {
         description:
           'A versão publicada do pacote @koalarx/ui aparece no package.json do repositório. O arquivo CHANGELOG.md na raiz espelha estas notas. A partir de 23.x, o major da lib = major do Angular + 1 (23 → Angular 22). Para Angular 21 use a linha 22.x; para Angular 22 use 23.x.',
       },
+      v2311: {
+        title: '23.1.1 — Docs: patch notes e generate-icons',
+        description: 'Corrige surfaces da documentação web e LLM após a 23.1.0.',
+        items: [
+          'Patch notes no site listam todas as seções de patch-notes.ts (inclui 23.1.0).',
+          'docs/patch-notes.md e generate:llms passam a incluir 23.1.0+.',
+          'Sitemap inclui resources/generate-icons; links usam /pt/... em vez de hash.',
+        ],
+        upgrade: 'Só redeploy das docs; sem mudanças nos projetos consumidores.',
+      },
       v2310: {
         title: '23.1.0 — CLI app/library/SSR, Signal Forms, pagination',
         description:
@@ -100,6 +110,16 @@ export const PATCH_NOTES_PAGE = {
         title: 'How to use these notes',
         description:
           'The published @koalarx/ui package version is in the repository package.json. The root CHANGELOG.md mirrors these notes. From 23.x onward, library major = Angular major + 1 (23 → Angular 22). For Angular 21 use the 22.x line; for Angular 22 use 23.x.',
+      },
+      v2311: {
+        title: '23.1.1 — Docs: patch notes and generate-icons',
+        description: 'Fixes web and LLM documentation surfaces after 23.1.0.',
+        items: [
+          'Site patch notes list every section from patch-notes.ts (includes 23.1.0).',
+          'docs/patch-notes.md and generate:llms now include 23.1.0+.',
+          'Sitemap includes resources/generate-icons; links use /pt/... instead of hash.',
+        ],
+        upgrade: 'Docs redeploy only; no consumer project changes.',
       },
       v2310: {
         title: '23.1.0 — CLI app/library/SSR, Signal Forms, pagination',

@@ -136,4 +136,4 @@ kl add ai-context cursor github
 
 ## Native tooling
 
-- **Generate Icons** – ships with `kl new` / `kl init` (`generate-icons.js`). Docs: [Generate Icons](https://ui.koalarx.com/#/resources/generate-icons).
+- **Generate Icons** – ships with `kl new` / `kl init` (`generate-icons.js`). Docs: [Generate Icons](https://ui.koalarx.com/pt/resources/generate-icons).
