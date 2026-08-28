@@ -1,6 +1,6 @@
 {
   "name": "@koalarx/ui",
-  "version": "23.1.0",
+  "version": "23.1.1",
   "type": "module",
   "scripts": {
     "build": "bun scripts/build.mjs",
@@ -71,13 +71,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/igordrangel/koala.git"
+    "url": "git+https://github.com/igordrangel/koala-ui.git"
   },
   "author": "Igor D. Rangel",
   "bugs": {
-    "url": "https://github.com/igordrangel/koala/issues"
+    "url": "https://github.com/igordrangel/koala-ui/issues"
   },
-  "homepage": "https://github.com/igordrangel/koala#readme",
+  "homepage": "https://github.com/igordrangel/koala-ui#readme",
   "keywords": [
     "koalarx",
     "ui",
