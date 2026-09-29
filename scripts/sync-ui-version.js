@@ -1,9 +1,9 @@
-const fs = require('node:fs');
-const path = require('node:path');
+import fs from 'node:fs';
+import path from 'node:path';
 
-const rootPackageJsonPath = path.resolve(__dirname, '../package.json');
+const rootPackageJsonPath = path.resolve(import.meta.dirname, '../package.json');
 const uiVersionFilePath = path.resolve(
-  __dirname,
+  import.meta.dirname,
   '../libs/ui/src/app/core/constants/app-version.ts',
 );
 

@@ -19,6 +19,8 @@ export const DEPENDENCY_VERSIONS = {
   cally: '^0.9.2',
   clsx: '^2.1.1',
   daisyui: '^5.5.19',
+  // ESLint 10 removed FlatESLint, which @typescript-eslint/utils still extends
+  eslint: '^9.39.2',
   'eslint-plugin-prettier': '^5.5.5',
   jsdom: '^28.0.0',
   'jwt-decode': '^4.0.0',

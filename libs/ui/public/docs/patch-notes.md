@@ -4,6 +4,16 @@ Changelog for anyone using or upgrading projects scaffolded with the Koala UI CL
 Site page: https://ui.koalarx.com/pt/getting-started/patch-notes
 Root CHANGELOG.md mirrors these notes.
 
+## 23.1.2 — ESLint compatibility in scaffolding
+
+### What changed
+
+- `kl new` pins ESLint 9 to avoid ESLint 10 incompatibility with `@typescript-eslint/utils`.
+
+### Upgrade
+
+For projects created whose lint step failed, run `bun add -d eslint@^9.39.2`, then `bunx eslint . --fix`.
+
 ## 23.1.0 — CLI app/library/SSR, Signal Forms, pagination
 
 ### What changed
