@@ -4,7 +4,10 @@ import { DEPENDENCY_VERSIONS, withVersion, withVersions } from './dependency-ver
 describe('dependency-versions', () => {
   it('should append pinned version for managed packages', () => {
     expect(withVersion('clsx')).toBe(`clsx@${DEPENDENCY_VERSIONS.clsx}`);
-    expect(withVersion('@angular/aria')).toBe(`@angular/aria@${DEPENDENCY_VERSIONS['@angular/aria']}`);
+    expect(withVersion('@angular/aria')).toBe(
+      `@angular/aria@${DEPENDENCY_VERSIONS['@angular/aria']}`,
+    );
+    expect(withVersion('eslint')).toBe('eslint@^9.39.2');
   });
 
   it('should keep unmanaged packages unchanged', () => {

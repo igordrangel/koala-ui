@@ -13,6 +13,16 @@ Formato inspirado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/)
 
 A partir de **23.x**, o major de `@koalarx/ui` = major do Angular + 1 (`23` → Angular 22). A linha `22.x` permanece para Angular 21 (`previous-release` / dist-tag `angular-21`).
 
+## [23.1.2] — Compatibilidade do ESLint no scaffold
+
+### Fixed
+
+- `kl new` fixa ESLint 9 para evitar incompatibilidade do ESLint 10 com `@typescript-eslint/utils`.
+
+### Upgrade
+
+Em projetos criados que falharam durante o lint, execute `bun add -d eslint@^9.39.2` e depois `bunx eslint . --fix`.
+
 ## [23.1.0] — CLI app/library/SSR, Signal Forms, pagination
 
 ### Added

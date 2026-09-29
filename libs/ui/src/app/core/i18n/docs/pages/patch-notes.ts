@@ -12,6 +12,15 @@ export const PATCH_NOTES_PAGE = {
         description:
           'A versão publicada do pacote @koalarx/ui aparece no package.json do repositório. O arquivo CHANGELOG.md na raiz espelha estas notas. A partir de 23.x, o major da lib = major do Angular + 1 (23 → Angular 22). Para Angular 21 use a linha 22.x; para Angular 22 use 23.x.',
       },
+      v2312: {
+        title: '23.1.2 — Compatibilidade do ESLint no scaffold',
+        description: 'Correção de compatibilidade do ESLint instalado em projetos novos.',
+        items: [
+          'kl new fixa ESLint 9 para evitar incompatibilidade do ESLint 10 com @typescript-eslint/utils.',
+        ],
+        upgrade:
+          'Em projetos criados que falharam durante o lint, execute bun add -d eslint@^9.39.2 e depois bunx eslint . --fix.',
+      },
       v2310: {
         title: '23.1.0 — CLI app/library/SSR, Signal Forms, pagination',
         description:
@@ -100,6 +109,15 @@ export const PATCH_NOTES_PAGE = {
         title: 'How to use these notes',
         description:
           'The published @koalarx/ui package version is in the repository package.json. The root CHANGELOG.md mirrors these notes. From 23.x onward, library major = Angular major + 1 (23 → Angular 22). For Angular 21 use the 22.x line; for Angular 22 use 23.x.',
+      },
+      v2312: {
+        title: '23.1.2 — ESLint compatibility in scaffolding',
+        description: 'Fixes the ESLint version installed in newly scaffolded projects.',
+        items: [
+          'kl new pins ESLint 9 to avoid ESLint 10 incompatibility with @typescript-eslint/utils.',
+        ],
+        upgrade:
+          'For projects created whose lint step failed, run bun add -d eslint@^9.39.2, then bunx eslint . --fix.',
       },
       v2310: {
         title: '23.1.0 — CLI app/library/SSR, Signal Forms, pagination',

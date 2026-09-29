@@ -44,6 +44,7 @@ async function installBaseDependencies(
   });
   await runCommand(
     `${pm.installDev} ${withVersions([
+      'eslint',
       'angular-eslint',
       '@vitest/eslint-plugin',
       'eslint-plugin-prettier',
