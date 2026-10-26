@@ -1,4 +1,5 @@
 import { logHeader } from '../utils/cli-ui';
+import { getDefaultProjectName } from '../utils/project-path';
 import { setupExistingProject } from '../utils/setup-existing-project';
 
 export interface InitArgs {
@@ -11,7 +12,7 @@ export interface InitArgs {
 
 export async function runInitCommand(args: InitArgs): Promise<void> {
   const logger = console.log;
-  const projectName = args.project || (process.cwd().split('/').pop() as string);
+  const projectName = args.project || getDefaultProjectName();
   const verbose = args.verbose ?? false;
   const silent = args.silent ?? false;
   const aiContext = args.aiContext ?? (silent ? 'none' : undefined);

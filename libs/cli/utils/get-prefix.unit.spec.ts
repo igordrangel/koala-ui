@@ -48,6 +48,28 @@ describe('getPrefix', () => {
     expect(prefix).toBeNull();
   });
 
+  it('should resolve project when cwd basename does not match angular.json key', () => {
+    const mockAngularJson = {
+      projects: {
+        'somarcredito-site': {
+          projectType: 'application',
+          prefix: 'app',
+        },
+      },
+    };
+
+    vi.mocked(fs.readFileSync).mockReturnValue(JSON.stringify(mockAngularJson) as any);
+
+    // Simulates Windows cwd basename mismatch / wrong candidate name
+    expect(getPrefix('C:\\Projects\\somarcredito-site')).toBeNull();
+  });
+
+  it('should throw when angular.json has no projects', () => {
+    vi.mocked(fs.readFileSync).mockReturnValue(JSON.stringify({ projects: {} }) as any);
+
+    expect(() => getPrefix('my-app')).toThrow(/No projects found/);
+  });
+
   it('should handle malformed JSON gracefully', () => {
     vi.mocked(fs.readFileSync).mockReturnValue('invalid json' as any);
 

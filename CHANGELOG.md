@@ -9,6 +9,17 @@ O conteúdo principal da página web vive em `libs/ui/src/app/core/i18n/docs/pag
 
 Formato inspirado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 
+## [22.3.7] — CLI resolve projeto no Windows
+
+### Fixed
+
+- `kl install` / `kl init` / `kl add` usam `path.basename(cwd)` para o nome padrão do projeto (no Windows, `split('/')` devolvia o path inteiro).
+- Leitura do `prefix` em `angular.json` resolve a chave do projeto (candidato → `defaultProject` → primeira `application`).
+
+### Upgrade
+
+Atualize a CLI (`@koalarx/ui@angular-21` / linha 22.x). Se o nome da pasta diferir da chave em `angular.json`, use `--project <nome>` quando o fallback não for o desejado.
+
 ## [22.3.5] — Seletor de versão das docs
 
 ### Fixed
