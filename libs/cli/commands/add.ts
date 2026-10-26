@@ -11,7 +11,7 @@ import {
 } from '../constants/ai-context';
 import { logSuccess, logStep, logWarning } from '../utils/cli-ui';
 import { installAiContext } from '../utils/install-ai-context';
-import { getProjectPath } from '../utils/project-path';
+import { getDefaultProjectName, getProjectPath } from '../utils/project-path';
 import { promptAiContext } from '../utils/prompt-ai-context';
 
 export interface AddArgs {
@@ -43,7 +43,7 @@ function logInstallResults(
 
 export async function runAddCommand(args: AddArgs): Promise<void> {
   const logger = console.log;
-  const projectName = args.project || (process.cwd().split('/').pop() as string);
+  const projectName = args.project || getDefaultProjectName();
   const feature = args.feature?.trim().toLowerCase();
 
   if (!feature || feature === 'help') {

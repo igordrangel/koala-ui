@@ -1,5 +1,6 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { getProjectPath } from './project-path';
+import { resolveAngularProjectName } from './resolve-angular-project';
 import { setupGlobalTests } from './setup-global-tests';
 
 type E2ERoute = {
@@ -119,7 +120,7 @@ function ensureAngularE2EConfiguration(projectPath: string, projectName: string)
   };
 
   const projects = angularJson.projects ?? {};
-  const resolvedProjectName = projects[projectName] ? projectName : Object.keys(projects)[0];
+  const resolvedProjectName = resolveAngularProjectName(angularJson, projectName);
 
   if (!resolvedProjectName) {
     return;
