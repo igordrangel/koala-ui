@@ -12,6 +12,17 @@ export const PATCH_NOTES_PAGE = {
         description:
           'A versão publicada do pacote @koalarx/ui aparece no package.json do repositório. O arquivo CHANGELOG.md na raiz espelha estas notas.',
       },
+      v2237: {
+        title: '22.3.7 — CLI resolve projeto no Windows',
+        description:
+          'Correção do kl install/init/add ao inferir o nome do projeto a partir do diretório atual.',
+        items: [
+          'Nome padrão do projeto usa path.basename(cwd) (Windows não quebrava mais com split por /).',
+          'getPrefix resolve a chave em angular.json (candidato → defaultProject → primeira application).',
+        ],
+        upgrade:
+          'Atualize a CLI (@koalarx/ui linha 22.x / angular-21). Em projetos cujo nome da pasta difere da chave em angular.json, use --project <nome> se o fallback não for o desejado.',
+      },
       v2235: {
         title: '22.3.5 — Seletor de versão das docs',
         description: 'Corrige o seletor de major nas docs hospedadas em /v22/.',
@@ -65,6 +76,17 @@ export const PATCH_NOTES_PAGE = {
         title: 'How to use these notes',
         description:
           'The published @koalarx/ui package version is in the repository package.json. The root CHANGELOG.md mirrors these notes.',
+      },
+      v2237: {
+        title: '22.3.7 — CLI resolves project on Windows',
+        description:
+          'Fixes kl install/init/add when inferring the project name from the current directory.',
+        items: [
+          'Default project name uses path.basename(cwd) (Windows no longer breaks on split by /).',
+          'getPrefix resolves the angular.json key (candidate → defaultProject → first application).',
+        ],
+        upgrade:
+          'Update the CLI (@koalarx/ui 22.x / angular-21). If the folder name differs from the angular.json project key, pass --project <name> when the fallback is not the one you want.',
       },
       v2235: {
         title: '22.3.5 — Docs version switcher',

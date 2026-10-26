@@ -2,7 +2,7 @@ import { logHeader, logInstallSummary, logSuccess, logWarning } from '../utils/c
 import { install } from '../utils/install';
 import { InstallComponentFlags, InstallComponentFlagsList } from '../utils/install-component';
 import { detectPackageManager, getProjectExecCommand } from '../utils/package-manager';
-import { getProjectPath } from '../utils/project-path';
+import { getDefaultProjectName, getProjectPath } from '../utils/project-path';
 import { runCommand } from '../utils/run-command';
 
 export interface InstallArgs {
@@ -14,7 +14,7 @@ export interface InstallArgs {
 
 export async function runInstallCommand(args: InstallArgs): Promise<void> {
   const logger = console.log;
-  const projectName = args.project || (process.cwd().split('/').pop() as string);
+  const projectName = args.project || getDefaultProjectName();
   const verbose = args.verbose ?? false;
   const silent = args.silent ?? false;
 

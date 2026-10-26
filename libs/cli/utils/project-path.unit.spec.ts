@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { getProjectPath } from './project-path';
+import { getDefaultProjectName, getProjectPath } from './project-path';
 
 describe('getProjectPath', () => {
   const originalCwd = process.cwd();
@@ -43,5 +43,34 @@ describe('getProjectPath', () => {
 
     expect(getProjectPath('angular-app')).toBe('/workspace/angular-app');
     expect(getProjectPath('koala-ui')).toBe('/workspace/koala-ui');
+  });
+});
+
+describe('getDefaultProjectName', () => {
+  const originalCwd = process.cwd();
+
+  afterEach(() => {
+    Object.defineProperty(process, 'cwd', {
+      value: () => originalCwd,
+      configurable: true,
+    });
+  });
+
+  it('should return basename for POSIX cwd', () => {
+    Object.defineProperty(process, 'cwd', {
+      value: () => '/home/user/somarcredito-site',
+      configurable: true,
+    });
+
+    expect(getDefaultProjectName()).toBe('somarcredito-site');
+  });
+
+  it('should return basename for Windows cwd', () => {
+    Object.defineProperty(process, 'cwd', {
+      value: () => 'C:\\Projects\\somarcredito-site',
+      configurable: true,
+    });
+
+    expect(getDefaultProjectName()).toBe('somarcredito-site');
   });
 });

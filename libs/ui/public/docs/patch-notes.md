@@ -4,6 +4,17 @@ Changelog for anyone using or upgrading projects scaffolded with the Koala UI CL
 Site page: https://ui.koalarx.com/#/getting-started/patch-notes
 Root CHANGELOG.md mirrors these notes.
 
+## 22.3.7 — CLI resolves project on Windows
+
+### What changed
+
+- Default project name for `kl install` / `kl init` / `kl add` uses `path.basename(cwd)` (Windows no longer breaks on `split('/')`).
+- `getPrefix` resolves the `angular.json` project key (candidate → `defaultProject` → first application).
+
+### Upgrade
+
+Update the CLI (`@koalarx/ui` 22.x / `angular-21`). If the folder name differs from the `angular.json` project key, pass `--project <name>` when the fallback is not the one you want.
+
 ## 22.3.3 — No docs leakage in the CLI
 
 ### What changed
