@@ -1,0 +1,70 @@
+<app-section-container>
+  <ng-container title>{{ copy().title }}</ng-container>
+  <ng-container description>{{ copy().description }}</ng-container>
+
+  <app-section-content class="block mt-10">
+    <ng-container title>{{ copy().sections.whatIs.title }}</ng-container>
+    <ng-container description>{{ copy().sections.whatIs.description }}</ng-container>
+  </app-section-content>
+
+  <app-section-content class="block mt-10">
+    <ng-container title>{{ copy().sections.install.title }}</ng-container>
+    <ng-container description>{{ copy().sections.install.description }}</ng-container>
+    <app-code-viewer language="bash" name="kl" src="markdown/install/add-agents.md" />
+
+    <div role="alert" class="alert alert-info alert-dash mt-2">
+      <i class="fa-solid fa-circle-info"></i>
+      <span>{{ copy().sections.install.otherProse[0] }}</span>
+    </div>
+  </app-section-content>
+
+  <app-section-content class="block mt-10">
+    <ng-container title>{{ copy().sections.structure.title }}</ng-container>
+    <ng-container description>{{ copy().sections.structure.description }}</ng-container>
+    <app-code-viewer language="bash" name="tree" src="markdown/install/agents-tree.md" />
+
+    <div role="alert" class="alert alert-info alert-dash mt-2">
+      <i class="fa-solid fa-circle-info"></i>
+      <span>{{ copy().sections.structure.otherProse[0] }}</span>
+    </div>
+  </app-section-content>
+
+  <app-section-content class="block mt-10">
+    <ng-container title>{{ copy().sections.howAgentsUse.title }}</ng-container>
+    <ng-container description>{{ copy().sections.howAgentsUse.description }}</ng-container>
+  </app-section-content>
+
+  <app-section-content class="block mt-10">
+    <ng-container title>{{ copy().sections.codeReview.title }}</ng-container>
+    <ng-container description>{{ copy().sections.codeReview.description }}</ng-container>
+    <app-code-viewer
+      language="bash"
+      name="prompt"
+      src="markdown/install/agents-review-prompt.md"
+    />
+
+    <div role="alert" class="alert alert-info alert-dash mt-2">
+      <i class="fa-solid fa-circle-info"></i>
+      <span>{{ copy().sections.codeReview.otherProse[0] }}</span>
+    </div>
+  </app-section-content>
+
+  <app-section-content class="block mt-10">
+    <ng-container title>{{ copy().sections.mcps.title }}</ng-container>
+
+    <div role="alert" class="alert alert-info alert-dash mt-2">
+      <i class="fa-solid fa-circle-info"></i>
+      <span>{{ copy().sections.mcps.otherProse[0] }}</span>
+    </div>
+
+    <div role="alert" class="alert alert-info alert-dash mt-2">
+      <i class="fa-solid fa-circle-info"></i>
+      <span>{{ copy().sections.mcps.otherProse[1] }}</span>
+    </div>
+  </app-section-content>
+
+  <app-section-content class="block mt-10">
+    <ng-container title>{{ copy().sections.upgrade.title }}</ng-container>
+    <ng-container description>{{ copy().sections.upgrade.description }}</ng-container>
+  </app-section-content>
+</app-section-container>

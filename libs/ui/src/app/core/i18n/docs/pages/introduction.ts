@@ -74,7 +74,7 @@ export const INTRODUCTION_PAGE = {
           {
             title: 'Contexto no projeto (CLI)',
             description:
-              'No kl new / kl init escolha Cursor e/ou GitHub Copilot, ou rode kl add ai-context cursor|github em projetos existentes. Gera AGENTS.md e regras do editor sem sobrescrever customizações.',
+              'No kl new / kl init confirme agentes de IA, ou rode kl add agents em projetos existentes. Gera AGENTS.md + .agents/ (IDE-agnóstico) e remove o scaffolding legado Cursor/Copilot da Koala.',
           },
         ],
       },
@@ -152,7 +152,7 @@ export const INTRODUCTION_PAGE = {
           {
             title: 'Project context (CLI)',
             description:
-              'In kl new / kl init pick Cursor and/or GitHub Copilot, or run kl add ai-context cursor|github on existing projects. Scaffolds AGENTS.md and editor rules without overwriting customizations.',
+              'In kl new / kl init confirm AI agents, or run kl add agents on existing projects. Scaffolds AGENTS.md + .agents/ (IDE-agnostic) and removes legacy Koala Cursor/Copilot scaffolding.',
           },
         ],
       },

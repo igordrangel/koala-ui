@@ -10,17 +10,17 @@ kl new example --ssr
 # Angular library workspace
 kl new example --type library
 
-# skip AI context prompt
-kl new example --ai-context none
+# scaffold AI agents context without prompting
+kl new example --agents
 
-# scaffold Cursor + Copilot context without prompting
-kl new example --ai-context both
+# skip AI agents prompt
+kl new example --no-agents
 
-# non-interactive (AI agents / CI): bun + app + no SSR + AI context none
+# non-interactive (AI agents / CI): bun + app + no SSR + agents off
 kl new example --silent
 
 # non-interactive with overrides
-kl new example --silent --pm pnpm --type app --ssr --ai-context both
+kl new example --silent --pm pnpm --type app --ssr --agents
 ```
 
-Prompts (interactive, before scaffold): package manager → app/library → SSR (app only) → AI context.
+Prompts (interactive, before scaffold): package manager → app/library → SSR (app only) → AI agents.

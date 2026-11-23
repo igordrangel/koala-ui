@@ -13,6 +13,25 @@ Formato inspirado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/)
 
 A partir de **23.x**, o major de `@koalarx/ui` = major do Angular + 1 (`23` → Angular 22). A linha `22.x` permanece para Angular 21 (`previous-release` / dist-tag `angular-21`).
 
+## [23.2.0] — Agentes de IA (AGENTS.md + .agents/)
+
+### Breaking
+
+- Removidos `kl add ai-context` e a flag `--ai-context none|cursor|github|both`.
+- Scaffolding deixa de gerar `.cursor/rules/koala-*.mdc` e `.github/copilot-instructions.md`.
+
+### Added
+
+- `kl add agents` — gera `AGENTS.md` + `.agents/instructions` + `.agents/skills` (force) e remove o scaffolding legado Koala se existir.
+- Flags `--agents` / `--no-agents` em `kl new` / `kl init`.
+- Skill de revisão: peça *"Faça uma revisão completa utilizando os padrões Koala"*.
+- Página-guia Getting Started → [Agentes de IA](https://ui.koalarx.com/pt/getting-started/ai-agents).
+
+### Upgrade
+
+1. Em projetos existentes: `kl add agents`.
+2. Em CI/scripts: troque `--ai-context …` por `--agents` ou `--no-agents`.
+
 ## [23.1.3] — CLI resolve projeto no Windows
 
 ### Fixed

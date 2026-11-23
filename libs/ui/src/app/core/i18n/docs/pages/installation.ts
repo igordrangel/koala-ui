@@ -14,8 +14,8 @@ export const INSTALLATION_PAGE = {
         title: 'Criar um novo projeto',
         otherProse: [
           'kl new e kl init instalam @koalarx/utils ≥ 5 e clsx como dependências base. Veja a documentação do utils e o llms.txt para a API completa.',
-          'Durante o setup, a CLI pergunta o contexto AI (Cursor / GitHub Copilot). Use --ai-context none|cursor|github|both para pular o prompt, ou kl add ai-context depois.',
-          'Em agentes de IA ou CI, use --silent: no new/init pula prompts (bun + AI context none por padrão); no install aceita todas as libs externas sem perguntar.',
+          'Durante o setup, a CLI pergunta se deve configurar agentes de IA. Use --agents ou --no-agents para pular o prompt, ou kl add agents depois. Guia: Getting Started → Agentes de IA.',
+          'Em agentes de IA ou CI, use --silent: no new/init pula prompts (bun + agents off por padrão); no install aceita todas as libs externas sem perguntar.',
         ],
       },
       addingComponents: {
@@ -25,9 +25,9 @@ export const INSTALLATION_PAGE = {
         ],
       },
       addingAiContext: {
-        title: 'Adicionar contexto AI',
+        title: 'Adicionar agentes de IA',
         description:
-          'Em projetos existentes, gere AGENTS.md e regras do editor para agentes de IA sem sobrescrever arquivos já customizados.',
+          'Em projetos existentes, gere AGENTS.md e .agents/ (instructions + skills) para agentes de IA. Remove o scaffolding legado Cursor/Copilot da Koala, se existir. Detalhes na página Agentes de IA.',
       },
       addingInitialStructure: {
         title: 'Adicionar estrutura inicial',
@@ -49,8 +49,8 @@ export const INSTALLATION_PAGE = {
         title: 'Creating new project',
         otherProse: [
           'kl new and kl init install @koalarx/utils ≥ 5 and clsx as base dependencies. See the utils docs and llms.txt for the full API.',
-          'During setup, the CLI prompts for AI context (Cursor / GitHub Copilot). Use --ai-context none|cursor|github|both to skip the prompt, or kl add ai-context later.',
-          'For AI agents or CI, use --silent: on new/init it skips prompts (bun + AI context none by default); on install it accepts all external libs without asking.',
+          'During setup, the CLI asks whether to configure AI agents. Use --agents or --no-agents to skip the prompt, or kl add agents later. Guide: Getting Started → AI Agents.',
+          'For AI agents or CI, use --silent: on new/init it skips prompts (bun + agents off by default); on install it accepts all external libs without asking.',
         ],
       },
       addingComponents: {
@@ -60,9 +60,9 @@ export const INSTALLATION_PAGE = {
         ],
       },
       addingAiContext: {
-        title: 'Add AI context',
+        title: 'Add AI agents',
         description:
-          'On existing projects, scaffold AGENTS.md and editor rules for AI agents without overwriting customized files.',
+          'On existing projects, scaffold AGENTS.md and .agents/ (instructions + skills) for AI agents. Removes legacy Koala Cursor/Copilot scaffolding if present. See the AI Agents guide.',
       },
       addingInitialStructure: {
         title: 'Adding initial structure',

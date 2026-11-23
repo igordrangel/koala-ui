@@ -40,23 +40,23 @@ kl new example --ssr
 # Angular library workspace
 kl new example --type library
 
-# skip AI context prompt
-kl new example --ai-context none
+# scaffold AI agents context without prompting
+kl new example --agents
 
-# scaffold Cursor + Copilot context without prompting
-kl new example --ai-context both
+# skip AI agents prompt
+kl new example --no-agents
 
-# non-interactive (AI agents / CI): bun + app + no SSR + AI context none
+# non-interactive (AI agents / CI): bun + app + no SSR + agents off
 kl new example --silent
 
 # non-interactive with overrides
-kl new example --silent --pm pnpm --type app --ssr --ai-context both
+kl new example --silent --pm pnpm --type app --ssr --agents
 ```
 
-Prompts (interactive, before scaffold): package manager → app/library → SSR (app only) → AI context.
+Prompts (interactive, before scaffold): package manager → app/library → SSR (app only) → AI agents.
 
-During setup you can scaffold AI context (Cursor / GitHub Copilot). Use `--ai-context none|cursor|github|both` to skip the prompt.
-For AI agents or CI, prefer `--silent` (non-interactive: bun + AI context none unless overridden).
+During setup you can scaffold IDE-agnostic AI agents context (`AGENTS.md` + `.agents/`). Use `--agents` / `--no-agents` to skip the prompt.
+For AI agents or CI, prefer `--silent` (non-interactive: bun + agents off unless `--agents`).
 
 ## 3. Add components
 
@@ -72,18 +72,22 @@ kl install button,modal --silent
 
 Use `kl install … --silent` to accept all external dependency installs without prompting (recommended for AI agents).
 
-## 4. Add AI context (optional)
+## 4. Add AI agents (optional)
 
 ```bash
-# Cursor (.cursor/rules + AGENTS.md)
-kl add ai-context cursor
+# IDE-agnostic agents context (AGENTS.md + .agents/)
+kl add agents
 
-# GitHub Copilot (.github/copilot-instructions.md + AGENTS.md)
-kl add ai-context github
+# during new / init
+kl new example --agents
+kl init --agents
 
-# both
-kl add ai-context cursor github
+# skip agents scaffolding
+kl new example --no-agents
+kl init --no-agents
 ```
+
+Guide: [AI Agents](https://ui.koalarx.com/docs/ai-agents.md) (site: [/getting-started/ai-agents](https://ui.koalarx.com/pt/getting-started/ai-agents)).
 
 ## 5. Add resources (optional)
 

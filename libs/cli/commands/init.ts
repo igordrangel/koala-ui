@@ -5,8 +5,9 @@ import { setupExistingProject } from '../utils/setup-existing-project';
 export interface InitArgs {
   project?: string;
   verbose?: boolean;
-  aiContext?: string;
-  /** Skip interactive prompts (AI context defaults to none unless --ai-context is set). */
+  /** Explicit agents choice from `--agents` / `--no-agents`. */
+  agents?: boolean;
+  /** Skip interactive prompts (agents default to off unless `--agents` is set). */
   silent?: boolean;
 }
 
@@ -15,9 +16,9 @@ export async function runInitCommand(args: InitArgs): Promise<void> {
   const projectName = args.project || getDefaultProjectName();
   const verbose = args.verbose ?? false;
   const silent = args.silent ?? false;
-  const aiContext = args.aiContext ?? (silent ? 'none' : undefined);
+  const agents = args.agents ?? (silent ? false : undefined);
 
   logHeader(logger, 'KOALA PROJECT INITIALIZER', `Project: ${projectName}`);
 
-  await setupExistingProject(projectName, verbose, aiContext);
+  await setupExistingProject(projectName, verbose, agents);
 }

@@ -31,18 +31,18 @@ bun add -g @koalarx/ui
 
 Creates a new Angular project with the Koala structure and dependencies already configured.
 
-Interactive prompts (before scaffold): package manager → app/library → SSR (app only) → AI context (Cursor / GitHub Copilot).
+Interactive prompts (before scaffold): package manager → app/library → SSR (app only) → AI agents (`AGENTS.md` + `.agents/`).
 
 Package managers: `bun`, `npm`, `yarn`, `pnpm`.
 
-Skip prompts with `--pm`, `--type app|library`, `--ssr` / `--no-ssr`, `--ai-context`, and `--silent` (non-interactive defaults: bun + app + no SSR + AI context none).
+Skip prompts with `--pm`, `--type app|library`, `--ssr` / `--no-ssr`, `--agents` / `--no-agents`, and `--silent` (non-interactive defaults: bun + app + no SSR + agents off).
 
 ```bash
 kl new --name meu-projeto
 kl new --name my-project --pm npm
 kl new my-app --ssr
 kl new my-lib --type library
-kl new my-app --ai-context both
+kl new my-app --agents
 kl new my-app --silent
 ```
 
@@ -65,13 +65,13 @@ kl install button,modal --silent
 
 ### `kl add`
 
-Adds project features. Currently supports AI context scaffolding:
+Adds project features. Currently supports IDE-agnostic AI agents scaffolding:
 
 ```bash
-kl add ai-context cursor
-kl add ai-context github
-kl add ai-context cursor github
+kl add agents
 ```
+
+Guide: https://ui.koalarx.com/pt/getting-started/ai-agents
 
 ---
 
@@ -83,7 +83,7 @@ Initializes an existing Angular project with the Koala structure and required to
 kl init
 kl init --project meu-projeto
 kl init --project meu-projeto --verbose
-kl init --ai-context none
+kl init --agents
 kl init --silent
 ```
 

@@ -13,6 +13,11 @@ export const ROUTES: Routes = [
     title: generateTitle('Installation'),
   },
   {
+    path: 'ai-agents',
+    loadComponent: () => import('./ai-agents/ai-agents.page').then((m) => m.AiAgentsPage),
+    title: generateTitle('AI Agents'),
+  },
+  {
     path: 'patch-notes',
     loadComponent: () => import('./patch-notes/patch-notes.page').then((m) => m.PatchNotesPage),
     title: generateTitle('Patch notes'),

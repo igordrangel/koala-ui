@@ -1,0 +1,11 @@
+```text
+AGENTS.md
+.agents/
+  instructions/
+    structure.md
+    components.md
+    angular.md
+    docs.md
+  skills/
+    code-review.md
+```

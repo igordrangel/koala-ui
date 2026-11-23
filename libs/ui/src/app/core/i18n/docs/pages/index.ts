@@ -45,10 +45,12 @@ import { PAGE_BASE_PAGE } from './page-base';
 import { RULES_PAGE } from './rules';
 import { GENERATE_ICONS_PAGE } from './generate-icons';
 import { PATCH_NOTES_PAGE } from './patch-notes';
+import { AI_AGENTS_PAGE } from './ai-agents';
 
 export { INSTALLATION_PAGE, type InstallationPageCopy } from './installation';
 export { INTRODUCTION_PAGE, type IntroductionPageCopy } from './introduction';
 export { PATCH_NOTES_PAGE, type PatchNotesPageCopy } from './patch-notes';
+export { AI_AGENTS_PAGE, type AiAgentsPageCopy } from './ai-agents';
 export { ALERT_PAGE, type AlertPageCopy } from './alert';
 export { BOTTOM_SHEET_PAGE, type BottomSheetPageCopy } from './bottom-sheet';
 export { BREADCRUMB_PAGE, type BreadcrumbPageCopy } from './breadcrumb';
@@ -97,6 +99,7 @@ export const DOCS_PAGES = {
   installation: INSTALLATION_PAGE,
   introduction: INTRODUCTION_PAGE,
   'patch-notes': PATCH_NOTES_PAGE,
+  'ai-agents': AI_AGENTS_PAGE,
   alert: ALERT_PAGE,
   'bottom-sheet': BOTTOM_SHEET_PAGE,
   breadcrumb: BREADCRUMB_PAGE,

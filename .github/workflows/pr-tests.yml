@@ -7,7 +7,8 @@ on:
 jobs:
   cli-tests:
     name: Unit Tests (CLI)
-    runs-on: ubuntu-latest
+    # Pin LTS: ubuntu-latest may be 26.04+, which Playwright 1.59.x does not support yet.
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout
@@ -24,7 +25,8 @@ jobs:
 
   ui-tests:
     name: Unit + E2E (UI)
-    runs-on: ubuntu-latest
+    # Pin LTS: ubuntu-latest may be 26.04+, which Playwright 1.59.x does not support yet.
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout

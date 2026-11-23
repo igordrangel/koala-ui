@@ -119,7 +119,7 @@ Duas majors ativas (como Angular current + previous):
 2. Criar branch de arquivo com esse nome: `git branch 22.3.0 previous-release` (sem CI).
 3. Atualizar `previous-release` para o tip de `main`.
 4. Em `main`, subir a major nova e desenvolver.
-5. Atualizar em **ambos** os branches ativos: `docs-versions.ts`, `.github/release-lines.json` (`previousDistTag`), ai-context / README se as URLs da linha previous mudarem.
+5. Atualizar em **ambos** os branches ativos: `docs-versions.ts`, `.github/release-lines.json` (`previousDistTag`), assets de agents / README se as URLs da linha previous mudarem.
 
 ### Docs nesta branch
 

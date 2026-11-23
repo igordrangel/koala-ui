@@ -12,7 +12,7 @@ import { withVersions } from '../utils/dependency-versions';
 import { runCommand } from '../utils/run-command';
 import { setupGlobalTests } from '../utils/setup-global-tests';
 import { installUtil } from '../utils/install-util';
-import { applyAiContext, resolveAiContextTargets } from '../utils/apply-ai-context';
+import { applyAgents, resolveAgentsEnabled } from '../utils/apply-agents';
 import { askProjectType, askSsr, type ProjectType } from '../utils/prompt-project-options';
 import { getOriginPath } from '../utils/get-package-root';
 
@@ -20,8 +20,9 @@ export interface NewArgs {
   name: string;
   pm?: PackageManager;
   verbose?: boolean;
-  aiContext?: string;
-  /** Accept defaults without prompts (package manager, type, SSR, AI context). */
+  /** Explicit agents choice from `--agents` / `--no-agents`. */
+  agents?: boolean;
+  /** Accept defaults without prompts (package manager, type, SSR, agents). */
   silent?: boolean;
   type?: ProjectType;
   ssr?: boolean;
@@ -238,8 +239,8 @@ export async function runNewCommand(args: NewArgs): Promise<void> {
     }
   }
 
-  const aiContextFlag = args.aiContext ?? (silent ? 'none' : undefined);
-  const aiContextTargets = await resolveAiContextTargets(aiContextFlag);
+  const agentsFlag = args.agents ?? (silent ? false : undefined);
+  const agentsEnabled = await resolveAgentsEnabled(agentsFlag);
 
   logHeader(console.log, 'KOALA UI PROJECT SETUP', `Project: ${name}`);
 
@@ -280,7 +281,7 @@ export async function runNewCommand(args: NewArgs): Promise<void> {
     loaderText: 'Formatting project',
   });
 
-  applyAiContext(name, aiContextTargets);
+  applyAgents(name, agentsEnabled);
 
   logSuccess(console.log, 'Project ready');
 }

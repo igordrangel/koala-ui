@@ -21,6 +21,7 @@ export const UI_COPY = {
     searchAria: 'Buscar documentação',
     introduction: 'Introdução',
     installation: 'Instalação',
+    aiAgents: 'Agentes de IA',
     patchNotes: 'Patch notes',
     navGroups: {
       actions: 'Ações',
@@ -73,6 +74,7 @@ export const UI_COPY = {
     searchAria: 'Search documentation',
     introduction: 'Introduction',
     installation: 'Installation',
+    aiAgents: 'AI Agents',
     patchNotes: 'Patch notes',
     navGroups: {
       actions: 'Actions',

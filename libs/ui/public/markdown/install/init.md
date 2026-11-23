@@ -4,9 +4,12 @@ kl init --project my-angular-app
 # or inside the project
 kl init
 
-# skip AI context prompt
-kl init --ai-context none
+# scaffold AI agents without prompting
+kl init --agents
 
-# non-interactive (AI agents / CI): AI context defaults to none
+# skip AI agents prompt
+kl init --no-agents
+
+# non-interactive (AI agents / CI): agents off unless --agents
 kl init --silent
 ```
