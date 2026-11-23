@@ -8,6 +8,7 @@ const DEFAULT_LOCALE = 'pt';
 const DOC_PATHS = [
   'getting-started/introduction',
   'getting-started/installation',
+  'getting-started/ai-agents',
   'components/bottom-sheet',
   'components/button',
   'components/confirm',

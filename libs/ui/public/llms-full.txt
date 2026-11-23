@@ -42,23 +42,23 @@ kl new example --ssr
 # Angular library workspace
 kl new example --type library
 
-# skip AI context prompt
-kl new example --ai-context none
+# scaffold AI agents context without prompting
+kl new example --agents
 
-# scaffold Cursor + Copilot context without prompting
-kl new example --ai-context both
+# skip AI agents prompt
+kl new example --no-agents
 
-# non-interactive (AI agents / CI): bun + app + no SSR + AI context none
+# non-interactive (AI agents / CI): bun + app + no SSR + agents off
 kl new example --silent
 
 # non-interactive with overrides
-kl new example --silent --pm pnpm --type app --ssr --ai-context both
+kl new example --silent --pm pnpm --type app --ssr --agents
 ```
 
-Prompts (interactive, before scaffold): package manager → app/library → SSR (app only) → AI context.
+Prompts (interactive, before scaffold): package manager → app/library → SSR (app only) → AI agents.
 
-During setup you can scaffold AI context (Cursor / GitHub Copilot). Use `--ai-context none|cursor|github|both` to skip the prompt.
-For AI agents or CI, prefer `--silent` (non-interactive: bun + AI context none unless overridden).
+During setup you can scaffold IDE-agnostic AI agents context (`AGENTS.md` + `.agents/`). Use `--agents` / `--no-agents` to skip the prompt.
+For AI agents or CI, prefer `--silent` (non-interactive: bun + agents off unless `--agents`).
 
 ## 3. Add components
 
@@ -74,18 +74,22 @@ kl install button,modal --silent
 
 Use `kl install … --silent` to accept all external dependency installs without prompting (recommended for AI agents).
 
-## 4. Add AI context (optional)
+## 4. Add AI agents (optional)
 
 ```bash
-# Cursor (.cursor/rules + AGENTS.md)
-kl add ai-context cursor
+# IDE-agnostic agents context (AGENTS.md + .agents/)
+kl add agents
 
-# GitHub Copilot (.github/copilot-instructions.md + AGENTS.md)
-kl add ai-context github
+# during new / init
+kl new example --agents
+kl init --agents
 
-# both
-kl add ai-context cursor github
+# skip agents scaffolding
+kl new example --no-agents
+kl init --no-agents
 ```
+
+Guide: [AI Agents](https://ui.koalarx.com/docs/ai-agents.md) (site: [/getting-started/ai-agents](https://ui.koalarx.com/pt/getting-started/ai-agents)).
 
 ## 5. Add resources (optional)
 
@@ -142,11 +146,87 @@ kl add ai-context cursor github
 
 ---
 
+# Koala UI – AI Agents
+
+IDE-agnostic agent context for projects scaffolded with the Koala UI CLI.
+Site page: https://ui.koalarx.com/pt/getting-started/ai-agents
+
+## What it is
+
+The agents pack writes an `AGENTS.md` index at the project root plus instructions and skills under `.agents/`. Agents start from `AGENTS.md` and open the linked files for the task — works in Cursor, GitHub Copilot, and other IDEs that read `AGENTS.md`.
+
+## How to install
+
+```bash
+# IDE-agnostic agents context (AGENTS.md + .agents/)
+kl add agents
+
+# during new / init
+kl new example --agents
+kl init --agents
+
+# skip agents scaffolding
+kl new example --no-agents
+kl init --no-agents
+```
+
+`kl add agents` removes legacy Koala Cursor/Copilot scaffolding (`.cursor/rules/koala-*.mdc`, `.github/copilot-instructions.md`) if present, then writes the new pack (force).
+
+## Generated structure
+
+```text
+AGENTS.md
+.agents/
+  instructions/
+    structure.md
+    components.md
+    angular.md
+    docs.md
+  skills/
+    code-review.md
+```
+
+`AGENTS.md` is only the index (When → Read). Details live in `.agents/instructions/` and `.agents/skills/`.
+
+## Code review skill
+
+Ask the agent:
+
+```text
+Faça uma revisão completa utilizando os padrões Koala
+```
+
+The skill covers best practices, Angular team patterns (Angular MCP when available), Clean Code, abstraction/componentization, and library-standard usage (docs / `koala-ui-docs` MCP / `kl install`).
+
+## Recommended MCPs
+
+- `koala-ui-docs` — `read_koala_ui_doc`, `search_koala_ui_docs`, `list_koala_ui_docs`
+- Angular (`angular-cli` via `@angular/cli mcp`) — https://angular.dev/ai/mcp
+
+## Upgrade from old AI context
+
+Projects that used `kl add ai-context` should run `kl add agents` once.
+
+---
+
 # Koala UI – Patch notes
 
 Changelog for anyone using or upgrading projects scaffolded with the Koala UI CLI.
 Site page: https://ui.koalarx.com/pt/getting-started/patch-notes
 Root CHANGELOG.md mirrors these notes.
+
+## 23.2.0 — AI agents (AGENTS.md + .agents/)
+
+### What changed
+
+- New command `kl add agents` — writes `AGENTS.md` + `.agents/instructions` + `.agents/skills` (force) and removes legacy `.cursor/rules/koala-*.mdc` and `.github/copilot-instructions.md`.
+- Removed `kl add ai-context` and the `--ai-context` flag; use `--agents` / `--no-agents` on `kl new` / `kl init`.
+- Assets under `libs/cli/assets/agents/` with a code-review skill (“Faça uma revisão completa utilizando os padrões Koala”).
+- New Getting Started → AI Agents guide page.
+
+### Upgrade
+
+On existing projects run `kl add agents`. Replace CI `--ai-context` with `--agents` / `--no-agents`. Guide: https://ui.koalarx.com/pt/getting-started/ai-agents
 
 ## 23.1.3 — CLI resolves project on Windows
 

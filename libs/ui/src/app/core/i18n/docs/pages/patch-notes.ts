@@ -12,6 +12,19 @@ export const PATCH_NOTES_PAGE = {
         description:
           'A versão publicada do pacote @koalarx/ui aparece no package.json do repositório. O arquivo CHANGELOG.md na raiz espelha estas notas. A partir de 23.x, o major da lib = major do Angular + 1 (23 → Angular 22). Para Angular 21 use a linha 22.x; para Angular 22 use 23.x.',
       },
+      v2320: {
+        title: '23.2.0 — Agentes de IA (AGENTS.md + .agents/)',
+        description:
+          'Breaking: contexto AI deixa de ser Cursor/GitHub específico. Pacote IDE-agnóstico via kl add agents, skill de revisão e página-guia.',
+        items: [
+          'Novo comando kl add agents — gera AGENTS.md + .agents/instructions + .agents/skills (force) e remove legado .cursor/rules/koala-*.mdc e .github/copilot-instructions.md.',
+          'Removidos kl add ai-context e a flag --ai-context; use --agents / --no-agents no kl new / kl init.',
+          'Assets em libs/cli/assets/agents/ com skill de revisão (“Faça uma revisão completa utilizando os padrões Koala”).',
+          'Nova página Getting Started → Agentes de IA (guia de uso).',
+        ],
+        upgrade:
+          'Em projetos existentes rode kl add agents (migra e recria o pacote). Troque scripts/CI de --ai-context para --agents/--no-agents. Guia: https://ui.koalarx.com/pt/getting-started/ai-agents',
+      },
       v2313: {
         title: '23.1.3 — CLI resolve projeto no Windows',
         description:
@@ -120,6 +133,19 @@ export const PATCH_NOTES_PAGE = {
         title: 'How to use these notes',
         description:
           'The published @koalarx/ui package version is in the repository package.json. The root CHANGELOG.md mirrors these notes. From 23.x onward, library major = Angular major + 1 (23 → Angular 22). For Angular 21 use the 22.x line; for Angular 22 use 23.x.',
+      },
+      v2320: {
+        title: '23.2.0 — AI agents (AGENTS.md + .agents/)',
+        description:
+          'Breaking: AI context is no longer Cursor/GitHub-specific. IDE-agnostic pack via kl add agents, code-review skill, and a guide page.',
+        items: [
+          'New command kl add agents — writes AGENTS.md + .agents/instructions + .agents/skills (force) and removes legacy .cursor/rules/koala-*.mdc and .github/copilot-instructions.md.',
+          'Removed kl add ai-context and the --ai-context flag; use --agents / --no-agents on kl new / kl init.',
+          'Assets under libs/cli/assets/agents/ with a code-review skill (“Faça uma revisão completa utilizando os padrões Koala”).',
+          'New Getting Started → AI Agents guide page.',
+        ],
+        upgrade:
+          'On existing projects run kl add agents (migrates and recreates the pack). Replace CI scripts --ai-context with --agents/--no-agents. Guide: https://ui.koalarx.com/en/getting-started/ai-agents',
       },
       v2313: {
         title: '23.1.3 — CLI resolves project on Windows',

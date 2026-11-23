@@ -1,44 +1,13 @@
-import { existsSync } from 'node:fs';
-import path from 'node:path';
-import {
-  AI_CONTEXT_CURSOR_MARKER,
-  AI_CONTEXT_GITHUB_PATH,
-  AI_CONTEXT_LABELS,
-  AiContextTarget,
-  listMissingAiContextTargets,
-  parseAiContextTarget,
-  type AiContextTarget as AiContextTargetType,
-} from '../constants/ai-context';
+import { AGENTS_LABEL } from '../constants/agents';
 import { logSuccess, logStep, logWarning } from '../utils/cli-ui';
-import { installAiContext } from '../utils/install-ai-context';
-import { getDefaultProjectName, getProjectPath } from '../utils/project-path';
-import { promptAiContext } from '../utils/prompt-ai-context';
+import { installAgents } from '../utils/install-agents';
+import { getDefaultProjectName } from '../utils/project-path';
 
 export interface AddArgs {
   feature?: string;
   targets?: string[];
   project?: string;
   verbose?: boolean;
-}
-
-function detectAiContextState(projectRoot: string): { cursor: boolean; github: boolean } {
-  return {
-    cursor: existsSync(path.join(projectRoot, AI_CONTEXT_CURSOR_MARKER)),
-    github: existsSync(path.join(projectRoot, AI_CONTEXT_GITHUB_PATH)),
-  };
-}
-
-function logInstallResults(
-  results: ReturnType<typeof installAiContext>,
-  logger: typeof console.log,
-): void {
-  for (const result of results) {
-    if (result.installed) {
-      logSuccess(logger, result.label);
-    } else if (result.reason) {
-      logWarning(logger, `${result.label}: ${result.reason}`);
-    }
-  }
 }
 
 export async function runAddCommand(args: AddArgs): Promise<void> {
@@ -48,55 +17,27 @@ export async function runAddCommand(args: AddArgs): Promise<void> {
 
   if (!feature || feature === 'help') {
     throw new Error(
-      'USAGE\n  $ kl add ai-context cursor|github [cursor|github] [-p <project>]\n\nFEATURES\n  ai-context  Contexto AI (AGENTS.md + regras do editor)',
+      'USAGE\n  $ kl add agents [-p <project>]\n\nFEATURES\n  agents  Contexto de agentes de IA (AGENTS.md + .agents/)',
     );
   }
 
-  if (feature !== 'ai-context') {
-    throw new Error(
-      `Feature desconhecida: "${feature}". Use: kl add ai-context cursor|github`,
-    );
+  if (feature !== 'agents') {
+    throw new Error(`Feature desconhecida: "${feature}". Use: kl add agents`);
   }
-
-  const projectRoot = getProjectPath(projectName);
-  const state = detectAiContextState(projectRoot);
-  let targets: AiContextTargetType[] = [];
 
   if (args.targets && args.targets.length > 0) {
-    targets = args.targets.map((value) => parseAiContextTarget(value));
-  } else {
-    const available = listMissingAiContextTargets(state);
-    if (available.length === 0) {
-      logWarning(logger, 'Contexto AI (Cursor e GitHub Copilot) já está instalado.');
-      return;
-    }
-
-    const prompted = await promptAiContext();
-    targets = prompted.filter((target) => {
-      if (target === AiContextTarget.CURSOR) {
-        return !state.cursor;
-      }
-      return !state.github;
-    });
-  }
-
-  const missing = targets.filter((target) => {
-    if (target === AiContextTarget.CURSOR) {
-      return !state.cursor;
-    }
-    return !state.github;
-  });
-
-  if (missing.length === 0) {
-    logWarning(
-      logger,
-      `Nada a instalar. Já presente: ${targets.map((t) => AI_CONTEXT_LABELS[t]).join(', ')}`,
+    throw new Error(
+      `Argumentos extras não suportados: ${args.targets.join(' ')}. Use: kl add agents`,
     );
-    return;
   }
 
-  logStep(logger, 'Configurando contexto AI...');
-  const results = installAiContext(projectName, missing);
-  logInstallResults(results, logger);
-  logSuccess(logger, 'Contexto AI atualizado');
+  logStep(logger, 'Configurando agentes de IA...');
+  const result = installAgents(projectName);
+
+  for (const legacyPath of result.removedLegacy) {
+    logWarning(logger, `Removido legado: ${legacyPath}`);
+  }
+
+  logSuccess(logger, result.label || AGENTS_LABEL);
+  logSuccess(logger, 'Agentes de IA atualizados');
 }

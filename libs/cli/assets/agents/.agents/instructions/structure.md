@@ -1,9 +1,3 @@
----
-description: Estrutura Koala UI — componentes copiados pela CLI
-globs: src/app/**/*.ts,src/app/**/*.html
-alwaysApply: false
----
-
 # Estrutura
 
 - UI instalada por `kl` vive em `src/app/shared/` (components, directives, validators, utils, base).

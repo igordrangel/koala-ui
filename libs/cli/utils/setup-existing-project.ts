@@ -10,7 +10,7 @@ import { runCommand } from './run-command';
 import { setupGlobalTests } from './setup-global-tests';
 import { validateAngularProject } from './validate-project';
 import { installUtil } from './install-util';
-import { applyAiContext, resolveAiContextTargets } from './apply-ai-context';
+import { applyAgents, resolveAgentsEnabled } from './apply-agents';
 import { getOriginPath } from './get-package-root';
 const KOALARX_UTILS_MIN_MAJOR = 5;
 
@@ -34,7 +34,7 @@ function needsKoalarxUtilsV5(versionRange: string | undefined): boolean {
 export async function setupExistingProject(
   projectName: string,
   verbose = false,
-  aiContextFlag?: string,
+  agentsFlag?: boolean,
 ): Promise<void> {
   const logger = console.log;
   const projectPath = getProjectPath(projectName);
@@ -241,8 +241,8 @@ export async function setupExistingProject(
     loaderText: 'Formatting project',
   });
 
-  const aiContextTargets = await resolveAiContextTargets(aiContextFlag);
-  applyAiContext(projectName, aiContextTargets, logger);
+  const agentsEnabled = await resolveAgentsEnabled(agentsFlag);
+  applyAgents(projectName, agentsEnabled, logger);
 
   logSuccess(logger, 'Setup completed successfully!');
 }

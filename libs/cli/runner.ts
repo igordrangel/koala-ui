@@ -1,6 +1,7 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { getPackageRoot } from './utils/get-package-root';
+import { resolveAgentsFlag } from './constants/agents';
 import { runAddCommand } from './commands/add';
 import { runInstallCommand } from './commands/install';
 import { runInitCommand } from './commands/init';
@@ -83,20 +84,20 @@ function printHelp() {
   printBanner();
   console.log('Usage:');
   console.log(
-    '  kl new <project> [--pm bun|npm|yarn|pnpm] [--type app|library] [--ssr|--no-ssr] [--ai-context none|cursor|github|both] [--silent] [--verbose]',
+    '  kl new <project> [--pm bun|npm|yarn|pnpm] [--type app|library] [--ssr|--no-ssr] [--agents|--no-agents] [--silent] [--verbose]',
   );
   console.log(
-    '  kl init [--project <name>] [--ai-context none|cursor|github|both] [--silent] [--verbose]',
+    '  kl init [--project <name>] [--agents|--no-agents] [--silent] [--verbose]',
   );
   console.log('  kl install <component[,component]> [--project <name>] [--silent] [--verbose]');
-  console.log('  kl add ai-context cursor|github [--project <name>]');
+  console.log('  kl add agents [--project <name>]');
   console.log('  kl version');
   console.log('');
   console.log('Commands:');
   console.log('  new      Create a new UI project');
   console.log('  init     Initialize an existing Angular project with Koala');
   console.log('  install  Add one or more components to the project');
-  console.log('  add      Add project features (ai-context)');
+  console.log('  add      Add project features (agents)');
   console.log('  version  Show the CLI version');
 }
 
@@ -123,15 +124,14 @@ function printInitHelp() {
   console.log('');
   console.log('USAGE');
   console.log('  $ kl init');
-  console.log('  $ kl init [-p <value>] [--ai-context <value>] [--silent] [--verbose]');
+  console.log('  $ kl init [-p <value>] [--agents|--no-agents] [--silent] [--verbose]');
   console.log('');
   console.log('FLAGS');
   console.log('  -p, --project=<value>  name of the project (defaults to current directory)');
+  console.log('      --agents            scaffold AGENTS.md + .agents/ (skips prompt)');
+  console.log('      --no-agents         skip AI agents scaffolding (skips prompt)');
   console.log(
-    '      --ai-context=<value>  none|cursor|github|both (skips interactive prompt)',
-  );
-  console.log(
-    '      --silent           non-interactive: skip prompts (AI context defaults to none)',
+    '      --silent           non-interactive: skip prompts (agents off unless --agents)',
   );
   console.log('  -v, --verbose          show detailed logs');
   console.log('');
@@ -142,33 +142,31 @@ function printInitHelp() {
   console.log('  • Configure Vitest and Playwright if no tests are found');
   console.log('  • Install required dependencies');
   console.log('  • Set up ESLint and VS Code configuration');
-  console.log('  • Optionally scaffold AI context (Cursor / GitHub Copilot)');
+  console.log('  • Optionally scaffold IDE-agnostic AI agents context');
 }
 
 function printAddHelp() {
   console.log('add a feature to the project');
   console.log('');
   console.log('USAGE');
-  console.log('  $ kl add ai-context cursor|github [cursor|github] [-p <value>]');
+  console.log('  $ kl add agents [-p <value>]');
   console.log('');
   console.log('FEATURES');
-  console.log('  ai-context  Contexto AI (AGENTS.md + regras do editor)');
+  console.log('  agents  Contexto de agentes de IA (AGENTS.md + .agents/)');
   console.log('');
   console.log('FLAGS');
   console.log('  -p, --project=<value>  name of the project (defaults to current directory)');
   console.log('');
   console.log('EXAMPLES');
-  console.log('  kl add ai-context cursor');
-  console.log('  kl add ai-context github');
-  console.log('  kl add ai-context cursor github');
+  console.log('  kl add agents');
 }
 
 function printNewHelp() {
   console.log(
-    'Usage: kl new <project> [--pm bun|npm|yarn|pnpm] [--type app|library] [--ssr|--no-ssr] [--ai-context none|cursor|github|both] [--silent] [--verbose]',
+    'Usage: kl new <project> [--pm bun|npm|yarn|pnpm] [--type app|library] [--ssr|--no-ssr] [--agents|--no-agents] [--silent] [--verbose]',
   );
   console.log(
-    '       kl new --name <project> [--pm bun|npm|yarn|pnpm] [--type app|library] [--ssr|--no-ssr] [--ai-context none|cursor|github|both] [--silent] [--verbose]',
+    '       kl new --name <project> [--pm bun|npm|yarn|pnpm] [--type app|library] [--ssr|--no-ssr] [--agents|--no-agents] [--silent] [--verbose]',
   );
   console.log('');
   console.log('FLAGS');
@@ -176,11 +174,10 @@ function printNewHelp() {
   console.log('      --type=<value>       project type: app|library (default: app)');
   console.log('      --ssr                enable SSR (app only; default: disabled)');
   console.log('      --no-ssr             disable SSR (app only)');
+  console.log('      --agents             scaffold AGENTS.md + .agents/ (skips prompt)');
+  console.log('      --no-agents          skip AI agents scaffolding (skips prompt)');
   console.log(
-    '      --ai-context=<value>  none|cursor|github|both (skips interactive prompt)',
-  );
-  console.log(
-    '      --silent              non-interactive: bun + app + no SSR + AI context none unless overridden',
+    '      --silent              non-interactive: bun + app + no SSR + agents off unless --agents',
   );
   console.log('  -v, --verbose            show detailed logs');
 }
@@ -209,7 +206,10 @@ export async function runCli(argv: string[]): Promise<number> {
       const pm = getFlagValue(args, 'pm', 'm') as PackageManager | undefined;
       const verbose = hasFlag(args, 'verbose', 'v');
       const silent = hasFlag(args, 'silent');
-      const aiContext = getFlagValue(args, 'ai-context');
+      const agents = resolveAgentsFlag({
+        agents: hasFlag(args, 'agents'),
+        noAgents: hasFlag(args, 'no-agents'),
+      });
       const type = getFlagValue(args, 'type') as 'app' | 'library' | undefined;
       let ssr: boolean | undefined;
       if (hasFlag(args, 'ssr')) {
@@ -217,7 +217,7 @@ export async function runCli(argv: string[]): Promise<number> {
       } else if (hasFlag(args, 'no-ssr')) {
         ssr = false;
       }
-      await runNewCommand({ name: name ?? '', pm, verbose, aiContext, silent, type, ssr });
+      await runNewCommand({ name: name ?? '', pm, verbose, agents, silent, type, ssr });
       return 0;
     }
 
@@ -230,8 +230,11 @@ export async function runCli(argv: string[]): Promise<number> {
       const project = getFlagValue(args, 'project', 'p');
       const verbose = hasFlag(args, 'verbose', 'v');
       const silent = hasFlag(args, 'silent');
-      const aiContext = getFlagValue(args, 'ai-context');
-      await runInitCommand({ project, verbose, aiContext, silent });
+      const agents = resolveAgentsFlag({
+        agents: hasFlag(args, 'agents'),
+        noAgents: hasFlag(args, 'no-agents'),
+      });
+      await runInitCommand({ project, verbose, agents, silent });
       return 0;
     }
 

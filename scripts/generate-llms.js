@@ -68,6 +68,7 @@ function capitalize(str) {
 const COMPONENTS = [
   // get-started pseudo-pages
   { name: 'get-started', label: 'Get Started', installFile: null, usageDir: null, isPage: true },
+  { name: 'ai-agents', label: 'AI Agents', installFile: null, usageDir: null, isPage: true },
   { name: 'patch-notes', label: 'Patch notes', installFile: null, usageDir: null, isPage: true },
 
   // components
@@ -140,9 +141,9 @@ function buildGetStartedDoc() {
     ? read(join(INSTALL_DIR, 'add-resources.md'))
     : '';
 
-  const addAiContext = existsSync(join(INSTALL_DIR, 'add-ai-context.md'))
-    ? read(join(INSTALL_DIR, 'add-ai-context.md'))
-    : '`kl add ai-context cursor`';
+  const addAgents = existsSync(join(INSTALL_DIR, 'add-agents.md'))
+    ? read(join(INSTALL_DIR, 'add-agents.md'))
+    : '`kl add agents`';
 
   let doc = `# Koala UI – Get Started
 
@@ -171,8 +172,8 @@ ${installCli}
 
 ${createProject}
 
-During setup you can scaffold AI context (Cursor / GitHub Copilot). Use \`--ai-context none|cursor|github|both\` to skip the prompt.
-For AI agents or CI, prefer \`--silent\` (non-interactive: bun + AI context none unless overridden).
+During setup you can scaffold IDE-agnostic AI agents context (\`AGENTS.md\` + \`.agents/\`). Use \`--agents\` / \`--no-agents\` to skip the prompt.
+For AI agents or CI, prefer \`--silent\` (non-interactive: bun + agents off unless \`--agents\`).
 
 ## 3. Add components
 
@@ -180,9 +181,11 @@ ${addComponents}
 
 Use \`kl install … --silent\` to accept all external dependency installs without prompting (recommended for AI agents).
 
-## 4. Add AI context (optional)
+## 4. Add AI agents (optional)
 
-${addAiContext}
+${addAgents}
+
+Guide: [AI Agents](https://ui.koalarx.com/docs/ai-agents.md) (site: [/getting-started/ai-agents](https://ui.koalarx.com/pt/getting-started/ai-agents)).
 
 ## 5. Add resources (optional)
 
@@ -202,12 +205,76 @@ ${COMPONENTS.filter((c) => !c.isPage && !c.noKlInstall)
   return doc.trim();
 }
 
+function buildAiAgentsDoc() {
+  const addAgents = existsSync(join(INSTALL_DIR, 'add-agents.md'))
+    ? read(join(INSTALL_DIR, 'add-agents.md'))
+    : '`kl add agents`';
+  const tree = existsSync(join(INSTALL_DIR, 'agents-tree.md'))
+    ? read(join(INSTALL_DIR, 'agents-tree.md'))
+    : '';
+  const reviewPrompt = existsSync(join(INSTALL_DIR, 'agents-review-prompt.md'))
+    ? read(join(INSTALL_DIR, 'agents-review-prompt.md'))
+    : 'Faça uma revisão completa utilizando os padrões Koala';
+
+  return `# Koala UI – AI Agents
+
+IDE-agnostic agent context for projects scaffolded with the Koala UI CLI.
+Site page: https://ui.koalarx.com/pt/getting-started/ai-agents
+
+## What it is
+
+The agents pack writes an \`AGENTS.md\` index at the project root plus instructions and skills under \`.agents/\`. Agents start from \`AGENTS.md\` and open the linked files for the task — works in Cursor, GitHub Copilot, and other IDEs that read \`AGENTS.md\`.
+
+## How to install
+
+${addAgents}
+
+\`kl add agents\` removes legacy Koala Cursor/Copilot scaffolding (\`.cursor/rules/koala-*.mdc\`, \`.github/copilot-instructions.md\`) if present, then writes the new pack (force).
+
+## Generated structure
+
+${tree}
+
+\`AGENTS.md\` is only the index (When → Read). Details live in \`.agents/instructions/\` and \`.agents/skills/\`.
+
+## Code review skill
+
+Ask the agent:
+
+${reviewPrompt}
+
+The skill covers best practices, Angular team patterns (Angular MCP when available), Clean Code, abstraction/componentization, and library-standard usage (docs / \`koala-ui-docs\` MCP / \`kl install\`).
+
+## Recommended MCPs
+
+- \`koala-ui-docs\` — \`read_koala_ui_doc\`, \`search_koala_ui_docs\`, \`list_koala_ui_docs\`
+- Angular (\`angular-cli\` via \`@angular/cli mcp\`) — https://angular.dev/ai/mcp
+
+## Upgrade from old AI context
+
+Projects that used \`kl add ai-context\` should run \`kl add agents\` once.
+`.trim();
+}
+
 function buildPatchNotesDoc() {
   return `# Koala UI – Patch notes
 
 Changelog for anyone using or upgrading projects scaffolded with the Koala UI CLI.
 Site page: https://ui.koalarx.com/pt/getting-started/patch-notes
 Root CHANGELOG.md mirrors these notes.
+
+## 23.2.0 — AI agents (AGENTS.md + .agents/)
+
+### What changed
+
+- New command \`kl add agents\` — writes \`AGENTS.md\` + \`.agents/instructions\` + \`.agents/skills\` (force) and removes legacy \`.cursor/rules/koala-*.mdc\` and \`.github/copilot-instructions.md\`.
+- Removed \`kl add ai-context\` and the \`--ai-context\` flag; use \`--agents\` / \`--no-agents\` on \`kl new\` / \`kl init\`.
+- Assets under \`libs/cli/assets/agents/\` with a code-review skill (“Faça uma revisão completa utilizando os padrões Koala”).
+- New Getting Started → AI Agents guide page.
+
+### Upgrade
+
+On existing projects run \`kl add agents\`. Replace CI \`--ai-context\` with \`--agents\` / \`--no-agents\`. Guide: https://ui.koalarx.com/pt/getting-started/ai-agents
 
 ## 23.1.3 — CLI resolves project on Windows
 
@@ -407,7 +474,13 @@ for (const component of COMPONENTS) {
   let content;
 
   if (component.isPage) {
-    content = component.name === 'patch-notes' ? buildPatchNotesDoc() : buildGetStartedDoc();
+    if (component.name === 'patch-notes') {
+      content = buildPatchNotesDoc();
+    } else if (component.name === 'ai-agents') {
+      content = buildAiAgentsDoc();
+    } else {
+      content = buildGetStartedDoc();
+    }
   } else {
     content = buildComponentDoc(component);
   }
@@ -432,9 +505,10 @@ const llmsTxt = `# Koala UI
 ## Docs
 
 - [Get Started](${BASE_URL}/docs/get-started.md): Installation and setup
+- [AI Agents](${BASE_URL}/docs/ai-agents.md): IDE-agnostic agent context (AGENTS.md + .agents/)
 - [Patch notes](${BASE_URL}/docs/patch-notes.md): CLI and scaffolding changelog
 ${generated
-  .filter((c) => c.name !== 'get-started' && c.name !== 'patch-notes')
+  .filter((c) => c.name !== 'get-started' && c.name !== 'patch-notes' && c.name !== 'ai-agents')
   .map((c) => `- [${c.label}](${BASE_URL}/docs/${c.name}.md): ${c.label} component`)
   .join('\n')}
 
@@ -450,8 +524,8 @@ kl new my-app
 # Add components
 kl install button,modal,dropdown
 
-# Add AI context
-kl add ai-context cursor
+# Add AI agents context
+kl add agents
 \`\`\`
 `;
 
@@ -623,6 +697,32 @@ for (const section of extractSections(getStartedMarkdown)) {
     title: section.title,
     category: 'Getting Started',
     route: 'getting-started/installation',
+    fragment,
+    content: stripMarkdown(section.content),
+  });
+}
+
+const aiAgentsMarkdown = readFileSync(join(DOCS_OUT_DIR, 'ai-agents.md'), 'utf8').trim();
+searchEntries.push({
+  id: 'getting-started/ai-agents',
+  title: 'AI Agents',
+  category: 'Getting Started',
+  route: 'getting-started/ai-agents',
+  content: stripMarkdown(aiAgentsMarkdown),
+});
+usedSearchIds.add('getting-started/ai-agents');
+
+for (const section of extractSections(aiAgentsMarkdown)) {
+  const { id, fragment } = uniqueSectionId(
+    'getting-started/ai-agents',
+    section.title,
+    usedSearchIds,
+  );
+  searchEntries.push({
+    id,
+    title: section.title,
+    category: 'Getting Started',
+    route: 'getting-started/ai-agents',
     fragment,
     content: stripMarkdown(section.content),
   });

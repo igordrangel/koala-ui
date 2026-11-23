@@ -19,9 +19,9 @@ vi.mock('./setup-global-tests');
 vi.mock('./install-util', () => ({
   installUtil: vi.fn(),
 }));
-vi.mock('./apply-ai-context', () => ({
-  resolveAiContextTargets: vi.fn(async () => []),
-  applyAiContext: vi.fn(),
+vi.mock('./apply-agents', () => ({
+  resolveAgentsEnabled: vi.fn(async () => false),
+  applyAgents: vi.fn(),
 }));
 
 describe('setupExistingProject', () => {

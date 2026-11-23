@@ -6,6 +6,7 @@
 ## Docs
 
 - [Get Started](https://ui.koalarx.com/docs/get-started.md): Installation and setup
+- [AI Agents](https://ui.koalarx.com/docs/ai-agents.md): IDE-agnostic agent context (AGENTS.md + .agents/)
 - [Patch notes](https://ui.koalarx.com/docs/patch-notes.md): CLI and scaffolding changelog
 - [Alert](https://ui.koalarx.com/docs/alert.md): Alert component
 - [Bottom Sheet](https://ui.koalarx.com/docs/bottom-sheet.md): Bottom Sheet component
@@ -63,6 +64,6 @@ kl new my-app
 # Add components
 kl install button,modal,dropdown
 
-# Add AI context
-kl add ai-context cursor
+# Add AI agents context
+kl add agents
 ```

@@ -4,6 +4,19 @@ Changelog for anyone using or upgrading projects scaffolded with the Koala UI CL
 Site page: https://ui.koalarx.com/pt/getting-started/patch-notes
 Root CHANGELOG.md mirrors these notes.
 
+## 23.2.0 — AI agents (AGENTS.md + .agents/)
+
+### What changed
+
+- New command `kl add agents` — writes `AGENTS.md` + `.agents/instructions` + `.agents/skills` (force) and removes legacy `.cursor/rules/koala-*.mdc` and `.github/copilot-instructions.md`.
+- Removed `kl add ai-context` and the `--ai-context` flag; use `--agents` / `--no-agents` on `kl new` / `kl init`.
+- Assets under `libs/cli/assets/agents/` with a code-review skill (“Faça uma revisão completa utilizando os padrões Koala”).
+- New Getting Started → AI Agents guide page.
+
+### Upgrade
+
+On existing projects run `kl add agents`. Replace CI `--ai-context` with `--agents` / `--no-agents`. Guide: https://ui.koalarx.com/pt/getting-started/ai-agents
+
 ## 23.1.3 — CLI resolves project on Windows
 
 ### What changed

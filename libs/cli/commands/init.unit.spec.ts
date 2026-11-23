@@ -54,32 +54,28 @@ describe('Init Command', () => {
     expect(vi.mocked(setupExistingProject)).toHaveBeenCalledWith('test-project', false, undefined);
   });
 
-  it('should pass aiContext flag to setupExistingProject', async () => {
+  it('should pass agents flag to setupExistingProject', async () => {
     const { setupExistingProject } = await import('../utils/setup-existing-project');
 
-    await runInitCommand({ project: 'test-project', aiContext: 'cursor' });
+    await runInitCommand({ project: 'test-project', agents: true });
 
-    expect(vi.mocked(setupExistingProject)).toHaveBeenCalledWith(
-      'test-project',
-      false,
-      'cursor',
-    );
+    expect(vi.mocked(setupExistingProject)).toHaveBeenCalledWith('test-project', false, true);
   });
 
-  it('should default aiContext to none when silent is set without aiContext', async () => {
+  it('should default agents to false when silent is set without agents', async () => {
     const { setupExistingProject } = await import('../utils/setup-existing-project');
 
     await runInitCommand({ project: 'test-project', silent: true });
 
-    expect(vi.mocked(setupExistingProject)).toHaveBeenCalledWith('test-project', false, 'none');
+    expect(vi.mocked(setupExistingProject)).toHaveBeenCalledWith('test-project', false, false);
   });
 
-  it('should keep explicit aiContext when silent is set', async () => {
+  it('should keep explicit agents when silent is set', async () => {
     const { setupExistingProject } = await import('../utils/setup-existing-project');
 
-    await runInitCommand({ project: 'test-project', silent: true, aiContext: 'both' });
+    await runInitCommand({ project: 'test-project', silent: true, agents: true });
 
-    expect(vi.mocked(setupExistingProject)).toHaveBeenCalledWith('test-project', false, 'both');
+    expect(vi.mocked(setupExistingProject)).toHaveBeenCalledWith('test-project', false, true);
   });
 
   it('should call logHeader with correct parameters', async () => {

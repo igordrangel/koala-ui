@@ -7,7 +7,7 @@ Ao introduzir mudanças **visíveis** na CLI, nos templates/assets instalados no
 3. Atualize também **`buildPatchNotesDoc()`** em **`scripts/generate-llms.js`** — essa string **não** é gerada a partir do TS; sem esse passo, `public/docs/patch-notes.md` fica desatualizado.
 4. Se a mudança afetar onboarding ou scripts destacados, ajuste o **`README.md`** e as cópias de instalação/introdução quando fizer sentido.
 5. Não mantenha camadas legadas “só por compatibilidade” na CLI — documente o upgrade nos patch notes.
-6. Se a mudança alterar padrões que agentes devem seguir no projeto gerado (estrutura Angular, install CLI, docs URLs, utils), revise **`libs/cli/assets/ai-context/`** (`AGENTS.md`, `.cursor/rules`, Copilot instructions) para o contexto de agentes dos consumidores não ficar desatualizado.
+6. Se a mudança alterar padrões que agentes devem seguir no projeto gerado (estrutura Angular, install CLI, docs URLs, utils), revise **`libs/cli/assets/agents/`** (`AGENTS.md`, `.agents/instructions`, `.agents/skills`) para o contexto de agentes dos consumidores não ficar desatualizado.
 
 ## O que registrar
 

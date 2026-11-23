@@ -18,7 +18,7 @@ Useful entry points: [Get Started](https://ui.koalarx.com/docs/get-started.md), 
 | New component / block / resource docs | `.agents/documentation.md` |
 | Major bump / `main` + `previous-release` support lines | `.agents/documentation.md` → “Suporte dual” |
 | User-facing CLI or generated-project change (patch notes) | `.agents/patch-notes.md` |
-| Consumer AI context (`kl new` / `init` / `add ai-context`) | `libs/cli/assets/ai-context/` — keep in sync after docs/pattern changes (see below) |
+| Consumer AI agents (`kl new` / `init` / `add agents`) | `libs/cli/assets/agents/` — keep in sync after docs/pattern changes (see below) |
 | CLI install / deps / copy paths | `libs/cli/utils/install-component.ts` + related install helpers |
 | Masks, dates, arrays, prototypes (`@koalarx/utils`) | https://utils.koalarx.com/llms.txt |
 
@@ -43,4 +43,4 @@ Context must stay **VS Code (Copilot) + Cursor compatible**. Same files, no edit
 - Path-scoped: `.github/instructions/*.instructions.md` (`applyTo` frontmatter) are pointers only — no copied bodies.
 - **Never** create `.cursor/`, `.cursor/rules/`, or `*.mdc` Cursor-only rules in this repo. Cursor already reads `AGENTS.md` / Copilot instructions; path-scoped guidance goes under `.github/instructions/`.
 - Prefer adding a reference over pasting long guidance here.
-- **Consumer AI scaffolding:** `libs/cli/assets/ai-context/` is copied into projects via `kl new` / `kl init` / `kl add ai-context`. After changing install patterns, docs URLs, hard constraints, or Angular conventions that agents must know, **review and update** those assets (and related CLI install/detect if needed) so generated agent context stays accurate.
+- **Consumer AI scaffolding:** `libs/cli/assets/agents/` is copied into projects via `kl new` / `kl init` / `kl add agents` (`AGENTS.md` + `.agents/instructions` + `.agents/skills`). After changing install patterns, docs URLs, hard constraints, or Angular conventions that agents must know, **review and update** those assets (and related CLI install/detect if needed) so generated agent context stays accurate.
